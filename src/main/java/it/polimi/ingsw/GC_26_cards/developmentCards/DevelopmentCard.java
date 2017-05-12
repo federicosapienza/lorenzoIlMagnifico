@@ -1,9 +1,9 @@
-package it.polimi.ingsw.GC_26_cards_developmentCards;
+package it.polimi.ingsw.GC_26_cards.developmentCards;
 
 
 public interface DevelopmentCard {
 	String getName();
-	boolean canPlayerGetThis(Player player, ResourcesOrPoints resourcesUsedUntilNow); /* the second parameter allows to check 
+	boolean canPlayerGetThis(Player player, ResourcesOrPoints resourcesUsedUntilNow); /* the second parameter allows to check if
 	the player has enough resources even after other previous payments (such as coins or servants) */
 	void pay(Player player);
 	void runImmediateEffect(Player player);

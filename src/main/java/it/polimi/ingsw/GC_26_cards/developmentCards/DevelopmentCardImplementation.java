@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26_cards_developmentCards;
+package it.polimi.ingsw.GC_26_cards.developmentCards;
 
 public class DevelopmentCardImplementation implements DevelopmentCard{
 	private String name;
@@ -11,7 +11,7 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 
 	@Override
 	public boolean canPlayerGetThis(Player player, ResourcesOrPoints resourcesUsedUntilNow) {
-		/* the second parameter allows to check the player has enough resources even after other previous payments 
+		/* the second parameter allows to check if the player has enough resources even after other previous payments 
 		 * (such as coins or servants) */
 		// TODO Auto-generated method stub
 		return false;
