@@ -108,24 +108,30 @@ public class Warehouse {
 	
 	// Setters methods
 	
-	public void add(int coins, int servants, int wood, int stone, int victoryP, int militaryP, int faithP, int councilP){
-		this.coins  += coins;
-		this.servants += servants;
-		this.wood += wood;
-		this.stone +=stone;
-		this.militaryPoints +=militaryP;
-		this.victoryPoints += victoryP;
-		this.faithPoints +=faithP;
-		this.councilPrivileges +=councilP;
+	public void add(ResourcesOrPoints resources){
+		this.coins  += resources.getResources().getCoins();
+		this.servants += resources.getResources().getServants();
+		this.wood += resources.getResources().getWood();
+		this.stone +=resources.getResources().getStone();
+		this.militaryPoints +=resources.getPoints().getMilitaryPoints();
+		this.victoryPoints += resources.getPoints().getVictoryPoints();
+		this.faithPoints +=resources.getPoints().getFaithPoints();
+		this.councilPrivileges += resources.getPoints().getCouncilPrivileges();
 	}
 	
-	public void spendResources(int coins, int servants, int wood, int stone, int victoryP, int militaryP, int faithP)throws RuntimeException{
-
-		add(- coins, - servants, - wood, - stone, - victoryP, - militaryP, - faithP, 0);
-		//Council privileges spending is handled in other functions . So there is not its parameter here, and 0 is passed to add.
+	public void spendResources(ResourcesOrPoints resources)throws IllegalArgumentException{
+		this.coins  -= resources.getResources().getCoins();
+		this.servants -= resources.getResources().getServants();
+		this.wood -= resources.getResources().getWood();
+		this.stone -=resources.getResources().getStone();
+		this.militaryPoints -=resources.getPoints().getMilitaryPoints();
+		this.victoryPoints -= resources.getPoints().getVictoryPoints();
+		this.faithPoints -=resources.getPoints().getFaithPoints();
+		
+		//Council privileges spending is handled in other functions . So there is not its parameter here.
 		// To ensure nothing went wrong calls moreThanZero. 
 		if(moreThanZero())  
-			throw new RuntimeException("Resources went below zero");
+			throw new IllegalArgumentException("Resources went below zero");
 		
 		}
 	
@@ -137,5 +143,6 @@ public class Warehouse {
 	public void resetCouncilPriviledges(){  // used in Council privileges handling
 		councilPrivileges = 0;
 	}
+	
 	
 }

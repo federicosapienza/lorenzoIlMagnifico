@@ -1,5 +1,7 @@
 package it.polimi.ingsw.GC_26_cards.developmentCards;
 
+import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public interface DevelopmentCard {
 	String getName();
@@ -8,4 +10,5 @@ public interface DevelopmentCard {
 	void pay(Player player);
 	void runImmediateEffect(Player player);
 	void runPermanentEffect(Player player);	
+	DevelopmentCard copy();
 }

@@ -1,7 +1,11 @@
 package it.polimi.ingsw.GC_26_board;
 
 import java.util.*;
-import it.polimi.ingsw.GC_26_cards_developmentCards.DevelopmentCard;  //To import Set interface
+
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+//To import Set interface
+import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class Tower {
 	private boolean free;
@@ -13,10 +17,10 @@ public class Tower {
 	}
 	
 	public void createTowerPositions(ResourcesOrPoints [] resourcesOrPoints){
-		TowerPosition towerPosition1 = new TowerPosition(1,resoucesOrPoints[0],1);
-		TowerPosition towerPosition2 = new TowerPosition(2,resoucesOrPoints[1],3);
-		TowerPosition towerPosition3 = new TowerPosition(3,resoucesOrPoints[2],5);
-		TowerPosition towerPosition4 = new TowerPosition(4,resoucesOrPoints[3],7);
+		TowerPosition towerPosition1 = new TowerPosition(1,resourcesOrPoints[0],1);
+		TowerPosition towerPosition2 = new TowerPosition(2,resourcesOrPoints[1],3);
+		TowerPosition towerPosition3 = new TowerPosition(3,resourcesOrPoints[2],5);
+		TowerPosition towerPosition4 = new TowerPosition(4,resourcesOrPoints[3],7);
 	}
 
 	public TowerPosition getPosition(int floor){

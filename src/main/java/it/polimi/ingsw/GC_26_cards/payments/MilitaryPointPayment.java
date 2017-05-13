@@ -1,7 +1,10 @@
 package it.polimi.ingsw.GC_26_cards.payments;
 
-public class MilitaryPointPayment implements OnePayment{
-	private final int toSpend;  // the amount player have  really to spend
+import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+
+public class MilitaryPointPayment implements Payment{
+	private final int toSpend;  // the amount player has  really to spend
 	private final int needed;  // the requirement
 	
 	public MilitaryPointPayment(int toSpend, int needed) {
@@ -9,7 +12,7 @@ public class MilitaryPointPayment implements OnePayment{
 		this.needed= needed;
 	}
 	
-	private MilitaryPointPayment(MilitaryPointPayment other) {
+	private MilitaryPointPayment(MilitaryPointPayment other) {// constructor used for deep cloning. See copy() here and in ResourcesAndPoints
 		this.toSpend = other.getToSpend();
 		this.needed = other.getNeeded();
 	}
@@ -24,19 +27,32 @@ public class MilitaryPointPayment implements OnePayment{
 	
 	@Override
 	public boolean canPlayerGetThis(Player player, ResourcesOrPoints resourcesUsedUntilNow) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void pay(Player player) {
-		// TODO Auto-generated method stub
+		if(player.getWarehouse().getMilitaryPoints()<= needed || 
+				player.getPermanentModifiers().isMilitaryPointRequirementNotNeeded()==true)// Cesare Borgia effect
+			return false;
+		else if(player.getWarehouse().getMilitaryPoints()<toSpend)  //useless if isMilitaryPointRequirementNotNeeded()==false
+			return false;
+		else return true;
+		
+		// TODO va bene se prima di chiamare la carta controlliamo se ha le risorse necessarie fino alla chiamata, 
+		// se no va aggiunta logica
 		
 	}
 
 	@Override
-	public Payment copy() {
+	public void pay(Player player) {
+		player.getWarehouse().spendResources(ResourcesOrPoints.newPoints(0,toSpend,0,0));
+	}
+
+	@Override
+	public Payment copy() {   // passes an object which is identical to the first: allows deep cloning
 		return new MilitaryPointPayment(this);
+		
+	}
+	
+	@Override
+	public String toString(){
+		return "military points payment: needed: "+needed +", to consume: "+ toSpend;
 		
 	}
 	
