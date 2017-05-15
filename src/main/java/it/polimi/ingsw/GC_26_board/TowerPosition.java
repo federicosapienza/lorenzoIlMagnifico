@@ -1,11 +1,11 @@
 package it.polimi.ingsw.GC_26_board;
 
 public class TowerPosition {
-	int floor;
-	FamilyMember familyMemberInPosition;
-	ResoucesOrPoints resoucesOrPointsInPosition;
-	int valueInPosition;
-	DevelopmentCard cardInPosition;
+	private int floor;
+	private FamilyMember familyMemberInPosition;
+	private ResoucesOrPoints resoucesOrPointsInPosition;
+	private int valueOfPosition;
+	private DevelopmentCard cardInPosition;
 	
 	public TowerPosition(int floor, ResoucesOrPoints resoucesOrPointsinPosition,int value){
 		this.floor=floor;
@@ -20,7 +20,7 @@ public class TowerPosition {
 		return cardInPosition;
 	}
 	
-	public SetFamilyMember(FamilyMember familymember){
+	public void setFamilyMember(FamilyMember familyMember){
 		this.familyMember=familyMember;
 	}
 	
@@ -33,4 +33,8 @@ public class TowerPosition {
 		setFamilyMember(null);
 	}
 	//string ToString
+    
+	private payCoins(){
+		//gli passo il player?
+	}
 }

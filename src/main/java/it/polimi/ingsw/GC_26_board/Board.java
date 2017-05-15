@@ -1,27 +1,29 @@
 package it.polimi.ingsw.GC_26_board;
 
+import java.util.*;
+
 public class Board {
-	int numberOfPlayers;
-	Tower territoriesTower;
-	Tower buildingsTower;
-	Tower charactersTower;
-	Tower venturesTower;
-	public Board(int numberOfPlayers,ResourcesOrPoints [] resourcesOrPointsTerritoriesTower,ResourcesOrPoints [] resourcesOrPointsBuildingsTower,ResourcesOrPoints [] resourcesOrPointsCharactersTower,ResourcesOrPoints [] resourcesOrPointsVenturesTower){
+	private int numberOfPlayers;
+	private Tower territoriesTower;
+	private Tower buildingsTower;
+	private Tower charactersTower;
+	private Tower venturesTower;
+	public Board(int numberOfPlayers, List<ResourcesOrPoints []> resourcesOrPointsList){
 		this.numberOfPlayers=numberOfPlayers;	
-		create(numberOfPlayers,resourcesOrPointsTerritoriesTower,resourcesOrPointsBuildingsTower,resourcesOrPointsCharactersTower,resourcesOrPointsVenturesTower);
+		create(numberOfPlayers,resourcesOrPointsList);
 	}
 	
-	private void create(int numberOfPlayers,ResourcesOrPoints [] resourcesOrPointsTerritoriesTower,ResourcesOrPoints [] resourcesOrPointsBuildingsTower,ResourcesOrPoints [] resourcesOrPointsCharactersTower,ResourcesOrPoints [] resourcesOrPointsVenturesTower){
-		createTowers(resourcesOrPointsTerritoriesTower,resourcesOrPointsBuildingsTower,resourcesOrPointsCharactersTower,resourcesOrPointsVenturesTower);
+	public void create(int numberOfPlayers,List<ResourcesOrPoints []> resourcesOrPointsList){
+		createTowers(resourcesOrPointsList);
 		//councilpalace= new councilpalace...
 		//if(numberOfplayers>2) crea il resto
 	}
 	
-	public void createTowers(ResourcesOrPoints [] resourcesOrPointsTerritoriesTower,ResourcesOrPoints [] resourcesOrPointsBuildingsTower,ResourcesOrPoints [] resourcesOrPointsCharactersTower,ResourcesOrPoints [] resourcesOrPointsVenturesTower){            //16 resor points , 4 per tower
-		territoriesTower=new Tower(resourcesOrPointsTerritoriesTower); 
-		buildingsTower=new Tower(resourcesOrPointsBuildingsTower);   
-		charactersTower=new Tower(resourcesOrPointsCharactersTower);  
-		venturesTower=new Tower(resourcesOrPointsVenturesTower);
+	private void createTowers(List<ResourcesOrPoints []> resourcesOrPointsList){
+		territoriesTower=new Tower(resourcesOrPointsList.get(0)); 
+		buildingsTower=new Tower(resourcesOrPointsList.get(1));   
+		charactersTower=new Tower(resourcesOrPointsList.get(2));  
+		venturesTower=new Tower(resourcesOrPointsList.get(3));
 	} 
 	
 	public int getNumberOfPlayers(){
@@ -30,20 +32,28 @@ public class Board {
 	                                      
 	public Tower getTerritoriesTower(){
 		return territoriesTower;
-	}//da fare per ognuno
+	}
+	
+	public Tower getBuildingsTower(){
+		return buildingsTower;
+	}
+	public Tower getCharactersTower(){
+		return charactersTower;
+	}
+	public Tower getVenturesTower(){
+		return venturesTower;
+	}
 	
 	public void endRound(){
 	//territoriestower.clear 
 	//market.clear ecc
 	}
 	
-		
-	
-	public void endGame(){
+	public void endPeriod(){
 		//TODO
 	}
 	
-	public void endPeriod(){
+	public void endGame(){
 		//TODO
 	}
 

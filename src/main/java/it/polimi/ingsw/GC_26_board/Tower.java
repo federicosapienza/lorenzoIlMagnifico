@@ -53,9 +53,10 @@ public class Tower {
 		//delete card dalla lista cardforthisperiod
 	}
 	
-	public void clear(){ // clear cards and players
+	public void clearCardsAndPlayers(){ // clear cards and players
 		//towerposition1.clear
 		//free=true;
+		//chiama i vari metodi clear relativi alle varie posizioni
 	}
 	
 	public boolean isThePlayerInTheTower(Player player){
