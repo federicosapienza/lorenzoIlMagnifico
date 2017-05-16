@@ -23,7 +23,7 @@ public class Tower {
 		TowerPosition towerPositionFloor4 = new TowerPosition(4,resourcesOrPoints[3],7);
 	}
 
-	public TowerPosition getPosition(int floor){
+	public TowerPosition getPosition(int floor){//devo definire all'esterno le variabili towerposition?
 		switch(floor) {
 		case 1:
 			return towerPositionFloor1;
@@ -41,9 +41,18 @@ public class Tower {
 			System.out.println("Hai inserito un numero non corretto");
 		}//exception?
 	}
-
-	public void setCardsForThisPeriod(Set<DevelopmentCard> cards){
-		cardForthisPeriod=cards;
+	
+	public void setCardsForThisPeriod(List<DevelopmentCards> cards){
+		cardsForthisPeriod=cards;
+		
+		//DevelopmentCard randomCard1= takeRandomCard(cardsForThisPeriod); 
+		//delete randomcard1 da cardsForThisPeriod
+		//cardForThisPeriod.random    giveRandomCardsToPosition(cardsForThisPeriod)
+	}
+	
+	public DevelopmentCard takeRandomCardFromList(List<DevelopmentCards> cards){
+		Random randomizer = new Random();
+		DevelopmentCard randomCard = cards.get(randomizer.nextInt(cards.size()));
 	}
 	
 	private void giveRandomCardsToPosition(DevelopmentCard developmentCard1 ,DevelopmentCard developmentCard2, DevelopmentCard developmentCard3,DevelopmentCard developmentCard4){
@@ -53,17 +62,18 @@ public class Tower {
 		towerPosition4.setCard(developmentCard4);
 	}
 	
+	private void setCardsInPositions(){
+		//prendi una carta a caso 
+		//towerposition1.setcard(card);
+		//delete card dalla lista cardforthisperiod
+	}
+	
 	public void newRound(){
 		//chiama le ultime 4 carte 
 		//chiamo setcardsinpositions;
 		giveRandomCardsToPosition(developmentCard1,developmentCard2,developmentCard3,developmentCard4);
 	}
 	
-	private void setCardsInPositions(){
-		//prendi una carta a caso 
-		//towerposition1.setcard(card);
-		//delete card dalla lista cardforthisperiod
-	}
 	
 	public void clearCardsAndPlayers(){ // clear cards and players
 		//towerposition1.clear
@@ -94,9 +104,7 @@ public class Tower {
 		}
 	}
 	
-	public void setCardsForThisPeriod(List<DevelopmentCards> cards=new ArrayList<DevelopmentCard>()){
-		
-	}
+	
 	
 
 	

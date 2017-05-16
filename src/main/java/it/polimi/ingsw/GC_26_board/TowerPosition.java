@@ -31,7 +31,11 @@ public class TowerPosition {
 		familyMemberInPosition=null;
 		cardInPosition=null;
 	}
-	//string ToString
+	@override
+	public String toString(){
+		return "Floor:" + this.floor + " Value of the position: " + this.valueOfPosition;
+	// come faccio a ritornare l'oggetto resourcesOrPointsInPosition?
+	}
     
 	private payCoins(){
 		//gli passo il player?
