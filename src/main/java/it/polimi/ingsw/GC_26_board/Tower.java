@@ -17,21 +17,33 @@ public class Tower {
 	}
 	
 	public void createTowerPositions(ResourcesOrPoints [] resourcesOrPoints){
-		TowerPosition towerPosition1 = new TowerPosition(1,resourcesOrPoints[0],1);
-		TowerPosition towerPosition2 = new TowerPosition(2,resourcesOrPoints[1],3);
-		TowerPosition towerPosition3 = new TowerPosition(3,resourcesOrPoints[2],5);
-		TowerPosition towerPosition4 = new TowerPosition(4,resourcesOrPoints[3],7);
+		TowerPosition towerPositionFloor1 = new TowerPosition(1,resourcesOrPoints[0],1);
+		TowerPosition towerPositionFloor2 = new TowerPosition(2,resourcesOrPoints[1],3);
+		TowerPosition towerPositionFloor3 = new TowerPosition(3,resourcesOrPoints[2],5);
+		TowerPosition towerPositionFloor4 = new TowerPosition(4,resourcesOrPoints[3],7);
 	}
 
 	public TowerPosition getPosition(int floor){
-		
+		switch(floor) {
+		case 1:
+			return towerPositionFloor1;
+			break;
+		case 2:
+			return towerPositionFloor2;
+			break;
+		case 3:
+			return towerPositionFloor3;
+			break;
+		case 4:
+			return towerPositionFloor4;
+			break;
+		default:
+			System.out.println("Hai inserito un numero non corretto");
+		}//exception?
 	}
 
 	public void setCardsForThisPeriod(Set<DevelopmentCard> cards){
 		cardForthisPeriod=cards;
-		//carico da file e inserisco 8 carte in cardsForThisPeriod
-		//DevelopmentCard developmentCard1= oggetto letto da file
-		
 	}
 	
 	private void giveRandomCardsToPosition(DevelopmentCard developmentCard1 ,DevelopmentCard developmentCard2, DevelopmentCard developmentCard3,DevelopmentCard developmentCard4){

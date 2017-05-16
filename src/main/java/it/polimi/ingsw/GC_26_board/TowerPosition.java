@@ -9,8 +9,8 @@ public class TowerPosition {
 	
 	public TowerPosition(int floor, ResoucesOrPoints resoucesOrPointsinPosition,int value){
 		this.floor=floor;
-		this.resoucesOrPoints=resourcesOrPoints;
-		this.value=valueInPosition;
+		this.resoucesOrPointsInPosition=resoucesOrPointsinPosition;
+		this.valueOfPosition=valueOfPosition;
 	}
 	public void setCard(DevelopmentCard cardInPosition){ 
 		this.cardInPosition=cardInPosition;
@@ -21,16 +21,15 @@ public class TowerPosition {
 	}
 	
 	public void setFamilyMember(FamilyMember familyMember){
-		this.familyMember=familyMember;
+		this.familyMemberInPosition=familyMemberInPosition;
 	}
 	
 	public FamilyMember GetFamilyMember(){
 		return familyMemberInPosition;
 	}
-	// absTRACT in singleposition, qua implementato.
 	public void clearAll(){
-		setCard(null);
-		setFamilyMember(null);
+		familyMemberInPosition=null;
+		cardInPosition=null;
 	}
 	//string ToString
     
