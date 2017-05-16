@@ -1,15 +1,18 @@
 package it.polimi.ingsw.GC_26_board;
 
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+
 public class TowerPosition {
 	private int floor;
 	private FamilyMember familyMemberInPosition;
-	private ResoucesOrPoints resoucesOrPointsInPosition;
+	private ResourcesOrPoints resoucesOrPointsInPosition;
 	private int valueOfPosition;
 	private DevelopmentCard cardInPosition;
 	
-	public TowerPosition(int floor, ResoucesOrPoints resoucesOrPointsinPosition,int value){
+	public TowerPosition(int floor, ResourcesOrPoints resourcesOrPointsinPosition,int valueOfPosition){
 		this.floor=floor;
-		this.resoucesOrPointsInPosition=resoucesOrPointsinPosition;
+		this.resoucesOrPointsInPosition=resourcesOrPointsinPosition;
 		this.valueOfPosition=valueOfPosition;
 	}
 	public void setCard(DevelopmentCard cardInPosition){ 
