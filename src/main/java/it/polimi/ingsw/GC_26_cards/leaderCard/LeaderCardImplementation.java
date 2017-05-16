@@ -22,7 +22,7 @@ public class LeaderCardImplementation implements LeaderCard{
 		return name;
 	}
 	@Override
-	public Requirement getRequirement() {
+	public Requirement checkRequirement() {
 		return requirement;
 	}
 	@Override
