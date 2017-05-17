@@ -8,7 +8,7 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class Tower {
-	private boolean free;
+	private boolean isTowerFree;
 	private List<Player> playersInTheTower = new ArrayList<>();
 	private List<DevelopmentCard> cardsForThisPeriod = new ArrayList<>();
 	private TowerPosition towerPositionFloor1;
@@ -45,7 +45,10 @@ public class Tower {
 	
 	public void setCardsForThisPeriod(List<DevelopmentCard> cards){
 		cardsForThisPeriod=cards;
-		DevelopmentCard randomCard1 =takeRandomCardFromList(cardsForThisPeriod);
+	}
+	
+	public void setCardsInPositions(){
+		DevelopmentCard randomCard1 = takeRandomCardFromList(cardsForThisPeriod);
 		cardsForThisPeriod.remove(randomCard1);
 		DevelopmentCard randomCard2 = takeRandomCardFromList(cardsForThisPeriod);
 		cardsForThisPeriod.remove(randomCard2);
@@ -53,7 +56,7 @@ public class Tower {
 		cardsForThisPeriod.remove(randomCard3);
 		DevelopmentCard randomCard4 = takeRandomCardFromList(cardsForThisPeriod);
 		cardsForThisPeriod.remove(randomCard4);
-		//giveRandomCardsToPosition(cardsForThisPeriod)
+		giveRandomCardsToPosition(randomCard1,randomCard2,randomCard3,randomCard4);
 	}
 	
 	public DevelopmentCard takeRandomCardFromList(List<DevelopmentCard> cards){
@@ -68,43 +71,36 @@ public class Tower {
 		towerPositionFloor3.setCard(developmentCard3);
 		towerPositionFloor4.setCard(developmentCard4);
 	}
-	
-	private void setCardsInPositions(){
-		//prendi una carta a caso 
-		//towerposition1.setcard(card);
-		//delete card dalla lista cardforthisperiod
-	}
+			
+	public void clearCardsAndFamilyMembers(){ 
+		isTowerFree=true;
+		towerPositionFloor1.clear();
+		towerPositionFloor2.clear();
+		towerPositionFloor3.clear();
+		towerPositionFloor4.clear();
+	    }
 	
 	public void newRound(){
-		//chiama le ultime 4 carte 
-		//chiamo setcardsinpositions;
-		giveRandomCardsToPosition(developmentCard1,developmentCard2,developmentCard3,developmentCard4);
-	}
-	
-	
-	public void clearCardsAndPlayers(){ // clear cards and players
-		//towerposition1.clear
-		//free=true;
-		//chiama i vari metodi clear relativi alle varie posizioni
+		clearCardsAndFamilyMembers();
+		setCardsInPositions();
 	}
 	
 	public boolean isThePlayerInTheTower(Player player){
 		for(Player p: playersInTheTower){
 			if(p.equals(player)){
-				return true;
+				return isTowerFree=true;
 			}
-			else{return false;}
+		}
+			return isTowerFree=false; 	
 	}
-		
-		
-		
+	
 	public void setPlayerInTheTower(Player player){
-		//playerintower .add(player p);
-		//set free = false
+		playersInTheTower.add(player); 
+		isTowerFree = false;
 	}
 	
 	public boolean isTheTowerOccupied(){
-		if(free==false){
+		if(isTowerFree==false){
 			return true;
 		}
 		else{return false;
