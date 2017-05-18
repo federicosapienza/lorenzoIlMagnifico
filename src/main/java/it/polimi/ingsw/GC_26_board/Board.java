@@ -1,6 +1,7 @@
 package it.polimi.ingsw.GC_26_board;
 
 import java.util.*;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class Board {
 	private int numberOfPlayers;
@@ -8,6 +9,7 @@ public class Board {
 	private Tower buildingsTower;
 	private Tower charactersTower;
 	private Tower venturesTower;
+	
 	public Board(int numberOfPlayers, List<ResourcesOrPoints []> resourcesOrPointsList){
 		this.numberOfPlayers=numberOfPlayers;	
 		create(numberOfPlayers,resourcesOrPointsList);
@@ -15,6 +17,17 @@ public class Board {
 	
 	public void create(int numberOfPlayers,List<ResourcesOrPoints []> resourcesOrPointsList){
 		createTowers(resourcesOrPointsList);
+		if(numberOfPlayers==2){
+			
+		}
+		
+		if(numberOfPlayers==3){
+			
+		}
+		
+		if(numberOfPlayers==4){
+			
+		}
 		//councilpalace= new councilpalace...
 		//if(numberOfplayers>2) crea il resto
 	}
