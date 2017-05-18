@@ -1,11 +1,12 @@
 package it.polimi.ingsw.GC_26_cards.leaderCard;
 
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
+import it.polimi.ingsw.GC_26_player.Player;
 
 public interface LeaderCard {
 	String getName();
-	Requirement checkRequirement();
-	Effect getEffect();
-	LeaderCard copy();
+	boolean checkRequirement(Player player);
+	void runEffect(Player player);
+	//LeaderCard copy();
 
 }

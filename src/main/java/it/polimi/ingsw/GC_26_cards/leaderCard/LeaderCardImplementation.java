@@ -1,6 +1,7 @@
 package it.polimi.ingsw.GC_26_cards.leaderCard;
 
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
+import it.polimi.ingsw.GC_26_player.Player;
 
 public class LeaderCardImplementation implements LeaderCard{
 	private final String name;
@@ -21,17 +22,18 @@ public class LeaderCardImplementation implements LeaderCard{
 	public String getName() {
 		return name;
 	}
+	
 	@Override
-	public Requirement checkRequirement() {
-		return requirement;
+	public boolean checkRequirement(Player player) {
+		return requirement.checkRequirement(player);
 	}
 	@Override
-	public Effect getEffect() {
-		return effect;
+	public void  runEffect(Player player) {
+		effect.doEffect(player, false);
 	}
-	@Override
+	/*@Override
 	public LeaderCard copy() {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	} */
 }
