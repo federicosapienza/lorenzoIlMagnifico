@@ -7,15 +7,16 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
 //It 's the implementation used by Character and Venture Cards. Territories and building cards extend this. 
-public class CharacterAndVenturesCards implements DevelopmentCard{
+public class DevelpmentCardImplementation implements DevelopmentCard{
 	private final String name;
 	private final int period;
 	private final DevelopmentCardTypes type;
 	private final Payment payment;
 	private final Effect immediateEffect;
 	private final Effect permanentEffect;
+	private final int actionValue;
 	
-	public CharacterAndVenturesCards(String name, int period, DevelopmentCardTypes type, Payment payment, Effect immediate, Effect permanent) {
+	private DevelpmentCardImplementation(String name, int period, DevelopmentCardTypes type, Payment payment, Effect immediate, Effect permanent, int actionValue) {
 		this.name=name;
 		this.period= period;
 		this.type= type;
@@ -24,18 +25,35 @@ public class CharacterAndVenturesCards implements DevelopmentCard{
 		this.payment= payment;
 		this.immediateEffect= immediate;
 		this.permanentEffect= permanent;
+		this.actionValue= actionValue;
 	}
-	protected CharacterAndVenturesCards(CharacterAndVenturesCards other) { //used for deep cloning
+	/*protected DevelpmentCardImplementation(DevelpmentCardImplementation other) { //used for deep cloning
 		name=new String( other.getName());  
 		period= other.getPeriod();
 		type=other.getType();
 		payment= other.getPayment().copy();
 		immediateEffect=other.getImmediateEffect().copy();
 		permanentEffect=other.getPermanentEffect().copy();
-		
-		
+		this.actionValue= other.getActionValue();	
 	}
-	@Override
+	*/
+	
+	public static DevelopmentCard territoryCard(String name, int period, Payment payment, Effect immediate, Effect permanent, int actionValue){
+		return new DevelpmentCardImplementation(name, period, DevelopmentCardTypes.TERRITORYCARD, payment, immediate, permanent, actionValue);
+	}
+	
+	public static DevelopmentCard buildingCard(String name, int period, Payment payment, Effect immediate, Effect permanent, int actionValue){
+		return new DevelpmentCardImplementation(name, period, DevelopmentCardTypes.BUILDINGCARD, payment, immediate, permanent, actionValue);
+	}
+	
+	public static DevelopmentCard characterCard(String name, int period, Payment payment, Effect immediate, Effect permanent){
+		return new DevelpmentCardImplementation(name, period, DevelopmentCardTypes.CHARACTERCARD, payment, immediate, permanent, 0);
+	}
+	
+	public static DevelopmentCard ventureCard(String name, int period, Payment payment, Effect immediate, Effect permanent, int actionValue){
+		return new DevelpmentCardImplementation(name, period, DevelopmentCardTypes.VENTURECARD, payment, immediate, permanent, 0);
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -54,6 +72,10 @@ public class CharacterAndVenturesCards implements DevelopmentCard{
 	}
 	public Effect getPermanentEffect() {
 		return permanentEffect;
+	}
+	@Override
+	public int getActionValue() {
+		return actionValue;
 	}
 
 	@Override
@@ -80,14 +102,11 @@ public class CharacterAndVenturesCards implements DevelopmentCard{
 		permanentEffect.doEffect(player, false);
 		
 	}
-	@Override
+	/*@Override
 	public DevelopmentCard copy() {
-		return new CharacterAndVenturesCards(this);
-	}
+		return new DevelpmentCardImplementation(this);
+	} */
 	
 	//TODO to string completi e parziali
-	
-
-	
 
 }

@@ -22,11 +22,11 @@ public class ExcommunicationTileImplementation implements ExcommunicationTile{
 		effect.doEffect(player, false);
 	}
 
-	@Override
+	/*@Override
 	public ExcommunicationTile copy() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-
+*/
 }

@@ -6,8 +6,21 @@ package it.polimi.ingsw.GC_26_cards.developmentCards;
  * It must not be mistaken with the four subclasses that truly implements the differences between development card types.
 */
 public enum DevelopmentCardTypes {
-	TerritoriesCard,
-	BuildingsCard,
-	CharactersCards,
-	VenturesCards;
+	TERRITORYCARD("Territory card"),
+	BUILDINGCARD("Building card"),
+	CHARACTERCARD("Character card"),
+	VENTURECARD("Venture card");
+	
+	private String stringDescriber;
+	
+	private DevelopmentCardTypes(String stringDescriber) {
+		this.stringDescriber=stringDescriber;
+	}
+	
+	@Override
+	public String toString() {
+		return stringDescriber;
+	}
+	
+	
 }
