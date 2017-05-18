@@ -98,7 +98,7 @@ public class Tower {
 		playersInTheTower.add(player); 
 		isTowerFree = false;
 	}
-	
+	// mi serve per fare pagare le 3 monete in piu,nel market non ho bisogno di ciò
 	public boolean isTheTowerOccupied(){
 		if(isTowerFree==false){
 			return true;
