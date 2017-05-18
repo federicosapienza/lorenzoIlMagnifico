@@ -6,15 +6,16 @@ public class DicesSet {
 	Dice whiteDice = new Dice(nrFaces, Colour.WHITE);
 	Dice blackDice = new Dice(nrFaces, Colour.BLACK);
 	Dice orangeDice = new Dice(nrFaces, Colour.ORANGE);
-	int whiteValue = whiteDice.throwDice();
-	int blackValue = blackDice.throwDice();
-	int orangeValue = orangeDice.throwDice();
+	
 	/* ho unito tutto in un unico metodo throwdices che ritorna la mappa*/ 
-	public Map<Integer, Colour> throwDices(Dice whiteDice, Dice blackDice, Dice orangeDice) {
-		Map<Integer, Colour> readDices = new HashMap<>();
-		readDices.put(whiteValue, Colour.WHITE);
-		readDices.put(orangeDice.throwDice(), Colour.ORANGE);
-		readDices.put(blackDice.throwDice(), Colour.BLACK);
+	public Map<Colour, Integer> throwDices() {
+		Map<Colour, Integer> readDices = new HashMap<>();
+		int whiteValue = whiteDice.throwDice();
+		int blackValue = blackDice.throwDice();
+		int orangeValue = orangeDice.throwDice();
+		readDices.put(Colour.WHITE, whiteValue);
+		readDices.put(Colour.ORANGE, orangeValue);
+		readDices.put(Colour.BLACK, blackValue);
 		return readDices;
 	}
 }

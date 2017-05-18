@@ -5,6 +5,7 @@ public class Dice {
 	private Random gen;
 	private int nrFaces;
 	private Colour colour;
+	private int value;
 	public Dice(int nrFaces, Colour colour) //Costruttore che ha come parametro il numero di facce del dado
 	{
 		this.colour = colour;
@@ -18,11 +19,9 @@ public class Dice {
 	}
 	public int throwDice() //Metodo che simula il lancio del dado
 	{
-		return 1 + gen.nextInt(nrFaces);
+		return value = 1 + gen.nextInt(nrFaces);
 	}
 	public int readDice() { /*secondo me questo metodo non serve, la lettura è contenuta nella throwdices*/
-		int diceValue;
-		diceValue=throwDice();
-		return diceValue;
+		return value;
 	}
 }
