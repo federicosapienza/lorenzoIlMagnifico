@@ -9,7 +9,7 @@ public class Board {
 	private Tower buildingsTower;
 	private Tower charactersTower;
 	private Tower venturesTower;
-	
+	//TODO riferimenti a tutto il resto
 	public Board(int numberOfPlayers, List<ResourcesOrPoints []> resourcesOrPointsList){
 		this.numberOfPlayers=numberOfPlayers;	
 		create(numberOfPlayers,resourcesOrPointsList);
@@ -28,7 +28,7 @@ public class Board {
 		if(numberOfPlayers==4){
 			
 		}
-		//councilpalace= new councilpalace...
+		//TODO councilpalace= new councilpalace...
 		//if(numberOfplayers>2) crea il resto
 	}
 	
@@ -61,13 +61,4 @@ public class Board {
 	//territoriestower.clear 
 	//market.clear ecc
 	}
-	
-	public void endPeriod(){
-		//TODO
-	}
-	
-	public void endGame(){
-		//TODO
-	}
-
 }

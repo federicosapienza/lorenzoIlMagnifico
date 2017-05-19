@@ -38,9 +38,8 @@ public class Tower {
 		case 4:
 			return towerPositionFloor4;
 		default:
-			System.out.println("Hai inserito un numero non corretto");
-			return null;
-		}//exception?
+			throw new IllegalArgumentException();
+		}
 	}
 	
 	public void setCardsForThisPeriod(List<DevelopmentCard> cards){
@@ -93,18 +92,16 @@ public class Tower {
 		}
 			return isTowerFree=false; 	
 	}
-	
-	public void setPlayerInTheTower(Player player){
-		playersInTheTower.add(player); 
+	//Se la pedina è neutra non la aggiungo alla lista!
+	public void setPlayerInTheTower(FamilyMember familyMember){ //TODO getPlayer();
+		if(familyMember.getColour()!=NEUTRAL){
+			playersInTheTower.add(familyMember.getPlayer());
+			}
 		isTowerFree = false;
 	}
 	// mi serve per fare pagare le 3 monete in piu,nel market non ho bisogno di ciò
 	public boolean isTheTowerOccupied(){
-		if(isTowerFree==false){
-			return true;
-		}
-		else{return false;
-		}
+		return isTowerFree;
 	}
 	
 	

@@ -8,14 +8,16 @@ public class Market {
 	private MarketPosition marketPosition2;
 	private MarketPosition marketPosition3;
 	private MarketPosition marketPosition4;
+	int numberOfPlayers;
 	
 	public Market(int numberOfPlayers,ResourcesOrPoints[] resourcesOrPoints){
+		this.numberOfPlayers=numberOfPlayers;
 		if(numberOfPlayers==2 || numberOfPlayers==3){
-			marketPosition1= new MarketPosition();
-			marketPosition2= new MarketPosition();
+			marketPosition1= new MarketPosition(1,resourcesOrPoints[0],value);
+			marketPosition2= new MarketPosition(2,resourcesOrPoints[1],value);
 			if(numberOfPlayers==4){
-				marketPosition3= new MarketPosition();
-				marketPosition4= new MarketPosition();
+				marketPosition3= new MarketPosition(3,resourcesOrPoints[2],value);
+				marketPosition4= new MarketPosition(4,resourcesOrPoints[3],value);
 			}
 		}
 	}
@@ -27,21 +29,26 @@ public class Market {
 		case 2:
 			return marketPosition2;
 		case 3:
+			if(numberOfPlayers<4){
+				throw new IllegalArgumentException();
+			}
 			return marketPosition3;
 		case 4:
+			if(numberOfPlayers<4){
+				throw new IllegalArgumentException();
+			}
 			return marketPosition4;
 		default:
-			System.out.println("Hai inserito un numero non corretto");
-			return null;
-		}//exception?
+			throw new IllegalArgumentException();
+		}
 	}
 	
-	/*public clearMarket(){
+	public void clearMarket(){
 		marketPosition1.clear();
 		marketPosition2.clear();
 		marketPosition3.clear();
 		marketPosition4.clear();
-	} */
+	} 
 	
 	
 	

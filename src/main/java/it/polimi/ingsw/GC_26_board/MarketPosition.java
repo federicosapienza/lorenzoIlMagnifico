@@ -1,11 +1,11 @@
 package it.polimi.ingsw.GC_26_board;
 
-import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
+import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class MarketPosition extends SinglePosition {
-	int number;
-	private ResourcesOrPoints resourcesOrPointsinPosition;
+	private final int number;
+	private final ResourcesOrPoints resourcesOrPointsinPosition;
 	
 	public MarketPosition(int number,ResourcesOrPoints resourcesOrPointsinPosition,int valueOfPosition){
 		super(valueOfPosition);
@@ -16,5 +16,13 @@ public class MarketPosition extends SinglePosition {
 	@Override
 	public void clear() {
 		setFamilyMember(null);
+	}
+	
+	public void add(Player player){
+		player.getWarehouse().add(resourcesOrPointsinPosition);
+	}
+	
+	public ResourcesOrPoints getResourcesOrPointsinPosition(){
+		return  resourcesOrPointsinPosition;
 	}
 }
