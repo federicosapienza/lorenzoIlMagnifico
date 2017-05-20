@@ -19,11 +19,11 @@ public class CouncilPalace extends MultiplePosition {
 		player.getWarehouse().add(ResourcesOrPointsInPosition);
 	}
 	
-	public String PrintList(){
+	/*public String PrintList(){
 		//TODO
-	}
+	}*/
 	
-	public ArrayList getRanking(){
+	/*public ArrayList getRanking(){
 		//TODO
-	}
+	}*/
 }

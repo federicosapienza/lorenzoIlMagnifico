@@ -6,6 +6,7 @@ import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 //To import Set interface
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26_utilities.familyMembers.*;
 
 public class Tower {
 	private boolean isTowerFree;
