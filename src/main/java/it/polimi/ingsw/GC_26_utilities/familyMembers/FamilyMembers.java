@@ -36,17 +36,35 @@ public class FamilyMembers {
 		else if (colour == Colour.NEUTRAL) {
 			isFree = neutralMember.isFree();
 		}
-		else if (colour != Colour.BLACK && colour != Colour.ORANGE && colour != Colour.WHITE && colour != Colour.NEUTRAL) {
-			System.out.println("Insert a valid colour");
+		else {throw new IllegalArgumentException();
 		}
 		return isFree;
 	}
 	
-	public void setValues(){
-		orangeMember.getValue();
-        blackMember.getValue();
-        whiteMember.getValue();
-        neutralMember.getValue();
+	public void setValues(Dices dices){
+		orangeMember.setValue(dices.readDice(Colour.ORANGE));
+        blackMember.setValue(dices.readDice(Colour.BLACK));
+        whiteMember.setValue(dices.readDice(Colour.WHITE));
+        neutralMember.setValue(0);
+	}
+	
+	public int getValue(Colour colour){
+		if (colour == Colour.BLACK) {
+			return blackMember.getValue();
+		}
+		else if (colour == Colour.WHITE) {
+			return whiteMember.getValue();
+		}
+		else if (colour == Colour.ORANGE) {
+			return orangeMember.getValue();
+		}
+		else if (colour == Colour.NEUTRAL) {
+			return neutralMember.getValue();
+		}
+		else if (colour != Colour.BLACK && colour != Colour.ORANGE && colour != Colour.WHITE && colour != Colour.NEUTRAL) {
+			System.out.println("Insert a valid colour");
+		}
+		else throw new IllegalArgumentException();
 	}
 	
 	public void setUsed(Colour colour) {

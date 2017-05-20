@@ -18,17 +18,14 @@ public class FamilyMember {
 		}
 	}
 	
-	public void setValue(Colour colour) {
-		if (colour == Colour.NEUTRAL) {
-			this.value = 0;
-		}
-		else {
-			this.value = dices.readDice(colour); 
-		}
-		
+	public Colour getColour() {
+		return colour;
+	}
+	
+	public void setValue(int value) {
+		this.value =value;
 	}
 	public int getValue() {
-		this.setValue(colour);
 		return this.value;
 	}
 	public void setUsed() {
