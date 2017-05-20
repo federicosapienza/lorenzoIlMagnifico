@@ -2,9 +2,16 @@ package it.polimi.ingsw.GC_26_utilities.familyMembers;
 import it.polimi.ingsw.GC_26_utilities.dices.*;
 import java.util.Set;
 
+<<<<<<< HEAD
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 import it.polimi.ingsw.GC_26_utilities.dices.Dices;
+=======
+import it.polimi.ingsw.GC_26_utilities.dices.Colour;
+import it.polimi.ingsw.GC_26_utilities.dices.Dice;
+import it.polimi.ingsw.GC_26_utilities.dices.DicesSet;
+
+>>>>>>> fcfd1c1935be0eb0dad88e215df8ff8270013bc4
 public class FamilyMembers {
 	FamilyMember orangeMember;
 	FamilyMember whiteMember;
@@ -29,6 +36,12 @@ public class FamilyMembers {
 		
 		return true;
 	}
+	public Setvalues(DicesSet dices){
+		dices.throwDices();
+		dices.read(Colour.ORANGE)
+	}
+	
+	public setDices()
 	public void setUsed(Colour colour) {
 		
 	}
