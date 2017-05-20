@@ -1,17 +1,12 @@
 package it.polimi.ingsw.GC_26_utilities.familyMembers;
 import it.polimi.ingsw.GC_26_utilities.dices.*;
 import java.util.Set;
-
-<<<<<<< HEAD
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 import it.polimi.ingsw.GC_26_utilities.dices.Dices;
-=======
-import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 import it.polimi.ingsw.GC_26_utilities.dices.Dice;
-import it.polimi.ingsw.GC_26_utilities.dices.DicesSet;
 
->>>>>>> fcfd1c1935be0eb0dad88e215df8ff8270013bc4
+
 public class FamilyMembers {
 	FamilyMember orangeMember;
 	FamilyMember whiteMember;
@@ -26,28 +21,54 @@ public class FamilyMembers {
 	public Set whatIsFree() {
 		//TODO
 	}
-	public void setValues(Dices dices) {
+
+	public boolean isFree(Colour colour) {
+		boolean isFree = false;
+		if (colour == Colour.BLACK) {
+			isFree = blackMember.isFree();
+		}
+		else if (colour == Colour.WHITE) {
+			isFree = whiteMember.isFree();
+		}
+		else if (colour == Colour.ORANGE) {
+			isFree = orangeMember.isFree();
+		}
+		else if (colour == Colour.NEUTRAL) {
+			isFree = neutralMember.isFree();
+		}
+		else if (colour != Colour.BLACK && colour != Colour.ORANGE && colour != Colour.WHITE && colour != Colour.NEUTRAL) {
+			System.out.println("Insert a valid colour");
+		}
+		return isFree;
+	}
+	
+	public void setValues(){
 		orangeMember.getValue();
-		blackMember.getValue();
-		whiteMember.getValue();
-		neutralMember.getValue();
-	}
-	public boolean isFree() {
-		
-		return true;
-	}
-	public Setvalues(DicesSet dices){
-		dices.throwDices();
-		dices.read(Colour.ORANGE)
+        blackMember.getValue();
+        whiteMember.getValue();
+        neutralMember.getValue();
 	}
 	
-	public setDices()
 	public void setUsed(Colour colour) {
-		
+		if (colour == Colour.ORANGE) {
+			orangeMember.setUsed();
+		}
+		else if (colour == Colour.BLACK) {
+			blackMember.setUsed();
+		}
+		else if (colour == Colour.WHITE) {
+			whiteMember.setUsed();
+		}
+		else if (colour == Colour.NEUTRAL) {
+			neutralMember.setUsed();
+		}
 	}
 	
-	public void setUnusedAll() {
-		//da implementare
+	public void setFreeAll() {
+		orangeMember.setFree();
+		whiteMember.setFree();
+		blackMember.setFree();
+		neutralMember.setFree();
 	}
 
 }
