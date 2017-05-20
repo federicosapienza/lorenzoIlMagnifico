@@ -8,8 +8,12 @@ import it.polimi.ingsw.GC_26_utilities.dices.DicesSet;
 public class FamilyMember {
 	private int value;
 	private boolean free;
-	public Colour colour;
+	private final Colour colour;
 	public Map<Colour, Integer> valueTable;
+	
+	public FamilyMember(Colour colour) {
+		this.colour= colour;
+	}
 	public boolean isFree() {
 		//Secondo me isFree non deve essere un metodo di FamilyMember!
 		return false;
