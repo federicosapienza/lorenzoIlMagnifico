@@ -1,17 +1,21 @@
 package it.polimi.ingsw.GC_26_utilities.familyMembers;
 import it.polimi.ingsw.GC_26_utilities.dices.*;
+import java.util.HashSet;
 import java.util.Set;
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_utilities.dices.Colour;
-import it.polimi.ingsw.GC_26_utilities.dices.Dices;
-import it.polimi.ingsw.GC_26_utilities.dices.Dice;
-
 
 public class FamilyMembers {
 	FamilyMember orangeMember;
 	FamilyMember whiteMember;
 	FamilyMember blackMember;
 	FamilyMember neutralMember;
+	private int memberValue; /*David: mi serve per getValue(Colour colour):
+	per ogni if salvo il valore in memberValue e poi lo ritorno alla fine di tutti 
+	gli if. Senza usare memberValue e scrivendo return per ogni if, dà errore */
+	private boolean isFree;
+	private Set<FamilyMember> freeMembers = new HashSet<FamilyMember>(); /* David: 
+	non so se creare qui il set oppure dentro whatIsFree(), prima degli if */
+	
 	public void FamilyMembersSet(Player player) {
 		orangeMember = new FamilyMember(Colour.ORANGE);
 		whiteMember = new FamilyMember(Colour.WHITE);
@@ -19,11 +23,22 @@ public class FamilyMembers {
 		neutralMember = new FamilyMember(Colour.NEUTRAL);
 	}
 	public Set whatIsFree() {
-		//TODO
+		if (blackMember.isFree() == true) {
+			freeMembers.add(blackMember);
+		}
+		if (orangeMember.isFree() == true) {
+			freeMembers.add(orangeMember);
+		}
+		if (whiteMember.isFree() == true) {
+			freeMembers.add(whiteMember);
+		}
+		if (neutralMember.isFree() == true) {
+			freeMembers.add(neutralMember);
+		}
+		return freeMembers;
 	}
 
 	public boolean isFree(Colour colour) {
-		boolean isFree = false;
 		if (colour == Colour.BLACK) {
 			isFree = blackMember.isFree();
 		}
@@ -50,21 +65,24 @@ public class FamilyMembers {
 	
 	public int getValue(Colour colour){
 		if (colour == Colour.BLACK) {
-			return blackMember.getValue();
+			memberValue = blackMember.getValue();
 		}
 		else if (colour == Colour.WHITE) {
-			return whiteMember.getValue();
+			memberValue = whiteMember.getValue();
 		}
 		else if (colour == Colour.ORANGE) {
-			return orangeMember.getValue();
+			memberValue = orangeMember.getValue();
 		}
 		else if (colour == Colour.NEUTRAL) {
-			return neutralMember.getValue();
+			memberValue = neutralMember.getValue();
 		}
 		else if (colour != Colour.BLACK && colour != Colour.ORANGE && colour != Colour.WHITE && colour != Colour.NEUTRAL) {
 			System.out.println("Insert a valid colour");
 		}
-		else throw new IllegalArgumentException();
+		else {
+			throw new IllegalArgumentException();
+		}
+		return memberValue;
 	}
 	
 	public void setUsed(Colour colour) {

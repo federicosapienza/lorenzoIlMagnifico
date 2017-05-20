@@ -16,6 +16,9 @@ public class Player {
 	private FamilyMembers familyMembers;
 	private PlayerStatus status;  // fed: introdotta per motivi che vi spiego di persona!
 	private Warehouse temporaryWarehouse; // fed: la sistemo io: ti devo spiegare a cosa servirà
+	private boolean harvestDone;
+	private boolean productionDone;
+	private PersonalBoard personalBoard;
 	
 	public Player(String name) {
 		this.name=name;
@@ -25,10 +28,16 @@ public class Player {
 
 	}
 
-	
+	public String getName() {
+		return this.name;
+	}
 	
 	public FamilyMembers getFamilyMembers() {
 		return familyMembers;
+	}
+	
+	public PersonalBoard getPersonalBoard() {
+		return personalBoard;
 	}
 	public Warehouse getWarehouse() {
 		return warehouse;
@@ -38,22 +47,23 @@ public class Player {
 		return permanentModifiers;
 	}
 	
+	public boolean hasDoneProduction() {
+		return this.productionDone;
+	}
+	public boolean hasDoneHarvest() {
+		return this.harvestDone;
+	}
 	public PlayerStatus getStatus(){
 		return status;
 	}
 	
 	public void setStatus(PlayerStatus status){
-		 this.status =status;
+		this.status = status;
 	}
 
+	
 
-
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
+	
 
 	public void endTurn() {
 		//TODO pulisce la temporaryWarehouse e altri parametri che credo dovremo mettere: (per il momento lasciala perdere
