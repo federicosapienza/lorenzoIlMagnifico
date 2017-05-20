@@ -11,7 +11,7 @@ public class GameElements {
 	private Board board;
 	private DicesSet dices;
 	private Rankings rankings;
-	private Set<Player> players;
+	private List<Player> players;
 	
 	
 	public GameElements(Set<Player> players) {
