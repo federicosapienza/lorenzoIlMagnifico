@@ -15,7 +15,7 @@ public class Player {
 	private PermanentModifiers permanentModifiers;
 	private FamilyMembers familyMembers;
 	private PlayerStatus status;  // fed: introdotta per motivi che vi spiego di persona!
-	private Warehouse temporaryWarehouse;
+	private Warehouse temporaryWarehouse; // fed: la sistemo io: ti devo spiegare a cosa servirà
 	
 	public Player(String name) {
 		this.name=name;
@@ -56,7 +56,7 @@ public class Player {
 
 
 	public void endTurn() {
-		// TODO Auto-generated method stub
+		//TODO pulisce la temporaryWarehouse e altri parametri che credo dovremo mettere: (per il momento lasciala perdere
 		
 	}
 

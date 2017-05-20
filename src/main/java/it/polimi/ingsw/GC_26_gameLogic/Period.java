@@ -42,7 +42,8 @@ public class Period {
 	private void vaticanReport() {
 		for (Iterator<Player> iter = gameElements.getPlayers().iterator(); iter.hasNext(); ) {
 		    Player p = iter.next();
-		    VaticanReportTurn turn = new VaticaReportTurn(player, period);
+		    VaticanReportRound vatican = new VaticanReportRound(period);
+		    vatican.start();
 		    //TODO si potrebbero anche gestire in contemporanea: occhio al sincronismo
 		}
 		

@@ -10,7 +10,7 @@ public class GameParameters {
 	
 	private static int maxNumOfCards= 6; 
 	
-	public static int getPaithPointNeeded(int period){
+	public static int getFaithPointNeeded(int period){
 		switch (period) {
 		case 1:{
 			return faithPointNeededPeriod1;
