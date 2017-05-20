@@ -21,7 +21,7 @@ public class Tower {
 		createTowerPositions(resourcesOrPoints);
 	}
 	
-	public void createTowerPositions(ResourcesOrPoints[] resourcesOrPoints){
+	private void createTowerPositions(ResourcesOrPoints[] resourcesOrPoints){
 		towerPositionFloor1 = new TowerPosition(1,resourcesOrPoints[0],1);
 		towerPositionFloor2 = new TowerPosition(2,resourcesOrPoints[1],3);
 		towerPositionFloor3 = new TowerPosition(3,resourcesOrPoints[2],5);
@@ -46,6 +46,7 @@ public class Tower {
 	public void setCardsForThisPeriod(List<DevelopmentCard> cards){
 		cardsForThisPeriod=cards;
 	}
+	
 	
 	public void setCardsInPositions(){
 		DevelopmentCard randomCard1 = takeRandomCardFromList(cardsForThisPeriod);

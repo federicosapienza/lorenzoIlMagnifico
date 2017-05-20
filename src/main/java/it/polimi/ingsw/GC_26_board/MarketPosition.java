@@ -18,7 +18,7 @@ public class MarketPosition extends SinglePosition {
 		setFamilyMember(null);
 	}
 	
-	public void add(Player player){
+	public void addResources(Player player){
 		player.getWarehouse().add(resourcesOrPointsinPosition);
 	}
 	

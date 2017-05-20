@@ -68,19 +68,20 @@ public class Board {
 	public int getNumberOfPlayers(){
 		return numberOfPlayers;
 	}
-	                                      
-	public Tower getTerritoriesTower(){
-		return territoriesTower;
-	}
 	
-	public Tower getBuildingsTower(){
-		return buildingsTower;
-	}
-	public Tower getCharactersTower(){
-		return charactersTower;
-	}
-	public Tower getVenturesTower(){
-		return venturesTower;
+	public Tower getTower(int number){
+		switch(number){
+		case 1: 
+			return territoriesTower;
+		case 2: 
+			return buildingsTower;
+		case 3:
+			return charactersTower;
+		case 4:
+			return venturesTower;
+		default:
+			throw new IllegalArgumentException();
+		}
 	}
 	
 	public CouncilPalace getCouncilPalace() {

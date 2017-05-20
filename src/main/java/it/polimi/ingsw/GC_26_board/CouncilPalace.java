@@ -8,11 +8,10 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 public class CouncilPalace extends MultiplePosition {
 	
 	private ResourcesOrPoints ResourcesOrPointsInPosition;
-	int resourcesCounter;
 	
 	public CouncilPalace(ResourcesOrPoints resourcesOrPoints,int valueOfPosition){
 		super(valueOfPosition);
-		this.ResourcesOrPointsInPosition=(resourcesOrPoints);
+		this.ResourcesOrPointsInPosition=resourcesOrPoints;
 	}
 	
 	public void addBonusResources(Player player){
