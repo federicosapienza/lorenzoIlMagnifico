@@ -21,7 +21,7 @@ public class Dice {
 	{
 		return value = 1 + gen.nextInt(nrFaces);
 	}
-	public int readDice() { /*secondo me questo metodo non serve, la lettura è contenuta nella throwdices*/
+	public int getValue() { 
 		return value;
 	}
 }
