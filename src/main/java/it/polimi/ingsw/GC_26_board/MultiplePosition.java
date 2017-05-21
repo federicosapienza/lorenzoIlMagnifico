@@ -32,7 +32,7 @@ public class MultiplePosition {
 		return null;
 	}
 	
-	public boolean getIsPositionFree(){
+	public boolean isPositionFree(){
 		return positionFree;
 	}
 	
