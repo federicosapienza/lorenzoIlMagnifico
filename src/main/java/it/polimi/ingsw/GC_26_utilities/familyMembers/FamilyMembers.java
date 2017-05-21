@@ -5,16 +5,13 @@ import java.util.Set;
 import it.polimi.ingsw.GC_26_player.Player;
 
 public class FamilyMembers {
-	FamilyMember orangeMember;
-	FamilyMember whiteMember;
-	FamilyMember blackMember;
-	FamilyMember neutralMember;
-	private int memberValue; /*David: mi serve per getValue(Colour colour):
-	per ogni if salvo il valore in memberValue e poi lo ritorno alla fine di tutti 
-	gli if. Senza usare memberValue e scrivendo return per ogni if, dà errore */
-	private boolean isFree;
-	private Set<FamilyMember> freeMembers = new HashSet<FamilyMember>(); /* David: 
-	non so se creare qui il set oppure dentro whatIsFree(), prima degli if */
+	private FamilyMember orangeMember;
+	private FamilyMember whiteMember;
+	private FamilyMember blackMember;
+	private FamilyMember neutralMember;
+	private int memberValue; 
+	
+	
 	
 	public void FamilyMembersSet(Player player) {
 		orangeMember = new FamilyMember(Colour.ORANGE);
@@ -23,6 +20,7 @@ public class FamilyMembers {
 		neutralMember = new FamilyMember(Colour.NEUTRAL);
 	}
 	public Set whatIsFree() {
+		Set<FamilyMember> freeMembers = new HashSet<FamilyMember>();
 		if (blackMember.isFree() == true) {
 			freeMembers.add(blackMember);
 		}
@@ -39,6 +37,7 @@ public class FamilyMembers {
 	}
 
 	public boolean isFree(Colour colour) {
+		boolean isFree;
 		if (colour == Colour.BLACK) {
 			isFree = blackMember.isFree();
 		}
@@ -51,7 +50,8 @@ public class FamilyMembers {
 		else if (colour == Colour.NEUTRAL) {
 			isFree = neutralMember.isFree();
 		}
-		else {throw new IllegalArgumentException();
+		else {
+			throw new IllegalArgumentException();
 		}
 		return isFree;
 	}
@@ -65,7 +65,7 @@ public class FamilyMembers {
 	
 	public int getValue(Colour colour){
 		if (colour == Colour.BLACK) {
-			memberValue = blackMember.getValue();
+			blackMember.getValue();
 		}
 		else if (colour == Colour.WHITE) {
 			memberValue = whiteMember.getValue();
@@ -75,9 +75,6 @@ public class FamilyMembers {
 		}
 		else if (colour == Colour.NEUTRAL) {
 			memberValue = neutralMember.getValue();
-		}
-		else if (colour != Colour.BLACK && colour != Colour.ORANGE && colour != Colour.WHITE && colour != Colour.NEUTRAL) {
-			System.out.println("Insert a valid colour");
 		}
 		else {
 			throw new IllegalArgumentException();
@@ -97,6 +94,9 @@ public class FamilyMembers {
 		}
 		else if (colour == Colour.NEUTRAL) {
 			neutralMember.setUsed();
+		}
+		else {
+			throw new IllegalArgumentException();
 		}
 	}
 	
