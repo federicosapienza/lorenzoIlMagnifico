@@ -13,8 +13,9 @@ public class PersonalBoard {
 	private Set<DevelopmentCard> buildingCardSet= new HashSet<>();
 	private Set<DevelopmentCard> characterCardSet= new HashSet<>();
 	private Set<DevelopmentCard> ventureCardSet= new HashSet<>();
-	private Set<LeaderCard> leaderCardsSet= new HashSet<>();
+	private Set<LeaderCard> leaderCardSet= new HashSet<>();
 	private int territoryCardCounter;
+	private PersonalBoardTile personalBoardTile;
 	
 	public PersonalBoard(){
 		
@@ -36,6 +37,16 @@ public class PersonalBoard {
 		ventureCardSet.add(ventureCard);
 	}
 	
+	public void addLeaderCard(LeaderCard leaderCard){
+		leaderCardSet.add(leaderCard);
+	}
+	
+	public void callCard(){
+		//TODO
+		//non rimembro cosa dovrebbe fare questa funzione 
+		//probabilmente non serve btw
+	}
+	
 	public int checkNumberOfTerritoryCards(){
 		return territoryCardCounter;
 	}
@@ -55,10 +66,15 @@ public class PersonalBoard {
 		}
 	}
 	
-	public void callCard(){
-		//TODO
-		//non rimembro cosa dovrebbe fare questa funzione 
+	public Set<LeaderCard> getLeaderCard(){
+		return leaderCardSet;
 	}
+	
+	public PersonalBoardTile getPersonalBoardTile() {
+		return personalBoardTile;
+	}
+	
+	
 	
 	
 	

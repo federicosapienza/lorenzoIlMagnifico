@@ -6,6 +6,7 @@ import javax.net.ssl.SSLEngineResult.Status;
 
 import org.junit.rules.TemporaryFolder;
 
+import it.polimi.ingsw.GC_26_personalBoard.PersonalBoard;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembers;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
