@@ -8,9 +8,7 @@ public class FamilyMembers {
 	private FamilyMember orangeMember;
 	private FamilyMember whiteMember;
 	private FamilyMember blackMember;
-	private FamilyMember neutralMember;
-	private int memberValue; 
-	
+	private FamilyMember neutralMember; 
 	
 	
 	public void FamilyMembersSet(Player player) {
@@ -19,7 +17,7 @@ public class FamilyMembers {
 		blackMember = new FamilyMember(Colour.BLACK);
 		neutralMember = new FamilyMember(Colour.NEUTRAL);
 	}
-	public Set whatIsFree() {
+	public Set<FamilyMember> whatIsFree() {
 		Set<FamilyMember> freeMembers = new HashSet<FamilyMember>();
 		if (blackMember.isFree() == true) {
 			freeMembers.add(blackMember);
@@ -64,8 +62,9 @@ public class FamilyMembers {
 	}
 	
 	public int getValue(Colour colour){
+		 int memberValue;
 		if (colour == Colour.BLACK) {
-			blackMember.getValue();
+			memberValue = blackMember.getValue();
 		}
 		else if (colour == Colour.WHITE) {
 			memberValue = whiteMember.getValue();
