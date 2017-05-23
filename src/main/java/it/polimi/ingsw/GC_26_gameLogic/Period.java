@@ -50,10 +50,10 @@ public class Period {
 	}
 
 	private void initialisePeriod(){
-		gameElements.getBoard().getBuildingsTower().setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.BUILDINGCARD));
-		gameElements.getBoard().getCharactersTower().setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.CHARACTERCARD));
-		gameElements.getBoard().getTerritoriesTower().setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.TERRITORYCARD));
-		gameElements.getBoard().getVenturesTower().setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.VENTURECARD));
+		gameElements.getBoard().getTower(2).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.BUILDINGCARD));
+		gameElements.getBoard().getTower(3).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.CHARACTERCARD));
+		gameElements.getBoard().getTower(1).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.TERRITORYCARD));
+		gameElements.getBoard().getTower(4).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.VENTURECARD));
 	}
 	
 	
