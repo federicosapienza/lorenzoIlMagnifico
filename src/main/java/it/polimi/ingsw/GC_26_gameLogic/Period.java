@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import it.polimi.ingsw.GC_26_board.Board;
 import it.polimi.ingsw.GC_26_cards.Cards;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_player.Player;
 

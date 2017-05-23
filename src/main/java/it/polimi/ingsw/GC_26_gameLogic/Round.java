@@ -1,13 +1,9 @@
 package it.polimi.ingsw.GC_26_gameLogic;
 
 import java.util.Iterator;
-
-import javax.net.ssl.SSLEngineResult.Status;
-
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
-import it.polimi.ingsw.GC_26_utilities.dices.Dice;
-import it.polimi.ingsw.GC_26_utilities.dices.Dices;
+
 
 public class Round {
 	private int period;
@@ -52,13 +48,18 @@ public class Round {
 			    else if(player.getStatus()== PlayerStatus.WAITINGHISTURN){
 			    player.setStatus(PlayerStatus.PLAYING);
 			    //TODO notifico al player che è il suo turno
-			    player.notifyObservers("your turn "+ player.getName());
+			    player.notifyObservers("YOURTURN");
 			    //TODO è ok?
 			    while(player.getStatus()!= PlayerStatus.WAITINGHISTURN || player.getStatus()!= PlayerStatus.SUSPENDED){
-			    	wait();
+			    	try {
+						wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			    //TODO mettere un notifyall!!!
 			    }
-			    player.endRound();
+			    //TODO dobbiamo fare qualcosa alla fine del turno del player?
 			    }
 			}
 		}

@@ -11,8 +11,16 @@ import it.polimi.ingsw.GC_26_cards.payments.Payment;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
+ 
 public class TowerActionHandler extends ActionHandler{
-	
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+}
+/*	
 	
 	///////in via di eliminazione!!!!
 		
@@ -40,3 +48,4 @@ public class TowerActionHandler extends ActionHandler{
 
 
 
+*/

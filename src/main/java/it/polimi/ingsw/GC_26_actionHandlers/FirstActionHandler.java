@@ -22,25 +22,25 @@ public class FirstActionHandler extends ActionHandler{
 	@Override
 	public void update(Observable o, Object arg) {
 		BoardAction action= (BoardAction) arg;
-		Boolean flag = isPossible(action);
-		if(!flag)
+	//	Boolean flag = isPossible(action);
+		//if(!flag)
 			return;  // ho già notificato in ifPossible
 		//if(flag)
 			//pay()	
 }
 	
 	
-		public boolean isPossible(Player player, BoardAction action ){
+		 /*public boolean isPossible(Player player, BoardAction action ){
 			//spostare sopra
-			if(action.getPlayer().getStatus() != PlayerStatus.PLAYING)  //TODO la spostiamo in controller
+			//if(action.getPlayer().getStatus() != PlayerStatus.PLAYING)  //TODO la spostiamo in controller
 				//TODO notificare:forse va lanciata un' eccezione
 				return false;
 			 // non va bene osì per doppi pagamenti: Warehouse temporaryWarehouse = new Warehouse(action.getPlayer().getWarehouse());
-			player.setTemporaryWarehouse();  // prepares the action
+		player.setTemporaryWarehouse();  // prepares the action
 			if(player.getTemporaryWarehouse().areResourcesEnough(action.getServantsUsed()))
 				return false;
 				//TODO notificare player!!
-			FamilyMember familyMemberUsed = player.getFamilyMembers().getfamilyMember(action.getFamilyMemberColour())
+			FamilyMember familyMemberUsed = player.getFamilyMembers().getfamilyMember(action. getFamilyMemberColour()); //togliere puntoe virgola
 			if(!familyMemberUsed.isFree())
 				return false;
 			//TODO notificare
@@ -48,8 +48,8 @@ public class FirstActionHandler extends ActionHandler{
 		//manda a tutti i diversi metodi per le diverse posizioni della board!
 			
 		}
-	}
-		private boolean towerIsPossible(Player player, FamilyMember familyMember, BoardAction action){
+	//}
+	/*	private boolean towerIsPossible(Player player, FamilyMember familyMember, BoardAction action){
 			//if// sono già nella torre non mi fare andare
 			//if//TOWEr non libera fai spendere 3 soldi in temporaryWarehouse
 			//if(getGameElements().getBoard().getTower(action.getTower()) // è libero)
@@ -61,16 +61,17 @@ public class FirstActionHandler extends ActionHandler{
 			
 			if(tower.isTheTowerOccupied()){
 				;
-						if (player.getTemporaryWarehouse().areResourcesEnough(//todo monete))
-				player.getTemporaryWarehouse().spendResources(//TODO TogliereMonete)
+					//	if (player.getTemporaryWarehouse().areResourcesEnough(//todo monete));
+			//	player.getTemporaryWarehouse().spendResources(//TODO TogliereMonete)
 	
 				
 			//TODO notificare
 			//PickACard
 			// non si aggiunge guadagno al temporaryWarehouse
 			//prova a pagare : qui doppio pagamento non mi interessa: glielo dirò nella carta: se è uno solo paga comunque
+				
 		}
-			
+			*/
 
 		//private void pay()
 		//Fa il percorso e tutto ok
@@ -79,4 +80,3 @@ public class FirstActionHandler extends ActionHandler{
 
 
 		}
-		

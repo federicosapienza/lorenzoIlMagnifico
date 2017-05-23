@@ -3,7 +3,7 @@ package it.polimi.ingsw.GC_26_gameLogic;
 
 import java.util.List;
 
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26_cards.Cards;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
@@ -11,7 +11,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
 public class Game {
-	private final DevelopmentCard cards;
+	private final Cards cards;
 	private  List<Player> players;
 	private int numberOfPlayers;
 	private GameElements gameElements;
@@ -20,7 +20,7 @@ public class Game {
 	private int currentPeriod=1;
 	private List<ResourcesOrPoints> startingResources;
 	
-	public Game(DevelopmentCard cards, List<ResourcesOrPoints[]> resourcesOrPointsList, List<ResourcesOrPoints> startingResources){
+	public Game(Cards cards, List<ResourcesOrPoints[]> resourcesOrPointsList, List<ResourcesOrPoints> startingResources){
 		this.cards= cards;
 		this.resourcesOrPointsBonus= resourcesOrPointsList;
 	}
