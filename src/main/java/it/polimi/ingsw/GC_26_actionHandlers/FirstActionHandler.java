@@ -30,16 +30,18 @@ public class FirstActionHandler extends ActionHandler{
 }
 	
 	
-		 /*public boolean isPossible(Player player, BoardAction action ){
+		 public boolean isPossible(Player player, BoardAction action ){
 			//spostare sopra
 			//if(action.getPlayer().getStatus() != PlayerStatus.PLAYING)  //TODO la spostiamo in controller
 				//TODO notificare:forse va lanciata un' eccezione
-				return false;
+			//	return false;
 			 // non va bene osì per doppi pagamenti: Warehouse temporaryWarehouse = new Warehouse(action.getPlayer().getWarehouse());
-		player.setTemporaryWarehouse();  // prepares the action
-			if(player.getTemporaryWarehouse().areResourcesEnough(action.getServantsUsed()))
-				return false;
+				player.setTemporaryWarehouse();  // prepares the action
+					if(player.getTemporaryWarehouse().areResourcesEnough(action.getServantsUsed())){
+						player.notifyObservers();
+						return false;
 				//TODO notificare player!!
+					}
 			FamilyMember familyMemberUsed = player.getFamilyMembers().getfamilyMember(action. getFamilyMemberColour()); //togliere puntoe virgola
 			if(!familyMemberUsed.isFree())
 				return false;

@@ -83,5 +83,12 @@ public class Player extends Observable{
 		harvestDone= false;
 		productionDone= false;
 	}
-
+	
+	
+	
+	@Override
+    public void notifyObservers(Object object){  
+        setChanged();
+        super.notifyObservers( object);
+	}
 }
