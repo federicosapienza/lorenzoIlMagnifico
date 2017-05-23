@@ -48,18 +48,17 @@ public class Round {
 			    if(player.getStatus()== PlayerStatus.SUSPENDED)  
 			    	//if player is suspended it misses the turn
 			    	//TODO notificare i giocatori che il player salta il turno
-			    	gameElements.notifyObservers(player.getName() + "misses his turn!");
+			    	gameElements.notifyObservers(player.getName() + "misses his turn!");  // look at gameElements
 			    else if(player.getStatus()== PlayerStatus.WAITINGHISTURN){
 			    player.setStatus(PlayerStatus.PLAYING);
 			    //TODO notifico al player che è il suo turno
-			    player.setChanged();
 			    player.notifyObservers("your turn "+ player.getName());
 			    //TODO è ok?
 			    while(player.getStatus()!= PlayerStatus.WAITINGHISTURN || player.getStatus()!= PlayerStatus.SUSPENDED){
 			    	wait();
 			    //TODO mettere un notifyall!!!
 			    }
-			    player.endTurn();
+			    player.endRound();
 			    }
 			}
 		}

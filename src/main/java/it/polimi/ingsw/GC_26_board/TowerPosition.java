@@ -18,6 +18,13 @@ public class TowerPosition extends SinglePosition{
 	public void setCard(DevelopmentCard cardInPosition){ 
 		this.cardInPosition=cardInPosition;
 	}
+	public int getFloor() {
+		return floor;
+	}
+	
+	public ResourcesOrPoints getResourcesOrPointsinPosition() {
+		return resourcesOrPointsinPosition;
+	}
 	
 	public DevelopmentCard getCard(){
 		return cardInPosition;

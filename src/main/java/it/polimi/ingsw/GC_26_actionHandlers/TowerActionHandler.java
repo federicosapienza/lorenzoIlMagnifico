@@ -17,7 +17,7 @@ public class TowerActionHandler extends ActionHandler{
 	///////in via di eliminazione!!!!
 		
 		
-	}
+	
 		
 	private boolean isPossible(BoardAction action ){
 		if(action.getPlayer().getStatus() != PlayerStatus.PLAYING)
@@ -32,7 +32,7 @@ public class TowerActionHandler extends ActionHandler{
 		 //TODO notificare
 		
 	}	
-
+}
 	//private void pay()
 	//Fa il percorso e tutto ok
 	

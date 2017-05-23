@@ -21,5 +21,5 @@ public class SingleProduction extends SinglePosition{
 		//uno che controlla valore dado,valore carta
 	}	
 	
-
+	
 }

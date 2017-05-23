@@ -1,6 +1,5 @@
 package it.polimi.ingsw.GC_26_personalBoard;
 
-import it.polimi.ingsw.GC_26_cards.*;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;

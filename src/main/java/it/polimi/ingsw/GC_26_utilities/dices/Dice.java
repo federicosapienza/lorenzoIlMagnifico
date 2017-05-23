@@ -24,4 +24,8 @@ public class Dice {
 	public int getValue() { 
 		return value;
 	}
+	
+	public Colour getColour() {
+		return colour;
+	}
 }

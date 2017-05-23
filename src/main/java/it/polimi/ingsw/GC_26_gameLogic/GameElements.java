@@ -1,7 +1,8 @@
 package it.polimi.ingsw.GC_26_gameLogic;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Observable;
+
 
 import it.polimi.ingsw.GC_26_board.Board;
 import it.polimi.ingsw.GC_26_player.Player;
@@ -9,7 +10,7 @@ import it.polimi.ingsw.GC_26_utilities.dices.Dices;
 import it.polimi.ingsw.GC_26_utilities.rankings.Rankings;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
-public class GameElements {
+public class GameElements extends Observable{
 	private Board board;
 	private Dices dices;
 	private Rankings rankings;
@@ -36,4 +37,10 @@ public class GameElements {
 	}
 	
 
+	@Override
+    public void notifyObservers(Object object){  
+        setChanged();
+        super.notifyObservers( object);
+    }
+	
 }

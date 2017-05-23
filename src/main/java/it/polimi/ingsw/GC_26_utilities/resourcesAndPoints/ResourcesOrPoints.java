@@ -1,6 +1,5 @@
 package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 
-import javax.print.attribute.standard.RequestingUserName;
 
 /*ResourcesOrPoints is the class the handles the reference to all the payments and earnings; 
  * Its attributes are objects of classes Points and Resources. Any attribute in this three classes is final. 

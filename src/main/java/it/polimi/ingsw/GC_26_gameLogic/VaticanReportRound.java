@@ -1,5 +1,7 @@
 package it.polimi.ingsw.GC_26_gameLogic;
 
+import it.polimi.ingsw.GC_26_player.Player;
+
 public class VaticanReportRound {
 	int points; 
 	int period; 
@@ -9,7 +11,7 @@ public class VaticanReportRound {
 		points= GameParameters.getFaithPointNeeded(period);
 	}
 	
-	public void start(){
+	public void start(Player p){
 		//TODO
 	}
 

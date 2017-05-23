@@ -11,12 +11,12 @@ import it.polimi.ingsw.GC_26_player.Player;
 
 public class Period {
 	private int period;
-	private Cards cards;
+	private DevelopmentCard cards;
 	private GameElements gameElements;
 	private int currentRound=1; 
 	private int numOfRounds =  GameParameters.getRoundsforPeriod();
 	
-	public Period(int period, Cards cards, GameElements gameElements) {
+	public Period(int period, DevelopmentCard cards, GameElements gameElements) {
 		this.period=period;
 		this.cards= cards;
 		this.gameElements = gameElements;
@@ -43,7 +43,7 @@ public class Period {
 		for (Iterator<Player> iter = gameElements.getPlayers().iterator(); iter.hasNext(); ) {
 		    Player p = iter.next();
 		    VaticanReportRound vatican = new VaticanReportRound(period);
-		    vatican.start();
+		    vatican.start(p);
 		    //TODO si potrebbero anche gestire in contemporanea: occhio al sincronismo
 		}
 		
