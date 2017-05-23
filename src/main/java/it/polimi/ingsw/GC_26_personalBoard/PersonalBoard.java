@@ -2,6 +2,7 @@ package it.polimi.ingsw.GC_26_personalBoard;
 
 import it.polimi.ingsw.GC_26_cards.*;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import java.util.Set;
 import java.util.HashSet;
@@ -41,25 +42,21 @@ public class PersonalBoard {
 		leaderCardSet.add(leaderCard);
 	}
 	
-	public void callCard(){
-		//TODO
-		//non rimembro cosa dovrebbe fare questa funzione 
-		//probabilmente non serve btw
-	}
+	
 	
 	public int checkNumberOfTerritoryCards(){
 		return territoryCardCounter;
 	}
 	
-	public Set<DevelopmentCard> getCurrentCards(int switchCounter){
-		switch(switchCounter){
-		case 1:
+	public Set<DevelopmentCard> getCurrentCards(DevelopmentCardTypes type){
+		switch(type){
+		case TERRITORYCARD:
 			return territoryCardSet;
-		case 2:
+		case BUILDINGCARD:
 			return buildingCardSet;
-		case 3:
+		case CHARACTERCARD:
 			return characterCardSet;
-		case 4:
+		case VENTURECARD:
 			return ventureCardSet;
 		default: 
 			throw new IllegalArgumentException();

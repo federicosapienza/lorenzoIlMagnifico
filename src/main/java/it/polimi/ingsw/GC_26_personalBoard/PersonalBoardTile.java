@@ -7,7 +7,7 @@ public class PersonalBoardTile {
 	private ResourcesOrPoints resourcesOrPointsProduction;
 	private ResourcesOrPoints resourcesOrPointsHarvest;
 	private final int value=1;
-	//nell'UML avevamo segnato un uniqueCode che non comprendo.
+	
 	public PersonalBoardTile(ResourcesOrPoints resourcesOrPointsProoduction,ResourcesOrPoints resourcesOrPointsHarvest){
 		this.resourcesOrPointsProduction=resourcesOrPointsProoduction;
 		this.resourcesOrPointsHarvest=resourcesOrPointsHarvest;
@@ -33,4 +33,3 @@ public class PersonalBoardTile {
 		return value;
 	}
 }
-//le due classi normal e advanced secondo me non servono mhhhhhhhhhh

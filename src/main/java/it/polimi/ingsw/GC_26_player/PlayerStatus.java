@@ -37,4 +37,4 @@ public enum PlayerStatus {
 	public abstract PlayerStatus nextState();
 }
 
-}
+
