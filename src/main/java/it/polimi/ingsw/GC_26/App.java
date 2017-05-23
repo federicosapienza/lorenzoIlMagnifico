@@ -1,5 +1,4 @@
 package it.polimi.ingsw.GC_26;
-
 /**
  * Hello world!
  *
