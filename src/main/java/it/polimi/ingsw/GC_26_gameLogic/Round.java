@@ -46,7 +46,7 @@ public class Round {
 			    Player player = iter.next();
 			    player.getFamilyMembers().setValues(gameElements.getDices());
 			    if(player.getStatus()== PlayerStatus.SUSPENDED)  
-			    	//if player is suspended it misses the turn
+			    	//if player is suspended ,  misses the turn
 			    	//TODO notificare i giocatori che il player salta il turno
 			    	gameElements.notifyObservers(player.getName() + "misses his turn!");  // look at gameElements
 			    else if(player.getStatus()== PlayerStatus.WAITINGHISTURN){

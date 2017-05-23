@@ -11,12 +11,12 @@ import it.polimi.ingsw.GC_26_player.Player;
 
 public class Period {
 	private int period;
-	private DevelopmentCard cards;
+	private Cards cards;
 	private GameElements gameElements;
 	private int currentRound=1; 
 	private int numOfRounds =  GameParameters.getRoundsforPeriod();
 	
-	public Period(int period, DevelopmentCard cards, GameElements gameElements) {
+	public Period(int period, Cards cards, GameElements gameElements) {
 		this.period=period;
 		this.cards= cards;
 		this.gameElements = gameElements;
