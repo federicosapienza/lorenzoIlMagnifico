@@ -1,13 +1,15 @@
 package it.polimi.ingsw.GC_26_utilities.familyMembers;
-import it.polimi.ingsw.GC_26_utilities.dices.*;
+import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 public class FamilyMember {
 	private int value;
 	private boolean free;
 	private Colour colour;
-	Dices dices;
-	public FamilyMember(Colour colour) {
+	Player player;
+	
+	public FamilyMember(Colour colour, Player player) {
 		this.colour = colour;
+		this.player= player;
 	}
 	public boolean isFree() {
 		if (this.free == true) {
@@ -34,5 +36,9 @@ public class FamilyMember {
 	
 	public void setFree() {
 		this.free = true;
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 }

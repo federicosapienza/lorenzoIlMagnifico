@@ -13,6 +13,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 */
 public class PermanentModifiers {
 	private Player player;
+	
 	public PermanentModifiers(Player player) {
 		this.player = player;
 	}

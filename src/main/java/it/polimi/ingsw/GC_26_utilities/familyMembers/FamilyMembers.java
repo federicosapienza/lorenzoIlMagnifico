@@ -2,22 +2,58 @@ package it.polimi.ingsw.GC_26_utilities.familyMembers;
 import it.polimi.ingsw.GC_26_utilities.dices.*;
 import java.util.HashSet;
 import java.util.Set;
+
+import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 
 public class FamilyMembers {
 	private FamilyMember orangeMember;
 	private FamilyMember whiteMember;
 	private FamilyMember blackMember;
-	private FamilyMember neutralMember; 
+	private FamilyMember neutralMember;
+	private Player player;
 	
 	
 	public void FamilyMembersSet(Player player) {
-		orangeMember = new FamilyMember(Colour.ORANGE);
-		whiteMember = new FamilyMember(Colour.WHITE);
-		blackMember = new FamilyMember(Colour.BLACK);
-		neutralMember = new FamilyMember(Colour.NEUTRAL);
+		this.player= player;
+		orangeMember = new FamilyMember(Colour.ORANGE, player);
+		whiteMember = new FamilyMember(Colour.WHITE, player);
+		blackMember = new FamilyMember(Colour.BLACK, player);
+		neutralMember = new FamilyMember(Colour.NEUTRAL, player);
 	}
-	public Set<FamilyMember> whatIsFree() {
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public FamilyMember getfamilyMember(Colour colour){
+		if (colour == Colour.BLACK) {
+			return blackMember;
+		}
+		else if (colour == Colour.WHITE) {
+			return whiteMember;
+		}
+		else if (colour == Colour.ORANGE) {
+			return orangeMember;
+		}
+		else if (colour == Colour.NEUTRAL) {
+			return neutralMember;
+		}
+		else 
+			throw  new IllegalArgumentException();
+		
+	}
+	
+	
+	
+	public void setValues(Dices dices){
+		orangeMember.setValue(dices.readDice(Colour.ORANGE));
+        blackMember.setValue(dices.readDice(Colour.BLACK));
+        whiteMember.setValue(dices.readDice(Colour.WHITE));
+        neutralMember.setValue(GameParameters.getDefaultNeutralValue());
+	}
+	
+	public Set<FamilyMember> whatIsFree() {  //returns the set of the free familyMembers
 		Set<FamilyMember> freeMembers = new HashSet<FamilyMember>();
 		if (blackMember.isFree() == true) {
 			freeMembers.add(blackMember);
@@ -33,8 +69,18 @@ public class FamilyMembers {
 		}
 		return freeMembers;
 	}
-
-	public boolean isFree(Colour colour) {
+	
+	public void setFreeAll() {
+		orangeMember.setFree();
+		whiteMember.setFree();
+		blackMember.setFree();
+		neutralMember.setFree();
+	}
+	
+	
+	//penso che da qui in poi sia inutile. facciamo il get del singolo FamilyMember e e lavoriamo su di lui
+	
+	/*public boolean isFree(Colour colour) {
 		boolean isFree;
 		if (colour == Colour.BLACK) {
 			isFree = blackMember.isFree();
@@ -54,12 +100,7 @@ public class FamilyMembers {
 		return isFree;
 	}
 	
-	public void setValues(Dices dices){
-		orangeMember.setValue(dices.readDice(Colour.ORANGE));
-        blackMember.setValue(dices.readDice(Colour.BLACK));
-        whiteMember.setValue(dices.readDice(Colour.WHITE));
-        neutralMember.setValue(0);
-	}
+	
 	
 	public int getValue(Colour colour){
 		 int memberValue;
@@ -99,11 +140,6 @@ public class FamilyMembers {
 		}
 	}
 	
-	public void setFreeAll() {
-		orangeMember.setFree();
-		whiteMember.setFree();
-		blackMember.setFree();
-		neutralMember.setFree();
-	}
+	*/
 
 }

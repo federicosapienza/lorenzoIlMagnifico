@@ -7,6 +7,7 @@ public class GameParameters {
 	private static int faithPointNeededPeriod2= 4;
 	private static int faithPointNeededPeriod3= 5;
 	private static int turnsForRound = 4; // how many family members per player?
+	private static int defaultNeutralValue = 0;
 	
 	private static int maxNumOfCards= 6; 
 	
@@ -38,5 +39,9 @@ public class GameParameters {
 	
 	public static int getMaxNumOfCards() {
 		return maxNumOfCards;
+	}
+	
+	public static int getDefaultNeutralValue() {
+		return defaultNeutralValue;
 	}
 }

@@ -2,10 +2,21 @@ package it.polimi.ingsw.GC_26_actionHandlers;
 
 import java.util.Observable;
 
-import it.polimi.ingsw.GC_26_actions.BoardAction;
-import it.polimi.ingsw.GC_26_player.PlayerStatus;
+import javax.imageio.ImageTypeSpecifier;
 
+import it.polimi.ingsw.GC_26_actions.BoardAction;
+import it.polimi.ingsw.GC_26_board.Tower;
+import it.polimi.ingsw.GC_26_gameLogic.GameElements;
+import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_player.PlayerStatus;
+import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
+
+
+
+// synchronization is ensured by Controllers which calls method of this function, only if the player is allowed
 public class FirstActionHandler extends ActionHandler{
+	
+	
 	
 
 	@Override
@@ -19,16 +30,18 @@ public class FirstActionHandler extends ActionHandler{
 }
 	
 	
-	public boolean isPossible(){
-		private boolean isPossible(BoardAction action ){
-			if(action.getPlayer().getStatus() != PlayerStatus.PLAYING)
+		public boolean isPossible(Player player, BoardAction action ){
+			//spostare sopra
+			if(action.getPlayer().getStatus() != PlayerStatus.PLAYING)  //TODO la spostiamo in controller
 				//TODO notificare:forse va lanciata un' eccezione
 				return false;
 			 // non va bene osì per doppi pagamenti: Warehouse temporaryWarehouse = new Warehouse(action.getPlayer().getWarehouse());
-			if(temporaryWarehouse.areResourcesEnough(action.getServantsUsed()))
+			player.setTemporaryWarehouse();  // prepares the action
+			if(player.getTemporaryWarehouse().areResourcesEnough(action.getServantsUsed()))
 				return false;
 				//TODO notificare player!!
-			if(!familyMember.isFree())
+			FamilyMember familyMemberUsed = player.getFamilyMembers().getfamilyMember(action.getFamilyMemberColour())
+			if(!familyMemberUsed.isFree())
 				return false;
 			//TODO notificare
 		
@@ -36,13 +49,23 @@ public class FirstActionHandler extends ActionHandler{
 			
 		}
 	}
-		private boolean towerIsPossible(){
+		private boolean towerIsPossible(Player player, FamilyMember familyMember, BoardAction action){
 			//if// sono già nella torre non mi fare andare
 			//if//TOWEr non libera fai spendere 3 soldi in temporaryWarehouse
 			//if(getGameElements().getBoard().getTower(action.getTower()) // è libero)
 				//TODO modificare questo metodo
-				return false;
-				//TODO notificare
+			Tower tower = getGameElements().getBoard().getTower(action.getZone());
+			if(tower.isThePlayerInTheTower(player)){
+				//notificare il player
+				return false;}
+			
+			if(tower.isTheTowerOccupied()){
+				;
+						if (player.getTemporaryWarehouse().areResourcesEnough(//todo monete))
+				player.getTemporaryWarehouse().spendResources(//TODO TogliereMonete)
+	
+				
+			//TODO notificare
 			//PickACard
 			// non si aggiunge guadagno al temporaryWarehouse
 			//prova a pagare : qui doppio pagamento non mi interessa: glielo dirò nella carta: se è uno solo paga comunque

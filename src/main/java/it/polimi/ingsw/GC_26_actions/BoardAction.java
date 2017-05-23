@@ -2,6 +2,7 @@ package it.polimi.ingsw.GC_26_actions;
 
 
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
@@ -20,26 +21,21 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
  */
 
 public class BoardAction {
-	private Player player;
 	private int zone; 
 	private int position;
-	private FamilyMember familyMember;
+	private Colour familyMemberColour;
 	private ResourcesOrPoints servantsUsed;
 	
 	
 	//la view all inizio del gioco dovrà avere un riferimento a player , un' identità di se stesso, se no non ne usciamo piu!
-	public BoardAction(Player player, int zone, int position, FamilyMember familyMember, ResourcesOrPoints  servantsUsed) {
-		this.player=player;
+	public BoardAction(Player player, int zone, int position, Colour familyMemberColour, ResourcesOrPoints  servantsUsed) {
 		this.zone=zone;
-		this.familyMember= familyMember;
+		this.familyMemberColour = familyMemberColour;
 		this.servantsUsed= servantsUsed;
 	} 
 
-	public Player getPlayer() {
-		return player;
-	}
-	public FamilyMember getFamilyMember() {
-		return familyMember;
+	public Colour getFamilyMemberColour() {
+		return familyMemberColour;
 	}
 	public ResourcesOrPoints getServantsUsed() {
 		return servantsUsed;

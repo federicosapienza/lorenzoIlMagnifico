@@ -1,6 +1,5 @@
 package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 
-import org.junit.experimental.theories.Theories;
 
 /* It ' s the class that represent the status of the player in terms of resources and points owned.
  * It must not be mistaken with ResourcesOrPoints class , which instead represent the payments and effects that are called by cards, positions etc
@@ -16,11 +15,8 @@ public class Warehouse {
 	private int faithPoints;
 	private int councilPrivileges;
 	
-	public Warehouse(int coins, int servants, int wood, int stone){
-		this.coins =coins;
-		this.servants=servants;
-		this.wood=wood;
-		this.stone= stone;
+	public Warehouse(ResourcesOrPoints startingResources){  //initialisation
+		add(startingResources);
 	}
 	
 	public  Warehouse(Warehouse other){  /// use to copy and create temporary warehouse : useful in some parts of gameLogic
