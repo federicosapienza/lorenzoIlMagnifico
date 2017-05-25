@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_board;
 
+import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class Market {
@@ -12,10 +13,10 @@ public class Market {
 	
 	public Market(int numberOfPlayers,ResourcesOrPoints[] resourcesOrPoints){
 		this.numberOfPlayers=numberOfPlayers;
-		if(numberOfPlayers==2 || numberOfPlayers==3){
+		if(numberOfPlayers<GameParameters.getNumPlayerforCompleteMarketActivation()){
 			marketPosition1= new MarketPosition(1,resourcesOrPoints[0],value);
 			marketPosition2= new MarketPosition(2,resourcesOrPoints[1],value);
-			if(numberOfPlayers==4){
+			if(numberOfPlayers>=GameParameters.getNumPlayerforCompleteMarketActivation()){
 				marketPosition3= new MarketPosition(3,resourcesOrPoints[2],value);
 				marketPosition4= new MarketPosition(4,resourcesOrPoints[3],value);
 			}

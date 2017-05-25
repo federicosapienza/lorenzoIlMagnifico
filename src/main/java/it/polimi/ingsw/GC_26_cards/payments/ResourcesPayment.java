@@ -21,13 +21,17 @@ public class ResourcesPayment implements Payment{
 	
 
 	@Override
-	public boolean canPlayerGetThis(Player player, ResourcesOrPoints resourcesUsedUntilNow) {
+	public boolean canPlayerGetThis(Player player) {
 		ResourcesOrPoints temp=price;
 		if(player.getPermanentModifiers().IsTherediscountOnResources()){  //handling Pico Della Mirandola Card: (and even similar cards if added)
 			temp= ResourcesOrPoints.newResourcesOrPointsDiscount(temp, player.getPermanentModifiers().getDiscount());
 		}
-		temp = ResourcesOrPoints.sum(temp, resourcesUsedUntilNow); //  the total cost for picking the card is obtained 
-		return player.getWarehouse().areResourcesEnough(temp);
+		
+		// The player is notified if the player has not enough resources for getting the card, and false is returned
+		if (!player.getTestWarehouse().areResourcesEnough(temp)){
+			return false;
+		}
+		else return true;
 	}
 	
 	

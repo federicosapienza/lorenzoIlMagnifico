@@ -1,6 +1,8 @@
 package it.polimi.ingsw.GC_26_board;
 
 import java.util.*;
+
+import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class Board {
@@ -69,19 +71,19 @@ public class Board {
 		return numberOfPlayers;
 	}
 	
-	public Tower getTower(int number){
-		switch(number){
-		case 1: 
+	public Tower getTower(BoardZone zone){
+		switch(zone){
+		case TERRITORYTOWER: 
 			return territoriesTower;
-		case 2: 
+		case BUILDINGTOWER: 
 			return buildingsTower;
-		case 3:
+		case CHARACTERTOWER:
 			return charactersTower;
-		case 4:
+		case VENTURETOWER:
 			return venturesTower;
 		default:
 			throw new IllegalArgumentException();
-		}
+			}
 	}
 	
 	public CouncilPalace getCouncilPalace() {

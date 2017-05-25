@@ -4,6 +4,8 @@ import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import java.util.Set;
+
+
 import java.util.HashSet;
 
 
@@ -21,21 +23,37 @@ public class PersonalBoard {
 		
 	}
 	
-	public void addTerritoryCard(DevelopmentCard territoryCard){
-		territoryCardSet.add(territoryCard);
-		territoryCardCounter++;
-	}
-	public void addBuildingCard(DevelopmentCard buildingCard){
-		buildingCardSet.add(buildingCard);
-	}
 	
-	public void addCharacterCard(DevelopmentCard characterCard){
-		characterCardSet.add(characterCard);
-	}
+	public void add(DevelopmentCard card){
+			switch(card.getType()){
+			case TERRITORYCARD: 
+				territoryCardSet.add(card);
+			case BUILDINGCARD: 
+				buildingCardSet.add(card);
+			case CHARACTERCARD:
+				characterCardSet.add(card);
+			case VENTURECARD:
+				ventureCardSet.add(card);
+			default:
+				throw new IllegalArgumentException();
+			}
+			}
 	
-	public void addVenturesCard(DevelopmentCard ventureCard){
-		ventureCardSet.add(ventureCard);
-	}
+	public int getNumberOfCardPerType(DevelopmentCardTypes type){
+		switch(type){
+		case TERRITORYCARD: 
+			return territoryCardSet.size();
+		case BUILDINGCARD: 
+			return buildingCardSet.size();
+		case CHARACTERCARD:
+			return characterCardSet.size();
+		case VENTURECARD:
+			return ventureCardSet.size();
+		default:
+			throw new IllegalArgumentException();
+		}
+}
+
 	
 	public void addLeaderCard(LeaderCard leaderCard){
 		leaderCardSet.add(leaderCard);

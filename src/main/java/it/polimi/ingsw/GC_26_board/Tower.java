@@ -95,17 +95,22 @@ public class Tower {
 		}
 			return isTowerFree=false; 	
 	}
-	//Se la pedina è neutra non la aggiungo alla lista!
-	public void setPlayerInTheTower(FamilyMember familyMember){ //TODO getPlayer();
-		if(familyMember.getColour()!=Colour.NEUTRAL){
+	
+	//sets that the player is in the Tower, passing the familyMember so that:
+	//1) if the member is neutral , player is not added to the list 
+	//2) if is a secondary action familyMember is null and player is not added
+	public void setPlayerInTheTower(FamilyMember familyMember){
+		if(familyMember== null)
+			return;
+		if( familyMember.getColour()!=Colour.NEUTRAL)
 			playersInTheTower.add(familyMember.getPlayer());
-			}
 		isTowerFree = false;
 	}
-	// mi serve per fare pagare le 3 monete in piu,nel market non ho bisogno di ciò
+	
 	public boolean isTheTowerOccupied(){
 		return isTowerFree;
 	}
+
 	
 	
 	

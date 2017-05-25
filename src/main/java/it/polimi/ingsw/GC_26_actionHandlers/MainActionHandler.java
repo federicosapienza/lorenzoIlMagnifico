@@ -8,17 +8,22 @@ When the game is beginning this classes passes the reference of gameElements to 
  */
 public class MainActionHandler {
 	private GameElements gameElements;
-	private TowerActionHandler towerActionHandler;
+	private FirstActionHandler firstActionHandler;
 	//TODO 
 	
 	public MainActionHandler() {
-		towerActionHandler =new TowerActionHandler();
+		firstActionHandler =new FirstActionHandler(gameElements);
 		//TODO
 		
 	}
 
+	// da cancellare
 	public void setGameElements(GameElements gameElements){
 		this.gameElements= gameElements;
-		towerActionHandler.setGameElements(gameElements);
+		//towerActionHandler.setGameElements(gameElements);
+	}
+	
+	public FirstActionHandler getFirstActionHandler() {
+		return firstActionHandler;
 	}
 }

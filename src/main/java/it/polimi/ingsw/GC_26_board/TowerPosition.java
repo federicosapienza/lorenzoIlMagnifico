@@ -40,7 +40,5 @@ public class TowerPosition extends SinglePosition{
 		return "Floor:" + floor + super.ToString() ;
 	}*/
     
-	public void payCoins(Player player){
-		player.getWarehouse().spendResources(ResourcesOrPoints.newResources(3,0,0,0));
-	}
+	
 }

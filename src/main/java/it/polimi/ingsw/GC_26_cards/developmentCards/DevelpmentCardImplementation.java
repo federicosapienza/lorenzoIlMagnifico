@@ -2,9 +2,8 @@ package it.polimi.ingsw.GC_26_cards.developmentCards;
 
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
+import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
-
 
 //It 's the implementation used by Character and Venture Cards. Territories and building cards extend this. 
 public class DevelpmentCardImplementation implements DevelopmentCard{
@@ -79,11 +78,19 @@ public class DevelpmentCardImplementation implements DevelopmentCard{
 	}
 
 	@Override
-	public boolean canPlayerGetThis(Player player, ResourcesOrPoints resourcesUsedUntilNow) {
-		/* the second parameter allows to check if the player has enough resources even after other previous payments 
-		 * (such as coins or servants) */
-		return payment.canPlayerGetThis(player, resourcesUsedUntilNow);
-		
+	public boolean canPlayerGetThis(Player player) {
+		// if the card is a territory card we first of all need to check if player has enough military points 
+		if(type== DevelopmentCardTypes.TERRITORYCARD){
+			int territoryCardOwned = player.getPersonalBoard().getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD);
+			if(player.getWarehouse().getMilitaryPoints() < GameParameters.getTerritoryCardRequirements(territoryCardOwned))
+				player.notifyObservers("not enough military points  for a new territory card");
+			return false;
+		}
+		 if(!payment.canPlayerGetThis(player)){
+			 player.notifyObservers("not enough resources for getting the card");
+		 	return false;
+		 	}
+		return true;
 	}
 	@Override
 	public void pay(Player player) {

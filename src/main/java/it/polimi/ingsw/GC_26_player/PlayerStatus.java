@@ -3,38 +3,14 @@ package it.polimi.ingsw.GC_26_player;
 
 
 public enum PlayerStatus {
-	WAITINGHISTURN{
-		@Override
-		public PlayerStatus nextState() {
-			return PLAYING;
-		}
-	},	
-	PLAYING {
-		@Override
-		public PlayerStatus nextState() {
-			return WAITINGHISTURN;
-		}
-	},
-	CHOOSINGPAYMENT {
-		@Override
-		public PlayerStatus nextState() {
-			return PLAYING;
-		}
-	},
-	TRADING {
-		@Override
-		public PlayerStatus nextState() {
-			return PLAYING;
-		}
-	},
-	SUSPENDED {  // reached when a player has not permormed an action 
-		@Override
-		public PlayerStatus nextState() {
-			return WAITINGHISTURN;
-		}
-	};
+	WAITINGHISTURN,
+	ACTIONVALIDATING, //needed to ensure that the player do not produce an other action before validating or refusing a precedent one.
+	PLAYING,
+	CHOOSINGPAYMENT,  // This status is needed because player could be asked to choose payment 
+	ACTIONPERFORMED, // the status  reached when player can convert Diplomatic Priviledges and use Leader cards
+	SUSPENDED ; // reached when a player has not performed an action 
 	
-	public abstract PlayerStatus nextState();
+	
 }
 
 

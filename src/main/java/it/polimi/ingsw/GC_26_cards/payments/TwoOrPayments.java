@@ -29,9 +29,9 @@ public class TwoOrPayments implements Payment{
 	}
 
 	@Override
-	public boolean canPlayerGetThis(Player player, ResourcesOrPoints resourcesUsedUntilNow) {
+	public boolean canPlayerGetThis(Player player) {
 		//returns true as long as one payment is ok!
-		if(mode1.canPlayerGetThis(player, resourcesUsedUntilNow) || mode2.canPlayerGetThis(player, resourcesUsedUntilNow))
+		if(mode1.canPlayerGetThis(player) || mode2.canPlayerGetThis(player))
 			return false;
 		else return true;
 	}

@@ -4,6 +4,7 @@ package it.polimi.ingsw.GC_26_gameLogic;
 import java.util.Iterator;
 
 import it.polimi.ingsw.GC_26_board.Board;
+import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.Cards;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_player.Player;
@@ -49,10 +50,10 @@ public class Period {
 	}
 
 	private void initialisePeriod(){
-		gameElements.getBoard().getTower(2).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.BUILDINGCARD));
-		gameElements.getBoard().getTower(3).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.CHARACTERCARD));
-		gameElements.getBoard().getTower(1).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.TERRITORYCARD));
-		gameElements.getBoard().getTower(4).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.VENTURECARD));
+		gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.BUILDINGCARD));
+		gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.CHARACTERCARD));
+		gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.TERRITORYCARD));
+		gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisPeriod(cards.getDevelopmentCards(period, DevelopmentCardTypes.VENTURECARD));
 	}
 	
 	

@@ -26,16 +26,13 @@ public class MilitaryPointPayment implements Payment{
 	}
 	
 	@Override
-	public boolean canPlayerGetThis(Player player, ResourcesOrPoints resourcesUsedUntilNow) {
+	public boolean canPlayerGetThis(Player player) {
 		if(player.getWarehouse().getMilitaryPoints()<= needed || 
 				player.getPermanentModifiers().isMilitaryPointRequirementNotNeeded()==true)// Cesare Borgia effect
 			return false;
 		else if(player.getWarehouse().getMilitaryPoints()<toSpend)  //useless if isMilitaryPointRequirementNotNeeded()==false
 			return false;
 		else return true;
-		
-		// TODO va bene se prima di chiamare la carta controlliamo se ha le risorse necessarie fino alla chiamata, 
-		// se no va aggiunta logica
 		
 	}
 

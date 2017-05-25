@@ -15,6 +15,7 @@ public class GameElements extends Observable{
 	private Dices dices;
 	private Rankings rankings;
 	private List<Player> players;
+	private int numberOfPlayers;
 	
 	
 	public GameElements(List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList) {
@@ -36,6 +37,9 @@ public class GameElements extends Observable{
 		return rankings;
 	}
 	
+	public  int getNumberOfPlayers() {
+		return numberOfPlayers;
+	}
 
 	@Override
     public void notifyObservers(Object object){  
