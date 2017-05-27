@@ -19,14 +19,7 @@ public class DoHarvest implements Effect{
 		
 	}
 	
-	private DoHarvest(DoHarvest other) {
-		this.value = other.getValue();
-	}
 
-	@Override
-	public Effect copy() {
-		return new DoHarvest(this);
-	}
 	
 	@Override
 	public String toString() {

@@ -19,14 +19,7 @@ public class DoProduction implements Effect{
 		
 	}
 	
-	private DoProduction(DoProduction other) {
-		this.value = other.getValue();
-	}
 
-	@Override
-	public Effect copy() {
-		return new DoProduction(this);
-	}
 	
 	@Override
 	public String toString() {

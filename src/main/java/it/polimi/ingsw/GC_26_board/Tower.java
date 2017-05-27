@@ -87,9 +87,14 @@ public class Tower {
 		setCardsInPositions();
 	}
 	
-	public boolean isThePlayerInTheTower(Player player){
+	    //checks if  the family member can be put there 
+		//1) if the member is neutral , player is not added to the list 
+		//2) if is a second action familyMember is null and player is not added
+	public boolean canFamilyMemberGoToTheTower(FamilyMember familyMember){
+		if(familyMember==null ||  familyMember.getColour()==Colour.NEUTRAL)
+			return true;
 		for(Player p: playersInTheTower){
-			if(p.equals(player)){
+			if(p.equals(familyMember.getPlayer())){
 				return isTowerFree=true;
 			}
 		}
@@ -98,12 +103,14 @@ public class Tower {
 	
 	//sets that the player is in the Tower, passing the familyMember so that:
 	//1) if the member is neutral , player is not added to the list 
-	//2) if is a secondary action familyMember is null and player is not added
+	//2) if is a second action familyMember is null and player is not added
 	public void setPlayerInTheTower(FamilyMember familyMember){
 		if(familyMember== null)
 			return;
 		if( familyMember.getColour()!=Colour.NEUTRAL)
 			playersInTheTower.add(familyMember.getPlayer());
+		if(canFamilyMemberGoToTheTower(familyMember))
+			throw new IllegalArgumentException();
 		isTowerFree = false;
 	}
 	

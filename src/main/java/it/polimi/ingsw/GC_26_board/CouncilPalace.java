@@ -1,7 +1,6 @@
 package it.polimi.ingsw.GC_26_board;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
@@ -18,6 +17,9 @@ public class CouncilPalace extends MultiplePosition {
 		player.getWarehouse().add(ResourcesOrPointsInPosition);
 	}
 	
+	public ResourcesOrPoints getResourcesOrPointsInPosition() {
+		return ResourcesOrPointsInPosition;
+	}
 	/*public String PrintList(){
 		//TODO
 	}*/

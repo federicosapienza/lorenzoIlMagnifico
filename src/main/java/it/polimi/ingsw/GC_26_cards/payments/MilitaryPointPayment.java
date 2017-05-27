@@ -12,10 +12,6 @@ public class MilitaryPointPayment implements Payment{
 		this.needed= needed;
 	}
 	
-	private MilitaryPointPayment(MilitaryPointPayment other) {// constructor used for deep cloning. See copy() here and in ResourcesAndPoints
-		this.toSpend = other.getToSpend();
-		this.needed = other.getNeeded();
-	}
 	
 	public int getToSpend() {
 		return toSpend;
@@ -41,11 +37,6 @@ public class MilitaryPointPayment implements Payment{
 		player.getWarehouse().spendResources(ResourcesOrPoints.newPoints(0,toSpend,0,0));
 	}
 
-	@Override
-	public Payment copy() {   // passes an object which is identical to the first: allows deep cloning
-		return new MilitaryPointPayment(this);
-		
-	}
 	
 	@Override
 	public String toString(){

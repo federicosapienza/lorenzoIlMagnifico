@@ -25,22 +25,14 @@ public class PickACardEffect implements Effect{
 		return type;
 	}
 	
-	private PickACardEffect(PickACardEffect other) { //allows deep cloning
-		this.actionValue= other.getActionValue();
-		this.discount= other.getDiscount().copy();
-		this.type= other.getType();
-	}
+	
 
 	@Override
 	public void doEffect(Player player, boolean immediate) {
-		//TODO chiama l handler (idea il discount lo si passerà avanti come "resourcesSpentUntilNow")
+		//TODO chiama l handler
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public Effect copy() {
-		return new PickACardEffect(this);
-	}
-
+	
 }

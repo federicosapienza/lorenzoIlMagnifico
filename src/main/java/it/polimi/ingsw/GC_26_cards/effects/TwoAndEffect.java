@@ -17,10 +17,6 @@ public class TwoAndEffect implements Effect{
 	public Effect getEffect2() {
 		return effect2;
 	}
-	private TwoAndEffect(TwoAndEffect other) { //created for deep cloning
-		this.effect1= other.getEffect1().copy();
-		this.effect2=other.getEffect2().copy();
-	}
 	
 	
 	@Override
@@ -28,10 +24,6 @@ public class TwoAndEffect implements Effect{
 		effect1.doEffect(player, immediate);
 		effect2.doEffect(player, immediate);
 		
-	}
-	@Override
-	public Effect copy() {
-		return new TwoAndEffect(this);
 	}
 	
 	

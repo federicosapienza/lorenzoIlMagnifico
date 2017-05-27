@@ -20,10 +20,6 @@ public class CardsNumberToResourcesEffect implements Effect{
 		return type;
 	}
 	
-	private CardsNumberToResourcesEffect(CardsNumberToResourcesEffect other) {
-		type= other.getType();
-		resourcesOrPoints= other.getResourcesOrPoints().copy();
-	}
 
 	@Override
 	public void doEffect(Player player, boolean immediate) {
@@ -31,11 +27,7 @@ public class CardsNumberToResourcesEffect implements Effect{
 		
 	}
 
-	@Override
-	public Effect copy() {
-		return new CardsNumberToResourcesEffect(this);
-	}
-	
+
 	@Override
 	public String toString(){
 		return " gives "+ resourcesOrPoints+ " for any "+resourcesOrPoints.toString(); 

@@ -54,7 +54,7 @@ public class Round {
 			    else if(player.getStatus()== PlayerStatus.WAITINGHISTURN){
 			    player.setStatus(PlayerStatus.PLAYING);
 			    //TODO notifico al player che è il suo turno
-			    player.notifyObservers("YOURTURN");
+			    player.notifyObservers("It s your turn");
 			    //TODO è ok?
 			    while(player.getStatus()!= PlayerStatus.WAITINGHISTURN || player.getStatus()!= PlayerStatus.SUSPENDED){
 			    	try {

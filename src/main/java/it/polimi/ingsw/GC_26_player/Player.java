@@ -2,6 +2,7 @@ package it.polimi.ingsw.GC_26_player;
 
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
+
 import java.util.Observable;
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoard;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembers;
@@ -11,11 +12,13 @@ public class Player extends Observable{
 	private final Warehouse warehouse;
 	private final PermanentModifiers permanentModifiers;
 	private final FamilyMembers familyMembers;
-	private PlayerStatus status;  
+	private PlayerStatus status;
+	private PlayerStatus previousStatus;  
+	 //previous status is used to keep memory of status before the status== VALIDATING; 
+	//It' s needed in case of actions denied.
 	private Warehouse testWarehouse;
 	//temporaryWarehouse is used in some calculations, such as checking if the player can pay something or keeping track of resources earned in Production
-	private boolean productionDone;
-	private boolean harvestDone;
+
 	private final PersonalBoard personalBoard;
 	private boolean playerActive; //set true if the player has at least tried to perform an action during the round.
 	
@@ -24,8 +27,6 @@ public class Player extends Observable{
 		familyMembers = new FamilyMembers();
 		status= PlayerStatus.WAITINGHISTURN;
 		warehouse= new Warehouse(startingResources);
-		productionDone=false;
-		harvestDone= false;
 		personalBoard= new PersonalBoard();
 		permanentModifiers = new PermanentModifiers(this);
 		playerActive= false;
@@ -56,12 +57,6 @@ public class Player extends Observable{
 		return permanentModifiers;
 	}
 	
-	public boolean hasDoneProduction() {
-		return this.productionDone;
-	}
-	public boolean hasDoneHarvest() {
-		return this.harvestDone;
-	}
 	public PlayerStatus getStatus(){
 		return status;
 	}
@@ -69,17 +64,21 @@ public class Player extends Observable{
 		return playerActive;
 	}
 	
+	public PlayerStatus getPreviousStatus() {
+		if (status != PlayerStatus.VALIDATING)
+			throw new IllegalStateException();
+		return previousStatus;
+	}
 	//setters methods
-	public void setProductionDone() {
-		this.productionDone = true;;
-	}
-	public void setHarvestDone(){
-		harvestDone= true;
-	}
+	
 	public void setStatus(PlayerStatus status){
+		if(status== PlayerStatus.VALIDATING)
+			previousStatusSet(this.status);
 		this.status = status;
 	}
-
+	private void previousStatusSet(PlayerStatus status){
+		previousStatus = status;
+	}
 	public void setTemporaryWarehouse(){
 		testWarehouse = new Warehouse(warehouse);
 	}
@@ -92,14 +91,21 @@ public class Player extends Observable{
 	}
 	
 	
-	public void endRound() {
-		//cleans parameters.
-		harvestDone= false;
-		productionDone= false;
+	
+	@Override
+	public boolean equals(Object obj) {
+		   if (this==obj) 
+			   return true;
+		   if (obj == null)
+			   return false;
+		   if (this.getClass() != obj.getClass()) 
+			   return false;
+		   Player other =(Player) obj;
+		   if(name.equals(other.getName()))
+			   return true;
+		   else return false;
 	}
-	
-	
-	
+		   
 	@Override
     public void notifyObservers(Object object){  
         setChanged();

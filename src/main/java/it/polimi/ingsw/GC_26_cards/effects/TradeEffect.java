@@ -24,13 +24,6 @@ public class TradeEffect implements Effect{
 		this.receive2= receive2;
 	}
 	
-	private TradeEffect(TradeEffect other){ //for deep cloning
-		give1= other.getGive1().copy();
-		give2= other.getGive2().copy();
-		receive1= other.getReceive1().copy();
-		receive2= other.getReceive2().copy();
-
-	}
 	
 	public ResourcesOrPoints getGive1() {
 		return give1;
@@ -51,11 +44,6 @@ public class TradeEffect implements Effect{
 		// TODO chiama l handler
 		
 	}
-	@Override
-	public Effect copy() {
-		return new TradeEffect(this);
-	}
-	
 	@Override
 	public String toString() {
 		if(receive2==null && give2==null)

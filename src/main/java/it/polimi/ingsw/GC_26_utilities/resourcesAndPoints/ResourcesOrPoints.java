@@ -2,8 +2,8 @@ package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 
 
 /*ResourcesOrPoints is the class the handles the reference to all the payments and earnings; 
- * Its attributes are objects of classes Points and Resources. Any attribute in this three classes is final. 
- * Any other part of the code will refer to this class: never to resources or points: this can be useful because in 
+ * Its attributes are objects of classes Points and Resources. Any attribute in these three classes is final. 
+ * Any other part of the code will refer to this class: never to resources or points classes: this can be useful because in 
  * a general case effects can touch both points and resources.
  * 
  * It must not be mistaken with Warehouse , which instead represent the status of the player (points and resources) , and whose 
@@ -70,7 +70,6 @@ public class ResourcesOrPoints {
 	public static ResourcesOrPoints newResourcesOrPointsDiscount(ResourcesOrPoints price,ResourcesOrPoints discount){
 		/*Created for handling Pico Della Mirandola card, developed in order to be useful in case of creation of similar cards
 		 */
-
 		int coins = price.getResources().getCoins()-discount.getResources().getCoins();
 		int servants = price.getResources().getServants()-discount.getResources().getServants();
 		int stone = price.getResources().getStone()-discount.getResources().getStone();

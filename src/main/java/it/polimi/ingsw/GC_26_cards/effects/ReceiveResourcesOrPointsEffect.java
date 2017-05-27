@@ -15,10 +15,6 @@ public class ReceiveResourcesOrPointsEffect implements Effect{
 		return resources;
 	}
 	
-	private ReceiveResourcesOrPointsEffect(ReceiveResourcesOrPointsEffect other) { //constructors used for deep copy 
-		this.resources= other.getResources().copy();
-	}
-
 	@Override
 	public void doEffect(Player player, boolean immediate) {
 		player.getWarehouse().add(resources);
@@ -31,11 +27,6 @@ public class ReceiveResourcesOrPointsEffect implements Effect{
 		
 	}
 
-	@Override
-	public ReceiveResourcesOrPointsEffect copy() {
-		return new ReceiveResourcesOrPointsEffect(this);
-		
-	}
 	
 	@Override 
 	public String toString(){

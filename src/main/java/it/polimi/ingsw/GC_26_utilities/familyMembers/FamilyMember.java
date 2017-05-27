@@ -41,4 +41,18 @@ public class FamilyMember {
 	public Player getPlayer() {
 		return player;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		   if (this==obj) 
+			   return true;
+		   if (obj == null)
+			   return false;
+		   if (this.getClass() != obj.getClass()) 
+			   return false;
+		   FamilyMember other =(FamilyMember) obj;
+		   if(player.equals(other.getPlayer()) && colour== other.getColour())
+			   return true;
+		   else return false;   
+	}
 }

@@ -20,7 +20,7 @@ public abstract class SinglePosition{
 			positionFree=false;
 		}
 		
-		public FamilyMember GetFamilyMember(){
+		public FamilyMember getFamilyMember(){
 			return familyMemberInPosition;
 		}
 		

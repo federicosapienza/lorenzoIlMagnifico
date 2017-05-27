@@ -5,7 +5,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 //here are all the parameters not passed by files but that we find useful to keep parametric 
 public class GameParameters {
-	private static int numberOfPlayers=4;
+	private static final int numberOfPlayers=4;
 	private static int numberOfPeriods=3;
 	private static int roundsforPeriod=2;
 	private static int faithPointNeededPeriod1= 3;
@@ -20,6 +20,9 @@ public class GameParameters {
 	private static int numPlayerforCompleteMarketActivation=4;
 	private static int minMarketzone=2;
 	private static int maxMarketZone=4;
+	private static int numPlayersForMultipleZones =3;
+	private static int singleHarvestOrProuductionZones=1;
+	private static int multipleHarvestOrProductionZones=1;
 	
 	public static int getNumberOfPlayers() {
 		return numberOfPlayers;
@@ -78,5 +81,17 @@ public class GameParameters {
 	public static int getMinMarketzone() {
 		return minMarketzone;
 	}
-}
+	public static int getNumPlayersForMultipleZones() {
+		return numPlayersForMultipleZones;
+	}
+	
+	public static int getMultipleHarvestOrProductionZones() {
+		return multipleHarvestOrProductionZones;
+	}
+	
+	public static int getSingleHarvestOrProductionZones() {
+		return singleHarvestOrProuductionZones;
+	}
+}	
+
 

@@ -10,9 +10,6 @@ public class ResourcesPayment implements Payment{
 		this.price=price;	
 	}
 	
-	private ResourcesPayment(ResourcesPayment other){  // constructor used for deep cloning. See copy() here and in ResourcesAndPoints
-		price = other.getPrice().copy();
-	}
 	
 	public ResourcesOrPoints getPrice() {
 		return price;
@@ -53,9 +50,4 @@ public class ResourcesPayment implements Payment{
 		return " payment of "+ price.toString();
 	}
 
-	@Override
-	public Payment copy() {    // passes an object which is identical to the first: allows deep cloning
-			return new ResourcesPayment(this);
-	}
-	
 }

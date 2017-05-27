@@ -2,7 +2,6 @@ package it.polimi.ingsw.GC_26_board;
 
 import java.util.*;
 
-import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class Board {
@@ -13,10 +12,8 @@ public class Board {
 	private Tower venturesTower;
 	private Market market;
 	private CouncilPalace councilPalace;
-	private SingleHarvest singleHarvest;
-	private SingleProduction singleProduction;
-	private MultipleHarvest multipleHarvest;
-	private MultipleProduction multipleProduction;
+	private HarvestZone harvestZone;
+	private ProductionZone productionZone;
 	
 	public Board(int numberOfPlayers, List<ResourcesOrPoints []> resourcesOrPointsList){
 		this.numberOfPlayers=numberOfPlayers;	
@@ -28,13 +25,9 @@ public class Board {
 		createMarket(resourcesOrPointsList);
 		ResourcesOrPoints [] resourcesOrPointsCouncilPalace=resourcesOrPointsList.get(5);
 		createCouncilPalace(resourcesOrPointsCouncilPalace[0],1);
-		createSingleHarvest(1);
-		createSingleProduction(1);
-		if(numberOfPlayers>=3){
-			createMultipleProducion(1);
-			createMultipleHarvest(1);
+		createProductionZone();
+		createHarvestZone();
 		}	
-	}
 	
 	private void createTowers(List<ResourcesOrPoints []> resourcesOrPointsList){
 		territoriesTower=new Tower(resourcesOrPointsList.get(0)); 
@@ -51,20 +44,21 @@ public class Board {
 		councilPalace= new CouncilPalace(resourcesOrPoints,1);
 	}
 	
-	private void createSingleHarvest(int value){
-		singleHarvest=new SingleHarvest(value);	
+	private void createProductionZone(){
+		harvestZone=new HarvestZone(1, 1, numberOfPlayers);	
 	}
 	
-	private void createSingleProduction(int value){
-		singleProduction=new SingleProduction(value);	
+	private void createHarvestZone(){
+		productionZone=new ProductionZone(1, 1, numberOfPlayers);	
 	}
 	
-	private void createMultipleHarvest(int value){
-		multipleHarvest= new MultipleHarvest(value);
+	
+	public HarvestZone getHarvestZone() {
+		return harvestZone;
 	}
 	
-	private void createMultipleProducion(int value){
-		multipleProduction= new MultipleProduction(value);
+	public ProductionZone getProductionZone() {
+		return productionZone;
 	}
 	
 	public int getNumberOfPlayers(){
@@ -90,21 +84,11 @@ public class Board {
 		return councilPalace;
 	}
 	
-	public SingleHarvest getSingleHarvest(){
-		return singleHarvest;
+	
+	public Market getMarket() {
+		return market;
 	}
 	
-	public SingleProduction getSingleProduction() {
-		return singleProduction;
-	}
-	
-	public MultipleProduction getMultipleProduction(){
-		return multipleProduction;
-	}
-	
-	public MultipleHarvest getMultipleHarvest(){
-		return multipleHarvest;
-	}
 	
 	public void endRound(){
 		territoriesTower.clearCardsAndFamilyMembers();
@@ -112,9 +96,8 @@ public class Board {
 		charactersTower.clearCardsAndFamilyMembers();
 		venturesTower.clearCardsAndFamilyMembers();
 		market.clearMarket();
-		singleHarvest.clear();
-		multipleHarvest.clear();
-		singleProduction.clear();
-		multipleProduction.clear();
+		harvestZone.clear();
+		
+		productionZone.clear();
 		}
 }
