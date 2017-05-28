@@ -32,7 +32,8 @@ public abstract class ActionHandler {
 		return gameElements;
 	}
 	
-	public abstract void startAction(Player player, Action action);
+	public abstract boolean isPossible(Player player, Action action);
+	public abstract void perform(Player player, Action action);
 	
 	
 	////// checkers
@@ -43,7 +44,7 @@ public abstract class ActionHandler {
 		 //checks if the player is already on the tower
 		Tower tower = gameElements.getBoard().getTower(action.getZone());
 		if(tower.canFamilyMemberGoToTheTower(familyMember)){
-			player.notifyObservers(" you are already in the tower");
+			player.notifyObservers("Your coloured members are already in the tower");
 			return false ;
 					}
 		
@@ -51,7 +52,7 @@ public abstract class ActionHandler {
 		if(tower.isTheTowerOccupied()){
 				if (!player.getTestWarehouse().areResourcesEnough(GameParameters.getTowerOccupiedMalus())){
 					player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
-					player.notifyObservers(" not enough resources for going in a occupied tower");
+					player.notifyObservers("Not enough resources for going in a occupied tower");
 					return false;
 				}
 				player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
@@ -102,7 +103,7 @@ public abstract class ActionHandler {
 		 //checking
 		 HarvestZone zone =gameElements.getBoard().getHarvestZone();
 		 if(zone.playerAlreadyHere(familyMember)){
-			 player.notifyObservers("already used a coloured member in harvest");
+			 player.notifyObservers("Already used a coloured member in harvest");
 			 return false;
 		 }
 
@@ -128,7 +129,7 @@ public abstract class ActionHandler {
 		 //checking
 		 ProductionZone zone =gameElements.getBoard().getProductionZone();
 		 if(zone.playerAlreadyHere(familyMember)){
-			 player.notifyObservers("already used a coloured member in production");
+			 player.notifyObservers("Already used a coloured member in production");
 			 return false;
 		 }
 			 
@@ -152,16 +153,20 @@ public abstract class ActionHandler {
 				player.notifyObservers("position not free");
 				return false;
 			}
-		 if(familyMember.getValue() + action.getServantsUsed()< position.getValueOfPosition()){
-				player.notifyObservers("not valid family member's value");
+		 if(  (familyMember != null && familyMember.getValue() + action.getServantsUsed()< position.getValueOfPosition()) //first action
+				 || (familyMember==null && player.getSecondactionValue()+action.getServantsUsed()
+				 								<position.getValueOfPosition())){  // second action: those determined by cards
+				player.notifyObservers("Family member's value and servants used not enough");
 				return false;
 				}
 		 else return true;
 	}
 	// 1)checking family member' s value is big enough for performing the action
 	 private boolean canMemberGoToPosition(MultiplePosition position, Player player, FamilyMember familyMember, Action action){
-		 if(familyMember.getValue() + action.getServantsUsed()< position.getValueOfPosition()){
-				player.notifyObservers("not valid family member's value");
+		 if(  (familyMember != null && familyMember.getValue() + action.getServantsUsed()< position.getValueOfPosition()) //first action
+				 || (familyMember==null && player.getSecondactionValue()+action.getServantsUsed()
+				 								<position.getValueOfPosition())){  // second action: those determined by cards
+			 player.notifyObservers("Family member's value and servants used not enough");
 				return false;
 				}
 		 else return true;

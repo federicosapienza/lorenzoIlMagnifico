@@ -8,7 +8,7 @@ public class MainActionHandler {
 	private GameElements gameElements;
 	private FirstActionHandler firstActionHandler;
 	private SecondActionHandler secondActionHandler;
-	
+	 
 	public MainActionHandler() {
 		firstActionHandler =new FirstActionHandler(gameElements);
 		secondActionHandler= new SecondActionHandler(gameElements);
@@ -24,4 +24,5 @@ public class MainActionHandler {
 	public SecondActionHandler getSecondActionHandler() {
 		return secondActionHandler;
 	}
+	
 }
