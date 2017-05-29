@@ -3,26 +3,38 @@ package it.polimi.ingsw.GC_26_player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
+import java.io.Serializable;
+import java.util.Map;
 import java.util.Observable;
 
 import it.polimi.ingsw.GC_26_actionsHandlers.Action;
+import it.polimi.ingsw.GC_26_board.Board;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26_gameLogic.Game;
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoard;
+import it.polimi.ingsw.GC_26_utilities.dices.Colour;
+import it.polimi.ingsw.GC_26_utilities.dices.Dices;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembers;
-
-public class Player extends Observable{
-	private final String name;
+import it.polimi.ingsw.GC_26_gameLogic.*;
+public class Player extends Observable {
+	private String name;
+	private int playerID;
+	private int victoryPoints;
 	private final Warehouse warehouse;
 	private final PermanentModifiers permanentModifiers;
 	private final FamilyMembers familyMembers;
 	private PlayerStatus status;
+	private int orderOfTurn;
+	private Round round;
+	private Period period;
+	
 	// private PlayerStatus previousStatus;  
 	 //previous status is used to keep memory of status before the status== VALIDATING; 
 	//It' s needed in case of actions denied.
 	private Warehouse testWarehouse;
 	//temporaryWarehouse is used in some calculations, such as checking if the player can pay something or keeping track of resources earned in Production
 
-	private final PersonalBoard personalBoard;
+	private PersonalBoard personalBoard;
 	private boolean playerActive; //set true if the player has at least tried to perform an action during the round.
 	// reached when a player has not performed an action 	
 	
@@ -32,15 +44,17 @@ public class Player extends Observable{
 	private DevelopmentCard cardUsed; // pointer to the card used when the player is asked something, such as choosing payment or trade 
 	private int secondActionValue;
 	
-	public Player(String name, ResourcesOrPoints startingResources) {
-		this.name=name;
+	public Player(int id, String na) { /* creates a new player; param id is the player number, param na is
+	the name of the player */
+		this.name = na;
+		this.playerID = id;
+		victoryPoints = 0;
 		familyMembers = new FamilyMembers();
 		status= PlayerStatus.WAITINGHISTURN;
-		warehouse= new Warehouse(startingResources);
+		warehouse= new Warehouse(this);
 		personalBoard= new PersonalBoard();
 		permanentModifiers = new PermanentModifiers(this);
 		playerActive= false;
-
 	}
 	
 	//getters methods
@@ -48,9 +62,14 @@ public class Player extends Observable{
 		return this.name;
 	}
 	
+	public int getPlayerID() {
+		return playerID;
+	}
+	
 	public FamilyMembers getFamilyMembers() {
 		return familyMembers;
 	}
+	
 	
 	public PersonalBoard getPersonalBoard() {
 		return personalBoard;
@@ -70,6 +89,10 @@ public class Player extends Observable{
 	public PlayerStatus getStatus(){
 		return status;
 	}
+	
+	public int getOrderOfTurn() {
+		return orderOfTurn;
+	}
 	public boolean isPlayerActive() {
 		return playerActive;
 	}
@@ -81,6 +104,9 @@ public class Player extends Observable{
 	
 	//setters methods
 	
+	public void setName(String na) {
+		name = na;
+	}
 	public void setStatus(PlayerStatus status){
 	//	if(status== PlayerStatus.VALIDATING)
 		//	previousStatusSet(this.status);
@@ -96,6 +122,14 @@ public class Player extends Observable{
 		this.playerActive = true;
 	}
 	
+	public void setOrderOfTurn() {
+		if (round.getRound()==1 && period.getPeriod()==1) {
+			orderOfTurn = getPlayerID();
+		}
+		else {
+			//TODO: we need to edit CouncilPalace
+		}
+	}
 	public void endTurn(){
 		playerActive=false;
 	}

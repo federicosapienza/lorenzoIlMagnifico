@@ -80,7 +80,7 @@ public class FamilyMembers {
 	
 	//penso che da qui in poi sia inutile. facciamo il get del singolo FamilyMember e e lavoriamo su di lui
 	
-	/*public boolean isFree(Colour colour) {
+	public boolean isFree(Colour colour) {
 		boolean isFree;
 		if (colour == Colour.BLACK) {
 			isFree = blackMember.isFree();
@@ -140,6 +140,6 @@ public class FamilyMembers {
 		}
 	}
 	
-	*/
+	
 
 }

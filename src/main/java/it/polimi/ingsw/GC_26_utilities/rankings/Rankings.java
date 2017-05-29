@@ -18,12 +18,12 @@ public class Rankings {
 	private Map<String, Integer> faithPoints= new HashMap<>();
 	private List<String> nextRoundOrder= new ArrayList<>();
 	
-	public Rankings(List<Player> players) {
+	public Rankings(Player[] players) {
 		initialise(players);
 		
 	}
 
-	private void initialise(List<Player> players) {
+	private void initialise(Player[] players) {
 		for(Player p: players){
 			String name = p.getName();
 			victoryPoints.put(name, 0);

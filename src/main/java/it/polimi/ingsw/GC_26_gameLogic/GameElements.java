@@ -18,7 +18,7 @@ public class GameElements extends Observable{
 	private int numberOfPlayers;
 	
 	
-	public GameElements(List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList) {
+	public GameElements(Player[] players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList) {
 		board=new Board(numberOfPlayers, resourcesOrPointsList);
 		dices= new Dices();
 		rankings = new Rankings(players);

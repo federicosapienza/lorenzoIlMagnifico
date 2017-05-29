@@ -1,5 +1,5 @@
 package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
-
+import it.polimi.ingsw.GC_26_player.*;
 
 /* It ' s the class that represent the status of the player in terms of resources and points owned.
  * It must not be mistaken with ResourcesOrPoints class , which instead represent the payments and effects that are called by cards, positions etc
@@ -8,22 +8,44 @@ package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 public class Warehouse {
 	private int coins;
 	private int servants;
-	private int wood; 
-	private int stone;
+	private int woods; 
+	private int stones;
 	private int victoryPoints;
 	private int militaryPoints;
 	private int faithPoints;
 	private int councilPrivileges;
+	private static final int initialCoinsID1 = 5;
+    private static final int initialCoinsID2 = 6;
+    private static final int initialCoinsID3 = 7;
+    private static final int initialCoinsID4 = 8;
+    private static final int initialServants = 3;
+    private static final int initialWoods = 2;
+    private static final int initialStones = 2;
+
+    public Warehouse(Player player) {
+        servants = initialServants;
+        woods = initialWoods;
+        stones = initialStones;
+        if (player.getPlayerID()==1){
+            coins = initialCoinsID1;
+        }
+        else if (player.getPlayerID()==2) {
+            coins = initialCoinsID2;
+        }
+        else if (player.getPlayerID()==3) {
+            coins = initialCoinsID3;
+        }
+        else if (player.getPlayerID()==4) {
+            coins = initialCoinsID4;
+        }
+    }
 	
-	public Warehouse(ResourcesOrPoints startingResources){  //initialisation
-		add(startingResources);
-	}
 	
-	public  Warehouse(Warehouse other){  /// use to copy and create temporary warehouse : useful in some parts of gameLogic
+	public Warehouse(Warehouse other){  /// use to copy and create temporary warehouse : useful in some parts of gameLogic
 		this.coins =other.getCoins();
 		this.servants=other.getServants();
-		this.wood=other.getWood();
-		this.stone= other.getStone();
+		this.woods=other.getWood();
+		this.stones= other.getStone();
 		this.victoryPoints= other.getVictoryPoints();
 		this.militaryPoints = other.getMilitaryPoints();
 		this.faithPoints= other.getFaithPoints();
@@ -38,10 +60,10 @@ public class Warehouse {
 		return servants;
 	}
 	public int getStone() {
-		return stone;
+		return stones;
 	}
 	public int getWood() {
-		return wood;
+		return woods;
 	}
 	
 	public int getMilitaryPoints() {
@@ -61,12 +83,12 @@ public class Warehouse {
 	
 	// ToString methods
 	public String ResourcesStatus() {// String that describes only the status of resources owned by the player
-		return coins+" coins,  "+ servants+ " servants, "+wood+ " wood, "+stone+ " stone.";
+		return coins+" coins,  "+ servants+ " servants, "+woods+ " wood, "+stones+ " stone.";
 	}
 
 	@Override
 	public String toString(){
-		return coins+" coins,  "+ servants+ " servants, "+wood+ " wood, "+stone+ " stone"
+		return coins+" coins,  "+ servants+ " servants, "+woods+ " wood, "+stones+ " stone"
 	    		+ victoryPoints+ " victoryPoints"+  militaryPoints+" military points" + victoryPoints+ " victory points"+
 	    		 faithPoints+ " faith points" + councilPrivileges +" council priviledges.";
 	}
@@ -86,9 +108,9 @@ public class Warehouse {
 			return false;
 		if(!greaterEqualThan(servants, resources.getResources().getServants()))  
 			return false;
-		if(!greaterEqualThan(wood, resources.getResources().getWood()))  
+		if(!greaterEqualThan(woods, resources.getResources().getWood()))  
 			return false;
-		if(!greaterEqualThan(stone, resources.getResources().getStone()))  
+		if(!greaterEqualThan(stones, resources.getResources().getStone()))  
 			return false;
 		if(!greaterEqualThan(victoryPoints, resources.getPoints().getVictoryPoints()))  
 			return false;
@@ -113,9 +135,9 @@ public class Warehouse {
 			return false;
 		if(!greaterEqualThan(servants, 0))  
 			return false;
-		if(!greaterEqualThan(wood, 0))  
+		if(!greaterEqualThan(woods, 0))  
 			return false;
-		if(!greaterEqualThan(stone, 0))  
+		if(!greaterEqualThan(stones, 0))  
 			return false;
 		if(!greaterEqualThan(victoryPoints, 0))
 			return false;
@@ -132,8 +154,8 @@ public class Warehouse {
 	public void add(ResourcesOrPoints resources){
 		this.coins  += resources.getResources().getCoins();
 		this.servants += resources.getResources().getServants();
-		this.wood += resources.getResources().getWood();
-		this.stone +=resources.getResources().getStone();
+		this.woods += resources.getResources().getWood();
+		this.stones +=resources.getResources().getStone();
 		this.militaryPoints +=resources.getPoints().getMilitaryPoints();
 		this.victoryPoints += resources.getPoints().getVictoryPoints();
 		this.faithPoints +=resources.getPoints().getFaithPoints();
@@ -143,8 +165,8 @@ public class Warehouse {
 	public void spendResources(ResourcesOrPoints resources)throws IllegalArgumentException{
 		this.coins  -= resources.getResources().getCoins();
 		this.servants -= resources.getResources().getServants();
-		this.wood -= resources.getResources().getWood();
-		this.stone -=resources.getResources().getStone();
+		this.woods -= resources.getResources().getWood();
+		this.stones -=resources.getResources().getStone();
 		this.militaryPoints -=resources.getPoints().getMilitaryPoints();
 		this.victoryPoints -= resources.getPoints().getVictoryPoints();
 		this.faithPoints -=resources.getPoints().getFaithPoints();
