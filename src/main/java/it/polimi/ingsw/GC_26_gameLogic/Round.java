@@ -29,7 +29,7 @@ public class Round {
 		gameElements.getDices().throwDices();
 		
 		
-		// set the values of family members: it ' s valid for all the round
+		// set the values of family members: it's valid for all the round
 		for (Iterator<Player> iter = gameElements.getPlayers().iterator(); iter.hasNext(); ) {
 		    Player p = iter.next();
 		    p.getFamilyMembers().setValues(gameElements.getDices());
@@ -47,16 +47,16 @@ public class Round {
 			for (Iterator<Player> iter = gameElements.getPlayers().iterator(); iter.hasNext(); ) {
 			    Player player = iter.next();
 			    player.getFamilyMembers().setValues(gameElements.getDices());
-			    if(player.getStatus()== PlayerStatus.SUSPENDED)  
-			    	//if player is suspended ,  misses the turn
+			    if(player.getStatus() == PlayerStatus.SUSPENDED)  
+			    	//if player is suspended, misses the turn
 			    	//TODO notificare i giocatori che il player salta il turno
 			    	gameElements.notifyObservers(player.getName() + "misses his turn!");  // look at gameElements
-			    else if(player.getStatus()== PlayerStatus.WAITINGHISTURN){
+			    else if(player.getStatus() == PlayerStatus.WAITINGHISTURN){
 			    player.setStatus(PlayerStatus.PLAYING);
 			    //TODO notifico al player che è il suo turno
-			    player.notifyObservers("It s your turn");
+			    player.notifyObservers("It's your turn");
 			    //TODO è ok?
-			    while(player.getStatus()!= PlayerStatus.WAITINGHISTURN || player.getStatus()!= PlayerStatus.SUSPENDED){
+			    while(player.getStatus()!= PlayerStatus.WAITINGHISTURN && player.getStatus()!= PlayerStatus.SUSPENDED){
 			    	try {
 						wait();
 					} catch (InterruptedException e) {

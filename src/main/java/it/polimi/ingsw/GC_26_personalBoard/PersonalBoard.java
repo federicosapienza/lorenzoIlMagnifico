@@ -3,6 +3,8 @@ package it.polimi.ingsw.GC_26_personalBoard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
+import it.polimi.ingsw.GC_26_player.Player;
+
 import java.util.Set;
 
 
@@ -37,7 +39,7 @@ public class PersonalBoard {
 			default:
 				throw new IllegalArgumentException();
 			}
-			}
+		}
 	
 	public int getNumberOfCardPerType(DevelopmentCardTypes type){
 		switch(type){

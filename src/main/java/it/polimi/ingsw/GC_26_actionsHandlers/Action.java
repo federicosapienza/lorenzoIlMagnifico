@@ -15,7 +15,7 @@ public class Action {
 	private Colour familyMemberColour;  //can be null only in case of secondary action
 	private int servantsUsed;
 	
-	public Action(BoardZone zone, int position, Colour familyMemberColour, int  servantsUsed) {
+	public Action(BoardZone zone, int position, Colour familyMemberColour, int servantsUsed) {
 		this.zone=zone;
 		this.familyMemberColour = familyMemberColour;
 		this.servantsUsed= servantsUsed;

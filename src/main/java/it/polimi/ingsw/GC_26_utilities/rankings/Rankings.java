@@ -64,10 +64,10 @@ public class Rankings {
 		nextRoundOrder.add(name);
 	}
 	
-	//it ' s called when the round starts: it returns next round's order by passing players' names(string)   
+	//it's called when the round starts: it returns next round's order by passing players' names(string)   
 	public void getNextRoundOrder(List<Player> players){  
 		//completing the nextRoundOrderList: adding all the players who are not in nextRoundOrder
-		for ( Player p: players) {
+		for (Player p: players) {
 			if (!nextRoundOrder.contains(p.getName()))
 				nextRoundOrder.add(p.getName());
 		}

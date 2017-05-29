@@ -14,7 +14,7 @@ public class FamilyMembers {
 	private Player player;
 	
 	
-	public void FamilyMembersSet(Player player) {
+	public FamilyMembers(Player player) {
 		this.player= player;
 		orangeMember = new FamilyMember(Colour.ORANGE, player);
 		whiteMember = new FamilyMember(Colour.WHITE, player);

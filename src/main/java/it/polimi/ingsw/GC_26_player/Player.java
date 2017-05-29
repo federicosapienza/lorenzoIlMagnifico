@@ -34,7 +34,7 @@ public class Player extends Observable{
 	
 	public Player(String name, ResourcesOrPoints startingResources) {
 		this.name=name;
-		familyMembers = new FamilyMembers();
+		familyMembers = new FamilyMembers(this);
 		status= PlayerStatus.WAITINGHISTURN;
 		warehouse= new Warehouse(startingResources);
 		personalBoard= new PersonalBoard();
