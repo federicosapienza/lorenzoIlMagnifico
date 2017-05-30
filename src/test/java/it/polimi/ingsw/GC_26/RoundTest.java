@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26_gameLogic;
+package it.polimi.ingsw.GC_26;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,8 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
+import it.polimi.ingsw.GC_26_gameLogic.GameElements;
+import it.polimi.ingsw.GC_26_gameLogic.Round;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;

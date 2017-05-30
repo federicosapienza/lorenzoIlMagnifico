@@ -1,9 +1,10 @@
-package it.polimi.ingsw.GC_26_utilities.familyMembers;
+package it.polimi.ingsw.GC_26;
 import it.polimi.ingsw.GC_26_player.*;
 import static org.junit.Assert.*;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.*;
 import org.junit.Test;
 import it.polimi.ingsw.GC_26_utilities.dices.*;
+import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembers;
 public class FamilyMembersTest {
 	Dices dices = new Dices();
     FamilyMembers familyMembersSet;

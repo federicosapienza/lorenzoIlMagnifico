@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26_utilities.rankings;
+package it.polimi.ingsw.GC_26;
 
 import static org.junit.Assert.*;
 
