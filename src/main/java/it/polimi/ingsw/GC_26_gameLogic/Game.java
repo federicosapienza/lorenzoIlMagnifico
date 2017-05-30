@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26_gameLogic;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Observable;
 import java.util.function.IntToLongFunction;
 
 import it.polimi.ingsw.GC_26_board.Board;
@@ -14,7 +15,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
 
-public class Game implements Serializable, Cloneable{
+public class Game extends Observable implements Serializable, Cloneable{
 	private final Cards cards;
 	private Player[] players;
 	private int numberOfPlayers;
