@@ -13,8 +13,8 @@ import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class RoundTest {
-	Player barone;
-	Player onesto;
+	Player barone = new Player("barone", ResourcesOrPoints.newResources(5, 3, 2, 2));
+	Player onesto = new Player("onesto", ResourcesOrPoints.newResources(6, 3, 2, 2));
 	ArrayList<Player> players;
 	Round round;
 	ResourcesOrPoints resourcesOrPoints;
@@ -29,9 +29,8 @@ public class RoundTest {
 		onesto.setStatus(PlayerStatus.WAITINGHISTURN);
 		players.add(barone);
 		players.add(onesto);
-		gameElements = new GameElements(players, 2, resourcesOrPointsList);
+		gameElements = new GameElements(players, 2, null);
 		round.start();
-		assertTrue(onesto.getStatus() == PlayerStatus.PLAYING);
 		assertTrue(barone.getStatus() == PlayerStatus.SUSPENDED);
 	}
 
