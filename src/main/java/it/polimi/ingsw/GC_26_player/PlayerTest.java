@@ -22,8 +22,8 @@ public class PlayerTest {
 		dices.throwDices();
 		player1.getFamilyMembers().setValues(dices);
 		player2.getFamilyMembers().setValues(dices);
-		assertTrue(player1.getFamilyMembers().getfamilyMember(Colour.BLACK) == player2.getFamilyMembers().getfamilyMember(Colour.BLACK));
-		assertTrue(player1.getFamilyMembers().getfamilyMember(Colour.WHITE) == player2.getFamilyMembers().getfamilyMember(Colour.WHITE));
+		assertTrue(player1.getFamilyMembers().getfamilyMember(Colour.BLACK).getValue() == player2.getFamilyMembers().getfamilyMember(Colour.BLACK).getValue());
+		assertTrue(player1.getFamilyMembers().getfamilyMember(Colour.WHITE).getValue() == player2.getFamilyMembers().getfamilyMember(Colour.WHITE).getValue());
 		assertNotEquals(player1.getFamilyMembers(), player2.getFamilyMembers());
 	}
 
