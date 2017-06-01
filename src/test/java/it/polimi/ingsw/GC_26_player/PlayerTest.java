@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import it.polimi.ingsw.GC_26_gameLogic.Game;
 import it.polimi.ingsw.GC_26_gameLogic.Round;
+import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 import it.polimi.ingsw.GC_26_utilities.dices.Dices;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembers;
