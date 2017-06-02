@@ -1,5 +1,9 @@
 package it.polimi.ingsw.GC_26_gameLogic;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
@@ -23,6 +27,12 @@ public class GameParameters {
 	private static int numPlayersForMultipleZones =3;
 	private static int singleHarvestOrProuductionZones=1;
 	private static int multipleHarvestOrProductionZones=1;
+	private static int multiplePositionMalus = -3;
+	private static int standardPersonalBonusTileValue=1;
+	private static ResourcesOrPoints[] diplomaticPrivilegesTrades ={ResourcesOrPoints.newResources(0,0,1,1),
+							ResourcesOrPoints.newResources(0,2,0,0),ResourcesOrPoints.newResources(2,0,0,0),
+							ResourcesOrPoints.newPoints(0, 2, 0, 0),ResourcesOrPoints.newPoints(0, 0, 1, 0)};
+			
 	
 	public static int getNumberOfPlayers() {
 		return numberOfPlayers;
@@ -91,6 +101,16 @@ public class GameParameters {
 	
 	public static int getSingleHarvestOrProductionZones() {
 		return singleHarvestOrProuductionZones;
+	}
+	public static int getMultiplePositionMalus() {
+		return multiplePositionMalus;
+	}
+	public static int getStandardPersonalBonusTileValue() {
+		return standardPersonalBonusTileValue;
+	}
+	
+	public static ResourcesOrPoints[] getDiplomaticPrivilegesTrades() {
+		return diplomaticPrivilegesTrades;
 	}
 }	
 

@@ -19,16 +19,17 @@ public class Warehouse {
 		add(startingResources);
 	}
 	
-	public  Warehouse(Warehouse other){  /// use to copy and create temporary warehouse : useful in some parts of gameLogic
+	public Warehouse(Warehouse other){
 		this.coins =other.getCoins();
-		this.servants=other.getServants();
-		this.wood=other.getWood();
-		this.stone= other.getStone();
-		this.victoryPoints= other.getVictoryPoints();
-		this.militaryPoints = other.getMilitaryPoints();
-		this.faithPoints= other.getFaithPoints();
+		this.servants =other.getServants();
+		this.wood= other.getWood();
+		this.stone=other.getWood();
+		this.victoryPoints=other.getVictoryPoints();
+		this.militaryPoints=other.getMilitaryPoints();
+		this.faithPoints=other.getFaithPoints();
 		this.councilPrivileges=other.getCouncilPrivileges();
 	}
+	
 	
 	//getters methods
 	public int getCoins() {
@@ -125,6 +126,13 @@ public class Warehouse {
 			return false;
 		return true;
 	}
+	
+	public ResourcesOrPoints warehouseStatus(){
+		return ResourcesOrPoints.newResourcesOrPoints(coins, servants, wood, stone, victoryPoints, 
+													militaryPoints, faithPoints, councilPrivileges);
+	}
+	
+	
 	
 	
 	// Setters methods

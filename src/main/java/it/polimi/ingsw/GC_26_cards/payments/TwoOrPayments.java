@@ -1,6 +1,7 @@
 package it.polimi.ingsw.GC_26_cards.payments;
 
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_player.PlayerStatus;
 
 /*This class handles the cards in which choice between two different way of paying is possible */
 //it needs to call a specific handler for the interaction with user  
@@ -33,7 +34,23 @@ public class TwoOrPayments implements Payment{
 
 	@Override
 	public void pay(Player player) {
-		// TODO chiamare l handler!!!
+		if(mode1.canPlayerGetThis(player)&& mode2.canPlayerGetThis(player))
+		synchronized (player) {
+			player.setStatus(PlayerStatus.CHOOSINGPAYMENT);  //the notification to the player will be done by setPlayerStatus
+			return;
+		}
+		if(mode1.canPlayerGetThis(player)){
+				mode1.pay(player);
+				return;
+		}
+		if(mode2.canPlayerGetThis(player)){
+				mode2.pay(player);
+				return;
+		}
+		throw new IllegalArgumentException();
+		
+		
+		
 		
 		
 	}

@@ -7,8 +7,8 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class SecondActionHandler extends ActionHandler{
 
-	public SecondActionHandler(GameElements gameElements) {
-		super(gameElements);
+	public SecondActionHandler(GameElements gameElements , HarvestAndProductionHandler handler) {
+		super(gameElements,handler);
 	}
 
 	@Override
@@ -53,11 +53,11 @@ public class SecondActionHandler extends ActionHandler{
 		
 		//adding the servants to the value and calling Harvest
 		if(action.getZone()== BoardZone.HARVEST){
-			HarvestAndProductionHandler handler =new HarvestAndProductionHandler(super.getGameElements());
+			HarvestAndProductionHandler handler = super.getHarvestAndProductionHandler();
 			handler.startHarvest(player, player.getSecondactionValue()+action.getServantsUsed());
 		}
 		if(action.getZone()== BoardZone.PRODUCTION){
-			HarvestAndProductionHandler handler =new HarvestAndProductionHandler(super.getGameElements());
+			HarvestAndProductionHandler handler = super.getHarvestAndProductionHandler();
 			handler.startProduction(player, player.getSecondactionValue()+action.getServantsUsed());
 		}		
 		//they do not exists in standard game but they were put for flexibility

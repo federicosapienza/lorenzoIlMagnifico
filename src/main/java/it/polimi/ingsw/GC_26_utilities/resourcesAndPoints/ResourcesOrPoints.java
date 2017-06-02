@@ -19,7 +19,7 @@ public class ResourcesOrPoints {
 		this.resources=resources;
 		this.points=points;
 	}
-	
+
 	public static ResourcesOrPoints newResourcesOrPoints(int coins, int servants, int wood, int stone, int victoryP, int militaryP, int faithP, int councilP){
 		return new ResourcesOrPoints(new Resources(coins, servants, wood, stone), new Points(victoryP, militaryP, faithP, councilP));
 		
@@ -54,39 +54,11 @@ public class ResourcesOrPoints {
 		return newResourcesOrPoints(coins, servants, wood, stone, victoryP, militaryP, faithP, councilP);
 	}
 	
-	
-	 public ResourcesOrPoints copy() { // Creates a deep copy of the object
-		return  newResourcesOrPoints(this.getResources().getCoins(), this.getResources().getServants(), 
-									this.getResources().getStone(),this.getResources().getWood(), 
-									this.getPoints().getVictoryPoints(), this.getPoints().getMilitaryPoints(), 
-									this.getPoints().getFaithPoints(), this.getPoints().getCouncilPrivileges());
-	 }
 			
 	@Override
 	public String toString(){
 		return resources.toString() + " "+ points.toString()+ " ";
 	}
 	
-	public static ResourcesOrPoints newResourcesOrPointsDiscount(ResourcesOrPoints price,ResourcesOrPoints discount){
-		/*Created for handling Pico Della Mirandola card, developed in order to be useful in case of creation of similar cards
-		 */
-		int coins = price.getResources().getCoins()-discount.getResources().getCoins();
-		int servants = price.getResources().getServants()-discount.getResources().getServants();
-		int stone = price.getResources().getStone()-discount.getResources().getStone();
-		int wood = price.getResources().getWood()-discount.getResources().getWood();
-		int militaryP = price.getPoints().getMilitaryPoints()-discount.getPoints().getMilitaryPoints();
-		int faithP = price.getPoints().getFaithPoints()-discount.getPoints().getFaithPoints();
-		int victoryP= price.getPoints().getVictoryPoints()-discount.getPoints().getVictoryPoints();
-		 //no Council Privileges (never used directly as price)
-		return newResourcesOrPoints(moreThanZero(coins), moreThanZero(servants), moreThanZero(wood), 
-				moreThanZero(stone), moreThanZero(victoryP), moreThanZero(militaryP), moreThanZero(faithP), 
-				price.getPoints().getCouncilPrivileges());
-	}
 	
-	private static int moreThanZero(int test){
-		//used only by newResourcesOrPointsDiscounted, to ensure no negative value
-		if(test>= 0)
-			return test;
-		else return 0;
-	}
 }

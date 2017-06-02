@@ -37,7 +37,7 @@ public class Round {
 		
 		//sort the list of the players changing the order in which they will perform their turn. (in the first turn , order is not changed
 		try {
-			gameElements.getRankings().getNextRoundOrder(gameElements.getPlayers());
+			gameElements.getRankings().changeNextRoundOrder(gameElements.getPlayers());
 		} catch (RuntimeException e) {
 			e.printStackTrace();  // error generated when player list is corrupted! the list will not be sorted during the game!
 		}
@@ -56,6 +56,7 @@ public class Round {
 			    //TODO notifico al player che è il suo turno
 			    player.notifyObservers("It's your turn");
 			    //TODO è ok?
+			    synchronized (this) {
 			    while(player.getStatus()!= PlayerStatus.WAITINGHISTURN && player.getStatus()!= PlayerStatus.SUSPENDED){
 			    	try {
 						wait();
@@ -65,6 +66,7 @@ public class Round {
 					}
 			    //TODO mettere un notifyall!!!
 			    }
+			    }
 			    //TODO dobbiamo fare qualcosa alla fine del turno del player?
 			    }
 			}
@@ -72,6 +74,10 @@ public class Round {
 		//ends the round! : clears everything on the board
 		gameElements.getBoard().endRound();
 		
+	}
+	
+	public synchronized void endPlayerTurn(){
+		notifyAll();
 	}
 	
 }

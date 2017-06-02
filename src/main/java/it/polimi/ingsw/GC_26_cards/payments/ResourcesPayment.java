@@ -18,10 +18,10 @@ public class ResourcesPayment implements Payment{
 	
 
 	@Override
-	public boolean canPlayerGetThis(Player player) {
+	public synchronized boolean canPlayerGetThis(Player player) {
 		ResourcesOrPoints temp=price;
 		if(player.getPermanentModifiers().IsTherediscountOnResources()){  //handling Pico Della Mirandola Card: (and even similar cards if added)
-			temp= ResourcesOrPoints.newResourcesOrPointsDiscount(temp, player.getPermanentModifiers().getDiscount());
+			temp=player.getPermanentModifiers().resourcesOrPointsDiscount(temp);
 		}
 		
 		// The player is notified if the player has not enough resources for getting the card, and false is returned
@@ -34,15 +34,14 @@ public class ResourcesPayment implements Payment{
 	
 
 	@Override
-	public void pay(Player player) { // come gestisce l eccezione???
+	public synchronized void pay(Player player) { // come gestisce l eccezione???
 		ResourcesOrPoints temp=price;
 		if(player.getPermanentModifiers().IsTherediscountOnResources()){  //handling Pico Della Mirandola Card: (and even similar cards if added)
-			temp= ResourcesOrPoints.newResourcesOrPointsDiscount(temp, player.getPermanentModifiers().getDiscount());
-		}
+			temp= player.getPermanentModifiers().resourcesOrPointsDiscount(temp);
+			}
 
 		player.getWarehouse().spendResources(temp);
-
-		//TODO	
+	
 	}
 	
 	@Override

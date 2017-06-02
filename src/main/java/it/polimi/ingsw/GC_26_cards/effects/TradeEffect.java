@@ -2,14 +2,17 @@ package it.polimi.ingsw.GC_26_cards.effects;
 
 
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
-//Trade effect needs dialog with user: there is often choice and playyer can also decide not to trade!
+//Trade effect needs dialog with user: there is often choice and player can also decide not to trade!
 /*Creation rules: 
- * if a resource to be given can be traded in two different ways , this resouce must be inserted both in give1 and give2
+ * if a resource to be given can be traded in two different ways , this resource must be inserted both in give1 and give2
  * if  there is a choice in giving and only one possible outcome, the outcome must be inserted both in receive1 that receive2. 
  * If there is only one income and only one outcome leave give2 and receive2 null; 
+ * 
+ * So if one of both give2 and receive2 is not null , the other one (receive2 or give2) is not null
  */
 public class TradeEffect implements Effect{
 	private ResourcesOrPoints give1;  
@@ -41,7 +44,9 @@ public class TradeEffect implements Effect{
 	
 	@Override
 	public void doEffect(Player player, boolean immediate) {
-		// TODO chiama l handler
+		synchronized (player.getStatus()) {
+			player.setStatus(PlayerStatus.TRADING);  // status change will call the interaction!
+		}
 		
 	}
 	@Override

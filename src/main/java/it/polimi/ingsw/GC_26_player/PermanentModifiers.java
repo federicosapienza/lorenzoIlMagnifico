@@ -74,6 +74,32 @@ public class PermanentModifiers {
 		return discount;
 	}
 	
+	public  ResourcesOrPoints resourcesOrPointsDiscount(ResourcesOrPoints price){
+		/*Created for handling Pico Della Mirandola card, developed in order to be useful in case of creation of similar cards
+		 */
+		int coins = price.getResources().getCoins()-discount.getResources().getCoins();
+		int servants = price.getResources().getServants()-discount.getResources().getServants();
+		int stone = price.getResources().getStone()-discount.getResources().getStone();
+		int wood = price.getResources().getWood()-discount.getResources().getWood();
+		int militaryP = price.getPoints().getMilitaryPoints()-discount.getPoints().getMilitaryPoints();
+		int faithP = price.getPoints().getFaithPoints()-discount.getPoints().getFaithPoints();
+		int victoryP= price.getPoints().getVictoryPoints()-discount.getPoints().getVictoryPoints();
+		 //no Council Privileges (never used directly as price)
+		return ResourcesOrPoints.newResourcesOrPoints(moreThanZero(coins), moreThanZero(servants), moreThanZero(wood), 
+				moreThanZero(stone), moreThanZero(victoryP), moreThanZero(militaryP), moreThanZero(faithP), 
+				price.getPoints().getCouncilPrivileges());
+	}
+	private static int moreThanZero(int test){
+		//used only by newResourcesOrPointsDiscounted, to ensure no negative value
+		if(test>= 0)
+			return test;
+		else return 0;
+	}
+	
+
+	
+	
+	
 	//Santa Rita effect: doubles the earning of coins, servants, stone , wood. 
 	private boolean doubleEarningOn=false;
 	

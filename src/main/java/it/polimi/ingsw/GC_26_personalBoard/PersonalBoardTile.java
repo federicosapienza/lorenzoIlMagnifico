@@ -1,12 +1,13 @@
 package it.polimi.ingsw.GC_26_personalBoard;
 
+import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class PersonalBoardTile {
 	private ResourcesOrPoints resourcesOrPointsProduction;
 	private ResourcesOrPoints resourcesOrPointsHarvest;
-	private final int value=1;
+	private final int value=GameParameters.getStandardPersonalBonusTileValue();
 	
 	public PersonalBoardTile(ResourcesOrPoints resourcesOrPointsProoduction,ResourcesOrPoints resourcesOrPointsHarvest){
 		this.resourcesOrPointsProduction=resourcesOrPointsProoduction;

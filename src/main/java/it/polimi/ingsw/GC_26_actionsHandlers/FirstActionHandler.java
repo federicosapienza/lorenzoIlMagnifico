@@ -11,8 +11,8 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 public class FirstActionHandler extends ActionHandler{
 	
 	
-	public FirstActionHandler(GameElements gameElements){
-		super(gameElements);
+	public FirstActionHandler(GameElements gameElements, HarvestAndProductionHandler handler){
+		super(gameElements, handler);
 	}
 	
 	/*@Override

@@ -50,7 +50,7 @@ public class Game {
 	}
 	
 	private void initialiseGame(){
-		gameElements= new GameElements(players, numberOfPlayers, resourcesOrPointsBonus);
+		gameElements= new GameElements(this ,players, numberOfPlayers, resourcesOrPointsBonus);
 		
 	}
 }

@@ -24,12 +24,18 @@ import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 //contains the methods used both by firstActionHandler and SecondActionHandler
 public abstract class ActionHandler {
 	private GameElements gameElements;
+	public HarvestAndProductionHandler harvestAndProductionHandler;
 	
-	public ActionHandler(GameElements gameElements){
+	public ActionHandler(GameElements gameElements, HarvestAndProductionHandler harvestAndProductionHandler){
 		this.gameElements =gameElements;
+		this.harvestAndProductionHandler=harvestAndProductionHandler;
 	}
 	public GameElements getGameElements() {
 		return gameElements;
+	}
+	
+	public HarvestAndProductionHandler getHarvestAndProductionHandler() {
+		return harvestAndProductionHandler;
 	}
 	
 	public abstract boolean isPossible(Player player, Action action);
@@ -191,8 +197,9 @@ public abstract class ActionHandler {
 		//getting the card
 		
 		DevelopmentCard card = position.getCard();
+		player.setCardUsed(card);//pointer to this card used if the action is interrupted (i.e. for double payments choice) 
+		
 		//paying the card
-		player.setStatus(PlayerStatus.CHOOSINGPAYMENT);
 		card.pay(player);
 		while(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT){ // This status reached when player is asked to choose payment
 			try {
@@ -202,12 +209,13 @@ public abstract class ActionHandler {
 				player.setStatus(PlayerStatus.WAITINGHISTURN);  // ends player turn
 				e.printStackTrace();
 			}
-			//TODO mettere un notifyAll!!
 			
 				card.runImmediateEffect(player);
 				if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)// character cards' permanent effect is immediately activated
 							card.runPermanentEffect(player);
-					gameElements.getRankings().updateRankingPlayer(player);
+				player.setCardUsed(null);  //cleaning parameter of the card no more used
+					
+				//gameElements.getRankings().updateRankingPlayer(player);
 				}
  }
 		
@@ -230,12 +238,15 @@ public abstract class ActionHandler {
 		 if(action.getPosition()==1){
 				SingleProduction position = gameElements.getBoard().getProductionZone().getSingleProduction();
 			 	position.setFamilyMember(familyMember);
-			 	//TODO lanciare produzione
+			 	//launching production
+			 	harvestAndProductionHandler.startProduction(player, action.getServantsUsed()+familyMember.getValue());
 			 }
 			 else  if(action.getPosition()==2){
 				 MultipleProduction position = gameElements.getBoard().getProductionZone().getMultipleProduction();
 				 position.setFamilyMember(familyMember);
-				 //todo lanciare produzione
+				 //launching Production
+				 harvestAndProductionHandler.startProduction(player, action.getServantsUsed()+
+						 											familyMember.getValue()+position.getActionMalus());
 			 } 
 			 throw new IllegalArgumentException();
 }
@@ -243,13 +254,17 @@ public abstract class ActionHandler {
 		 if(action.getPosition()==1){  //single position
 				SingleHarvest position = gameElements.getBoard().getHarvestZone().getSingleHarvest();
 			 	position.setFamilyMember(familyMember);
-			 	//TODO lanciare produzione
-			 }
+			 	//launching harvest 
+			 	harvestAndProductionHandler.startHarvest(player, action.getServantsUsed()+familyMember.getValue());			 }
 			 else  if(action.getPosition()==2){ //multiple position
 				 MultipleHarvest position = gameElements.getBoard().getHarvestZone().getMultipleHarvest();
 				 position.setFamilyMember(familyMember);
-				 //todo lanciare produzione
-			 } 
+				//launching harvest
+				 	harvestAndProductionHandler.startHarvest(player, action.getServantsUsed()+
+				 											familyMember.getValue()+position.getActionMalus());			
+				 	}
+
+			 
 			 throw new IllegalArgumentException();
 }
 }

@@ -9,5 +9,4 @@ public interface DevelopmentCard {
 	void runPermanentEffect(Player player);	
 	public int getActionValue();
 	public DevelopmentCardTypes getType();
-	//DevelopmentCard copy();
 }

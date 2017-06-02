@@ -1,4 +1,4 @@
-package controllers;
+package it.polimi.ingsw.GC_26_controllers;
 
 import it.polimi.ingsw.GC_26_actionsHandlers.Action;
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
@@ -16,11 +16,16 @@ public class ActionController {  //TODO extends actionObserver etc
 	
 	public void update(){ //todo 
 		//potrei mettere synronysed il controller per evitare problemi di 2 azioni in contemporane
+		PlayerStatus status;
 	
 		Action action=null; //inizializzazione provvisoria!
-		if(player.getStatus() == PlayerStatus.PLAYING)
+		synchronized (player) {
+			 status= player.getStatus();
+		}
+		
+		if(status == PlayerStatus.PLAYING)
 			 firstActionController(action);
-		if(player.getStatus()== PlayerStatus.SECONDPLAY)
+		if(status== PlayerStatus.SECONDPLAY)
 			secondActionController(action);
 	}
 	
@@ -30,26 +35,34 @@ public class ActionController {  //TODO extends actionObserver etc
 		try {
 			Boolean flag = handlers.getFirstActionHandler().isPossible(player, action);
 			// if action not possible player is notified in IsPossible and linked methods
-			if(!flag){
-				handlers.getFirstActionHandler().perform(player,  action);
-			if(player.isThereAsecondaryAction())
-				synchronized (player.getStatus()) {
-					player.setStatus(PlayerStatus.SECONDPLAY);
-				}
-			else synchronized (player.getStatus()) {
+			if(!flag)
+				return;
+			
+			handlers.getFirstActionHandler().perform(player,  action);
+				
+			synchronized (player) {
+				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
+					return;
+				if(player.isThereAsecondaryAction())
+				player.setStatus(PlayerStatus.SECONDPLAY);
+				else
 				player.setStatus(PlayerStatus.ACTIONPERFORMED);
-			}
+			
 			}
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-			player.setStatus(PlayerStatus.PLAYING);
-			player.notifyObservers("action not valid");
+			synchronized (player) {
+				player.setStatus(PlayerStatus.PLAYING);
+				player.notifyObservers("action not valid");
+			}
 			
 		}
 		catch ( IllegalStateException e1 ) {
 			e1.printStackTrace();
-			player.setStatus(PlayerStatus.PLAYING);
-			player.notifyObservers("action not valid");
+			synchronized (player) {
+				player.setStatus(PlayerStatus.PLAYING);
+				player.notifyObservers("action not valid");
+			}
 		}
 	}
 	
@@ -57,26 +70,34 @@ public class ActionController {  //TODO extends actionObserver etc
 		try {
 			Boolean flag = handlers.getSecondActionHandler().isPossible(player, action);
 			// if action not possible player is notified in IsPossible and linked methods
-			if(!flag){
+			if(flag)
+				return;
 				handlers.getSecondActionHandler().perform(player,  action);
-			 synchronized (player.getStatus()) {
+			 synchronized (player) {
+				 if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
+						return;
 				player.setStatus(PlayerStatus.ACTIONPERFORMED);
 				player.resetSecondAction();
 			}
-		}
 			 
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-			player.setStatus(PlayerStatus.PLAYING);
-			player.notifyObservers("action not valid");
+			synchronized (player) {
+				player.setStatus(PlayerStatus.PLAYING);
+				player.notifyObservers("action not valid");
+			}
+			
 			
 		}
 		catch ( IllegalStateException e1 ) {
 			e1.printStackTrace();
-			player.setStatus(PlayerStatus.PLAYING);
-			player.notifyObservers("action not valid");
+			synchronized (player) {
+				player.setStatus(PlayerStatus.PLAYING);
+				player.notifyObservers("action not valid");
+			}
 		}
 	}
+	
 	
 }
 

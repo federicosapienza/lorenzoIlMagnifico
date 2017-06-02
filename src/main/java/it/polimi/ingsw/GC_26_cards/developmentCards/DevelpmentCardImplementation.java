@@ -26,16 +26,6 @@ public class DevelpmentCardImplementation implements DevelopmentCard{
 		this.permanentEffect= permanent;
 		this.actionValue= actionValue;
 	}
-	/*protected DevelpmentCardImplementation(DevelpmentCardImplementation other) { //used for deep cloning
-		name=new String( other.getName());  
-		period= other.getPeriod();
-		type=other.getType();
-		payment= other.getPayment().copy();
-		immediateEffect=other.getImmediateEffect().copy();
-		permanentEffect=other.getPermanentEffect().copy();
-		this.actionValue= other.getActionValue();	
-	}
-	*/
 	
 	public static DevelopmentCard territoryCard(String name, int period, Payment payment, Effect immediate, Effect permanent, int actionValue){
 		return new DevelpmentCardImplementation(name, period, DevelopmentCardTypes.TERRITORYCARD, payment, immediate, permanent, actionValue);
@@ -109,10 +99,6 @@ public class DevelpmentCardImplementation implements DevelopmentCard{
 		permanentEffect.doEffect(player, false);
 		
 	}
-	/*@Override
-	public DevelopmentCard copy() {
-		return new DevelpmentCardImplementation(this);
-	} */
 	
 	//TODO to string completi e parziali
 

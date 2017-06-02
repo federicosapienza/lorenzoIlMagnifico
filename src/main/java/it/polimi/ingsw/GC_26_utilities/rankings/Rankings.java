@@ -17,7 +17,6 @@ public class Rankings {
 	private Map<String, Integer> militaryPoints= new HashMap<>();
 	private Map<String, Integer> faithPoints= new HashMap<>();
 	private List<String> nextRoundOrder= new ArrayList<>();
-	
 	public Rankings(List<Player> players) {
 		initialise(players);
 		
@@ -64,8 +63,13 @@ public class Rankings {
 		nextRoundOrder.add(name);
 	}
 	
+	public List<String> getNextRoundOrder() {
+		return nextRoundOrder;
+	}
+	
+	
 	//it's called when the round starts: it returns next round's order by passing players' names(string)   
-	public void getNextRoundOrder(List<Player> players){  
+	public void changeNextRoundOrder(List<Player> players){  
 		//completing the nextRoundOrderList: adding all the players who are not in nextRoundOrder
 		for (Player p: players) {
 			if (!nextRoundOrder.contains(p.getName()))

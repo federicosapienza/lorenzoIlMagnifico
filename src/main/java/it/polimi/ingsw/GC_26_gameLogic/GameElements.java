@@ -11,6 +11,7 @@ import it.polimi.ingsw.GC_26_utilities.rankings.Rankings;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class GameElements extends Observable{
+	Game game;
 	private Board board;
 	private Dices dices;
 	private Rankings rankings;
@@ -18,12 +19,17 @@ public class GameElements extends Observable{
 	private int numberOfPlayers;
 	
 	
-	public GameElements(List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList) {
+	public GameElements(Game game, List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList) {
 		board=new Board(numberOfPlayers, resourcesOrPointsList);
 		dices= new Dices();
 		rankings = new Rankings(players);
 		
 	}
+	
+	public Game getGame() {
+		return game;
+	}
+	
 	public Board getBoard() {
 		return board;
 	}

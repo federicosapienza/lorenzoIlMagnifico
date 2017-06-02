@@ -2,6 +2,8 @@ package it.polimi.ingsw.GC_26_board;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 
 public class MultiplePosition {
@@ -9,6 +11,7 @@ public class MultiplePosition {
 	private List<FamilyMember> familyMemberInPosition = new ArrayList<>();
 	private boolean positionFree=true;
 	private int counter; //to count number of FM in position
+	private final int actionMalus= GameParameters.getMultiplePositionMalus();
 	
 	public MultiplePosition(int valueOfPosition){
 		this.valueOfPosition=valueOfPosition;
@@ -48,10 +51,16 @@ public class MultiplePosition {
 		this.counter = counter;
 	}
 	
+	public int getActionMalus() {
+		return actionMalus;
+	}
+	
 	public void clear(){
 		familyMemberInPosition.clear();
 		setIsPositionFree(true);
 		}
+	
+	
 
 
 }
