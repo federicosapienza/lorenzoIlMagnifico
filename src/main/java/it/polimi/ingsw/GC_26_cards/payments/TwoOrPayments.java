@@ -25,7 +25,7 @@ public class TwoOrPayments implements Payment{
 	
 
 	@Override
-	public boolean canPlayerGetThis(Player player) {
+	public synchronized boolean canPlayerGetThis(Player player) {
 		//returns true as long as one payment is ok!
 		if(mode1.canPlayerGetThis(player) || mode2.canPlayerGetThis(player))
 			return false;
@@ -33,7 +33,7 @@ public class TwoOrPayments implements Payment{
 	}
 
 	@Override
-	public void pay(Player player) {
+	public synchronized void pay(Player player) {
 		if(mode1.canPlayerGetThis(player)&& mode2.canPlayerGetThis(player))
 		synchronized (player) {
 			player.setStatus(PlayerStatus.CHOOSINGPAYMENT);  //the notification to the player will be done by setPlayerStatus
@@ -49,10 +49,11 @@ public class TwoOrPayments implements Payment{
 		}
 		throw new IllegalArgumentException();
 		
-		
-		
-		
-		
+	}
+	
+	@Override
+	public String toString() {
+		return "choice over two payment: "+  mode1.toString()+" or "+mode2.toString();
 	}
 
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
+
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
@@ -21,7 +22,16 @@ public class SecondActionHandler extends ActionHandler{
 		
 		//gets the info about second action from PlayerStatus and checks is valid
 		Action secondAction = player.getTypeOfSecondaryAction();
-		if(secondAction.getZone()!=action.getZone()){
+		if(secondAction.getZone()==null){ //==means take card from everywhere (i.e Badess effect): look at SetSecondActionEffect
+			//anyway we must check is a tower Action.
+			if(! (action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
+			action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER)){
+				player.notifyObservers("second action not corresponds to the allowed one");
+				return false;
+			}
+				
+		}
+		else if(secondAction.getZone()!=action.getZone()){
 			player.notifyObservers("second action not corresponds to the allowed one");
 			return false;
 		}

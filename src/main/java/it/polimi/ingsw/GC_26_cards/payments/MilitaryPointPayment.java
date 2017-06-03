@@ -22,18 +22,18 @@ public class MilitaryPointPayment implements Payment{
 	}
 	
 	@Override
-	public boolean canPlayerGetThis(Player player) {
+	public synchronized boolean canPlayerGetThis(Player player) {
 		if(player.getWarehouse().getMilitaryPoints()<= needed || 
 				player.getPermanentModifiers().isMilitaryPointRequirementNotNeeded()==true)// Cesare Borgia effect
 			return false;
-		else if(player.getWarehouse().getMilitaryPoints()<toSpend)  //useless if isMilitaryPointRequirementNotNeeded()==false
+		if(player.getWarehouse().getMilitaryPoints()<toSpend)  //useless if isMilitaryPointRequirementNotNeeded()==false
 			return false;
 		else return true;
 		
 	}
 
 	@Override
-	public void pay(Player player) {
+	public synchronized void pay(Player player) {
 		player.getWarehouse().spendResources(ResourcesOrPoints.newPoints(0,toSpend,0,0));
 	}
 

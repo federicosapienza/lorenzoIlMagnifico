@@ -17,8 +17,8 @@ public enum PlayerStatus {
 	TRADING,
 	ACTIONPERFORMED, // the status  reached when player can convert Diplomatic Priviledges and use Leader cards
 	SECONDPLAY,
-	SUSPENDED ; // reached when a player has not performed an action 
-	
+	SUSPENDED , // reached when a player has not performed an action 
+	VATICANREPORTDECISION;
 	}	
 
 

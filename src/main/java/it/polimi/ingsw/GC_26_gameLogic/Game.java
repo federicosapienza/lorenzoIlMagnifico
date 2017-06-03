@@ -4,6 +4,7 @@ package it.polimi.ingsw.GC_26_gameLogic;
 import java.util.List;
 
 import it.polimi.ingsw.GC_26_cards.Cards;
+import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTile;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
@@ -17,20 +18,31 @@ public class Game {
 	private GameElements gameElements;
 	private List<ResourcesOrPoints[]> resourcesOrPointsBonus;
 	private final int  numberOfPeriods =GameParameters.getNumberOfPeriods(); 
-	private int currentPeriod=1;
-	private List<ResourcesOrPoints> startingResources;
 	
-	public Game(Cards cards, List<ResourcesOrPoints[]> resourcesOrPointsList, List<ResourcesOrPoints> startingResources){
+	private List<ResourcesOrPoints> startingResources;
+	private int times[];
+	
+	Period period;
+	private int periodNumber;
+	private List<ExcommunicationTile> excommunicationTiles;
+
+	
+	public Game(Cards cards, List<ResourcesOrPoints[]> resourcesOrPointsList, List<ResourcesOrPoints> startingResources, int times[]){
 		this.cards= cards;
 		this.resourcesOrPointsBonus= resourcesOrPointsList;
+		this.times= times;
+		periodNumber=1;
 	}
 	
 	public GameElements getGameElements() {
 		return gameElements;
 	}
 	
-	public int getCurrentPeriod() {
-		return currentPeriod;
+	public int getPeriodNumber() {
+		return periodNumber;
+	}
+	public Period getPeriod() {
+		return period;
 	}
 	
 	
@@ -43,14 +55,21 @@ public class Game {
 	
 	public void startGame(){
 		initialiseGame();
-		while(currentPeriod<= numberOfPeriods){
-			Period period= new Period(currentPeriod, cards, gameElements);
+		while(periodNumber<= numberOfPeriods){
+			period= new Period(periodNumber, cards, gameElements, excommunicationTiles.get(periodNumber-1));
 			period.start();
 		}
+		
+		//TODO decide Winner!!!
 	}
 	
 	private void initialiseGame(){
-		gameElements= new GameElements(this ,players, numberOfPlayers, resourcesOrPointsBonus);
+		gameElements= new GameElements(this ,players, numberOfPlayers, resourcesOrPointsBonus, times);
+		excommunicationTiles = cards.getExcommunicationTiles();
 		
+		//TODO notificare i giocatori
+		
+		
+		//TODO prendere 4 carte leader per giocatore e notificarliele 
 	}
 }

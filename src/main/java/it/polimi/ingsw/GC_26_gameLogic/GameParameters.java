@@ -1,9 +1,5 @@
 package it.polimi.ingsw.GC_26_gameLogic;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 

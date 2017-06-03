@@ -12,6 +12,7 @@ public class MainActionHandler {
 	private TradeHandler tradeHandler;
 	private TwoPaymentsHandler twoPaymentHandler;
 	private DiplomaticPrivilegesHandler diplomaticPrivilegesHandler;
+	private VaticanReportHandler vaticanReportHandler;
 	 
 	public MainActionHandler() {
 		harvestAndProductionHandler = new HarvestAndProductionHandler(gameElements);
@@ -22,8 +23,13 @@ public class MainActionHandler {
 		tradeHandler = new TradeHandler(gameElements, harvestAndProductionHandler);
 		twoPaymentHandler = new TwoPaymentsHandler(gameElements);
 		diplomaticPrivilegesHandler= new DiplomaticPrivilegesHandler(gameElements);
+		vaticanReportHandler = new VaticanReportHandler(gameElements);
+		
 	}
 
+	public GameElements getGameElements() {
+		return gameElements;
+	}
 	
 	public FirstActionHandler getFirstActionHandler() {
 		return firstActionHandler;
@@ -48,4 +54,7 @@ public class MainActionHandler {
 		return diplomaticPrivilegesHandler;
 	}
 	
+	public VaticanReportHandler getVaticanReportHandler() {
+		return vaticanReportHandler;
+	}
 }

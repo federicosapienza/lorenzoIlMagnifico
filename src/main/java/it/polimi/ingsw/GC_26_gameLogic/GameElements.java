@@ -17,13 +17,13 @@ public class GameElements extends Observable{
 	private Rankings rankings;
 	private List<Player> players;
 	private int numberOfPlayers;
+	private TimerInfo timerInfo;
 	
-	
-	public GameElements(Game game, List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList) {
+	public GameElements(Game game, List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList, int times[]) {
 		board=new Board(numberOfPlayers, resourcesOrPointsList);
 		dices= new Dices();
 		rankings = new Rankings(players);
-		
+		timerInfo= new TimerInfo(times);
 	}
 	
 	public Game getGame() {
@@ -46,6 +46,8 @@ public class GameElements extends Observable{
 	public  int getNumberOfPlayers() {
 		return numberOfPlayers;
 	}
+	
+	
 
 	@Override
     public void notifyObservers(Object object){  

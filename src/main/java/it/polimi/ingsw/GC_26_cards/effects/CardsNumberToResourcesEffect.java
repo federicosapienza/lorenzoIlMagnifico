@@ -5,8 +5,8 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class CardsNumberToResourcesEffect implements Effect{
-	private DevelopmentCardTypes type;
-	private ResourcesOrPoints resourcesOrPoints;
+	private final DevelopmentCardTypes type;
+	private final ResourcesOrPoints resourcesOrPoints;
 	
 	public CardsNumberToResourcesEffect(DevelopmentCardTypes type, ResourcesOrPoints resources) {
 		this.type= type;
@@ -22,8 +22,11 @@ public class CardsNumberToResourcesEffect implements Effect{
 	
 
 	@Override
-	public void doEffect(Player player, boolean immediate) {
-		// TODO Auto-generated method stub
+	public synchronized void doEffect(Player player, boolean immediate) {
+		int number = player.getPersonalBoard().getNumberOfCardPerType(type);
+		for(int i=0; i <number; i++){
+			player.getWarehouse().add(resourcesOrPoints);
+		}
 		
 	}
 

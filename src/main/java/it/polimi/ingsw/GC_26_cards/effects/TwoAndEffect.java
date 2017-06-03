@@ -26,7 +26,10 @@ public class TwoAndEffect implements Effect{
 		
 	}
 	
-	
+	@Override
+	public String toString() {
+		return  "two effects: "+  effect1.toString()+" and "+effect2.toString();
+	}
 	
 
 }

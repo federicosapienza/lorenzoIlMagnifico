@@ -1,9 +1,13 @@
 package it.polimi.ingsw.GC_26_cards.developmentCards;
 
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
+import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
+import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
+import it.polimi.ingsw.GC_26_cards.payments.MilitaryPointPayment;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 //It 's the implementation used by Character and Venture Cards. Territories and building cards extend this. 
 public class DevelpmentCardImplementation implements DevelopmentCard{

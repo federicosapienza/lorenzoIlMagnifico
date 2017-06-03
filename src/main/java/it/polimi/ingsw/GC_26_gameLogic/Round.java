@@ -46,35 +46,42 @@ public class Round {
 		for(int i =0; i<turnsNumber; i++){
 			for (Iterator<Player> iter = gameElements.getPlayers().iterator(); iter.hasNext(); ) {
 			    Player player = iter.next();
-			    player.getFamilyMembers().setValues(gameElements.getDices());
-			    if(player.getStatus() == PlayerStatus.SUSPENDED)  
-			    	//if player is suspended, misses the turn
-			    	//TODO notificare i giocatori che il player salta il turno
-			    	gameElements.notifyObservers(player.getName() + "misses his turn!");  // look at gameElements
-			    else if(player.getStatus() == PlayerStatus.WAITINGHISTURN){
-			    player.setStatus(PlayerStatus.PLAYING);
-			    //TODO notifico al player che è il suo turno
-			    player.notifyObservers("It's your turn");
-			    //TODO è ok?
+			    startPlayerTurn(player);
+			    
 			    synchronized (this) {
 			    while(player.getStatus()!= PlayerStatus.WAITINGHISTURN && player.getStatus()!= PlayerStatus.SUSPENDED){
 			    	try {
 						wait();
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-			    //TODO mettere un notifyall!!!
 			    }
 			    }
-			    //TODO dobbiamo fare qualcosa alla fine del turno del player?
 			    }
 			}
-		}
+		
 		//ends the round! : clears everything on the board
 		gameElements.getBoard().endRound();
 		
 	}
+	
+	private synchronized void startPlayerTurn(Player player){
+		synchronized(player){
+			if(player.getStatus() == PlayerStatus.SUSPENDED){  
+		    	//if player is suspended, misses the turn
+		    	//TODO notificare i giocatori che il player salta il turno
+		    	gameElements.notifyObservers(player.getName() + "misses his turn!");
+		    	return;
+			}
+			if(player.getStatus() == PlayerStatus.WAITINGHISTURN){
+			    player.setStatus(PlayerStatus.PLAYING);
+			    //TODO notifico al player che è il suo turno
+			    player.notifyObservers("It's your turn");
+		
+			}	
+		}
+}
+	
 	
 	public synchronized void endPlayerTurn(){
 		notifyAll();

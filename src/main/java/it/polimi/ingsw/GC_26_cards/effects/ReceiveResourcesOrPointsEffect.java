@@ -5,7 +5,7 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class ReceiveResourcesOrPointsEffect implements Effect{
-	ResourcesOrPoints resources; 
+	private final ResourcesOrPoints resources; 
 	
 	public ReceiveResourcesOrPointsEffect(ResourcesOrPoints resources) {
 		this.resources=resources;
@@ -16,13 +16,11 @@ public class ReceiveResourcesOrPointsEffect implements Effect{
 	}
 	
 	@Override
-	public void doEffect(Player player, boolean immediate) {
+	public synchronized void doEffect(Player player, boolean immediate) {
 		player.getWarehouse().add(resources);
-		if(player.getPermanentModifiers().IsresourcesMalusOn())
-			player.getPermanentModifiers().runMalus(resources);
 		
 		if(immediate && player.getPermanentModifiers().isDoubleEarningOn())  //Santa Rita Effect
-			player.getPermanentModifiers().DoDoubleEarning(resources);
+			player.getWarehouse().add(resources);;
 			
 		
 	}

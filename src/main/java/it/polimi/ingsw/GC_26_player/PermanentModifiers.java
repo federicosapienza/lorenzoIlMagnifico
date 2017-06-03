@@ -1,5 +1,10 @@
 package it.polimi.ingsw.GC_26_player;
 
+import java.util.Map;
+
+import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
+
+import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
@@ -109,16 +114,30 @@ public class PermanentModifiers {
 	public void setDoubleEarningOn() {
 		doubleEarningOn = true;
 	}
-	public void DoDoubleEarning(ResourcesOrPoints resources){
-		player.getWarehouse().add(ResourcesOrPoints.newResources(resources.getResources().getCoins(), 
-																resources.getResources().getServants(),
-																resources.getResources().getWood(),
-																resources.getResources().getStone()));
-	}
+	
+	
 	
 	
 	
 	//TODO i modificatori di valori delle carte e delle produzioni/raccolti e carta Predicatore : niente bonus da torri: qui e in effects
+	private Map<BoardZone, Integer> actionModifiers;
+		
+	public void addModifier(BoardZone zone, int value){
+		Integer temp = actionModifiers.get(zone);
+		if(temp==null)
+			actionModifiers.put(zone, value);
+		else{
+			actionModifiers.put(zone, temp+value);
+		}
+	}
 	
-
+	
+	public  int getModifier(BoardZone zone){
+		Integer temp = actionModifiers.get(zone);
+		if(temp==null)
+			return 0;
+		else return temp;
+		
+	}
+	
 }
