@@ -1,6 +1,7 @@
 package it.polimi.ingsw.GC_26_gameLogic;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
@@ -34,6 +35,7 @@ public class Game extends Observable<CardDescriber>{
 		this.resourcesOrPointsBonus= resourcesOrPointsList;
 		this.times= times;
 		periodNumber=1;
+		players= new ArrayList<>();
 	}
 	
 	public GameElements getGameElements() {

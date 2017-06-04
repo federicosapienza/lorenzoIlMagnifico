@@ -8,7 +8,8 @@ import it.polimi.ingsw.GC_26_player.Player;
  *ResourcesAndPoints' attributes are immutable, warehouse's attributes are mutable.  */
 
 public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
-	Player player;
+	private Player player;
+	private String  playerName;
 	private int coins;
 	private int servants;
 	private int wood; 
@@ -19,6 +20,8 @@ public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
 	private int councilPrivileges;
 	
 	public Warehouse(Player player, ResourcesOrPoints startingResources){  //initialisation
+		this.player = player;
+		this.playerName= player.getName(); 
 		add(startingResources);
 	}
 	
@@ -42,7 +45,7 @@ public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
 	
 	 @Override
 	public String getPlayerName() {
-		return player.getName();
+		return playerName;
 	}
 	
 	@Override
@@ -159,11 +162,11 @@ public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
 	
 	public void add(ResourcesOrPoints resources){
 		ResourcesOrPoints temp=resources;
-		if(player.getPermanentModifiers().IsresourcesMalusOn())
-			//check if any malus over getting resources is on (look at permanentModifier)
+			if(player.getPermanentModifiers().IsresourcesMalusOn())
+			//check if any malus on getting resources is on (look at permanentModifier)
 		//calls  the permanent effect to reduce the resources the player can earn
 			 temp= player.getPermanentModifiers().getResourcesAfterMalus(resources);
-		
+
 		this.coins  += temp.getResources().getCoins();
 		this.servants += temp.getResources().getServants();
 		this.wood += temp.getResources().getWood();
@@ -175,7 +178,7 @@ public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
 		
 		
 		//notify the clients
-		notifyObservers(this);
+		this.notifyObservers(this);
 	}
 	
 	public void spendResources(ResourcesOrPoints resources)throws IllegalArgumentException{

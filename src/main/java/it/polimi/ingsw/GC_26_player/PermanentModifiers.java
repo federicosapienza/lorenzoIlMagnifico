@@ -27,7 +27,6 @@ public class PermanentModifiers {
 	//Resources malus of excommunication tiles
 	private boolean resourcesMalusOn=false;
 	private ResourcesOrPoints resourcesMalus= ResourcesOrPoints.newResources(0, 0, 0, 0); // at the beginning of the game there are not malus
-	private boolean StoneOrWoodMalus=false;
 	
 	public boolean IsresourcesMalusOn() {
 		return resourcesMalusOn;
