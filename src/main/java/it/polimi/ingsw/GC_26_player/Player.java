@@ -44,12 +44,14 @@ public class Player extends Observable<String>{
 		this.name=name;
 		familyMembers = new FamilyMembers(this);
 		status= PlayerStatus.WAITINGHISTURN;
-		warehouse= new Warehouse(this, startingResources);
 		personalBoard= new PersonalBoard();
 		permanentModifiers = new PermanentModifiers(this);
 		playerActive= false;
+		warehouse= new Warehouse(this, startingResources);
+		}
 
-	}
+
+	
 	
 	//getters methods
 	public String getName() {
