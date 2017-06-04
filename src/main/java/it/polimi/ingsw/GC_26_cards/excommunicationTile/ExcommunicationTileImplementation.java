@@ -3,7 +3,6 @@ package it.polimi.ingsw.GC_26_cards.excommunicationTile;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_player.Player;
 
-//TODO
 public class ExcommunicationTileImplementation implements ExcommunicationTile{
 	private String IdCode;
 	private Effect effect;
@@ -22,11 +21,46 @@ public class ExcommunicationTileImplementation implements ExcommunicationTile{
 		effect.doEffect(player, false);
 	}
 
-	/*@Override
-	public ExcommunicationTile copy() {
-		// TODO Auto-generated method stub
+	@Override
+	public String getTypeOfCard() {
+		return "Excommunication Tile";
+	}
+
+	@Override
+	public String getName() {
 		return null;
 	}
-	
-*/
+
+	@Override
+	public int getActionValue() {
+		return 0;
+	}
+
+	@Override
+	public String getCardType() {
+		return null;
+	}
+
+	@Override
+	public int getPeriod() {
+		return 0;
+	}
+
+	@Override
+	public String getImmediateEffectDescriber() {
+		return null;
+	}
+
+	@Override
+	public String getPermanentEffectDescriber() {
+		return effect.toString();
+	}
+
+	@Override
+	public String getRequirementDescriber() {
+		return null;
+	}
+
+
+
 }

@@ -15,11 +15,15 @@ import it.polimi.ingsw.GC_26_board.Tower;
 import it.polimi.ingsw.GC_26_board.TowerPosition;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Resources;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
 //contains the methods used both by firstActionHandler and SecondActionHandler
 public abstract class ActionHandler {
@@ -68,6 +72,8 @@ public abstract class ActionHandler {
 		
 		//calling the card
 		DevelopmentCard card = position.getCard();
+
+		
 		if(!card.canPlayerGetThis(player)){
 			return false;
 			//the card will notify why card could not be bought: 
@@ -190,10 +196,14 @@ public abstract class ActionHandler {
 		if(tower.isTheTowerOccupied()){
 		player.getWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
 		
-		//going to position and getting resources;
+		//going to position 
 		TowerPosition position =gameElements.getBoard().getTower(action.getZone()).getPosition(action.getPosition());
-		player.getWarehouse().add(position.getResourcesOrPointsinPosition());
 		position.setFamilyMember(familyMember);
+		
+		//getting resources (if the permanent effect which revoke this chance is off.
+		if(! player.getPermanentModifiers().isBonusRevokedOn())
+			player.getWarehouse().add(position.getResourcesOrPointsinPosition());
+		
 		//getting the card
 		
 		DevelopmentCard card = position.getCard();

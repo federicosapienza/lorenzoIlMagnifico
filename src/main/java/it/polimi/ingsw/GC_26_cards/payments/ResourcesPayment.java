@@ -1,5 +1,7 @@
 package it.polimi.ingsw.GC_26_cards.payments;
 
+import it.polimi.ingsw.GC_26_board.BoardZone;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
@@ -18,11 +20,11 @@ public class ResourcesPayment implements Payment{
 	
 
 	@Override
-	public synchronized boolean canPlayerGetThis(Player player) {
-		ResourcesOrPoints temp=price;
-		if(player.getPermanentModifiers().IsTherediscountOnResources()){  //handling Pico Della Mirandola Card: (and even similar cards if added)
-			temp=player.getPermanentModifiers().resourcesOrPointsDiscount(temp);
-		}
+	public synchronized boolean canPlayerGetThis(Player player, DevelopmentCardTypes type) {
+		
+		//calculating discount 
+		BoardZone zone = cardTypeToBoardZone(type);
+		ResourcesOrPoints temp= player.getPermanentModifiers().resourcesOrPointsDiscount(zone, price);
 		
 		// The player is notified if the player has not enough resources for getting the card, and false is returned
 		if (!player.getTestWarehouse().areResourcesEnough(temp)){
@@ -34,12 +36,11 @@ public class ResourcesPayment implements Payment{
 	
 
 	@Override
-	public synchronized void pay(Player player) { // come gestisce l eccezione???
-		ResourcesOrPoints temp=price;
-		if(player.getPermanentModifiers().IsTherediscountOnResources()){  //handling Pico Della Mirandola Card: (and even similar cards if added)
-			temp= player.getPermanentModifiers().resourcesOrPointsDiscount(temp);
-			}
-
+	public synchronized void pay(Player player, DevelopmentCardTypes type) { 
+		//calculating discount 
+		BoardZone zone = cardTypeToBoardZone(type);
+		ResourcesOrPoints temp= player.getPermanentModifiers().resourcesOrPointsDiscount(zone, price);
+		
 		player.getWarehouse().spendResources(temp);
 	
 	}
@@ -47,6 +48,19 @@ public class ResourcesPayment implements Payment{
 	@Override
 	public String toString(){
 		return " payment of "+ price.toString();
+	}
+	
+	private BoardZone cardTypeToBoardZone(DevelopmentCardTypes type){
+		switch (type) {
+		case TERRITORYCARD:
+			return BoardZone.TERRITORYTOWER;
+		case BUILDINGCARD:
+			return BoardZone.BUILDINGTOWER;
+		case CHARACTERCARD:
+			return BoardZone.CHARACTERTOWER;
+		default:
+			return BoardZone.VENTURETOWER;
+		}
 	}
 
 }

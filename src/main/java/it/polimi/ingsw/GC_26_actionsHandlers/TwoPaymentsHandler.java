@@ -34,10 +34,10 @@ public class TwoPaymentsHandler {
 				TwoOrPayments twoOrPayments =(TwoOrPayments) payment;
 		//paying
 				if(choice==1){
-					twoOrPayments.getMode1().pay(player);
+					twoOrPayments.getMode1().pay(player,card.getType());
 				}
 				else {
-					twoOrPayments.getMode2().pay(player);
+					twoOrPayments.getMode2().pay(player,card.getType());
 					}
 				}
 					

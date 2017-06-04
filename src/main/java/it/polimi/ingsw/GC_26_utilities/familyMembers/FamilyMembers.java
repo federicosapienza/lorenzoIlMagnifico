@@ -47,9 +47,10 @@ public class FamilyMembers {
 	
 	
 	public void setValues(Dices dices){
-		orangeMember.setValue(dices.readDice(Colour.ORANGE));
-        blackMember.setValue(dices.readDice(Colour.BLACK));
-        whiteMember.setValue(dices.readDice(Colour.WHITE));
+		int malus = player.getPermanentModifiers().getColouredMembersMalusValue();
+		orangeMember.setValue(dices.readDice(Colour.ORANGE)-malus);
+        blackMember.setValue(dices.readDice(Colour.BLACK)-malus);
+        whiteMember.setValue(dices.readDice(Colour.WHITE)-malus);
         neutralMember.setValue(GameParameters.getDefaultNeutralValue());
 	}
 	
@@ -78,68 +79,4 @@ public class FamilyMembers {
 	}
 	
 	
-	//penso che da qui in poi sia inutile. facciamo il get del singolo FamilyMember e e lavoriamo su di lui
-	
-	/*public boolean isFree(Colour colour) {
-		boolean isFree;
-		if (colour == Colour.BLACK) {
-			isFree = blackMember.isFree();
-		}
-		else if (colour == Colour.WHITE) {
-			isFree = whiteMember.isFree();
-		}
-		else if (colour == Colour.ORANGE) {
-			isFree = orangeMember.isFree();
-		}
-		else if (colour == Colour.NEUTRAL) {
-			isFree = neutralMember.isFree();
-		}
-		else {
-			throw new IllegalArgumentException();
-		}
-		return isFree;
-	}
-	
-	
-	
-	public int getValue(Colour colour){
-		 int memberValue;
-		if (colour == Colour.BLACK) {
-			memberValue = blackMember.getValue();
-		}
-		else if (colour == Colour.WHITE) {
-			memberValue = whiteMember.getValue();
-		}
-		else if (colour == Colour.ORANGE) {
-			memberValue = orangeMember.getValue();
-		}
-		else if (colour == Colour.NEUTRAL) {
-			memberValue = neutralMember.getValue();
-		}
-		else {
-			throw new IllegalArgumentException();
-		}
-		return memberValue;
-	}
-	
-	public void setUsed(Colour colour) {
-		if (colour == Colour.ORANGE) {
-			orangeMember.setUsed();
-		}
-		else if (colour == Colour.BLACK) {
-			blackMember.setUsed();
-		}
-		else if (colour == Colour.WHITE) {
-			whiteMember.setUsed();
-		}
-		else if (colour == Colour.NEUTRAL) {
-			neutralMember.setUsed();
-		}
-		else {
-			throw new IllegalArgumentException();
-		}
-	}
-	
-	*/
-
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_cards.payments;
 
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 
@@ -25,26 +26,26 @@ public class TwoOrPayments implements Payment{
 	
 
 	@Override
-	public synchronized boolean canPlayerGetThis(Player player) {
+	public synchronized boolean canPlayerGetThis(Player player, DevelopmentCardTypes type) {
 		//returns true as long as one payment is ok!
-		if(mode1.canPlayerGetThis(player) || mode2.canPlayerGetThis(player))
+		if(mode1.canPlayerGetThis(player,type) || mode2.canPlayerGetThis(player, type))
 			return false;
 		else return true;
 	}
 
 	@Override
-	public synchronized void pay(Player player) {
-		if(mode1.canPlayerGetThis(player)&& mode2.canPlayerGetThis(player))
+	public synchronized void pay(Player player,  DevelopmentCardTypes type) {
+		if(mode1.canPlayerGetThis(player, type)&& mode2.canPlayerGetThis(player,type))
 		synchronized (player) {
 			player.setStatus(PlayerStatus.CHOOSINGPAYMENT);  //the notification to the player will be done by setPlayerStatus
 			return;
 		}
-		if(mode1.canPlayerGetThis(player)){
-				mode1.pay(player);
+		if(mode1.canPlayerGetThis(player, type)){
+				mode1.pay(player,type);
 				return;
 		}
-		if(mode2.canPlayerGetThis(player)){
-				mode2.pay(player);
+		if(mode2.canPlayerGetThis(player, type)){
+				mode2.pay(player,type);
 				return;
 		}
 		throw new IllegalArgumentException();

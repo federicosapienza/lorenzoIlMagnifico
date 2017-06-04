@@ -10,7 +10,7 @@ import it.polimi.ingsw.GC_26_utilities.dices.Dices;
 import it.polimi.ingsw.GC_26_utilities.rankings.Rankings;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
-public class GameElements extends Observable{
+public class GameElements{
 	Game game;
 	private Board board;
 	private Dices dices;
@@ -49,10 +49,12 @@ public class GameElements extends Observable{
 	
 	
 
-	@Override
-    public void notifyObservers(Object object){  
-        setChanged();
-        super.notifyObservers( object);
+	//instead of adding an other observer to send String , it calls player's observer
+    public void notifyObservers(String string){  
+       for(Player p: players){
+    	   p.notifyObservers(string);
+       }
+       
     }
 	
 }

@@ -80,7 +80,7 @@ public class DevelpmentCardImplementation implements DevelopmentCard{
 				player.notifyObservers("not enough military points  for a new territory card");
 			return false;
 		}
-		 if(!payment.canPlayerGetThis(player)){
+		 if(!payment.canPlayerGetThis(player, type)){
 			 player.notifyObservers("not enough resources for getting the card");
 		 	return false;
 		 	}
@@ -88,22 +88,49 @@ public class DevelpmentCardImplementation implements DevelopmentCard{
 	}
 	@Override
 	public void pay(Player player) {
-		payment.pay(player);
+		payment.pay(player, type);
 		
 	}
 
 	@Override
 	public void runImmediateEffect(Player player) {
-		immediateEffect.doEffect(player, true);
+		if(immediateEffect!= null)
+			immediateEffect.doEffect(player, true);
 		
 	}
 
 	@Override
 	public void runPermanentEffect(Player player) {
-		permanentEffect.doEffect(player, false);
+		if(immediateEffect!= null)
+			permanentEffect.doEffect(player, false);
 		
 	}
+
+	@Override
+	public String getTypeOfCard() {
+		return "Development Card";
+	}
+
+	@Override
+	public String getCardType() {
+		return type.toString();
+	}
+
+	@Override
+	public String getImmediateEffectDescriber() {
+		return immediateEffect.toString();
+	}
+
+	@Override
+	public String getPermanentEffectDescriber() {
+		return permanentEffect.toString();
+	}
+
+	@Override
+	public String getRequirementDescriber() {
+		return null;
+	}
+
 	
-	//TODO to string completi e parziali
 
 }

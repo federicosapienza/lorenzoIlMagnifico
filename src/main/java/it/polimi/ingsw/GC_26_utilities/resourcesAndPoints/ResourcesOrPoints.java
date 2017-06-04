@@ -41,6 +41,7 @@ public class ResourcesOrPoints {
 		return resources;
 	}
 	
+	
 	public static  ResourcesOrPoints sum(ResourcesOrPoints res1, ResourcesOrPoints res2){
 		//static method that sums the elements of two ResourcesOrPoints objects and returns a third one
 		int coins = res1.getResources().getCoins()+res2.getResources().getCoins();
@@ -60,5 +61,24 @@ public class ResourcesOrPoints {
 		return resources.toString() + " "+ points.toString()+ " ";
 	}
 	
+	public static  ResourcesOrPoints subtract(ResourcesOrPoints main , ResourcesOrPoints subtrahend){
+		int coins = main.getResources().getCoins()-subtrahend.getResources().getCoins();
+		int servants = main.getResources().getServants()-subtrahend.getResources().getServants();
+		int stone = main.getResources().getStone()-subtrahend.getResources().getStone();
+		int wood = main.getResources().getWood()-subtrahend.getResources().getWood();
+		int militaryP = main.getPoints().getMilitaryPoints()-subtrahend.getPoints().getMilitaryPoints();
+		int faithP = main.getPoints().getFaithPoints()-subtrahend.getPoints().getFaithPoints();
+		int victoryP= main.getPoints().getVictoryPoints()-subtrahend.getPoints().getVictoryPoints();
+		 //no Council Privileges (never used directly as price)
+		return ResourcesOrPoints.newResourcesOrPoints(moreThanZero(coins), moreThanZero(servants), moreThanZero(wood), 
+				moreThanZero(stone), moreThanZero(victoryP), moreThanZero(militaryP), moreThanZero(faithP), 
+				main.getPoints().getCouncilPrivileges());
+	}
+	private static int moreThanZero(int test){
+		//used only by newResourcesOrPointsDiscounted, to ensure no negative value
+		if(test>= 0)
+			return test;
+		else return 0;
 	
+	}
 }

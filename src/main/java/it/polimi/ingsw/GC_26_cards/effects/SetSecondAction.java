@@ -1,6 +1,6 @@
 package it.polimi.ingsw.GC_26_cards.effects;
 
-import it.polimi.ingsw.GC_26_actionsHandlers.Action;
+import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 

@@ -6,8 +6,10 @@ import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
-//Trade effect needs dialog with user: there is often choice and player can also decide not to trade!
-/*Creation rules: 
+/*Trade effect 
+ * 1) as permanent effect : needs dialog with user: there is often choice and player can also decide not to trade!
+ * 2) as immediate effect: automatically done is possible (works with one receive- one give) (General card)
+*Creation rules: 
  * if a resource to be given can be traded in two different ways , this resource must be inserted both in give1 and give2
  * if  there is a choice in giving and only one possible outcome, the outcome must be inserted both in receive1 that receive2. 
  * If there is only one income and only one outcome leave give2 and receive2 null; 
@@ -43,7 +45,16 @@ public class TradeEffect implements Effect{
 	}
 	
 	@Override
-	public void doEffect(Player player, boolean immediate) {
+	public synchronized void doEffect(Player player, boolean immediate) {
+		//if effect is immediate player is not asked to choose: if he did not wanted trade , he would not have gone here.
+		if(immediate){
+			if(player.getWarehouse().areResourcesEnough(receive1)){
+					player.getWarehouse().spendResources(give1);
+					player.getWarehouse().add(receive1);
+			}
+			return;
+		}
+		
 		synchronized (player.getStatus()) {
 			player.setStatus(PlayerStatus.TRADING);  // status change will call the interaction!
 		}

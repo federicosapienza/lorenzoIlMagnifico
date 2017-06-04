@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_cards.payments;
 
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
@@ -22,7 +23,7 @@ public class MilitaryPointPayment implements Payment{
 	}
 	
 	@Override
-	public synchronized boolean canPlayerGetThis(Player player) {
+	public synchronized boolean canPlayerGetThis(Player player, DevelopmentCardTypes type) {
 		if(player.getWarehouse().getMilitaryPoints()<= needed || 
 				player.getPermanentModifiers().isMilitaryPointRequirementNotNeeded()==true)// Cesare Borgia effect
 			return false;
@@ -33,7 +34,7 @@ public class MilitaryPointPayment implements Payment{
 	}
 
 	@Override
-	public synchronized void pay(Player player) {
+	public synchronized void pay(Player player, DevelopmentCardTypes type) {
 		player.getWarehouse().spendResources(ResourcesOrPoints.newPoints(0,toSpend,0,0));
 	}
 

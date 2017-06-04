@@ -1,7 +1,7 @@
 package it.polimi.ingsw.GC_26_controllers;
 
-import it.polimi.ingsw.GC_26_actionsHandlers.Action;
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
+import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 

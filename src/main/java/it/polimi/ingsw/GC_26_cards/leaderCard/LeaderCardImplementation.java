@@ -14,9 +14,7 @@ public class LeaderCardImplementation implements LeaderCard{
 		this.requirement=requirement;
 	}
 	
-	
-	//TODO copy
-	
+
 	
 	@Override
 	public String getName() {
@@ -31,9 +29,47 @@ public class LeaderCardImplementation implements LeaderCard{
 	public void  runEffect(Player player) {
 		effect.doEffect(player, false);
 	}
-	/*@Override
-	public LeaderCard copy() {
-		// TODO Auto-generated method stub
+	
+
+
+	@Override
+	public String getTypeOfCard() {
+		return "Leader Card";
+	}
+
+
+	@Override
+	public int getActionValue() {
+		return 0;
+	}
+
+
+	@Override
+	public String getCardType() {
 		return null;
-	} */
+	}
+
+
+	@Override
+	public int getPeriod() {
+		return 0;
+	}
+
+
+	@Override
+	public String getImmediateEffectDescriber() {
+		return null;
+	}
+
+
+	@Override
+	public String getPermanentEffectDescriber() {
+		return effect.toString();
+	}
+
+
+	@Override
+	public String getRequirementDescriber() {
+		return requirement.toString();
+	}
 }

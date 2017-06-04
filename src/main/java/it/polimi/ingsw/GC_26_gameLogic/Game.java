@@ -3,15 +3,17 @@ package it.polimi.ingsw.GC_26_gameLogic;
 
 import java.util.List;
 
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.Cards;
 import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTile;
+import it.polimi.ingsw.GC_26_observerAndObservableLogic.Observable;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
 
 
-public class Game {
+public class Game extends Observable<CardDescriber>{
 	private final Cards cards;
 	private  List<Player> players;
 	private int numberOfPlayers;

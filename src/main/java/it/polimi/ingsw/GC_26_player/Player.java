@@ -3,14 +3,14 @@ package it.polimi.ingsw.GC_26_player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
-import java.util.Observable;
 
-import it.polimi.ingsw.GC_26_actionsHandlers.Action;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26_gameLogic.Action;
+import it.polimi.ingsw.GC_26_observerAndObservableLogic.Observable;
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoard;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembers;
 
-public class Player extends Observable{
+public class Player extends Observable<String>{
 	private final String name;
 	private final Warehouse warehouse;
 	private final PermanentModifiers permanentModifiers;
@@ -44,7 +44,7 @@ public class Player extends Observable{
 		this.name=name;
 		familyMembers = new FamilyMembers(this);
 		status= PlayerStatus.WAITINGHISTURN;
-		warehouse= new Warehouse(startingResources);
+		warehouse= new Warehouse(this, startingResources);
 		personalBoard= new PersonalBoard();
 		permanentModifiers = new PermanentModifiers(this);
 		playerActive= false;
@@ -154,10 +154,5 @@ public class Player extends Observable{
 	}
 	
 	
-		   
-	@Override
-    public void notifyObservers(Object object){  
-        setChanged();
-        super.notifyObservers( object);
-	}
+
 }

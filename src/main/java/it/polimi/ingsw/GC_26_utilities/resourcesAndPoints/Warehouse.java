@@ -1,11 +1,14 @@
 package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 
+import it.polimi.ingsw.GC_26_observerAndObservableLogic.Observable;
+import it.polimi.ingsw.GC_26_player.Player;
 
 /* It ' s the class that represent the status of the player in terms of resources and points owned.
  * It must not be mistaken with ResourcesOrPoints class , which instead represent the payments and effects that are called by cards, positions etc
  *ResourcesAndPoints' attributes are immutable, warehouse's attributes are mutable.  */
 
-public class Warehouse {
+public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
+	Player player;
 	private int coins;
 	private int servants;
 	private int wood; 
@@ -15,7 +18,7 @@ public class Warehouse {
 	private int faithPoints;
 	private int councilPrivileges;
 	
-	public Warehouse(ResourcesOrPoints startingResources){  //initialisation
+	public Warehouse(Player player, ResourcesOrPoints startingResources){  //initialisation
 		add(startingResources);
 	}
 	
@@ -32,30 +35,45 @@ public class Warehouse {
 	
 	
 	//getters methods
+	public ResourcesOrPoints getStatus(){
+		return ResourcesOrPoints.newResourcesOrPoints(coins, servants, wood, stone, victoryPoints, militaryPoints, 
+				faithPoints, councilPrivileges);
+	}
+	
+	 @Override
+	public String getPlayerName() {
+		return player.getName();
+	}
+	
+	@Override
 	public int getCoins() {
 		return coins;
 	}
+	@Override
 	public int getServants() {
 		return servants;
 	}
+	@Override
 	public int getStone() {
 		return stone;
 	}
+	@Override
 	public int getWood() {
 		return wood;
 	}
-	
+	@Override
 	public int getMilitaryPoints() {
 		return militaryPoints;
 	}
-	
+	@Override
 	public int getCouncilPrivileges() {
 		return councilPrivileges;
 	}
-	
+	@Override
 	public int getFaithPoints() {
 		return faithPoints;
 	}
+	@Override
 	public int getVictoryPoints() {
 		return victoryPoints;
 	}
@@ -137,15 +155,27 @@ public class Warehouse {
 	
 	// Setters methods
 	
+	
+	
 	public void add(ResourcesOrPoints resources){
-		this.coins  += resources.getResources().getCoins();
-		this.servants += resources.getResources().getServants();
-		this.wood += resources.getResources().getWood();
-		this.stone +=resources.getResources().getStone();
-		this.militaryPoints +=resources.getPoints().getMilitaryPoints();
-		this.victoryPoints += resources.getPoints().getVictoryPoints();
-		this.faithPoints +=resources.getPoints().getFaithPoints();
-		this.councilPrivileges += resources.getPoints().getCouncilPrivileges();
+		ResourcesOrPoints temp=resources;
+		if(player.getPermanentModifiers().IsresourcesMalusOn())
+			//check if any malus over getting resources is on (look at permanentModifier)
+		//calls  the permanent effect to reduce the resources the player can earn
+			 temp= player.getPermanentModifiers().getResourcesAfterMalus(resources);
+		
+		this.coins  += temp.getResources().getCoins();
+		this.servants += temp.getResources().getServants();
+		this.wood += temp.getResources().getWood();
+		this.stone +=temp.getResources().getStone();
+		this.militaryPoints +=temp.getPoints().getMilitaryPoints();
+		this.victoryPoints += temp.getPoints().getVictoryPoints();
+		this.faithPoints +=temp.getPoints().getFaithPoints();
+		this.councilPrivileges += temp.getPoints().getCouncilPrivileges();
+		
+		
+		//notify the clients
+		notifyObservers(this);
 	}
 	
 	public void spendResources(ResourcesOrPoints resources)throws IllegalArgumentException{
@@ -162,15 +192,25 @@ public class Warehouse {
 		if(moreThanZero())  
 			throw new IllegalArgumentException("Resources went below zero");
 		
+		
+		//notify the clients
+			notifyObservers(this);
 		}
 	
 	
 	public void resetFaithPoints() {  // used in Vatican Report
 		faithPoints =0;
+		notifyObservers(this);
+		
+		//notify the clients
+		notifyObservers(this);
 	}
 	
 	public void resetCouncilPriviledges(){  // used in Council privileges handling
 		councilPrivileges = 0;
+		
+		//notify the clients
+		notifyObservers(this);
 	}
 	
 	

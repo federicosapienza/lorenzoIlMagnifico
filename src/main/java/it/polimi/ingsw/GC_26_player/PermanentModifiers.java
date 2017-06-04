@@ -2,9 +2,9 @@ package it.polimi.ingsw.GC_26_player;
 
 import java.util.Map;
 
-import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
+
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
@@ -32,28 +32,17 @@ public class PermanentModifiers {
 	public boolean IsresourcesMalusOn() {
 		return resourcesMalusOn;
 	}
-	public boolean isStoneOrWoodMalus() {
-		return StoneOrWoodMalus;
-	}
-
-	public void setStoneOrWoodMalus() {
-		StoneOrWoodMalus = true;
-	}
-	
-	public void setResoursesMalusOn() {
-		this.resourcesMalusOn = true; //once activated can not be undone, as in the game
-	}
 	
 	public void setMalus(ResourcesOrPoints temp){ // update the malus
+		this.resourcesMalusOn = true; //once activated can not be undone, as in the game
+	
 		resourcesMalus=ResourcesOrPoints.sum(resourcesMalus, temp);
 	}
 	
-	public void runMalus(ResourcesOrPoints resources){ //receives the resourses just earn by the player and if needed subtract malus from warehouse 
-		if(StoneOrWoodMalus);
-			//TODO user-interaction: c è una scelta
-		//TODO tutto 
+	public ResourcesOrPoints getResourcesAfterMalus(ResourcesOrPoints resources){ // subtract malus from the resources the player can obtain
+		return ResourcesOrPoints.subtract(resources, resourcesMalus);
+			
 	}
-	
 	
 	// Cesare Borgia effect
 	private boolean militaryPointRequirementNotNeeded; 
@@ -64,41 +53,59 @@ public class PermanentModifiers {
 		this.militaryPointRequirementNotNeeded = true;
 	}
 	
-	
-	/*Pico della Mirandola Effect: anyway is handled in a general way in order to
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*Dame and Pico della Mirandola Effect: anyway is handled in a general way in order to
 	potentially have much more cards with this kind of effect(not only money, but also servants...)									*/
-	private Boolean IsthereDiscountOnResources=false;
-	private ResourcesOrPoints discount;
-	public Boolean IsTherediscountOnResources() {
-		return IsthereDiscountOnResources;
-	}
-	public void activateDiscountOnResources() {
-		IsthereDiscountOnResources=true;
-	}
-	public ResourcesOrPoints getDiscount() {
-		return discount;
+	private Boolean discountOnResources=false;
+	private Map<BoardZone, ResourcesOrPoints>  discounts;
+	public Boolean IsTherediscountOnResources(BoardZone zone) {
+		return discountOnResources;
 	}
 	
-	public  ResourcesOrPoints resourcesOrPointsDiscount(ResourcesOrPoints price){
-		/*Created for handling Pico Della Mirandola card, developed in order to be useful in case of creation of similar cards
-		 */
-		int coins = price.getResources().getCoins()-discount.getResources().getCoins();
-		int servants = price.getResources().getServants()-discount.getResources().getServants();
-		int stone = price.getResources().getStone()-discount.getResources().getStone();
-		int wood = price.getResources().getWood()-discount.getResources().getWood();
-		int militaryP = price.getPoints().getMilitaryPoints()-discount.getPoints().getMilitaryPoints();
-		int faithP = price.getPoints().getFaithPoints()-discount.getPoints().getFaithPoints();
-		int victoryP= price.getPoints().getVictoryPoints()-discount.getPoints().getVictoryPoints();
-		 //no Council Privileges (never used directly as price)
-		return ResourcesOrPoints.newResourcesOrPoints(moreThanZero(coins), moreThanZero(servants), moreThanZero(wood), 
-				moreThanZero(stone), moreThanZero(victoryP), moreThanZero(militaryP), moreThanZero(faithP), 
-				price.getPoints().getCouncilPrivileges());
+	public void addDiscount(BoardZone zone, ResourcesOrPoints res){
+		ResourcesOrPoints temp = discounts.get(zone);
+		if(temp==null){  // if there was no discount
+			if(zone!=null) //(i.e Dame effect)
+				discounts.put(zone, res);
+			else{
+				//zone==null //means that a discount on any tower: Pico della mirandola effect
+					discounts.put(BoardZone.TERRITORYTOWER, res);
+					discounts.put(BoardZone.VENTURETOWER, res);
+					discounts.put(BoardZone.CHARACTERTOWER, res);
+					discounts.put(BoardZone.BUILDINGTOWER, res);
+				}
+			
+		}
+		else{//there was discount
+			if(zone!=null) //(i.e Dame effect)
+				discounts.put(zone, ResourcesOrPoints.sum(res, temp));
+			else{
+				//zone==null //means that a discount on any tower: Pico della mirandola effect
+					discounts.put(BoardZone.TERRITORYTOWER, ResourcesOrPoints.sum(res, temp));
+					discounts.put(BoardZone.VENTURETOWER,ResourcesOrPoints.sum(res, temp));
+					discounts.put(BoardZone.CHARACTERTOWER,ResourcesOrPoints.sum(res, temp));
+					discounts.put(BoardZone.BUILDINGTOWER, ResourcesOrPoints.sum(res, temp));
+				}
+			}
+			
 	}
-	private static int moreThanZero(int test){
-		//used only by newResourcesOrPointsDiscounted, to ensure no negative value
-		if(test>= 0)
-			return test;
-		else return 0;
+	
+	public ResourcesOrPoints getDiscount(BoardZone zone){
+		ResourcesOrPoints discount = discounts.get(zone);
+		if(zone==null){   //if there is no discount
+			return ResourcesOrPoints.newResources(0, 0, 0, 0);
+		}
+		else return discount;
+	}
+	
+	
+	public  ResourcesOrPoints resourcesOrPointsDiscount(BoardZone zone, ResourcesOrPoints price){
+		/*Created for handling Pico Della Mirandola card and Dame, developed in order to be useful in case of creation of similar cards
+		 */
+		ResourcesOrPoints  discount= discounts.get(zone);
+		return ResourcesOrPoints.subtract(price, discount);
+			
+	
 	}
 	
 
@@ -119,7 +126,7 @@ public class PermanentModifiers {
 	
 	
 	
-	//TODO i modificatori di valori delle carte e delle produzioni/raccolti e carta Predicatore : niente bonus da torri: qui e in effects
+	// carta Predicatore : niente bonus da torri: qui e in effects
 	private Map<BoardZone, Integer> actionModifiers;
 		
 	public void addModifier(BoardZone zone, int value){
@@ -140,4 +147,21 @@ public class PermanentModifiers {
 		
 	}
 	
+	//revoke bonuses obtained from Tower spaces (Preacher Card);
+	 private boolean bonusRevoked =false;
+	 public void setBonusRevokedOn(){
+		 bonusRevoked=true;
+	 }
+	public boolean isBonusRevokedOn() {
+		return bonusRevoked;
+	}
+	
+	//excommunication tile: reduce the coloured family member value
+	private int dicesMalusValue;
+	public int getColouredMembersMalusValue(){
+		return dicesMalusValue;
+	}
+	public void setColouredMembersMalusValue(int value){
+		dicesMalusValue = value;
+	}
 }
