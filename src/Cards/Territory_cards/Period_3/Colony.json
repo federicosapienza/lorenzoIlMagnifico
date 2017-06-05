@@ -1,0 +1,11 @@
+	   {
+	  	"name": "Colony",
+	  	"period": 3,
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,2,0,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		0,0,1,0,4,0,0,0
+	  		],
+	  	"actionValue": 1
+	  }

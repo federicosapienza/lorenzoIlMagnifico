@@ -1,0 +1,12 @@
+	   {
+	  	"name": "City",
+	  	"period": 1,
+	  	"immediateResourcesAndPoints": [
+	  		3,0,0,0,0,0,0,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,0,0,0,1
+	  		],
+	  	"actionValue": 6
+	  }
+	 

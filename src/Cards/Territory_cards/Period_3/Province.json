@@ -1,0 +1,11 @@
+	   {
+	  	"name": "Province",
+	  	"period": 3,
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,1,0,0,0,1
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,1,4,0,0,0
+	  		],
+	  	"actionValue": 6
+	  }

@@ -1,0 +1,11 @@
+	   {
+	  	"name": "Trading Town",
+	  	"period": 3,
+	  	"immediateResourcesAndPoints": [
+	  		1,1,0,0,0,0,0,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		3,0,0,0,0,0,0,0
+	  		],
+	  	"actionValue": 1
+	  }

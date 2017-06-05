@@ -1,0 +1,12 @@
+	   {
+	  	"name": "Forest",
+	  	"period": 1,
+	  	"immediateResourcesAndPoints": [
+	  		0,0,1,0,0,0,0,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		0,0,3,0,0,0,0,0
+	  		],
+	  	"actionValue": 5
+	  }
+	 

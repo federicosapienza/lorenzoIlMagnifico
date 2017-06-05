@@ -1,0 +1,11 @@
+	   {
+	  	"name": "Gold Mine",
+	  	"period": 2,
+	  	"immediateResourcesAndPoints": [
+	  		1,0,0,0,0,0,0,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		2,0,0,0,0,0,0,0
+	  		],
+	  	"actionValue": 1
+	  }

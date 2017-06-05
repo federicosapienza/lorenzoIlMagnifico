@@ -1,0 +1,11 @@
+	   {
+	  	"name": "Sanctuary",
+	  	"period": 3,
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,0,1,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		1,0,0,0,0,0,1,0
+	  		],
+	  	"actionValue": 1
+	  }

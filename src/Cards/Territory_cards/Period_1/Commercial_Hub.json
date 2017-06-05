@@ -1,0 +1,11 @@
+	   {
+	  	"name": "Commercial Hub",
+	  	"period": 1,
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,0,0,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		1,0,0,0,0,0,0,0
+	  		],
+	  	"actionValue": 1
+	  }

@@ -1,0 +1,11 @@
+	   {
+	  	"name": "Harmitage",
+	  	"period": 2,
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,0,1,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,0,0,1,0
+	  		],
+	  	"actionValue": 2
+	  }

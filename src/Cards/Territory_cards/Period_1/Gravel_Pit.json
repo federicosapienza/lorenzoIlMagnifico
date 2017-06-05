@@ -1,0 +1,11 @@
+	   {
+	  	"name": "Gravel Pit",
+	  	"period": 1,
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,2,0,0,0,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,2,0,0,0,0
+	  		],
+	  	"actionValue": 4
+	  }

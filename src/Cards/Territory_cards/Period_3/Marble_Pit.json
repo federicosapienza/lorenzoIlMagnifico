@@ -1,0 +1,11 @@
+	   {
+	  	"name": "Marble Pit",
+	  	"period": 3,
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,3,0,0,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,2,1,0,0,0
+	  		],
+	  	"actionValue": 2
+	  }

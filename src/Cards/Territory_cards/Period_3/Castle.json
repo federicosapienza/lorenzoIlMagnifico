@@ -1,0 +1,11 @@
+	   {
+	  	"name": "Castle",
+	  	"period": 3,
+	  	"immediateResourcesAndPoints": [
+	  		2,0,0,0,2,0,0,0
+	  		],
+	  	"permanentResourcesAndPoints": [
+	  		0,1,0,0,0,3,0,0
+	  		],
+	  	"actionValue": 4
+	  }
