@@ -87,7 +87,7 @@ public class Period {
 			if(player.getStatus() == PlayerStatus.SUSPENDED){  
 		    	//if player is suspended, the effect is runned.
 		    	//TODO notificare i giocatori che il player salta il turno
-		    	gameElements.notifyObservers(player.getName() + "misses his turn!");
+		    	gameElements.notifyPlayers(player.getName() + "misses his turn!");
 		    	excommunicationTile.runEffect(player);
 		    	return;
 			}

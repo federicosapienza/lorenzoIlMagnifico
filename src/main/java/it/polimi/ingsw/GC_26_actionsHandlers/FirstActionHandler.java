@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
+
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
@@ -62,12 +63,13 @@ public class FirstActionHandler extends ActionHandler{
 			else {
 				throw new IllegalArgumentException();
 			}
+			
 		}
 				
  
 		
 		
-	// also used in secondary action.
+	
 	 
 	 
 /////////////////////////////////////////////////////////////////////
@@ -91,6 +93,9 @@ public class FirstActionHandler extends ActionHandler{
 				harvestPerform(player, familyMemberUsed, action);
 			if(action.getZone()==BoardZone.PRODUCTION)
 				productionPerform(player, familyMemberUsed, action);
+			
+			//notify the players
+	//		getGameElements().getGameMemory().addAction(new ActionDescriber(player.getName(), action));
 		
 	 }
 }

@@ -7,8 +7,8 @@ import java.util.List;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.Cards;
 import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTile;
-import it.polimi.ingsw.GC_26_observerAndObservableLogic.Observable;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_serverView.Observable;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
@@ -49,6 +49,9 @@ public class Game extends Observable<CardDescriber>{
 		return period;
 	}
 	
+	public List<Player> getPlayers() {
+		return players;
+	}
 	
 	public Player addPlayer(String name){
 		Player player = new Player(name, startingResources.get(numberOfPlayers-1));
@@ -58,7 +61,9 @@ public class Game extends Observable<CardDescriber>{
 	}
 	
 	public void startGame(){
-		initialiseGame();
+		excommunicationTiles = cards.getExcommunicationTiles();
+		
+		//todo mandargliele
 		while(periodNumber<= numberOfPeriods){
 			period= new Period(periodNumber, cards, gameElements, excommunicationTiles.get(periodNumber-1));
 			period.start();
@@ -67,9 +72,9 @@ public class Game extends Observable<CardDescriber>{
 		//TODO decide Winner!!!
 	}
 	
-	private void initialiseGame(){
+	public void initialiseGame(){
 		gameElements= new GameElements(this ,players, numberOfPlayers, resourcesOrPointsBonus, times);
-		excommunicationTiles = cards.getExcommunicationTiles();
+		
 		
 		//TODO notificare i giocatori
 		

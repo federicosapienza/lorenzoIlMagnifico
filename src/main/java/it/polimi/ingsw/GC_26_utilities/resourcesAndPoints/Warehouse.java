@@ -1,13 +1,13 @@
 package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 
-import it.polimi.ingsw.GC_26_observerAndObservableLogic.Observable;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_serverView.Observable;
 
 /* It ' s the class that represent the status of the player in terms of resources and points owned.
  * It must not be mistaken with ResourcesOrPoints class , which instead represent the payments and effects that are called by cards, positions etc
  *ResourcesAndPoints' attributes are immutable, warehouse's attributes are mutable.  */
 
-public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
+public class Warehouse extends Observable<ResourcesDescriber> implements ResourcesDescriber{
 	private Player player;
 	private String  playerName;
 	private int coins;

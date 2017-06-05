@@ -2,10 +2,12 @@ package it.polimi.ingsw.GC_26_controllers;
 
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
+import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
+import it.polimi.ingsw.GC_26_serverView.Observer;
 
-public class ActionController {  //TODO extends actionObserver etc
+public class ActionController implements Observer<Action>{  //TODO extends actionObserver etc
 	Player player;
 	MainActionHandler handlers;
 	
@@ -14,11 +16,10 @@ public class ActionController {  //TODO extends actionObserver etc
 		this.handlers= handlers;
 	}
 	
-	public void update(){ //todo 
+	public void update(Action action){ //todo 
 		//potrei mettere synronysed il controller per evitare problemi di 2 azioni in contemporane
 		PlayerStatus status;
 	
-		Action action=null; //inizializzazione provvisoria!
 		synchronized (player) {
 			 status= player.getStatus();
 		}
@@ -96,6 +97,12 @@ public class ActionController {  //TODO extends actionObserver etc
 				player.notifyObservers("action not valid");
 			}
 		}
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

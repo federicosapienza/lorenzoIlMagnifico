@@ -70,7 +70,7 @@ public class Round {
 			if(player.getStatus() == PlayerStatus.SUSPENDED){  
 		    	//if player is suspended, misses the turn
 		    	//TODO notificare i giocatori che il player salta il turno
-		    	gameElements.notifyObservers(player.getName() + "misses his turn!");
+		    	gameElements.notifyPlayers(player.getName() + "misses his turn!");
 		    	return;
 			}
 			if(player.getStatus() == PlayerStatus.WAITINGHISTURN){

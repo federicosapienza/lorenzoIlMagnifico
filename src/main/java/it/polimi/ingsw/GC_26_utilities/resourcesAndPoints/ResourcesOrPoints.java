@@ -9,7 +9,7 @@ package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
  * It must not be mistaken with Warehouse , which instead represent the status of the player (points and resources) , and whose 
  * attributes are mutable.
  */
-public class ResourcesOrPoints {
+public class ResourcesOrPoints implements ResourcesDescriber{
 	private final Resources resources; 
 	private final Points points;
 	
@@ -80,5 +80,55 @@ public class ResourcesOrPoints {
 			return test;
 		else return 0;
 	
+	}
+
+	@Override
+	public String getPlayerName() { //added in ResourcesDescriber interface, useful in Warehouse, useless here.
+		return null;
+	}
+
+	@Override
+	public int getCoins() {
+		return resources.getCoins();
+	}
+
+	@Override
+	public int getServants() {
+		return resources.getServants();
+	}
+
+	@Override
+	public int getStone() {
+		return resources.getStone();
+	}
+
+	@Override
+	public int getWood() {
+		return resources.getWood();
+
+	}
+
+	@Override
+	public int getMilitaryPoints() {
+		return points.getMilitaryPoints();
+
+	}
+
+	@Override
+	public int getCouncilPrivileges() {
+		return points.getCouncilPrivileges();
+
+	}
+
+	@Override
+	public int getFaithPoints() {
+		return points.getFaithPoints();
+
+	}
+
+	@Override
+	public int getVictoryPoints() {
+		return points.getVictoryPoints();
+
 	}
 }

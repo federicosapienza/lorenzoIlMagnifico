@@ -4,22 +4,17 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.*;
-
-
-import com.google.gson.*;
-
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelpmentCardImplementation;
-import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
-import it.polimi.ingsw.GC_26_cards.leaderCard.PointsOrResourcesRequirement;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Points;
-
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelpmentCardImplementation;
+import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class ReadTerritoryCards {
 		

@@ -6,8 +6,8 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
-import it.polimi.ingsw.GC_26_observerAndObservableLogic.Observable;
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoard;
+import it.polimi.ingsw.GC_26_serverView.Observable;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembers;
 
 public class Player extends Observable<String>{

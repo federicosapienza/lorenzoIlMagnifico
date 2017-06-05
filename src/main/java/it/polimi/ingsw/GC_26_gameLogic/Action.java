@@ -10,12 +10,14 @@ import it.polimi.ingsw.GC_26_utilities.dices.Colour;
  */
 
 public class Action {
+	private String playerName;
 	private BoardZone zone; 
 	private int position;
 	private Colour familyMemberColour;  //can be null only in case of secondary action
 	private int servantsUsed;
 	
-	public Action(BoardZone zone, int position, Colour familyMemberColour, int servantsUsed) {
+	public Action(String playerName, BoardZone zone, int position, Colour familyMemberColour, int servantsUsed) {
+		this.playerName= playerName;
 		this.zone=zone;
 		this.familyMemberColour = familyMemberColour;
 		this.servantsUsed= servantsUsed;

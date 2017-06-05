@@ -1,6 +1,9 @@
 package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 
-public interface PlayerWallet {
+//the interface sent to the players: when it s used to send resources bonus on positions playerName is null, 
+//Then is used to update status of the player in clients' view
+
+public interface ResourcesDescriber {
 	
 	public String getPlayerName();
 	

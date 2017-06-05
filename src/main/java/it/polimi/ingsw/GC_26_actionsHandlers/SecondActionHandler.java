@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
+
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
@@ -78,6 +79,11 @@ public class SecondActionHandler extends ActionHandler{
 			councilPalacePerform(player, null, action);
 		
 		else throw new IllegalArgumentException();
+		
+		
+		//notify the players of the action
+	//	getGameElements().getGameMemory().addAction(new ActionDescriber(player.getName(), action));
+
 	}
 	
 	

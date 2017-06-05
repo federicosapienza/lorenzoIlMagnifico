@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26_observerAndObservableLogic;
+package it.polimi.ingsw.GC_26_serverView;
 
 import java.util.ArrayList;
 import java.util.List;

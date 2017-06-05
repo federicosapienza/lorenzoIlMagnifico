@@ -1,13 +1,10 @@
 package it.polimi.ingsw.GC_26_cards.developmentCards;
 
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
-import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
-import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
-import it.polimi.ingsw.GC_26_cards.payments.MilitaryPointPayment;
+
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 //It 's the implementation used by Character and Venture Cards. Territories and building cards extend this. 
 public class DevelpmentCardImplementation implements DevelopmentCard{
@@ -80,6 +77,9 @@ public class DevelpmentCardImplementation implements DevelopmentCard{
 				player.notifyObservers("not enough military points  for a new territory card");
 			return false;
 		}
+		if(payment==null)
+			return true;
+		
 		 if(!payment.canPlayerGetThis(player, type)){
 			 player.notifyObservers("not enough resources for getting the card");
 		 	return false;
@@ -88,7 +88,8 @@ public class DevelpmentCardImplementation implements DevelopmentCard{
 	}
 	@Override
 	public void pay(Player player) {
-		payment.pay(player, type);
+		if(payment !=null)
+			payment.pay(player, type);
 		
 	}
 
