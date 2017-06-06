@@ -2,7 +2,7 @@ package it.polimi.ingsw.GC_26_serverView;
 
 
 import it.polimi.ingsw.GC_26_gameLogic.Action;
-import it.polimi.ingsw.GC_26_serverConnections.ClientConnection;
+import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
 
 public class ClientMainServerView {
 	private final String name;
@@ -12,15 +12,15 @@ public class ClientMainServerView {
 	private ActionView actionView;
 	private StringInputView stringInputView ;
 	private ActionInputView actionInputView;
-	private ClientConnection connection;
+	private ServerConnectionToClient connection;
 	
 	
-	public ClientMainServerView(String name, ClientConnection connection) {
+	public ClientMainServerView(String name, ServerConnectionToClient connection) {
 		this.name = name;
-		playerWalletView =  new PlayerWalletView();
-		cardDescriberView = new CardDescriberView();
-		stringView = new StringView();
-		actionView = new ActionView();
+		playerWalletView =  new PlayerWalletView(connection);
+		cardDescriberView = new CardDescriberView(connection);
+		stringView = new StringView(connection);
+		actionView = new ActionView(connection);
 		stringInputView = new StringInputView();
 		actionInputView = new ActionInputView();
 		this.connection= connection;
@@ -95,7 +95,7 @@ public class ClientMainServerView {
 
 
 
-	public void addConnection(ClientConnection connection) {
+	public void addConnection(ServerConnectionToClient connection) {
 		// TODO Auto-generated method stub
 		
 	}

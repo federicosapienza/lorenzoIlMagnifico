@@ -1,18 +1,19 @@
 package it.polimi.ingsw.GC_26_serverView;
 
+import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
 
-public class StringView implements Observer<String>{
+public class StringView extends OutputView implements Observer<String>{
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
+	public StringView(ServerConnectionToClient connection) {
+		super(connection);
 	}
+
+	
 	
 	public void update(String string) {
-		Observer.super.update(string);
-		System.out.println("I am the view I have been notified by the model with an update String");
-		System.out.println("Received" + string);
+		super.getConnection().send(string);
+
+		
 
 	
 	}

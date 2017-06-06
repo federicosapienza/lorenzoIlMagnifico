@@ -1,9 +1,11 @@
 package it.polimi.ingsw.GC_26_personalBoard;
 
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_serverView.Observable;
 
 import java.util.Set;
 
@@ -12,7 +14,7 @@ import java.util.HashSet;
 
 
 
-public class PersonalBoard {
+public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we need to pass cardsonly to a player: (i.e LeaderCards)
 	private Set<DevelopmentCard> territoryCardSet= new HashSet<>();
 	private Set<DevelopmentCard> buildingCardSet= new HashSet<>();
 	private Set<DevelopmentCard> characterCardSet= new HashSet<>();

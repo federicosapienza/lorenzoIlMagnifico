@@ -51,8 +51,10 @@ public class GameInitialiserAndController implements Runnable{
 		//views' observers of model
 		for(Player player: players){
 			for(ClientMainServerView view : clients){
-				if(player.getName()==view.getName())
+				if(player.getName().equals(view.getName())){
 					player.registerObserver(view.getStringView());
+					player.getPersonalBoard().registerObserver(view.getCardDescriberView());
+				}
 				player.getWarehouse().registerObserver(view.getPlayerWalletView());
 				game.registerObserver(view.getCardDescriberView());
 				gameElements.getGameMemory().registerObserver(view.getActionView());

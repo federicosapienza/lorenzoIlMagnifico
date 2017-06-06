@@ -6,10 +6,11 @@ import it.polimi.ingsw.GC_26_actionsHandlers.TradeHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.VaticanReportHandler;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
+import it.polimi.ingsw.GC_26_serverView.Observer;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 //the controller called whenever the game asks the client to perform a specific choice
-public class ChoiceController {//TODO extends actionObserver etc
+public class ChoiceController implements Observer<Integer>{
 	Player player;
 	MainActionHandler handlers;
 	
@@ -18,8 +19,7 @@ public class ChoiceController {//TODO extends actionObserver etc
 		this.handlers= handlers;
 	}
 	
-	void update(){ //todo
-		int choice=0;
+	public void update(Integer choice){ 
 		PlayerStatus status; 
 		synchronized (player) {
 			status = player.getStatus();
