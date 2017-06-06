@@ -13,7 +13,7 @@ public class FamilyMembersTest {
     @Test
     public void test() {
     	familyMembersSet = new FamilyMembers(player);
-    	dices.throwDices();
+    	dices.rollDices();
     	int whiteValue = dices.readDice(Colour.WHITE);
     	int blackValue = dices.readDice(Colour.BLACK);
     	int orangeValue = dices.readDice(Colour.ORANGE);
