@@ -66,12 +66,16 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 			ReceiveResourcesOrPointsEffect permanentEffect = new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(permanentResourcesAndPointsList.get(0), permanentResourcesAndPointsList.get(1), permanentResourcesAndPointsList.get(2), permanentResourcesAndPointsList.get(3), permanentResourcesAndPointsList.get(4), permanentResourcesAndPointsList.get(5), permanentResourcesAndPointsList.get(6), permanentResourcesAndPointsList.get(7)));
 		    DevelopmentCard developmentCard= DevelpmentCardImplementation.territoryCard(name, period, null, immediateEffect, permanentEffect , actionValue);
 		   switch(numOfPeriod){
-		   case 1:
+		   case 1:{
 			   cardsImplementation.getTerritoryCardsPeriod1().add(developmentCard);
-		   case 2:
+			   return;
+		   }
+		   case 2:{
 			   cardsImplementation.getTerritoryCardsPeriod2().add(developmentCard);
-		   case 3:
+			   return;}
+		   case 3:{
 			   cardsImplementation.getTerritoryCardsPeriod3().add(developmentCard);
+			   return; }
 		   default:
 			   throw new IllegalArgumentException();
 		   }

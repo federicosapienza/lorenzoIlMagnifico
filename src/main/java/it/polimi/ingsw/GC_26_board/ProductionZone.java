@@ -7,15 +7,20 @@ import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 public class ProductionZone {
 	private SingleProduction singleProduction;
 	private MultipleProduction multipleProduction;
-	int numberOfPlayers;
+	private int positionsNumber;
 	
 	public ProductionZone(int value1, int value2, int numberOfPlayers){
-		this.numberOfPlayers=numberOfPlayers;
 		singleProduction=new SingleProduction(value1);
-		if(numberOfPlayers>=GameParameters.getNumPlayersForMultipleZones())
+		if(numberOfPlayers>=GameParameters.getNumPlayersForMultipleZones()){
 				multipleProduction= new MultipleProduction(value2);
+				positionsNumber=2;
+		}
+		else positionsNumber=1;
 	}
 	
+	public int getPositionsActivated() {
+		return positionsNumber;
+	}
 	public SingleProduction getSingleProduction() {
 		return singleProduction;
 	}

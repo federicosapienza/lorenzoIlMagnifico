@@ -7,7 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
+import it.polimi.ingsw.GC_26_client_clientLogic.ClientController;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
@@ -16,8 +18,8 @@ public class SocketClient implements ClientConnection{
 	    ObjectOutputStream objOut =  null;
 	    ObjectInputStream objIn  = null;
 		
-		public SocketClient(Socket socket) throws IOException {
-	        this.socket= socket;
+		public SocketClient(int port, String ip) throws IOException {
+	        this.socket= new Socket(ip, port);
 			objOut = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
 			objOut.flush();
 			objIn  = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
@@ -26,11 +28,18 @@ public class SocketClient implements ClientConnection{
 
 		@Override
 		public void run() {
-			while (true) {
+			 
 				try {
-			        
-
-
+					while (true){
+			        String test = objIn.readUTF();
+			        if(test.equals("Login or signing in successful"))  //any change here must be changed also in server
+			        	break;
+			        //TODO chiedere username e password
+					}
+					
+					
+					
+					while(true){
 					Object object = objIn.readObject();
 					if(object instanceof String){
 						String string = (String) object;
@@ -48,15 +57,28 @@ public class SocketClient implements ClientConnection{
 						PlayerWallet wallet = (PlayerWallet) object;
 						//TODO sempre ok
 					}
+					if(object instanceof PositionDescriber){
+						PositionDescriber positionDescriber = (PositionDescriber) object;
+						
 					
-					
+					}
+					}
 					
 				
-				}catch (ClassNotFoundException | IOException e) {
+				}catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
+				
+				catch(IOException e1){
+					//TODO
 				}
-		}
+			
 		
+		}
 
+		@Override
+		public void setController(ClientController controller) {
+			// TODO Auto-generated method stub
+			
+		}
 }

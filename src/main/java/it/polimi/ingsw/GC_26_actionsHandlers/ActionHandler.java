@@ -88,9 +88,9 @@ public abstract class ActionHandler {
 		 if(action.getPosition()<=0 ||  //market's number of positions depends on number of players
 					// with standard rules: if (numPlayers<4 && position>2)||(numPlayers=4 && position>4) throws exception.
 					(gameElements.getNumberOfPlayers()<GameParameters.getNumPlayerforCompleteMarketActivation() 
-							&& action.getPosition()>GameParameters.getMinMarketzone())||
+							&& action.getPosition()>GameParameters.getMinMarketZones())||
 					(gameElements.getNumberOfPlayers()>=GameParameters.getNumPlayerforCompleteMarketActivation() 
-							&& action.getPosition()>GameParameters.getMinMarketzone()))
+							&& action.getPosition()>GameParameters.getMinMarketZones()))
 				throw new IllegalArgumentException();
 		 
 		 MarketPosition position = gameElements.getBoard().getMarket().getPosition(action.getPosition());

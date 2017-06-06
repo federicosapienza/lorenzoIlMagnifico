@@ -12,6 +12,8 @@ public class ClientMainServerView {
 	private ActionView actionView;
 	private StringInputView stringInputView ;
 	private ActionInputView actionInputView;
+	private PositionView positionView;
+	
 	private ServerConnectionToClient connection;
 	
 	
@@ -23,6 +25,8 @@ public class ClientMainServerView {
 		actionView = new ActionView(connection);
 		stringInputView = new StringInputView();
 		actionInputView = new ActionInputView();
+		positionView =new PositionView(connection);
+		
 		this.connection= connection;
 		
 	}
@@ -92,13 +96,13 @@ public class ClientMainServerView {
 	public String getName() {
 		return name;
 	}
-
-
-
-	public void addConnection(ServerConnectionToClient connection) {
-		// TODO Auto-generated method stub
-		
+	
+	
+	public PositionView getPositionView() {
+		return positionView;
 	}
+
+
 
 
 	

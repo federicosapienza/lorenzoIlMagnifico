@@ -2,6 +2,8 @@ package it.polimi.ingsw.GC_26_gameLogic;
 
 
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 
@@ -9,7 +11,12 @@ import it.polimi.ingsw.GC_26_utilities.dices.Colour;
  *  floor for towers, specifier of poisiton for production , harvest, market. Useless for council Palace.
  */
 
-public class Action {
+public class Action implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String playerName;
 	private final BoardZone zone; 
 	private final int position;

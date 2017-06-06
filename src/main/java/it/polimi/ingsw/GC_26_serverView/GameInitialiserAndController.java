@@ -58,6 +58,7 @@ public class GameInitialiserAndController implements Runnable{
 				player.getWarehouse().registerObserver(view.getPlayerWalletView());
 				game.registerObserver(view.getCardDescriberView());
 				gameElements.getGameMemory().registerObserver(view.getActionView());
+				gameElements.getBoard().registerObserver(view.getPositionView());
 			}
 		}
 		//controllers' observers of view

@@ -5,13 +5,11 @@ import java.util.List;
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_board.Board;
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_serverView.Observable;
 import it.polimi.ingsw.GC_26_utilities.dices.Dices;
 import it.polimi.ingsw.GC_26_utilities.rankings.Rankings;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
-public class GameElements extends Observable<PlayerWallet>{  //used at the beginning of the game to pass resources bonus in positions
+public class GameElements {  //used at the beginning of the game to pass resources bonus in positions
 	Game game;
 	private Board board;
 	private Dices dices;

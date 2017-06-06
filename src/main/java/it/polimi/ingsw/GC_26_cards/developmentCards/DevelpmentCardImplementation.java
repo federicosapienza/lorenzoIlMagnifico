@@ -113,8 +113,8 @@ public class DevelpmentCardImplementation implements DevelopmentCard{
 	}
 
 	@Override
-	public String getCardType() {
-		return type.toString();
+	public DevelopmentCardTypes getCardType() {
+		return type;
 	}
 
 	@Override
