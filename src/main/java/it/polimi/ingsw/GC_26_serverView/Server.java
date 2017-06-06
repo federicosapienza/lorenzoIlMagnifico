@@ -1,19 +1,20 @@
 package it.polimi.ingsw.GC_26_serverView;
 
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 
-import it.polimi.ingsw.GC_26_cards.Cards;
 import it.polimi.ingsw.GC_26_gameLogic.Game;
-import it.polimi.ingsw.GC_26_serverConnections.ClientConnection;
+import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
 import it.polimi.ingsw.GC_26_serverConnections.SocketServer;
 
 public class Server {
 	private GameInitialiserAndController game;
 	private Set<GameInitialiserAndController> games = new HashSet<>();
-	
+	private Map<String ,String> listOfPlayers =new HashMap<>();
 	
 	
 	private static Server server=null ;
@@ -46,7 +47,7 @@ public class Server {
 		
 	}
 	
-	public synchronized void addClient(ClientConnection connection, String username){
+	public synchronized void addClient(ServerConnectionToClient connection, String username){
 		
 		ClientMainServerView views= new ClientMainServerView(username, connection);
 		connection.addViews( views);
@@ -58,9 +59,17 @@ public class Server {
 		else enterInANewGame(views);
 		
 	}
+//	public synchronized boolean isPlayerSignedIn(String username){
+	//	return listOfPlayers.containsKey(username);
+//	}
 	
 	public synchronized boolean doLogin(String username, String password){
-		//todo
+		if(listOfPlayers.containsKey(username)){
+			if(listOfPlayers.get(username).equals(password))
+				return true;
+			else return false;		
+		}
+		listOfPlayers.put(username, password);
 		return true;
 	}
 	

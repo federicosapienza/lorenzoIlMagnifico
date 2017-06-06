@@ -8,10 +8,10 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_serverView.Observable;
 import it.polimi.ingsw.GC_26_utilities.dices.Dices;
 import it.polimi.ingsw.GC_26_utilities.rankings.Rankings;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesDescriber;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
-public class GameElements extends Observable<ResourcesDescriber>{  //used at the beginning of the game to pass resources bonus in positions
+public class GameElements extends Observable<PlayerWallet>{  //used at the beginning of the game to pass resources bonus in positions
 	Game game;
 	private Board board;
 	private Dices dices;
@@ -19,18 +19,23 @@ public class GameElements extends Observable<ResourcesDescriber>{  //used at the
 	private List<Player> players;
 	private int numberOfPlayers;
 	private TimerInfo timerInfo;
-	private ActionsPerformed gameMemory= new ActionsPerformed();
 	private MainActionHandler handlers = new MainActionHandler();
+	private ActionsPerformed gameMemory;
 	
 	public GameElements(Game game, List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList, int times[]) {
 		board=new Board(numberOfPlayers, resourcesOrPointsList);
 		dices= new Dices();
 		rankings = new Rankings(players);
 		timerInfo= new TimerInfo(times);
+		gameMemory =new ActionsPerformed();
 	}
 	
 	public Game getGame() {
 		return game;
+	}
+	
+	public ActionsPerformed getGameMemory() {
+		return gameMemory;
 	}
 	
 	public Board getBoard() {
@@ -50,9 +55,6 @@ public class GameElements extends Observable<ResourcesDescriber>{  //used at the
 		return numberOfPlayers;
 	}
 	
-	public ActionsPerformed getGameMemory() {
-		return gameMemory;
-	}
 	
 	public MainActionHandler getHandlers() {
 		return handlers;

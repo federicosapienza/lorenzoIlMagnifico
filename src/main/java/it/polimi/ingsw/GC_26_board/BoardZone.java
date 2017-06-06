@@ -12,15 +12,22 @@ package it.polimi.ingsw.GC_26_board;
  * 
  */
 public enum BoardZone {
-	TERRITORYTOWER,
-	BUILDINGTOWER, 
-	CHARACTERTOWER,
-	VENTURETOWER,
-	HARVEST,
-	PRODUCTION,
-	MARKET,
-	COUNCILPALACE,
+	TERRITORYTOWER("territory tower"),
+	BUILDINGTOWER("building tower"), 
+	CHARACTERTOWER("character tower"),
+	VENTURETOWER("venture tower"),
+	HARVEST("harvest zone"),
+	PRODUCTION("production zone"),
+	MARKET("market zone"),
+	COUNCILPALACE("Council Palace");
 	
+	private final String stringDescriber;
 	
+	BoardZone(String stringDescriber){
+		this.stringDescriber = stringDescriber;
+	}
+	public String getStringDescriber() {
+		return stringDescriber;
+	}
 
 }

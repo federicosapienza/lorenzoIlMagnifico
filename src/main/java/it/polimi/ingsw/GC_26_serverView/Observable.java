@@ -21,14 +21,7 @@ public abstract class Observable<C> {
 		this.observers.remove(o);
 	}
 
-	public void notifyObservers() {
-		System.out
-				.println("I am the " + this.getClass().getSimpleName() + " -- I am notifying my observers");
 
-		for (Observer<C> o : this.observers) {
-			o.update();
-		}
-	}
 
 	public void notifyObservers(C c) {
 		for (Observer<C> o : this.observers) {

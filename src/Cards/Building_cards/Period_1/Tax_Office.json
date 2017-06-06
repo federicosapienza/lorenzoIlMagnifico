@@ -7,6 +7,7 @@
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,5,0,0,0
 	  		],
+	  		"typeOfPermanentEffect": "cardsNumberToResources",
 	  	"permanentCardsNumberToResourcesResources": [
 	  		1,0,0,0,0,0,0,0
 	  		],

@@ -1,19 +1,23 @@
 package it.polimi.ingsw.GC_26_serverView;
 
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesDescriber;
 
-public class PlayerWalletView implements Observer<ResourcesDescriber>{
+import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
+public class PlayerWalletView extends OutputView implements Observer<PlayerWallet>{
+
+	public PlayerWalletView(ServerConnectionToClient connection) {
+		super(connection);
+	}
+
+	
+	public void update(PlayerWallet wallet) {
+		super.getConnection().send(wallet);
 		
 	}
+
+
+
 	
-	public void update(ResourcesDescriber wallet) {
-		Observer.super.update(wallet);
-		System.out.println("I am the view I have been notified by the model with an update CardDescriber");
-		System.out.println("Received"  + wallet.getPlayerName());
-	}
 	
 }

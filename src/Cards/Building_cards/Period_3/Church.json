@@ -1,24 +1,24 @@
 	   {
-	  	"name": "Painters' Guild",
-	  	"period": 2,
+	  	"name": "Church",
+	  	"period": 3,
 	  	"payment": [
-	  	  0,0,4,0
+	  	  4,0,3,0
 	  	  ],
 	  	"immediateResourcesAndPoints": [
-	  		0,0,0,0,5,0,0,0
+	  		0,0,0,0,5,0,1,0
 	  		],
 	  		"typeOfPermanentEffect": "doubleTrade",
 	     "permanentTradeEffectGive1": [
 	  	  0,0,1,0,0,0,0,0
 	  	  ],
-	  	 "permanentTradeEffectReceive1": [
-	  	  0,0,0,0,3,0,0,0
+	  	  "permanentTradeEffectReceive1": [
+	  	  0,0,0,0,0,0,2,0
 	  	  ],
 	  	  "permanentTradeEffectGive2": [
-	  	  0,0,3,0,0,0,0,0
+	  	  0,0,0,1,0,0,0,0
 	  	  ],
-	  	 "permanentTradeEffectReceive2": [
-	  	  0,0,0,0,7,0,0,0
+	  	  "permanentTradeEffectReceive2": [
+	  	  0,0,0,0,0,0,2,0
 	  	  ],
-	  	"actionValue": 4
+	  	"actionValue": 1
 	  }

@@ -9,7 +9,7 @@ package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
  * It must not be mistaken with Warehouse , which instead represent the status of the player (points and resources) , and whose 
  * attributes are mutable.
  */
-public class ResourcesOrPoints implements ResourcesDescriber{
+public class ResourcesOrPoints implements PlayerWallet{
 	private final Resources resources; 
 	private final Points points;
 	
