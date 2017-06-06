@@ -23,7 +23,7 @@ import java.util.Map;
 
 import com.google.gson.reflect.TypeToken;
 
-public class ReadDevelopmentCards {
+public class DevelopmentCardsReader {
 	
 	private String name;
 	private int period;

@@ -26,7 +26,7 @@ import java.util.Map;
 import com.google.gson.reflect.TypeToken;
 
 
-public class ReadBuildingCards extends ReadDevelopmentCards {
+public class BuildingCardsReader extends DevelopmentCardsReader {
 		
 	private String name;
 	private int period;
@@ -51,7 +51,7 @@ public class ReadBuildingCards extends ReadDevelopmentCards {
 	private String permanentCardsNumberToResourcesCardType;
 
 		public static void main(String [] args){
-			ReadBuildingCards rbc = new ReadBuildingCards();
+			BuildingCardsReader rbc = new BuildingCardsReader();
 			rbc.readCards(3);//per ora li metto manualmente qua i valori
 			
 		}

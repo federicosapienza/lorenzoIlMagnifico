@@ -1,30 +1,19 @@
 package it.polimi.ingsw.GC_26_readJson;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.*;
-
 
 import com.google.gson.*;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelpmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
-import it.polimi.ingsw.GC_26_cards.leaderCard.PointsOrResourcesRequirement;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Points;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import com.google.gson.reflect.TypeToken;
-
-
-public class ReadTerritoryCards extends ReadDevelopmentCards {
+public class TerritoryCardsReader extends DevelopmentCardsReader {
 		
 	private String name;
 	private int period;
@@ -32,20 +21,15 @@ public class ReadTerritoryCards extends ReadDevelopmentCards {
 	private List<Integer> permanentResourcesAndPointsList = new ArrayList<Integer>();
 	private int actionValue;
 	private BufferedReader br= null;
-	private Gson gson = new Gson();
 	private JsonObject jsonObject= null;
-	private JsonElement jsonElement= null;
-	private Type listTypeInt = new TypeToken<List<Integer>>() {}.getType();
-	private List<DevelopmentCard> territoryCards = new ArrayList<DevelopmentCard>();//getter! -> non credo sia utile,passo i file direttamente ad un'altra classe
 	private JsonPathData jsonPathData = new JsonPathData();
-	private CardsImplementation cards= new CardsImplementation();
 
-		public static void main(String [] args){
-			ReadTerritoryCards rtc = new ReadTerritoryCards();
+		/*public static void main(String [] args){
+			TerritoryCardsReader rtc = new TerritoryCardsReader();
 			rtc.readCards(3);//per ora li metto manualmente qua i valori
-		}
+		}*/
 		
-		private void readCards(int numberOfPeriod){
+		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
 				String[] listOfPaths = chooseListOfCards(numberOfPeriod);
 				for(String s:listOfPaths){
 					jsonObject= super.createJsonObjectFromFile(s);
@@ -55,7 +39,7 @@ public class ReadTerritoryCards extends ReadDevelopmentCards {
 					immediateResourcesAndPointsList=super.readImmediateResourcesAndPoints();
 					permanentResourcesAndPointsList=super.readPermanentResourcesAndPoints();
 					stamp(); 
-					createTerritoryCard(cards,numberOfPeriod);
+					createTerritoryCard(cardsImplementation,numberOfPeriod);
 					if(br!= null){
 						try {
 							br.close();
@@ -76,11 +60,6 @@ public class ReadTerritoryCards extends ReadDevelopmentCards {
 			
 		}
 		
-		//APPUNTO PER CREAZIONE CARTE-
-		//DevelpmentCardImplementation.territoryCard(name, period, new MilitaryPointPayment(toSpend, needed), 
-		//new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(coins, servants, wood, stone, victoryP, militaryP, faithP, councilP)),
-		//TradeEffect(...parametrivari.), actionValue)
-		
 		
 		private void createTerritoryCard(CardsImplementation cardsImplementation,int numOfPeriod){
 		    ReceiveResourcesOrPointsEffect immediateEffect = new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(immediateResourcesAndPointsList.get(0), immediateResourcesAndPointsList.get(1), immediateResourcesAndPointsList.get(2), immediateResourcesAndPointsList.get(3), immediateResourcesAndPointsList.get(4), immediateResourcesAndPointsList.get(5), immediateResourcesAndPointsList.get(6), immediateResourcesAndPointsList.get(7)));
@@ -93,7 +72,10 @@ public class ReadTerritoryCards extends ReadDevelopmentCards {
 			   cardsImplementation.getTerritoryCardsPeriod2().add(developmentCard);
 		   case 3:
 			   cardsImplementation.getTerritoryCardsPeriod3().add(developmentCard);
+		   default:
+			   throw new IllegalArgumentException();
 		   }
+	
 		    
 		}
 		
