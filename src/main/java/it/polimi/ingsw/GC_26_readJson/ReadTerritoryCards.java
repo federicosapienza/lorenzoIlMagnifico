@@ -75,6 +75,8 @@ public class ReadTerritoryCards extends ReadDevelopmentCards {
 			System.out.println(permanentResourcesAndPointsList);
 			
 		}
+		
+		//APPUNTO PER CREAZIONE CARTE-
 		//DevelpmentCardImplementation.territoryCard(name, period, new MilitaryPointPayment(toSpend, needed), 
 		//new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(coins, servants, wood, stone, victoryP, militaryP, faithP, councilP)),
 		//TradeEffect(...parametrivari.), actionValue)
@@ -98,11 +100,5 @@ public class ReadTerritoryCards extends ReadDevelopmentCards {
 				throw new IllegalArgumentException();
 			}
 		}
-		
-		
-		/*
-		public List<DevelopmentCard> getTerritoryCards() {
-			return territoryCards;
-		}*///non so se servirà,anzi credo proprio di no in quanto vorrei mettere ciò che leggo in Cards
-		
+
 }

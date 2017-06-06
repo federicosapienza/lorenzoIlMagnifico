@@ -26,7 +26,7 @@ import java.util.Map;
 import com.google.gson.reflect.TypeToken;
 
 
-public class ReadBuildingCards {
+public class ReadBuildingCards extends ReadDevelopmentCards {
 		
 	private String name;
 	private int period;
@@ -34,6 +34,10 @@ public class ReadBuildingCards {
 	private List<Integer> permanentResourcesAndPointsList = new ArrayList<Integer>();
 	private List<Integer> permanentCardsNumberToResourcesEffectResourcesAndPointsList = new ArrayList<Integer>();
 	private List<Integer> paymentList = new ArrayList<Integer>();
+	private List<Integer> permanentTradeEffectGive1ResList = new ArrayList<Integer>();
+	private List<Integer> permanentTradeEffectReceive1ResList = new ArrayList<Integer>();
+	private List<Integer> permanentTradeEffectGive2ResList = new ArrayList<Integer>();
+	private List<Integer> permanentTradeEffectReceive2ResList = new ArrayList<Integer>();
 	private int actionValue;
 	private BufferedReader br= null;
 	private Gson gson = new Gson();
@@ -47,23 +51,29 @@ public class ReadBuildingCards {
 
 		public static void main(String [] args){
 			ReadBuildingCards rbc = new ReadBuildingCards();
-			rbc.readCards(1);//per ora li metto manualmente qua i valori
+			rbc.readCards(2);//per ora li metto manualmente qua i valori
 			
 		}
 		
 		private void readCards(int numberOfList){
-			//String[] ListOfPaths = chooseListOfCards(numberOfList);
-			for(int i=0;i<8;i++){
-				createJsonObjectFromFile("src/Cards/Building_cards/Period_1/Mint.json");
-				readName();
-				readPeriod();
-				readActionValue();
-				readPayment();
-				readImmediateResourcesAndPoints();
-				readPermanentResourcesAndPoints();
-				readPermanentCardsNumberToResourcesEffect();
-				readPermanentCardsNumberToResourcesCardType();
+			String[] ListOfPaths = chooseListOfCards(numberOfList);
+			for(String s:ListOfPaths){
+				jsonObject= super.createJsonObjectFromFile(s);
+				name = super.readName();
+				period= super.readPeriod();
+				actionValue=super.readActionValue();
+				paymentList=super.readPayment();
+				immediateResourcesAndPointsList=super.readImmediateResourcesAndPoints();
+				permanentResourcesAndPointsList=super.readPermanentResourcesAndPoints();
+				permanentCardsNumberToResourcesEffectResourcesAndPointsList=super.readPermanentCardsNumberToResourcesEffect();
+				permanentCardsNumberToResourcesCardType=super.readPermanentCardsNumberToResourcesCardType();
+				permanentTradeEffectGive1ResList=super.readPermanentTradeEffectGive1Resources();
+				permanentTradeEffectReceive1ResList= super.readPermanentTradeEffectReceive1Resources();
+				permanentTradeEffectGive2ResList=super.readPermanentTradeEffectGive2Resources();
+				permanentTradeEffectReceive2ResList=super.readPermanentTradeEffectReceive2Resources();
 				stamp(); 
+				//TODO create right enum CARDTYPE
+				//TODO createRightEffect();
 				// TODO createBuildingCard();
 				if(br!= null){
 					try {
@@ -75,96 +85,22 @@ public class ReadBuildingCards {
 				}
 			}
 		}
-		private void createJsonObjectFromFile(String path){
-			try {
-				br = new BufferedReader(new FileReader(path));
-				jsonObject= gson.fromJson(br, JsonObject.class);
-			} catch (FileNotFoundException e) {e.printStackTrace();}
-		}
 		
-		private void readName(){
-			jsonElement= jsonObject.get("name");
-			name= jsonElement.getAsString();
-		}
-		
-		private void readPeriod(){
-			jsonElement = jsonObject.get("period");
-			period = jsonElement.getAsInt();
-		}
-		
-		private void readPayment(){
-			try {
-				jsonElement = jsonObject.get("payment").getAsJsonArray();
-				paymentList = new Gson().fromJson(jsonObject.get("payment"), listTypeInt);
-									  
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-				paymentList=null;
-			}
-			
-		}
-		
-		private void readImmediateResourcesAndPoints(){
-			try {
-				jsonElement = jsonObject.get("immediateResourcesAndPoints").getAsJsonArray();
-				immediateResourcesAndPointsList = new Gson().fromJson(jsonObject.get("immediateResourcesAndPoints"), listTypeInt);
-									  
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-				immediateResourcesAndPointsList=null;
-			}
-			
-		}
-		
-		private void readPermanentResourcesAndPoints(){
-			try {
-				jsonElement = jsonObject.get("permanentResourcesAndPoints").getAsJsonArray(); 
-				permanentResourcesAndPointsList = new Gson().fromJson(jsonObject.get("permanentResourcesAndPoints"), listTypeInt);
-				
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-				permanentResourcesAndPointsList= null; //mi servirà per scegliere poi l'effetto giusto!
-			}
-		}
-		
-		
-		private void readPermanentCardsNumberToResourcesEffect(){
-			try {
-				jsonElement = jsonObject.get("permanentCardsNumberToResourcesResources").getAsJsonArray(); 
-				permanentCardsNumberToResourcesEffectResourcesAndPointsList = new Gson().fromJson(jsonObject.get("permanentCardsNumberToResourcesResources"), listTypeInt);
-				
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-				permanentCardsNumberToResourcesEffectResourcesAndPointsList= null; //mi servirà per scegliere poi l'effetto giusto!
-			}
-		}
-		
-		private void readPermanentCardsNumberToResourcesCardType(){
-			try {
-				jsonElement = jsonObject.get("permanentCardsNumberToResourcesCardType");
-				permanentCardsNumberToResourcesCardType = jsonElement.getAsString();
-			} catch (NullPointerException e) {
-				permanentCardNumberToResourcesCardType=null;
-				e.printStackTrace();
-			}
-		}
-		
-		
-		private void readActionValue(){
-			jsonElement = jsonObject.get("actionValue");
-			actionValue = jsonElement.getAsInt();
-		}
 		
 		
 		private void stamp(){
-			System.out.println(name);
-			System.out.println(period);
-			System.out.println(paymentList);
-			System.out.println(immediateResourcesAndPointsList);
-			System.out.println(permanentResourcesAndPointsList);
-			System.out.println(permanentCardsNumberToResourcesEffectResourcesAndPointsList);
-			System.out.println(permanentCardsNumberToResourcesCardType);
-			System.out.println(actionValue);
+			System.out.println("name : " + name);
+			System.out.println("period :" + period);
+			System.out.println("payment :" + paymentList);
+			System.out.println("immediateResourcesAndPointseffect:" + immediateResourcesAndPointsList);
+			System.out.println("permanentResourcesAndPointsEffect:" + permanentResourcesAndPointsList);
+			System.out.println("permanentCardsNumberToResourcesEffect: " + permanentCardsNumberToResourcesEffectResourcesAndPointsList);
+			System.out.println("permanentCardsNumberToResourcesEffect: " + permanentCardsNumberToResourcesCardType);
+			System.out.println("permanentTradeEffectGive1: "+ permanentTradeEffectGive1ResList);
+			System.out.println("permanentTradeEffectReceive1: "+ permanentTradeEffectReceive1ResList);
+			System.out.println("permanentTradeEffectGive2: "+ permanentTradeEffectGive2ResList);
+			System.out.println("permanentTradeEffectReceive2: "+ permanentTradeEffectReceive2ResList);
+			System.out.println("actionValue: " + actionValue);
 		}
 		
 		private String[] chooseListOfCards(int numOfList){
