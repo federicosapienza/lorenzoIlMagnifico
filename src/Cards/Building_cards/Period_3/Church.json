@@ -1,0 +1,23 @@
+	   {
+	  	"name": "Church",
+	  	"period": 3,
+	  	"payment": [
+	  	  4,0,3,0
+	  	  ],
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,5,0,1,0
+	  		],
+	     "permanentTradeEffectGive1": [
+	  	  0,0,1,0,0,0,0,0
+	  	  ],
+	  	  "permanentTradeEffectReceive1": [
+	  	  0,0,0,0,0,0,2,0
+	  	  ],
+	  	  "permanentTradeEffectGive2": [
+	  	  0,0,0,1,0,0,0,0
+	  	  ],
+	  	  "permanentTradeEffectReceive2": [
+	  	  0,0,0,0,0,0,2,0
+	  	  ],
+	  	"actionValue": 1
+	  }

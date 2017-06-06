@@ -24,7 +24,7 @@ import java.util.Map;
 import com.google.gson.reflect.TypeToken;
 
 
-public class ReadTerritoryCards {
+public class ReadTerritoryCards extends ReadDevelopmentCards {
 		
 	private String name;
 	private int period;
@@ -46,16 +46,16 @@ public class ReadTerritoryCards {
 		}
 		
 		private void readCards(int numberOfList){
-				String[] ListOfPaths = chooseListOfCards(numberOfList);
-				for(int i=0;i<8;i++){
-					createJsonObjectFromFile(ListOfPaths[i]);
-					readName();
-					readPeriod();
-					readActionValue();
-					readImmediateResourcesAndPoints();
-					readPermanentResourcesAndPoints();
+				String[] listOfPaths = chooseListOfCards(numberOfList);
+				for(String s:listOfPaths){
+					jsonObject= super.createJsonObjectFromFile(s);
+					name=super.readName();
+					period=super.readPeriod();
+					actionValue= super.readActionValue();
+					immediateResourcesAndPointsList=super.readImmediateResourcesAndPoints();
+					permanentResourcesAndPointsList=super.readPermanentResourcesAndPoints();
 					stamp(); 
-					// TODO createTerritoryCard();
+					createTerritoryCard();
 					if(br!= null){
 						try {
 							br.close();
@@ -66,60 +66,6 @@ public class ReadTerritoryCards {
 					}
 				}
 			}
-		
-		
-		private void createJsonObjectFromFile(String path){
-			try {
-				br = new BufferedReader(new FileReader(path));
-				jsonObject= gson.fromJson(br, JsonObject.class);
-			} catch (FileNotFoundException e) {e.printStackTrace();}
-		}
-		
-		private void readName(){
-			jsonElement= jsonObject.get("name");
-			name= jsonElement.getAsString();
-		}
-		
-		private void readPeriod(){
-			jsonElement = jsonObject.get("period");
-			period = jsonElement.getAsInt();
-		}
-		
-		private void readImmediateResourcesAndPoints(){
-			jsonElement = jsonObject.get("immediateResourcesAndPoints").getAsJsonArray();
-			if(jsonElement!= null){
-									immediateResourcesAndPointsList = new Gson().fromJson(jsonObject.get("immediateResourcesAndPoints"), listTypeInt);
-								  }
-			else{ 
-                 initializeToZero(1);
-				}
-		}
-		
-		private void readPermanentResourcesAndPoints(){
-			jsonElement = jsonObject.get("permanentResourcesAndPoints").getAsJsonArray();
-			if(jsonElement!=null){ 
-						           permanentResourcesAndPointsList = new Gson().fromJson(jsonObject.get("permanentResourcesAndPoints"), listTypeInt);
-								 }
-			else{
-				 initializeToZero(2);
-			    }
-		}
-		
-		private void readActionValue(){
-			jsonElement = jsonObject.get("actionValue");
-			actionValue = jsonElement.getAsInt();
-		}
-		
-		private void initializeToZero(int switcher){
-			switch(switcher) {
-			case 1:
-			    immediateResourcesAndPointsList = Arrays.asList(0,0,0,0,0,0,0,0);
-			case 2:
-				permanentResourcesAndPointsList = Arrays.asList(0,0,0,0,0,0,0,0);
-			default:
-				throw new IllegalArgumentException();
-		   }
-	   }
 		
 		private void stamp(){
 			System.out.println(name);
@@ -134,11 +80,11 @@ public class ReadTerritoryCards {
 		//TradeEffect(...parametrivari.), actionValue)
 		
 		
-		/*private void createTerritoryCard(){
+		private void createTerritoryCard(){
 		    DevelopmentCard developmentCard= DevelpmentCardImplementation.territoryCard(name, period, null, new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(immediateResourcesAndPointsList.get(0), immediateResourcesAndPointsList.get(1), immediateResourcesAndPointsList.get(2), immediateResourcesAndPointsList.get(3), immediateResourcesAndPointsList.get(4), immediateResourcesAndPointsList.get(5), immediateResourcesAndPointsList.get(6), immediateResourcesAndPointsList.get(7))), new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(permanentResourcesAndPointsList.get(0), permanentResourcesAndPointsList.get(1), permanentResourcesAndPointsList.get(2), permanentResourcesAndPointsList.get(3), permanentResourcesAndPointsList.get(4), permanentResourcesAndPointsList.get(5), permanentResourcesAndPointsList.get(6), permanentResourcesAndPointsList.get(7))), actionValue);
-			territoryCards.add(developmentCard); //ok ma diocane come faccio
-												 //no problema -> create territory card,
-		}*/
+			//qua vorrei riferirmi sempre allo stesso oggetto di cardsImplementation
+		    //per caricare le liste presenti in CardsImplementation,come si fa?
+		}
 		
 		private String[] chooseListOfCards(int numOfList){
 			switch(numOfList) {
