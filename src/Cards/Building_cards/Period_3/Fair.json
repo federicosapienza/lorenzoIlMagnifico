@@ -1,0 +1,17 @@
+	   {
+	  	"name": "Fair",
+	  	"period": 3,
+	  	"payment": [
+	  	  4,0,3,0
+	  	  ],
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,8,0,0,0
+	  		],
+	     "permanentTradeEffectGive1": [
+	  	  4,0,0,0,0,0,0,0
+	  	  ],
+	  	  "permanentTradeEffectReceive1": [
+	  	  0,0,3,3,0,0,0,0
+	  	  ],
+	  	"actionValue": 4
+	  }

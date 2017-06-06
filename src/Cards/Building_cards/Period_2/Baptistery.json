@@ -1,0 +1,17 @@
+	   {
+	  	"name": "Baptistery",
+	  	"period": 2,
+	  	"payment": [
+	  	  0,0,0,3
+	  	  ],
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,2,0,1,0
+	  		],
+	     "permanentTradeEffectGive1": [
+	  	  0,0,0,0,0,0,1,0
+	  	  ],
+	  	 "permanentTradeEffectReceive1": [
+	  	  2,0,0,0,2,0,0,0
+	  	  ],
+	  	"actionValue": 2
+	  }

@@ -1,0 +1,14 @@
+	   {
+	  	"name": "Garden",
+	  	"period": 3,
+	  	"payment": [
+	  	  2,0,4,2
+	  	  ],
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,10,0,0,0
+	  		],
+	  	 "permanentResourcesAndPoints": [
+	  		0,0,0,0,3,0,0,0
+	  		],
+	  	"actionValue": 1
+	  }

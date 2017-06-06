@@ -24,7 +24,7 @@ import java.util.Map;
 import com.google.gson.reflect.TypeToken;
 
 
-public class ReadTerritoryCard {
+public class ReadTerritoryCards {
 		
 	private String name;
 	private int period;
@@ -35,12 +35,14 @@ public class ReadTerritoryCard {
 	private Gson gson = new Gson();
 	private JsonObject jsonObject= null;
 	private JsonElement jsonElement= null;
+	private Type listTypeInt = new TypeToken<List<Integer>>() {}.getType();
 	private List<DevelopmentCard> territoryCards = new ArrayList<DevelopmentCard>();//getter! -> non credo sia utile,passo i file direttamente ad un'altra classe
 	private JsonPathData jsonPathData = new JsonPathData();
+	
 
 		public static void main(String [] args){
-			ReadTerritoryCard rtc = new ReadTerritoryCard();
-			rtc.readCards(1);//per ora li metto manualmente qua i valori
+			ReadTerritoryCards rtc = new ReadTerritoryCards();
+			rtc.readCards(3);//per ora li metto manualmente qua i valori
 		}
 		
 		private void readCards(int numberOfList){
@@ -53,7 +55,7 @@ public class ReadTerritoryCard {
 					readImmediateResourcesAndPoints();
 					readPermanentResourcesAndPoints();
 					stamp(); 
-					createTerritoryCard();
+					// TODO createTerritoryCard();
 					if(br!= null){
 						try {
 							br.close();
@@ -86,8 +88,7 @@ public class ReadTerritoryCard {
 		private void readImmediateResourcesAndPoints(){
 			jsonElement = jsonObject.get("immediateResourcesAndPoints").getAsJsonArray();
 			if(jsonElement!= null){
-									Type listType = new TypeToken<List<Integer>>() {}.getType();
-									immediateResourcesAndPointsList = new Gson().fromJson(jsonObject.get("immediateResourcesAndPoints"), listType);
+									immediateResourcesAndPointsList = new Gson().fromJson(jsonObject.get("immediateResourcesAndPoints"), listTypeInt);
 								  }
 			else{ 
                  initializeToZero(1);
@@ -96,9 +97,8 @@ public class ReadTerritoryCard {
 		
 		private void readPermanentResourcesAndPoints(){
 			jsonElement = jsonObject.get("permanentResourcesAndPoints").getAsJsonArray();
-			if(jsonElement!=null){
-				                   Type listType = new TypeToken<List<Integer>>() {}.getType();
-						           permanentResourcesAndPointsList = new Gson().fromJson(jsonObject.get("permanentResourcesAndPoints"), listType);
+			if(jsonElement!=null){ 
+						           permanentResourcesAndPointsList = new Gson().fromJson(jsonObject.get("permanentResourcesAndPoints"), listTypeInt);
 								 }
 			else{
 				 initializeToZero(2);
@@ -127,14 +127,18 @@ public class ReadTerritoryCard {
 			System.out.println(actionValue);
 			System.out.println(immediateResourcesAndPointsList);
 			System.out.println(permanentResourcesAndPointsList);
+			
 		}
 		//DevelpmentCardImplementation.territoryCard(name, period, new MilitaryPointPayment(toSpend, needed), 
 		//new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(coins, servants, wood, stone, victoryP, militaryP, faithP, councilP)),
 		//TradeEffect(...parametrivari.), actionValue)
-		private void createTerritoryCard(){
+		
+		
+		/*private void createTerritoryCard(){
 		    DevelopmentCard developmentCard= DevelpmentCardImplementation.territoryCard(name, period, null, new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(immediateResourcesAndPointsList.get(0), immediateResourcesAndPointsList.get(1), immediateResourcesAndPointsList.get(2), immediateResourcesAndPointsList.get(3), immediateResourcesAndPointsList.get(4), immediateResourcesAndPointsList.get(5), immediateResourcesAndPointsList.get(6), immediateResourcesAndPointsList.get(7))), new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(permanentResourcesAndPointsList.get(0), permanentResourcesAndPointsList.get(1), permanentResourcesAndPointsList.get(2), permanentResourcesAndPointsList.get(3), permanentResourcesAndPointsList.get(4), permanentResourcesAndPointsList.get(5), permanentResourcesAndPointsList.get(6), permanentResourcesAndPointsList.get(7))), actionValue);
-			territoryCards.add(developmentCard);
-		}
+			territoryCards.add(developmentCard); //ok ma diocane come faccio
+												 //no problema -> create territory card,
+		}*/
 		
 		private String[] chooseListOfCards(int numOfList){
 			switch(numOfList) {
@@ -144,7 +148,6 @@ public class ReadTerritoryCard {
 				return jsonPathData.getTerritoryCardsPeriod2PathArray();
 			case 3:
 				return jsonPathData.getTerritoryCardsPeriod3PathArray();
-			//TODO
 			default:
 				throw new IllegalArgumentException();
 			}

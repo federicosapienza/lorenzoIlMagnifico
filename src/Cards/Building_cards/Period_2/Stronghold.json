@@ -1,0 +1,14 @@
+	   {
+	  	"name": "Stronghold",
+	  	"period": 2,
+	  	"payment": [
+	  	  2,0,2,2
+	  	  ],
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,8,0,0,0
+	  		],
+	     "permanentResourcesAndPoints": [
+	  	  0,0,0,0,2,2,0,0
+	  	  ],
+	  	"actionValue": 6
+	  }

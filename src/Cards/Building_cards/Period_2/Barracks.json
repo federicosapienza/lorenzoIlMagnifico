@@ -1,0 +1,17 @@
+	   {
+	  	"name": "Barracks",
+	  	"period": 2,
+	  	"payment": [
+	  	  0,0,1,1
+	  	  ],
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,3,0,0,0
+	  		],
+	     "permanentTradeEffectGive1": [
+	  	  0,1,0,0,0,0,0,0
+	  	  ],
+	  	 "permanentTradeEffectReceive1": [
+	  	  0,0,0,0,0,3,0,0
+	  	  ],
+	  	"actionValue": 1
+	  }

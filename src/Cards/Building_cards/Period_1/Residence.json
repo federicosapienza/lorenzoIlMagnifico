@@ -1,0 +1,17 @@
+	   {
+	  	"name": "Residence",
+	  	"period": 1,
+	  	"payment": [
+	  	  0,0,0,2
+	  	  ],
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,1,0,0,0
+	  		],
+	     "permanentTradeEffectGive1": [
+	  	  1,0,0,0,0,0,0,0
+	  	  ],
+	  	 "permanentTradeEffectReceive1": [
+	  	  0,0,0,0,0,0,0,1
+	  	  ],
+	  	"actionValue": 1
+	  }

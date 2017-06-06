@@ -1,0 +1,14 @@
+	   {
+	  	"name": "Fortress",
+	  	"period": 3,
+	  	"payment": [
+	  	  2,0,2,4
+	  	  ],
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,9,0,0,0
+	  		],
+	  	 "permanentResourcesAndPoints": [
+	  		0,0,0,0,2,0,0,1
+	  		],
+	  	"actionValue": 5
+	  }
