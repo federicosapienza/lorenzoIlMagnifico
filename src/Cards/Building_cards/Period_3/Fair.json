@@ -7,6 +7,7 @@
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,8,0,0,0
 	  		],
+	  		"typeOfPermanentEffect": "singleTrade",
 	     "permanentTradeEffectGive1": [
 	  	  4,0,0,0,0,0,0,0
 	  	  ],

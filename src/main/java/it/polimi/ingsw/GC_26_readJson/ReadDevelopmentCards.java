@@ -35,7 +35,7 @@ public class ReadDevelopmentCards {
 	private List<Integer> permanentTradeEffectReceive1ResList = new ArrayList<Integer>();
 	private List<Integer> permanentTradeEffectGive2ResList = new ArrayList<Integer>();
 	private List<Integer> permanentTradeEffectReceive2ResList = new ArrayList<Integer>();
-
+	private String permanentEffectType;
 	private int actionValue;
 	private BufferedReader br= null;
 	private Gson gson = new Gson();
@@ -63,6 +63,11 @@ public class ReadDevelopmentCards {
 		return name= jsonElement.getAsString();
 	}
 	
+	public String readPermanentEffectType(){
+		jsonElement= jsonObject.get("typeOfPermanentEffect");
+		return permanentEffectType= jsonElement.getAsString();
+	} 
+	
 	public int readPeriod(){
 		jsonElement = jsonObject.get("period");
 		return period = jsonElement.getAsInt();
@@ -74,99 +79,48 @@ public class ReadDevelopmentCards {
 	}
 	
 	public List<Integer> readPayment(){
-		try {
 			jsonElement = jsonObject.get("payment").getAsJsonArray();
 			return paymentList= new Gson().fromJson(jsonObject.get("payment"), listTypeInt);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			return paymentList= null;
-		}
 	}
 	
 	public List<Integer> readImmediateResourcesAndPoints(){
-		try {
 			jsonElement = jsonObject.get("immediateResourcesAndPoints").getAsJsonArray();
 			return immediateResourcesAndPointsList = new Gson().fromJson(jsonObject.get("immediateResourcesAndPoints"), listTypeInt);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			return immediateResourcesAndPointsList= null;
-		}
 	}
 	
 	public List<Integer> readPermanentResourcesAndPoints(){
-		try {
 			jsonElement = jsonObject.get("permanentResourcesAndPoints").getAsJsonArray();
 			return permanentResourcesAndPointsList = new Gson().fromJson(jsonObject.get("permanentResourcesAndPoints"), listTypeInt);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			return permanentResourcesAndPointsList= null;
-		}
 	}
 	
 	public List<Integer> readPermanentCardsNumberToResourcesEffect(){
-		try {
 			jsonElement = jsonObject.get("permanentCardsNumberToResourcesResources").getAsJsonArray(); 
 			return permanentCardsNumberToResourcesEffectResourcesAndPointsList = new Gson().fromJson(jsonObject.get("permanentCardsNumberToResourcesResources"), listTypeInt);
-			
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			return permanentCardsNumberToResourcesEffectResourcesAndPointsList= null; //mi servirà per scegliere poi l'effetto giusto!
-		}
 	}
 	
-	public String readPermanentCardsNumberToResourcesCardType(){
-		try { 
+	public String readPermanentCardsNumberToResourcesCardType(){ 
 			jsonElement= jsonObject.get("permanentCardsNumberToResourcesCardType");
 			return permanentCardsNumberToResourcesCardType= jsonElement.getAsString();
-			
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			return permanentCardsNumberToResourcesCardType= null; //mi servirà per scegliere poi l'effetto giusto!
-		}
 	}
 	
 	public List<Integer> readPermanentTradeEffectGive1Resources(){
-		try {
 			jsonElement = jsonObject.get("permanentTradeEffectGive1").getAsJsonArray(); 
 			return permanentTradeEffectGive1ResList = new Gson().fromJson(jsonObject.get("permanentTradeEffectGive1"), listTypeInt);
-			
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			return permanentTradeEffectGive1ResList= null; //mi servirà per scegliere poi l'effetto giusto!
-		}
 	}
 	
 	public List<Integer> readPermanentTradeEffectReceive1Resources(){
-		try {
 			jsonElement = jsonObject.get("permanentTradeEffectReceive1").getAsJsonArray(); 
 			return permanentTradeEffectReceive1ResList = new Gson().fromJson(jsonObject.get("permanentTradeEffectReceive1"), listTypeInt);
-			
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			return permanentTradeEffectReceive1ResList= null; //mi servirà per scegliere poi l'effetto giusto!
-		}
 	}
 	
 	public List<Integer> readPermanentTradeEffectGive2Resources(){
-		try {
 			jsonElement = jsonObject.get("permanentTradeEffectGive2").getAsJsonArray(); 
 			return permanentTradeEffectGive2ResList = new Gson().fromJson(jsonObject.get("permanentTradeEffectGive2"), listTypeInt);
-			
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			return permanentTradeEffectGive2ResList= null; //mi servirà per scegliere poi l'effetto giusto!
-		}
 	}
 	
 	public List<Integer> readPermanentTradeEffectReceive2Resources(){
-		try {
 			jsonElement = jsonObject.get("permanentTradeEffectReceive1").getAsJsonArray(); 
-			return permanentTradeEffectReceive1ResList = new Gson().fromJson(jsonObject.get("permanentTradeEffectReceive1"), listTypeInt);
-			
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			return permanentTradeEffectReceive1ResList= null; //mi servirà per scegliere poi l'effetto giusto!
-		}
+			return permanentTradeEffectReceive1ResList = new Gson().fromJson(jsonObject.get("permanentTradeEffectReceive2"), listTypeInt);
 	}
 	
 	

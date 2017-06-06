@@ -38,15 +38,15 @@ public class ReadTerritoryCards extends ReadDevelopmentCards {
 	private Type listTypeInt = new TypeToken<List<Integer>>() {}.getType();
 	private List<DevelopmentCard> territoryCards = new ArrayList<DevelopmentCard>();//getter! -> non credo sia utile,passo i file direttamente ad un'altra classe
 	private JsonPathData jsonPathData = new JsonPathData();
-	
+	private CardsImplementation cards= new CardsImplementation();
 
 		public static void main(String [] args){
 			ReadTerritoryCards rtc = new ReadTerritoryCards();
 			rtc.readCards(3);//per ora li metto manualmente qua i valori
 		}
 		
-		private void readCards(int numberOfList){
-				String[] listOfPaths = chooseListOfCards(numberOfList);
+		private void readCards(int numberOfPeriod){
+				String[] listOfPaths = chooseListOfCards(numberOfPeriod);
 				for(String s:listOfPaths){
 					jsonObject= super.createJsonObjectFromFile(s);
 					name=super.readName();
@@ -55,7 +55,7 @@ public class ReadTerritoryCards extends ReadDevelopmentCards {
 					immediateResourcesAndPointsList=super.readImmediateResourcesAndPoints();
 					permanentResourcesAndPointsList=super.readPermanentResourcesAndPoints();
 					stamp(); 
-					createTerritoryCard();
+					createTerritoryCard(cards,numberOfPeriod);
 					if(br!= null){
 						try {
 							br.close();
@@ -82,10 +82,19 @@ public class ReadTerritoryCards extends ReadDevelopmentCards {
 		//TradeEffect(...parametrivari.), actionValue)
 		
 		
-		private void createTerritoryCard(){
-		    DevelopmentCard developmentCard= DevelpmentCardImplementation.territoryCard(name, period, null, new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(immediateResourcesAndPointsList.get(0), immediateResourcesAndPointsList.get(1), immediateResourcesAndPointsList.get(2), immediateResourcesAndPointsList.get(3), immediateResourcesAndPointsList.get(4), immediateResourcesAndPointsList.get(5), immediateResourcesAndPointsList.get(6), immediateResourcesAndPointsList.get(7))), new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(permanentResourcesAndPointsList.get(0), permanentResourcesAndPointsList.get(1), permanentResourcesAndPointsList.get(2), permanentResourcesAndPointsList.get(3), permanentResourcesAndPointsList.get(4), permanentResourcesAndPointsList.get(5), permanentResourcesAndPointsList.get(6), permanentResourcesAndPointsList.get(7))), actionValue);
-			//qua vorrei riferirmi sempre allo stesso oggetto di cardsImplementation
-		    //per caricare le liste presenti in CardsImplementation,come si fa?
+		private void createTerritoryCard(CardsImplementation cardsImplementation,int numOfPeriod){
+		    ReceiveResourcesOrPointsEffect immediateEffect = new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(immediateResourcesAndPointsList.get(0), immediateResourcesAndPointsList.get(1), immediateResourcesAndPointsList.get(2), immediateResourcesAndPointsList.get(3), immediateResourcesAndPointsList.get(4), immediateResourcesAndPointsList.get(5), immediateResourcesAndPointsList.get(6), immediateResourcesAndPointsList.get(7)));
+			ReceiveResourcesOrPointsEffect permanentEffect = new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(permanentResourcesAndPointsList.get(0), permanentResourcesAndPointsList.get(1), permanentResourcesAndPointsList.get(2), permanentResourcesAndPointsList.get(3), permanentResourcesAndPointsList.get(4), permanentResourcesAndPointsList.get(5), permanentResourcesAndPointsList.get(6), permanentResourcesAndPointsList.get(7)));
+		    DevelopmentCard developmentCard= DevelpmentCardImplementation.territoryCard(name, period, null, immediateEffect, permanentEffect , actionValue);
+		   switch(numOfPeriod){
+		   case 1:
+			   cardsImplementation.getTerritoryCardsPeriod1().add(developmentCard);
+		   case 2:
+			   cardsImplementation.getTerritoryCardsPeriod2().add(developmentCard);
+		   case 3:
+			   cardsImplementation.getTerritoryCardsPeriod3().add(developmentCard);
+		   }
+		    
 		}
 		
 		private String[] chooseListOfCards(int numOfList){

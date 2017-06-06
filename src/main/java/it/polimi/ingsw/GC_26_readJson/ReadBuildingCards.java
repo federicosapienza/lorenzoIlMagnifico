@@ -39,6 +39,7 @@ public class ReadBuildingCards extends ReadDevelopmentCards {
 	private List<Integer> permanentTradeEffectGive2ResList = new ArrayList<Integer>();
 	private List<Integer> permanentTradeEffectReceive2ResList = new ArrayList<Integer>();
 	private int actionValue;
+	private String permanentEffectType;
 	private BufferedReader br= null;
 	private Gson gson = new Gson();
 	private JsonObject jsonObject= null;
@@ -51,7 +52,7 @@ public class ReadBuildingCards extends ReadDevelopmentCards {
 
 		public static void main(String [] args){
 			ReadBuildingCards rbc = new ReadBuildingCards();
-			rbc.readCards(2);//per ora li metto manualmente qua i valori
+			rbc.readCards(3);//per ora li metto manualmente qua i valori
 			
 		}
 		
@@ -64,13 +65,8 @@ public class ReadBuildingCards extends ReadDevelopmentCards {
 				actionValue=super.readActionValue();
 				paymentList=super.readPayment();
 				immediateResourcesAndPointsList=super.readImmediateResourcesAndPoints();
-				permanentResourcesAndPointsList=super.readPermanentResourcesAndPoints();
-				permanentCardsNumberToResourcesEffectResourcesAndPointsList=super.readPermanentCardsNumberToResourcesEffect();
-				permanentCardsNumberToResourcesCardType=super.readPermanentCardsNumberToResourcesCardType();
-				permanentTradeEffectGive1ResList=super.readPermanentTradeEffectGive1Resources();
-				permanentTradeEffectReceive1ResList= super.readPermanentTradeEffectReceive1Resources();
-				permanentTradeEffectGive2ResList=super.readPermanentTradeEffectGive2Resources();
-				permanentTradeEffectReceive2ResList=super.readPermanentTradeEffectReceive2Resources();
+				permanentEffectType=super.readPermanentEffectType();
+				readRightEffect(permanentEffectType);
 				stamp(); 
 				//TODO create right enum CARDTYPE
 				//TODO createRightEffect();
@@ -106,15 +102,36 @@ public class ReadBuildingCards extends ReadDevelopmentCards {
 		private String[] chooseListOfCards(int numOfList){
 			switch(numOfList) {
 			case 1:
-				return jsonPathData.getTerritoryCardsPeriod1PathArray();
+				return jsonPathData.getBuildingCardsPeriod1PathArray();
 			case 2:
-				return jsonPathData.getTerritoryCardsPeriod2PathArray();
+				return jsonPathData.getBuildingCardsPeriod2PathArray();
 			case 3:
-				return jsonPathData.getTerritoryCardsPeriod3PathArray();
+				return jsonPathData.getBuildingCardsPeriod3PathArray();
 			default:
 				throw new IllegalArgumentException();
 			}
 		}
+		
+		private void readRightEffect(String effectType){
+			if(effectType.equals("singleTrade")){
+												permanentTradeEffectGive1ResList=super.readPermanentTradeEffectGive1Resources();
+												permanentTradeEffectReceive1ResList= super.readPermanentTradeEffectReceive1Resources();
+												}
+			if(effectType.equals("doubleTrade")){
+												permanentTradeEffectGive1ResList=super.readPermanentTradeEffectGive1Resources();
+												permanentTradeEffectReceive1ResList= super.readPermanentTradeEffectReceive1Resources();
+												permanentTradeEffectGive2ResList=super.readPermanentTradeEffectGive2Resources();
+												permanentTradeEffectReceive2ResList=super.readPermanentTradeEffectReceive2Resources();
+												}
+			if(effectType.equals("cardsNumberToResources")){
+												permanentCardsNumberToResourcesEffectResourcesAndPointsList=super.readPermanentCardsNumberToResourcesEffect();
+												permanentCardsNumberToResourcesCardType=super.readPermanentCardsNumberToResourcesCardType();
+												}
+			if(effectType.equals("addResourcesAndPoints")){
+												permanentResourcesAndPointsList=super.readPermanentResourcesAndPoints();
+												}
+		}
+		
 }
 		
 		
