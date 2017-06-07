@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_cards.leaderCard;
 
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_player.Player;
 
@@ -45,7 +46,7 @@ public class LeaderCardImplementation implements LeaderCard{
 
 
 	@Override
-	public String getCardType() {
+	public DevelopmentCardTypes getCardType() {
 		return null;
 	}
 

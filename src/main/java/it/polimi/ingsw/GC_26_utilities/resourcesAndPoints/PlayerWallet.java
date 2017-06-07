@@ -1,9 +1,11 @@
 package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 
+import java.io.Serializable;
+
 //the interface sent to the players: when it s used to send resources bonus on positions playerName is null, 
 //Then is used to update status of the player in clients' view
 
-public interface PlayerWallet {
+public interface PlayerWallet extends Serializable{
 	
 	public String getPlayerName();
 	

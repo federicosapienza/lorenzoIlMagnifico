@@ -1,8 +1,6 @@
 package it.polimi.ingsw.GC_26_board;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class TowerPosition extends SinglePosition{
@@ -11,7 +9,7 @@ public class TowerPosition extends SinglePosition{
 	private DevelopmentCard cardInPosition;
 	
 	public TowerPosition(int floor, ResourcesOrPoints resourcesOrPointsinPosition,int valueOfPosition){
-		super(valueOfPosition); //dovrebbe utilizzare il costruttore base.
+		super(valueOfPosition); 
 		this.floor=floor;
 		this.resourcesOrPointsinPosition=resourcesOrPointsinPosition;
 	}
@@ -29,16 +27,11 @@ public class TowerPosition extends SinglePosition{
 	public DevelopmentCard getCard(){
 		return cardInPosition;
 	}
-	
+	@Override
 	public void clear(){
-		setFamilyMember(null);
+		super.clear();
 		setCard(null);
 	}
 
-	/*@Override
-	public String toString(){
-		return "Floor:" + floor + super.ToString() ;
-	}*/
-    
 	
 }

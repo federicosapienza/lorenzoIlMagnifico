@@ -5,13 +5,14 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
-//used by cards such as Dame or PicoDellaMirandola (to specify every tower action is valid for discount leave null zone.
+//used by cards such as Dame or PicoDellaMirandola (to specify every tower action is valid for discount leave null zone).
+//only >0 values
 
-public class DiscountOnActionsEffect implements Effect{
+public class ReceiveDiscountOnActionsEffect implements Effect{
 	BoardZone zone;
 	ResourcesOrPoints discount;
 	
-	public DiscountOnActionsEffect(BoardZone zone, ResourcesOrPoints discount) {
+	public ReceiveDiscountOnActionsEffect(BoardZone zone, ResourcesOrPoints discount) {
 		this.zone=zone;
 		this.discount=discount;
 	}

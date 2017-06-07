@@ -3,6 +3,8 @@ package it.polimi.ingsw.GC_26_board;
 import java.util.*;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26_gameLogic.GameElements;
+import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 //To import Set interface
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
@@ -23,10 +25,10 @@ public class Tower {
 	}
 	
 	private void createTowerPositions(ResourcesOrPoints[] resourcesOrPoints){
-		towerPositionFloor1 = new TowerPosition(1,resourcesOrPoints[0],1);
-		towerPositionFloor2 = new TowerPosition(2,resourcesOrPoints[1],3);
-		towerPositionFloor3 = new TowerPosition(3,resourcesOrPoints[2],5);
-		towerPositionFloor4 = new TowerPosition(4,resourcesOrPoints[3],7);
+		towerPositionFloor1 = new TowerPosition(1,resourcesOrPoints[0],getFloorValue(1));
+		towerPositionFloor2 = new TowerPosition(2,resourcesOrPoints[1],getFloorValue(2));
+		towerPositionFloor3 = new TowerPosition(3,resourcesOrPoints[2],getFloorValue(3));
+		towerPositionFloor4 = new TowerPosition(4,resourcesOrPoints[3],getFloorValue(4));
 	}
 
 	public TowerPosition getPosition(int floor){
@@ -42,6 +44,10 @@ public class Tower {
 		default:
 			throw new IllegalArgumentException();
 		}
+	}
+	
+	public int getFloorValue(int floor){
+		return GameParameters.getTowersFloorsValues(floor);
 	}
 	
 	public void setCardsForThisPeriod(List<DevelopmentCard> cards){
@@ -91,7 +97,6 @@ public class Tower {
 		return cardsForThisPeriod;
 	}
 	
-	//TODO cambiare il sisrema di inserimento
 	
 	    //checks if  the family member can be put there 
 		//1) if the member is neutral , player is not added to the list 

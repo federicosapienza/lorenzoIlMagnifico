@@ -9,6 +9,7 @@ import java.net.Socket;
 
 import org.w3c.dom.css.ViewCSS;
 
+import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
@@ -45,15 +46,17 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 				String username=null;
 				String password=null;
 				while(!loginDone){
-					objOut.writeUTF("Your username");
+					objOut.writeUTF("Insert username and password");
 					objOut.flush();
 					username = objIn.readUTF();
-					objOut.writeUTF("Your password");
-					objOut.flush();
 					password = objIn.readUTF();
 					loginDone= server.doLogin(username, password);
-					if(!loginDone)
+					if(!loginDone){
 						objOut.writeUTF("Password wrong! Or perhaps you are trying to sign in with an already used username");
+					}
+					else
+						objOut.writeUTF("Login or signing in successful");
+					objOut.flush();
 				}
 				server.addClient(this, username);
 				while(true){
@@ -123,6 +126,11 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 		public void send(Action action) {
 			sendMethod(action);
 			
+		}
+
+		@Override
+		public void send(PositionDescriber position) {
+			sendMethod(position);
 		}
 		
 			

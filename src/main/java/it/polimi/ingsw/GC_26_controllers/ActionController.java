@@ -43,7 +43,10 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 			synchronized (player) {
 				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 					return;
-				if(player.isThereAsecondaryAction())
+				if(player.getWarehouse().getCouncilPrivileges()>0){
+					player.setStatus(PlayerStatus.TRADINGCOUNCILPRIVILEDGES);
+				}
+				else if(player.isThereAsecondaryAction())
 				player.setStatus(PlayerStatus.SECONDPLAY);
 				else
 				player.setStatus(PlayerStatus.ACTIONPERFORMED);
@@ -73,11 +76,14 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 			if(flag)
 				return;
 				handlers.getSecondActionHandler().perform(player,  action);
+				player.resetSecondAction();
 			 synchronized (player) {
 				 if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 						return;
-				player.setStatus(PlayerStatus.ACTIONPERFORMED);
-				player.resetSecondAction();
+				 if(player.getWarehouse().getCouncilPrivileges()>0){
+						player.setStatus(PlayerStatus.TRADINGCOUNCILPRIVILEDGES);}
+				 else player.setStatus(PlayerStatus.ACTIONPERFORMED);
+				
 			}
 			 
 		} catch (IllegalArgumentException e) {
@@ -99,24 +105,5 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 	}
 
 	
+}	
 	
-	
-	
-}
-
-
-/*
- * STATO PRECEDENTE
- * if(player.getStatus() == PlayerStatus.PLAYING){
- 
-	synchronized (player.getStatus()) {
-		player.setStatus(PlayerStatus.VALIDATING);
-	}	
-handlers.getFirstActionHandler().startAction(player, action);
-}
-if(player.getStatus()== PlayerStatus.SECONDPLAY){
-	synchronized (player.getStatus()) {
-		player.setStatus(PlayerStatus.VALIDATING);
-	}
-	handlers.getSecondActionHandler().startAction(player, action);
-} */

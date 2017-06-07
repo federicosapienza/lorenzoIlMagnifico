@@ -4,23 +4,31 @@ import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class Market {
-	private final int value=1;
+	private final int value=GameParameters.getDefaultPositionValue();
 	private MarketPosition marketPosition1;
 	private MarketPosition marketPosition2;
 	private MarketPosition marketPosition3;
 	private MarketPosition marketPosition4;
-	int numberOfPlayers;
+	private int numberOfPlayers;
+	private int positionsActivated;
 	
 	public Market(int numberOfPlayers,ResourcesOrPoints[] resourcesOrPoints){
 		this.numberOfPlayers=numberOfPlayers;
-		if(numberOfPlayers<GameParameters.getNumPlayerforCompleteMarketActivation()){
-			marketPosition1= new MarketPosition(1,resourcesOrPoints[0],value);
-			marketPosition2= new MarketPosition(2,resourcesOrPoints[1],value);
-			if(numberOfPlayers>=GameParameters.getNumPlayerforCompleteMarketActivation()){
-				marketPosition3= new MarketPosition(3,resourcesOrPoints[2],value);
-				marketPosition4= new MarketPosition(4,resourcesOrPoints[3],value);
-			}
+		
+		marketPosition1= new MarketPosition(1,resourcesOrPoints[0],value);
+		marketPosition2= new MarketPosition(2,resourcesOrPoints[1],value);
+	
+		if(numberOfPlayers>=GameParameters.getNumPlayerforCompleteMarketActivation()){
+			marketPosition3= new MarketPosition(3,resourcesOrPoints[2],value);
+			marketPosition4= new MarketPosition(4,resourcesOrPoints[3],value);
+			positionsActivated=GameParameters.getMaxMarketZones();
 		}
+		else positionsActivated= GameParameters.getMinMarketZones();
+		
+	}
+	
+	public int getValue() {
+		return value;
 	}
 	
 	public MarketPosition getPosition(int number){
@@ -42,6 +50,10 @@ public class Market {
 		default:
 			throw new IllegalArgumentException();
 		}
+	}
+	
+	public int getPositionsActivated() {
+		return positionsActivated;
 	}
 	
 	public void clearMarket(){

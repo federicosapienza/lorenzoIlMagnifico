@@ -66,12 +66,14 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 		   case 1:
 			   cardsImplementation.getTerritoryCardsPeriod1().add(developmentCard);
 			   break;
+		  
 		   case 2:
 			   cardsImplementation.getTerritoryCardsPeriod2().add(developmentCard);
 			   break;
 		   case 3:
 			   cardsImplementation.getTerritoryCardsPeriod3().add(developmentCard);
 			   break;
+
 		   default:
 			   throw new IllegalArgumentException();
 		   }

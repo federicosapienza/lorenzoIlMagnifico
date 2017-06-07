@@ -45,20 +45,20 @@ public class FirstActionHandler extends ActionHandler{
 		//calling the right checker
 			if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 					action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER){
-				return towerIsPossible(player, familyMemberUsed, action);
+				return getCheckerHandler().towerIsPossible(player, familyMemberUsed, action);
 			}
 			if(action.getZone()==BoardZone.MARKET){
-					return marketIsPossible(player, familyMemberUsed, action);
+					return getCheckerHandler().marketIsPossible(player, familyMemberUsed, action);
 			}
 			if(action.getZone()==BoardZone.COUNCILPALACE){
-				return councilPalaceIsPossible(player, familyMemberUsed, action);
+				return getCheckerHandler().councilPalaceIsPossible(player, familyMemberUsed, action);
 			}
 			if(action.getZone()==BoardZone.HARVEST){
-				return harvestIsPossible(player, familyMemberUsed, action);
+				return getCheckerHandler().harvestIsPossible(player, familyMemberUsed, action);
 			}
 			if(action.getZone()==BoardZone.PRODUCTION){
 				
-			 return productionIsPossible(player, familyMemberUsed, action);
+			 return getCheckerHandler().productionIsPossible(player, familyMemberUsed, action);
 			}
 			else {
 				throw new IllegalArgumentException();
@@ -84,15 +84,15 @@ public class FirstActionHandler extends ActionHandler{
 		//calling the right performer
 			if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 					action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER)
-				towerPerform(player, familyMemberUsed, action);			
+				getPerformerHandler().towerPerform(player, familyMemberUsed, action);			
 			if(action.getZone()==BoardZone.MARKET)
-				marketPerform(player, familyMemberUsed, action);
+				getPerformerHandler().marketPerform(player, familyMemberUsed, action);
 			if(action.getZone()== BoardZone.COUNCILPALACE)
-				councilPalacePerform(player, familyMemberUsed, action);
+				getPerformerHandler().councilPalacePerform(player, familyMemberUsed, action);
 			if(action.getZone()==BoardZone.HARVEST)
-				harvestPerform(player, familyMemberUsed, action);
+				getPerformerHandler().harvestPerform(player, familyMemberUsed, action);
 			if(action.getZone()==BoardZone.PRODUCTION)
-				productionPerform(player, familyMemberUsed, action);
+				getPerformerHandler().productionPerform(player, familyMemberUsed, action);
 			
 			//notify the players
 	//		getGameElements().getGameMemory().addAction(new ActionDescriber(player.getName(), action));
