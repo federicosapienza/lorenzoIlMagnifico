@@ -7,7 +7,11 @@ import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 
 //It 's the implementation used by Character and Venture Cards. Territories and building cards extend this. 
-public class DevelpmentCardImplementation implements DevelopmentCard{
+public class DevelopmentCardImplementation implements DevelopmentCard{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String name;
 	private final int period;
 	private final DevelopmentCardTypes type;
@@ -16,7 +20,7 @@ public class DevelpmentCardImplementation implements DevelopmentCard{
 	private final Effect permanentEffect;
 	private final int actionValue;
 	
-	private DevelpmentCardImplementation(String name, int period, DevelopmentCardTypes type, Payment payment, Effect immediate, Effect permanent, int actionValue) {
+	private DevelopmentCardImplementation(String name, int period, DevelopmentCardTypes type, Payment payment, Effect immediate, Effect permanent, int actionValue) {
 		this.name=name;
 		this.period= period;
 		this.type= type;
@@ -29,19 +33,19 @@ public class DevelpmentCardImplementation implements DevelopmentCard{
 	}
 	
 	public static DevelopmentCard territoryCard(String name, int period, Payment payment, Effect immediate, Effect permanent, int actionValue){
-		return new DevelpmentCardImplementation(name, period, DevelopmentCardTypes.TERRITORYCARD, payment, immediate, permanent, actionValue);
+		return new DevelopmentCardImplementation(name, period, DevelopmentCardTypes.TERRITORYCARD, payment, immediate, permanent, actionValue);
 	}
 	
 	public static DevelopmentCard buildingCard(String name, int period, Payment payment, Effect immediate, Effect permanent, int actionValue){
-		return new DevelpmentCardImplementation(name, period, DevelopmentCardTypes.BUILDINGCARD, payment, immediate, permanent, actionValue);
+		return new DevelopmentCardImplementation(name, period, DevelopmentCardTypes.BUILDINGCARD, payment, immediate, permanent, actionValue);
 	}
 	
 	public static DevelopmentCard characterCard(String name, int period, Payment payment, Effect immediate, Effect permanent){
-		return new DevelpmentCardImplementation(name, period, DevelopmentCardTypes.CHARACTERCARD, payment, immediate, permanent, 0);
+		return new DevelopmentCardImplementation(name, period, DevelopmentCardTypes.CHARACTERCARD, payment, immediate, permanent, 0);
 	}
 	
 	public static DevelopmentCard ventureCard(String name, int period, Payment payment, Effect immediate, Effect permanent, int actionValue){
-		return new DevelpmentCardImplementation(name, period, DevelopmentCardTypes.VENTURECARD, payment, immediate, permanent, 0);
+		return new DevelopmentCardImplementation(name, period, DevelopmentCardTypes.VENTURECARD, payment, immediate, permanent, 0);
 	}
 	
 	public String getName() {

@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Stonemason's Shop",
 	  	"period": 1,
+	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  1,0,0,2
 	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,2,0,0,0
 	  		],

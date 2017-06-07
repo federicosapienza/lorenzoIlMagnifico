@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Province",
 	  	"period": 3,
+	  	"typeOfImmediateEffect" :"addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,1,0,0,0,1
 	  		],
+	  		"typeOfPermanentEffect" :"addResourcesAndPoints",
 	  	"permanentResourcesAndPoints": [
 	  		0,0,0,1,4,0,0,0
 	  		],

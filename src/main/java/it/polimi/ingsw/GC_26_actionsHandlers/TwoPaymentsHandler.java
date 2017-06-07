@@ -2,7 +2,7 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelpmentCardImplementation;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
@@ -29,7 +29,7 @@ public class TwoPaymentsHandler {
 	public void perform(Player player, int choice){
 		// we will need to recast  DevelopmentCard to  DevelopmentCardImplementation and to recast Payment to DoublePayment;
 				DevelopmentCard temp=  player.getCardUsed();
-				DevelpmentCardImplementation  card= (DevelpmentCardImplementation) temp;
+				DevelopmentCardImplementation  card= (DevelopmentCardImplementation) temp;
 				Payment payment = card.getPayment();
 				TwoOrPayments twoOrPayments =(TwoOrPayments) payment;
 		//paying

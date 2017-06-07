@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Commercial Hub",
 	  	"period": 1,
+	  	"typeOfImmediateEffect" : "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,0,0,0,0
 	  		],
+	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
 	  	"permanentResourcesAndPoints": [
 	  		1,0,0,0,0,0,0,0
 	  		],

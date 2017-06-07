@@ -26,7 +26,7 @@ public class Round {
 	
 	public void start() {
 		//throw the dices!
-		gameElements.getDices().throwDices();
+		gameElements.getDices().rollDices();
 		
 		
 		// set the values of family members: it's valid for all the round

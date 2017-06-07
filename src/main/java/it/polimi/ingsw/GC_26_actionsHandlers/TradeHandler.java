@@ -3,7 +3,7 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelpmentCardImplementation;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
@@ -40,7 +40,7 @@ public class TradeHandler {
 
 		// we will need to recast  DevelopmentCard to  DevelopmentCardImplementation and to recast Effect to TradeEffect;
 		DevelopmentCard temp=  player.getCardUsed();
-		DevelpmentCardImplementation  card= (DevelpmentCardImplementation) temp;
+		DevelopmentCardImplementation  card= (DevelopmentCardImplementation) temp;
 		Effect effect= card.getPermanentEffect();
 		TradeEffect tradeEffect = (TradeEffect) effect;
 		
@@ -68,7 +68,7 @@ public class TradeHandler {
 		
 		// we will need to recast  DevelopmentCard to  DevelopmentCardImplementation and to recast Effect to TradeEffect;
 		DevelopmentCard temp=  player.getCardUsed();
-		DevelpmentCardImplementation  card= (DevelpmentCardImplementation) temp;
+		DevelopmentCardImplementation  card= (DevelopmentCardImplementation) temp;
 		Effect effect= card.getPermanentEffect();
 		TradeEffect tradeEffect = (TradeEffect) effect;
 		

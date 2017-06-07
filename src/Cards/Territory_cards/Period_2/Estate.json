@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Estate",
 	  	"period": 2,
+	  	"typeOfImmediateEffect" :"addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,2,1,0,0,0,0,0
 	  		],
+	  		"typeOfPermanentEffect" :"addResourcesAndPoints",
 	  	"permanentResourcesAndPoints": [
 	  		1,0,2,0,0,0,0,0
 	  		],
