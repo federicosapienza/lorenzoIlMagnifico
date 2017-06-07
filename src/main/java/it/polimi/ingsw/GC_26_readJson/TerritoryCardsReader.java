@@ -33,11 +33,11 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 				String[] listOfPaths = chooseListOfCards(numberOfPeriod);
 				for(String s:listOfPaths){
 					jsonObject= super.createJsonObjectFromFile(s);
-					name=super.readName();
-					period=super.readPeriod();
-					actionValue= super.readActionValue();
-					immediateEffectType= super.readImmediateEffectType();
-					permanentEffectType= super.readImmediateEffectType();
+					name=super.readString("name");
+					period=super.readInt("period");
+					actionValue= super.readInt("actionValue");
+					immediateEffectType= super.readString("typeOfImmediateEffect");
+					permanentEffectType= super.readString("typeOfPermanentEffect");
 					immediateEffect= super.createImmediateEffect(immediateEffectType);
 					permanentEffect=super.createPermanentEffect(permanentEffectType);
 					createTerritoryCard(cardsImplementation, numberOfPeriod);

@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Baptistery",
 	  	"period": 2,
+	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  0,0,0,3
 	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,2,0,1,0
 	  		],

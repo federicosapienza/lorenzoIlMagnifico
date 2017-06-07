@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Barracks",
 	  	"period": 2,
+	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  0,0,1,1
 	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,3,0,0,0
 	  		],

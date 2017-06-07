@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Fortress",
 	  	"period": 3,
+	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  2,0,2,4
 	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,9,0,0,0
 	  		],

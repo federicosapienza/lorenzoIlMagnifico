@@ -16,7 +16,7 @@ public class ReadAll {
 		//territoryCardsReader.readCards(3,cards);
 		
 		//buildingCardsReader.readCards(1, cards);
-		//buildingCardsReader.readCards(1, cards);
-		//buildingCardsReader.readCards(1, cards);
+		//buildingCardsReader.readCards(2, cards);
+		buildingCardsReader.readCards(3, cards);
 	}
 }

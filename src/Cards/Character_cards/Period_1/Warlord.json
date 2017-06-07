@@ -1,0 +1,15 @@
+	   {
+	  	"name": "Warlord",
+	  	"period": 1,
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  2,0,0,0
+	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,3,0,0
+	  		],
+	  		"typeOfPermanentEffect": "actionValueModifier",
+	  	 "permanentValueModifier": 2,
+	  	 "boardzone" : "territory"
+	  }

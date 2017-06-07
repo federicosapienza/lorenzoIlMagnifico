@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Garden",
+	  	"typeOfPayment" :"resources",
 	  	"period": 3,
 	  	"payment": [
 	  	  2,0,4,2
 	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,10,0,0,0
 	  		],

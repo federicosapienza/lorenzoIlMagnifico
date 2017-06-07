@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Stronghold",
 	  	"period": 2,
+	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  2,0,2,2
 	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,8,0,0,0
 	  		],

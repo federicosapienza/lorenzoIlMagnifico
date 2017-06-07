@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Sculptor' Guild",
 	  	"period": 2,
+	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  0,0,0,4
 	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,6,0,0,0
 	  		],

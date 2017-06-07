@@ -61,17 +61,16 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 			String[] ListOfPaths = chooseListOfCards(numberOfPeriod);
 			for(String s:ListOfPaths){
 				jsonObject= super.createJsonObjectFromFile(s);
-				name = super.readName();
-				period= super.readPeriod();
-				actionValue=super.readActionValue();
-				paymentType=super.readPaymentType();
+				name = super.readString("name");
+				period= super.readInt("period");
+				actionValue=super.readInt("actionValue");
+				paymentType=super.readString("typeOfPayment");
 				payment=super.createPayment(paymentType);
-				permanentEffectType=super.readPermanentEffectType();
-				immediateEffectType=super.readImmediateEffectType();
+				permanentEffectType=super.readString("typeOfPermanentEffect");
+				immediateEffectType=super.readString("typeOfImmediateEffect");
 				immediateEffect = super.createImmediateEffect(immediateEffectType);
 				permanentEffect = super.createPermanentEffect(permanentEffectType);
 				createBuildingCard(cardsImplementation,numberOfPeriod);
-				//stamp(); 
 				if(br!= null){
 					try {
 						br.close();
@@ -82,35 +81,20 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 				}
 			}
 		}
-		
-		
-		
-		/*private void stamp(){
-			System.out.println("name : " + name);
-			System.out.println("period :" + period);
-			System.out.println("immediateResourcesAndPointseffect:" + immediateResourcesAndPointsList);
-			System.out.println("permanentResourcesAndPointsEffect:" + permanentResourcesAndPointsList);
-			System.out.println("permanentCardsNumberToResourcesEffect: " + permanentCardsNumberToResourcesEffectResourcesAndPointsList);
-			System.out.println("permanentCardsNumberToResourcesEffect: " + permanentCardsNumberToResourcesCardType);
-			System.out.println("permanentTradeEffectGive1: "+ permanentTradeEffectGive1ResList);
-			System.out.println("permanentTradeEffectReceive1: "+ permanentTradeEffectReceive1ResList);
-			System.out.println("permanentTradeEffectGive2: "+ permanentTradeEffectGive2ResList);
-			System.out.println("permanentTradeEffectReceive2: "+ permanentTradeEffectReceive2ResList);
-			System.out.println("actionValue: " + actionValue);
-		}*/
+
 		
 		private void createBuildingCard(CardsImplementation cardsImplementation,int numOfPeriod){
 			DevelopmentCard developmentCard= DevelopmentCardImplementation.buildingCard(name, numOfPeriod, payment, immediateEffect, permanentEffect, actionValue);
 			switch(numOfPeriod){
 			   case 1:
 				   cardsImplementation.getBuildingCardsPeriod1().add(developmentCard);
-				   System.out.println(cardsImplementation.getBuildingCardsPeriod1().get(0).getName());
 				   break;
 			   case 2:
 				   cardsImplementation.getBuildingCardsPeriod2().add(developmentCard);
 				   break;
 			   case 3:
 				   cardsImplementation.getBuildingCardsPeriod3().add(developmentCard);
+				   System.out.println(cardsImplementation.getBuildingCardsPeriod3().get(0).getName());
 				   break;
 			   default:
 				   throw new IllegalArgumentException();

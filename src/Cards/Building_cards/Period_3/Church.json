@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Church",
 	  	"period": 3,
+	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  4,0,3,0
 	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,5,0,1,0
 	  		],

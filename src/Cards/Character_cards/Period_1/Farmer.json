@@ -1,0 +1,12 @@
+	   {
+	  	"name": "Farmer",
+	  	"period": 1,
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  3,0,0,0
+	  	  ],
+	  	  "typeOfImmediateEffect": "null",
+	  		"typeOfPermanentEffect": "actionValueModifier",
+	  	 "permanentValueModifier": 2,
+	  	 "boardzone" : "harvest"
+	  }

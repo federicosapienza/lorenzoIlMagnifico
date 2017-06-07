@@ -1,0 +1,15 @@
+	   {
+	  	"name": "Knight",
+	  	"period": 1,
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  2,0,0,0
+	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,0,0,1
+	  		],
+	  		"typeOfPermanentEffect": "actionValueModifier",
+	  	 "permanentValueModifier": 2,
+	  	 "boardzone" : "venture"
+	  }

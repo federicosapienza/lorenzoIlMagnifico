@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Residence",
 	  	"period": 2,
+	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  0,0,2,1
 	  	  ],
+	  	  "typeOfImmediateEffect": "AddResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,3,0,0,0
 	  		],
