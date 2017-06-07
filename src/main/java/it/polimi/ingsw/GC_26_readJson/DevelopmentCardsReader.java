@@ -17,6 +17,7 @@ import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
 import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
 import it.polimi.ingsw.GC_26_cards.leaderCard.PointsOrResourcesRequirement;
+import it.polimi.ingsw.GC_26_cards.payments.MilitaryPointPayment;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
 import it.polimi.ingsw.GC_26_cards.payments.ResourcesPayment;
 
@@ -41,13 +42,14 @@ public class DevelopmentCardsReader {
 	private List<Integer> permanentTradeEffectReceive2ResList = new ArrayList<Integer>();
 	private List<Integer> immediateResourcesAndPointsList = new ArrayList<Integer>();
 	private List<Integer> immediateCardsNumberToResourcesEffectResourcesAndPointsList = new ArrayList<Integer>();
-	private List<Integer> immediateTraseEffectGive1ResList = new ArrayList<Integer>();
+	private List<Integer> immediateTradeEffectGive1ResList = new ArrayList<Integer>();
 	private List<Integer> immediateTradeEffectReceive1ResList = new ArrayList<Integer>();
 	private List<Integer> immediateTradeEffectGive2ResList = new ArrayList<Integer>();
-	private List<Integer> immedaiteTradeEffectReceive2ResList = new ArrayList<Integer>();
+	private List<Integer> immediateTradeEffectReceive2ResList = new ArrayList<Integer>();
 	
 	private String permanentEffectType;
 	private String immediateEffectType;
+	private String paymentType;
 	private int actionValue;
 	private BufferedReader br= null;
 	private Gson gson = new Gson();
@@ -57,7 +59,7 @@ public class DevelopmentCardsReader {
 	private List<DevelopmentCard> territoryCards = new ArrayList<DevelopmentCard>();//getter! -> non credo sia utile,passo i file direttamente ad un'altra classe
 	private JsonPathData jsonPathData = new JsonPathData();
 	private String permanentCardsNumberToResourcesCardType;
-	
+	private String immediateCardsNumberToResourcesCardType;
 	
 	
 	public JsonObject createJsonObjectFromFile(String path){
@@ -85,6 +87,11 @@ public class DevelopmentCardsReader {
 		return immediateEffectType= jsonElement.getAsString();
 	}
 	
+	public String readPaymentType(){
+		jsonElement= jsonObject.get("typeOfPayment");
+		return paymentType= jsonElement.getAsString();	
+	}
+	
 	public int readPeriod(){
 		jsonElement = jsonObject.get("period");
 		return period = jsonElement.getAsInt();
@@ -95,7 +102,7 @@ public class DevelopmentCardsReader {
 		return actionValue= jsonElement.getAsInt();
 	}
 	
-	public List<Integer> readPayment(){
+	public List<Integer> readResourcesPayment(){
 			jsonElement = jsonObject.get("payment").getAsJsonArray();
 			return paymentList= new Gson().fromJson(jsonObject.get("payment"), listTypeInt);
 	}
@@ -103,6 +110,36 @@ public class DevelopmentCardsReader {
 	public List<Integer> readImmediateResourcesAndPoints(){
 			jsonElement = jsonObject.get("immediateResourcesAndPoints").getAsJsonArray();
 			return immediateResourcesAndPointsList = new Gson().fromJson(jsonObject.get("immediateResourcesAndPoints"), listTypeInt);
+	}
+	
+	public List<Integer> readImmediateCardsNumberToResourcesEffect(){
+		jsonElement = jsonObject.get("ImmediateCardsNumberToResourcesResources").getAsJsonArray(); 
+		return immediateCardsNumberToResourcesEffectResourcesAndPointsList = new Gson().fromJson(jsonObject.get("immediateCardsNumberToResourcesResources"), listTypeInt);
+	}
+
+	public String readImmediateCardsNumberToResourcesCardType(){ 
+		jsonElement= jsonObject.get("immediateCardsNumberToResourcesCardType");
+		return immediateCardsNumberToResourcesCardType= jsonElement.getAsString();
+	}
+
+	public List<Integer> readImmediateTradeEffectGive1Resources(){
+		jsonElement = jsonObject.get("immediateTradeEffectGive1").getAsJsonArray(); 
+		return immediateTradeEffectGive1ResList = new Gson().fromJson(jsonObject.get("immediateTradeEffectGive1"), listTypeInt);
+	}
+
+	public List<Integer> readImmediateTradeEffectReceive1Resources(){
+		jsonElement = jsonObject.get("ImmediateTradeEffectReceive1").getAsJsonArray(); 
+		return immediateTradeEffectReceive1ResList = new Gson().fromJson(jsonObject.get("ImmediateTradeEffectReceive1"), listTypeInt);
+	}
+
+	public List<Integer> readImmediateTradeEffectGive2Resources(){
+		jsonElement = jsonObject.get("immediateTradeEffectGive2").getAsJsonArray(); 
+		return immediateTradeEffectGive2ResList = new Gson().fromJson(jsonObject.get("immediateTradeEffectGive2"), listTypeInt);
+	}
+
+	public List<Integer> readImmediateTradeEffectReceive2Resources(){
+		jsonElement = jsonObject.get("immediateTradeEffectReceive1").getAsJsonArray(); 
+		return immediateTradeEffectReceive1ResList = new Gson().fromJson(jsonObject.get("immediateTradeEffectReceive2"), listTypeInt);
 	}
 	
 	public List<Integer> readPermanentResourcesAndPoints(){
@@ -140,7 +177,7 @@ public class DevelopmentCardsReader {
 			return permanentTradeEffectReceive1ResList = new Gson().fromJson(jsonObject.get("permanentTradeEffectReceive2"), listTypeInt);
 	}
 	
-	public Effect createEffect(String effectType){
+	public Effect createPermanentEffect(String effectType){
 		if(effectType.equals("singleTrade")){
 			permanentTradeEffectGive1ResList=readPermanentTradeEffectGive1Resources();
 			permanentTradeEffectReceive1ResList= readPermanentTradeEffectReceive1Resources();
@@ -177,6 +214,59 @@ public class DevelopmentCardsReader {
 		return null;
 	}
 	
+	public Payment createPayment(String paymentType){
+		if(paymentType.equals("resources")){
+			paymentList = readResourcesPayment();
+			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResources(paymentList.get(0),paymentList.get(1),paymentList.get(2),paymentList.get(3));
+			ResourcesPayment payment = new ResourcesPayment(resourcesOrPoints);
+			return payment;
+		}
+		/*if(paymentType.equals("militaryPoints")){
+			MilitaryPointPayment payment = new MilitaryPointPayment(toSpend, needed);// direi che prima di fare ciò devo leggere le carte.
+			return payment;
+		}*/
+		return null;
+	}
+	
+	public Effect createImmediateEffect(String effectType){
+		if(effectType.equals("singleTrade")){
+			immediateTradeEffectGive1ResList=readImmediateTradeEffectGive1Resources();
+			immediateTradeEffectReceive1ResList= readImmediateTradeEffectReceive1Resources();
+			ResourcesOrPoints resourcesOrPointsGive1 = ResourcesOrPoints.newResourcesOrPoints(immediateTradeEffectGive1ResList.get(0),immediateTradeEffectGive1ResList.get(1),immediateTradeEffectGive1ResList.get(2),immediateTradeEffectGive1ResList.get(3),immediateTradeEffectGive1ResList.get(4),immediateTradeEffectGive1ResList.get(5),immediateTradeEffectGive1ResList.get(6),immediateTradeEffectGive1ResList.get(7));
+			ResourcesOrPoints resourcesOrPointsReceive1 = ResourcesOrPoints.newResourcesOrPoints(immediateTradeEffectReceive1ResList.get(0),immediateTradeEffectReceive1ResList.get(1),immediateTradeEffectReceive1ResList.get(2),immediateTradeEffectReceive1ResList.get(3),immediateTradeEffectReceive1ResList.get(4),immediateTradeEffectReceive1ResList.get(5),immediateTradeEffectReceive1ResList.get(6),immediateTradeEffectReceive1ResList.get(7));
+			TradeEffect Effect = new TradeEffect(resourcesOrPointsGive1, null, resourcesOrPointsReceive1, null);
+			return Effect;
+			}
+		if(effectType.equals("doubleTrade")){
+			immediateTradeEffectGive1ResList=readImmediateTradeEffectGive1Resources();
+			immediateTradeEffectReceive1ResList= readImmediateTradeEffectReceive1Resources();
+			immediateTradeEffectGive2ResList=readImmediateTradeEffectGive2Resources();
+			immediateTradeEffectReceive2ResList= readImmediateTradeEffectReceive2Resources();
+			ResourcesOrPoints resourcesOrPointsGive1 = ResourcesOrPoints.newResourcesOrPoints(immediateTradeEffectGive1ResList.get(0),immediateTradeEffectGive1ResList.get(1),immediateTradeEffectGive1ResList.get(2),immediateTradeEffectGive1ResList.get(3),immediateTradeEffectGive1ResList.get(4),immediateTradeEffectGive1ResList.get(5),immediateTradeEffectGive1ResList.get(6),immediateTradeEffectGive1ResList.get(7));
+			ResourcesOrPoints resourcesOrPointsReceive1 = ResourcesOrPoints.newResourcesOrPoints(immediateTradeEffectReceive1ResList.get(0),immediateTradeEffectReceive1ResList.get(1),immediateTradeEffectReceive1ResList.get(2),immediateTradeEffectReceive1ResList.get(3),immediateTradeEffectReceive1ResList.get(4),immediateTradeEffectReceive1ResList.get(5),immediateTradeEffectReceive1ResList.get(6),immediateTradeEffectReceive1ResList.get(7));
+			ResourcesOrPoints resourcesOrPointsGive2 = ResourcesOrPoints.newResourcesOrPoints(immediateTradeEffectGive2ResList.get(0),immediateTradeEffectGive2ResList.get(1),immediateTradeEffectGive2ResList.get(2),immediateTradeEffectGive2ResList.get(3),immediateTradeEffectGive2ResList.get(4),immediateTradeEffectGive2ResList.get(5),immediateTradeEffectGive2ResList.get(6),immediateTradeEffectGive2ResList.get(7));
+			ResourcesOrPoints resourcesOrPointsReceive2 = ResourcesOrPoints.newResourcesOrPoints(immediateTradeEffectReceive2ResList.get(0),immediateTradeEffectReceive2ResList.get(1),immediateTradeEffectReceive2ResList.get(2),immediateTradeEffectReceive2ResList.get(3),immediateTradeEffectReceive2ResList.get(4),immediateTradeEffectReceive2ResList.get(5),immediateTradeEffectReceive2ResList.get(6),immediateTradeEffectReceive2ResList.get(7));	
+			TradeEffect Effect = new TradeEffect(resourcesOrPointsGive1, resourcesOrPointsGive2, resourcesOrPointsReceive1, resourcesOrPointsReceive2);
+			return Effect;
+			}
+		if(effectType.equals("cardsNumberToResources")){
+			immediateCardsNumberToResourcesEffectResourcesAndPointsList=readImmediateCardsNumberToResourcesEffect();
+			immediateCardsNumberToResourcesCardType=readImmediateCardsNumberToResourcesCardType();
+			DevelopmentCardTypes type = getDevelopmentCardType(immediateCardsNumberToResourcesCardType);
+			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(immediateCardsNumberToResourcesEffectResourcesAndPointsList.get(0),immediateCardsNumberToResourcesEffectResourcesAndPointsList.get(1),immediateCardsNumberToResourcesEffectResourcesAndPointsList.get(2),immediateCardsNumberToResourcesEffectResourcesAndPointsList.get(3),immediateCardsNumberToResourcesEffectResourcesAndPointsList.get(4),immediateCardsNumberToResourcesEffectResourcesAndPointsList.get(5),immediateCardsNumberToResourcesEffectResourcesAndPointsList.get(6),immediateCardsNumberToResourcesEffectResourcesAndPointsList.get(7));
+			CardsNumberToResourcesEffect Effect = new CardsNumberToResourcesEffect(type, resourcesOrPoints);
+			return Effect;
+			}
+		if(effectType.equals("addResourcesAndPoints")){
+			immediateResourcesAndPointsList=readImmediateResourcesAndPoints();
+			ReceiveResourcesOrPointsEffect Effect= new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(immediateResourcesAndPointsList.get(0),immediateResourcesAndPointsList.get(1),immediateResourcesAndPointsList.get(2),immediateResourcesAndPointsList.get(3),immediateResourcesAndPointsList.get(4),immediateResourcesAndPointsList.get(5),immediateResourcesAndPointsList.get(6),immediateResourcesAndPointsList.get(7)));
+			return Effect;
+			}
+		return null;
+	}
+	
+	//forse ho duplicato le variabili senza motivo... intendo immediate e permanent.
+	
 	private DevelopmentCardTypes getDevelopmentCardType(String type){
 			if(type.equals("territory")){ return DevelopmentCardTypes.TERRITORYCARD;}
 			if(type.equals("building")){ return DevelopmentCardTypes.BUILDINGCARD;}
@@ -186,57 +276,5 @@ public class DevelopmentCardsReader {
 		}
 }
 	
-	/*public void readRightEffectAndCreateCard(String effectType,CardsImplementation cardsImplementation,int numOfPeriod){
-		if(effectType.equals("singleTrade")){
-											permanentTradeEffectGive1ResList=readPermanentTradeEffectGive1Resources();
-											permanentTradeEffectReceive1ResList= readPermanentTradeEffectReceive1Resources();
-											createBuildingCardWithSingleTradeEffect(cardsImplementation, numOfPeriod);
-		}
-		if(effectType.equals("doubleTrade")){
-											permanentTradeEffectGive1ResList=readPermanentTradeEffectGive1Resources();
-											permanentTradeEffectReceive1ResList= readPermanentTradeEffectReceive1Resources();
-											permanentTradeEffectGive2ResList=readPermanentTradeEffectGive2Resources();
-											permanentTradeEffectReceive2ResList=readPermanentTradeEffectReceive2Resources();
-											
-											}
-		if(effectType.equals("cardsNumberToResources")){
-											permanentCardsNumberToResourcesEffectResourcesAndPointsList=readPermanentCardsNumberToResourcesEffect();
-											permanentCardsNumberToResourcesCardType=readPermanentCardsNumberToResourcesCardType();
-											}
-		if(effectType.equals("addResourcesAndPoints")){
-											permanentResourcesAndPointsList=readPermanentResourcesAndPoints();
-											}
-	}*/
-	
-	/*private void createBuildingCardWithSingleTradeEffect(CardsImplementation cardsImplementation,int numOfPeriod){
-		ReceiveResourcesOrPointsEffect immediateEffect = new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(immediateResourcesAndPointsList.get(0), immediateResourcesAndPointsList.get(1), immediateResourcesAndPointsList.get(2), immediateResourcesAndPointsList.get(3), immediateResourcesAndPointsList.get(4), immediateResourcesAndPointsList.get(5), immediateResourcesAndPointsList.get(6), immediateResourcesAndPointsList.get(7)));
-		ResourcesOrPoints resourcesOrPointsGive1= ResourcesOrPoints.newResourcesOrPoints(permanentTradeEffectGive1ResList.get(0),permanentTradeEffectGive1ResList.get(1),permanentTradeEffectGive1ResList.get(2),permanentTradeEffectGive1ResList.get(3),permanentTradeEffectGive1ResList.get(4),permanentTradeEffectGive1ResList.get(5),permanentTradeEffectGive1ResList.get(6),permanentTradeEffectGive1ResList.get(7));			
-		ResourcesOrPoints resourcesOrPointsReceive1 = ResourcesOrPoints.newResourcesOrPoints(permanentTradeEffectReceive1ResList.get(0),permanentTradeEffectReceive1ResList.get(1),permanentTradeEffectReceive1ResList.get(2),permanentTradeEffectReceive1ResList.get(3),permanentTradeEffectReceive1ResList.get(4),permanentTradeEffectReceive1ResList.get(5),permanentTradeEffectReceive1ResList.get(6),permanentTradeEffectReceive1ResList.get(7));		
-		ResourcesOrPoints paymentRes = ResourcesOrPoints.newResourcesOrPoints(paymentList.get(0),paymentList.get(1),paymentList.get(2),paymentList.get(3),paymentList.get(4),paymentList.get(5),paymentList.get(6),paymentList.get(7));
-		Payment payment = new ResourcesPayment(paymentRes);
-		TradeEffect permanentEffect = new TradeEffect(resourcesOrPointsGive1, null, resourcesOrPointsReceive1, null);
-		DevelopmentCard developmentCard = DevelopmentCardImplementation.buildingCard(name, period, payment, immediateEffect, permanentEffect, actionValue);
-		choosePeriod(numOfPeriod, developmentCard,cardsImplementation);
-	}
-	
-	private void createBuildingCardWithDoubleTradeEffect(CardsImplementation cardsImplementation,int numOfPeriod){
-		// devo fare in modo di poter scrivere tutti gli immediate?
-	}
-	
-	private void choosePeriod(int numOfPeriod,DevelopmentCard developmentCard,CardsImplementation cardsImplementation){
-		switch (numOfPeriod) {
-		case 1:
-			cardsImplementation.getBuildingCardsPeriod1().add(developmentCard);
-			break;
-		case 2:
-			cardsImplementation.getBuildingCardsPeriod2().add(developmentCard);
-			break;
-		case 3:
-			cardsImplementation.getBuildingCardsPeriod3().add(developmentCard);
-			break;
-		default:
-			throw new IllegalArgumentException();
-		}
-	}*/ //TODO
-	
+
 

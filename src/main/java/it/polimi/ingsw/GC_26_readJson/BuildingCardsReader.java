@@ -13,6 +13,7 @@ import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
+import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
 import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
 import it.polimi.ingsw.GC_26_cards.leaderCard.PointsOrResourcesRequirement;
@@ -35,13 +36,14 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 	private List<Integer> immediateResourcesAndPointsList = new ArrayList<Integer>(); 
 	private List<Integer> permanentResourcesAndPointsList = new ArrayList<Integer>();
 	private List<Integer> permanentCardsNumberToResourcesEffectResourcesAndPointsList = new ArrayList<Integer>();
-	private List<Integer> paymentList = new ArrayList<Integer>();
 	private List<Integer> permanentTradeEffectGive1ResList = new ArrayList<Integer>();
 	private List<Integer> permanentTradeEffectReceive1ResList = new ArrayList<Integer>();
 	private List<Integer> permanentTradeEffectGive2ResList = new ArrayList<Integer>();
 	private List<Integer> permanentTradeEffectReceive2ResList = new ArrayList<Integer>();
 	private int actionValue;
 	private String permanentEffectType;
+	private String immediateEffectType;
+	private String paymentType;
 	private BufferedReader br= null;
 	private Gson gson = new Gson();
 	private JsonObject jsonObject= null;
@@ -51,28 +53,25 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 	private JsonPathData jsonPathData = new JsonPathData();
 	private DevelopmentCardTypes permanentCardNumberToResourcesCardType;
 	private String permanentCardsNumberToResourcesCardType;
-
-		/*public static void main(String [] args){
-			BuildingCardsReader rbc = new BuildingCardsReader();
-			rbc.readCards(3);//per ora li metto manualmente qua i valori
-			
-		}*/
+	private Payment payment;
+	private Effect immediateEffect;
+	private Effect permanentEffect;
 		
-		private void readCards(int numberOfList,CardsImplementation cardsImplementation){
-			String[] ListOfPaths = chooseListOfCards(numberOfList);
+		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
+			String[] ListOfPaths = chooseListOfCards(numberOfPeriod);
 			for(String s:ListOfPaths){
 				jsonObject= super.createJsonObjectFromFile(s);
 				name = super.readName();
 				period= super.readPeriod();
 				actionValue=super.readActionValue();
-				paymentList=super.readPayment();
-				immediateResourcesAndPointsList=super.readImmediateResourcesAndPoints();
+				paymentType=super.readPaymentType();
+				payment=super.createPayment(paymentType);
 				permanentEffectType=super.readPermanentEffectType();
-			//	super.readRightEffectAndCreateCard(permanentEffectType,cardsImplementation,numberOfList);
-				stamp(); 
-				//TODO create right enum CARDTYPE
-				//TODO createRightEffect();
-				// TODO createBuildingCard();
+				immediateEffectType=super.readImmediateEffectType();
+				immediateEffect = super.createImmediateEffect(immediateEffectType);
+				permanentEffect = super.createPermanentEffect(permanentEffectType);
+				createBuildingCard(cardsImplementation,numberOfPeriod);
+				//stamp(); 
 				if(br!= null){
 					try {
 						br.close();
@@ -86,10 +85,9 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 		
 		
 		
-		private void stamp(){
+		/*private void stamp(){
 			System.out.println("name : " + name);
 			System.out.println("period :" + period);
-			System.out.println("payment :" + paymentList);
 			System.out.println("immediateResourcesAndPointseffect:" + immediateResourcesAndPointsList);
 			System.out.println("permanentResourcesAndPointsEffect:" + permanentResourcesAndPointsList);
 			System.out.println("permanentCardsNumberToResourcesEffect: " + permanentCardsNumberToResourcesEffectResourcesAndPointsList);
@@ -99,7 +97,27 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 			System.out.println("permanentTradeEffectGive2: "+ permanentTradeEffectGive2ResList);
 			System.out.println("permanentTradeEffectReceive2: "+ permanentTradeEffectReceive2ResList);
 			System.out.println("actionValue: " + actionValue);
-		}
+		}*/
+		
+		private void createBuildingCard(CardsImplementation cardsImplementation,int numOfPeriod){
+			DevelopmentCard developmentCard= DevelopmentCardImplementation.buildingCard(name, numOfPeriod, payment, immediateEffect, permanentEffect, actionValue);
+			switch(numOfPeriod){
+			   case 1:
+				   cardsImplementation.getBuildingCardsPeriod1().add(developmentCard);
+				   System.out.println(cardsImplementation.getBuildingCardsPeriod1().get(0).getName());
+				   break;
+			   case 2:
+				   cardsImplementation.getBuildingCardsPeriod2().add(developmentCard);
+				   break;
+			   case 3:
+				   cardsImplementation.getBuildingCardsPeriod3().add(developmentCard);
+				   break;
+			   default:
+				   throw new IllegalArgumentException();
+			   }
+		   
+			}
+		
 		
 		private String[] chooseListOfCards(int numOfList){
 			switch(numOfList) {

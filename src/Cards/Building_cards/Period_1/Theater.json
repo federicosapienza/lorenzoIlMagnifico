@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Theater",
 	  	"period": 1,
+	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  2,0,2,0
 	  	  ],
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,6,0,0,0
 	  		],

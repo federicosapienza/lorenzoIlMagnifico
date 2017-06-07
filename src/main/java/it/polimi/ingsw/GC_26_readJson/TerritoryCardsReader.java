@@ -38,10 +38,10 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 					actionValue= super.readActionValue();
 					immediateEffectType= super.readImmediateEffectType();
 					permanentEffectType= super.readImmediateEffectType();
-					immediateEffect= super.createEffect(immediateEffectType);
-					permanentEffect=super.createEffect(permanentEffectType);
-					createTerritoryCard(cardsImplementation, numberOfPeriod, immediateEffect, permanentEffect);
-					//stamp(); ;
+					immediateEffect= super.createImmediateEffect(immediateEffectType);
+					permanentEffect=super.createPermanentEffect(permanentEffectType);
+					createTerritoryCard(cardsImplementation, numberOfPeriod);
+					stamp(); ;
 					if(br!= null){
 						try {
 							br.close();
@@ -53,14 +53,14 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 				}
 			}
 		
-		/*private void stamp(){
+		private void stamp(){
 			System.out.println(name);
 			System.out.println(period);
 			System.out.println(actionValue);
-		}*/
+		}
 		
 		
-		private void createTerritoryCard(CardsImplementation cardsImplementation,int numOfPeriod, Effect immediateEffect,Effect permanentEffect){
+		private void createTerritoryCard(CardsImplementation cardsImplementation,int numOfPeriod){
 		    DevelopmentCard developmentCard= DevelopmentCardImplementation.territoryCard(name, period, null, immediateEffect, permanentEffect , actionValue);
 		   switch(numOfPeriod){
 		   case 1:
