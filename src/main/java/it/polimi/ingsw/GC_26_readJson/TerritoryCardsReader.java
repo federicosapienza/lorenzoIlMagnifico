@@ -68,13 +68,18 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 		   switch(numOfPeriod){
 		   case 1:{
 			   cardsImplementation.getTerritoryCardsPeriod1().add(developmentCard);
+			   System.out.println("periodo 1");
 			   return;
 		   }
 		   case 2:{
 			   cardsImplementation.getTerritoryCardsPeriod2().add(developmentCard);
+			   System.out.println("periodo 2");
+
 			   return;}
 		   case 3:{
 			   cardsImplementation.getTerritoryCardsPeriod3().add(developmentCard);
+			   System.out.println("periodo 3");
+
 			   return; }
 		   default:
 			   throw new IllegalArgumentException();

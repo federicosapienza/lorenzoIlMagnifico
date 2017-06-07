@@ -1,10 +1,10 @@
 package it.polimi.ingsw.GC_26_client_connection;
 
-import it.polimi.ingsw.GC_26_client_clientLogic.ClientController;
+import it.polimi.ingsw.GC_26_client.ClientoutputController;
 
-public interface ClientConnection extends Runnable{
+public interface ClientConnection {
 
-	void setController(ClientController controller);
 	
+	void run(ClientoutputController controller);
 
 }

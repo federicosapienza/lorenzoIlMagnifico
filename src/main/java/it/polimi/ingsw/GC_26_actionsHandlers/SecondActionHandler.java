@@ -40,13 +40,13 @@ public class SecondActionHandler extends ActionHandler{
 			// calls the right checker	
 		if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 					action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER)
-				return towerIsPossible(player, null , action);
+				return getCheckerHandler().towerIsPossible(player, null , action);
 		//not present in standard game. anyway implemented for flexibility:
 		if(action.getZone()==BoardZone.MARKET)
-			return marketIsPossible(player, null, action);
+			return getCheckerHandler().marketIsPossible(player, null, action);
 		//not present in standard game. anyway implemented for flexibility:
 		if(action.getZone()==BoardZone.COUNCILPALACE)
-			return councilPalaceIsPossible(player, null, action);
+			return getCheckerHandler().councilPalaceIsPossible(player, null, action);
 		if(action.getZone()==BoardZone.HARVEST ||action.getZone()==BoardZone.PRODUCTION)
 				return true;
 		else throw new IllegalArgumentException();
@@ -60,23 +60,32 @@ public class SecondActionHandler extends ActionHandler{
 		//calling the right performer
 		if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 				action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER)
-			towerPerform(player, null, action);
+			getPerformerHandler().towerPerform(player, null, action);
 		
 		
 		//adding the servants to the value and calling Harvest
 		if(action.getZone()== BoardZone.HARVEST){
 			HarvestAndProductionHandler handler = super.getHarvestAndProductionHandler();
+			int actionValue= action.getServantsUsed()  +player.getPermanentModifiers().getActionModifier(BoardZone.HARVEST); //permanent Effect
+				if(actionValue<1)  //checking if action value is valid
+					throw new IllegalArgumentException();
+		
+			harvestAndProductionHandler.startHarvest(player, actionValue);	
 			handler.startHarvest(player, player.getSecondactionValue()+action.getServantsUsed());
 		}
 		if(action.getZone()== BoardZone.PRODUCTION){
 			HarvestAndProductionHandler handler = super.getHarvestAndProductionHandler();
+			int actionValue= action.getServantsUsed() +player.getPermanentModifiers().getActionModifier(BoardZone.PRODUCTION); //permanent Effect
+				if(actionValue<1) //checking if action value is valid
+					throw new IllegalArgumentException();
+			harvestAndProductionHandler.startProduction(player, actionValue);	
 			handler.startProduction(player, player.getSecondactionValue()+action.getServantsUsed());
 		}		
 		//they do not exists in standard game but they were put for flexibility
 		if(action.getZone()==BoardZone.MARKET)
-			marketPerform(player, null, action);
+			getPerformerHandler().marketPerform(player, null, action);
 		if(action.getZone()== BoardZone.COUNCILPALACE)
-			councilPalacePerform(player, null, action);
+			getPerformerHandler().councilPalacePerform(player, null, action);
 		
 		else throw new IllegalArgumentException();
 		

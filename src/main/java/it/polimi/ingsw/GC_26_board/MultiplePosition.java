@@ -51,7 +51,7 @@ public class MultiplePosition {
 		this.counter = counter;
 	}
 	
-	public int getActionMalus() {
+	public int getMultipleActionMalus() {
 		return actionMalus;
 	}
 	

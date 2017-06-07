@@ -9,7 +9,7 @@ import java.net.Socket;
 
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
-import it.polimi.ingsw.GC_26_client_clientLogic.ClientController;
+import it.polimi.ingsw.GC_26_client.ClientoutputController;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
@@ -27,7 +27,7 @@ public class SocketClient implements ClientConnection{
 	        }
 
 		@Override
-		public void run() {
+		public void run(ClientoutputController controller) {
 			 
 				try {
 					while (true){
@@ -76,9 +76,5 @@ public class SocketClient implements ClientConnection{
 		
 		}
 
-		@Override
-		public void setController(ClientController controller) {
-			// TODO Auto-generated method stub
-			
-		}
+		
 }

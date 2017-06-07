@@ -8,7 +8,6 @@ import java.util.List;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 
 
@@ -102,11 +101,15 @@ public class BoardView {
 			return buildingsTower;
 		case CHARACTERCARD:
 			return charactersTower;
-		default:
+		case VENTURECARD:
 			return venturesTower;
+		default:
+			throw new IllegalArgumentException();
 		}
 		
 	}
+	
+	
 
 
 	}

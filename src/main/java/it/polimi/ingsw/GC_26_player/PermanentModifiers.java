@@ -1,11 +1,15 @@
 package it.polimi.ingsw.GC_26_player;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Predicate;
 
+import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
-
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
 
 /*Class that keeps memory and logic of all the modifiers linked to a player and activated by Leader Cards and excommunication tiles
@@ -24,7 +28,7 @@ public class PermanentModifiers {
 	}
 	
 	
-	//Resources malus of excommunication tiles
+	//Resources malus of excommunication tiles (the firsts 4 in the GameRules pdf)
 	private boolean resourcesMalusOn=false;
 	private ResourcesOrPoints resourcesMalus= ResourcesOrPoints.newResources(0, 0, 0, 0); // at the beginning of the game there are not malus
 	
@@ -98,7 +102,7 @@ public class PermanentModifiers {
 	}
 	
 	
-	public  ResourcesOrPoints resourcesOrPointsDiscount(BoardZone zone, ResourcesOrPoints price){
+	public  ResourcesOrPoints resourcesOrPointsDiscount(BoardZone zone, ResourcesOrPoints price){  //checked and called in ResourcesOrPointPayment;
 		/*Created for handling Pico Della Mirandola card and Dame, developed in order to be useful in case of creation of similar cards
 		 */
 		ResourcesOrPoints  discount= discounts.get(zone);
@@ -111,7 +115,7 @@ public class PermanentModifiers {
 	
 	
 	
-	//Santa Rita effect: doubles the earning of coins, servants, stone , wood. 
+	//Santa Rita effect: doubles the earning of coins, servants, stone , wood. : hecked and called in ReceiveResourcesOrPointsEffect
 	private boolean doubleEarningOn=false;
 	
 	public boolean isDoubleEarningOn() {
@@ -125,10 +129,11 @@ public class PermanentModifiers {
 	
 	
 	
-	// carta Predicatore : niente bonus da torri: qui e in effects
+	// action Modifiers: for towers positions in getting a card and in production or harvest to change action value
+	//used both in development Card and excommunication tiles: checked and called in ActionCheckerHandler and SecondActionHandler
 	private Map<BoardZone, Integer> actionModifiers;
 		
-	public void addModifier(BoardZone zone, int value){
+	public void addActionModifier(BoardZone zone, int value){
 		Integer temp = actionModifiers.get(zone);
 		if(temp==null)
 			actionModifiers.put(zone, value);
@@ -138,29 +143,117 @@ public class PermanentModifiers {
 	}
 	
 	
-	public  int getModifier(BoardZone zone){
+	public  int getActionModifier(BoardZone zone){
 		Integer temp = actionModifiers.get(zone);
 		if(temp==null)
 			return 0;
 		else return temp;
 		
 	}
+	/////////////
 	
-	//revoke bonuses obtained from Tower spaces (Preacher Card);
+	
+	//revoke bonuses obtained from Tower spaces (Preacher Card);  //checked and called in ActionPerformedHandler
 	 private boolean bonusRevoked =false;
 	 public void setBonusRevokedOn(){
 		 bonusRevoked=true;
 	 }
-	public boolean isBonusRevokedOn() {
+	public boolean isTowerBonusRevokedOn() {
 		return bonusRevoked;
 	}
 	
-	//excommunication tile: reduce the coloured family member value
-	private int dicesMalusValue;
-	public int getColouredMembersMalusValue(){
-		return dicesMalusValue;
+	
+	//family members value increments or decrements
+	//excommunication tile: reduce the coloured family member value :checked and called in "FamilyMembers"
+	private int colouredMembersChange;
+	public int getColouredMemberChange(){
+		return colouredMembersChange;
 	}
-	public void setColouredMembersMalusValue(int value){
-		dicesMalusValue = value;
+	public void setColouredMembersChange(int value){
+		colouredMembersChange += value;
 	}
+	
+	private int neutralMemberChange;
+	public int getneutralMemberChange(){
+		return neutralMemberChange;
+	}
+	public void setNeutralMembersChange(int value){
+		neutralMemberChange += value;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//market Ban (excommunication tile effect),checked and  called in "ActionCheckerHandler"
+	private boolean marketBanFlag=false; 
+	
+	public boolean getMarketBanFlag(){
+		return marketBanFlag;
+	}
+	public void setMarketBanFlagOn(){
+		marketBanFlag =true;
+	}
+	
+	
+	//excommunication tile effect: doubles the have to spend 2 servants to increase your ActionHandler value by 1 " checked and called in ActionCheckerHandler and SecondActionHandler
+	private boolean doubleServants=false;
+	public boolean isDoubleServantsOn() {
+		return doubleServants;
+	}
+	public void setDoubleServantsOn() {
+		doubleServants =true;
+	}
+
+	//No victoryPoints for developmentCard type
+	private Set<DevelopmentCardTypes> noVictoryPointsTypes;
+	
+	public void noVictoryPointsForCardType(DevelopmentCardTypes type){
+		noVictoryPointsTypes.add(type);
+	}
+	public boolean pointsForThisCardType(DevelopmentCardTypes type){
+		return noVictoryPointsTypes.contains(type);
+	}
+	
+	
+	//Lose victoryPoints at the end of the game. excommunication tile Effect
+	// resourcesOrPoints are here used to save what and how many resources or points causes loss on victoryPoints: 
+	// 0 stands for no malus, 1,2 ... stand for how many victory point for type.
+	private ResourcesOrPoints parametersForLosingPoints = ResourcesOrPoints.newResources(0, 0, 0, 0);
+	public void addParameterForLosingPoints(ResourcesOrPoints resourcesOrPoints){
+		parametersForLosingPoints= ResourcesOrPoints.sum(parametersForLosingPoints, resourcesOrPoints);
+	}
+	public int howManyVIctoryPointLess(){
+		Warehouse test =player.getWarehouse();
+		ResourcesOrPoints malus = parametersForLosingPoints;
+		return test.getCoins() * malus.getCoins() + test.getServants() *malus.getServants() + test.getStone()* malus.getStone()+ 
+				test.getWood()*malus.getWood()+ test.getVictoryPoints()*malus.getVictoryPoints()
+				+ test.getFaithPoints()*malus.getFaithPoints() + test.getMilitaryPoints()*malus.getMilitaryPoints();
+	}
+	
+	//Ariosto effect, handled in ActionCheckerHandler
+	private boolean goingInOccupiedPositionsAllowed=false;
+	public boolean isGoingInOccupiedPositionsAllowed() {
+		return goingInOccupiedPositionsAllowed;
+	}
+	public void setGoingInOccupiedPositionsAllowed() {
+		this.goingInOccupiedPositionsAllowed = true;
+	}
+	
+
+	//Brunelleschi effect 
+	private boolean towerOccupiedMalusDisabled=false;
+	
+	public boolean isTowerOccupiedMalusDisabled() {
+		return towerOccupiedMalusDisabled;
+	}
+	
+	public void setTowerOccupiedMalusDisabled() {
+		towerOccupiedMalusDisabled= true;
+	}
+	
+	
 }

@@ -2,6 +2,8 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import java.util.Set;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
+
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
@@ -17,6 +19,8 @@ public class HarvestAndProductionHandler {
 	}
 	
 	public void startHarvest(Player player, int value){
+		if(value<1)
+			throw new IllegalArgumentException();
 		//taking the cards
 		Set<DevelopmentCard>  set = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.TERRITORYCARD);
 		
@@ -30,6 +34,9 @@ public class HarvestAndProductionHandler {
 	}
 	
 	public void startProduction(Player player, int value){
+		if(value<1)
+			throw new IllegalArgumentException();
+		
 		//taking the cards
 		Set<DevelopmentCard>  set = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.BUILDINGCARD);
 		
@@ -60,10 +67,15 @@ public class HarvestAndProductionHandler {
 						e.printStackTrace();
 					}
 				}
-			//	if(player.getStatus()!= PlayerStatus.PLAYING && player.getStatus() != PlayerStatus.SECONDPLAY )  
+				synchronized (player) {
+					if(player.getStatus()!= PlayerStatus.PLAYING && player.getStatus() != PlayerStatus.SECONDPLAY ){
+					//	the player is no more doing harvest or production (for example if timeout happens)
+						player.setCardUsed(null);
+						break;
+				}
 				
-				//if the player is no more doing harvest or production (for example if timeout happens)
-				//	break;
+				}
+				
 			}
 			player.setCardUsed(null);
 		}

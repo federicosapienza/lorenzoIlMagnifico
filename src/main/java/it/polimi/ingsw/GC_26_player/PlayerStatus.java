@@ -15,6 +15,7 @@ public enum PlayerStatus {
 	PLAYING,
 	CHOOSINGPAYMENT,  // This status is needed because player could be asked to choose payment
 	TRADING,
+	TRADINGCOUNCILPRIVILEDGES,
 	ACTIONPERFORMED, // the status  reached when player can convert Diplomatic Priviledges and use Leader cards
 	SECONDPLAY,
 	SUSPENDED , // reached when a player has not performed an action 

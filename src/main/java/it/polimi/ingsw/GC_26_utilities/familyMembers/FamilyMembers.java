@@ -47,11 +47,14 @@ public class FamilyMembers {
 	
 	
 	public void setValues(Dices dices){
-		int malus = player.getPermanentModifiers().getColouredMembersMalusValue();
-		orangeMember.setValue(dices.readDice(Colour.ORANGE)-malus);
-        blackMember.setValue(dices.readDice(Colour.BLACK)-malus);
-        whiteMember.setValue(dices.readDice(Colour.WHITE)-malus);
-        neutralMember.setValue(GameParameters.getDefaultNeutralValue());
+		//reduce of permanent effect
+		int colouredChange = player.getPermanentModifiers().getColouredMemberChange();
+		int neutralChange = player.getPermanentModifiers().getneutralMemberChange();
+		
+		orangeMember.setValue(dices.readDice(Colour.ORANGE)+colouredChange);
+        blackMember.setValue(dices.readDice(Colour.BLACK)+colouredChange);
+        whiteMember.setValue(dices.readDice(Colour.WHITE)+colouredChange);
+        neutralMember.setValue(GameParameters.getDefaultNeutralValue()+neutralChange);
 	}
 	
 	public Set<FamilyMember> whatIsFree() {  //returns the set of the free familyMembers

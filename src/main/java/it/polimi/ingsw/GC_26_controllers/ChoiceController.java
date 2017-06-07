@@ -7,7 +7,6 @@ import it.polimi.ingsw.GC_26_actionsHandlers.VaticanReportHandler;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_serverView.Observer;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 //the controller called whenever the game asks the client to perform a specific choice
 public class ChoiceController implements Observer<Integer>{
@@ -32,8 +31,7 @@ public class ChoiceController implements Observer<Integer>{
 		if(status == PlayerStatus.VATICANREPORTDECISION)
 			vaticanReportController(choice);
 		
-		if(status==PlayerStatus.ACTIONPERFORMED || status== PlayerStatus.SECONDPLAY 
-				&& player.getWarehouse().areResourcesEnough(ResourcesOrPoints.newPoints(0, 0, 0, 1)))
+		if(status==PlayerStatus.VATICANREPORTDECISION )
 			//player is trading diplomatic privileges
 			diplomaticPrivilegesController( choice);
 
@@ -101,7 +99,17 @@ public class ChoiceController implements Observer<Integer>{
 				if (!flag)  // the player is notified by the handler
 					return;
 				handler.perform(player, choice);
-		}
+				synchronized (player) {
+					if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
+						return;
+					 //going back to previous state of the game, if time not expired and restarting the action that was interrputed
+					if(player.getWarehouse().getCouncilPrivileges()>0)
+						return;
+					if(player.isThereAsecondaryAction())
+						player.setStatus(PlayerStatus.SECONDPLAY);
+					else player.setStatus(PlayerStatus.ACTIONPERFORMED);
+				}
+				}
 			catch(IllegalArgumentException e){
 				e.printStackTrace();
 				synchronized (player) {

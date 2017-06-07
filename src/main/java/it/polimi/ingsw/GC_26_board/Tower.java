@@ -97,7 +97,6 @@ public class Tower {
 		return cardsForThisPeriod;
 	}
 	
-	//TODO cambiare il sisrema di inserimento
 	
 	    //checks if  the family member can be put there 
 		//1) if the member is neutral , player is not added to the list 
