@@ -1,6 +1,6 @@
 package it.polimi.ingsw.GC_26_serverView;
 
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelpmentCardImplementation;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.payments.MilitaryPointPayment;
 import it.polimi.ingsw.GC_26_gameLogic.Game;
 import it.polimi.ingsw.GC_26_player.Player;

@@ -1,9 +1,11 @@
 	   {
 	  	"name": "Forest",
 	  	"period": 1,
+	  	"typeOfImmediateEffect" : "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,1,0,0,0,0,0
 	  		],
+	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
 	  	"permanentResourcesAndPoints": [
 	  		0,0,3,0,0,0,0,0
 	  		],

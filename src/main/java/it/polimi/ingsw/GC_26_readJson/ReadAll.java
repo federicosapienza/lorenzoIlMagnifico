@@ -11,8 +11,8 @@ public class ReadAll {
 	
 	public void readDevelopmentCards(){
 		territoryCardsReader.readCards(1,cards);
-		territoryCardsReader.readCards(2,cards);
-		territoryCardsReader.readCards(3,cards);
+		//territoryCardsReader.readCards(2,cards);
+		//territoryCardsReader.readCards(3,cards);
 	}
 
 }

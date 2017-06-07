@@ -10,12 +10,14 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.*;
 import com.google.gson.*;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelpmentCardImplementation;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
+import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
 import it.polimi.ingsw.GC_26_cards.leaderCard.PointsOrResourcesRequirement;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Points;
+import it.polimi.ingsw.GC_26_cards.payments.ResourcesPayment;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -50,13 +52,13 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 	private DevelopmentCardTypes permanentCardNumberToResourcesCardType;
 	private String permanentCardsNumberToResourcesCardType;
 
-		public static void main(String [] args){
+		/*public static void main(String [] args){
 			BuildingCardsReader rbc = new BuildingCardsReader();
 			rbc.readCards(3);//per ora li metto manualmente qua i valori
 			
-		}
+		}*/
 		
-		private void readCards(int numberOfList){
+		private void readCards(int numberOfList,CardsImplementation cardsImplementation){
 			String[] ListOfPaths = chooseListOfCards(numberOfList);
 			for(String s:ListOfPaths){
 				jsonObject= super.createJsonObjectFromFile(s);
@@ -66,7 +68,7 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 				paymentList=super.readPayment();
 				immediateResourcesAndPointsList=super.readImmediateResourcesAndPoints();
 				permanentEffectType=super.readPermanentEffectType();
-				readRightEffect(permanentEffectType);
+			//	super.readRightEffectAndCreateCard(permanentEffectType,cardsImplementation,numberOfList);
 				stamp(); 
 				//TODO create right enum CARDTYPE
 				//TODO createRightEffect();
@@ -111,30 +113,8 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 				throw new IllegalArgumentException();
 			}
 		}
-		
-		private void readRightEffect(String effectType){
-			if(effectType.equals("singleTrade")){
-												permanentTradeEffectGive1ResList=super.readPermanentTradeEffectGive1Resources();
-												permanentTradeEffectReceive1ResList= super.readPermanentTradeEffectReceive1Resources();
-												}
-			if(effectType.equals("doubleTrade")){
-												permanentTradeEffectGive1ResList=super.readPermanentTradeEffectGive1Resources();
-												permanentTradeEffectReceive1ResList= super.readPermanentTradeEffectReceive1Resources();
-												permanentTradeEffectGive2ResList=super.readPermanentTradeEffectGive2Resources();
-												permanentTradeEffectReceive2ResList=super.readPermanentTradeEffectReceive2Resources();
-												}
-			if(effectType.equals("cardsNumberToResources")){
-												permanentCardsNumberToResourcesEffectResourcesAndPointsList=super.readPermanentCardsNumberToResourcesEffect();
-												permanentCardsNumberToResourcesCardType=super.readPermanentCardsNumberToResourcesCardType();
-												}
-			if(effectType.equals("addResourcesAndPoints")){
-												permanentResourcesAndPointsList=super.readPermanentResourcesAndPoints();
-												}
-		}
-		
-}
-		
-		
+			
+}	
 		
 		
 		

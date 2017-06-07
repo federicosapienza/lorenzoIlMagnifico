@@ -1,9 +1,11 @@
 	   {
 	  	"name": "City",
 	  	"period": 1,
+	  	"typeOfImmediateEffect" :"addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		3,0,0,0,0,0,0,0
 	  		],
+	  	"typeOfPermanentEffect" :"addResourcesAndPoints",
 	  	"permanentResourcesAndPoints": [
 	  		0,0,0,0,0,0,0,1
 	  		],
