@@ -1,6 +1,8 @@
 package it.polimi.ingsw.GC_26_controllers;
 
+
 import it.polimi.ingsw.GC_26_actionsHandlers.DiplomaticPrivilegesHandler;
+import it.polimi.ingsw.GC_26_actionsHandlers.LeaderCardHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.TradeHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.VaticanReportHandler;
@@ -31,11 +33,16 @@ public class ChoiceController implements Observer<Integer>{
 		if(status == PlayerStatus.VATICANREPORTDECISION)
 			vaticanReportController(choice);
 		
-		if(status==PlayerStatus.VATICANREPORTDECISION )
+		if(status==PlayerStatus.TRADINGCOUNCILPRIVILEDGES )
 			//player is trading diplomatic privileges
 			diplomaticPrivilegesController( choice);
+		if(status==PlayerStatus.ACTIONPERFORMED)
+			//player Is asking to use Leader Card
+			leaderCardsController(choice);
 
 	}
+
+
 
 	private void tradeController(int choice){
 		try{
@@ -95,10 +102,10 @@ public class ChoiceController implements Observer<Integer>{
 		private void diplomaticPrivilegesController(int choice) {
 			try{
 				DiplomaticPrivilegesHandler handler= handlers.getDiplomaticPrivilegesHandler();
-				boolean flag = handler.isPossible(player, choice);
+				boolean flag = handler.isPossible(player, choice--);  //because player will send a value >=1, but we want it starting from zero
 				if (!flag)  // the player is notified by the handler
 					return;
-				handler.perform(player, choice);
+				handler.perform(player, choice--);
 				synchronized (player) {
 					if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 						return;
@@ -147,5 +154,28 @@ public class ChoiceController implements Observer<Integer>{
 				}
 				}	
 			
-		}	
+		}
+		
+		
+		private void leaderCardsController(Integer choice) {
+			
+		try{
+			LeaderCardHandler handler= handlers.getLeaderCardHandler(); 
+			boolean flag = handler.isPossible(player, choice); //because player will send a value >=1, but we want it starting from zero
+			if (!flag)  // the player is notified by the handler
+				return;
+			handler.perform(player, choice);
+			synchronized (player) {
+				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
+					return;
+				 //going back to previous state of the game, if time not expired and restarting the action that was interrupted
+				if(player.getWarehouse().getCouncilPrivileges()>0)
+					player.setStatus(PlayerStatus.TRADINGCOUNCILPRIVILEDGES);
+				//altrimenti lo stato resta lo stesso
+				}
+		}
+		catch( IllegalStateException e){
+			player.notifyObservers("wrong action");
+		}
+		}
 }

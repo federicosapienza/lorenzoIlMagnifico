@@ -35,8 +35,8 @@ public class ActionPerformerHandler {
 		//1) if the member is neutral , player is not added to the list 
 		//2) if is a secondary action familyMember is null and player is not added
 		tower.setPlayerInTheTower(familyMember);  
-		//if the tower is occupied pay coins(or any payment if rules are changed)
-		if(tower.isTheTowerOccupied()){
+		//if the tower is occupied pay coins(or any payment if rules are changed)(and Brunelleschi effect is not activated)
+		if(tower.isTheTowerOccupied()& !player.getPermanentModifiers().isTowerOccupiedMalusDisabled()){
 		player.getWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
 		
 		//going to position 
@@ -50,8 +50,8 @@ public class ActionPerformerHandler {
 		//getting the card
 		
 		DevelopmentCard card = position.getCard();
-		player.setCardUsed(card);//pointer to this card used if the action is interrupted (i.e. for double payments choice) 
-		
+		//saves the reference to the card used: useful if the action is interrupted (i.e. for double payments choice)
+		player.setCardUsed(card);
 		//paying the card
 		card.pay(player);
 		while(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT){ // This status reached when player is asked to choose payment

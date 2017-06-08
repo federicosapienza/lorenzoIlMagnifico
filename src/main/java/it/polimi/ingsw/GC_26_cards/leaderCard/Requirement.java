@@ -5,6 +5,6 @@ import it.polimi.ingsw.GC_26_player.Player;
 
 public interface Requirement {
 	boolean checkRequirement(Player player);
-	Requirement copy();
+
 
 }

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
 
-import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
@@ -15,19 +14,16 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
  * 	 the first reward possible is given. (choices right value are set between 1 and 5 in the standard game.
  */
 public class DiplomaticPrivilegesHandler {
-	private GameElements gameElements;
 	private  ResourcesOrPoints[] diplomaticPrivilegesTrades= GameParameters.getDiplomaticPrivilegesTrades();
 	private boolean used[];
 
-	public DiplomaticPrivilegesHandler(GameElements gameElements) {
-		this.gameElements =gameElements;
+	public DiplomaticPrivilegesHandler() {
 		used= new boolean[diplomaticPrivilegesTrades.length];
 		resetMemory();
 		
 	}
 	
 	public boolean isPossible(Player player , int choice){  
-		choice= choice--;
 		if(!player.getWarehouse().areResourcesEnough(ResourcesOrPoints.newPoints(0, 0, 0, 1))){
 			throw new IllegalStateException();
 		}
@@ -44,7 +40,6 @@ public class DiplomaticPrivilegesHandler {
 	}
 	
 	public void perform(Player player , int choice){  
-		choice= choice--;
 		
 		if(!player.getWarehouse().areResourcesEnough(ResourcesOrPoints.newPoints(0, 0, 0, 1)))
 			throw new IllegalStateException();

@@ -51,6 +51,8 @@ public class EndTurnController {
 	player.getWarehouse().resetCouncilPriviledges();
 	player.endTurn();
 	handlers.getGameElements().getGame().getPeriod().getCurrentRound().endPlayerTurn();
+	handlers.getLeaderCardHandler().endTurn();
+	handlers.getDiplomaticPrivilegesHandler().resetMemory();
 		
 		
 	}	

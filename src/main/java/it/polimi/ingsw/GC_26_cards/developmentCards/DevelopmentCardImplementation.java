@@ -74,8 +74,9 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 
 	@Override
 	public boolean canPlayerGetThis(Player player) {
-		// if the card is a territory card we first of all need to check if player has enough military points 
-		if(type== DevelopmentCardTypes.TERRITORYCARD){
+		// if the card is a territory card we first of all need to check if player has enough military points
+		//also checks Cesare Borgia Effect
+		if(type== DevelopmentCardTypes.TERRITORYCARD && !player.getPermanentModifiers().isMilitaryPointRequirementNotNeeded()){
 			int territoryCardOwned = player.getPersonalBoard().getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD);
 			if(player.getWarehouse().getMilitaryPoints() < GameParameters.getTerritoryCardRequirements(territoryCardOwned))
 				player.notifyObservers("not enough military points  for a new territory card");

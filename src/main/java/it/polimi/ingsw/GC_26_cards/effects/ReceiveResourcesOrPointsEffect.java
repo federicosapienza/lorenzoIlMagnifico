@@ -2,7 +2,6 @@ package it.polimi.ingsw.GC_26_cards.effects;
 
 
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Resources;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class ReceiveResourcesOrPointsEffect implements Effect{

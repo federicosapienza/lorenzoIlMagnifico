@@ -24,8 +24,7 @@ public class MilitaryPointPayment implements Payment{
 	
 	@Override
 	public synchronized boolean canPlayerGetThis(Player player, DevelopmentCardTypes type) {
-		if(player.getWarehouse().getMilitaryPoints()<= needed || 
-				player.getPermanentModifiers().isMilitaryPointRequirementNotNeeded()==true)// Cesare Borgia effect
+		if(player.getWarehouse().getMilitaryPoints()<= needed )
 			return false;
 		if(player.getWarehouse().getMilitaryPoints()<toSpend)  //useless if isMilitaryPointRequirementNotNeeded()==false
 			return false;

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.GC_26_player;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -64,7 +67,6 @@ public class PermanentModifiers {
 	public Boolean IsTherediscountOnResources(BoardZone zone) {
 		return discountOnResources;
 	}
-	
 	public void addDiscount(BoardZone zone, ResourcesOrPoints res){
 		ResourcesOrPoints temp = discounts.get(zone);
 		if(temp==null){  // if there was no discount
@@ -77,7 +79,6 @@ public class PermanentModifiers {
 					discounts.put(BoardZone.CHARACTERTOWER, res);
 					discounts.put(BoardZone.BUILDINGTOWER, res);
 				}
-			
 		}
 		else{//there was discount
 			if(zone!=null) //(i.e Dame effect)
@@ -89,10 +90,8 @@ public class PermanentModifiers {
 					discounts.put(BoardZone.CHARACTERTOWER,ResourcesOrPoints.sum(res, temp));
 					discounts.put(BoardZone.BUILDINGTOWER, ResourcesOrPoints.sum(res, temp));
 				}
-			}
-			
+			}	
 	}
-	
 	public ResourcesOrPoints getDiscount(BoardZone zone){
 		ResourcesOrPoints discount = discounts.get(zone);
 		if(zone==null){   //if there is no discount
@@ -101,10 +100,10 @@ public class PermanentModifiers {
 		else return discount;
 	}
 	
-	
-	public  ResourcesOrPoints resourcesOrPointsDiscount(BoardZone zone, ResourcesOrPoints price){  //checked and called in ResourcesOrPointPayment;
-		/*Created for handling Pico Della Mirandola card and Dame, developed in order to be useful in case of creation of similar cards
-		 */
+	//checked and called in ResourcesOrPointPayment;
+			/*Created for handling Pico Della Mirandola card and Dame, developed in order to be useful in case of creation of similar cards
+			 */
+	public  ResourcesOrPoints resourcesOrPointsDiscount(BoardZone zone, ResourcesOrPoints price){  
 		ResourcesOrPoints  discount= discounts.get(zone);
 		return ResourcesOrPoints.subtract(price, discount);
 			
@@ -181,10 +180,7 @@ public class PermanentModifiers {
 		neutralMemberChange += value;
 	}
 	
-	
-	
-	
-	
+
 	
 	
 	
@@ -199,7 +195,8 @@ public class PermanentModifiers {
 	}
 	
 	
-	//excommunication tile effect: doubles the have to spend 2 servants to increase your ActionHandler value by 1 " checked and called in ActionCheckerHandler and SecondActionHandler
+	// doubles the have to spend 2 servants to increase your ActionHandler value by 1 " checked and called in ActionCheckerHandler and SecondActionHandler
+	//excommunication tile effect:
 	private boolean doubleServants=false;
 	public boolean isDoubleServantsOn() {
 		return doubleServants;
@@ -208,7 +205,7 @@ public class PermanentModifiers {
 		doubleServants =true;
 	}
 
-	//No victoryPoints for developmentCard type
+	//No victoryPoints for developmentCard type, (Borgia Effect)
 	private Set<DevelopmentCardTypes> noVictoryPointsTypes;
 	
 	public void noVictoryPointsForCardType(DevelopmentCardTypes type){
@@ -244,7 +241,7 @@ public class PermanentModifiers {
 	}
 	
 
-	//Brunelleschi effect 
+	//Brunelleschi effect : used in ActionChecker and ActionPerformer
 	private boolean towerOccupiedMalusDisabled=false;
 	
 	public boolean isTowerOccupiedMalusDisabled() {
@@ -254,6 +251,49 @@ public class PermanentModifiers {
 	public void setTowerOccupiedMalusDisabled() {
 		towerOccupiedMalusDisabled= true;
 	}
+	
+	//Setting dices Value: 
+	//Ludovico Il Moro and Federico da Montefeltro effect. 
+	//The first parameter shows how many colored family Member will have "value" value
+	//used in FamilyMembers
+	//TODO per il momento non consideriamo il caso in effetti attivati durante un turno, ma solo all' inizio
+	private boolean threeDicesChangeOn=false;
+	int value3dicesChanged=0;
+	public boolean isThreeDicesChangeOn() {
+		return threeDicesChangeOn;
+	}
+	private void setValue3dicesChanged(int value) {
+		this.value3dicesChanged = value;
+		threeDicesChangeOn=true;
+	}
+	private boolean oneDicesChangeOn=false;
+	int value1diceChanged=0;
+	public boolean isOneDiceChangeOn() {
+		return threeDicesChangeOn;
+	}
+	private void setValue1diceChanged(int value) {  
+		this.value1diceChanged = value;
+		oneDicesChangeOn=true;
+	}
+	
+	public int getValue1diceChanged() {
+		return value1diceChanged;
+	}
+	
+	public int getValue3dicesChanged() {
+		return value3dicesChanged;
+	}
+	
+	
+	public void setDicesSetted(int howManyDicesSetted, int value){
+		if(howManyDicesSetted==3)
+			setValue1diceChanged(value);
+		else setValue3dicesChanged(value);
+	}
+	
+	
+	
+	
 	
 	
 }

@@ -1,20 +1,40 @@
 package it.polimi.ingsw.GC_26_cards.leaderCard;
 
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26_personalBoard.PersonalBoard;
 import it.polimi.ingsw.GC_26_player.Player;
-//TODO
+
+
 public class CardNumbersRequirement implements Requirement{
-
-	@Override
-	public boolean checkRequirement(Player player) {
-		// TODO Auto-generated method stub
-		return false;
+	private final int territoryCardsRequired;
+	private final int buildingCardsRequired;
+	private final int characterCardsRequired;
+	private final int ventureCardsRequired;
+	
+	
+	public CardNumbersRequirement(int territoryCardsRequired, int buildingCardsRequired, int characterCardsRequired,
+			int ventureCardsRequired) {
+		this.territoryCardsRequired = territoryCardsRequired;
+		this.buildingCardsRequired = buildingCardsRequired;
+		this.characterCardsRequired = characterCardsRequired;
+		this.ventureCardsRequired = ventureCardsRequired;
 	}
 
 	@Override
-	public Requirement copy() {
-		// TODO Auto-generated method stub
-		return null;
+	public synchronized boolean checkRequirement(Player player) {
+		PersonalBoard personalBoard =player.getPersonalBoard();
+		return personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD)>=territoryCardsRequired &&
+				personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.BUILDINGCARD)>=buildingCardsRequired &&
+				personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.CHARACTERCARD)>=characterCardsRequired &&
+				personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.VENTURECARD)>=ventureCardsRequired;
 	}
+	
+	@Override
+	public String toString() {
+		return "Player needs "+ territoryCardsRequired +" territory Cards " + buildingCardsRequired +" building Cards "
+				+ characterCardsRequired +" character Cards "+ ventureCardsRequired +" venture Cards ."  ;
+	}
+
 	
 
 }

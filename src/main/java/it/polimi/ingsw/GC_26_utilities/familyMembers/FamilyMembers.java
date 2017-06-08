@@ -3,6 +3,8 @@ import it.polimi.ingsw.GC_26_utilities.dices.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.omg.CORBA.portable.ValueBase;
+
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 
@@ -82,18 +84,38 @@ public class FamilyMembers {
 	
 	/**
 	 * Method that sets the value for every family member to the correct value of the corresponding dice.
-	 * If the player is under the effect of a malus, 
-	 * his family members will have a value subtracted of an amount equal to malus.
+	 * Furthermore, if the player has some effects that change is values(i.e his family members value are set or
+	 *    he is under the effect of a malus), his family members value will be modified.
 	 * @param dices It's the set of dices that assigns the corresponding value for every family member. 
 	 */
 	public void setValues(Dices dices){
-		//reduce of permanent effect
+		//changes of permanent effect	
+		
+		int orangeDice= dices.readDice(Colour.ORANGE);
+		int blackDice=dices.readDice(Colour.BLACK);
+		int whiteDice= dices.readDice(Colour.WHITE);
+		if(player.getPermanentModifiers().isThreeDicesChangeOn()){  //Ludovico Il moro Effect
+			orangeDice=player.getPermanentModifiers().getValue3dicesChanged();
+			whiteDice= player.getPermanentModifiers().getValue3dicesChanged();
+			blackDice= player.getPermanentModifiers().getValue3dicesChanged();
+		}
+		if(player.getPermanentModifiers().isOneDiceChangeOn()){ //Federico Da Montefeltro effect
+			int test = searchSmaller(orangeDice,whiteDice,blackDice);
+			if(test==1)
+				orangeDice=player.getPermanentModifiers().getValue1diceChanged();
+			else  if(test==2)
+				blackDice=player.getPermanentModifiers().getValue1diceChanged();
+			else if(test==3)
+				whiteDice=player.getPermanentModifiers().getValue1diceChanged();
+		}
+			
+		
 		int colouredChange = player.getPermanentModifiers().getColouredMemberChange();
 		int neutralChange = player.getPermanentModifiers().getneutralMemberChange();
 		
-		orangeMember.setValue(dices.readDice(Colour.ORANGE)+colouredChange);
-        blackMember.setValue(dices.readDice(Colour.BLACK)+colouredChange);
-        whiteMember.setValue(dices.readDice(Colour.WHITE)+colouredChange);
+		orangeMember.setValue(orangeDice+colouredChange);
+        blackMember.setValue(blackDice+colouredChange);
+        whiteMember.setValue(whiteDice+colouredChange);
         neutralMember.setValue(GameParameters.getDefaultNeutralValue()+neutralChange);
 	}
 	
@@ -129,5 +151,26 @@ public class FamilyMembers {
 		neutralMember.setFree();
 	}
 	
+	/**
+	 * Method that finds the smaller of three integer(in case two are equals the first is preferred.)
+	 * .
+	 * @param test1. : the first  integer value
+	 * @param test1. : the second integer value
+	 * @param test3. : the third integer value
+	 * 
+	 * @return  the number corresponding to the number of the argument received which was smaller
+	 */
+	
+	private int searchSmaller(int test1, int test2, int test3){
+		int temp=1;
+		int smallerValue=test1;
+		if(test2<smallerValue){
+			temp=2;
+			smallerValue=test2;
+		}
+		if(test3<smallerValue)
+			temp=3;
+		return temp;
+	}
 	
 }

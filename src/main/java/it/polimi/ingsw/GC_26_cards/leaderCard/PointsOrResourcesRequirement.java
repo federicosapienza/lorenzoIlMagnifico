@@ -4,21 +4,23 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class PointsOrResourcesRequirement implements Requirement{
-	//TODO
-	ResourcesOrPoints needed;
+	private final ResourcesOrPoints needed;
+	
+	public PointsOrResourcesRequirement(ResourcesOrPoints needed) {
+		this.needed= needed;
+	}
 	
 	
 	@Override
 	public boolean checkRequirement(Player player) {
-		// TODO Auto-generated method stub
-		return false;
+		return player.getWarehouse().areResourcesEnough(needed);
+	}
+	
+	@Override
+	public String toString() {
+		return "Player needs "+needed;
 	}
 
-	@Override
-	public Requirement copy() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 		
 
 }

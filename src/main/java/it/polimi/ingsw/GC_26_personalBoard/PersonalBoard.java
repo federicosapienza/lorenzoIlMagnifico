@@ -7,9 +7,9 @@ import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import it.polimi.ingsw.GC_26_serverView.Observable;
 
 import java.util.Set;
-
-
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * 
@@ -35,7 +35,7 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	private Set<DevelopmentCard> ventureCardSet= new HashSet<>();
 	
 	//it's the set of leader cards
-	private Set<LeaderCard> leaderCardSet= new HashSet<>();
+	private List<LeaderCard> leaderCardSet= new ArrayList<>();
 	
 	//it's a counter that counts the number of territory cards
 	private int territoryCardCounter;
@@ -129,10 +129,10 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	}
 	
 	/**
-	 * Method that returns the set of leader cards.
-	 * @return leaderCardSet It's set of leader cards
+	 * Method that returns the list of leader cards.
+	 * @return leaderCardSet It's list of leader cards
 	 */
-	public Set<LeaderCard> getLeaderCard(){
+	public List<LeaderCard> getLeadersCard(){
 		return leaderCardSet;
 	}
 	

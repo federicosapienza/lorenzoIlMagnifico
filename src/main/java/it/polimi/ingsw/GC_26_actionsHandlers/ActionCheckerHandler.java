@@ -51,8 +51,8 @@ public class ActionCheckerHandler {
 			return false ;
 					}
 		
-			//if the tower is occupied pay coins(or whatever payment, if rules are changed)if possible
-		if(tower.isTheTowerOccupied()){
+		//if the tower is occupied pay coins(or whatever payment, if rules are changed)if possible; also checks that Brunelleschi effect not activated
+		if(tower.isTheTowerOccupied()&& !player.getPermanentModifiers().isTowerBonusRevokedOn()){
 				if (!player.getTestWarehouse().areResourcesEnough(GameParameters.getTowerOccupiedMalus())){
 					player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
 					player.notifyObservers("Not enough resources for going in a occupied tower");
