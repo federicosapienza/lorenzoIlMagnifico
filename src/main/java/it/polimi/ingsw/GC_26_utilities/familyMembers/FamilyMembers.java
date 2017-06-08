@@ -84,8 +84,8 @@ public class FamilyMembers {
 	
 	/**
 	 * Method that sets the value for every family member to the correct value of the corresponding dice.
-	 * Furthermore, if the player has some effects that change is values(i.e his family members value are set or
-	 *    he is under the effect of a malus), his family members value will be modified.
+	 * Furthermore, if the player got some effects that change his values(i.e his family members values are changed or
+	 * he is under the effect of a malus), his family members' values will be modified.
 	 * @param dices It's the set of dices that assigns the corresponding value for every family member. 
 	 */
 	public void setValues(Dices dices){
@@ -153,12 +153,12 @@ public class FamilyMembers {
 	
 	/**
 	 * Method that finds the smaller of three integer(in case two are equals the first is preferred.)
-	 * .
-	 * @param test1. : the first  integer value
+	 * 
+	 * @param test1. : the first integer value
 	 * @param test1. : the second integer value
 	 * @param test3. : the third integer value
 	 * 
-	 * @return  the number corresponding to the number of the argument received which was smaller
+	 * @return temp It's the number corresponding to the number of the argument received which was smaller
 	 */
 	
 	private int searchSmaller(int test1, int test2, int test3){
