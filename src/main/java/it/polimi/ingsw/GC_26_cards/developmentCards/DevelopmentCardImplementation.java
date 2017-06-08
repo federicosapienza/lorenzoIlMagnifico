@@ -7,11 +7,10 @@ import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 
 //It 's the implementation used by Character and Venture Cards. Territories and building cards extend this. 
-public class DevelopmentCardImplementation implements DevelopmentCard{
+public class DevelopmentCardImplementation extends DevelopmentCard{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private final String name;
 	private final int period;
 	private final DevelopmentCardTypes type;
@@ -112,10 +111,7 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 		
 	}
 
-	@Override
-	public String getTypeOfCard() {
-		return "Development Card";
-	}
+	
 
 	@Override
 	public DevelopmentCardTypes getCardType() {
@@ -132,10 +128,7 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 		return permanentEffect.toString();
 	}
 
-	@Override
-	public String getRequirementDescriber() {
-		return null;
-	}
+	
 
 	
 

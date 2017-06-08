@@ -13,6 +13,7 @@ public class ClientMainServerView {
 	private StringInputView stringInputView ;
 	private ActionInputView actionInputView;
 	private PositionView positionView;
+	private FamilyMembersView familyMembersView;
 	
 	private ServerConnectionToClient connection;
 	
@@ -26,6 +27,7 @@ public class ClientMainServerView {
 		stringInputView = new StringInputView();
 		actionInputView = new ActionInputView();
 		positionView =new PositionView(connection);
+		familyMembersView = new FamilyMembersView(connection);
 		
 		this.connection= connection;
 		
@@ -102,6 +104,10 @@ public class ClientMainServerView {
 		return positionView;
 	}
 
+	
+	public FamilyMembersView getFamilyMembersView() {
+		return familyMembersView;
+	}
 
 
 

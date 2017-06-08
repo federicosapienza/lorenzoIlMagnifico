@@ -1,7 +1,6 @@
 package it.polimi.ingsw.GC_26_cards.effects;
 
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26_cards.payments.MilitaryPointPayment;
+//TODO cambiare nome
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
@@ -20,10 +19,12 @@ public class GainPointsPerAnyMilitaryPointEffect implements Effect{
 
 		@Override
 		public synchronized void doEffect(Player player, boolean immediate) {
-			int temp =player.getWarehouse().getMilitaryPoints();
-			ResourcesOrPoints.newResourcesOrPoints(toHave.getCoins()*temp,
-					toHave.getServants()*temp, toHave.getWood()*temp, toHave.getStone()*temp,
-					toHave.getVictoryPoints()*temp, toHave.getMilitaryPoints()*temp,toHave.getFaithPoints()*temp, 0);
+			Warehouse temp =player.getWarehouse();
+			int test = toHave.getCoins()*temp.getCoins()+
+					toHave.getServants()+temp.getServants()+ toHave.getWood()*temp.getWood()+ toHave.getStone()*temp.getStone()+
+					toHave.getVictoryPoints()*temp.getVictoryPoints()+toHave.getMilitaryPoints()*temp.getMilitaryPoints()+
+					toHave.getFaithPoints()*temp.getFaithPoints();
+			temp.add(ResourcesOrPoints.newPoints(test, 0, 0, 0));
 			}
 			
 		

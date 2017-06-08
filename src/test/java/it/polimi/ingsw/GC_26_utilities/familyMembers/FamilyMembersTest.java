@@ -10,6 +10,7 @@ public class FamilyMembersTest {
     FamilyMembers familyMembersSet;
     Player player;
     ResourcesOrPoints startingResources;
+    
     @Test
     public void test() {
     	familyMembersSet = new FamilyMembers(player);
@@ -18,7 +19,7 @@ public class FamilyMembersTest {
     	int blackValue = dices.readDice(Colour.BLACK);
     	int orangeValue = dices.readDice(Colour.ORANGE);
     	familyMembersSet.setValues(dices);
-    	assertEquals(blackValue, familyMembersSet.getfamilyMember(Colour.BLACK).getValue());;
+    	assertEquals(blackValue, familyMembersSet.getfamilyMember(Colour.BLACK).getValue());
     	assertEquals(whiteValue, familyMembersSet.getfamilyMember(Colour.WHITE).getValue());
     	assertEquals(orangeValue, familyMembersSet.getfamilyMember(Colour.ORANGE).getValue());
     	assertEquals(0, familyMembersSet.getfamilyMember(Colour.NEUTRAL).getValue());

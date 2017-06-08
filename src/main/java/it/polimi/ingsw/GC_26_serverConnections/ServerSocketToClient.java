@@ -7,13 +7,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import org.w3c.dom.css.ViewCSS;
 
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 import it.polimi.ingsw.GC_26_serverView.Server;
+import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
 
@@ -131,6 +131,12 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 		@Override
 		public void send(PositionDescriber position) {
 			sendMethod(position);
+		}
+
+		@Override
+		public void send(FamilyMembersDescriber familyMembersDescriber) {
+			sendMethod(familyMembersDescriber);
+			
 		}
 		
 			
