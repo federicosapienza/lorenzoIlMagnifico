@@ -17,7 +17,7 @@ public class SetSecondAction implements Effect{
 	
 	public SetSecondAction(BoardZone zone, int value, ResourcesOrPoints discount) {
 		this.value= value;
-		this.action= new Action(null, zone, 0,null,0);
+		this.action= new Action( zone, 0,null,0);
 		this.secondActionDiscount=discount;
 	}
 	

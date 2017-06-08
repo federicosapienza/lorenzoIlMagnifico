@@ -8,24 +8,18 @@ import it.polimi.ingsw.GC_26_client_clientLogic.MainClientView;
 import it.polimi.ingsw.GC_26_client_clientLogic.PositionView;
 import it.polimi.ingsw.GC_26_client_connection.ClientConnection;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
+import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 
-public class ClientoutputController implements Runnable {
-	private ClientConnection connection; 
+public class ClientController {
 	private String playerPlaying;
 	private MainClientView view;
 	
 
-	public ClientoutputController(ClientConnection connection) {
-		this.connection=connection;
-	}
+	
 
-	@Override
-	public void run() {
-		connection.run(this);
-		
-	}
+	
 	
 	public void receiveCard(CardDescriber card){
 		if(view.getGameStatus()==GameStatus.INITIALAISINGGAME||view.getGameStatus()==GameStatus.INITIALAISINGTURN){
@@ -53,7 +47,7 @@ public class ClientoutputController implements Runnable {
 			//TODO
 	}
 	
-	public void receiveAction(Action action){
+	public void receiveAction(ActionNotification action){
 		if(view.getGameStatus()==GameStatus.INITIALAISINGGAME||view.getGameStatus()==GameStatus.INITIALAISINGTURN)
 			throw new IllegalStateException();
 		if(view.getGameStatus()==GameStatus.PLAYING){
@@ -98,6 +92,11 @@ public class ClientoutputController implements Runnable {
 				view.setPlayerStatus(PlayerStatus.VATICANREPORTDECISION);
 			if(string.contains(PlayerStatus.SUSPENDED.toString()))
 				view.setPlayerStatus(PlayerStatus.SUSPENDED);
+	}
+
+	public void setLoginDone() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
