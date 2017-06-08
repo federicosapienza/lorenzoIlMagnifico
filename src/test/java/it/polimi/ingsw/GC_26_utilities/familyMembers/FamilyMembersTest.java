@@ -10,6 +10,7 @@ public class FamilyMembersTest {
     FamilyMembers familyMembersSet;
     Player player;
     ResourcesOrPoints startingResources;
+    PermanentModifiers permModifiers = null;
     @Test
     public void test() {
     	familyMembersSet = new FamilyMembers(player);
@@ -18,10 +19,10 @@ public class FamilyMembersTest {
     	int blackValue = dices.readDice(Colour.BLACK);
     	int orangeValue = dices.readDice(Colour.ORANGE);
     	familyMembersSet.setValues(dices);
-    	assertEquals(blackValue, familyMembersSet.getfamilyMember(Colour.BLACK).getValue());;
-    	assertEquals(whiteValue, familyMembersSet.getfamilyMember(Colour.WHITE).getValue());
-    	assertEquals(orangeValue, familyMembersSet.getfamilyMember(Colour.ORANGE).getValue());
-    	assertEquals(0, familyMembersSet.getfamilyMember(Colour.NEUTRAL).getValue());
+    	assertTrue(familyMembersSet.getfamilyMember(Colour.BLACK).getValue() == blackValue || familyMembersSet.getfamilyMember(Colour.BLACK).getValue() == player.getPermanentModifiers().getValue3dicesChanged() + player.getPermanentModifiers().getColouredMemberChange() || familyMembersSet.getfamilyMember(Colour.BLACK).getValue() == player.getPermanentModifiers().getColouredMemberChange() + player.getPermanentModifiers().getValue1diceChanged());
+    	assertTrue(familyMembersSet.getfamilyMember(Colour.ORANGE).getValue() == orangeValue || familyMembersSet.getfamilyMember(Colour.ORANGE).getValue() == player.getPermanentModifiers().getValue3dicesChanged() + player.getPermanentModifiers().getColouredMemberChange() || familyMembersSet.getfamilyMember(Colour.ORANGE).getValue() == player.getPermanentModifiers().getColouredMemberChange() + player.getPermanentModifiers().getValue1diceChanged());
+    	assertTrue(familyMembersSet.getfamilyMember(Colour.WHITE).getValue() == whiteValue || familyMembersSet.getfamilyMember(Colour.WHITE).getValue() == player.getPermanentModifiers().getValue3dicesChanged() + player.getPermanentModifiers().getColouredMemberChange() || familyMembersSet.getfamilyMember(Colour.WHITE).getValue() == player.getPermanentModifiers().getColouredMemberChange() + player.getPermanentModifiers().getValue1diceChanged());
+    	assertTrue(familyMembersSet.getfamilyMember(Colour.NEUTRAL).getValue() == 0 || familyMembersSet.getfamilyMember(Colour.NEUTRAL).getValue() == player.getPermanentModifiers().getneutralMemberChange());
     }
 
 }

@@ -256,7 +256,7 @@ public class PermanentModifiers {
 	//Ludovico Il Moro and Federico da Montefeltro effect. 
 	//The first parameter shows how many colored family Member will have "value" value
 	//used in FamilyMembers
-	//TODO per il momento non consideriamo il caso in effetti attivati durante un turno, ma solo all' inizio
+	//TODO per il momento non consideriamo il caso in effetti attivati durante un turno, ma solo all'inizio
 	private boolean threeDicesChangeOn=false;
 	int value3dicesChanged=0;
 	public boolean isThreeDicesChangeOn() {
