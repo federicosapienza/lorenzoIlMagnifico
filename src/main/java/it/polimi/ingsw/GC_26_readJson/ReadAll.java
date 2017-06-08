@@ -4,6 +4,7 @@ public class ReadAll {
 	private TerritoryCardsReader territoryCardsReader = new TerritoryCardsReader();
 	private BuildingCardsReader buildingCardsReader = new BuildingCardsReader();
 	private CharacterCardsReader characterCardsReader = new CharacterCardsReader();
+	private VentureCardsReader ventureCardsReader = new VentureCardsReader();
 	private CardsImplementation cards= new CardsImplementation();
 
 	
@@ -25,5 +26,9 @@ public class ReadAll {
 		//characterCardsReader.readCards(1, cards);
 		//characterCardsReader.readCards(2, cards);
 		//characterCardsReader.readCards(3, cards);
+		
+		//ventureCardsReader.readCards(1, cards);
+		//ventureCardsReader.readCards(2, cards);
+		//ventureCardsReader.readCards(3, cards);
 	}
 }

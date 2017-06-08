@@ -14,5 +14,5 @@
 	  		],
 	  		"typeOfPermanentEffect": "actionValueModifier",
 	  	 "permanentValueModifier": 2,
-	  	 "boardzone" : "territory"
+	  	 "permanentBoardzone" : "territory"
 	  }

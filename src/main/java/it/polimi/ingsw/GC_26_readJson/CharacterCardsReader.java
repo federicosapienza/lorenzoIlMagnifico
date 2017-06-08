@@ -33,14 +33,6 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 		
 	private String name;
 	private int period;
-	private List<Integer> immediateResourcesAndPointsList = new ArrayList<Integer>(); 
-	private List<Integer> permanentResourcesAndPointsList = new ArrayList<Integer>();
-	private List<Integer> permanentCardsNumberToResourcesEffectResourcesAndPointsList = new ArrayList<Integer>();
-	private List<Integer> permanentTradeEffectGive1ResList = new ArrayList<Integer>();
-	private List<Integer> permanentTradeEffectReceive1ResList = new ArrayList<Integer>();
-	private List<Integer> permanentTradeEffectGive2ResList = new ArrayList<Integer>();
-	private List<Integer> permanentTradeEffectReceive2ResList = new ArrayList<Integer>();
-	private int actionValue;
 	private String permanentEffectType;
 	private String immediateEffectType;
 	private String permanentEffectType2;
@@ -52,7 +44,6 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 	private JsonObject jsonObject= null;
 	private JsonElement jsonElement= null;
 	private Type listTypeInt = new TypeToken<List<Integer>>() {}.getType();
-	//private List<DevelopmentCard> buildingCards = new ArrayList<DevelopmentCard>();//getter! -> non credo sia utile,passo i file direttamente ad un'altra classe
 	private JsonPathData jsonPathData = new JsonPathData();
 	private DevelopmentCardTypes permanentCardNumberToResourcesCardType;
 	private String permanentCardsNumberToResourcesCardType;
@@ -69,7 +60,7 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
 			String[] ListOfPaths = chooseListOfCards(numberOfPeriod);
 			for(String s:ListOfPaths){
-				jsonObject= super.createJsonObjectFromFile(s);
+				jsonObject= super.createJsonObjectFromFile(s); //forse è inutile questo assegnamento
 				name = super.readString("name");
 				period= super.readInt("period");
 				doublePayment = super.readString("doublePayment");
@@ -108,7 +99,7 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 					immediateTemp = super.createImmediateEffect(immediateEffectType2);
 					immediateEffect = super.createDoubleEffect(immediateEffect, immediateTemp);
 				}
-				createBuildingCard(cardsImplementation,numberOfPeriod);
+				createCharacterCard(cardsImplementation,numberOfPeriod);
 				if(br!= null){
 					try {
 						br.close();
@@ -121,12 +112,12 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 		}
 
 		
-		private void createBuildingCard(CardsImplementation cardsImplementation,int numOfPeriod){
+		private void createCharacterCard(CardsImplementation cardsImplementation,int numOfPeriod){
 			DevelopmentCard developmentCard= DevelopmentCardImplementation.characterCard(name, period, payment, immediateEffect,permanentEffect);
 			switch(numOfPeriod){
 			   case 1:
 				   cardsImplementation.getCharacterCardsPeriod1().add(developmentCard);
-				   System.out.println(cardsImplementation.getCharacterCardsPeriod1().get(3).getName());
+				   System.out.println(cardsImplementation.getCharacterCardsPeriod1().get(0).getName());
 				   break;
 			   case 2:
 				   cardsImplementation.getCharacterCardsPeriod2().add(developmentCard);

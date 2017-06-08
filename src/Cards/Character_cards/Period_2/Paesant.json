@@ -11,5 +11,5 @@
 	  	  "typeOfImmediateEffect": "null",
 	  		"typeOfPermanentEffect": "actionValueModifier",
 	  	 "permanentValueModifier": 3,
-	  	 "boardzone" : "harvest"
+	  	 "permanentBoardzone" : "harvest"
 	  }

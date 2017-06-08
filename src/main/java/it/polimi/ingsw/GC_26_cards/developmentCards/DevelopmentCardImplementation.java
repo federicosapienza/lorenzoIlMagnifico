@@ -43,7 +43,7 @@ public class DevelopmentCardImplementation extends DevelopmentCard{
 		return new DevelopmentCardImplementation(name, period, DevelopmentCardTypes.CHARACTERCARD, payment, immediate, permanent, 0);
 	}
 	
-	public static DevelopmentCard ventureCard(String name, int period, Payment payment, Effect immediate, Effect permanent, int actionValue){
+	public static DevelopmentCard ventureCard(String name, int period, Payment payment, Effect immediate, Effect permanent){
 		return new DevelopmentCardImplementation(name, period, DevelopmentCardTypes.VENTURECARD, payment, immediate, permanent, 0);
 	}
 	

@@ -29,7 +29,7 @@ import java.util.Map;
 import com.google.gson.reflect.TypeToken;
 
 
-public class BuildingCardsReader extends DevelopmentCardsReader {
+public class VentureCardsReader extends DevelopmentCardsReader {
 		
 	private String name;
 	private int period;
@@ -65,14 +65,14 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 	private String doubleImmediateEffect;
 	private String doublePermanentEffect;
 	private String doublePayment;
-		
+
+	
 		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
 			String[] ListOfPaths = chooseListOfCards(numberOfPeriod);
 			for(String s:ListOfPaths){
 				jsonObject= super.createJsonObjectFromFile(s);
 				name = super.readString("name");
 				period= super.readInt("period");
-				actionValue=super.readInt("actionValue");
 				doublePayment = super.readString("doublePayment");
 				if(doublePayment.equals("false")){
 					paymentType=super.readString("typeOfPayment");
@@ -109,7 +109,7 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 					immediateTemp = super.createImmediateEffect(immediateEffectType2);
 					immediateEffect = super.createDoubleEffect(immediateEffect, immediateTemp);
 				}
-				createBuildingCard(cardsImplementation,numberOfPeriod);
+				createVentureCard(cardsImplementation,numberOfPeriod);
 				if(br!= null){
 					try {
 						br.close();
@@ -122,20 +122,20 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 		}
 
 		
-		private void createBuildingCard(CardsImplementation cardsImplementation,int numOfPeriod){
-			DevelopmentCard developmentCard= DevelopmentCardImplementation.buildingCard(name, numOfPeriod, payment, immediateEffect, permanentEffect, actionValue);
+		private void createVentureCard(CardsImplementation cardsImplementation,int numOfPeriod){
+			DevelopmentCard developmentCard= DevelopmentCardImplementation.ventureCard(name, period, payment, immediateEffect, permanentEffect);
 			switch(numOfPeriod){
 			   case 1:
-				   cardsImplementation.getBuildingCardsPeriod1().add(developmentCard);
-				   System.out.println(cardsImplementation.getBuildingCardsPeriod1().get(0).getName());
+				   cardsImplementation.getVentureCardsPeriod1().add(developmentCard);
+				   System.out.println(cardsImplementation.getVentureCardsPeriod1().get(0).getName());
 				   break;
 			   case 2:
-				   cardsImplementation.getBuildingCardsPeriod2().add(developmentCard);
-				   System.out.println(cardsImplementation.getBuildingCardsPeriod2().get(0).getName());
+				   cardsImplementation.getVentureCardsPeriod2().add(developmentCard);
+				   System.out.println(cardsImplementation.getVentureCardsPeriod2().get(0).getName());
 				   break;
 			   case 3:
-				   cardsImplementation.getBuildingCardsPeriod3().add(developmentCard);
-				   System.out.println(cardsImplementation.getBuildingCardsPeriod3().get(0).getName());
+				   cardsImplementation.getVentureCardsPeriod3().add(developmentCard);
+				   System.out.println(cardsImplementation.getVentureCardsPeriod3().get(0).getName());
 				   break;
 			   default:
 				   throw new IllegalArgumentException();
@@ -147,30 +147,14 @@ public class BuildingCardsReader extends DevelopmentCardsReader {
 		private String[] chooseListOfCards(int numOfList){
 			switch(numOfList) {
 			case 1:
-				return jsonPathData.getBuildingCardsPeriod1PathArray();
+				return jsonPathData.getVentureCardsPeriod1PathArray();
 			case 2:
-				return jsonPathData.getBuildingCardsPeriod2PathArray();
+				return jsonPathData.getVentureCardsPeriod2PathArray();
 			case 3:
-				return jsonPathData.getBuildingCardsPeriod3PathArray();
+				return jsonPathData.getVentureCardsPeriod3PathArray();
 			default:
 				throw new IllegalArgumentException();
 			}
 		}
 			
-}	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+}

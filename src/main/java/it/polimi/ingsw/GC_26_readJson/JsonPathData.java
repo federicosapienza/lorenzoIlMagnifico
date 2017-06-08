@@ -16,8 +16,10 @@ public class JsonPathData {
 	String[] characterCardsPeriod1PathArray = {"src/Cards/Character_cards/Period_1/Abbess.json","src/Cards/Character_cards/Period_1/Artisan.json","src/Cards/Character_cards/Period_1/Dame.json","src/Cards/Character_cards/Period_1/Farmer.json","src/Cards/Character_cards/Period_1/Knight.json","src/Cards/Character_cards/Period_1/Preacher.json","src/Cards/Character_cards/Period_1/Stonemason.json","src/Cards/Character_cards/Period_1/Warlord.json"};
 	String[] characterCardsPeriod2PathArray = {"src/Cards/Character_cards/Period_2/Architect.json","src/Cards/Character_cards/Period_2/Captain.json","src/Cards/Character_cards/Period_2/Hero.json","src/Cards/Character_cards/Period_2/Paesant.json","src/Cards/Character_cards/Period_2/Papal_Messanger.json","src/Cards/Character_cards/Period_2/Patron.json","src/Cards/Character_cards/Period_2/Royal_Messanger.json","src/Cards/Character_cards/Period_2/Scholar.json"};
 	String[] characterCardsPeriod3PathArray = {"src/Cards/Character_cards/Period_3/Ambassador.json","src/Cards/Character_cards/Period_3/Bishop.json","src/Cards/Character_cards/Period_3/Cardinal.json","src/Cards/Character_cards/Period_3/General.json","src/Cards/Character_cards/Period_3/Governor.json","src/Cards/Character_cards/Period_3/Herald.json","src/Cards/Character_cards/Period_3/Noble.json","src/Cards/Character_cards/Period_3/Paramour.json"};
-
 	
+	String[] ventureCardsPeriod1PathArray ={"src/Cards/Venture_cards/Period1/Building_the_Walls.json","src/Cards/Venture_cards/Period1/Fighting_Heresies.json","src/Cards/Venture_cards/Period1/Hiring_Recruits.json","src/Cards/Venture_cards/Period1/Hosting_Panhandlers.json","src/Cards/Venture_cards/Period1/Military_Campaign.json","src/Cards/Venture_cards/Period1/Raising_a_Statue.json","src/Cards/Venture_cards/Period1/Repairing_the_Church.json","src/Cards/Venture_cards/Period1/Support_to_the_Bishop.json"};
+	String[] ventureCardsPeriod2PathArray ={"src/Cards/Venture_cards/Period2/Building_the_Bastions.json","src/Cards/Venture_cards/Period2/Crusade.json","src/Cards/Venture_cards/Period2/Hiring_Soldiers.json","src/Cards/Venture_cards/Period2/Hosting_Foreigners.json","src/Cards/Venture_cards/Period2/Improving_the_Canals.json","src/Cards/Venture_cards/Period2/Repairing_the_Abbey.json","src/Cards/Venture_cards/Period2/Support_to_the_Cardinal.json","src/Cards/Venture_cards/Period2/Support_to_the_King.json"};
+	String[] ventureCardsPeriod3PathArray ={"src/Cards/Venture_cards/Period3/Building_the_Towers.json","src/Cards/Venture_cards/Period3/Hiring_Mercenaries.json","src/Cards/Venture_cards/Period3/Improving_the_Roads.json","src/Cards/Venture_cards/Period3/Military_Conquest.json","src/Cards/Venture_cards/Period3/Promoting_Sacred_Art.json","src/Cards/Venture_cards/Period3/Repairing_the_Cathedral.json","src/Cards/Venture_cards/Period3/Sacred_War.json","src/Cards/Venture_cards/Period3/Support_to_the_Pope.json"};
 	
 	public String[] getTerritoryCardsPeriod1PathArray() {
 		return territoryCardsPeriod1PathArray;
@@ -28,7 +30,6 @@ public class JsonPathData {
 	public String[] getTerritoryCardsPeriod3PathArray() {
 		return territoryCardsPeriod3PathArray;
 	}
-	
 	public String[] getBuildingCardsPeriod1PathArray() {
 		return buildingCardsPeriod1PathArray;
 	}
@@ -47,6 +48,15 @@ public class JsonPathData {
 	}
 	public String[] getCharacterCardsPeriod3PathArray() {
 		return characterCardsPeriod3PathArray;
+	}
+	public String[] getVentureCardsPeriod1PathArray() {
+		return ventureCardsPeriod1PathArray;
+	}
+	public String[] getVentureCardsPeriod2PathArray() {
+		return ventureCardsPeriod2PathArray;
+	}
+	public String[] getVentureCardsPeriod3PathArray() {
+		return ventureCardsPeriod3PathArray;
 	}
 
 }
