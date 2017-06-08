@@ -37,6 +37,8 @@ public class SecondActionHandler extends ActionHandler{
 			player.notifyObservers("second action not corresponds to the allowed one");
 			return false;
 		}
+		
+		
 			// calls the right checker	
 		if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 					action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER)

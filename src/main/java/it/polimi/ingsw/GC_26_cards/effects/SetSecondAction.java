@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_cards.effects;
 
+import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
@@ -14,9 +15,9 @@ public class SetSecondAction implements Effect{
 	//If the second action is take card from everywhere (i.e Abbess) leave null even this parameter.
 	private final ResourcesOrPoints secondActionDiscount;  //leave null if does not exists
 	
-	public SetSecondAction(Action action, int value, ResourcesOrPoints discount) {
+	public SetSecondAction(BoardZone zone, int value, ResourcesOrPoints discount) {
 		this.value= value;
-		this.action=action;
+		this.action= new Action(null, zone, 0,null,0);
 		this.secondActionDiscount=discount;
 	}
 	

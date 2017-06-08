@@ -8,7 +8,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 /*Trade effect 
  * 1) as permanent effect : needs dialog with user: there is often choice and player can also decide not to trade!
- * 2) as immediate effect: automatically done is possible (works with one receive- one give) (General card)
+ * 2) as immediate effect: automatically done is possible (works with one receive- one give) (not present in the game but anyway is implemented)
 *Creation rules: 
  * if a resource to be given can be traded in two different ways , this resource must be inserted both in give1 and give2
  * if  there is a choice in giving and only one possible outcome, the outcome must be inserted both in receive1 that receive2. 
