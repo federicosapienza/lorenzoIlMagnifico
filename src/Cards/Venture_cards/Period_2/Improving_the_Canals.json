@@ -1,0 +1,21 @@
+	   {
+	  	"name": "Imporoving the Canals",
+	  	"period": 2,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  0,0,0,4
+	  	  ],
+	  	  	"typeOfImmediateEffect" : "setSecondAction",
+	  	    "immediateBoardzone" : "harvest",
+	  	    "immediateValue" : 4,
+	  	    "immediateDiscount" : [
+	  	      0,0,0,0,0,0,0,0
+	  	      ],
+	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,5,0,0,0
+	  		]
+	  	}

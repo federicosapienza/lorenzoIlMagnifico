@@ -178,10 +178,12 @@ public class DevelopmentCardsReader {
 			ResourcesPayment payment = new ResourcesPayment(resourcesOrPoints);
 			return payment;
 		}
-		/*if(paymentType.equals("militaryPoints")){
-			MilitaryPointPayment payment = new MilitaryPointPayment(toSpend, needed);// direi che prima di fare ciò devo leggere le carte.
-			return payment;
-		}*/
+		if(paymentType.equals("militaryPointPayment")){
+			intInt = readInt("toSpend");
+			intInt2 = readInt("needed");
+			MilitaryPointPayment militaryPointPayment = new MilitaryPointPayment(intInt, intInt2);
+			return militaryPointPayment;
+		}
 		return null;
 	}
 	

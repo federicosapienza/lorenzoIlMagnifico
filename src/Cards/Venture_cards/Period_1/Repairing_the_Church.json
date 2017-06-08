@@ -1,0 +1,19 @@
+	   {
+	  	"name": "Repairing the Church",
+	  	"period": 1,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  1,0,1,1
+	  	  ],
+	  	 "typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,0,1,0
+	  		],
+	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,5,0,0,0
+	  		]
+	  	}

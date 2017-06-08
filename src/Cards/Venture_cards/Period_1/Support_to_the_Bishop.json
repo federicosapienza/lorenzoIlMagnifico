@@ -1,0 +1,22 @@
+	   {
+	  	"name": "Support to the Bishop",
+	  	"period": 1,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"true",
+	  	"typeOfPayment" :"resources",
+	      "payment": [
+	  	  2,0,1,1
+	  	  ],
+	  	"typeOfPayment2" :"militaryPointPayment",
+	  	"toSpend" :2,
+	  	"needed" :4,
+	  	 "typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,0,3,0
+	  		],
+	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,1,0,0,0
+	  		]
+	  	}

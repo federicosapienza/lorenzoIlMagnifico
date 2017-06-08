@@ -1,0 +1,19 @@
+	   {
+	  	"name": "Building the Bastions",
+	  	"period": 2,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  0,0,0,4
+	  	  ],
+	  	 "typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,3,0,1
+	  		],
+	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,2,0,0,0
+	  		]
+	  	}

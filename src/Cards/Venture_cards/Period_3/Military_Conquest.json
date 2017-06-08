@@ -1,0 +1,18 @@
+	   {
+	  	"name": "Military Conquest",
+	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"militaryPointPayment",
+	  	"toSpend" :6,
+	  	"needed" :12,
+	  	 "typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		3,0,3,3,0,0,0,0
+	  		],
+	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,7,0,0,0
+	  		]
+	  	}

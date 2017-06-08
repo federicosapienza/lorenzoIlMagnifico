@@ -126,7 +126,7 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 			switch(numOfPeriod){
 			   case 1:
 				   cardsImplementation.getCharacterCardsPeriod1().add(developmentCard);
-				   System.out.println(cardsImplementation.getCharacterCardsPeriod1().get(0).getName());
+				   System.out.println(cardsImplementation.getCharacterCardsPeriod1().get(3).getName());
 				   break;
 			   case 2:
 				   cardsImplementation.getCharacterCardsPeriod2().add(developmentCard);

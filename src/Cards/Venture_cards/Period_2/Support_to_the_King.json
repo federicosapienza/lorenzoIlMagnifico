@@ -1,0 +1,18 @@
+	   {
+	  	"name": "Support to the King",
+	  	"period": 2,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"militaryPointPayment",
+	  	"toSpend" :3,
+	  	"needed" :6,
+	  	 "typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		5,0,0,0,0,0,0,1
+	  		],
+	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,3,0,0,0
+	  		]
+	  	}

@@ -1,0 +1,19 @@
+	   {
+	  	"name": "Building the Towers",
+	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  0,0,0,6
+	  	  ],
+	  	"typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,4,0,1
+	   ],
+	  	"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,4,0,0,0
+	  		]
+	  	}

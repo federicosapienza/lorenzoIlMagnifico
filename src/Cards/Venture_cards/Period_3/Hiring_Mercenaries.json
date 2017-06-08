@@ -1,0 +1,19 @@
+	   {
+	  	"name": "Hiring Mercenaries",
+	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  8,0,0,0
+	  	  ],
+	  	"typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,7,0,0
+	   ],
+	  	"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,6,0,0,0
+	  		]
+	  	}

@@ -1,0 +1,19 @@
+	   {
+	  	"name": "Hosting Foreigners",
+	  	"period": 2,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  0,0,4,0
+	  	  ],
+	  	"typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		0,5,0,0,0,0,0,0
+	   ],
+	  	"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,4,0,0,0
+	  		]
+	  	}

@@ -1,0 +1,19 @@
+	   {
+	  	"name": "Promoting Sacred Art",
+	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  0,0,6,0
+	  	  ],
+	  	"typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,0,3,0
+	   ],
+	  	"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,3,0,0,0
+	  		]
+	  	}

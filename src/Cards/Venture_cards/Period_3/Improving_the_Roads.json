@@ -1,0 +1,21 @@
+	   {
+	  	"name": "Imporoving the Roads",
+	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  4,3,0,0
+	  	  ],
+	  	  	"typeOfImmediateEffect" : "setSecondAction",
+	  	    "immediateBoardzone" : "production",
+	  	    "immediateValue" : 3,
+	  	    "immediateDiscount" : [
+	  	      0,0,0,0,0,0,0,0
+	  	      ],
+	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,5,0,0,0
+	  		]
+	  	}

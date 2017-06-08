@@ -1,0 +1,22 @@
+	   {
+	  	"name": "Support to the Pope",
+	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"true",
+	  	"typeOfPayment" :"resources",
+	      "payment": [
+	  	  4,0,3,3
+	  	  ],
+	  	"typeOfPayment2" :"militaryPointPayment",
+	  	"toSpend" :5,
+	  	"needed" :10,
+	  	 "typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"immediateResourcesAndPoints": [
+	  		0,0,0,0,0,0,2,0
+	  		],
+	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
+	  	"permanentResourcesAndPoints": [
+	  		0,0,0,0,10,0,0,0
+	  		]
+	  	}
