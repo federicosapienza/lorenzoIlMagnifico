@@ -1,12 +1,15 @@
 package it.polimi.ingsw.GC_26_utilities.familyMembers;
 import it.polimi.ingsw.GC_26_utilities.dices.*;
+
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
-import org.omg.CORBA.portable.ValueBase;
 
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_serverView.Observable;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)
@@ -19,7 +22,7 @@ import it.polimi.ingsw.GC_26_player.Player;
  * The values of the coloured family members correspond with the value of the dices of the same colour.
  * 
  */
-public class FamilyMembers {
+public class FamilyMembers extends Observable<FamilyMembersDescriber> implements FamilyMembersDescriber{
 	
 	//it's the orange family member.
 	private FamilyMember orangeMember;
@@ -106,7 +109,7 @@ public class FamilyMembers {
 			else  if(test==2)
 				blackDice=player.getPermanentModifiers().getValue1diceChanged();
 			else if(test==3)
-				whiteDice=player.getPermanentModifiers().getValue1diceChanged();
+				whiteDice=player.getPermanentModifiers().getValue1diceChanged();		
 		}
 			
 		
@@ -117,6 +120,7 @@ public class FamilyMembers {
         blackMember.setValue(blackDice+colouredChange);
         whiteMember.setValue(whiteDice+colouredChange);
         neutralMember.setValue(GameParameters.getDefaultNeutralValue()+neutralChange);
+        notifyObservers(this);
 	}
 	
 	/**
@@ -139,6 +143,22 @@ public class FamilyMembers {
 		}
 		return freeMembers;
 	}
+	
+	
+	/**
+	 * Method that returns the map of the family members.
+	 * @return mapDescriber :the map describing the values of the dices.
+	 */
+	
+	public Map<Colour, Integer> getStatus(){
+		Map<Colour, Integer> mapDescriber =new HashMap<>();
+		mapDescriber.put(Colour.ORANGE, orangeMember.getValue());
+		mapDescriber.put(Colour.BLACK, orangeMember.getValue());
+		mapDescriber.put(Colour.WHITE, whiteMember.getValue());
+		mapDescriber.put(Colour.NEUTRAL, neutralMember.getValue());
+		return mapDescriber;
+	}
+	
 	
 	/**
 	 * Method that sets all the family members to free, 

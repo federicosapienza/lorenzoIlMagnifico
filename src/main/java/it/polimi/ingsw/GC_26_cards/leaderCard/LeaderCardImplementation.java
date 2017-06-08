@@ -1,10 +1,13 @@
 package it.polimi.ingsw.GC_26_cards.leaderCard;
 
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_player.Player;
 
-public class LeaderCardImplementation implements LeaderCard{
+public class LeaderCardImplementation extends LeaderCard{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String name;
 	private final Requirement requirement;
 	private final Effect effect;
@@ -16,7 +19,6 @@ public class LeaderCardImplementation implements LeaderCard{
 	}
 	
 
-	
 	@Override
 	public String getName() {
 		return name;
@@ -31,38 +33,6 @@ public class LeaderCardImplementation implements LeaderCard{
 		effect.doEffect(player, false);
 	}
 	
-
-
-	@Override
-	public String getTypeOfCard() {
-		return "Leader Card";
-	}
-
-
-	@Override
-	public int getActionValue() {
-		return 0;
-	}
-
-
-	@Override
-	public DevelopmentCardTypes getCardType() {
-		return null;
-	}
-
-
-	@Override
-	public int getPeriod() {
-		return 0;
-	}
-
-
-	@Override
-	public String getImmediateEffectDescriber() {
-		return null;
-	}
-
-
 	@Override
 	public String getPermanentEffectDescriber() {
 		return effect.toString();
