@@ -1,6 +1,8 @@
 	   {
 	  	"name": "City",
 	  	"period": 1,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
 	  	"typeOfImmediateEffect" :"addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		3,0,0,0,0,0,0,0

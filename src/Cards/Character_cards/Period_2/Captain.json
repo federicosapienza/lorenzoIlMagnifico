@@ -1,0 +1,22 @@
+	   {
+	  	"name": "Captain",
+	  	"period": 2,
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  4,0,0,0
+	  	  ],
+	  	  "doubleImmediateEffect": "true",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
+	  	  "immediateResourcesAndPoints": [
+	  	    0,0,0,0,0,2,0,0
+	  	    ],
+	  	    "typeOfImmediateEffect2" : "setSecondAction",
+	  	    "immediateBoardzone" : "territory",
+	  	    "immediateValue" : 6,
+	  	    "immediateDiscount" : [
+	  	      0,0,0,0,0,0,0,0
+	  	      ],
+	  		"typeOfPermanentEffect": "null"
+	  }

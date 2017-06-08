@@ -2,6 +2,9 @@
 	  	"name": "Garden",
 	  	"typeOfPayment" :"resources",
 	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
 	  	"payment": [
 	  	  2,0,4,2
 	  	  ],

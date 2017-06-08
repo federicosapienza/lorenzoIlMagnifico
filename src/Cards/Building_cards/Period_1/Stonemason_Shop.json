@@ -1,6 +1,9 @@
 	   {
 	  	"name": "Stonemason's Shop",
 	  	"period": 1,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
 	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  1,0,0,2

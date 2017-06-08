@@ -5,6 +5,9 @@
 	  	"payment": [
 	  	  2,0,0,0
 	  	  ],
+	  	  "doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
 	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,0,3,0,0

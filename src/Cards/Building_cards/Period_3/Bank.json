@@ -1,6 +1,9 @@
 	   {
 	  	"name": "Bank",
 	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
 	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  3,0,1,3

@@ -1,0 +1,18 @@
+	   {
+	  	"name": "Architect",
+	  	"period": 2,
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  4,0,0,0
+	  	  ],
+	  	  "doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	    "typeOfImmediateEffect" : "setSecondAction",
+	  	    "immediateBoardzone" : "building",
+	  	    "immediateValue" : 6,
+	  	    "immediateDiscount" : [
+	  	      0,0,1,1,0,0,0,0
+	  	      ],
+	  		"typeOfPermanentEffect": "null"
+	  }

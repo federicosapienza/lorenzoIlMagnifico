@@ -1,0 +1,16 @@
+	   {
+	  	"name": "General",
+	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  5,0,0,0
+	  	  ],
+	  	  "typeOfImmediateEffect": "GainPointsPerAnyMilitaryPoint",
+	  	"immediateGainPointsPerAnyMilitaryPointResources": [
+	  		0,0,0,0,0,2,0,0
+	  		],
+	  	"typeOfPermanentEffect": "null"
+	  }

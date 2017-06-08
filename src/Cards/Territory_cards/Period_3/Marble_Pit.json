@@ -1,6 +1,8 @@
 	   {
 	  	"name": "Marble Pit",
 	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
 	  	"typeOfImmediateEffect" :"addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,3,0,0,0

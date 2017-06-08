@@ -1,0 +1,19 @@
+	   {
+	  	"name": "Dame",
+	  	"period": 1,
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  4,0,0,0
+	  	  ],
+	  	  "doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "true",
+	  	  "doublePayment" :"false",
+	  	  "typeOfImmediateEffect": "null",
+	  		"typeOfPermanentEffect": "actionValueModifier",
+	  	 "permanentValueModifier": 2,
+	  	 "permanentBoardzone" : "character",
+	  	 "typeOfPermanentEffect2": "discountOnAction",
+	  	 "permanentResDiscount": [
+	  	   1,0,0,0,0,0,0,0
+	  	   ]
+	  }

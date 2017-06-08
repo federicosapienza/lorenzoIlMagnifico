@@ -1,6 +1,8 @@
 	   {
 	  	"name": "Colony",
 	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
 	  	"typeOfImmediateEffect" :"addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,0,2,0,0

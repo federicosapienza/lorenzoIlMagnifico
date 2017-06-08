@@ -1,6 +1,8 @@
 	   {
 	  	"name": "Trading Town",
 	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
 	  	"typeOfImmediateEffect" :"addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		1,1,0,0,0,0,0,0

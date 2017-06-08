@@ -1,0 +1,17 @@
+	   {
+	  	"name": "Paramour",
+	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  7,0,0,0
+	  	  ],
+	  	  "typeOfImmediateEffect": "cardsNumberToResources",
+	  	"immediateCardsNumberToResourcesResources": [
+	  		0,0,0,0,2,0,0,0
+	  		],
+	  	"immediateCardsNumberToResourcesCardType" : "character",
+	  	"typeOfPermanentEffect": "null"
+	  }

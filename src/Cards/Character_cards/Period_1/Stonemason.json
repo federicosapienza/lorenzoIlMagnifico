@@ -1,0 +1,19 @@
+	   {
+	  	"name": "Stonemason",
+	  	"period": 1,
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  4,0,0,0
+	  	  ],
+	  	  "doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "true",
+	  	  "doublePayment" :"false",
+	  	  "typeOfImmediateEffect": "null",
+	  		"typeOfPermanentEffect": "actionValueModifier",
+	  	 "permanentValueModifier": 2,
+	  	 "permanentBoardzone" : "building",
+	  	 "typeOfPermanentEffect2": "discountOnAction",
+	  	 "permanentResDiscount": [
+	  	   0,0,1,1,0,0,0,0
+	  	   ]
+	  }

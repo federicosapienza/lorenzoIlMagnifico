@@ -1,6 +1,8 @@
 	   {
 	  	"name": "Woods",
 	  	"period": 1,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
 	  	"typeOfImmediateEffect" : "addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,1,0,0,0,0,0

@@ -1,0 +1,22 @@
+	   {
+	  	"name": "Cardinal",
+	  	"period": 3,
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  4,0,0,0
+	  	  ],
+	  	  "doubleImmediateEffect": "true",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
+	  	  "immediateResourcesAndPoints": [
+	  	    0,0,0,0,0,0,2,0
+	  	    ],
+	  	    "typeOfImmediateEffect2" : "setSecondAction",
+	  	    "immediateBoardzone" : "harvest",
+	  	    "immediateValue" : 4,
+	  	    "immediateDiscount" : [
+	  	      0,0,0,0,0,0,0,0
+	  	      ],
+	  		"typeOfPermanentEffect": "null"
+	  }

@@ -1,0 +1,22 @@
+	   {
+	  	"name": "Ambassador",
+	  	"period": 1,
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  6,0,0,0
+	  	  ],
+	  	  "doubleImmediateEffect": "true",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
+	  	  "immediateResourcesAndPoints": [
+	  	    0,0,0,0,0,0,0,1
+	  	    ],
+	  	    "typeOfImmediateEffect2" : "setSecondAction",
+	  	    "immediateBoardzone" : "null",
+	  	    "immediateValue" : 7,
+	  	    "immediateDiscount" : [
+	  	      0,0,0,0,0,0,0,0
+	  	      ],
+	  		"typeOfPermanentEffect": "null"
+	  }

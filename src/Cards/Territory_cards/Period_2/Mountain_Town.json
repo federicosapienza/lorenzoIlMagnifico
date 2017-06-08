@@ -1,6 +1,8 @@
 	   {
 	  	"name": "Mountain Town",
 	  	"period": 2,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
 	  	"typeOfImmediateEffect" :"addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		0,1,0,0,0,0,0,0

@@ -1,6 +1,9 @@
 	   {
 	  	"name": "Treasury",
 	  	"period": 2,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
 	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  0,0,3,0

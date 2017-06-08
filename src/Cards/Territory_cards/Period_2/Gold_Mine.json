@@ -1,6 +1,8 @@
 	   {
 	  	"name": "Gold Mine",
 	  	"period": 2,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
 	  	"typeOfImmediateEffect" :"addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		1,0,0,0,0,0,0,0

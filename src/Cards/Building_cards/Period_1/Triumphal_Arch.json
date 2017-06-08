@@ -1,6 +1,9 @@
 	   {
 	  	"name": "Triumphal Arch",
 	  	"period": 1,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
 	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  2,0,0,2

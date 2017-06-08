@@ -1,6 +1,8 @@
 	   {
 	  	"name": "Castle",
 	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
 	  	"typeOfImmediateEffect" :"addResourcesAndPoints",
 	  	"immediateResourcesAndPoints": [
 	  		2,0,0,0,2,0,0,0

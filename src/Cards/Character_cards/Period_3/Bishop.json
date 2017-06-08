@@ -1,0 +1,22 @@
+	   {
+	  	"name": "Bishop",
+	  	"period": 3,
+	  	"typeOfPayment" :"resources",
+	  	"payment": [
+	  	  5,0,0,0
+	  	  ],
+	  	  "doubleImmediateEffect": "true",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
+	  	  "typeOfImmediateEffect": "addResourcesAndPoints",
+	  	  "immediateResourcesAndPoints": [
+	  	    0,0,0,0,0,0,1,0
+	  	    ],
+	  	    "typeOfImmediateEffect2" : "setSecondAction",
+	  	    "immediateBoardzone" : "production",
+	  	    "immediateValue" : 4,
+	  	    "immediateDiscount" : [
+	  	      0,0,0,0,0,0,0,0
+	  	      ],
+	  		"typeOfPermanentEffect": "null"
+	  }

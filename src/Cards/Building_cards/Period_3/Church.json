@@ -1,6 +1,9 @@
 	   {
 	  	"name": "Church",
 	  	"period": 3,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
 	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  4,0,3,0

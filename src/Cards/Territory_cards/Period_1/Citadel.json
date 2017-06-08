@@ -2,6 +2,8 @@
 	  	"name": "Citadel",
 	  	"period": 1,
 	  	"typeOfImmediateEffect" : "addResourcesAndPoints",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
 	  	"immediateResourcesAndPoints": [
 	  		0,0,0,0,0,0,0,0
 	  		],

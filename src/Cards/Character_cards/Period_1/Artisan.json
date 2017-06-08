@@ -5,6 +5,9 @@
 	  	"payment": [
 	  	  3,0,0,0
 	  	  ],
+	  	  "doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
 	  	  "typeOfImmediateEffect": "null",
 	  		"typeOfPermanentEffect": "actionValueModifier",
 	  	 "permanentValueModifier": 2,

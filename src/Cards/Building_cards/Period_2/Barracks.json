@@ -1,6 +1,9 @@
 	   {
 	  	"name": "Barracks",
 	  	"period": 2,
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doublePayment" :"false",
 	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  0,0,1,1
