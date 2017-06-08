@@ -11,6 +11,7 @@ import java.net.Socket;
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
+import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 import it.polimi.ingsw.GC_26_serverView.Server;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembersDescriber;
@@ -123,7 +124,7 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 			
 		}
 		@Override
-		public void send(Action action) {
+		public void send(ActionNotification action) {
 			sendMethod(action);
 			
 		}

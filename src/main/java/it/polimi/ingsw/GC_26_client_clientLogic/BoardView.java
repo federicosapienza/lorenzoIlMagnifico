@@ -9,6 +9,7 @@ import java.util.List;
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
+import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 
 
 public class BoardView {
@@ -40,7 +41,7 @@ public class BoardView {
 			list.add(position.getPositionIndex()-1, position);; //position Index starts from 1: in list from zero;	
 		}
 		
-		public void addfamilyMember(Action action){
+		public void addfamilyMember(ActionNotification action){
 			PositionView position= findPosition(action);
 			position.setPlayerhere(action.getPlayerName(), action.getFamilyMemberColour());
 			position.setCardHere(null);
