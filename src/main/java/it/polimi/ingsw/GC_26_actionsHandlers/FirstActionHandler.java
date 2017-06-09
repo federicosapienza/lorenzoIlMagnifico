@@ -3,7 +3,7 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
-
+import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.Request;
@@ -96,7 +96,7 @@ public class FirstActionHandler extends ActionHandler{
 				getPerformerHandler().productionPerform(player, familyMemberUsed, action);
 			
 			//notify the players
-	//		getGameElements().getGameMemory().addAction(new ActionDescriber(player.getName(), action));
+			getGameElements().getGameMemory().addAction(new ActionNotification(player.getName(), action));
 		
 	 }
 }

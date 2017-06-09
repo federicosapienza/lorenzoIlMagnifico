@@ -1,8 +1,11 @@
 package it.polimi.ingsw.GC_26_controllers;
 
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
+import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
+import it.polimi.ingsw.GC_26_utilities.Info;
+import it.polimi.ingsw.GC_26_utilities.Message;
 import it.polimi.ingsw.GC_26_utilities.Request;
 
 public class EndTurnController {
@@ -15,27 +18,28 @@ public class EndTurnController {
 		this.handlers= handlers;
 	}
 	
-	public void update(){ //todo 
+	public void update(boolean timeOutOccured){ //todo 
 		//potrei mettere synronysed il controller per evitare problemi di 2 azioni in contemporane
 		
 		
-		boolean connectionFailed=true; //inizializzazione provvisoria
 		
 		PlayerStatus status;
 		synchronized (player) {
 				 status= player.getStatus();
 			
-			if(!connectionFailed && player.isPlayerActive())
+			if(!timeOutOccured && player.isPlayerActive())
 				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "end turn", null));
+
 			
-			else
+			else{
 				player.setStatus(new Request(PlayerStatus.SUSPENDED, "end turn", null));
-			//TODO mettere la notification
+				handlers.getGameElements().notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+" is suspended"));
 			
+					}
 		}
 		PlayerStatus previousStatus = player.getPreviousStatus();
 		
-		//setting the default parameters and calling the actions that wew suspended
+		//setting the default parameters and calling the actions that were suspended if the turn ends where it should not
 		if(previousStatus == PlayerStatus.TRADING)
 			handlers.getTradeHandler().perform(player, 0);
 			
@@ -44,14 +48,17 @@ public class EndTurnController {
 		
 		//scelta malus
 		
-		if(previousStatus==PlayerStatus.VATICANREPORTDECISION)
+		if(previousStatus==PlayerStatus.VATICANREPORTDECISION){
 			handlers.getVaticanReportHandler().perform(player, 0);
+			handlers.getGameElements().getGame().vaticanReportNext();
+		}
+			
 	
 		
 		//ending his turn
 	player.getWarehouse().resetCouncilPriviledges();
 	player.endTurn();
-	
+	handlers.getGameElements().notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ " has ended the turn" )); 
 	handlers.getLeaderCardHandler().endTurn();
 	handlers.getDiplomaticPrivilegesHandler().resetMemory();
 	handlers.getGameElements().getGame().nextStep();

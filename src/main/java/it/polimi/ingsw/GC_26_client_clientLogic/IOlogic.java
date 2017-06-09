@@ -12,16 +12,16 @@ import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 
 public class IOlogic  implements Runnable{
-		private boolean loginDone=false;;
 		private ClientConnection connection;
 		private boolean waitingPlayer;  //useless
 		private boolean waitingAction=false;
 		private boolean waitingResponse = false;
 		private boolean firstAction =true;  //if first action true , if second is false
+		private MainClientView view; 
 	
 		private Scanner socketIn;
 		
-		public IOlogic(ClientConnection connection) {
+		public IOlogic(ClientConnection connection, MainClientView view) {
 			this.connection=connection;
 
 		}
@@ -29,7 +29,7 @@ public class IOlogic  implements Runnable{
 
 		@Override
 		public void run() { 
-			while (!loginDone) {
+			while (!view.isLoginDone()) {
 				// reads a new Line from the Scanner
 				String username = socketIn.nextLine();
 				String password = socketIn.nextLine();

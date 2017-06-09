@@ -145,8 +145,10 @@ public class ChoiceController implements Observer<Integer>{
 					if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 						return;
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, "action not valid" , null));
+					
 
 					}
+				handlers.getGameElements().getGame().vaticanReportNext(); // automatically ends the turn
 		}
 			
 			catch ( IllegalStateException e ) {
@@ -155,6 +157,7 @@ public class ChoiceController implements Observer<Integer>{
 					player.setStatus(new Request(PlayerStatus.VATICANREPORTDECISION, "action not valid" , null));
 					handlers.getVaticanReportHandler().perform(player, 0);
 				}
+				handlers.getGameElements().getGame().vaticanReportNext(); // automatically ends the turn
 				}	
 			
 		}

@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
+import it.polimi.ingsw.GC_26_gameLogic.GameElements;
+import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.Info;
 import it.polimi.ingsw.GC_26_utilities.Request;
 
 
 //Handles the activation of leaderCards : he keeps memory of the cards used this turn to prevent the player from trying using the same card twice
 public class LeaderCardHandler {
+	private GameElements gameElements;
 	private List<LeaderCard> used;
 
-	public LeaderCardHandler() {
+	public LeaderCardHandler(GameElements gameElements) {
+		this.gameElements= gameElements;
 		used =new ArrayList<>();
 	}
 	
@@ -50,6 +55,8 @@ public class LeaderCardHandler {
 		
 		card.runEffect(player);
 		setCardUsed(card);
+		//notifies the players
+		gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName() + "uses LeaderCard "+ card));
 			
 	}
 	

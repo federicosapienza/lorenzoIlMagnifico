@@ -14,6 +14,7 @@ import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_client.ClientController;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
+import it.polimi.ingsw.GC_26_utilities.Message;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
 public class SocketINClient implements Runnable{
@@ -47,8 +48,8 @@ public class SocketINClient implements Runnable{
 					
 					while(true){
 					Object object = objIn.readObject();
-					if(object instanceof String){
-						String string = (String) object;
+					if(object instanceof Message){
+						Message string = (Message) object;
 						System.out.println(string);
 					}
 					if(object instanceof ActionNotification){

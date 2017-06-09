@@ -33,7 +33,7 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 	private String doubleImmediateEffect;
 	private String doublePermanentEffect;	
 		
-		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
+		public void readCards(int numberOfPeriod,CardsImplementation cards){
 				String[] listOfPaths = chooseListOfCards(numberOfPeriod);
 				for(String s:listOfPaths){
 					jsonObject= super.createJsonObjectFromFile(s);
@@ -65,7 +65,7 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 						immediateEffect = super.createDoubleEffect(immediateEffect, immediateTemp);
 					}
 					
-					createTerritoryCard(cardsImplementation, numberOfPeriod);
+					createTerritoryCard(cards, numberOfPeriod);
 					stamp(); ;
 					if(br!= null){
 						try {
@@ -85,18 +85,18 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 		}
 		
 		
-		private void createTerritoryCard(CardsImplementation cardsImplementation,int numOfPeriod){
+		private void createTerritoryCard(CardsImplementation cards,int numOfPeriod){
 		    DevelopmentCard developmentCard= DevelopmentCardImplementation.territoryCard(name, period, null, immediateEffect, permanentEffect , actionValue);
 		   switch(numOfPeriod){
 		   case 1:
-			   cardsImplementation.getTerritoryCardsPeriod1().add(developmentCard);
+			   cards.getTerritoryCardsPeriod1().add(developmentCard);
 			   break;
 		  
 		   case 2:
-			   cardsImplementation.getTerritoryCardsPeriod2().add(developmentCard);
+			   cards.getTerritoryCardsPeriod2().add(developmentCard);
 			   break;
 		   case 3:
-			   cardsImplementation.getTerritoryCardsPeriod3().add(developmentCard);
+			   cards.getTerritoryCardsPeriod3().add(developmentCard);
 			   break;
 
 		   default:

@@ -10,19 +10,22 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 public class MainClientView {
 	private GameStatus gameStatus=null;
 	private PlayerStatus playerStatus=PlayerStatus.WAITINGHISTURN;
+	private boolean LoginDone=false;
 	
-	
-	private final String playerUsername;
+	private  String playerUsername;
 	private final Map< String, PlayerView> players;
 	private final BoardView board;
 	
 	
 	
 	
-	public MainClientView(String name) {
-		playerUsername= name;
+	public MainClientView() {
 		players = new HashMap<>();
 		board =new BoardView();
+	}
+	
+	public void setPlayerUsername(String string){
+		playerUsername= string;
 	}
 	
 	
@@ -52,7 +55,9 @@ public class MainClientView {
 		this.playerStatus = playerStatus;
 	}
 	
-	
+	public boolean isLoginDone() {
+		return LoginDone;
+	}
 	
 	
 	

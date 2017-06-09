@@ -157,8 +157,7 @@ public class Game extends Observable<CardDescriber>{
 			gameElements.notifyPlayers(new Info(GameStatus.INITIALAISINGTURN, null, "starting period "+ period+ " round "+round ));;
 			sendingCards();
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, null ));
-			nextStep();
-			return;
+			//than read to 202
 		}
 		//starting vatican Turn
 		if(playersPerformedActions==numberOfPlayers){
@@ -166,19 +165,20 @@ public class Game extends Observable<CardDescriber>{
 				vaticanReportNext();
 				return;
 			}
+		}
 		playersPerformedActions++;
 
 		if(playersPerformedActions==numberOfPlayers){
 			if(round==2&& vaticanDone){
-				vaticanDone=false;
-				gameElements.getNextROundOrder().changeNextRoundOrder(players);
+				vaticanDone=false; //re initialaising
+				gameElements.getNextROundOrder().changeNextRoundOrder(players); //as determined by council
 				gameElements.getBoard().endRound();
 				//is the Game finishing?
 				if(period==numberOfPeriods && round==2){
 					gameElements.notifyPlayers(new Info(GameStatus.ENDING, null, "calculating results "+ period+ " round "+round ));;
 					chooseAWinner();  //si può fare che da view parte timeout e dopo tot libero risorse
 					return; //o forse no;
-					}
+					
 				}
 				else{
 				period++;
@@ -187,7 +187,7 @@ public class Game extends Observable<CardDescriber>{
 				nextStep();//calls nextStep
 				return;
 				}
-			}
+			}//end of if(playersPerformedActions==numberOfPlayers)
 				
 			if(round==1){//end round
 				gameElements.getNextROundOrder().changeNextRoundOrder(players);
@@ -198,9 +198,9 @@ public class Game extends Observable<CardDescriber>{
 				return;
 			}
 			}
-				
+			
 		
-		Player player= players.get(playersPerformedActions);
+		Player player= players.get(playersPerformedActions); //get the next player that has to perform an Action
 		synchronized(player){
 			if(player.getStatus()==PlayerStatus.SUSPENDED){
 				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn")) ;

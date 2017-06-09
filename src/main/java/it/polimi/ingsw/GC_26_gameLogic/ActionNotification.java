@@ -6,8 +6,8 @@ import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 public class ActionNotification extends Action{
 	private final String playerName;
 
-	public ActionNotification(String playerName , BoardZone zone, int position, Colour familyMemberColour, int servantsUsed) {
-		super(zone, position, familyMemberColour, servantsUsed);
+	public ActionNotification(String playerName , Action action) {
+		super(action.getZone(),action.getPosition(), action.getFamilyMemberColour(), action.getServantsUsed());
 		this.playerName=playerName;
 		}
 	

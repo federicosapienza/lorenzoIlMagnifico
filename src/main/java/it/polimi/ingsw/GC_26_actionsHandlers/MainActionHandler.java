@@ -25,7 +25,7 @@ public class MainActionHandler {
 		twoPaymentHandler = new TwoPaymentsHandler(gameElements);
 		diplomaticPrivilegesHandler= new DiplomaticPrivilegesHandler();
 		vaticanReportHandler = new VaticanReportHandler(gameElements);
-		leaderCardHandler =new LeaderCardHandler();
+		leaderCardHandler =new LeaderCardHandler( gameElements);
 		
 	}
 

@@ -8,6 +8,10 @@ import java.util.Set;
 
 
 import it.polimi.ingsw.GC_26_gameLogic.Game;
+import it.polimi.ingsw.GC_26_readJson.BonusInterface;
+import it.polimi.ingsw.GC_26_readJson.Cards;
+import it.polimi.ingsw.GC_26_readJson.ReadAll;
+import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
 import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
 import it.polimi.ingsw.GC_26_serverConnections.SocketServer;
 
@@ -15,6 +19,9 @@ public class Server {
 	private GameInitialiserAndController game;
 	private Set<GameInitialiserAndController> games = new HashSet<>();
 	private Map<String ,String> listOfPlayers =new HashMap<>();
+	private Cards cards;
+	private BonusInterface bonus;
+	private TimerValuesInterface times;
 	
 	
 	private static Server server=null ;
@@ -37,13 +44,18 @@ public class Server {
 	
 	
 	public void start(){
-		//TODO lettura da file: ottengo 2 classi cards e bonus
+		ReadFromFile gamesSpecific= new ReadAll();
+		
+		gamesSpecific.start();
+		cards= gamesSpecific.getCards();
+		bonus = gamesSpecific.getBonus();
+		times= null;
 		
 		//game = new GameInitialiserAndController(this , null, null, null , null);
 		
-		SocketServer socket=  SocketServer.newServer(this);
-		Thread threadSocket = new Thread(socket);
-		threadSocket.run();
+		SocketServer socketServer=  SocketServer.newServer(this);
+		socketServer.run();
+		game= new GameInitialiserAndController(cards, bonus, times);
 		
 	}
 	
@@ -65,8 +77,8 @@ public class Server {
 	
 	public synchronized boolean doLogin(String username, String password){
 		if(listOfPlayers.containsKey(username)){
-			if(listOfPlayers.get(username).equals(password))
-				return true;
+			if(listOfPlayers.get(username).equals(password)){
+				return true;}
 			else return false;		
 		}
 		listOfPlayers.put(username, password);
@@ -76,13 +88,18 @@ public class Server {
 	
 	private  void enterInANewGame(ClientMainServerView clientView){
 		game.addClient(clientView);
+		if(game.getNumOfPlayer()==4)
+			newGame();
 	}
 	
-	private void startGame(Game game){
-		game.initialiseGame();
+	
+	
+	private void newGame() {
+		GameInitialiserAndController temp= game;
+		game= new GameInitialiserAndController(cards, bonus, times);
 		
 	}
-	
+
 	private GameInitialiserAndController findPlayerInExistingGame(String playerName){
 		for(GameInitialiserAndController game: games){
 			if(game.isPlayerHere(playerName))

@@ -71,7 +71,7 @@ public class ActionPerformerHandler {
 							card.runPermanentEffect(player);
 				player.setCardUsed(null);  //cleaning parameter of the card no more used
 					
-				//gameElements.getRankings().updateRankingPlayer(player);
+				
 				}
 }
 		

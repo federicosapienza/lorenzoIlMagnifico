@@ -39,6 +39,11 @@ public class GameInitialiserAndController implements Runnable{
 	}
 	
 	
+	public int getNumOfPlayer() {
+		return numOfPlayer;
+	}
+	
+	
 	public void removeClient(){
 		//TODO
 	}

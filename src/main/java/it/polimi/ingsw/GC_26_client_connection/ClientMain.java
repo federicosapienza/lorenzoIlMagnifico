@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 
 import it.polimi.ingsw.GC_26_client.ClientController;
 import it.polimi.ingsw.GC_26_client_clientLogic.IOlogic;
+import it.polimi.ingsw.GC_26_client_clientLogic.MainClientView;
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 
@@ -29,8 +30,9 @@ public class ClientMain {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		MainClientView view = new MainClientView();
 		ExecutorService pool = Executors.newFixedThreadPool(2);
-		IOlogic iOlogic= new IOlogic(connection);
+		IOlogic iOlogic= new IOlogic(connection, view);
 		SocketINClient socketINClient = new SocketINClient(PORT, IP);
 		socketINClient.setController( new ClientController());
 		pool.submit(iOlogic);
