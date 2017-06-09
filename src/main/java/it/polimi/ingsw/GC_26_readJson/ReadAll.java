@@ -5,8 +5,9 @@ public class ReadAll {
 	private BuildingCardsReader buildingCardsReader = new BuildingCardsReader();
 	private CharacterCardsReader characterCardsReader = new CharacterCardsReader();
 	private VentureCardsReader ventureCardsReader = new VentureCardsReader();
+	private BoardResourcesReader boardResourcesReader = new BoardResourcesReader();
 	private CardsImplementation cards= new CardsImplementation();
-
+	private BonusImplementation bonus = new BonusImplementation();
 	
 	
 	public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class ReadAll {
 	}
 	
 	public void readDevelopmentCards(){
-		territoryCardsReader.readCards(1,cards);
+		//territoryCardsReader.readCards(1,cards);
 		//territoryCardsReader.readCards(2,cards);
 		//territoryCardsReader.readCards(3,cards);
 		
@@ -30,5 +31,7 @@ public class ReadAll {
 		//ventureCardsReader.readCards(1, cards);
 		//ventureCardsReader.readCards(2, cards);
 		//ventureCardsReader.readCards(3, cards);
+		
+		boardResourcesReader.readResources(bonus);
 	}
 }
