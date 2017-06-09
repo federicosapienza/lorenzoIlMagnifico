@@ -91,16 +91,14 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 		   switch(numOfPeriod){
 		   case 1:
 
-			   cards.getTerritoryCardsPeriod1().add(developmentCard);
+			   cards.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 			   break;
 		  
 		   case 2:
-			   cards.getTerritoryCardsPeriod2().add(developmentCard);
+			   cards.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 			   break;
 		   case 3:
-			   cards.getTerritoryCardsPeriod3().add(developmentCard);
-
-			   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.TERRITORYCARD).add(developmentCard);
+			   cards.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 			   break;
 
 		   default:

@@ -52,7 +52,7 @@ public class Game extends Observable<CardDescriber>{
 	
 	public Game(Cards cards, BonusInterface bonus, TimerValuesInterface times){
 		this.cards= cards;
-		this.resourcesOrPointsBonus= bonus.getListOfResourcesOrPointsArray();
+		this.resourcesOrPointsBonus= bonus.getListOfResourcesOfPointsArray();
 		this.startingResources= bonus.getResourcesOrPointsStarting();
 		this.bonusInterface =bonus;
 		this.times= times;

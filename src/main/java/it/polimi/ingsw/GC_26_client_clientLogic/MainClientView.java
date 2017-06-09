@@ -10,11 +10,12 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 public class MainClientView {
 	private GameStatus gameStatus=null;
 	private PlayerStatus playerStatus=PlayerStatus.WAITINGHISTURN;
-	private boolean LoginDone=false;
+	private boolean loginDone=false;
 	
 	private  String playerUsername;
 	private final Map< String, PlayerView> players;
 	private final BoardView board;
+	private  IOlogic iOlogic;
 	
 	
 	
@@ -56,7 +57,7 @@ public class MainClientView {
 	}
 	
 	public boolean isLoginDone() {
-		return LoginDone;
+		return loginDone;
 	}
 	
 	
@@ -89,7 +90,11 @@ public class MainClientView {
 		return players.get(playerUsername);
 	}
 	
-	
-	
+	public void setLoginDone() {
+		loginDone = true;
+		
+		
+	}
+
 
 }

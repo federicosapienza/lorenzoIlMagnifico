@@ -28,13 +28,16 @@ public class IOlogic  implements Runnable{
 		
 
 		@Override
-		public void run() { 
+		public void run() {
+			String username = socketIn.nextLine();
+
 			while (!view.isLoginDone()) {
 				// reads a new Line from the Scanner
-				String username = socketIn.nextLine();
+				 username = socketIn.nextLine();
 				String password = socketIn.nextLine();
 				connection.login(username, password);
 				}
+			view.setPlayerUsername(username);
 			while(true){
 				if(waitingPlayer){
 					System.out.println("What Action?");
@@ -154,7 +157,6 @@ public class IOlogic  implements Runnable{
 		}
 		
 	
-		
-		
+	
 
 }
