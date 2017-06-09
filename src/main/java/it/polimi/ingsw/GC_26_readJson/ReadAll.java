@@ -5,7 +5,7 @@ public class ReadAll {
 	private BuildingCardsReader buildingCardsReader = new BuildingCardsReader();
 	private CharacterCardsReader characterCardsReader = new CharacterCardsReader();
 	private VentureCardsReader ventureCardsReader = new VentureCardsReader();
-	private BoardResourcesReader boardResourcesReader = new BoardResourcesReader();
+	private BoardResourcesAndStartingPlayerResourcesReader boardResourcesAndStartingPlayerResourcesReader = new BoardResourcesAndStartingPlayerResourcesReader();
 	private CardsImplementation cards= new CardsImplementation();
 	private BonusImplementation bonus = new BonusImplementation();
 	
@@ -32,6 +32,8 @@ public class ReadAll {
 		//ventureCardsReader.readCards(2, cards);
 		//ventureCardsReader.readCards(3, cards);
 		
-		boardResourcesReader.readResources(bonus);
+		//boardResourcesAndStartingPlayerResourcesReader.readResources(bonus);
+		//boardResourcesAndStartingPlayerResourcesReader.readStartingPlayerResources(bonus);
+		//boardResourcesAndStartingPlayerResourcesReader.readFaithTrack(bonus);
 	}
 }

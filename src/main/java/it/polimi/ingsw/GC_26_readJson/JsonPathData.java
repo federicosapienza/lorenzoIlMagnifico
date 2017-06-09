@@ -1,8 +1,6 @@
 package it.polimi.ingsw.GC_26_readJson;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 public class JsonPathData {
 	String[] territoryCardsPeriod1PathArray = {"src/Cards/Territory_cards/Period_1/Citadel.json","src/Cards/Territory_cards/Period_1/City.json","src/Cards/Territory_cards/Period_1/Commercial_Hub.json","src/Cards/Territory_cards/Period_1/Forest.json","src/Cards/Territory_cards/Period_1/Gravel_Pit.json","src/Cards/Territory_cards/Period_1/Monastery.json","src/Cards/Territory_cards/Period_1/Village.json","src/Cards/Territory_cards/Period_1/Woods.json"};
@@ -22,7 +20,10 @@ public class JsonPathData {
 	String[] ventureCardsPeriod3PathArray ={"src/Cards/Venture_cards/Period3/Building_the_Towers.json","src/Cards/Venture_cards/Period3/Hiring_Mercenaries.json","src/Cards/Venture_cards/Period3/Improving_the_Roads.json","src/Cards/Venture_cards/Period3/Military_Conquest.json","src/Cards/Venture_cards/Period3/Promoting_Sacred_Art.json","src/Cards/Venture_cards/Period3/Repairing_the_Cathedral.json","src/Cards/Venture_cards/Period3/Sacred_War.json","src/Cards/Venture_cards/Period3/Support_to_the_Pope.json"};
 	
 	String[] resources = {"src/ResourcesForBoard/Towers/TerritoriesTower/floor1.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor2.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor3.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor4.json","src/ResourcesForBoard/Towers/CharactersTower/floor1.json","src/ResourcesForBoard/Towers/CharactersTower/floor2.json","src/ResourcesForBoard/Towers/CharactersTower/floor3.json","src/ResourcesForBoard/Towers/CharactersTower/floor4.json","src/ResourcesForBoard/Towers/BuildingsTower/floor1.json","src/ResourcesForBoard/Towers/BuildingsTower/floor2.json","src/ResourcesForBoard/Towers/BuildingsTower/floor3.json","src/ResourcesForBoard/Towers/BuildingsTower/floor4.json","src/ResourcesForBoard/Towers/VenturesTower/floor1.json","src/ResourcesForBoard/Towers/VenturesTower/floor2.json","src/ResourcesForBoard/Towers/VenturesTower/floor3.json","src/ResourcesForBoard/Towers/VenturesTower/floor4.json","src/ResourcesForBoard/Market/position1.json","src/ResourcesForBoard/Market/position2.json","src/ResourcesForBoard/Market/position3.json","src/ResourcesForBoard/Market/position4.json","src/ResourcesForBoard/Council_Palace/council_palace.json"};
+	String[] startingResources = {"src/StartingResources/player1.json","src/StartingResources/player2.json","src/StartingResources/player3.json","src/StartingResources/player4.json"};
 	
+	
+
 	public String[] getTerritoryCardsPeriod1PathArray() {
 		return territoryCardsPeriod1PathArray;
 	}
@@ -63,7 +64,9 @@ public class JsonPathData {
 	public String[] getResources() {
 		return resources;
 	}
-
+	public String[] getStartingResources() {
+		return startingResources;
+	}
 }
 	
 	

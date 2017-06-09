@@ -116,16 +116,13 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 			DevelopmentCard developmentCard= DevelopmentCardImplementation.characterCard(name, period, payment, immediateEffect,permanentEffect);
 			switch(numOfPeriod){
 			   case 1:
-				   cardsImplementation.getCharacterCardsPeriod1().add(developmentCard);
-				   System.out.println(cardsImplementation.getCharacterCardsPeriod1().get(0).getName());
+				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 				   break;
 			   case 2:
-				   cardsImplementation.getCharacterCardsPeriod2().add(developmentCard);
-				   System.out.println(cardsImplementation.getCharacterCardsPeriod2().get(0).getName());
+				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 				   break;
 			   case 3:
-				   cardsImplementation.getCharacterCardsPeriod3().add(developmentCard);
-				   System.out.println(cardsImplementation.getCharacterCardsPeriod3().get(0).getName());
+				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 				   break;
 			   default:
 				   throw new IllegalArgumentException();
