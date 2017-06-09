@@ -5,26 +5,28 @@ import java.util.List;
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_board.Board;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
+import it.polimi.ingsw.GC_26_utilities.Message;
 import it.polimi.ingsw.GC_26_utilities.dices.Dices;
-import it.polimi.ingsw.GC_26_utilities.rankings.Rankings;
+import it.polimi.ingsw.GC_26_utilities.rankings.NextRoundOrder;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class GameElements {  //used at the beginning of the game to pass resources bonus in positions
 	Game game;
 	private Board board;
 	private Dices dices;
-	private Rankings rankings;
+	private NextRoundOrder rankings;
 	private List<Player> players;
 	private int numberOfPlayers;
-	private TimerInfo timerInfo;
+	private TimerValuesInterface timerInfo;
 	private MainActionHandler handlers = new MainActionHandler();
 	private ActionsPerformed gameMemory;
 	
-	public GameElements(Game game, List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList, int times[]) {
+	public GameElements(Game game, List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList, TimerValuesInterface times) {
 		board=new Board(numberOfPlayers, resourcesOrPointsList);
 		dices= new Dices();
-		rankings = new Rankings(players);
-		timerInfo= new TimerInfo(times);
+		rankings = new NextRoundOrder(players);
+		timerInfo= times;
 		gameMemory =new ActionsPerformed();
 	}
 	
@@ -45,7 +47,7 @@ public class GameElements {  //used at the beginning of the game to pass resourc
 	public List<Player> getPlayers() {
 		return players;
 	}
-	public Rankings getRankings() {
+	public NextRoundOrder getNextROundOrder() {
 		return rankings;
 	}
 	
@@ -60,9 +62,9 @@ public class GameElements {  //used at the beginning of the game to pass resourc
 	
 
 	//instead of adding an other observer to send String , it calls player's observer
-    public void notifyPlayers(String string){  
+    public void notifyPlayers(Message message){  
        for(Player p: players){
-    	   p.notifyObservers(string);
+    	   p.notifyObservers(message);
        }
        
     }

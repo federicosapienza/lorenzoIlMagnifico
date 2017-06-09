@@ -5,6 +5,7 @@ import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_serverView.Observer;
+import it.polimi.ingsw.GC_26_utilities.Request;
 
 public class ActionController implements Observer<Action>{  //TODO extends actionObserver etc
 	Player player;
@@ -44,27 +45,25 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 					return;
 				if(player.getWarehouse().getCouncilPrivileges()>0){
-					player.setStatus(PlayerStatus.TRADINGCOUNCILPRIVILEDGES);
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
 				}
 				else if(player.isThereAsecondaryAction())
-				player.setStatus(PlayerStatus.SECONDPLAY);
-				else
-				player.setStatus(PlayerStatus.ACTIONPERFORMED);
-			
+					player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+				else 
+					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 			}
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			synchronized (player) {
-				player.setStatus(PlayerStatus.PLAYING);
-				player.notifyObservers("action not valid");
+				player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
 			}
 			
 		}
 		catch ( IllegalStateException e1 ) {
 			e1.printStackTrace();
 			synchronized (player) {
-				player.setStatus(PlayerStatus.PLAYING);
-				player.notifyObservers("action not valid");
+				player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
+
 			}
 		}
 	}
@@ -81,16 +80,18 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 				 if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 						return;
 				 if(player.getWarehouse().getCouncilPrivileges()>0){
-						player.setStatus(PlayerStatus.TRADINGCOUNCILPRIVILEDGES);}
-				 else player.setStatus(PlayerStatus.ACTIONPERFORMED);
+						player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
+				 	}
+				 else 	player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
+;
 				
 			}
 			 
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			synchronized (player) {
-				player.setStatus(PlayerStatus.PLAYING);
-				player.notifyObservers("action not valid");
+				player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+
 			}
 			
 			
@@ -98,8 +99,8 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 		catch ( IllegalStateException e1 ) {
 			e1.printStackTrace();
 			synchronized (player) {
-				player.setStatus(PlayerStatus.PLAYING);
-				player.notifyObservers("action not valid");
+				player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+
 			}
 		}
 	}

@@ -8,9 +8,11 @@ import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoard;
 import it.polimi.ingsw.GC_26_serverView.Observable;
+import it.polimi.ingsw.GC_26_utilities.Message;
+import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembers;
 
-public class Player extends Observable<String> {
+public class Player extends Observable<Message> {
 	private final String name;
 	private final Warehouse warehouse;
 	private final PermanentModifiers permanentModifiers;
@@ -92,11 +94,16 @@ public class Player extends Observable<String> {
 	
 	//setters methods
 	
-	public void setStatus(PlayerStatus status){
-		this.status = status;
+	public void setStatus(Request request){
+		PlayerStatus temp = request.getStatus();
+		if(temp!= this.status)
+			previousStatus= this.status;
+		this.status = temp;
+		if(temp!=PlayerStatus.SUSPENDED)
+			notifyObservers(request);
 		
-		notifyObservers("PlayerStatus:"+ status  );
 	}
+	
 	
 	public void backToPreviousStatus() {
 		status=previousStatus;
@@ -155,6 +162,7 @@ public class Player extends Observable<String> {
 		this.cardUsed = cardUsed;
 	}
 	
+
 	
 
 }

@@ -5,13 +5,14 @@ import java.util.Iterator;
 
 import it.polimi.ingsw.GC_26_board.Board;
 import it.polimi.ingsw.GC_26_board.BoardZone;
-import it.polimi.ingsw.GC_26_cards.Cards;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTile;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 
 public class Period {
+	/*
+}
 	private int periodNumber;
 	private Cards cards;
 	private GameElements gameElements;
@@ -109,7 +110,6 @@ public class Period {
 		gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisPeriod(cards.getDevelopmentCards(periodNumber, DevelopmentCardTypes.VENTURECARD));
 	}
 	
-	
-	
+	*/
 	
 }

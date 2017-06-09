@@ -12,12 +12,10 @@ import it.polimi.ingsw.GC_26_player.Player;
  * 
  */
 
-public class Rankings {
-	private Map<String, Integer> victoryPoints= new HashMap<>();
-	private Map<String, Integer> militaryPoints= new HashMap<>();
-	private Map<String, Integer> faithPoints= new HashMap<>();
+public class NextRoundOrder {
+	
 	private List<String> nextRoundOrder= new ArrayList<>();
-	public Rankings(List<Player> players) {
+	public NextRoundOrder(List<Player> players) {
 		initialise(players);
 		
 	}
@@ -25,35 +23,11 @@ public class Rankings {
 	private void initialise(List<Player> players) {
 		for(Player p: players){
 			String name = p.getName();
-			victoryPoints.put(name, 0);
-			victoryPoints.put(name, 0);
-			victoryPoints.put(name, 0); 
 			//In the first round, the order is determined by the order in which the player were added to the game
 			// a "fair" principle common in multiplayers online game.
 		}
 	}
-	
-	// Rankings getters
-	public Map<String, Integer> getFaithPointsRank() {
-		return faithPoints;
-	}
-	public Map<String, Integer> getMilitaryPointsRank() {
-		return militaryPoints;
-	}
-	public Map<String, Integer> getVictoryPointsRank() {
-		return victoryPoints;
-	}
-	
-	
-	
-	
-	//setter of rankings
-	public void updateRankingPlayer(Player player){
-		String name = player.getName();
-		victoryPoints.replace(name, player.getWarehouse().getVictoryPoints());
-		faithPoints.replace(name, player.getWarehouse().getFaithPoints());
-		militaryPoints.replace(name, player.getWarehouse().getMilitaryPoints());
-	}
+
 	
 	
 	// logic of new round' s order 

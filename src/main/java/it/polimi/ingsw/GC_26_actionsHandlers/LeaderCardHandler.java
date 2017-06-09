@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.Request;
 
 
 //Handles the activation of leaderCards : he keeps memory of the cards used this turn to prevent the player from trying using the same card twice
@@ -21,11 +22,11 @@ public class LeaderCardHandler {
 		try {
 			card= list.get(choice);
 		} catch (IndexOutOfBoundsException e) {
-			player.notifyObservers("wrong value");
+			player.notifyObservers(new Request(player.getStatus(),"Wrong value", null));
 			return false;
 		}
 		if(used.contains(card)){
-			player.notifyObservers("You have already used the card");
+			player.notifyObservers(new Request(player.getStatus(),"You have already used the card", card));
 			return false;
 		}
 			
@@ -41,7 +42,7 @@ public class LeaderCardHandler {
 		try {
 			card= list.get(choice);
 		} catch (IndexOutOfBoundsException e) {
-			player.notifyObservers("wrong value");
+			player.notifyObservers(new Request(player.getStatus(),"Wrong value", null));
 			throw new IllegalStateException();
 		}
 		if (!card.checkRequirement(player))

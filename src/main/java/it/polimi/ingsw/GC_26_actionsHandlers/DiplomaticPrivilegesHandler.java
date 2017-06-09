@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
@@ -33,7 +34,7 @@ public class DiplomaticPrivilegesHandler {
 		}
 			
 		if(used[choice]){
-			player.notifyObservers("Resources or points already chosen");
+			player.notifyObservers(new Request(player.getStatus(),"Resources or points already chosen", null));
 			return false;
 		}
 		else return true;

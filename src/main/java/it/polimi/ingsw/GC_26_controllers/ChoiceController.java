@@ -9,6 +9,7 @@ import it.polimi.ingsw.GC_26_actionsHandlers.VaticanReportHandler;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_serverView.Observer;
+import it.polimi.ingsw.GC_26_utilities.Request;
 
 //the controller called whenever the game asks the client to perform a specific choice
 public class ChoiceController implements Observer<Integer>{
@@ -67,8 +68,9 @@ public class ChoiceController implements Observer<Integer>{
 		catch(IllegalArgumentException e){
 			e.printStackTrace();
 			synchronized (player) {
-				player.setStatus(PlayerStatus.WAITINGHISTURN); //ends the turn
-				player.notifyObservers("action not valid");
+				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, null , null));
+				//ends the turn
+			
 			}
 		}
 	}
@@ -94,8 +96,9 @@ public class ChoiceController implements Observer<Integer>{
 			} catch(IllegalArgumentException e){
 				e.printStackTrace();
 				synchronized (player) {
-					player.setStatus(PlayerStatus.WAITINGHISTURN); //ends his turn
-					player.notifyObservers("action not valid");
+					 player.backToPreviousStatus();
+					player.setStatus(new Request(player.getStatus(), "action not valid" , null));
+
 				}
 			}		
 		}
@@ -113,22 +116,23 @@ public class ChoiceController implements Observer<Integer>{
 					if(player.getWarehouse().getCouncilPrivileges()>0)
 						return;
 					if(player.isThereAsecondaryAction())
-						player.setStatus(PlayerStatus.SECONDPLAY);
-					else player.setStatus(PlayerStatus.ACTIONPERFORMED);
+						player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+					else player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));;
 				}
 				}
 			catch(IllegalArgumentException e){
 				e.printStackTrace();
 				synchronized (player) {
-					player.setStatus(PlayerStatus.WAITINGHISTURN); //ends his turn
-					player.notifyObservers("action not valid");
+					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, "action not valid" , null));
+
+					
 				}
 			}
 			catch ( IllegalStateException e1 ) {
 				e1.printStackTrace();
 				synchronized (player) {
-					player.setStatus(PlayerStatus.WAITINGHISTURN);
-					player.notifyObservers("action not valid");
+					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, "action not valid" , null));
+
 				}
 				}	
 				
@@ -140,16 +144,15 @@ public class ChoiceController implements Observer<Integer>{
 				synchronized (player) {
 					if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 						return;
-					 //changing the state
-					player.setStatus(PlayerStatus.WAITINGHISTURN);
+					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, "action not valid" , null));
+
 					}
 		}
 			
 			catch ( IllegalStateException e ) {
 				e.printStackTrace();
 				synchronized (player) {
-					player.setStatus(PlayerStatus.WAITINGHISTURN);
-					player.notifyObservers("action not valid");
+					player.setStatus(new Request(PlayerStatus.VATICANREPORTDECISION, "action not valid" , null));
 					handlers.getVaticanReportHandler().perform(player, 0);
 				}
 				}	
@@ -170,12 +173,12 @@ public class ChoiceController implements Observer<Integer>{
 					return;
 				 //going back to previous state of the game, if time not expired and restarting the action that was interrupted
 				if(player.getWarehouse().getCouncilPrivileges()>0)
-					player.setStatus(PlayerStatus.TRADINGCOUNCILPRIVILEDGES);
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
 				//altrimenti lo stato resta lo stesso
 				}
 		}
 		catch( IllegalStateException e){
-			player.notifyObservers("wrong action");
+			player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
 		}
 		}
 }

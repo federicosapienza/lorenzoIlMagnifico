@@ -5,13 +5,13 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
-public class GainPointsPerAnyMilitaryPointEffect implements Effect{
+public class GainVictoryPointsPerAnyMilitaryPointEffect implements Effect{
 
 	
 		private final ResourcesOrPoints toHave;
 		
 		
-		public GainPointsPerAnyMilitaryPointEffect(ResourcesOrPoints toHave) {
+		public GainVictoryPointsPerAnyMilitaryPointEffect(ResourcesOrPoints toHave) {
 			this.toHave= toHave;
 		}
 		
@@ -20,10 +20,10 @@ public class GainPointsPerAnyMilitaryPointEffect implements Effect{
 		@Override
 		public synchronized void doEffect(Player player, boolean immediate) {
 			Warehouse temp =player.getWarehouse();
-			int test = toHave.getCoins()*temp.getCoins()+
-					toHave.getServants()+temp.getServants()+ toHave.getWood()*temp.getWood()+ toHave.getStone()*temp.getStone()+
-					toHave.getVictoryPoints()*temp.getVictoryPoints()+toHave.getMilitaryPoints()*temp.getMilitaryPoints()+
-					toHave.getFaithPoints()*temp.getFaithPoints();
+			int test;
+			if(toHave.getMilitaryPoints()==0)
+				throw new IllegalArgumentException();
+			test = temp.getMilitaryPoints()/toHave.getMilitaryPoints();
 			temp.add(ResourcesOrPoints.newPoints(test, 0, 0, 0));
 			}
 			

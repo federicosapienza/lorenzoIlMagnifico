@@ -14,6 +14,7 @@ import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 import it.polimi.ingsw.GC_26_serverView.Server;
+import it.polimi.ingsw.GC_26_utilities.Message;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
@@ -114,8 +115,8 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 			sendMethod(wallet);
 		}
 		@Override
-		public void send(String string) {
-			sendMethod(string);
+		public void send(Message message) {
+			sendMethod(message);
 			
 		}
 		@Override

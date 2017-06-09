@@ -14,7 +14,7 @@ import it.polimi.ingsw.GC_26_cards.effects.ActionValueModifierEffect;
 import it.polimi.ingsw.GC_26_cards.effects.CardsNumberToResourcesEffect;
 import it.polimi.ingsw.GC_26_cards.effects.DeletingBonusFloorsEffect;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
-import it.polimi.ingsw.GC_26_cards.effects.GainPointsPerAnyMilitaryPointEffect;
+import it.polimi.ingsw.GC_26_cards.effects.GainVictoryPointsPerAnyMilitaryPointEffect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveDiscountOnActionsEffect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
 import it.polimi.ingsw.GC_26_cards.effects.SetSecondAction;
@@ -148,7 +148,7 @@ public class DevelopmentCardsReader {
 			if(effectType.equals("GainPointsPerAnyMilitaryPoint")){
 				intList = readIntList("permanentGainPointsPerAnyMilitaryPointResources");
 				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-				GainPointsPerAnyMilitaryPointEffect effect = new GainPointsPerAnyMilitaryPointEffect(resourcesOrPoints);
+				GainVictoryPointsPerAnyMilitaryPointEffect effect = new GainVictoryPointsPerAnyMilitaryPointEffect(resourcesOrPoints);
 				return effect;
 			}
 			if(effectType.equals("null")){
@@ -224,7 +224,7 @@ public class DevelopmentCardsReader {
 		if(effectType.equals("GainPointsPerAnyMilitaryPoint")){
 			intList = readIntList("immediateGainPointsPerAnyMilitaryPointResources");
 			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-			GainPointsPerAnyMilitaryPointEffect effect = new GainPointsPerAnyMilitaryPointEffect(resourcesOrPoints);
+			GainVictoryPointsPerAnyMilitaryPointEffect effect = new GainVictoryPointsPerAnyMilitaryPointEffect(resourcesOrPoints);
 			return effect;
 		}
 		if(effectType.equals("null")){
