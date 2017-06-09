@@ -8,6 +8,7 @@ import com.google.gson.*;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
 
@@ -89,6 +90,7 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 		    DevelopmentCard developmentCard= DevelopmentCardImplementation.territoryCard(name, period, null, immediateEffect, permanentEffect , actionValue);
 		   switch(numOfPeriod){
 		   case 1:
+
 			   cards.getTerritoryCardsPeriod1().add(developmentCard);
 			   break;
 		  
@@ -97,6 +99,8 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 			   break;
 		   case 3:
 			   cards.getTerritoryCardsPeriod3().add(developmentCard);
+
+			   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.TERRITORYCARD).add(developmentCard);
 			   break;
 
 		   default:

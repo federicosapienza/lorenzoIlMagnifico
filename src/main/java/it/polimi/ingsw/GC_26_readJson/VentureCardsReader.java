@@ -126,16 +126,13 @@ public class VentureCardsReader extends DevelopmentCardsReader {
 			DevelopmentCard developmentCard= DevelopmentCardImplementation.ventureCard(name, period, payment, immediateEffect, permanentEffect);
 			switch(numOfPeriod){
 			   case 1:
-				   cardsImplementation.getVentureCardsPeriod1().add(developmentCard);
-				   System.out.println(cardsImplementation.getVentureCardsPeriod1().get(0).getName());
+				   cardsImplementation.getRandomDevelopmentCards(1, DevelopmentCardTypes.VENTURECARD).add(developmentCard);
 				   break;
 			   case 2:
-				   cardsImplementation.getVentureCardsPeriod2().add(developmentCard);
-				   System.out.println(cardsImplementation.getVentureCardsPeriod2().get(0).getName());
+				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod,DevelopmentCardTypes.VENTURECARD ).add(developmentCard);
 				   break;
 			   case 3:
-				   cardsImplementation.getVentureCardsPeriod3().add(developmentCard);
-				   System.out.println(cardsImplementation.getVentureCardsPeriod3().get(0).getName());
+				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.VENTURECARD).add(developmentCard);
 				   break;
 			   default:
 				   throw new IllegalArgumentException();

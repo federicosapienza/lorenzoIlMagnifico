@@ -1,30 +1,39 @@
 package it.polimi.ingsw.GC_26_readJson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoardTile;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class BonusImplementation implements BonusInterface {
 
+
+
+	private List<ResourcesOrPoints[]> listOfResourcesOfPointsArray = new ArrayList<ResourcesOrPoints[]>();
+	private List<ResourcesOrPoints> resourcesOrPointsStarting = new ArrayList<ResourcesOrPoints>(); 
+	private Map<Integer,Integer> faithTrack = new HashMap<>();
 	
+	@Override
 	public List<ResourcesOrPoints[]> getListOfResourcesOfPointsArray() {
 		return listOfResourcesOfPointsArray;
 	}
-
-	private List<ResourcesOrPoints[]> listOfResourcesOfPointsArray = new ArrayList<ResourcesOrPoints[]>();
-
-	@Override
-	public List<ResourcesOrPoints[]> getListOfResourcesOrPointsArray() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public List<ResourcesOrPoints> getResourcesOrPointsStarting() {
-		// TODO Auto-generated method stub
-		return null;
+		return resourcesOrPointsStarting;
+	}
+
+	
+
+	
+
+	@Override
+
+	public Map<Integer, Integer> getFaithTrack() {
+		return faithTrack;
 	}
 
 	@Override
@@ -32,5 +41,6 @@ public class BonusImplementation implements BonusInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
