@@ -21,17 +21,18 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
 public class ServerSocketToClient  implements ServerConnectionToClient{
 		private final Socket socket;
-		Server server;
-		ObjectOutputStream objOut =  null;
-        ObjectInputStream objIn  = null;
-        ClientMainServerView views= null;
+		private Server server;
+		private ObjectOutputStream objOut =  null;
+		private  ObjectInputStream objIn  = null;
+		private ClientMainServerView views= null;
 
 		public ServerSocketToClient(Socket socket, Server server) throws IOException {
 			this.socket=socket;
 			this.server= server;
-			objOut = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+			objOut = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
 			objOut.flush();
-	        objIn  = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+			System.out.println("arrivi 11111qui");
+	        objIn  = new ObjectInputStream(new BufferedInputStream(this.socket.getInputStream()));
 		}
 		
 		@Override
@@ -44,6 +45,10 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 		@Override
 		public void run() {
 			try{
+				System.out.println("vai");
+				objOut.writeUTF("Welcome!");
+				objOut.flush();
+				System.out.println("qui");
 				Boolean loginDone= false;
 				String username=null;
 				String password=null;

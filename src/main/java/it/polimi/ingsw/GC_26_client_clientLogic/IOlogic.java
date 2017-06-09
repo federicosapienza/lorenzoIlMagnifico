@@ -39,7 +39,8 @@ public class IOlogic  implements Runnable{
 				}
 			view.setPlayerUsername(username);
 			while(true){
-				if(waitingPlayer){
+				if(waitingAction){
+					view.getBoard().printBoard();
 					System.out.println("What Action?");
 					int boardChoice=0; //senza lo zero la seconda volta va male
 					int position=0;
@@ -82,8 +83,12 @@ public class IOlogic  implements Runnable{
 				}
 				
 				if(waitingResponse){
-					System.out.println("waiting");
+					System.out.println("waiting, 100 to close turn");
 					int responce = socketIn.nextInt();
+						if(responce==999){
+							//TODO String end ="end turn";
+						}
+							
 					connection.sendResponce(responce);
 					waitingResponse=false;
 				}

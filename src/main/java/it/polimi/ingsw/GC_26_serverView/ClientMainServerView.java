@@ -1,7 +1,6 @@
 package it.polimi.ingsw.GC_26_serverView;
 
 
-import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
 
 public class ClientMainServerView {
@@ -14,6 +13,7 @@ public class ClientMainServerView {
 	private ActionInputView actionInputView;
 	private PositionView positionView;
 	private FamilyMembersView familyMembersView;
+	private EndTurnView endTurnView;
 	
 	private ServerConnectionToClient connection;
 	
@@ -24,11 +24,12 @@ public class ClientMainServerView {
 		cardDescriberView = new CardDescriberView(connection);
 		stringView = new MessageView(connection);
 		actionView = new ActionView(connection);
-		stringInputView = new StringInputView();
+		endTurnView= new EndTurnView();
+		stringInputView = new StringInputView(endTurnView);
 		actionInputView = new ActionInputView();
 		positionView =new PositionView(connection);
 		familyMembersView = new FamilyMembersView(connection);
-		
+		EndTurnView endTurnView= new EndTurnView();
 		this.connection= connection;
 		
 	}

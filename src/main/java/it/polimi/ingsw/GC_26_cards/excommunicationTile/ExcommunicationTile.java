@@ -34,10 +34,7 @@ public abstract class ExcommunicationTile implements CardDescriber{
 		return null;
 	}
 
-	@Override
-	public int getPeriod() {
-		return 0;
-	}
+	
 
 	@Override
 	public String getImmediateEffectDescriber() {

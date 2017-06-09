@@ -4,12 +4,17 @@ package it.polimi.ingsw.GC_26_client_clientLogic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import javax.print.event.PrintJobAttributeListener;
+import javax.swing.text.Position;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
+import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 
 
 public class BoardView {
@@ -21,6 +26,9 @@ public class BoardView {
 	private List<PositionView> productionZone;
 	private List<PositionView> harvestZone;
 	private List<PositionView> CouncilPalace;
+	
+	private List<CardDescriber> excommunicationThisGame;
+
 	
 	
 	public BoardView() {
@@ -34,6 +42,10 @@ public class BoardView {
 		this.harvestZone = new ArrayList<>();
 		this.CouncilPalace = new ArrayList<>();  
 		//even if there is only one council Palace set was chosen no order to be less specific
+		this.excommunicationThisGame= new ArrayList<>();
+		
+		
+		
 	}
 		//called at the beginning of the connection to save status of the board
 		public void addPosition(PositionView position){
@@ -109,6 +121,58 @@ public class BoardView {
 		}
 		
 	}
+	
+	public void printBoard(){
+		System.out.println("Territory Tower");
+		printList(territoriesTower);
+		System.out.println("building Tower");
+		printList(buildingsTower);
+		System.out.println("Character Tower");
+		printList(charactersTower);
+		System.out.println("Venture Tower");
+		printList(venturesTower);
+		System.out.println("market");
+		printList(marketZone);
+		System.out.println("Production ");
+		printList(productionZone);
+		System.out.println("Harvest ");
+		printList(harvestZone);
+		System.out.println("CouncilPalace ");
+		printList(CouncilPalace);
+		
+		
+	}
+	
+	
+	private void printList(List<PositionView> positions){
+		for(PositionView p : positions){
+			printTool(p);
+		}
+	}
+	
+	private void printTool(PositionView position){
+		String temp=" ";
+		if(position.getBonusPosition() !=null)
+			temp.concat(position.getBonusPosition()+" ");
+		if(position.getCardHere()!=null)
+			temp.concat(position.getCardHere()+ " ");
+		if(!position.getPlayersHere().isEmpty()){
+			Map<String , Colour> here= position.getPlayersHere();
+			for (Map.Entry<String, Colour> entry : here.entrySet()){
+			    temp.concat(entry.getKey()+ " "+ entry.getValue()+" ");
+			}
+
+		}
+		System.out.println(position.getPositionValue()+" "+temp);
+			
+	}
+	
+	
+	public void addExcommunication(CardDescriber card){
+		excommunicationThisGame.add(card);
+		System.out.println(card.getName()+" "+ card.getPermanentEffectDescriber());
+	}
+	
 	
 	
 

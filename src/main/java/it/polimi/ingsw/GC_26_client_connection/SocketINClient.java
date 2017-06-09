@@ -37,36 +37,38 @@ public class SocketINClient implements Runnable{
 			 
 				try {
 					while (true){
+						System.out.println("qui");
 			        String test = objIn.readUTF();
+			        System.out.println(test);
 			        if(test.equals("Login or signing in successful")){//any change here must be changed also in server
 			        	controller.setLoginDone();
 			        	break;
 			        }
 					}
-					
+					controller.setLoginDone();
 					
 					
 					while(true){
 					Object object = objIn.readObject();
 					if(object instanceof Message){
-						Message string = (Message) object;
-						System.out.println(string);
+						Message message = (Message) object;
+						controller.receiveMessage(message);
 					}
 					if(object instanceof ActionNotification){
 						ActionNotification action = (ActionNotification) object;
-						//TODO updateBoard
+						controller.receiveAction(action);
 					}
 					if(object instanceof CardDescriber){
 						CardDescriber card = (CardDescriber) object;
-						//TODO dipende dalla situa
+						controller.receiveCard(card);
 					}
 					if(object instanceof PlayerWallet){
 						PlayerWallet wallet = (PlayerWallet) object;
-						//TODO sempre ok
-					}
+						controller.receivePlayerPocket(wallet);
+ 					}
 					if(object instanceof PositionDescriber){
 						PositionDescriber positionDescriber = (PositionDescriber) object;
-						
+						controller.receivePosition(positionDescriber);
 					
 					}
 					}

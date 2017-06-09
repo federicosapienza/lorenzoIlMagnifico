@@ -1,6 +1,5 @@
 package it.polimi.ingsw.GC_26_serverConnections;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -8,46 +7,43 @@ import java.util.concurrent.Executors;
 
 import it.polimi.ingsw.GC_26_serverView.Server;
 
-public class SocketServer implements Runnable {
+public class SocketServer  {
+	private final Server server;
+	private final int port;
+    
 
-//singleton pattern
-private static SocketServer socketServer=null ;
-		private static final int PORT = 29999;
+    public SocketServer (Server server, int PORT) {
+       this.server= server;
+       port=PORT;
+    }
 
+    
+    
 	
-    //Singleton pattern
-    private SocketServer(){
-    	@SuppressWarnings("unused")
-    	SocketServer server= new SocketServer();
-    }
-
-    public static synchronized SocketServer newServer(Server server) {
-        if (socketServer == null) {
-        	socketServer = new SocketServer();
-        }
-        return socketServer;
-    }
-
-    
-    
-	@SuppressWarnings("resource")
-	@Override
 	public void run(){
 		ServerSocket welcomeSocket;
 		ExecutorService pool;
-    	while(true){
+    
     		try {
-    			 welcomeSocket = new ServerSocket(PORT);
-    	    	System.out.println("server ready at port "+PORT);
+    			 welcomeSocket = new ServerSocket(port);
+     	    	System.out.println("server ready at port "+port);
+     	    	pool = Executors.newCachedThreadPool();
+ 
+    			while(true){
+    				Socket socket = welcomeSocket.accept();
+    				ServerConnectionToClient socketconnect =new ServerSocketToClient(socket, server); 
+        			System.out.println("test");
+        			pool.submit(socketconnect);
     	    	
-    	    	pool = Executors.newCachedThreadPool();
     	    	
-    			Socket socket = welcomeSocket.accept();
     			
     			
-    		}catch (Exception e) {
+    			
+    			
+    		}
     		
-			}
+			}catch (Exception e) {
+				e.printStackTrace();
     		}
     	
     	

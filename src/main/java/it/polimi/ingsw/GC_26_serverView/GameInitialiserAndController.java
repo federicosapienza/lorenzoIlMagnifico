@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_serverView;
 
+import java.net.ResponseCache;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_controllers.ActionController;
 import it.polimi.ingsw.GC_26_controllers.ChoiceController;
+import it.polimi.ingsw.GC_26_controllers.EndTurnController;
 import it.polimi.ingsw.GC_26_gameLogic.Game;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
@@ -73,8 +75,12 @@ public class GameInitialiserAndController implements Runnable{
 				MainActionHandler handlers = gameElements.getHandlers();  //instead of giving all the model to the controllers we give handlers: 
 				for(Player player: players){
 					for(ClientMainServerView view : clients){
-						new ActionController(player, handlers);
-						new ChoiceController(player, handlers);
+						ActionController actionController= new ActionController(player, handlers);
+						ChoiceController choiceController=  new ChoiceController(player, handlers);
+						new EndTurnController(player, handlers);
+						
+						view.getActionInputView().registerObserver(actionController);
+						view.getStringInputView().registerObserver(choiceController);
 					}
 				}
 			game.startGame();

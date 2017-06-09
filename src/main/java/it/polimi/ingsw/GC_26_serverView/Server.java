@@ -1,12 +1,14 @@
 package it.polimi.ingsw.GC_26_serverView;
 
+import java.awt.geom.IllegalPathStateException;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
+import it.polimi.ingsw.GC_26_client_connection.ClientMain;
 import it.polimi.ingsw.GC_26_gameLogic.Game;
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;
@@ -22,26 +24,7 @@ public class Server {
 	private Cards cards;
 	private BonusInterface bonus;
 	private TimerValuesInterface times;
-	
-	
-	private static Server server=null ;
-	
-	
-    //Singleton pattern
-    private Server(){
-    	@SuppressWarnings("unused")
-		Server server= new Server();
-    }
-
-    public static synchronized Server newServer() {
-        if (server == null) {
-        	server = new Server();
-        }
-        return server;
-    }
-	
-
-	
+	private final static int PORT = 29997;
 	
 	public void start(){
 		ReadFromFile gamesSpecific= new ReadAll();
@@ -50,12 +33,11 @@ public class Server {
 		cards= gamesSpecific.getCards();
 		bonus = gamesSpecific.getBonus();
 		times= null;
-		
-		//game = new GameInitialiserAndController(this , null, null, null , null);
-		
-		SocketServer socketServer=  SocketServer.newServer(this);
-		socketServer.run();
 		game= new GameInitialiserAndController(cards, bonus, times);
+		
+		SocketServer socketServer= new SocketServer(this, PORT);
+		socketServer.run();
+		
 		
 	}
 	
@@ -111,6 +93,12 @@ public class Server {
 	
 	public void endGame(GameInitialiserAndController game){
 		games.remove(game);
+	}
+	
+	
+	public static void main(String args[]){
+		Server  server =  new Server();
+			server.start();
 	}
 	
 	

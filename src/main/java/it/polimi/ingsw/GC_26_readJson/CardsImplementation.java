@@ -4,10 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
+
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26_cards.effects.MarketBanEffect;
+import it.polimi.ingsw.GC_26_cards.effects.SetSecondAction;
 import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTile;
+import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTileImplementation;
+import it.polimi.ingsw.GC_26_cards.leaderCard.CardNumbersRequirement;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
+import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCardImplementation;
 
 public class CardsImplementation implements Cards {
 	
@@ -94,13 +101,28 @@ public class CardsImplementation implements Cards {
 	@Override
 	public List<LeaderCard> getRandomLeaderCards(int numOfPlayers) {
 		// TODO Auto-generated method stub
-		return null;
+		List<LeaderCard> list= new ArrayList<>();
+		LeaderCard leaderCard = new LeaderCardImplementation("test",
+				new CardNumbersRequirement(4, 4, 4, 4), new SetSecondAction(null, 4, null));
+		for(int i=0;i<16;i++ ){
+			list.add(leaderCard);
+		}
+		
+		return list;
 	}
 
 	@Override
 	public List<ExcommunicationTile> getExcommunicationTiles() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		List<ExcommunicationTile> list= new ArrayList<>();
+		ExcommunicationTile exc1 = new ExcommunicationTileImplementation(1, new MarketBanEffect());
+		ExcommunicationTile exc2 = new ExcommunicationTileImplementation(2, new MarketBanEffect());
+		ExcommunicationTile exc3 = new ExcommunicationTileImplementation(3, new MarketBanEffect());
+		list.add(exc1);
+		list.add(exc2);
+		list.add(exc3);
+		return list;
+		
+		}
+	
 
 }

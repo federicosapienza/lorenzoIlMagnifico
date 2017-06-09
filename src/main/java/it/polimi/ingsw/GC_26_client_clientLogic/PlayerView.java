@@ -16,7 +16,8 @@ public class PlayerView {
 	private Set <CardDescriber> leadersCardUsed;  // the cards the player has shown
 	private Set <CardDescriber> leadersCardOwned; //not null only for the playerView representing the client.
 	private PlayerWallet wallet;
-	
+	private Set<CardDescriber> excommunicationTaken;
+	private String personalTileValues;
 	
 	PlayerView(PlayerWallet wallet){  //the first time the client receives a playerWallet of a player, it creates playerView
 		name= wallet.getPlayerName();
@@ -34,22 +35,28 @@ public class PlayerView {
 	
 	public void updateValues(PlayerWallet wallet){
 		this.wallet=wallet;
-	}
-	
-	public void addDevelopmentCard(CardDescriber card){
-		developmentsCardOwned.add(card);
-	}
-	
-	public void addLeaderCardOwned(CardDescriber card){
-		leadersCardOwned.add(card);
-	}
-	
-	public void addLeaderCardUsed(CardDescriber card){
-		leadersCardUsed.add(card);
+		System.out.println(wallet.getCoins()+wallet.getServants()+wallet.getWood()+wallet.getStone());
+		//TODO dividere visione di punti e risorse
 	}
 	
 	
 	
+	
+	
+	
+	
+	public void setPersonalTileValues(String string){
+		personalTileValues= string;
+	}
+	
+	public void addCard(CardDescriber card){
+		if(card.getTypeOfCard().contains("Development"))
+			developmentsCardOwned.add(card);
+		if(card.getTypeOfCard().contains("Leader"))
+			leadersCardUsed.add(card);
+		if(card.getTypeOfCard().contains("Excommunication"))
+			excommunicationTaken.add(card);
+	}
 	
 	
 	

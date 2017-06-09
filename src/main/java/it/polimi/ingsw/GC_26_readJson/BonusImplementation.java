@@ -26,7 +26,6 @@ public class BonusImplementation implements BonusInterface {
 		return resourcesOrPointsStarting;
 	}
 
-	
 
 	
 

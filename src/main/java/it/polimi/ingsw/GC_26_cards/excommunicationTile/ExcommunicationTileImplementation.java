@@ -8,9 +8,13 @@ public class ExcommunicationTileImplementation extends ExcommunicationTile{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Effect effect;
+	private final Effect effect;
+	private final int period;
 	
-	
+	public ExcommunicationTileImplementation(int period, Effect effect) {
+		this.effect=effect;
+		this.period=period;
+	}
 
 	public Effect getEffect() {
 		return effect;
@@ -28,7 +32,10 @@ public class ExcommunicationTileImplementation extends ExcommunicationTile{
 	}
 
 	
-
+	@Override
+	public int getPeriod() {
+		return period;
+	}
 
 
 }

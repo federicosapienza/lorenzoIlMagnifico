@@ -2,10 +2,17 @@ package it.polimi.ingsw.GC_26_serverView;
 
 public class StringInputView extends Observable<Integer>{
 	
+	EndTurnView endTurnView ;
+	
+	public StringInputView(EndTurnView endTurnView) {
+		this.endTurnView= endTurnView;}
+		
 	public void notifyNewString(String string){
+		
 		String temp = "end turn";
-		if(string.equalsIgnoreCase(temp)){
-			//TODO chiamare observer di endturncontroller
+		if(string.equalsIgnoreCase(temp) || string.equals("999")){
+				endTurnView.notifyEndTurn(false);
+			
 		}
 		if(isInteger(string)){
 			int number = Integer.parseInt(string);
