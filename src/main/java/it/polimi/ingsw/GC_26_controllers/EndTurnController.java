@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26_controllers;
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
+import it.polimi.ingsw.GC_26_utilities.Request;
 
 public class EndTurnController {
 	
@@ -25,10 +26,10 @@ public class EndTurnController {
 				 status= player.getStatus();
 			
 			if(!connectionFailed && player.isPlayerActive())
-				player.setStatus(PlayerStatus.WAITINGHISTURN);
+				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "end turn", null));
 			
 			else
-					player.setStatus(PlayerStatus.SUSPENDED);
+				player.setStatus(new Request(PlayerStatus.SUSPENDED, "end turn", null));
 			//TODO mettere la notification
 			
 		}
@@ -50,10 +51,10 @@ public class EndTurnController {
 		//ending his turn
 	player.getWarehouse().resetCouncilPriviledges();
 	player.endTurn();
-	handlers.getGameElements().getGame().getPeriod().getCurrentRound().endPlayerTurn();
+	
 	handlers.getLeaderCardHandler().endTurn();
 	handlers.getDiplomaticPrivilegesHandler().resetMemory();
-		
+	handlers.getGameElements().getGame().nextStep();
 		
 	}	
 		

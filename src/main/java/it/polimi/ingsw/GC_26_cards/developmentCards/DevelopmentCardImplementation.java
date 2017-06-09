@@ -5,9 +5,14 @@ import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.Request;
 
 //It 's the implementation used by Character and Venture Cards. Territories and building cards extend this. 
 public class DevelopmentCardImplementation extends DevelopmentCard{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 
 	 */
@@ -74,18 +79,19 @@ public class DevelopmentCardImplementation extends DevelopmentCard{
 	@Override
 	public boolean canPlayerGetThis(Player player) {
 		// if the card is a territory card we first of all need to check if player has enough military points
-		//also checks Cesare Borgia Effect
+		//also checks Cesare Borgia's like Effect is not active
 		if(type== DevelopmentCardTypes.TERRITORYCARD && !player.getPermanentModifiers().isMilitaryPointRequirementNotNeeded()){
 			int territoryCardOwned = player.getPersonalBoard().getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD);
 			if(player.getWarehouse().getMilitaryPoints() < GameParameters.getTerritoryCardRequirements(territoryCardOwned))
-				player.notifyObservers("not enough military points  for a new territory card");
-			return false;
+				player.notifyObservers(new Request(player.getStatus(),"not enough resources military "
+						+ "Points for getting another military card",player.getCardUsed()))	;
+				return false;
 		}
 		if(payment==null)
 			return true;
 		
 		 if(!payment.canPlayerGetThis(player, type)){
-			 player.notifyObservers("not enough resources for getting the card");
+			 player.notifyObservers(new Request(player.getStatus(),"not enough resources for getting the card",player.getCardUsed()));
 		 	return false;
 		 	}
 		return true;

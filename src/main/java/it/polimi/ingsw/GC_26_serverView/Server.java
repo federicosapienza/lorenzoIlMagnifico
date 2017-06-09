@@ -39,7 +39,7 @@ public class Server {
 	public void start(){
 		//TODO lettura da file: ottengo 2 classi cards e bonus
 		
-		game = new GameInitialiserAndController(this , null, null, null , null);
+		//game = new GameInitialiserAndController(this , null, null, null , null);
 		
 		SocketServer socket=  SocketServer.newServer(this);
 		Thread threadSocket = new Thread(socket);

@@ -144,8 +144,13 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 		return personalBoardTile;
 	}
 	
-	
-	
+	/**
+	 * Method that sets the personal board tile.
+	 * 
+	 */
+	public void setPersonalBoardTile(PersonalBoardTile personalBoardTile) {
+		this.personalBoardTile = personalBoardTile;
+	}
 	
 	
 	

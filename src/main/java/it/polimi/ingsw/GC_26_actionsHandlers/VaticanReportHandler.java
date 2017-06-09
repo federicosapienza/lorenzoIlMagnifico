@@ -21,12 +21,12 @@ public class VaticanReportHandler {
 	
 	public void perform(Player player , int choice){  
 		if(choice == 0) {// player has decided to be excommunicated.
-			ExcommunicationTile tile = gameElements.getGame().getPeriod().getExcommunicationTile();
+			ExcommunicationTile tile = gameElements.getGame().getThisRoundExcommunicationTiles();
 			tile.runEffect(player);
 			//TODO notificare i giocatori
 			return;
 		}
-		 if(player.getWarehouse().getFaithPoints()< GameParameters.getFaithPointNeeded(gameElements.getGame().getPeriodNumber())){
+		 if(player.getWarehouse().getFaithPoints()< GameParameters.getFaithPointNeeded(gameElements.getGame().getPeriod())){
 		    	throw new IllegalStateException();
 		    	//the player should not be here  	
 		    //TODO notificare i giocatori

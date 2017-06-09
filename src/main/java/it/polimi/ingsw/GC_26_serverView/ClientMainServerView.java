@@ -8,7 +8,7 @@ public class ClientMainServerView {
 	private final String name;
 	private PlayerWalletView playerWalletView;
 	private CardDescriberView cardDescriberView;
-	private StringView stringView;
+	private MessageView stringView;
 	private ActionView actionView;
 	private StringInputView stringInputView ;
 	private ActionInputView actionInputView;
@@ -22,7 +22,7 @@ public class ClientMainServerView {
 		this.name = name;
 		playerWalletView =  new PlayerWalletView(connection);
 		cardDescriberView = new CardDescriberView(connection);
-		stringView = new StringView(connection);
+		stringView = new MessageView(connection);
 		actionView = new ActionView(connection);
 		stringInputView = new StringInputView();
 		actionInputView = new ActionInputView();
@@ -55,12 +55,12 @@ public class ClientMainServerView {
 	}
 
 
-	public StringView getStringView() {
+	public MessageView getMessageView() {
 		return stringView;
 	}
 
 
-	public void setStringView(StringView stringView) {
+	public void setStringView(MessageView stringView) {
 		this.stringView = stringView;
 	}
 

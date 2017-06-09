@@ -15,7 +15,7 @@ public class MarketPosition extends SinglePosition {
 
 	@Override
 	public void clear() {
-		setFamilyMember(null);
+		super.clear();
 	}
 	
 	public void addResources(Player player){

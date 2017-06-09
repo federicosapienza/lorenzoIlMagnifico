@@ -106,7 +106,7 @@ public class Board extends Observable<PositionDescriber>{
 	}
 	// called at the beginning of the game and whenever a player is re-inserted in a game, 
 	//to send any boardElement, position by position.
-	public void BoardDescription(){  
+	public void boardSendingDescription(){  
 		towerDescription(BoardZone.TERRITORYTOWER, territoriesTower);
 		towerDescription(BoardZone.BUILDINGTOWER, buildingsTower);
 		towerDescription(BoardZone.CHARACTERTOWER, charactersTower);

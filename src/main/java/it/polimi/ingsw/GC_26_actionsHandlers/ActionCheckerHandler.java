@@ -19,6 +19,7 @@ import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 
 public class ActionCheckerHandler {
@@ -38,7 +39,7 @@ public class ActionCheckerHandler {
 		//checks if the player has not already the maximum number of cards allowed
 		if(player.getPersonalBoard().getNumberOfCardPerType(convertZoneInCard(action.getZone()))
 									== GameParameters.getMaxNumOfCards()){
-					player.notifyObservers("maximum number of card already reached");
+					player.notifyObservers(new Request(player.getStatus(),"maximum number of card already reached", null));
 					return false;
 									}
 			
@@ -46,8 +47,8 @@ public class ActionCheckerHandler {
 		
 		 //checks if the player is already on the tower
 		Tower tower = gameElements.getBoard().getTower(action.getZone());
-		if(tower.canFamilyMemberGoToTheTower(familyMember)){
-			player.notifyObservers("Your coloured members are already in the tower");
+		if(tower.canFamilyMemberGoToTheTower(familyMember)){ //familyMember== null ->second Action: (considered by canPlayerGoToTheTower=
+			player.notifyObservers(new Request(player.getStatus(),"Your coloured members are already in the tower", null));
 			return false ;
 					}
 		
@@ -55,7 +56,7 @@ public class ActionCheckerHandler {
 		if(tower.isTheTowerOccupied()&& !player.getPermanentModifiers().isTowerBonusRevokedOn()){
 				if (!player.getTestWarehouse().areResourcesEnough(GameParameters.getTowerOccupiedMalus())){
 					player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
-					player.notifyObservers("Not enough resources for going in a occupied tower");
+					player.notifyObservers(new Request(player.getStatus(),"Not enough resources for going in a occupied tower", null));
 					return false;
 				}
 				player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
@@ -79,7 +80,7 @@ public class ActionCheckerHandler {
 	 protected boolean marketIsPossible(Player player, FamilyMember familyMember, Action action){
 		 //validating action
 		 if(player.getPermanentModifiers().getMarketBanFlag()){
-			 player.notifyObservers("player is banned from the Market!");
+			player.notifyObservers(new Request(player.getStatus(),"player is banned from the Market!", null));
 			 return false;
 		 }
 		 
@@ -114,7 +115,7 @@ public class ActionCheckerHandler {
 		 //checking
 		 HarvestZone zone =gameElements.getBoard().getHarvestZone();
 		 if(zone.playerAlreadyHere(familyMember)){
-			 player.notifyObservers("Already used a coloured member in harvest");
+				player.notifyObservers(new Request(player.getStatus(),"Already used a coloured member in harvest", null));
 			 return false;
 		 }
 
@@ -140,7 +141,7 @@ public class ActionCheckerHandler {
 		 //checking
 		 ProductionZone zone =gameElements.getBoard().getProductionZone();
 		 if(zone.playerAlreadyHere(familyMember)){
-			 player.notifyObservers("Already used a coloured member in production");
+			 player.notifyObservers(new Request(player.getStatus(),"Already used a coloured member in production", null));
 			 return false;
 		 }
 			 
@@ -164,7 +165,7 @@ public class ActionCheckerHandler {
 			 return true;
 		 
 		 if(position.IsPositionOccupied()){
-				player.notifyObservers("position not free");
+				player.notifyObservers(new Request(player.getStatus(),"position not free", null));
 				return false;
 			}
 		 
@@ -175,12 +176,13 @@ public class ActionCheckerHandler {
 			 
 		 if(  (familyMember != null && familyMember.getValue() + servants+ 
 				 	player.getPermanentModifiers().getActionModifier(action.getZone()) < position.getValueOfPosition())){  //first action
-				 player.notifyObservers("Family member's value and servants used not enough");
+					player.notifyObservers(new Request(player.getStatus(),"Family member's value and servants used not enough", null));
+
 				return false; }
 		 else if (familyMember==null && player.getSecondactionValue()+action.getServantsUsed()+ 
 				 player.getPermanentModifiers().getActionModifier(action.getZone())
 				 								<position.getValueOfPosition()){  // second action: those determined by cards
-			 player.notifyObservers(" servants used not enough");
+				player.notifyObservers(new Request(player.getStatus()," servants used not enough", null));
 				return false;
 				}
 		 else return true;
@@ -195,12 +197,14 @@ public class ActionCheckerHandler {
 		 
 		 if(  (familyMember != null && familyMember.getValue() + servants+ 
 				 	player.getPermanentModifiers().getActionModifier(action.getZone()) < position.getValueOfPosition())){  //first action
-				 player.notifyObservers("Family member's value and servants used not enough");
-				return false; }
-		 else if (familyMember==null && player.getSecondactionValue()+action.getServantsUsed()+ 
+					player.notifyObservers(new Request(player.getStatus(),"Family member's value and servants used not enough", null));
+					return false; 
+					}
+		 else if (familyMember==null && player.getSecondactionValue()+action.getServantsUsed()+  // second action: those determined by cards
 				 player.getPermanentModifiers().getActionModifier(action.getZone())
-				 								<position.getValueOfPosition()){  // second action: those determined by cards
-			 player.notifyObservers(" servants used not enough");
+				 								<position.getValueOfPosition()){  
+			 
+				player.notifyObservers(new Request(player.getStatus()," servants used not enough", null));
 				return false;
 				}
 		 else return true;

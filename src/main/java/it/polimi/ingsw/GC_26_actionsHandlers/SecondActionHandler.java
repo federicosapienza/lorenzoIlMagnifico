@@ -6,6 +6,7 @@ import it.polimi.ingsw.GC_26_gameLogic.Action;
 
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class SecondActionHandler extends ActionHandler{
@@ -16,25 +17,27 @@ public class SecondActionHandler extends ActionHandler{
 
 	@Override
 	public boolean isPossible(Player player, Action action) {
+		//BoardZone correspondence is checked here, position correspondence in ActionCheckerHandler 
+		
 		//enough servants?
 		if(!player.getTestWarehouse().areResourcesEnough(ResourcesOrPoints.newResources(0,action.getServantsUsed(),0,0))){
-			player.notifyObservers("Not enough servants");
+			player.notifyObservers(new Request(player.getStatus(),"Not enough servants", null));
 			return false;}
 		player.getTestWarehouse().spendResources(ResourcesOrPoints.newResources(0,action.getServantsUsed(),0,0));
 		
 		//gets the info about second action from PlayerStatus and checks is valid
 		Action secondAction = player.getTypeOfSecondaryAction();
 		if(secondAction.getZone()==null){ //==means take card from everywhere (i.e Badess effect): look at SetSecondActionEffect
-			//anyway we must check is a tower Action.
+			//anyway we must check is a tower Action. 
 			if(! (action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 			action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER)){
-				player.notifyObservers("second action not corresponds to the allowed one");
+				player.notifyObservers(new Request(player.getStatus(),"second action not corresponds to the allowed one", null));
 				return false;
 			}
 				
 		}
 		else if(secondAction.getZone()!=action.getZone()){
-			player.notifyObservers("second action not corresponds to the allowed one");
+			player.notifyObservers(new Request(player.getStatus(),"second action not corresponds to the allowed one", null));
 			return false;
 		}
 		

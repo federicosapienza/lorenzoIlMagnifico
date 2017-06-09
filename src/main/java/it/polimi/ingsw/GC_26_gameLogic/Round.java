@@ -6,6 +6,7 @@ import it.polimi.ingsw.GC_26_player.PlayerStatus;
 
 
 public class Round {
+	/*
 	private int period;
 	private int round;
 	private GameElements gameElements;
@@ -37,7 +38,7 @@ public class Round {
 		
 		//sort the list of the players changing the order in which they will perform their turn. (in the first turn , order is not changed
 		try {
-			gameElements.getRankings().changeNextRoundOrder(gameElements.getPlayers());
+			gameElements.getNextROundOrder().changeNextRoundOrder(gameElements.getPlayers());
 		} catch (RuntimeException e) {
 			e.printStackTrace();  // error generated when player list is corrupted! the list will not be sorted during the game!
 		}
@@ -86,5 +87,5 @@ public class Round {
 	public synchronized void endPlayerTurn(){
 		notifyAll();
 	}
-	
+	*/
 }

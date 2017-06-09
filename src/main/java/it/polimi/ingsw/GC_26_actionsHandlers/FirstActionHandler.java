@@ -6,6 +6,7 @@ import it.polimi.ingsw.GC_26_gameLogic.Action;
 
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
@@ -31,14 +32,14 @@ public class FirstActionHandler extends ActionHandler{
 		
 		//enough servants?
 		if(!player.getTestWarehouse().areResourcesEnough(ResourcesOrPoints.newResources(0,action.getServantsUsed(),0,0))){
-			player.notifyObservers("Not enough servants");
+			player.notifyObservers(new Request(player.getStatus(),"Not enough servants", null));
 			return false;}
 		player.getTestWarehouse().spendResources(ResourcesOrPoints.newResources(0,action.getServantsUsed(),0,0));
 		
 		//takes the family member used and checks is free
 		FamilyMember familyMemberUsed = player.getFamilyMembers().getfamilyMember(action. getFamilyMemberColour());
 		if(!familyMemberUsed.isFree()){
-			player.notifyObservers("Family member not free");
+			player.notifyObservers(new Request(player.getStatus(),"Family member not free", null));
 			return false;
 		}
 		

@@ -1,6 +1,5 @@
-package it.polimi.ingsw.GC_26_actionsHandlers;
+package it.polimi.ingsw.GC_26_cards.effects;
 
-import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_player.Player;
 
 public class DoubleServantsNeededEffect implements Effect{

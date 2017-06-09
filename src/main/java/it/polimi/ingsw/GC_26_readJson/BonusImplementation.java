@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.polimi.ingsw.GC_26_personalBoard.PersonalBoardTile;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class BonusImplementation implements BonusInterface {
@@ -28,6 +29,12 @@ public class BonusImplementation implements BonusInterface {
 	@Override
 	public Map<Integer, Integer> getFaithTrack() {
 		return faithTrack;
+	}
+
+	@Override
+	public List<PersonalBoardTile> get4RandomBonusTiles() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

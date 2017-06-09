@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
-import it.polimi.ingsw.GC_26_cards.Cards;
 import it.polimi.ingsw.GC_26_controllers.ActionController;
 import it.polimi.ingsw.GC_26_controllers.ChoiceController;
 import it.polimi.ingsw.GC_26_gameLogic.Game;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26_readJson.BonusInterface;
+import it.polimi.ingsw.GC_26_readJson.Cards;
+import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
 
 public class GameInitialiserAndController implements Runnable{
 	private Game game;
@@ -20,8 +21,8 @@ public class GameInitialiserAndController implements Runnable{
 	private int numOfPlayer ; 
 	private Server server;
 	
-	public  GameInitialiserAndController(Server server, Cards cards, List<ResourcesOrPoints[]> resourcesOrPointsList, List<ResourcesOrPoints> startingResources, int times[]){
-		game = new Game(cards, resourcesOrPointsList, startingResources, times);
+	public  GameInitialiserAndController(Cards cards, BonusInterface bonus, TimerValuesInterface times){
+		game = new Game( cards,  bonus,  times);
 	}
 	
 	
@@ -52,7 +53,7 @@ public class GameInitialiserAndController implements Runnable{
 		for(Player player: players){
 			for(ClientMainServerView view : clients){
 				if(player.getName().equals(view.getName())){ // for unicast messages
-					player.registerObserver(view.getStringView());
+					player.registerObserver(view.getMessageView());
 					player.getPersonalBoard().registerObserver(view.getCardDescriberView());
 				}
 				//for broadcast messages
@@ -71,6 +72,7 @@ public class GameInitialiserAndController implements Runnable{
 						new ChoiceController(player, handlers);
 					}
 				}
+			game.startGame();
 	}
 	
 	

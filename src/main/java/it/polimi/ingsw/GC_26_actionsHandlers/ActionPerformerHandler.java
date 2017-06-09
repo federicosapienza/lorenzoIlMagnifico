@@ -16,6 +16,7 @@ import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
+import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 
 public class ActionPerformerHandler {
@@ -59,7 +60,9 @@ public class ActionPerformerHandler {
 				wait();
 			} catch (InterruptedException e) { 
 				System.out.println(e.getMessage());
-				player.setStatus(PlayerStatus.WAITINGHISTURN);  // ends player turn
+				// ends player turn
+				player.notifyObservers(new Request(PlayerStatus.WAITINGHISTURN," unexpected server problem", null));
+
 				e.printStackTrace();
 			}
 			
@@ -87,7 +90,7 @@ public class ActionPerformerHandler {
 		 position.setFamilyMember(familyMember);
 		 player.getWarehouse().add(position.getResourcesOrPointsInPosition());
 		 //setting the player in the list for new round order
-		 gameElements.getRankings().nextRoundChanging(player);
+		 gameElements.getNextROundOrder().nextRoundChanging(player);
 	 }
 	 protected void productionPerform(Player player, FamilyMember familyMember, Action action){
 		 int servants =action.getServantsUsed();

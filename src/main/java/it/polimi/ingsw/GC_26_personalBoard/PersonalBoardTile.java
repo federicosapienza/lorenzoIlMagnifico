@@ -72,4 +72,13 @@ public class PersonalBoardTile {
 	public int getValue(){
 		return value;
 	}
+	/**
+	 * 
+	 * @return a stirng describing the bonuses of personal board tile
+	 */
+	
+	@Override
+	public String toString() {
+		return "Harvest Bonus: "+ resourcesOrPointsHarvest.toString()+ " , Production Bonus: "+resourcesOrPointsProduction.toString();
+	}
 }
