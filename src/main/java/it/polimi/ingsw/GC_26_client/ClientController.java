@@ -37,7 +37,7 @@ public class ClientController {
 	
 	
 	public void receiveCard(CardDescriber card){
-		if(view.getGameStatus()==GameStatus.INITIALAISINGGAME || view.getGameStatus()==GameStatus.INITIALAISINGTURN){
+		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME || view.getGameStatus()==GameStatus.INITIALIZINGTURN){
 			if(card.getTypeOfCard().equalsIgnoreCase("Development Card"))
 				view.getBoard().addCardWhereFree(card);
 			if(card.getTypeOfCard().equalsIgnoreCase("Excommunication Tile"))
@@ -69,7 +69,7 @@ public class ClientController {
 	}
 	
 	public void receiveAction(ActionNotification action){
-		if(view.getGameStatus()==GameStatus.INITIALAISINGGAME||view.getGameStatus()==GameStatus.INITIALAISINGTURN)
+		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME||view.getGameStatus()==GameStatus.INITIALIZINGTURN)
 			throw new IllegalStateException();
 		if(view.getGameStatus()==GameStatus.PLAYING){
 			view.getBoard().addfamilyMember(action); 
@@ -80,9 +80,9 @@ public class ClientController {
 	}
 	
 	public void receivePosition(PositionDescriber position){
-		if(view.getGameStatus()==GameStatus.INITIALAISINGGAME)
+		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME)
 			view.getBoard().addPosition(new PositionView(position));
-		if(view.getGameStatus()==GameStatus.PLAYING || view.getGameStatus()==GameStatus.INITIALAISINGTURN){}
+		if(view.getGameStatus()==GameStatus.PLAYING || view.getGameStatus()==GameStatus.INITIALIZINGTURN){}
 			//TODO lancia eccezione;
 		if(view.getGameStatus()==GameStatus.RECONNETTINGAPLAYER );
 			//just ignores themessages;
@@ -153,11 +153,11 @@ public class ClientController {
 	private void handlePersonalBoardChangeNotification(PersonalBoardChangeNotification change) {
 		if(view.getGameStatus() == GameStatus.RECONNETTINGAPLAYER)
 			return;
-		if(view.getGameStatus()==GameStatus.INITIALAISINGGAME){
+		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME){
 			if(change.getBoardTileValues()!=null)
 				view.getPlayer(change.getPlayerName()).setPersonalTileValues(change.getBoardTileValues());
 		}
-		if(view.getGameStatus()==GameStatus.INITIALAISINGGAME){
+		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME){
 			if(change.getBoardTileValues()!=null)
 				view.getPlayer(change.getPlayerName());
 		}		

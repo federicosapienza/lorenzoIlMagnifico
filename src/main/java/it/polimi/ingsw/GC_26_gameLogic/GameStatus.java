@@ -1,8 +1,16 @@
 package it.polimi.ingsw.GC_26_gameLogic;
 
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * Enumeration that contains all the possible status of a game
+ *
+ */
 public enum GameStatus {
-	INITIALAISINGGAME,
-	INITIALAISINGTURN,
+	INITIALIZINGGAME,
+	INITIALIZINGTURN,
 	PLAYING,
 	RECONNETTINGAPLAYER, ENDING
 

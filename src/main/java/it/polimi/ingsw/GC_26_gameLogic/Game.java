@@ -34,7 +34,7 @@ public class Game extends Observable<CardDescriber>{
 	private GameElements gameElements;
 	private List<ResourcesOrPoints[]> resourcesOrPointsBonus;
 	private final int  numberOfPeriods =GameParameters.getNumberOfPeriods(); 
-	private GameStatus gameStatus=GameStatus.INITIALAISINGGAME;
+	private GameStatus gameStatus=GameStatus.INITIALIZINGGAME;
 	
 	private List<ResourcesOrPoints> startingResources;
 	private TimerValuesInterface times;
@@ -107,7 +107,7 @@ public class Game extends Observable<CardDescriber>{
 		excommunicationTiles = cards.getExcommunicationTiles();
 		
 		
-		gameElements.notifyPlayers(new Info(GameStatus.INITIALAISINGGAME, null, "Welcome to a new game!"));
+		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
 		//TODO send rules : such as timeout etc
 		 //send the first info about players
 		for(Player p: players){ 
@@ -118,7 +118,7 @@ public class Game extends Observable<CardDescriber>{
 			int temp =0;
 			List<PersonalBoardTile> bonusTiles=bonusInterface.get4RandomBonusTiles();
 			p.getPersonalBoard().setPersonalBoardTile(bonusTiles.get(temp));
-			gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.INITIALAISINGGAME,p.getName(), null, null, bonusTiles.get(temp).toString()));
+			gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.INITIALIZINGGAME,p.getName(), null, null, bonusTiles.get(temp).toString()));
 			temp++;
 		}
 		//sending positions of the board:
@@ -140,7 +140,7 @@ public class Game extends Observable<CardDescriber>{
 		}
 		
 		//starting game
-		setGameStatus(GameStatus.INITIALAISINGTURN);
+		setGameStatus(GameStatus.INITIALIZINGTURN);
 		nextStep();
 	}
 	
@@ -154,7 +154,7 @@ public class Game extends Observable<CardDescriber>{
 	
 	public void nextStep() {
 		if(playersPerformedActions==-1){//starting new Round
-			gameElements.notifyPlayers(new Info(GameStatus.INITIALAISINGTURN, null, "starting period "+ period+ " round "+round ));;
+			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "starting period "+ period+ " round "+round ));;
 			sendingCards();
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, null ));
 			//than read to 202

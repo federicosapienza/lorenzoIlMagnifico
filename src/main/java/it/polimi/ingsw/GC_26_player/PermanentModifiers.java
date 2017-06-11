@@ -15,23 +15,31 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
 
-/*Class that keeps memory and logic of all the modifiers linked to a player and activated by Leader Cards and excommunication tiles
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * Class that keeps record and implement the logic of all the modifiers linked to a player 
+ * and activated by Leader Cards and excommunication tiles
  * 
  * 
- * Help for the reader: in order to keep near all the logic of a single modifier, attributes are placed near to correspondent methods,
- * not at the beginning of the class
-
-
+ * In order to make easier to understand the code in the logic of the single modifier, 
+ * attributes are placed near the correspondent methods, not at the beginning of the class
 */
 public class PermanentModifiers {
 	private Player player;
-	
+	 /**
+	  * Constructor: it associates these permanent modifiers to the player contained in the parameter
+	  * @param player It's the player associated to these permanent modifiers
+	  */
 	public PermanentModifiers(Player player) {
 		this.player = player;
 	}
 	
 	
-	//Resources malus of excommunication tiles (the firsts 4 in the GameRules pdf)
+	//Resources malus of excommunication tiles (the first 4 in the GameRules pdf)
 	private boolean resourcesMalusOn=false;
 	private ResourcesOrPoints resourcesMalus= ResourcesOrPoints.newResources(0, 0, 0, 0); // at the beginning of the game there are not malus
 	

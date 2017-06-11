@@ -11,6 +11,15 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.*;
 
+/**
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * It's the class that represents the tower. There are 4 towers in the game, each with 4 floors. 
+ * On every floor, there is an action space that allows the player to take the corresponding card and, 
+ * if present, some bonuses.
+ *
+ */
 public class Tower {
 	private boolean isTowerFree;
 	private List<Player> playersInTheTower = new ArrayList<>();
