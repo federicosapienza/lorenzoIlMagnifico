@@ -21,7 +21,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
  * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
  * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
  * 
- * Class that keeps record and implement the logic of all the modifiers linked to a player 
+ * Class that keeps a record and implements the logic of all the modifiers linked to a player 
  * and activated by Leader Cards and excommunication tiles
  * 
  * 
@@ -38,8 +38,6 @@ public class PermanentModifiers {
 		this.player = player;
 	}
 	
-	
-	//
 	
 	/**
 	 * Malus effects of excommunication tiles on resources (the first 4 in the GameRules pdf)
@@ -94,32 +92,44 @@ public class PermanentModifiers {
 		this.militaryPointRequirementNotNeeded = true;
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/*Dame and Pico della Mirandola Effect: anyway is handled in a general way in order to
-	potentially have much more cards with this kind of effect(not only money, but also servants...)									*/
+	/**
+	 * 
+	 * Dame and Pico della Mirandola Effect: it is handled in a general way in order to
+	 * have potentially much more cards with this kind of effect (not only money, but also servants...)	
+	 */
+	
 	private Boolean discountOnResources=false;
 	private Map<BoardZone, ResourcesOrPoints>  discounts;
 	public Boolean IsTherediscountOnResources(BoardZone zone) {
 		return discountOnResources;
 	}
+	
+	/**
+	 * Method that adds a discount on the cost required by some cards as resources or points, when obtaining
+	 * cards from particular zones of the board
+	 * @param zone It's the zone of the board from which the player gets the card that he wants.
+	 * @param res It's the discount on the resources or points that the player has to pay to get the card.
+	 */
 	public void addDiscount(BoardZone zone, ResourcesOrPoints res){
 		ResourcesOrPoints temp = discounts.get(zone);
-		if(temp==null){  // if there was no discount
+		if(temp==null){  // if there is no discount
 			if(zone!=null) //(i.e Dame effect)
 				discounts.put(zone, res);
 			else{
-				//zone==null //means that a discount on any tower: Pico della mirandola effect
+				//zone==null 
+				//means that a discount will be applied on every tower: Pico della mirandola effect
 					discounts.put(BoardZone.TERRITORYTOWER, res);
 					discounts.put(BoardZone.VENTURETOWER, res);
 					discounts.put(BoardZone.CHARACTERTOWER, res);
 					discounts.put(BoardZone.BUILDINGTOWER, res);
 				}
 		}
-		else{//there was discount
-			if(zone!=null) //(i.e Dame effect)
+		else{ //there is a discount
+			if(zone!=null) //(i.e. Dame effect)
 				discounts.put(zone, ResourcesOrPoints.sum(res, temp));
 			else{
-				//zone==null //means that a discount on any tower: Pico della mirandola effect
+				//zone==null 
+				//means that a discount will be applied on every tower: Pico della mirandola effect
 					discounts.put(BoardZone.TERRITORYTOWER, ResourcesOrPoints.sum(res, temp));
 					discounts.put(BoardZone.VENTURETOWER,ResourcesOrPoints.sum(res, temp));
 					discounts.put(BoardZone.CHARACTERTOWER,ResourcesOrPoints.sum(res, temp));
@@ -127,6 +137,14 @@ public class PermanentModifiers {
 				}
 			}	
 	}
+	
+	/**
+	 * Getter method that returns the discount that is eventually applied on a particular zone of the board 
+	 * expressed by the @param zone.
+	 * @param zone It's the particular zone of the board in which a discount has been applied.
+	 * @return ResourcesOrPoints.newResources(0, 0, 0, 0) if the there is no discount;
+	 * @return discount It's the value of the discount in terms of resources or points, if there is a discount
+	 */
 	public ResourcesOrPoints getDiscount(BoardZone zone){
 		ResourcesOrPoints discount = discounts.get(zone);
 		if(zone==null){   //if there is no discount
@@ -135,11 +153,22 @@ public class PermanentModifiers {
 		else return discount;
 	}
 	
-	//checked and called in ResourcesOrPointPayment;
-			/*Created for handling Pico Della Mirandola card and Dame, developed in order to be useful in case of creation of similar cards
-			 */
+	/**
+	 * checked and called in ResourcesOrPointPayment.
+	 * Created for handling Pico Della Mirandola card and Dame, 
+	 * developed in order to be useful in case of creation of similar cards
+	 * 
+	 * 
+	 * Method that returns the subtraction between price (as resources or points) and the discount, for the zone
+	 * expressed by the @param zone
+	 * @param zone It's the zone in which the player wants to check the real price to pay
+	 * @param price It's the original price to pay to get a card in a particular zone, not considering an eventual discount
+	 * @return ResourcesOrPoints.subtract(price, discount) It's the real price to pay to get the card in the zone
+	 * expressed in the @param zone: it's the subtraction between price and an eventual discount, if it exists.
+	 */
+	
 	public  ResourcesOrPoints resourcesOrPointsDiscount(BoardZone zone, ResourcesOrPoints price){  
-		ResourcesOrPoints  discount= discounts.get(zone);
+		ResourcesOrPoints discount= discounts.get(zone);
 		return ResourcesOrPoints.subtract(price, discount);
 			
 	
