@@ -12,8 +12,8 @@ public class SocketOutClient implements ClientConnection{
 	 Socket socket= null;
 	    ObjectOutputStream objOut =  null;
 		
-		public SocketOutClient(int port, String ip) throws IOException {
-	        this.socket= new Socket(ip, port);
+		public SocketOutClient(Socket socket) throws IOException {
+	        this.socket= socket;
 			objOut = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
 			objOut.flush();
 			
@@ -23,8 +23,11 @@ public class SocketOutClient implements ClientConnection{
 	@Override
 	public void login(String username, String password) {
 		try {
-			objOut.writeObject(username);
-			objOut.writeObject(password);
+
+			objOut.writeUTF(username);
+			objOut.flush();
+
+			objOut.writeUTF(password);
 			objOut.flush();
 			
 		} catch (IOException e) {

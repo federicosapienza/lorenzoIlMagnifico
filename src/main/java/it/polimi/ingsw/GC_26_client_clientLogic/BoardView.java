@@ -151,15 +151,15 @@ public class BoardView {
 	}
 	
 	private void printTool(PositionView position){
-		String temp=" ";
+		StringBuilder temp= new StringBuilder(" ");
 		if(position.getBonusPosition() !=null)
-			temp.concat(position.getBonusPosition()+" ");
+			temp.append(position.getBonusPosition()+" ");
 		if(position.getCardHere()!=null)
-			temp.concat(position.getCardHere()+ " ");
+			temp.append(position.getCardHere()+ " ");
 		if(!position.getPlayersHere().isEmpty()){
 			Map<String , Colour> here= position.getPlayersHere();
 			for (Map.Entry<String, Colour> entry : here.entrySet()){
-			    temp.concat(entry.getKey()+ " "+ entry.getValue()+" ");
+			    temp.append(entry.getKey()+ " "+ entry.getValue()+" ");
 			}
 
 		}

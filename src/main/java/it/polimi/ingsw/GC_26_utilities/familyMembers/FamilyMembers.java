@@ -9,7 +9,7 @@ import java.util.Set;
 
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_serverView.Observable;
+import it.polimi.ingsw.GC_26_server.Observable;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)

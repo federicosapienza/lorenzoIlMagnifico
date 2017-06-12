@@ -2,15 +2,12 @@ package it.polimi.ingsw.GC_26_client;
 
 
 
-import org.hamcrest.core.IsInstanceOf;
 
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_client_clientLogic.IOlogic;
 import it.polimi.ingsw.GC_26_client_clientLogic.MainClientView;
 import it.polimi.ingsw.GC_26_client_clientLogic.PositionView;
-import it.polimi.ingsw.GC_26_client_connection.ClientConnection;
-import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
@@ -26,8 +23,9 @@ public class ClientController {
 	private IOlogic iOlogic;
 	
 
-	public ClientController(IOlogic iOlogic) {
+	public ClientController(IOlogic iOlogic, MainClientView view) {
 		this.iOlogic= iOlogic;
+		this.view= view;
 	}
 	
 	public void setPlayerPlaying(String playerPlaying) {
@@ -145,9 +143,14 @@ public class ClientController {
 	}
 	
 	private void handleInfo(Info info) {
+		if(info.getMessage()!=null){
+			System.out.println(info.getMessage());
+		}
+		GameStatus old= GameStatus.INITIALIZINGTURN;
 		view.setGameStatus(info.getGameStatus());
-		System.out.println("message");
-		
+		if(old== GameStatus.INITIALIZINGTURN && info.getGameStatus()==GameStatus.PLAYING)
+			view.getBoard().printBoard();
+		System.out.println("CLIEnt controller exit 154");
 	}
 	
 	private void handlePersonalBoardChangeNotification(PersonalBoardChangeNotification change) {

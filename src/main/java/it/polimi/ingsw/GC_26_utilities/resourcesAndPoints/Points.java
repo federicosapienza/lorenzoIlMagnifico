@@ -34,15 +34,15 @@ public class Points {
 	
 	@Override
 	public String toString(){     //returns only the non 0 fields.
-		StringBuilder temp =new StringBuilder();
+		StringBuilder temp = new StringBuilder(" ");
 		if(victoryPoints!=0)
-				temp.append(victoryPoints + " victory points.");
+				 temp.append(victoryPoints + " victory points");
 		if(militaryPoints!=0)
-			temp.append(militaryPoints + " military points.");
+			temp= temp.append(militaryPoints + " military points");
 		if(faithPoints!=0)
-			temp.append(faithPoints + " faith points.");
+			temp= temp.append(faithPoints + " faith points");
 		if(councilPrivileges!=0)
-			temp.append(councilPrivileges + " council privileges.");
+			temp= temp.append(councilPrivileges + " council privileges");
 		return temp.toString(); 
 	}
 

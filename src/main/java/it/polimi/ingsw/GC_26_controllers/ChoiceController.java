@@ -8,7 +8,7 @@ import it.polimi.ingsw.GC_26_actionsHandlers.TradeHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.VaticanReportHandler;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
-import it.polimi.ingsw.GC_26_serverView.Observer;
+import it.polimi.ingsw.GC_26_server.Observer;
 import it.polimi.ingsw.GC_26_utilities.Request;
 
 //the controller called whenever the game asks the client to perform a specific choice

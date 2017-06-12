@@ -1,5 +1,7 @@
 package it.polimi.ingsw.GC_26_serverView;
 
+import it.polimi.ingsw.GC_26_server.Observable;
+
 public class StringInputView extends Observable<Integer>{
 	
 	EndTurnView endTurnView ;

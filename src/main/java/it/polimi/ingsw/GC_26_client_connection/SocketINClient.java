@@ -1,18 +1,14 @@
 package it.polimi.ingsw.GC_26_client_connection;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import javax.sound.midi.ControllerEventListener;
 
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_client.ClientController;
-import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_utilities.Message;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
@@ -22,8 +18,8 @@ public class SocketINClient implements Runnable{
 	 private   ObjectInputStream objIn  = null;
 	 private  ClientController controller=null;;
 		
-		public SocketINClient(int port, String ip) throws IOException {
-	        this.socket= new Socket(ip, port);
+		public SocketINClient(Socket socket) throws IOException {
+	        this.socket= socket;
 			objIn  = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
 
 	        }
@@ -37,19 +33,20 @@ public class SocketINClient implements Runnable{
 			 
 				try {
 					while (true){
-						System.out.println("qui");
-			        String test = objIn.readUTF();
-			        System.out.println(test);
-			        if(test.equals("Login or signing in successful")){//any change here must be changed also in server
+			        String string = objIn.readUTF();
+			        System.out.println(string);
+			        if(string.equals("Login or signing in successful")){//any change here must be changed also in server
 			        	controller.setLoginDone();
 			        	break;
 			        }
 					}
 					controller.setLoginDone();
-					
-					
+
 					while(true){
+						System.out.println("waiting something");
+
 					Object object = objIn.readObject();
+
 					if(object instanceof Message){
 						Message message = (Message) object;
 						controller.receiveMessage(message);
@@ -63,6 +60,7 @@ public class SocketINClient implements Runnable{
 						controller.receiveCard(card);
 					}
 					if(object instanceof PlayerWallet){
+						System.out.println("received playerWallet");
 						PlayerWallet wallet = (PlayerWallet) object;
 						controller.receivePlayerPocket(wallet);
  					}

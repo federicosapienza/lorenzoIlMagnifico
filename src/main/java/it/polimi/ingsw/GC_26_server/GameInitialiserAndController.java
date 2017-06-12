@@ -1,6 +1,5 @@
-package it.polimi.ingsw.GC_26_serverView;
+package it.polimi.ingsw.GC_26_server;
 
-import java.net.ResponseCache;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -15,12 +14,13 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
+import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 
 public class GameInitialiserAndController implements Runnable{
 	private Game game;
 	private boolean started;
 	private List<ClientMainServerView> clients= new ArrayList<>() ;
-	private int numOfPlayer ; 
+	private int numOfPlayer=0 ; //new match are created when a player is in 
 	private Server server;
 	
 	public  GameInitialiserAndController(Cards cards, BonusInterface bonus, TimerValuesInterface times){
@@ -31,10 +31,11 @@ public class GameInitialiserAndController implements Runnable{
 	public void addClient(ClientMainServerView client){
 		clients.add(client);
 		game.addPlayer(client.getName());
+		numOfPlayer++;
 	}
 	public boolean isPlayerHere(String playerName){
 		for(Player p: game.getPlayers()){
-			if(playerName == p.getName())
+			if(playerName.equals(p.getName()))
 				return true;
 		}
 		 return false;
@@ -52,7 +53,7 @@ public class GameInitialiserAndController implements Runnable{
 	public void addClientAgain(ClientMainServerView views){
 		//TODO
 	}
-	private void initialiseGame(){
+	public void initialiseGame(){
 		game.initialiseGame();
 		GameElements gameElements = game.getGameElements();
 		List<Player> players= game.getPlayers();
@@ -62,6 +63,7 @@ public class GameInitialiserAndController implements Runnable{
 				if(player.getName().equals(view.getName())){ // for unicast messages
 					player.registerObserver(view.getMessageView());
 					player.getPersonalBoard().registerObserver(view.getCardDescriberView());
+
 				}
 				//for broadcast messages
 				player.getWarehouse().registerObserver(view.getPlayerWalletView());
@@ -69,6 +71,7 @@ public class GameInitialiserAndController implements Runnable{
 				gameElements.getGameMemory().registerObserver(view.getActionView());
 				gameElements.getBoard().registerObserver(view.getPositionView());
 				player.getFamilyMembers().registerObserver(view.getFamilyMembersView());
+
 			}
 		}
 		//controllers' observers of view
@@ -78,9 +81,10 @@ public class GameInitialiserAndController implements Runnable{
 						ActionController actionController= new ActionController(player, handlers);
 						ChoiceController choiceController=  new ChoiceController(player, handlers);
 						new EndTurnController(player, handlers);
-						
+					
 						view.getActionInputView().registerObserver(actionController);
 						view.getStringInputView().registerObserver(choiceController);
+
 					}
 				}
 			game.startGame();

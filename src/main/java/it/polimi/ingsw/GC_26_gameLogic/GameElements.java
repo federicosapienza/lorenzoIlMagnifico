@@ -15,7 +15,7 @@ public class GameElements {  //used at the beginning of the game to pass resourc
 	Game game;
 	private Board board;
 	private Dices dices;
-	private NextRoundOrder rankings;
+	private NextRoundOrder nextRoundOrder;
 	private List<Player> players;
 	private int numberOfPlayers;
 	private TimerValuesInterface timerInfo;
@@ -25,9 +25,11 @@ public class GameElements {  //used at the beginning of the game to pass resourc
 	public GameElements(Game game, List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList, TimerValuesInterface times) {
 		board=new Board(numberOfPlayers, resourcesOrPointsList);
 		dices= new Dices();
-		rankings = new NextRoundOrder(players);
+		nextRoundOrder = new NextRoundOrder(players);
 		timerInfo= times;
 		gameMemory =new ActionsPerformed();
+		this.game =game;
+		this.players=players;
 	}
 	
 	public Game getGame() {
@@ -48,7 +50,7 @@ public class GameElements {  //used at the beginning of the game to pass resourc
 		return players;
 	}
 	public NextRoundOrder getNextROundOrder() {
-		return rankings;
+		return nextRoundOrder;
 	}
 	
 	public  int getNumberOfPlayers() {
@@ -61,12 +63,12 @@ public class GameElements {  //used at the beginning of the game to pass resourc
 	}
 	
 
-	//instead of adding an other observer to send String , it calls player's observer
+	//calling players notify observer method to share broadcast messages
     public void notifyPlayers(Message message){  
        for(Player p: players){
     	   p.notifyObservers(message);
        }
        
     }
-	
+    
 }

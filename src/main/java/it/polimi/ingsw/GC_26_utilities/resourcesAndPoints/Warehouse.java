@@ -1,20 +1,19 @@
 package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_serverView.Observable;
+import it.polimi.ingsw.GC_26_server.Observable;
 
 /* It ' s the class that represent the status of the player in terms of resources and points owned.
  * It must not be mistaken with ResourcesOrPoints class , which instead represent the payments and effects that are called by cards, positions etc
  *ResourcesAndPoints' attributes are immutable, warehouse's attributes are mutable.  */
 
-public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
+public class Warehouse  extends Observable<PlayerWallet> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	
-	private Player player;
-	private String  playerName;
+	private final Player player;
+	private final String  playerName;
 	private int coins;
 	private int servants;
 	private int wood; 
@@ -31,6 +30,8 @@ public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
 	}
 	
 	public Warehouse(Warehouse other){
+		this.playerName=other.getPlayerName();
+		this.player=other.getPlayer();
 		this.coins =other.getCoins();
 		this.servants =other.getServants();
 		this.wood= other.getWood();
@@ -42,46 +43,50 @@ public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
 	}
 	
 	
+	private Player getPlayer() {
+		return player;
+	}
+
 	//getters methods
 	public ResourcesOrPoints getStatus(){
 		return ResourcesOrPoints.newResourcesOrPoints(coins, servants, wood, stone, victoryPoints, militaryPoints, 
 				faithPoints, councilPrivileges);
 	}
 	
-	 @Override
+	 
 	public String getPlayerName() {
 		return playerName;
 	}
 	
-	@Override
+	
 	public int getCoins() {
 		return coins;
 	}
-	@Override
+	
 	public int getServants() {
 		return servants;
 	}
-	@Override
+	
 	public int getStone() {
 		return stone;
 	}
-	@Override
+	
 	public int getWood() {
 		return wood;
 	}
-	@Override
+	
 	public int getMilitaryPoints() {
 		return militaryPoints;
 	}
-	@Override
+	
 	public int getCouncilPrivileges() {
 		return councilPrivileges;
 	}
-	@Override
+	
 	public int getFaithPoints() {
 		return faithPoints;
 	}
-	@Override
+	
 	public int getVictoryPoints() {
 		return victoryPoints;
 	}
@@ -181,7 +186,7 @@ public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
 		this.faithPoints +=temp.getPoints().getFaithPoints();
 		this.councilPrivileges += temp.getPoints().getCouncilPrivileges();	
 		//notify the clients
-		this.notifyObservers(this);
+		this.notifyObservers(new PlayerWallet(this));
 	}
 	
 	
@@ -201,24 +206,27 @@ public class Warehouse extends Observable<PlayerWallet> implements PlayerWallet{
 		
 		
 		//notify the clients
-			notifyObservers(this);
+			notifyObservers(new PlayerWallet(this));
 		}
 	
 	
 	public void resetFaithPoints() {  // used in Vatican Report
 		faithPoints =0;
-		notifyObservers(this);
+		notifyObservers(new PlayerWallet(this));
 		
 		//notify the clients
-		notifyObservers(this);
+		notifyObservers(new PlayerWallet(this));
 	}
 	
 	public void resetCouncilPriviledges(){  // used in Council privileges handling
 		councilPrivileges = 0;
 		
 		//notify the clients
-		notifyObservers(this);
+		notifyObservers(new PlayerWallet(this));
 	}
 	
 	
+	public void notifyChange(){
+		notifyObservers(new PlayerWallet(this));
+	}
 }

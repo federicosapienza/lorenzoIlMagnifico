@@ -1,21 +1,18 @@
-package it.polimi.ingsw.GC_26_serverView;
+package it.polimi.ingsw.GC_26_server;
 
-import java.awt.geom.IllegalPathStateException;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import it.polimi.ingsw.GC_26_client_connection.ClientMain;
-import it.polimi.ingsw.GC_26_gameLogic.Game;
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_readJson.ReadAll;
 import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
 import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
 import it.polimi.ingsw.GC_26_serverConnections.SocketServer;
+import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 
 public class Server {
 	private GameInitialiserAndController game;
@@ -26,7 +23,7 @@ public class Server {
 	private TimerValuesInterface times;
 	private final static int PORT = 29997;
 	
-	public void start(){
+	public void start() {
 		ReadFromFile gamesSpecific= new ReadAll();
 		
 		gamesSpecific.start();
@@ -36,20 +33,24 @@ public class Server {
 		game= new GameInitialiserAndController(cards, bonus, times);
 		
 		SocketServer socketServer= new SocketServer(this, PORT);
-		socketServer.run();
+		try {
+			socketServer.run();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
 	
 	public synchronized void addClient(ServerConnectionToClient connection, String username){
-		
 		ClientMainServerView views= new ClientMainServerView(username, connection);
 		connection.addViews( views);
-		GameInitialiserAndController game= findPlayerInExistingGame(username);
-		if(game!=null){
-			game.addClientAgain(views);
+		GameInitialiserAndController gamestarted= findPlayerInExistingGame(username);
+		if(gamestarted!=null){
+			gamestarted.addClientAgain(views);
 			return;
-		}			
+		}
 		else enterInANewGame(views);
 		
 	}
@@ -69,10 +70,15 @@ public class Server {
 	
 	
 	private  void enterInANewGame(ClientMainServerView clientView){
+		System.out.println("enter1");
 		game.addClient(clientView);
-		if(game.getNumOfPlayer()==4)
+		if(game.getNumOfPlayer()==2){  //TODO
+			game.initialiseGame();
+			games.add(game);
 			newGame();
-	}
+
+			
+		}	}
 	
 	
 	

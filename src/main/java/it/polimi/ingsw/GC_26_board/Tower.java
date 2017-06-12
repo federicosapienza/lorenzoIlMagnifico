@@ -23,7 +23,7 @@ import it.polimi.ingsw.GC_26_utilities.familyMembers.*;
 public class Tower {
 	private boolean isTowerFree;
 	private List<Player> playersInTheTower = new ArrayList<>();
-	private List<DevelopmentCard> cardsForThisPeriod = new ArrayList<>();
+	private List<DevelopmentCard> cardsForThisRound = new ArrayList<>();
 	private TowerPosition towerPositionFloor1;
 	private TowerPosition towerPositionFloor2;
 	private TowerPosition towerPositionFloor3;
@@ -59,35 +59,20 @@ public class Tower {
 		return GameParameters.getTowersFloorsValues(floor);
 	}
 	
-	public void setCardsForThisPeriod(List<DevelopmentCard> cards){
-		cardsForThisPeriod=cards;
+	public void setCardsForThisRound(List<DevelopmentCard> cards){
+		cardsForThisRound=cards;
+		setCardsInPositions();
 	}
 	
 	
-	public void setCardsInPositions(){
-		DevelopmentCard randomCard1 = takeRandomCardFromList(cardsForThisPeriod);
-		cardsForThisPeriod.remove(randomCard1);
-		DevelopmentCard randomCard2 = takeRandomCardFromList(cardsForThisPeriod);
-		cardsForThisPeriod.remove(randomCard2);
-		DevelopmentCard randomCard3 = takeRandomCardFromList(cardsForThisPeriod);
-		cardsForThisPeriod.remove(randomCard3);
-		DevelopmentCard randomCard4 = takeRandomCardFromList(cardsForThisPeriod);
-		cardsForThisPeriod.remove(randomCard4);
-		giveRandomCardsToPosition(randomCard1,randomCard2,randomCard3,randomCard4);
+	private void setCardsInPositions(){
+		towerPositionFloor1.setCard(cardsForThisRound.get(0));
+		towerPositionFloor2.setCard(cardsForThisRound.get(1));
+		towerPositionFloor3.setCard(cardsForThisRound.get(2));
+		towerPositionFloor4.setCard(cardsForThisRound.get(3));
 	}
 	
-	public DevelopmentCard takeRandomCardFromList(List<DevelopmentCard> cards){
-		Random randomizer = new Random();
-		DevelopmentCard randomCard = cards.get(randomizer.nextInt(cards.size()));
-		return randomCard;
-	}
 	
-	private void giveRandomCardsToPosition(DevelopmentCard developmentCard1 ,DevelopmentCard developmentCard2, DevelopmentCard developmentCard3,DevelopmentCard developmentCard4){
-		towerPositionFloor1.setCard(developmentCard1);
-		towerPositionFloor2.setCard(developmentCard2);
-		towerPositionFloor3.setCard(developmentCard3);
-		towerPositionFloor4.setCard(developmentCard4);
-	}
 			
 	public void clearCardsAndFamilyMembers(){ 
 		isTowerFree=true;
@@ -102,9 +87,7 @@ public class Tower {
 		setCardsInPositions();
 	}
 	
-	public List<DevelopmentCard> getCardsForThisPeriod() {
-		return cardsForThisPeriod;
-	}
+
 	
 	
 	    //checks if  the family member can be put there 

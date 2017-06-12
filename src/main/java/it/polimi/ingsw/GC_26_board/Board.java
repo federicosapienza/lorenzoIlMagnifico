@@ -2,9 +2,8 @@ package it.polimi.ingsw.GC_26_board;
 
 import java.util.*;
 
-import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
-import it.polimi.ingsw.GC_26_serverView.Observable;
+import it.polimi.ingsw.GC_26_server.Observable;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class Board extends Observable<PositionDescriber>{

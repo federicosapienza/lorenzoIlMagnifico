@@ -1,6 +1,7 @@
 package it.polimi.ingsw.GC_26_client_connection;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,8 +23,10 @@ public class ClientMain {
 	private void start() throws IOException{
 		//scegliere connessione!
 		ClientConnection connection=null;
+		Socket socket=null;
 		try {
-			connection= new SocketOutClient(PORT , IP);
+			 socket= new Socket(IP, PORT);
+			connection= new SocketOutClient(socket);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -32,8 +35,8 @@ public class ClientMain {
 		MainClientView view = new MainClientView();
 		ExecutorService pool = Executors.newFixedThreadPool(2);
 		IOlogic iOlogic= new IOlogic(connection, view);
-		SocketINClient socketINClient = new SocketINClient(PORT, IP);
-		socketINClient.setController( new ClientController(iOlogic));
+		SocketINClient socketINClient = new SocketINClient(socket);
+		socketINClient.setController( new ClientController(iOlogic,view));
 		pool.submit(iOlogic);
 		pool.submit(socketINClient);
 		//magari mettere a runnable il controller

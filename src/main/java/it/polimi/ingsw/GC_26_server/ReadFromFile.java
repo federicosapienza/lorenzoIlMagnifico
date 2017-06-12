@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26_serverView;
+package it.polimi.ingsw.GC_26_server;
 
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;

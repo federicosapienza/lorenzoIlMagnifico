@@ -12,8 +12,8 @@ import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
+import it.polimi.ingsw.GC_26_server.Server;
 import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
-import it.polimi.ingsw.GC_26_serverView.Server;
 import it.polimi.ingsw.GC_26_utilities.Message;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
@@ -31,8 +31,8 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 			this.server= server;
 			objOut = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
 			objOut.flush();
-			System.out.println("arrivi 11111qui");
 	        objIn  = new ObjectInputStream(new BufferedInputStream(this.socket.getInputStream()));
+	
 		}
 		
 		@Override
@@ -44,11 +44,12 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 		
 		@Override
 		public void run() {
+		
+			
 			try{
-				System.out.println("vai");
+
 				objOut.writeUTF("Welcome!");
 				objOut.flush();
-				System.out.println("qui");
 				Boolean loginDone= false;
 				String username=null;
 				String password=null;
@@ -65,7 +66,9 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 						objOut.writeUTF("Login or signing in successful");
 					objOut.flush();
 				}
+				if(username!=null){
 				server.addClient(this, username);
+				}
 				while(true){
 					
 					//reading objects

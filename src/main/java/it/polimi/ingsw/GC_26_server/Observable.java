@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26_serverView;
+package it.polimi.ingsw.GC_26_server;
 
 import java.util.ArrayList;
 import java.util.List;

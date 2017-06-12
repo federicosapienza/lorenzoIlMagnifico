@@ -4,7 +4,7 @@ import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
-import it.polimi.ingsw.GC_26_serverView.Observer;
+import it.polimi.ingsw.GC_26_server.Observer;
 import it.polimi.ingsw.GC_26_utilities.Request;
 
 public class ActionController implements Observer<Action>{  //TODO extends actionObserver etc

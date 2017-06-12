@@ -92,7 +92,7 @@ public class GameParameters {
 			return towersFloorsValues[2];
 		}
 		case 4:
-			return towersFloorsValues[4];
+			return towersFloorsValues[3];
 		default: 	
 			throw new IllegalArgumentException();
 		}

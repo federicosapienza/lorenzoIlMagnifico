@@ -4,7 +4,8 @@ package it.polimi.ingsw.GC_26_gameLogic;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.ingsw.GC_26_board.Board;
+import javax.swing.InternalFrameFocusTraversalPolicy;
+
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
@@ -17,11 +18,11 @@ import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
-import it.polimi.ingsw.GC_26_serverView.Observable;
+import it.polimi.ingsw.GC_26_server.Observable;
 import it.polimi.ingsw.GC_26_utilities.Info;
-import it.polimi.ingsw.GC_26_utilities.Message;
 import it.polimi.ingsw.GC_26_utilities.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26_utilities.Request;
+import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 
@@ -30,7 +31,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 public class Game extends Observable<CardDescriber>{
 	private final it.polimi.ingsw.GC_26_readJson.Cards cards;
 	private  List<Player> players;
-	private int numberOfPlayers;
+	private int numberOfPlayers=0;
 	private GameElements gameElements;
 	private List<ResourcesOrPoints[]> resourcesOrPointsBonus;
 	private final int  numberOfPeriods =GameParameters.getNumberOfPeriods(); 
@@ -70,9 +71,9 @@ public class Game extends Observable<CardDescriber>{
 	}
 	
 	public Player addPlayer(String name){
+		numberOfPlayers++;
 		Player player = new Player(name, startingResources.get(numberOfPlayers-1));
 		players.add(player);
-		numberOfPlayers++;
 		return player;
 	}
 	
@@ -95,7 +96,6 @@ public class Game extends Observable<CardDescriber>{
 	public void initialiseGame(){
 		gameElements= new GameElements(this ,players, numberOfPlayers, resourcesOrPointsBonus, times);
 		
-		
 		//TODO notificare i giocatori
 		
 		
@@ -105,13 +105,12 @@ public class Game extends Observable<CardDescriber>{
 	
 	public void startGame(){
 		excommunicationTiles = cards.getExcommunicationTiles();
-		
-		
-		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
+		gameElements.notifyPlayers(new  Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
+
 		//TODO send rules : such as timeout etc
 		 //send the first info about players
 		for(Player p: players){ 
-			p.getWarehouse().notifyObservers(p.getWarehouse());
+			p.getWarehouse().notifyObservers(new PlayerWallet(p.getWarehouse()));
 		}
 		//gives to players  and send to clients personal bonus Tiles
 		for(Player p: players){ 
@@ -120,7 +119,9 @@ public class Game extends Observable<CardDescriber>{
 			p.getPersonalBoard().setPersonalBoardTile(bonusTiles.get(temp));
 			gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.INITIALIZINGGAME,p.getName(), null, null, bonusTiles.get(temp).toString()));
 			temp++;
-		}
+		}   
+		
+		System.out.println("Game124");
 		//sending positions of the board:
 		gameElements.getBoard().boardSendingDescription();
 		int temp =0;
@@ -144,7 +145,6 @@ public class Game extends Observable<CardDescriber>{
 		nextStep();
 	}
 	
-	private Player lastPlayerPerforming;
 	private int playersPerformedActions=-1;  //-1 means a new round is starting
 	private List<DevelopmentCard> territoryTowerCards;
 	private List<DevelopmentCard> buildingTowerCards;
@@ -225,10 +225,10 @@ public class Game extends Observable<CardDescriber>{
 			
 			
 			//Sending cards to board
-			gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisPeriod(buildingTowerCards);
-			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisPeriod(characterTowerCards);
-			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisPeriod(territoryTowerCards);
-			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisPeriod(ventureTowerCards);
+			gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisRound(buildingTowerCards);
+			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards);
+			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
+			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards);
 
 			//sending to clients the cards for this round:
 			sendCardTool(0, 4, territoryTowerCards);
@@ -242,6 +242,10 @@ public class Game extends Observable<CardDescriber>{
 			sendCardTool(4, 4, buildingTowerCards);
 			sendCardTool(4, 4, characterTowerCards);
 			sendCardTool(4, 4, ventureTowerCards);
+			gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisRound(buildingTowerCards);
+			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards);
+			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
+			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards);
 		}
 					
 					
@@ -262,21 +266,24 @@ public class Game extends Observable<CardDescriber>{
 		//TODO
 	}
 	
-	private int playerDoneVatican=-1;
+	private int playersDoneVatican=-1;
 	
 	public void vaticanReportNext(){
-		playerDoneVatican++;
-		if(playerDoneVatican==numberOfPlayers){
+		playersDoneVatican++;
+
+		if(playersDoneVatican==numberOfPlayers){
 			vaticanDone=true;
-			playerDoneVatican=-1;
+			playersDoneVatican=-1;
 		
 			nextStep();
 			return;
-		}	
+		}
+		vaticanLogic(players.get(playersDoneVatican));
+		
 	}
 	
 	
-	private void VaticanLogic(Player player){
+	private void vaticanLogic(Player player){
 		ExcommunicationTile excommunicationTile = excommunicationTiles.get(period-1);
 		
 		//if the player has not enough faith points , excommunication tile effect is automatically activated.

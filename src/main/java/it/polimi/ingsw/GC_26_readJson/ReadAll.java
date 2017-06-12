@@ -1,13 +1,13 @@
 package it.polimi.ingsw.GC_26_readJson;
 
-import it.polimi.ingsw.GC_26_serverView.ReadFromFile;
+import it.polimi.ingsw.GC_26_server.ReadFromFile;
 
 public class ReadAll implements ReadFromFile{
 	private TerritoryCardsReader territoryCardsReader = new TerritoryCardsReader();
 	private BuildingCardsReader buildingCardsReader = new BuildingCardsReader();
 	private CharacterCardsReader characterCardsReader = new CharacterCardsReader();
 	private VentureCardsReader ventureCardsReader = new VentureCardsReader();
-//	private BoardResourcesAndStartingPlayerResourcesReader boardResourcesAndStartingPlayerResourcesReader = new BoardResourcesAndStartingPlayerResourcesReader();
+	private BoardResourcesAndStartingPlayerResourcesReader boardResourcesAndStartingPlayerResourcesReader = new BoardResourcesAndStartingPlayerResourcesReader();
 	private CardsImplementation cards= new CardsImplementation();
 	private BonusImplementation bonus = new BonusImplementation();
 	
@@ -34,9 +34,9 @@ public class ReadAll implements ReadFromFile{
 		ventureCardsReader.readCards(2, cards);
 		ventureCardsReader.readCards(3, cards);
 		
-		//boardResourcesAndStartingPlayerResourcesReader.readResources(bonus);
-		//boardResourcesAndStartingPlayerResourcesReader.readStartingPlayerResources(bonus);
-		//boardResourcesAndStartingPlayerResourcesReader.readFaithTrack(bonus);
+		boardResourcesAndStartingPlayerResourcesReader.readResources(bonus);
+		boardResourcesAndStartingPlayerResourcesReader.readStartingPlayerResources(bonus);
+		boardResourcesAndStartingPlayerResourcesReader.readFaithTrack(bonus);
 	}
 	
 	public Cards getCards() {

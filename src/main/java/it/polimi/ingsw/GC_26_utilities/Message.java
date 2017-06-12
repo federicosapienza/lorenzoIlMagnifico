@@ -2,7 +2,7 @@ package it.polimi.ingsw.GC_26_utilities;
 
 import java.io.Serializable;
 
-import it.polimi.ingsw.GC_26_serverView.Observable;
+import it.polimi.ingsw.GC_26_server.Observable;
 
 /**
  * 
