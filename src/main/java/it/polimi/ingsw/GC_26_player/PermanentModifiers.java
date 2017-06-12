@@ -31,7 +31,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 public class PermanentModifiers {
 	private Player player;
 	 /**
-	  * Constructor: it associates these permanent modifiers to the player contained in the parameter
+	  * Constructor: it associates the permanent modifiers to the player contained in the parameter
 	  * @param player It's the player associated to these permanent modifiers
 	  */
 	public PermanentModifiers(Player player) {
@@ -39,26 +39,53 @@ public class PermanentModifiers {
 	}
 	
 	
-	//Resources malus of excommunication tiles (the first 4 in the GameRules pdf)
-	private boolean resourcesMalusOn=false;
-	private ResourcesOrPoints resourcesMalus= ResourcesOrPoints.newResources(0, 0, 0, 0); // at the beginning of the game there are not malus
+	//
 	
+	/**
+	 * Malus effects of excommunication tiles on resources (the first 4 in the GameRules pdf)
+	 */
+	private boolean resourcesMalusOn=false;
+	// at the beginning of the game there is no malus effect
+	private ResourcesOrPoints resourcesMalus= ResourcesOrPoints.newResources(0, 0, 0, 0); 
+	
+	/**
+	 * Method that verifies if the malus effect has been activated.
+	 * @return resourcesMalusOn It's the boolean that indicates if the malus has been activated: 
+	 * it's true if it's been activated, else it's false.
+	 */
 	public boolean IsresourcesMalusOn() {
 		return resourcesMalusOn;
 	}
 	
-	public void setMalus(ResourcesOrPoints temp){ // update the malus
-		this.resourcesMalusOn = true; //once activated can not be undone, as in the game
-	
+	/**
+	 * Method used to update the malus: it adds the resources or points expressed by temp 
+	 * to the current value of resourcesMalus in order to update the value of resourcesMalus.
+	 * @param temp It represents the resources or points that the excommunication tiles will subtract to the player
+	 */
+	public void setMalus(ResourcesOrPoints temp){ 
+		//the activation of resourcesMalusOn is not reversible: once activated it can't be disabled.
+		this.resourcesMalusOn = true; 
+		
 		resourcesMalus=ResourcesOrPoints.sum(resourcesMalus, temp);
 	}
 	
-	public ResourcesOrPoints getResourcesAfterMalus(ResourcesOrPoints resources){ // subtract malus from the resources the player can obtain
+	/**
+	 * Method that subtracts the malus from the resources that the player can obtain
+	 * @param resources It represents the resources that the player could obtain
+	 * @return ResourcesOrPoints.subtract(resources, resourcesMalus) It represents the real value of the resources
+	 * that the player obtains: the value will be equal to the value of the resources expressed by the @param, 
+	 * minus the value of the malus, expressed by resourcesMalus.
+	 */
+	public ResourcesOrPoints getResourcesAfterMalus(ResourcesOrPoints resources){ 
 		return ResourcesOrPoints.subtract(resources, resourcesMalus);
 			
 	}
 	
-	// Cesare Borgia effect
+	/**
+	 * The following lines are needed to represent the effect of Cesare Borgia Leader card:
+	 * if the player owns this card, he doesn't need to satisfy the Military Points requirement 
+	 * when he takes Territory Cards.
+	 */
 	private boolean militaryPointRequirementNotNeeded; 
 	public boolean isMilitaryPointRequirementNotNeeded() {
 		return militaryPointRequirementNotNeeded;
