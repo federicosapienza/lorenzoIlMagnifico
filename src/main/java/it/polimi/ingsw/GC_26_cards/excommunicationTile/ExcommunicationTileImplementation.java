@@ -3,7 +3,7 @@ package it.polimi.ingsw.GC_26_cards.excommunicationTile;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_player.Player;
 
-public class ExcommunicationTileImplementation extends ExcommunicationTile{
+public class ExcommunicationTileImplementation implements ExcommunicationTile{
 	/**
 	 * 
 	 */
@@ -24,18 +24,13 @@ public class ExcommunicationTileImplementation extends ExcommunicationTile{
 		effect.doEffect(player, false);
 	}
 
-	
-
-	@Override
 	public String getPermanentEffectDescriber() {
 		return effect.toString();
 	}
 
 	
-	@Override
-	public int getPeriod() {
-		return period;
-	}
+
+
 
 
 }

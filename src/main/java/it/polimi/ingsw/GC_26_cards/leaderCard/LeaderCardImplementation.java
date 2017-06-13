@@ -3,11 +3,10 @@ package it.polimi.ingsw.GC_26_cards.leaderCard;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_player.Player;
 
-public class LeaderCardImplementation extends LeaderCard{
+public class LeaderCardImplementation implements LeaderCard{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private final String name;
 	private final Requirement requirement;
 	private final Effect effect;
@@ -33,13 +32,13 @@ public class LeaderCardImplementation extends LeaderCard{
 		effect.doEffect(player, false);
 	}
 	
-	@Override
+	
 	public String getPermanentEffectDescriber() {
 		return effect.toString();
 	}
 
 
-	@Override
+	
 	public String getRequirementDescriber() {
 		return requirement.toString();
 	}

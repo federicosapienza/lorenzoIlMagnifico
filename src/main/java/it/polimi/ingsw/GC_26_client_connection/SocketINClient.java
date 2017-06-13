@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
-
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_client.ClientController;
@@ -30,7 +29,6 @@ public class SocketINClient implements Runnable{
 
 		@Override
 		public void run() {
-			 
 				try {
 					while (true){
 			        String string = objIn.readUTF();
@@ -43,41 +41,63 @@ public class SocketINClient implements Runnable{
 					controller.setLoginDone();
 
 					while(true){
-						System.out.println("waiting something");
-
 					Object object = objIn.readObject();
 
 					if(object instanceof Message){
 						Message message = (Message) object;
 						controller.receiveMessage(message);
+						continue;
 					}
 					if(object instanceof ActionNotification){
 						ActionNotification action = (ActionNotification) object;
 						controller.receiveAction(action);
+						continue;
+
 					}
 					if(object instanceof CardDescriber){
 						CardDescriber card = (CardDescriber) object;
 						controller.receiveCard(card);
+						continue;
+
 					}
 					if(object instanceof PlayerWallet){
-						System.out.println("received playerWallet");
 						PlayerWallet wallet = (PlayerWallet) object;
 						controller.receivePlayerPocket(wallet);
+						continue;
+
  					}
 					if(object instanceof PositionDescriber){
 						PositionDescriber positionDescriber = (PositionDescriber) object;
 						controller.receivePosition(positionDescriber);
+						continue;}
+
+					throw new IllegalArgumentException();
+				
 					
-					}
 					}
 					
 				
 				}catch (ClassNotFoundException e) {
 					e.printStackTrace();
+;
 				}
 				
 				catch(IOException e1){
+							//TODO
+
+				}
+				catch(IllegalArgumentException e2){
 					//TODO
+				}
+				
+				
+				finally {
+					try {
+						socket.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			
 		

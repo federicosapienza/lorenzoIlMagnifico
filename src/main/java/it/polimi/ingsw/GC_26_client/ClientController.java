@@ -9,6 +9,7 @@ import it.polimi.ingsw.GC_26_client_clientLogic.IOlogic;
 import it.polimi.ingsw.GC_26_client_clientLogic.MainClientView;
 import it.polimi.ingsw.GC_26_client_clientLogic.PositionView;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
+import it.polimi.ingsw.GC_26_gameLogic.Game;
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.Info;
@@ -35,16 +36,22 @@ public class ClientController {
 	
 	
 	public void receiveCard(CardDescriber card){
+		System.out.println(view.getGameStatus());
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME || view.getGameStatus()==GameStatus.INITIALIZINGTURN){
-			if(card.getTypeOfCard().equalsIgnoreCase("Development Card"))
+			if(card.getTypeOfCard().equalsIgnoreCase("Development Card")){
 				view.getBoard().addCardWhereFree(card);
-			if(card.getTypeOfCard().equalsIgnoreCase("Excommunication Tile"))
+				return;}
+			if(card.getTypeOfCard().equalsIgnoreCase("Excommunication Tile")){
 				view.getBoard().addExcommunication(card);
+				return;
+			}
 			
 			//TODO tutti i check
 		
-			if(card.getTypeOfCard().equalsIgnoreCase("LeaderCard")){
-					view.getPlayer(view.getPlayerUsername()).addCard(card);; }
+			if(card.getTypeOfCard().equalsIgnoreCase("Leader Card")){
+					view.getPlayer(view.getPlayerUsername()).addCard(card); 
+					return;
+					}
 			else throw new IllegalArgumentException();	
 		}
 		/*dovrebbe essere diventato inutile
@@ -88,7 +95,7 @@ public class ClientController {
 	}
 	
 	public void receivePlayerPocket(PlayerWallet playerWallet){
-		view.getPlayer(playerWallet.getPlayerName()).updateValues(playerWallet);
+		view.updatePlayerWallet((playerWallet));
 	}
 	
 	
@@ -125,17 +132,22 @@ public class ClientController {
 	private void handleRequests(Request request){
 		view.setPlayerStatus(request.getStatus());
 		System.out.println(request.getMessage());
-		if(request.getStatus()==PlayerStatus.PLAYING)
+		if(request.getStatus()==PlayerStatus.PLAYING){
+			System.out.println("CLICONTROLLER140startingPLaying");
 				iOlogic.setWaitingFirstAction();
-		if(request.getStatus()== PlayerStatus.SECONDPLAY)
+				return;}
+		if(request.getStatus()== PlayerStatus.SECONDPLAY){
 				iOlogic.setWaitingSecondAction();
+				return;
+		}
 		if(request.getStatus()==PlayerStatus.SUSPENDED){
 			//TODO dovrà chiedere reinserimento
 			return;
 		}
 			
-		if(request.getStatus()==PlayerStatus.WAITINGHISTURN)
+		if(request.getStatus()==PlayerStatus.WAITINGHISTURN){
 			return;
+		}
 		else {
 			iOlogic.setWaitingResponse();
 		}
@@ -148,9 +160,8 @@ public class ClientController {
 		}
 		GameStatus old= GameStatus.INITIALIZINGTURN;
 		view.setGameStatus(info.getGameStatus());
-		if(old== GameStatus.INITIALIZINGTURN && info.getGameStatus()==GameStatus.PLAYING)
+		if(old== GameStatus.INITIALIZINGTURN && info.getGameStatus()==GameStatus.PLAYING)  //TODO
 			view.getBoard().printBoard();
-		System.out.println("CLIEnt controller exit 154");
 	}
 	
 	private void handlePersonalBoardChangeNotification(PersonalBoardChangeNotification change) {

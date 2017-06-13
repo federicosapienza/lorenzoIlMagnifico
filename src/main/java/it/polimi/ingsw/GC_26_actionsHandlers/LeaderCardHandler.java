@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
@@ -31,7 +32,7 @@ public class LeaderCardHandler {
 			return false;
 		}
 		if(used.contains(card)){
-			player.notifyObservers(new Request(player.getStatus(),"You have already used the card", card));
+			player.notifyObservers(new Request(player.getStatus(),"You have already used the card", new CardDescriber(card)));
 			return false;
 		}
 			

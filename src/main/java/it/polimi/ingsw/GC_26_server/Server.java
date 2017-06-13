@@ -70,22 +70,20 @@ public class Server {
 	
 	
 	private  void enterInANewGame(ClientMainServerView clientView){
-		System.out.println("enter1");
+		System.out.println("new Client");
 		game.addClient(clientView);
-		if(game.getNumOfPlayer()==2){  //TODO
+		if(game.getNumOfPlayer()==2){  //TODO  //preparing for a new game
 			game.initialiseGame();
 			games.add(game);
 			newGame();
-
 			
-		}	}
-	
+		}	
+		}
+
 	
 	
 	private void newGame() {
-		GameInitialiserAndController temp= game;
-		game= new GameInitialiserAndController(cards, bonus, times);
-		
+		this.game= new GameInitialiserAndController(cards, bonus, times);
 	}
 
 	private GameInitialiserAndController findPlayerInExistingGame(String playerName){

@@ -129,6 +129,7 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 		}
 		@Override
 		public void send(CardDescriber cardDescriber) {
+			System.out.println("sending a card "+ cardDescriber.getName());
 			sendMethod(cardDescriber);
 			
 		}

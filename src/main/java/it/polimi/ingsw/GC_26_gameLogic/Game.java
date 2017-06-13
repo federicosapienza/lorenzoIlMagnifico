@@ -4,7 +4,6 @@ package it.polimi.ingsw.GC_26_gameLogic;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.InternalFrameFocusTraversalPolicy;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
@@ -46,8 +45,8 @@ public class Game extends Observable<CardDescriber>{
 	
 	private int numPeriods =GameParameters.getNumberOfPeriods();
 	private int numRounds= GameParameters.getRoundsforPeriod();
-	private int period;
-	private int round;
+	private int period=1;
+	private int round=1;
 	
 
 	
@@ -121,7 +120,6 @@ public class Game extends Observable<CardDescriber>{
 			temp++;
 		}   
 		
-		System.out.println("Game124");
 		//sending positions of the board:
 		gameElements.getBoard().boardSendingDescription();
 		int temp =0;
@@ -131,13 +129,13 @@ public class Game extends Observable<CardDescriber>{
 			for(int i=0; i<4; i++){
 				LeaderCard leaderCard = leaderCards.get(temp);
 				p.getPersonalBoard().addLeaderCard(leaderCard);
-				p.getPersonalBoard().notifyObservers(leaderCard);
+				p.getPersonalBoard().notifyObservers(new CardDescriber(leaderCard));
 			}
 		}
-		//taking and sending excommunicationTiles
+		//taking and sending excommunication Tiles
 		excommunicationTiles= cards.getExcommunicationTiles();
 		for(ExcommunicationTile tile : excommunicationTiles){
-			notifyObservers(tile);
+			notifyObservers(new CardDescriber(tile));
 		}
 		
 		//starting game
@@ -153,10 +151,12 @@ public class Game extends Observable<CardDescriber>{
 	private boolean vaticanDone= false;
 	
 	public void nextStep() {
+		System.out.println("game 156");
 		if(playersPerformedActions==-1){//starting new Round
 			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "starting period "+ period+ " round "+round ));;
 			sendingCards();
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, null ));
+			System.out.println("game161");
 			//than read to 202
 		}
 		//starting vatican Turn
@@ -208,7 +208,7 @@ public class Game extends Observable<CardDescriber>{
 				return;
 			}
 			player.setStatus(new Request(PlayerStatus.PLAYING, "your turn", null));
-			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),"Is " +player.getName()+ "turn")) ;
+			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),"Is '" +player.getName()+ "' turn")) ;
 			return;
 		}
 
@@ -216,26 +216,34 @@ public class Game extends Observable<CardDescriber>{
 	}
 
 	private void sendingCards() {
+		System.out.println("sendDD card");
 		if(round==1){
-			
-			territoryTowerCards= cards.getRandomDevelopmentCards(numberOfPeriods, DevelopmentCardTypes.TERRITORYCARD);
-			buildingTowerCards= cards.getRandomDevelopmentCards(numberOfPeriods, DevelopmentCardTypes.BUILDINGCARD);
-			characterTowerCards= cards.getRandomDevelopmentCards(numberOfPeriods, DevelopmentCardTypes.CHARACTERCARD);
-			ventureTowerCards= cards.getRandomDevelopmentCards(numberOfPeriods, DevelopmentCardTypes.VENTURECARD);
-			
-			
+
+			territoryTowerCards= cards.getRandomDevelopmentCards(period, DevelopmentCardTypes.TERRITORYCARD);
+			buildingTowerCards= cards.getRandomDevelopmentCards(period, DevelopmentCardTypes.BUILDINGCARD);
+			characterTowerCards= cards.getRandomDevelopmentCards(period, DevelopmentCardTypes.CHARACTERCARD);
+			ventureTowerCards= cards.getRandomDevelopmentCards(period, DevelopmentCardTypes.VENTURECARD);
+						
 			//Sending cards to board
 			gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisRound(buildingTowerCards);
+			System.out.println("game 230");
 			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards);
-			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
+			System.out.println("game 231");
+
+		//	gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
+			System.out.println("game 232");
+
 			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards);
+			System.out.println("game 234");
 
 			//sending to clients the cards for this round:
-			sendCardTool(0, 4, territoryTowerCards);
+		//	sendCardTool(0, 4, territoryTowerCards);
+			System.out.println("game 238");
+
 			sendCardTool(0, 4, buildingTowerCards);
 			sendCardTool(0, 4, characterTowerCards);
 			sendCardTool(0, 4, ventureTowerCards);
-			
+	}
 		if(round==2){
 			//sending to clients the cards for this round:
 			sendCardTool(4, 4, territoryTowerCards);
@@ -246,18 +254,16 @@ public class Game extends Observable<CardDescriber>{
 			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards);
 			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
 			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards);
-		}
-					
-					
-		}
-		
+		}	
 	}
 	
 	
 	private void sendCardTool(int startingPosition,int numbersToSend, List<DevelopmentCard> toSend){
+		System.out.println("game 261");
+
 		for(int i=startingPosition; i<numbersToSend; i++){
 			DevelopmentCard card= toSend.get(i);
-			notifyObservers(card);
+			notifyObservers(new CardDescriber(card));
 		}
 	}
 	
@@ -291,7 +297,7 @@ public class Game extends Observable<CardDescriber>{
 		  if(player.getWarehouse().getFaithPoints()< GameParameters.getFaithPointNeeded(periodNumber)){
 		    	excommunicationTile.runEffect(player);
 		    	gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "is excommunicated"));
-		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), excommunicationTile, 
+		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(excommunicationTile), 
 		    								 excommunicationTile.toString(), null));
 		    	vaticanReportNext();
 		    	return;
@@ -302,7 +308,7 @@ public class Game extends Observable<CardDescriber>{
 		    	//TODO notificare i giocatori che il player salta il turno
 		    	gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),
 		    			player.getName()+ "misses his turn and is excommunicated"));
-		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), excommunicationTile, 
+		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(),new CardDescriber(excommunicationTile), 
 						 excommunicationTile.toString(), null));
 		    	
 		    	excommunicationTile.runEffect(player);
@@ -310,7 +316,7 @@ public class Game extends Observable<CardDescriber>{
 		
 		
 		}
-	  player.notifyObservers(new Request(PlayerStatus.VATICANREPORTDECISION, "take your choice", excommunicationTile));
+	  player.notifyObservers(new Request(PlayerStatus.VATICANREPORTDECISION, "take your choice", new CardDescriber(excommunicationTile)));
 		}	
 	}
 	

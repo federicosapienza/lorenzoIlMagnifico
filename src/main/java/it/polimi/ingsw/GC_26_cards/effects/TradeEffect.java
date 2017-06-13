@@ -1,6 +1,7 @@
 package it.polimi.ingsw.GC_26_cards.effects;
 
 
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.Request;
@@ -57,7 +58,7 @@ public class TradeEffect implements Effect{
 		}
 		
 		synchronized (player.getStatus()) {
-			player.setStatus(new Request(PlayerStatus.TRADING,null,  player.getCardUsed()));// status change will call the interaction!
+			player.setStatus(new Request(PlayerStatus.TRADING,null,  new CardDescriber(player.getCardUsed())));// status change will call the interaction!
 		}
 		
 	}

@@ -2,7 +2,6 @@ package it.polimi.ingsw.GC_26_readJson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.*;
 
 import com.google.gson.*;
 
@@ -10,10 +9,7 @@ import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
-import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class TerritoryCardsReader extends DevelopmentCardsReader {
 		

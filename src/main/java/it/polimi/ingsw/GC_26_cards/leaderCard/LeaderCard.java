@@ -5,11 +5,10 @@ import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_player.Player;
 
-public abstract class LeaderCard implements CardDescriber{
+public interface LeaderCard {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 
 
 	public abstract String getName();
@@ -17,34 +16,6 @@ public abstract class LeaderCard implements CardDescriber{
 	public abstract void runEffect(Player player);
 	
 	
-	
-	@Override
-	public String getTypeOfCard() {
-		return "Leader Card";
-	}
 
-
-	@Override
-	public int getActionValue() {
-		return 0;
-	}
-
-
-	@Override
-	public DevelopmentCardTypes getCardType() {
-		return null;
-	}
-
-
-	@Override
-	public int getPeriod() {
-		return 0;
-	}
-
-
-	@Override
-	public String getImmediateEffectDescriber() {
-		return null;
-	}
 
 }

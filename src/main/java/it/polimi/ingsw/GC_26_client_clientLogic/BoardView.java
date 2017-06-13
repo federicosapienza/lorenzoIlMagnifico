@@ -107,7 +107,7 @@ public class BoardView {
 	
 	
 	private List<PositionView> findRightTowerFromCard(CardDescriber card){
-		switch (card.getCardType()) {
+		switch (card.getType()) {
 		case TERRITORYCARD: 
 			return territoriesTower;
 		case BUILDINGCARD: 
