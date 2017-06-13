@@ -16,7 +16,7 @@ public enum DevelopmentCardTypes {
 	private String stringDescriber;
 	
 	/**
-	 * Constructor of DevelopmentCardTypes: it sets the stringDescriber to the one contained in the @param
+	 * Constructor of DevelopmentCardTypes: it sets the stringDescriber to the one contained in the @param stringDescriber
 	 * @param stringDescriber It's the describer of the string.
 	 */
 	private DevelopmentCardTypes(String stringDescriber) {

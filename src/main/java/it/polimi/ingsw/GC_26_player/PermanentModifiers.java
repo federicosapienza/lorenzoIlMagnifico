@@ -174,16 +174,27 @@ public class PermanentModifiers {
 	
 	}
 	
-
 	
-	
-	
-	//Santa Rita effect: doubles the earning of coins, servants, stone , wood. : hecked and called in ReceiveResourcesOrPointsEffect
+	/**
+	 * Santa Rita's effect: each time the player who owns this leader card receives wood, stone, coins, or servants 
+	 * as an immediate effect from Development Cards (not from an action space),
+	 * he receives the resources twice. 
+	 * This will be checked and called in ReceiveResourcesOrPointsEffect
+	 */
 	private boolean doubleEarningOn=false;
 	
+	/**
+	 * Method that checks if Santa Rita's effect has been activated.
+	 * @return doubleEarningOn It's the boolean that indicates if Santa Rita effect has been activated: 
+	 * true if it's active, false if it isn't.
+	 */
 	public boolean isDoubleEarningOn() {
 		return doubleEarningOn;
 	}
+	
+	/**
+	 * Setter method to activate Santa Rita's effect.
+	 */
 	public void setDoubleEarningOn() {
 		doubleEarningOn = true;
 	}
@@ -191,11 +202,20 @@ public class PermanentModifiers {
 	
 	
 	
+	/**
+	 * The following lines represent the action modifiers: they change the value of the action when getting a card
+	 * from towers or when doing production or harvest.
+	 * These action modifiers are used both in development cards and excommunication tiles.
+	 * They'll be checked and called in ActionCheckerHandler and SecondActionHandler
+	 */
 	
-	// action Modifiers: for towers positions in getting a card and in production or harvest to change action value
-	//used both in development Card and excommunication tiles: checked and called in ActionCheckerHandler and SecondActionHandler
 	private Map<BoardZone, Integer> actionModifiers;
-		
+	
+	/**
+	 * Method used to add an action modifier
+	 * @param zone It's the zone involved in the change of the value of the action
+	 * @param value It's the value to add after applying the change: it has to be added to the previous value 
+	 */
 	public void addActionModifier(BoardZone zone, int value){
 		Integer temp = actionModifiers.get(zone);
 		if(temp==null)
@@ -205,7 +225,11 @@ public class PermanentModifiers {
 		}
 	}
 	
-	
+	/**
+	 * Getter method that returns the value of the action modifier in the zone expressed by the @param zone
+	 * @param zone It's the zone in which I want to get the value of the action modifier.
+	 * @return 0 if the zone has no action modifiers, temp if it has.
+	 */
 	public  int getActionModifier(BoardZone zone){
 		Integer temp = actionModifiers.get(zone);
 		if(temp==null)
@@ -213,33 +237,78 @@ public class PermanentModifiers {
 		else return temp;
 		
 	}
-	/////////////
 	
+	/**
+	 * The following lines represent the possibility to revoke the bonuses obtained from tower spaces 
+	 * (only the preacher card does it).
+	 * This possibility will be checked and called in ActionPerformedHandler
+	 */
 	
-	//revoke bonuses obtained from Tower spaces (Preacher Card);  //checked and called in ActionPerformedHandler
 	 private boolean bonusRevoked =false;
+	 
+	 /**
+	  * Setter method to activate the revocation of bonuses
+	  */
 	 public void setBonusRevokedOn(){
 		 bonusRevoked=true;
 	 }
+	 
+	 /**
+	  * Method to check if the revocation of bonuses is active
+	  * @return bonusRevoked It's the boolean that indicates if the revocation is active or not.
+	  */
 	public boolean isTowerBonusRevokedOn() {
 		return bonusRevoked;
 	}
 	
+	/**
+	 * The following lines represent the effect of the excommunication tiles that increment or decrement the value
+	 * of the coloured family members.
+	 * This possibility will be checked and called in the FamilyMembers class.
+	 */
 	
-	//family members value increments or decrements
-	//excommunication tile: reduce the coloured family member value :checked and called in "FamilyMembers"
+	//It's the value of the change applied to the value of the coloured family members
 	private int colouredMembersChange;
+	
+	/**
+	 * Getter method that returns the value of the coloured family members under the effect of the 
+	 * excommunication tiles that increment/decrement their value
+	 * @return colouredMembersChange It's the value of the family members under the effect of the 
+	 * excommunication tiles that increment/decrement their value
+	 */
 	public int getColouredMemberChange(){
 		return colouredMembersChange;
 	}
+	
+	/**
+	 * Setter method used when the excommunication tiles that increment/decrement the value of the coloured 
+	 * family members are activated
+	 * @param value It's the value that will be added or subtracted from the previous value 
+	 * that the family members had before being affected by the effect of the excommunication tiles.
+	 */
 	public void setColouredMembersChange(int value){
 		colouredMembersChange += value;
 	}
 	
+	
 	private int neutralMemberChange;
+	
+	/**
+	 * Getter method that returns the value of the neutral family members under the effect of the 
+	 * excommunication tiles that increment/decrement their value
+	 * @return neutralMembersChange It's the value of the family members under the effect of the 
+	 * excommunication tiles that increment/decrement their value
+	 */
 	public int getneutralMemberChange(){
 		return neutralMemberChange;
 	}
+	
+	/**
+	 * Setter method used when the excommunication tiles that increment/decrement the value of the neutral 
+	 * family members are activated
+	 * @param value It's the value that will be added or subtracted from the previous value 
+	 * that the neutral family members had before being affected by the effect of the excommunication tiles.
+	 */
 	public void setNeutralMembersChange(int value){
 		neutralMemberChange += value;
 	}
@@ -247,117 +316,336 @@ public class PermanentModifiers {
 
 	
 	
-	
-	//market Ban (excommunication tile effect),checked and  called in "ActionCheckerHandler"
+	/**
+	 * The following lines represent the effect of the excommunication tiles that inhibit the players under this effect
+	 * to access to the market.
+	 * This eventuality will be checked and called in the ActionCheckerHandler class.
+	 */
+	//it's a flag that indicates if the player has been banned from the market
 	private boolean marketBanFlag=false; 
 	
+	/**
+	 * Getter method that checks if the player has been banned from the market or not. 
+	 * @return marketBanFlag It's the flag that indicates if the player has been banned from the market:
+	 * true if he's banned, false if he isn't.
+	 */
 	public boolean getMarketBanFlag(){
 		return marketBanFlag;
 	}
+	
+	/**
+	 * Setter method used when one or more players are affected by the excommunication tiles that 
+	 * inhibit the players under this effect to access to the market.
+	 * Their marketBanFlag will be set to true. 
+	 */
 	public void setMarketBanFlagOn(){
-		marketBanFlag =true;
+		marketBanFlag = true;
 	}
 	
+	/**
+	 * The following lines represent the effect of the excommunication tile that doubles the number of servants
+	 * to pay in order to increase the value of the action (2 servants to increase the value of the action by 1,
+	 * 4 servants to increase the value of the action by 2 etc.) (See the 6th excommunication tile of the 2nd 
+	 * period in the official rulebook, page 13 of 14)
+	 * This eventuality will be checked and called in ActionCheckerHandler and SecondActionHandler 
+	 */
 	
-	// doubles the have to spend 2 servants to increase your ActionHandler value by 1 " checked and called in ActionCheckerHandler and SecondActionHandler
-	//excommunication tile effect:
 	private boolean doubleServants=false;
+	
+	/**
+	 * Method that checks if the player is affected by the excommunication tile that doubles the number of 
+	 * servants to pay in order to increase the value of the action
+	 * @return doubleServants It's the flag that indicates if the player is affected by the excommunication tile 
+	 * that doubles the number of servants to pay in order to increase the value of the action:
+	 * true if he's affected, false if he isn't.
+	 */
 	public boolean isDoubleServantsOn() {
 		return doubleServants;
 	}
+	
+	/**
+	 * Setter method that activates the effect of the excommunication tile when one or more players are affected by it.
+	 */
 	public void setDoubleServantsOn() {
-		doubleServants =true;
+		doubleServants = true;
 	}
-
-	//No victoryPoints for developmentCard type, (Borgia Effect)
+	
+	/**
+	 * The following lines represent the effects of the first 3 excommunication cards of the 3rd period (see page 13
+	 * of 14 of the official rulebook)
+	 * They inhibit the player to score Victory points for any of their Influenced Characters or Encouraged Ventures,
+	 * or Conquered Territories.
+	 */
+	
 	private Set<DevelopmentCardTypes> noVictoryPointsTypes;
 	
+	/**
+	 * Method that adds the type of card to the list of types of cards that won't influence anymore the score of 
+	 * Victory Points for the player who is affected by one of the first 3 Excommunication tiles.
+	 * @param type It's the type of card that will be added to the list of types of cards that won't influence 
+	 * anymore the score of Victory Points
+	 */
 	public void noVictoryPointsForCardType(DevelopmentCardTypes type){
 		noVictoryPointsTypes.add(type);
 	}
+	
+	/**
+	 * Method that checks if the type of card contained in the @param type is influencing the score of Victory
+	 * Points or not: if it's contained in the Set noVictoryPointsTypes, it can't have an influence in the score,
+	 * if it isn't, it will be counted as reported in the rulebook. 
+	 * @param type It's the type of card that will be checked in the list of types of cards that don't influence 
+	 * the score of Victory Points
+	 * @return noVictoryPointsTypes.contains(type) It's the result of the check: true if the type of card expressed
+	 * by the @param type is contained in the Set noVictoryPointsTypes, false if it isn't contained.
+	 */
 	public boolean pointsForThisCardType(DevelopmentCardTypes type){
 		return noVictoryPointsTypes.contains(type);
 	}
 	
-	
-	//Lose victoryPoints at the end of the game. excommunication tile Effect
+	/**
+	 * The following lines represent the effects of the last 3 excommunication tiles of the 3rd period (see pag 13
+	 * of 14 of the official rulebook).
+	 * At the end of the game, players affected by the effects of any of these excommunication tiles, will lose
+	 * Victory Points for some resources or points: 
+	 * 
+	 * 1st tile: players affected by the effect of this tile lose 1 Victory Point for every Military Point they have. 
+	 * (For example, if the players affected by this effect end the game with 12 Military Points, they lose 12 Victory Points.)
+	 * 
+	 * 2nd tile: players affected by the effect of this tile lose 1 Victory Point for every wood and stone on their 
+	 * Building Cards’ costs. (For example, if all their Building Cards cost 7 wood and 6 stone, they lose 
+	 * 13 Victory Points.)
+	 * 
+	 * 3rd tile: players affected by the effect of this tile lose 1 Victory Point for every resource 
+	 * (wood, stone, coin, servant) in their supply on their Personal Board. 
+	 * (For example, if the players affected by this effect end the game with 3 wood, 1 stone, 4 coins, and 2 servants, 
+	 * they lose 10 Victory Points.)
+	 * 
+	 * So here, resourcesOrPoints are used to save what and how many resources or points cause a subtraction in 
+	 * scoring Victory Points: 0 means no malus applied, other positive values stand for how many victory points 
+	 * will be subtracted to the original scoring.
+	 * 
+	 */
+
 	// resourcesOrPoints are here used to save what and how many resources or points causes loss on victoryPoints: 
 	// 0 stands for no malus, 1,2 ... stand for how many victory point for type.
 	private ResourcesOrPoints parametersForLosingPoints = ResourcesOrPoints.newResources(0, 0, 0, 0);
+	
+	/**
+	 * Method that adds the resources or points that cause loss of Victory Points to the resources or points that
+	 * have already been classified as resources or points that have this negative effect in scoring points.
+	 * @param resourcesOrPoints It represents the resources or points to add in the resources or points that cause
+	 * a loss in scoring Victory Points.
+	 */
+	
 	public void addParameterForLosingPoints(ResourcesOrPoints resourcesOrPoints){
-		parametersForLosingPoints= ResourcesOrPoints.sum(parametersForLosingPoints, resourcesOrPoints);
-	}
-	public int howManyVIctoryPointLess(){
-		Warehouse test =player.getWarehouse();
-		ResourcesOrPoints malus = parametersForLosingPoints;
-		return test.getCoins() * malus.getCoins() + test.getServants() *malus.getServants() + test.getStone()* malus.getStone()+ 
-				test.getWood()*malus.getWood()+ test.getVictoryPoints()*malus.getVictoryPoints()
-				+ test.getFaithPoints()*malus.getFaithPoints() + test.getMilitaryPoints()*malus.getMilitaryPoints();
+		parametersForLosingPoints = ResourcesOrPoints.sum(parametersForLosingPoints, resourcesOrPoints);
 	}
 	
-	//Ariosto effect, handled in ActionCheckerHandler
+	/**
+	 * Method that returns the total amount of Victory points that the player is going to lose because of the effects of
+	 * the last 3 excommunication tiles.
+	 * @return the total amount of Victory points that the player is going to lose because of the maluses applied to 
+	 * his resources and points.
+	 */
+	public int howManyVictoryPointLess(){
+		Warehouse test = player.getWarehouse();
+		ResourcesOrPoints malus = parametersForLosingPoints;
+		return test.getCoins() * malus.getCoins() + test.getServants() * malus.getServants() + test.getStone() * malus.getStone() + 
+				test.getWood() * malus.getWood() + test.getVictoryPoints() * malus.getVictoryPoints()
+				+ test.getFaithPoints() * malus.getFaithPoints() + test.getMilitaryPoints() * malus.getMilitaryPoints();
+	}
+	
+	/**
+	 * The following lines represent the effect of the "Ludovico Ariosto" Leader card: it allows the players who own him
+	 * to put their family members in occupied action spaces.
+	 * This effect is handled in ActionCheckerHandler
+	 */
 	private boolean goingInOccupiedPositionsAllowed=false;
+	
+	/**
+	 * Method that checks if the effect of the "Ludovico Ariosto" Leader card is active or not.
+	 * @return true if the effect of the "Ludovico Ariosto" Leader card is active; false if it isn't active.
+	 */
 	public boolean isGoingInOccupiedPositionsAllowed() {
 		return goingInOccupiedPositionsAllowed;
 	}
+	
+	/**
+	 * Method used to activate the effect of the "Ludovico Ariosto" Leader card.
+	 */
 	public void setGoingInOccupiedPositionsAllowed() {
 		this.goingInOccupiedPositionsAllowed = true;
 	}
 	
+	/**
+	 * The following lines represent the effect of the "Filippo Brunelleschi" Leader card: the player who owns this card,
+	 * doesn't have to spend 3 coins when he places his Family Members in a Tower that is already occupied.
+	 * This is used in ActionChecker and ActionPerformer
+	 */
 
-	//Brunelleschi effect : used in ActionChecker and ActionPerformer
 	private boolean towerOccupiedMalusDisabled=false;
 	
+	/**
+	 * Method that checks if the effect of the "Filippo Brunelleschi" Leader card is active
+	 * @return true if the effect is active, false if it isn't active.
+	 */
 	public boolean isTowerOccupiedMalusDisabled() {
 		return towerOccupiedMalusDisabled;
 	}
 	
+	/**
+	 * Method used to activate the effect of the "Filippo Brunelleschi" Leader card.
+	 */
 	public void setTowerOccupiedMalusDisabled() {
 		towerOccupiedMalusDisabled= true;
 	}
 	
-	//Setting dices Value: 
-	//Ludovico Il Moro and Federico da Montefeltro effect. 
-	//The first parameter shows how many colored family Member will have "value" value
-	//used in FamilyMembers
+	/**
+	 * The following lines represent the effects of the "Ludovico il Moro" and "Federico da Montefeltro" Leader cards.
+	 * 
+	 * Note: "Federico da Montefeltro" has an effect that is not permanent in the official rulebook, but for simplicity, 
+	 * we decided to consider it as permanent.
+	 * Ludovico il Moro has the following effect: the player's coloured Family Members has a value of 5, 
+	 * regardless of their related dice. (The player can increase their value by spending servants or 
+	 * if he has Character Cards with this effect.)
+	 * 
+	 * Federico da Montefeltro has the following effect: One of the player's coloured Family Members has a value of 6,
+	 * regardless of its related dice. (The player can increase their value by spending servants or 
+	 * if he has Character Cards with this effect.)
+	 * 
+	 * These 2 effects have a very similar logic, so we'll use a unique setDicesSetted method to determine if the 
+	 * update to the value has to be applied to all the 3 coloured family members or to only one coloured family member.
+	 * 
+	 */
+	
 	//TODO per il momento non consideriamo il caso in effetti attivati durante un turno, ma solo all'inizio
+	
+	/**
+	 * Parameters and methods for "Ludovico il Moro".
+	 */
+	
 	private boolean threeDicesChangeOn=false;
 	int value3dicesChanged=0;
+	
+	/**
+	 * Method that checks if the effect of the "Ludovico il Moro" Leader card is active.
+	 * @return true if the effect is active; false if it isn't active.
+	 */
 	public boolean isThreeDicesChangeOn() {
 		return threeDicesChangeOn;
 	}
+	
+	/**
+	 * Method used to activate the effect of the "Ludovico il Moro" Leader card.
+	 * @param value It's the new value that the family members belonging to the player who owns the 
+	 * "Ludovico il Moro" Leader card will assume.
+	 */
 	private void setValue3dicesChanged(int value) {
 		this.value3dicesChanged = value;
 		threeDicesChangeOn=true;
 	}
+	
+	/**
+	 * Method that returns the updated value of the coloured family members belonging to the player who owns 
+	 * the "Ludovico il Moro" Leader card
+	 * @return the updated value of the coloured family members belonging to the player who owns 
+	 * the "Ludovico il Moro" Leader card
+	 */
+	public int getValue3dicesChanged() {
+		return value3dicesChanged;
+	}
+	
+	/**
+	 * Parameters and methods for "Federico da Montefeltro"
+	 */
+	
 	private boolean oneDicesChangeOn=false;
 	int value1diceChanged=0;
+	
+	/**
+	 * Method that checks if the effect of the "Federico da Montefeltro" Leader card is active.
+	 * @return true if the effect is active; false if it isn't active.
+	 */
 	public boolean isOneDiceChangeOn() {
 		return threeDicesChangeOn;
 	}
+	
+	/**
+	 * Method used to activate the effect of the "Federico da Montefeltro" Leader card.
+	 * @param value It's the new value that the family members belonging to the player who owns the 
+	 * "Federico da Montefeltro" Leader card will assume.
+	 */
 	private void setValue1diceChanged(int value) {  
 		this.value1diceChanged = value;
 		oneDicesChangeOn=true;
 	}
 	
+	/**
+	 * Method that returns the updated value of the chosen coloured family member belonging to the player 
+	 * who owns the "Federico da Montefeltro" Leader card
+	 * @return the updated value of the chosen coloured family member belonging to the player who owns 
+	 * the "Federico da Montefeltro" Leader card
+	 */
 	public int getValue1diceChanged() {
 		return value1diceChanged;
 	}
 	
-	public int getValue3dicesChanged() {
-		return value3dicesChanged;
-	}
-	
+	/**
+	 * Method that checks if the player has the "Ludovico il Moro" Leader card or the "Federico da Montefeltro" 
+	 * Leader card, and activates the corresponding permanent effects.
+	 * @param howManyDicesSetted It indicates if the player has the "Ludovico il Moro" Leader card 
+	 * (howManyDicesSetted==3) or the "Federico da Montefeltro" Leader card (howManyDicesSetted==1)
+	 * @param value It's the new value that the family members belonging to the player who owns the 
+	 * "Ludovico il Moro" Leader card or the "Federico da Montefeltro" Leader card will assume.
+	 */
 	
 	public void setDicesSetted(int howManyDicesSetted, int value){
-		if(howManyDicesSetted==3)
+		if(howManyDicesSetted==1)
 			setValue1diceChanged(value);
 		else setValue3dicesChanged(value);
 	}
 	
+	/**
+	 * The following lines represent the effect of the "Sisto IV" Leader card. 
+	 * The player who owns this card gains 5 additional Victory Points when he supports the Church in 
+	 * a Vatican Report phase.
+	 */
+	private boolean churchSupported = false;
+	int additionalVictoryPoints = 0;
 	
+	/**
+	 * Method that checks if the player has supported the church
+	 * @return true if he has supported the church; false if he hasn't supported it.
+	 */
+	public boolean isChurchSupported() {
+		return churchSupported;
+	}
 	
+	/**
+	 * Setter method to use when the player supports the church.
+	 */
+	public void setChurchSupported() {
+		churchSupported = true;
+	}
 	
+	/**
+	 * Method used to update the value of the additional Victory Points: if the player has supported the church,
+	 * he will gain some additional Victory Points, expressed by the @param value 
+	 * @param value It's the amount of additional Victory Points that the player will gain if he supported the church.
+	 */
+	public void gainAdditionalVP(int value) {
+		if (isChurchSupported() == true) {
+			additionalVictoryPoints = additionalVictoryPoints + value;
+		}
+	}
+	
+	/**
+	 * Method that returns the value of the additional Victory Points.
+	 * @return
+	 */
+	public int getAdditionalVP() {
+		return additionalVictoryPoints;
+	}
 	
 	
 }
