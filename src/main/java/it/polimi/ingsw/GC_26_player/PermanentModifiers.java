@@ -610,23 +610,9 @@ public class PermanentModifiers {
 	 * The player who owns this card gains 5 additional Victory Points when he supports the Church in 
 	 * a Vatican Report phase.
 	 */
-	private boolean churchSupported = false;
+
 	int additionalVictoryPoints = 0;
 	
-	/**
-	 * Method that checks if the player has supported the church
-	 * @return true if he has supported the church; false if he hasn't supported it.
-	 */
-	public boolean isChurchSupported() {
-		return churchSupported;
-	}
-	
-	/**
-	 * Setter method to use when the player supports the church.
-	 */
-	public void setChurchSupported() {
-		churchSupported = true;
-	}
 	
 	/**
 	 * Method used to update the value of the additional Victory Points: if the player has supported the church,
@@ -634,9 +620,7 @@ public class PermanentModifiers {
 	 * @param value It's the amount of additional Victory Points that the player will gain if he supported the church.
 	 */
 	public void gainAdditionalVP(int value) {
-		if (isChurchSupported() == true) {
-			additionalVictoryPoints = additionalVictoryPoints + value;
-		}
+		additionalVictoryPoints = additionalVictoryPoints + value;
 	}
 	
 	/**
