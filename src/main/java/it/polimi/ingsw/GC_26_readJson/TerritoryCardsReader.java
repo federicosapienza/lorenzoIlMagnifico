@@ -65,14 +65,13 @@ public class TerritoryCardsReader extends CardsReader {
 		    DevelopmentCard developmentCard= DevelopmentCardImplementation.territoryCard(name, period, null, immediateEffect, permanentEffect , actionValue);
 		   switch(numOfPeriod){
 		   case 1:
-			   cards.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
+			   cards.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.TERRITORYCARD).add(developmentCard);
 			   break;
-		  
 		   case 2:
-			   cards.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
+			   cards.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.TERRITORYCARD).add(developmentCard);
 			   break;
 		   case 3:
-			   cards.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
+			   cards.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.TERRITORYCARD).add(developmentCard);
 			   break;
 
 		   default:

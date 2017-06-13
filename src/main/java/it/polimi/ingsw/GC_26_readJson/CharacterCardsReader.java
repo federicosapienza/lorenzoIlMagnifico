@@ -29,7 +29,7 @@ public class CharacterCardsReader extends CardsReader {
 		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
 			String[] ListOfPaths = super.chooseListOfCards(numberOfPeriod, DevelopmentCardTypes.CHARACTERCARD);
 			for(String s:ListOfPaths){
-				super.createJsonObjectFromFile(s); //forse è inutile questo assegnamento
+				super.createJsonObjectFromFile(s);
 				name = super.readString("name");
 				period= super.readInt("period");
 				doublePayment = super.readString("doublePayment");
