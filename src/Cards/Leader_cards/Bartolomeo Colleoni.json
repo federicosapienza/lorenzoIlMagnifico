@@ -1,0 +1,15 @@
+	   {
+	  	"name": "Bartolomeo Colleoni",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"cardsNumber",
+	  	"cardNumberRequirement": [
+	  	  4,0,0,2
+	  	  ],
+	  	 "typeOfImmediateEffect" : "addResourcesAndPoints",
+	  		"typeOfPermanentEffect" : "null",
+	  		"immediateResourcesAndPoints" : [
+	  		  0,0,0,0,4,0,0,0
+	  		  ]
+	  	}

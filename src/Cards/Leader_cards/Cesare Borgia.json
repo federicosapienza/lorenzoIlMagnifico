@@ -1,0 +1,16 @@
+	   {
+	  	"name": "Cesare Borgia",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"true",
+	  	"typeOfRequirements" :"cardsNumber",
+	  	"cardNumberRequirement": [
+	  	  0,0,3,0
+	  	  ],
+	  	  "typeOfRequirements2" :"pointsOrResources",
+	  	"pointsOrResourcesRequirement": [
+	  	  12,0,0,0,0,0,2,0
+	  	  ],
+	  	 "typeOfImmediateEffect" : "null",
+	  		"typeOfPermanentEffect" : "DisableMilitaryPointsRequirement"
+	  	}

@@ -1,0 +1,12 @@
+	   {
+	  	"name": "Ludovico Ariosto",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"cardsNumber",
+	  	"cardNumberRequirement": [
+	  	  0,5,0,0
+	  	  ],
+	  	 "typeOfImmediateEffect" : "null",
+	  		"typeOfPermanentEffect" : "GoingToOccupiedActionSpacesAllowedEffect"
+	  	}

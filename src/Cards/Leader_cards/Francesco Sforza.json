@@ -1,0 +1,17 @@
+	   {
+	  	"name": "Francesco Sforza",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"cardsNumber",
+	  	"cardNumberRequirement": [
+	  	  0,0,0,5
+	  	  ],
+	  	 "typeOfImmediateEffect" : "setSecondAction",
+	  		"typeOfPermanentEffect" : "null",
+	  	    "immediateBoardzone" : "harvest",
+	  	    "immediateValue" : 1,
+	  	    "immediateDiscount" : [
+	  	      0,0,0,0,0,0,0,0
+	  	      ] 
+	  	}

@@ -1,0 +1,15 @@
+	   {
+	  	"name": "Cosimo de' Medici",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"cardsNumber",
+	  	"cardNumberRequirement": [
+	  	  0,2,4,0
+	  	  ],
+	  	 "typeOfImmediateEffect" : "addResourcesAndPoints",
+	  		"typeOfPermanentEffect" : "null",
+	  		"immediateResourcesAndPoints" : [
+	  		  0,3,0,0,1,0,0,0
+	  		  ]
+	  	}

@@ -1,0 +1,15 @@
+	   {
+	  	"name": "Girolamo Savonarola",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"pointsOrResources",
+	  	"pointsOrResourcesRequirement": [
+	  	  18,0,0,0,0,0,0,0
+	  	  ],
+	  	 "typeOfImmediateEffect" : "addResourcesAndPoints",
+	  		"typeOfPermanentEffect" : "null",
+	  		"immediateResourcesAndPoints" : [
+	  		  0,0,0,0,0,0,1,0
+	  		  ]
+	  	}

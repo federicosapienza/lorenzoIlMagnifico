@@ -24,6 +24,11 @@ import it.polimi.ingsw.GC_26_server.Observable;
  */
 public class FamilyMembers extends Observable<FamilyMembersDescriber> implements FamilyMembersDescriber{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//it's the orange family member.
 	private FamilyMember orangeMember;
 	

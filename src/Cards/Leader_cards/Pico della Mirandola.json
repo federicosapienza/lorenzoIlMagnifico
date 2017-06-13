@@ -1,0 +1,16 @@
+	   {
+	  	"name": "Pico della Mirandola",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"cardsNumber",
+	  	"cardNumberRequirement": [
+	  	  0,0,2,4
+	  	  ],
+	  	 "typeOfImmediateEffect" : "null",
+	  		"typeOfPermanentEffect" : "discountOnAction",
+	  	    "permanentBoardzone" : "null",
+	  	    "permanentResDiscount": [
+	  	   3,0,0,0,0,0,0,0
+	  	   ]
+	  	}

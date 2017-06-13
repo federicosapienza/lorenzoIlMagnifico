@@ -1,0 +1,14 @@
+	   {
+	  	"name": "Lucrezia Borgia",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"cardsNumberOR",
+	  	"cardNumberRequirementOR": [
+	  	  6,6,6,6
+	  	  ],
+	  	 "typeOfImmediateEffect" : "null",
+	  		"typeOfPermanentEffect" : "ChangeFamilyMembersValue",
+	  		"permanentColouredMemberChange" : 2,
+	  		"permanentNeutralMemberChange" : 0
+	  	}

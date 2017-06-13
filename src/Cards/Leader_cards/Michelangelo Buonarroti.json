@@ -1,0 +1,15 @@
+	   {
+	  	"name": "Michelangelo Buonarroti",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"pointsOrResources",
+	  	"pointsOrResourcesRequirement": [
+	  	  0,0,0,10,0,0,0,0
+	  	  ],
+	  	 "typeOfImmediateEffect" : "addResourcesAndPoints",
+	  		"typeOfPermanentEffect" : "nulll",
+	  		"immediateResourcesAndPoints" : [
+	  		  3,0,0,0,0,0,0,0
+	  		  ]
+	  	}

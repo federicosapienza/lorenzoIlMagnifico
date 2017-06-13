@@ -27,8 +27,8 @@ public class CharacterCardsReader extends CardsReader {
 	private String doublePayment;
 		
 		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
-			String[] ListOfPaths = super.chooseListOfCards(numberOfPeriod, DevelopmentCardTypes.CHARACTERCARD);
-			for(String s:ListOfPaths){
+			String[] listOfPaths = super.chooseListOfCards(numberOfPeriod, DevelopmentCardTypes.CHARACTERCARD);
+			for(String s:listOfPaths){
 				super.createJsonObjectFromFile(s);
 				name = super.readString("name");
 				period= super.readInt("period");
@@ -69,8 +69,6 @@ public class CharacterCardsReader extends CardsReader {
 					immediateEffect = super.createDoubleEffect(immediateEffect, immediateTemp);
 				}
 				createCharacterCard(cardsImplementation,numberOfPeriod);
-				System.out.println(name);
-				System.out.println(period);
 				super.closeBufferedReader();
 			}
 		}
@@ -80,13 +78,13 @@ public class CharacterCardsReader extends CardsReader {
 			DevelopmentCard developmentCard= DevelopmentCardImplementation.characterCard(name, period, payment, immediateEffect,permanentEffect);
 			switch(numOfPeriod){
 			   case 1:
-				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
+				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 				   break;
 			   case 2:
-				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
+				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 				   break;
 			   case 3:
-				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
+				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 				   break;
 			   default:
 				   throw new IllegalArgumentException();
