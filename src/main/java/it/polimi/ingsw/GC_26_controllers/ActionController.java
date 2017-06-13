@@ -40,9 +40,16 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 				return;
 			
 			handlers.getFirstActionHandler().perform(player,  action);
-				
+			synchronized (player) {
+				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT)
+					return;
+			}
+			//otherwise
+	
 			synchronized (player) {
 				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
+					return;
+				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT)  //server waits for action
 					return;
 				if(player.getWarehouse().getCouncilPrivileges()>0){
 					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));

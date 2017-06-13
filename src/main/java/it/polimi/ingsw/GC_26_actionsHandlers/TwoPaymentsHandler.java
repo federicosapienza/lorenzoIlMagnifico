@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
@@ -39,7 +40,12 @@ public class TwoPaymentsHandler {
 				else {
 					twoOrPayments.getMode2().pay(player,card.getType());
 					}
+				card.runImmediateEffect(player);
+				if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)// character cards' permanent effect is immediately activated
+							card.runPermanentEffect(player);
+				player.setCardUsed(null);  //cleaning parameter of the card no more used
 				}
+	
 					
 				
 				

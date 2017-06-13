@@ -85,12 +85,19 @@ public class ChoiceController implements Observer<Integer>{
 					 //going back to previous state of the game, if time not expired and restarting the action that was interrputed
 					PlayerStatus previousStatus =player.getPreviousStatus(); 
 					if(previousStatus ==PlayerStatus.PLAYING){
-						player.backToPreviousStatus();
-						handlers.getFirstActionHandler().notifyAll();  //TODO controllare se funziona
+						if(player.getWarehouse().getCouncilPrivileges()>0){
+							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
+						}
+						else if(player.isThereAsecondaryAction())
+							player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+						else 
+							player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 					}
 					if(previousStatus ==PlayerStatus.SECONDPLAY){
-						player.backToPreviousStatus();
-						handlers.getSecondActionHandler().notifyAll(); //TODO controllare se funziona
+						if(player.getWarehouse().getCouncilPrivileges()>0){
+							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
+					 	}
+					 else 	player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 					}	
 					}
 			} catch(IllegalArgumentException e){

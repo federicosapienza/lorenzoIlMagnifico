@@ -7,9 +7,16 @@ import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import it.polimi.ingsw.GC_26_server.Observable;
 
 import java.util.Set;
+
+import javax.sound.sampled.LineListener;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -34,8 +41,11 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	//it's the set of venture cards
 	private Set<DevelopmentCard> ventureCardSet= new HashSet<>();
 	
-	//it's the set of leader cards
-	private List<LeaderCard> leaderCardSet= new ArrayList<>();
+	//it's the list of leader cards owned
+	private List<LeaderCard> leadersCardList= new ArrayList<>();
+	
+	//it's the list of leader cards the player has used at least once yet.
+	private Set<LeaderCard> leaderCardsUsed = new HashSet<>();
 	
 	//it's a counter that counts the number of territory cards
 	private int territoryCardCounter;
@@ -94,7 +104,7 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	 * @param leaderCard It's the leader card to add
 	 */
 	public void addLeaderCard(LeaderCard leaderCard){
-		leaderCardSet.add(leaderCard);
+		leadersCardList.add(leaderCard);
 	}
 	
 	/**
@@ -133,7 +143,8 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	 * @return leaderCardSet It's list of leader cards
 	 */
 	public List<LeaderCard> getLeadersCard(){
-		return leaderCardSet;
+		List<LeaderCard>  temp = Collections.unmodifiableList(leadersCardList);
+		return temp;
 	}
 	
 	/**
@@ -153,6 +164,23 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	}
 	
 	
+	/**
+	 * Method that sees if a player has already used a leaderCard in this game.
+	 * 
+	 */
+	public boolean isLeaderCardUsedYet(LeaderCard leaderCard){
+		return leaderCardsUsed.contains(leaderCard);
+	}
+	
+	/**
+	 * Method that sets the Leader Card as used during this game by this player, if this was note before.
+	 * 
+	 */
+
+	public void setCardUsed(LeaderCard leaderCard){
+		if(!isLeaderCardUsedYet(leaderCard))
+			leaderCardsUsed.add(leaderCard);
+	}
 	
 	
 }

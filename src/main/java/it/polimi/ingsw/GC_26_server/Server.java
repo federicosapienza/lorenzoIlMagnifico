@@ -27,6 +27,7 @@ public class Server {
 		ReadFromFile gamesSpecific= new ReadAll();
 		
 		gamesSpecific.start();
+		System.out.println("Server30");
 		cards= gamesSpecific.getCards();
 		bonus = gamesSpecific.getBonus();
 		times= null;

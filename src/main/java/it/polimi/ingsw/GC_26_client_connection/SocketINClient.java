@@ -70,7 +70,7 @@ public class SocketINClient implements Runnable{
 						PositionDescriber positionDescriber = (PositionDescriber) object;
 						controller.receivePosition(positionDescriber);
 						continue;}
-
+					//manca family member
 					throw new IllegalArgumentException();
 				
 					

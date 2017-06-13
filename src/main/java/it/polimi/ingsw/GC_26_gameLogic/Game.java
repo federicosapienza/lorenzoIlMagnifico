@@ -93,6 +93,7 @@ public class Game extends Observable<CardDescriber>{
 	
 	
 	public void initialiseGame(){
+		System.out.println("game 96");
 		gameElements= new GameElements(this ,players, numberOfPlayers, resourcesOrPointsBonus, times);
 		
 		//TODO notificare i giocatori
@@ -103,8 +104,8 @@ public class Game extends Observable<CardDescriber>{
 	
 	
 	public void startGame(){
-		excommunicationTiles = cards.getExcommunicationTiles();
 		gameElements.notifyPlayers(new  Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
+		excommunicationTiles = cards.getExcommunicationTiles();
 
 		//TODO send rules : such as timeout etc
 		 //send the first info about players
@@ -151,7 +152,6 @@ public class Game extends Observable<CardDescriber>{
 	private boolean vaticanDone= false;
 	
 	public void nextStep() {
-		System.out.println("game 156");
 		if(playersPerformedActions==-1){//starting new Round
 			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "starting period "+ period+ " round "+round ));;
 			sendingCards();
@@ -230,14 +230,14 @@ public class Game extends Observable<CardDescriber>{
 			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards);
 			System.out.println("game 231");
 
-		//	gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
+			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
 			System.out.println("game 232");
 
 			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards);
 			System.out.println("game 234");
 
 			//sending to clients the cards for this round:
-		//	sendCardTool(0, 4, territoryTowerCards);
+			sendCardTool(0, 4, territoryTowerCards);
 			System.out.println("game 238");
 
 			sendCardTool(0, 4, buildingTowerCards);

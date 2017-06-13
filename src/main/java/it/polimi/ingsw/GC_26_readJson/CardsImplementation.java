@@ -101,7 +101,7 @@ public class CardsImplementation implements Cards {
 		// TODO Auto-generated method stub
 		List<LeaderCard> list= new ArrayList<>();
 		LeaderCard leaderCard = new LeaderCardImplementation("test",
-				new CardNumbersRequirement(4, 4, 4, 4), new SetSecondAction(null, 4, null));
+				new CardNumbersRequirement(4, 4, 4, 4), null, new SetSecondAction(null, 4, null));
 		for(int i=0;i<16;i++ ){
 			list.add(leaderCard);
 		}

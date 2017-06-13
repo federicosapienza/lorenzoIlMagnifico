@@ -85,7 +85,7 @@ public class FirstActionHandler extends ActionHandler{
 		//calling the right performer
 			if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 					action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER)
-				getPerformerHandler().towerPerform(player, familyMemberUsed, action);			
+				getPerformerHandler().towerPerformPayment(player, familyMemberUsed, action);			
 			if(action.getZone()==BoardZone.MARKET)
 				getPerformerHandler().marketPerform(player, familyMemberUsed, action);
 			if(action.getZone()== BoardZone.COUNCILPALACE)

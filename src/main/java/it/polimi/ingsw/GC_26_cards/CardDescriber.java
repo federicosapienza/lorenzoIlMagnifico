@@ -36,7 +36,7 @@ public class CardDescriber implements Serializable{
 	private final String requirement;
 	
 	
-	public CardDescriber(DevelopmentCard card){
+	public CardDescriber(DevelopmentCard card){ //recasting is needed here
 		DevelopmentCardImplementation cardImplementation = (DevelopmentCardImplementation) card;
 		this.typeOfCard="Development Card";
 		this.name= cardImplementation.getName();
@@ -55,7 +55,7 @@ public class CardDescriber implements Serializable{
 		this.type=null;
 		this.period=0;
 		this.payment=null;
-		this.immediateEffect=null;
+		this.immediateEffect=cardImplementation.getPermanentEffectDescriber();
 		this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
 		this.requirement=cardImplementation.getRequirementDescriber();
 		this.actionValue=0;
@@ -121,7 +121,10 @@ public class CardDescriber implements Serializable{
 			StringBuilder temp= new StringBuilder(" ");
 			if(typeOfCard .equals("Development Card")){
 				temp.append(name );
-				temp.append(payment);
+				if(!payment.equals("none"))
+					temp.append(" payment:" +payment);
+				if(immediateEffect.equals("none"))
+					temp.append("payment");
 			}
 			
 			return temp.toString();

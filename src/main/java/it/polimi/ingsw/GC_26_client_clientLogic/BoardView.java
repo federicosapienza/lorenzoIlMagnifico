@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26_client_clientLogic;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -164,7 +165,6 @@ public class BoardView {
 
 		}
 		System.out.println(position.getPositionValue()+" "+temp);
-			
 	}
 	
 	

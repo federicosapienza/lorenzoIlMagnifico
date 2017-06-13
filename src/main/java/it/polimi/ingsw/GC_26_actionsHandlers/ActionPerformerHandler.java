@@ -16,7 +16,6 @@ import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
-import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 
 public class ActionPerformerHandler {
@@ -30,15 +29,15 @@ public class ActionPerformerHandler {
 	
 	 ///////////////////////  action performers
 	 
-	 protected void towerPerform(Player player, FamilyMember familyMember, Action action){
+	 protected void towerPerformPayment(Player player, FamilyMember familyMember, Action action){
 		Tower tower = gameElements.getBoard().getTower(action.getZone());
 		//sets that the player is in the Tower, passing the familyMember so that:
 		//1) if the member is neutral , player is not added to the list 
 		//2) if is a secondary action familyMember is null and player is not added
 		tower.setPlayerInTheTower(familyMember);  
 		//if the tower is occupied pay coins(or any payment if rules are changed)(and Brunelleschi effect is not activated)
-		if(tower.isTheTowerOccupied()& !player.getPermanentModifiers().isTowerOccupiedMalusDisabled()){
-		player.getWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
+		if(tower.isTheTowerOccupied()&& !player.getPermanentModifiers().isTowerOccupiedMalusDisabled())
+			player.getWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
 		
 		//going to position 
 		TowerPosition position =gameElements.getBoard().getTower(action.getZone()).getPosition(action.getPosition());
@@ -55,27 +54,22 @@ public class ActionPerformerHandler {
 		player.setCardUsed(card);
 		//paying the card
 		card.pay(player);
-		while(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT){ // This status reached when player is asked to choose payment
-			try {
-				wait();
-			} catch (InterruptedException e) { 
-				System.out.println(e.getMessage());
-				// ends player turn
-				player.notifyObservers(new Request(PlayerStatus.WAITINGHISTURN," unexpected server problem", null));
-
-				e.printStackTrace();
-			}
-			
-				card.runImmediateEffect(player);
+		synchronized (player) {
+			if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT)
+				return;
+		}
+		
+		card.runImmediateEffect(player);  //repeat any change here in TwoPaymentHandler
 				if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)// character cards' permanent effect is immediately activated
 							card.runPermanentEffect(player);
 				player.setCardUsed(null);  //cleaning parameter of the card no more used
-					
-				
+						
 				}
-}
 		
-		}
+		
+		
+
+		
 	 
 	 protected void marketPerform(Player player, FamilyMember familyMember, Action action){
 		 if(player.getPermanentModifiers().getMarketBanFlag())
