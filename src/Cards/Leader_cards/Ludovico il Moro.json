@@ -1,0 +1,14 @@
+	   {
+	  	"name": "Ludovico il Moro",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"cardsNumber",
+	  	"cardNumberRequirement": [
+	  	  2,2,2,2
+	  	  ],
+	  	 "typeOfImmediateEffect" : "null",
+	  		"typeOfPermanentEffect" : "FamilyMembersValueSetterEffect",
+	  		"permanentFamilyMemberValue" : 5,
+	  		"permanentNumberOfDices" :3
+	  	}

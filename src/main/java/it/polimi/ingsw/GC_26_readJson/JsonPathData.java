@@ -19,6 +19,8 @@ public class JsonPathData {
 	String[] ventureCardsPeriod2PathArray ={"src/Cards/Venture_cards/Period2/Building_the_Bastions.json","src/Cards/Venture_cards/Period2/Crusade.json","src/Cards/Venture_cards/Period2/Hiring_Soldiers.json","src/Cards/Venture_cards/Period2/Hosting_Foreigners.json","src/Cards/Venture_cards/Period2/Improving_the_Canals.json","src/Cards/Venture_cards/Period2/Repairing_the_Abbey.json","src/Cards/Venture_cards/Period2/Support_to_the_Cardinal.json","src/Cards/Venture_cards/Period2/Support_to_the_King.json"};
 	String[] ventureCardsPeriod3PathArray ={"src/Cards/Venture_cards/Period3/Building_the_Towers.json","src/Cards/Venture_cards/Period3/Hiring_Mercenaries.json","src/Cards/Venture_cards/Period3/Improving_the_Roads.json","src/Cards/Venture_cards/Period3/Military_Conquest.json","src/Cards/Venture_cards/Period3/Promoting_Sacred_Art.json","src/Cards/Venture_cards/Period3/Repairing_the_Cathedral.json","src/Cards/Venture_cards/Period3/Sacred_War.json","src/Cards/Venture_cards/Period3/Support_to_the_Pope.json"};
 	
+	String[] leaderCards= {"src/Cards/Leader_cards/Bartolomeo Colleoni.json","src/Cards/Leader_cards/Cesare Borgia.json","src/Cards/Leader_cards/Cosimo de Medici.json","src/Cards/Leader_cards/Federico da Montefeltro.json","src/Cards/Leader_cards/Filippo Brunelleschi.json","src/Cards/Leader_cards/Francesco Sforza.json","src/Cards/Leader_cards/Giovanni dalle Bande Nere.json","src/Cards/Leader_cards/Girolamo Savonarola.json","src/Cards/Leader_cards/Leonardo da Vinci.json","src/Cards/Leader_cards/Lucrezia Borgia.json","src/Cards/Leader_cards/Ludovico Ariosto.json","src/Cards/Leader_cards/Ludovico III Gonzaga.json","src/Cards/Leader_cards/Ludovico il Moro.json","src/Cards/Leader_cards/Michelangelo Buonarroti.json","src/Cards/Leader_cards/Pico della Mirandola.json","src/Cards/Leader_cards/Sandro Botticelli.json","src/Cards/Leader_cards/Santa Rita.json","src/Cards/Leader_cards/Sigismondo Malatesta.json","src/Cards/Leader_cards/Sisto IV.json"};
+	
 	String[] resources = {"src/ResourcesForBoard/Towers/TerritoriesTower/floor1.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor2.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor3.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor4.json","src/ResourcesForBoard/Towers/CharactersTower/floor1.json","src/ResourcesForBoard/Towers/CharactersTower/floor2.json","src/ResourcesForBoard/Towers/CharactersTower/floor3.json","src/ResourcesForBoard/Towers/CharactersTower/floor4.json","src/ResourcesForBoard/Towers/BuildingsTower/floor1.json","src/ResourcesForBoard/Towers/BuildingsTower/floor2.json","src/ResourcesForBoard/Towers/BuildingsTower/floor3.json","src/ResourcesForBoard/Towers/BuildingsTower/floor4.json","src/ResourcesForBoard/Towers/VenturesTower/floor1.json","src/ResourcesForBoard/Towers/VenturesTower/floor2.json","src/ResourcesForBoard/Towers/VenturesTower/floor3.json","src/ResourcesForBoard/Towers/VenturesTower/floor4.json","src/ResourcesForBoard/Market/position1.json","src/ResourcesForBoard/Market/position2.json","src/ResourcesForBoard/Market/position3.json","src/ResourcesForBoard/Market/position4.json","src/ResourcesForBoard/Council_Palace/council_palace.json"};
 	String[] startingResources = {"src/StartingResources/player1.json","src/StartingResources/player2.json","src/StartingResources/player3.json","src/StartingResources/player4.json"};
 	
@@ -66,6 +68,9 @@ public class JsonPathData {
 	}
 	public String[] getStartingResources() {
 		return startingResources;
+	}
+	public String[] getLeaderCards() {
+		return leaderCards;
 	}
 }
 	

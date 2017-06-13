@@ -12,7 +12,7 @@ public class CardNumbersRequirement implements Requirement{
 	private final int ventureCardsRequired;
 	
 	
-	public CardNumbersRequirement(int territoryCardsRequired, int buildingCardsRequired, int characterCardsRequired,
+	public CardNumbersRequirement(int territoryCardsRequired,int characterCardsRequired , int buildingCardsRequired,
 			int ventureCardsRequired) {
 		this.territoryCardsRequired = territoryCardsRequired;
 		this.buildingCardsRequired = buildingCardsRequired;

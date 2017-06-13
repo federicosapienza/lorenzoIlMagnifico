@@ -1,0 +1,12 @@
+	   {
+	  	"name": "Santa Rita",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"pointsOrResources",
+	  	"pointsOrResourcesRequirement": [
+	  	  0,0,0,0,0,0,8,0
+	  	  ],
+	  	 "typeOfImmediateEffect" : "null",
+	  		"typeOfPermanentEffect" : "DoublePermanentResourcesFromCards"
+	  	}

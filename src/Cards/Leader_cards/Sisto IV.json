@@ -1,0 +1,15 @@
+	   {
+	  	"name": "Sisto IV",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"pointsOrResources",
+	  	"pointsOrResourcesRequirement": [
+	  	  6,6,6,6,0,0,0,0
+	  	  ],
+	  	 "typeOfImmediateEffect" : "null",
+	  		"typeOfPermanentEffect" : "vaticanSupportBonus",
+	  		"permanentVaticanSupportBonus" : [
+	  		  0,0,0,0,5,0,0,0
+	  		  ]
+	  	}

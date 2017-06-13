@@ -1,0 +1,14 @@
+	   {
+	  	"name": "Sigismondo Malatesta",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"pointsOrResources",
+	  	"pointsOrResourcesRequirement": [
+	  	  0,0,0,0,0,7,3,0
+	  	  ],
+	  	 "typeOfImmediateEffect" : "null",
+	  		"typeOfPermanentEffect" : "ChangeFamilyMembersValue",
+	  		"permanentColouredMemberChange" : 0,
+	  		"permanentNeutralMemberChange" : 3
+	  	}

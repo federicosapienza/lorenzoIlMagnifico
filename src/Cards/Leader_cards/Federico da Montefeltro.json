@@ -1,0 +1,14 @@
+	   {
+	  	"name": "Federico da Montefeltro",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"cardsNumber",
+	  	"cardNumberRequirement": [
+	  	  5,0,0,0
+	  	  ],
+	  	 "typeOfImmediateEffect" : "FamilyMembersValueSetterEffect",
+	  		"typeOfPermanentEffect" : "null",
+	  		"immediateFamilyMemberValue" : 6,
+	  		"immediateNumberOfDices" :1
+	  	}

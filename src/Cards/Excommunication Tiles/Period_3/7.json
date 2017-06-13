@@ -1,0 +1,9 @@
+	   {
+	  	"name": "3.7",
+	  	"period": 3,
+	  	"typeOfPermanentEffect" : "LoseVictoryPointForResourcesOrPoints",
+	  	"permanentLoseVictoryPointForResourcesOrPoints" : [
+	  	  1,1,1,1,0,0,0,0
+	  	  ]
+	  }
+	 

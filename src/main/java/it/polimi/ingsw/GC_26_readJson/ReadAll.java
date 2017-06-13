@@ -7,6 +7,7 @@ public class ReadAll implements ReadFromFile{
 	private BuildingCardsReader buildingCardsReader = new BuildingCardsReader();
 	private CharacterCardsReader characterCardsReader = new CharacterCardsReader();
 	private VentureCardsReader ventureCardsReader = new VentureCardsReader();
+	private LeaderCardsReader leaderCardsReader = new LeaderCardsReader();
 	private BoardResourcesAndStartingPlayerResourcesReader boardResourcesAndStartingPlayerResourcesReader = new BoardResourcesAndStartingPlayerResourcesReader();
 	private CardsImplementation cards= new CardsImplementation();
 	private BonusImplementation bonus = new BonusImplementation();
@@ -33,6 +34,8 @@ public class ReadAll implements ReadFromFile{
 		ventureCardsReader.readCards(1, cards);
 		ventureCardsReader.readCards(2, cards);
 		ventureCardsReader.readCards(3, cards);
+		
+		leaderCardsReader.readCards(cards);
 		
 		boardResourcesAndStartingPlayerResourcesReader.readResources(bonus);
 		boardResourcesAndStartingPlayerResourcesReader.readStartingPlayerResources(bonus);

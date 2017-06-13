@@ -32,6 +32,8 @@ public class CardsImplementation implements Cards {
 	private List<DevelopmentCard> ventureCardsPeriod2 = new ArrayList<DevelopmentCard>();
 	private List<DevelopmentCard> ventureCardsPeriod3 = new ArrayList<DevelopmentCard>();
 	
+	private List<LeaderCard> leaderCard = new ArrayList<LeaderCard>();
+	private List<LeaderCard> leaderCardTemp = new ArrayList<LeaderCard>();
 
 	
 	
@@ -95,18 +97,81 @@ public class CardsImplementation implements Cards {
 		}
 		return null;
 	}
-
+	
+	public List<DevelopmentCard> getDevelopmentCards(int period, DevelopmentCardTypes type) {
+		switch (period) {
+		case 1:
+			switch (type) {
+			case TERRITORYCARD:
+				return territoryCardsPeriod1;
+			case CHARACTERCARD:
+				return characterCardsPeriod1;
+			case BUILDINGCARD:
+				return buildingCardsPeriod1;
+			case VENTURECARD:
+				return ventureCardsPeriod1;
+			default:
+				break;
+			}
+		case 2:
+			switch (type) {
+			case TERRITORYCARD:
+				return territoryCardsPeriod2;
+			case CHARACTERCARD:
+				return characterCardsPeriod2;
+			case BUILDINGCARD:
+				return buildingCardsPeriod2;
+			case VENTURECARD:
+				return ventureCardsPeriod2;
+			default:
+				break;
+			}
+		case 3:
+			switch (type) {
+			case TERRITORYCARD:
+				return territoryCardsPeriod3;
+			case CHARACTERCARD:
+				return characterCardsPeriod3;
+			case BUILDINGCARD:
+				return buildingCardsPeriod3;
+			case VENTURECARD:
+				return ventureCardsPeriod3;
+			default:
+				break;
+			}
+		default:
+			break;
+		}
+		return null;
+	}
+	
 	@Override
 	public List<LeaderCard> getRandomLeaderCards(int numOfPlayers) {
-		// TODO Auto-generated method stub
-		List<LeaderCard> list= new ArrayList<>();
-		LeaderCard leaderCard = new LeaderCardImplementation("test",
-				new CardNumbersRequirement(4, 4, 4, 4), null, new SetSecondAction(null, 4, null));
-		for(int i=0;i<16;i++ ){
-			list.add(leaderCard);
+		Collections.shuffle(leaderCard);
+		switch (numOfPlayers) {
+		case 2:
+			for(int i=0; i < 8; i++){
+				leaderCardTemp.add(leaderCard.get(i));
+			}
+			return leaderCardTemp;
+		case 3:
+			for(int i=0; i < 12; i++){
+				leaderCardTemp.add(leaderCard.get(i));
+			}
+			return leaderCardTemp;
+		case 4:
+			for(int i=0; i < 16; i++){
+				leaderCardTemp.add(leaderCard.get(i));
+			}
+			return leaderCardTemp;
+		default:
+			break;
 		}
-		
-		return list;
+		return null;
+		}
+	
+	public List<LeaderCard> getLeaderCards(){
+		return leaderCard;
 	}
 
 	@Override

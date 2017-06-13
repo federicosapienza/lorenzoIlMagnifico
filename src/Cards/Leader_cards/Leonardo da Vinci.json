@@ -1,0 +1,17 @@
+	   {
+	  	"name": "Leonardo da Vinci",
+	  	"doubleImmediateEffect": "false",
+	  	  "doublePermanentEffect": "false",
+	  	  "doubleRequirements" :"false",
+	  	"typeOfRequirements" :"cardsNumber",
+	  	"cardNumberRequirement": [
+	  	  2,4,0,0
+	  	  ],
+	  	 "typeOfImmediateEffect" : "setSecondAction",
+	  		"typeOfPermanentEffect" : "null",
+	  	    "immediateBoardzone" : "production",
+	  	    "immediateValue" : 0,
+	  	    "immediateDiscount" : [
+	  	      0,0,0,0,0,0,0,0
+	  	      ] 
+	  	}

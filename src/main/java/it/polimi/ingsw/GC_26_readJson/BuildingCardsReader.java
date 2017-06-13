@@ -82,13 +82,13 @@ public class BuildingCardsReader extends CardsReader {
 			DevelopmentCard developmentCard= DevelopmentCardImplementation.buildingCard(name, period, payment, immediateEffect, permanentEffect, actionValue);
 			switch(numOfPeriod){
 			   case 1:
-				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.BUILDINGCARD).add(developmentCard);
+				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.BUILDINGCARD).add(developmentCard);
 				   break;
 			   case 2:
-				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.BUILDINGCARD).add(developmentCard);
+				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.BUILDINGCARD).add(developmentCard);
 				   break;
 			   case 3:
-				   cardsImplementation.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.BUILDINGCARD).add(developmentCard);
+				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.BUILDINGCARD).add(developmentCard);
 				   break;
 			   default:
 				   throw new IllegalArgumentException();

@@ -14,14 +14,31 @@ import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.effects.ActionValueModifierEffect;
 import it.polimi.ingsw.GC_26_cards.effects.CardsNumberToResourcesEffect;
+import it.polimi.ingsw.GC_26_cards.effects.ChangeFamilyMembersValue;
 import it.polimi.ingsw.GC_26_cards.effects.DeletingBonusFloorsEffect;
+import it.polimi.ingsw.GC_26_cards.effects.DisableMilitaryPointsRequirement;
+import it.polimi.ingsw.GC_26_cards.effects.DisableTowerOccupiedMalus;
+import it.polimi.ingsw.GC_26_cards.effects.DoubleImmediateResourcesFromCards;
+import it.polimi.ingsw.GC_26_cards.effects.DoubleServantsNeededEffect;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
+import it.polimi.ingsw.GC_26_cards.effects.FamilyMembersValueSetterEffect;
 import it.polimi.ingsw.GC_26_cards.effects.GainVictoryPointsPerAnyMilitaryPointEffect;
+import it.polimi.ingsw.GC_26_cards.effects.GoingToOccupiedActionSpacesAllowedEffect;
+import it.polimi.ingsw.GC_26_cards.effects.LoseVictoryPointForResourcesOrPointsEffect;
+import it.polimi.ingsw.GC_26_cards.effects.MarketBanEffect;
+import it.polimi.ingsw.GC_26_cards.effects.NoVictoryPointForCardTypeEffect;
+import it.polimi.ingsw.GC_26_cards.effects.PermanentResourcesMalusEffect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveDiscountOnActionsEffect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
 import it.polimi.ingsw.GC_26_cards.effects.SetSecondAction;
 import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
 import it.polimi.ingsw.GC_26_cards.effects.TwoAndEffect;
+import it.polimi.ingsw.GC_26_cards.effects.VaticanSupportBonus;
+import it.polimi.ingsw.GC_26_cards.leaderCard.CardNumbersOrRequirement;
+import it.polimi.ingsw.GC_26_cards.leaderCard.CardNumbersRequirement;
+import it.polimi.ingsw.GC_26_cards.leaderCard.PointsOrResourcesRequirement;
+import it.polimi.ingsw.GC_26_cards.leaderCard.Requirement;
+import it.polimi.ingsw.GC_26_cards.leaderCard.TwoAndRequirements;
 import it.polimi.ingsw.GC_26_cards.payments.MilitaryPointPayment;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
 import it.polimi.ingsw.GC_26_cards.payments.ResourcesPayment;
@@ -56,9 +73,6 @@ public class CardsReader {
 	private JsonPathData jsonPathData = new JsonPathData();
 
 
-
-
-	
 	public void createJsonObjectFromFile(String path){
 		try {
 			br = new BufferedReader(new FileReader(path));
@@ -125,7 +139,6 @@ public class CardsReader {
 				}
 			if(effectType.equals("addResourcesAndPoints")){
 				intList=readIntList("permanentResourcesAndPoints");
-				//System.out.println(intList); it seems to work..wow
 				ReceiveResourcesOrPointsEffect Effect= new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7)));
 				return Effect;
 				}
@@ -161,6 +174,66 @@ public class CardsReader {
 				intList = readIntList("permanentGainPointsPerAnyMilitaryPointResources");
 				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
 				GainVictoryPointsPerAnyMilitaryPointEffect effect = new GainVictoryPointsPerAnyMilitaryPointEffect(resourcesOrPoints);
+				return effect;
+			}
+			if (effectType.equals("GoingToOccupiedActionSpacesAllowedEffect")){
+				GoingToOccupiedActionSpacesAllowedEffect effect = new GoingToOccupiedActionSpacesAllowedEffect();
+				return effect;
+			}
+			if (effectType.equals("DisableTowerOccupiedMalus")){
+				DisableTowerOccupiedMalus effect = new DisableTowerOccupiedMalus();
+				return effect;
+			}
+			if(effectType.equals("FamilyMembersValueSetterEffect")){
+				intInt = readInt("permanentFamilyMemberValue");
+				intInt2 = readInt("permanentNumberOfDices");
+				FamilyMembersValueSetterEffect effect = new FamilyMembersValueSetterEffect(intInt2, intInt);
+				return effect;
+			}
+			if(effectType.equals("ChangeFamilyMembersValue")){
+				intInt = readInt("permanentColouredMemberChange");
+				intInt2 = readInt("permanentNeutralMemberChange");
+				ChangeFamilyMembersValue effect = new ChangeFamilyMembersValue(intInt, intInt);
+				return effect;
+			}
+			if(effectType.equals("DisableMilitaryPointsRequirement")){
+				DisableMilitaryPointsRequirement effect = new DisableMilitaryPointsRequirement();
+				return effect;
+			}
+			if (effectType.equals("DoublePermanentResourcesFromCards")) {
+				DoubleImmediateResourcesFromCards effect = new DoubleImmediateResourcesFromCards();
+				return effect;
+			}
+			if(effectType.equals("vaticanSupportBonus")){
+				intList = readIntList("permanentVaticanSupportBonus");
+				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
+				VaticanSupportBonus effect = new VaticanSupportBonus(resourcesOrPoints);
+				return effect;
+			}
+			if(effectType.equals("PermanentResourcesMalusEffect")){
+				intList = readIntList("permanentResourcesAndPointsMalus");
+				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
+				PermanentResourcesMalusEffect effect = new PermanentResourcesMalusEffect(resourcesOrPoints);
+				return effect;
+			}
+			if(effectType.equals("MarketBan")){
+				MarketBanEffect effect = new MarketBanEffect();
+				return effect;
+			}
+			if(effectType.equals("DoubleServantsNeededEffect")){
+				DoubleServantsNeededEffect effect = new DoubleServantsNeededEffect();
+				return effect;
+			}
+			if(effectType.equals("NoVictoryPointForCardTypeEffect")){
+				string = readString("permanentCardType");
+				DevelopmentCardTypes type = getDevelopmentCardType(string);
+				NoVictoryPointForCardTypeEffect effect = new NoVictoryPointForCardTypeEffect(type);
+				return effect;
+			}
+			if(effectType.equals("LoseVictoryPointForResourcesOrPoints")){
+				intList = readIntList("permanentLoseVictoryPointForResourcesOrPoints");
+				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
+				LoseVictoryPointForResourcesOrPointsEffect effect = new LoseVictoryPointForResourcesOrPointsEffect(resourcesOrPoints);
 				return effect;
 			}
 			if(effectType.equals("null")){
@@ -239,6 +312,36 @@ public class CardsReader {
 			GainVictoryPointsPerAnyMilitaryPointEffect effect = new GainVictoryPointsPerAnyMilitaryPointEffect(resourcesOrPoints);
 			return effect;
 		}
+		if (effectType.equals("GoingToOccupiedActionSpacesAllowedEffect")){
+			GoingToOccupiedActionSpacesAllowedEffect effect = new GoingToOccupiedActionSpacesAllowedEffect();
+			return effect;
+		}
+		if (effectType.equals("DisableTowerOccupiedMalus")){
+			DisableTowerOccupiedMalus effect = new DisableTowerOccupiedMalus();
+			return effect;
+		}
+		if(effectType.equals("FamilyMembersValueSetterEffect")){
+			intInt = readInt("immediateFamilyMemberValue");
+			intInt2 = readInt("immediateNumberOfDices");
+			FamilyMembersValueSetterEffect effect = new FamilyMembersValueSetterEffect(intInt2, intInt);
+			return effect;
+		}
+		if(effectType.equals("ChangeFamilyMembersValue")){
+			intInt = readInt("immediateColouredMemberChange");
+			intInt2 = readInt("immediateNeutralMemberChange");
+			ChangeFamilyMembersValue effect = new ChangeFamilyMembersValue(intInt, intInt);
+			return effect;
+		}
+		if(effectType.equals("DisableMilitaryPointsRequirement")){
+			DisableMilitaryPointsRequirement effect = new DisableMilitaryPointsRequirement();
+			return effect;
+		}
+		if(effectType.equals("vaticanSupportBonus")){
+			intList = readIntList("immediateVaticanSupportBonus");
+			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
+			VaticanSupportBonus effect = new VaticanSupportBonus(resourcesOrPoints);
+			return effect;
+		}
 		if(effectType.equals("null")){
 			return null;
 		}
@@ -263,6 +366,26 @@ public class CardsReader {
 		return null;
 	}
 	
+	public Requirement createRequirement(String requirementType){
+		if(requirementType.equals("pointsOrResources")){
+			intList = readIntList("pointsOrResourcesRequirement");
+			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResources(intList.get(0),intList.get(1),intList.get(2),intList.get(3));
+			PointsOrResourcesRequirement requirement = new PointsOrResourcesRequirement(resourcesOrPoints);
+			return requirement;
+		}
+		if(requirementType.equals("cardsNumber")){
+			intList = readIntList("cardNumberRequirement");
+			CardNumbersRequirement requirement = new CardNumbersRequirement(intList.get(0),intList.get(1),intList.get(2),intList.get(3));
+			return requirement;
+		}
+		if(requirementType.equals("cardsNumberOR")){
+			intList = readIntList("cardNumberRequirementOR");
+			CardNumbersOrRequirement requirement = new CardNumbersOrRequirement(intList.get(0),intList.get(0),intList.get(0),intList.get(0));
+			return requirement;
+		}
+		return null;
+	}
+	
 	public Effect createDoubleEffect(Effect effect1,Effect effect2){
 		 TwoAndEffect effect = new TwoAndEffect(effect1, effect2);
 		 return effect;
@@ -271,6 +394,11 @@ public class CardsReader {
 	public Payment createDoublePayment(Payment payment1,Payment payment2){
 		TwoOrPayments payment = new TwoOrPayments(payment1, payment2);
 		return payment;
+	}
+	
+	public Requirement createDoubleRequirement(Requirement requirement,Requirement requirement2){
+		TwoAndRequirements requirements = new TwoAndRequirements(requirement, requirement2);
+		return requirements;
 	}
 	
 	private DevelopmentCardTypes getDevelopmentCardType(String type){
