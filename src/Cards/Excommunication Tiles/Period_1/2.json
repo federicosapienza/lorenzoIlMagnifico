@@ -1,0 +1,9 @@
+	   {
+	  	"name": "1.2",
+	  	"period": 1,
+	  	"typeOfPermanentEffect" : "PermanentResourcesMalusEffect",
+	  	"permanentResourcesAndPointsMalus": [
+	  		1,0,0,0,0,0,0,0
+	  		]
+	  }
+	 

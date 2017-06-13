@@ -1,0 +1,8 @@
+	   {
+	  	"name": "2.2",
+	  	"period": 2,
+	  	"typeOfPermanentEffect" : "ActionValueModifierEffect",
+	  	"permanentBoardzone": "building",
+	    "ActionValueModifierEffectValue" : -4
+	  }
+	 

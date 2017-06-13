@@ -19,7 +19,7 @@ public class ReadAll implements ReadFromFile{
 	}
 	
 	public void start(){
-		/*territoryCardsReader.readCards(1,cards);
+		territoryCardsReader.readCards(1,cards);
 		territoryCardsReader.readCards(2,cards);
 		territoryCardsReader.readCards(3,cards);
 		
@@ -33,13 +33,13 @@ public class ReadAll implements ReadFromFile{
 		
 		ventureCardsReader.readCards(1, cards);
 		ventureCardsReader.readCards(2, cards);
-		ventureCardsReader.readCards(3, cards);*/
+		ventureCardsReader.readCards(3, cards);
 		
 		leaderCardsReader.readCards(cards);
 		
-		/*boardResourcesAndStartingPlayerResourcesReader.readResources(bonus);
+		boardResourcesAndStartingPlayerResourcesReader.readResources(bonus);
 		boardResourcesAndStartingPlayerResourcesReader.readStartingPlayerResources(bonus);
-		boardResourcesAndStartingPlayerResourcesReader.readFaithTrack(bonus);*/
+		boardResourcesAndStartingPlayerResourcesReader.readFaithTrack(bonus);
 	}
 	
 	public Cards getCards() {
