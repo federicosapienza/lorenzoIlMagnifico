@@ -1,6 +1,7 @@
 package it.polimi.ingsw.GC_26_utilities.familyMembers;
 import it.polimi.ingsw.GC_26_utilities.dices.*;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -22,7 +23,7 @@ import it.polimi.ingsw.GC_26_server.Observable;
  * The values of the coloured family members correspond with the value of the dices of the same colour.
  * 
  */
-public class FamilyMembers extends Observable<FamilyMembersDescriber> implements FamilyMembersDescriber{
+public class FamilyMembers extends Observable<FamilyMembersDescriber> implements Serializable{
 	
 	//it's the orange family member.
 	private FamilyMember orangeMember;
@@ -57,6 +58,10 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> implements
 	 */
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public String getPlayerName(){
+		return player.getName();
 	}
 	
 	/**
@@ -120,7 +125,7 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> implements
         blackMember.setValue(blackDice+colouredChange);
         whiteMember.setValue(whiteDice+colouredChange);
         neutralMember.setValue(GameParameters.getDefaultNeutralValue()+neutralChange);
-        notifyObservers(this);
+        notifyObservers(new FamilyMembersDescriber(this));
 	}
 	
 	/**

@@ -47,14 +47,25 @@ public class LeaderCardImplementation implements LeaderCard{
 	
 	
 	public String getImmediateEffectDescriber() {
-		return immediateEffect.toString();
+		if(immediateEffect!=null){
+			return immediateEffect.toString();
+		}
+		else return null;
 	}
 
 	public String getPermanentEffectDescriber() {
-		return immediateEffect.toString();
+		if(permanentEffect!=null){
+			return permanentEffect.toString();
+		}
+		else return null;
 	}
+
 	
-	public String getRequirementDescriber() {
-		return requirement.toString();
+
+	public String getRequirementDescriber(){
+		if(requirement!=null){
+			return requirement.toString();
+		}
+		else return null;
 	}
 }

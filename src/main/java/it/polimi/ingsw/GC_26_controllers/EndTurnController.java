@@ -5,7 +5,6 @@ import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.Info;
-import it.polimi.ingsw.GC_26_utilities.Message;
 import it.polimi.ingsw.GC_26_utilities.Request;
 
 public class EndTurnController {
@@ -61,6 +60,7 @@ public class EndTurnController {
 	handlers.getGameElements().notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ " has ended the turn" )); 
 	handlers.getLeaderCardHandler().endTurn();
 	handlers.getDiplomaticPrivilegesHandler().resetMemory();
+	handlers.getHarvestAndProductionHandler();
 	handlers.getGameElements().getGame().nextStep();
 		
 	}	

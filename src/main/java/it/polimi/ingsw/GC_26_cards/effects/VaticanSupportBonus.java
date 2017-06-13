@@ -11,10 +11,14 @@ public class VaticanSupportBonus implements Effect{
 	}
 
 	@Override
-	public void doEffect(Player player, boolean immediate) {
-		// TODO Auto-generated method stub
-		
+	public synchronized void doEffect(Player player, boolean immediate) {
+		player.getPermanentModifiers().gainAdditionalVP(bonus.getVictoryPoints());
 	}
 	
+	
+	@Override
+	public String toString() {
+			return "Player gains "+ bonus.getVictoryPoints() +" Victory Points when supporting the Church in a Vatican Report phase.";
+	}
 
 }

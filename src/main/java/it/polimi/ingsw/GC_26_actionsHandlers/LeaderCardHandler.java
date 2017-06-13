@@ -2,7 +2,6 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
@@ -59,12 +58,12 @@ public class LeaderCardHandler {
 		
 		setCardUsed(card);
 		card.runImmediateEffect(player);
-		
-		
-		card.runPermanentEffect(player);
+		if(!player.getPersonalBoard().isLeaderCardUsedYet(card))
+			card.runPermanentEffect(player);
 		//notifies the players
 		gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName() + " uses Leader Card "+ card));
-			
+		player.getPersonalBoard().setLeaderCardUsed(card);
+		setCardUsed(null);	
 	}
 	
 	

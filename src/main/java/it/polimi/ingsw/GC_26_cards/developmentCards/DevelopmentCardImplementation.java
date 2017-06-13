@@ -130,14 +130,14 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 		if(immediateEffect!=null){
 			return immediateEffect.toString();
 		}
-		else return "none";
+		else return null;
 	}
 
 	public String getPermanentEffectDescriber() {
 		if(permanentEffect!=null){
 			return permanentEffect.toString();
 		}
-		else return "none";
+		else return null;
 	}
 
 	
@@ -146,7 +146,7 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 		if(payment!=null){
 			return payment.toString();
 		}
-		else return "none";
+		else return null;
 	}
 
 }

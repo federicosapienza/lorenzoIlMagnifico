@@ -44,6 +44,8 @@ public class TwoPaymentsHandler {
 				if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)// character cards' permanent effect is immediately activated
 							card.runPermanentEffect(player);
 				player.setCardUsed(null);  //cleaning parameter of the card no more used
+				
+				
 				}
 	
 					

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
-import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
 //keeps status of players: points , resources, cards in personal board
@@ -17,12 +17,14 @@ public class PlayerView {
 	private PlayerWallet wallet;
 	private Set<CardDescriber> excommunicationTaken;
 	private String personalTileValues;
+	private FamilyMembersDescriber familyMembers;
 	
 	PlayerView(PlayerWallet wallet){  //the first time the client receives a playerWallet of a player, it creates playerView
 		name= wallet.getPlayerName();
 		developmentsCardOwned= new HashSet<>();
 		leadersCardOwned= new HashSet<>();
 		leadersCardUsed= new HashSet<>();
+		
 		updateValues(wallet);
 		
 	}
@@ -53,6 +55,13 @@ public class PlayerView {
 			excommunicationTaken.add(card);
 	}
 	
+	public void setFamilyMembers(FamilyMembersDescriber familyMembers) {
+		this.familyMembers = familyMembers;
+	}
 	
+	public FamilyMembersDescriber getFamilyMembers() {
+		return familyMembers;
+	}
+
 	
 }

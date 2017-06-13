@@ -41,6 +41,7 @@ public class SocketOutClient implements ClientConnection{
 	public void sendResponce(int responce) {
 		try {
 			objOut.writeObject(responce);
+			objOut.flush();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -52,7 +53,9 @@ public class SocketOutClient implements ClientConnection{
 	public void performAction(Action action) {
 		try {
 			objOut.writeObject(action);
-			
+			objOut.flush();
+
+			System.out.println("socketOut- sent Action");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

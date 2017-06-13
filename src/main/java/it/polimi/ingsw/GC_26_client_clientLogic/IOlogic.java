@@ -39,44 +39,45 @@ public class IOlogic  implements Runnable{
 				if(view.isLoginDone())
 						break;
 				}
-			
 			while(true){
-				if(waitingAction){
-					view.getBoard().printBoard();
+				if(this.getWaitingAction()){
+					System.out.println(view.getThisPlayer().getFamilyMembers().getStatus());
+					System.out.println(view.getThisPlayer().getFamilyMembers().whatIsFree());
 					System.out.println("What Action?");
 					int boardChoice=0; //senza lo zero la seconda volta va male
 					int position=0;
-					int servants=-1;
-					boolean goBack=false;
+					int servants=-2;
 					Colour familyMemberColour =null;
 					int familyMember=0;
 					if(firstAction){
-								while(waitingAction && (position<1 || position>4)){
+								while(this.waitingAction && (familyMember<1 || familyMember>4)){
 								System.out.println("what family member? 1-orange 2-black 3-white 4-neutral");
-								position = scanIN.nextInt();}	
+								familyMember = scanIN.nextInt();}
 								familyMemberColour=chooseColour(familyMember);
-						}
-					while(waitingAction && (boardChoice<1 || boardChoice>8)){
+					}
+					while(this.waitingAction && (boardChoice<1 || boardChoice>8)){
 						System.out.println("What Action? 1-terr 2-buil 3-char 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
-						boardChoice = scanIN.nextInt();}
+						boardChoice = scanIN.nextInt();
+						}
 					//TODO ovviamente aggiusteremo con limitazioni che varieranno a seconda di pos e quindi di partita,
 					//TODO possiamo fare cosa carina che intanto gli lanciamo view  della zona di interesse
 	
-					while(waitingAction && (position<1 || position>4)&& position!= -1){ //!waitingAction In case timeout occurs
+					while(this.waitingAction && (position<1 || position>8)){ //!waitingAction In case timeout occurs
 							System.out.println("what position? '-1'-togoBack");
 							position = scanIN.nextInt();
-							if(position==5)
-								goBack=true;
+							System.out.println(position);
 							}
-					while(!waitingAction && servants>-2){
+					while(this.waitingAction && servants<-1 && position!=99){
 						System.out.println("how many servants? '-1'togoBack");
 						servants = scanIN.nextInt();
 					}
-					if(position!= -1 &&servants!=-1){
+					if(position!= 99 &&servants!=-1){
 						BoardZone boardZone=chooseBoardZone(boardChoice);
 						Action action = new Action(boardZone, position, familyMemberColour, servants);
 						connection.performAction(action);
-						waitingAction=false;
+						this.waitingAction=false;
+						this.firstAction=false;
+						System.out.println("IOLOGIC 80");
 					}
 
 
@@ -84,7 +85,7 @@ public class IOlogic  implements Runnable{
 					
 				}
 				
-				if(waitingResponse){
+				if(this.getWaitingResponce()){
 					System.out.println("waiting, 100 to close turn");
 					int responce = scanIN.nextInt();
 						if(responce==999){
@@ -138,8 +139,15 @@ public class IOlogic  implements Runnable{
 				
 			}
 		}
-
-
+		
+		private synchronized boolean getWaitingAction(){
+			return waitingAction;
+		}
+		
+		
+		private synchronized boolean getWaitingResponce(){
+			return waitingResponse;
+		}
 		public synchronized void setWaitingPlayer(){
 			waitingPlayer= true;
 		}
@@ -151,6 +159,7 @@ public class IOlogic  implements Runnable{
 		public synchronized void setWaitingFirstAction(){
 			waitingAction=true;
 			firstAction=true;
+
 		}
 		public synchronized void setWaitingSecondAction(){
 			waitingAction=true;

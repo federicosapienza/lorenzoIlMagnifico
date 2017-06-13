@@ -16,6 +16,7 @@ import it.polimi.ingsw.GC_26_utilities.Info;
 import it.polimi.ingsw.GC_26_utilities.Message;
 import it.polimi.ingsw.GC_26_utilities.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26_utilities.Request;
+import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
 public class ClientController {
@@ -118,7 +119,10 @@ public class ClientController {
 
 	
 
-
+	public void receiveFamilyMembers(FamilyMembersDescriber familyMembersDescriber) {
+		view.getPlayer(familyMembersDescriber.getPlayerName()).setFamilyMembers(familyMembersDescriber);
+		
+	}
 
 	
 
@@ -131,7 +135,8 @@ public class ClientController {
 	
 	private void handleRequests(Request request){
 		view.setPlayerStatus(request.getStatus());
-		System.out.println(request.getMessage());
+		if(request.getMessage()!=null)
+			System.out.println(request.getMessage());
 		if(request.getStatus()==PlayerStatus.PLAYING){
 			System.out.println("CLICONTROLLER140startingPLaying");
 				iOlogic.setWaitingFirstAction();
@@ -176,6 +181,8 @@ public class ClientController {
 				view.getPlayer(change.getPlayerName());
 		}		
 	}
+
+
 	
 
 }

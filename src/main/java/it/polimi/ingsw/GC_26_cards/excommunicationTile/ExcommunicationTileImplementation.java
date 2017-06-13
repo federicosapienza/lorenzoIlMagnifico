@@ -7,7 +7,6 @@ public class ExcommunicationTileImplementation implements ExcommunicationTile{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private final Effect effect;
 	private final int period;
 	
@@ -25,10 +24,14 @@ public class ExcommunicationTileImplementation implements ExcommunicationTile{
 	}
 
 	public String getPermanentEffectDescriber() {
-		return effect.toString();
+		if(effect!=null){
+			return effect.toString();
+		}
+		else return null;
 	}
-
-	
+	public int getPeriod() {
+		return period;
+	}
 
 
 

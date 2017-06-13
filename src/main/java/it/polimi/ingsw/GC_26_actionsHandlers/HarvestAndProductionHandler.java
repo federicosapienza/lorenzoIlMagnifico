@@ -11,7 +11,8 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 
 public class HarvestAndProductionHandler {
-	GameElements gameElements;
+	private GameElements gameElements;
+	private int actionValue; //updated when player is interrupted due to trading , no need to reset at the end of the turn
 	
 	public HarvestAndProductionHandler(GameElements gameElements) {
 		this.gameElements=gameElements;
@@ -54,31 +55,43 @@ public class HarvestAndProductionHandler {
 		
 		for(DevelopmentCard card: set){
 			player.setCardUsed(card);  //  pointer to the card used necessary if action is suspended due to trading
-			if(card.getActionValue()>=value){
-				card.runPermanentEffect(player);
-				while(player.getStatus()==PlayerStatus.TRADING){ 
-		//if the effect of the card is trading, the execution is suspended, waiting for the choice of player (see TradeHandling).
-					try {
-						synchronized (this) {
-							wait(); 	
-						}
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				synchronized (player) {
-					if(player.getStatus()!= PlayerStatus.PLAYING && player.getStatus() != PlayerStatus.SECONDPLAY ){
-					//	the player is no more doing harvest or production (for example if timeout happens)
-						player.setCardUsed(null);
-						break;
-				}
-				
-				}
-				
-			}
+			performTool(card, value, player);
 			player.setCardUsed(null);
 		}
 	}
 	
+	//called after trades
+	public void continuePerforming(Player player){
+		//retaking the right set of card at the right position
+		 Set<DevelopmentCard> set =player.getPersonalBoard().getCurrentCards(player.getCardUsed().getType()) ;
+		 boolean found=false;
+		 for(DevelopmentCard card: set){
+			 if(!found && card.equals(player.getCardUsed())) //
+					 found=true;
+				 
+			 
+		 //once card has been found we continue the action performing
+		 performTool(card, actionValue, player);
+	}
+	}
+	
+	
+	private void performTool(DevelopmentCard card, int value, Player player){
+		if(card.getActionValue()>=value){
+			card.runPermanentEffect(player);
+			//calling the card. Going back we must be sure turn is not finished or player has been asked for choice
+			synchronized (player) {
+				if(player.getStatus()== PlayerStatus.TRADING){
+					actionValue=value;
+					return;
+				}
+				
+			}
+			
+		}
+		
+	}
 
+	
+	
 }

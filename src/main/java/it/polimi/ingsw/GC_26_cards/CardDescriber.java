@@ -22,6 +22,10 @@ import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCardImplementation;
 public class CardDescriber implements Serializable{
 	/**
 	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
 	 * 
 	 * 
 	 */
@@ -42,7 +46,7 @@ public class CardDescriber implements Serializable{
 		this.name= cardImplementation.getName();
 		this.type=cardImplementation.getCardType();
 		this.period=cardImplementation.getPeriod();
-		this.payment=cardImplementation.getPaymentDescriber().toString();
+		this.payment=cardImplementation.getPaymentDescriber();
 		this.immediateEffect=cardImplementation.getImmediateEffectDescriber();
 		this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
 		this.requirement=null;
@@ -65,7 +69,7 @@ public class CardDescriber implements Serializable{
 		this.typeOfCard="Excommunication Tile";
 		this.name= null;
 		this.type=null;
-		this.period=0;
+		this.period=cardImplementation.getPeriod();
 		this.payment=null;
 		this.immediateEffect=null;
 		this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
@@ -119,16 +123,22 @@ public class CardDescriber implements Serializable{
 		@Override
 		public String toString() {
 			StringBuilder temp= new StringBuilder(" ");
-			if(typeOfCard .equals("Development Card")){
+			if(name!=null)
 				temp.append(name );
-				if(!payment.equals("none"))
-					temp.append(" payment:" +payment);
-				if(immediateEffect.equals("none"))
-					temp.append("payment");
-			}
+			if(payment!=null)
+					temp.append(" payment: " +payment);
+			if(requirement!=null)
+					temp.append(" requirement "+ requirement);
 			
+			if(immediateEffect!=null)
+					temp.append(" immediate effect :" + immediateEffect);
+			if(immediateEffect!=null)
+				temp.append(" permanent effect :" + permanentEffect);
+			if(actionValue !=0)
+				temp.append(" action value "+ actionValue);
+			temp.append(".");
 			return temp.toString();
-		}
 		
+		}
 		
 }

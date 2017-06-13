@@ -82,6 +82,7 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 					}
 					if(object instanceof Action){
 						Action action = (Action) object;
+						System.out.println("SERVersOckeraction received");
 						views.getActionInputView().notifyNewAction(action);
 				} 
 					

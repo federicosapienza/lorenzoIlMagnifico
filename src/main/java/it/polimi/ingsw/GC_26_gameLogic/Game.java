@@ -140,7 +140,6 @@ public class Game extends Observable<CardDescriber>{
 		}
 		
 		//starting game
-		setGameStatus(GameStatus.INITIALIZINGTURN);
 		nextStep();
 	}
 	
@@ -154,9 +153,8 @@ public class Game extends Observable<CardDescriber>{
 	public void nextStep() {
 		if(playersPerformedActions==-1){//starting new Round
 			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "starting period "+ period+ " round "+round ));;
-			sendingCards();
+			sendingCardsAndSettingFamilyMembers();
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, null ));
-			System.out.println("game161");
 			//than read to 202
 		}
 		//starting vatican Turn
@@ -207,7 +205,7 @@ public class Game extends Observable<CardDescriber>{
 				nextStep();
 				return;
 			}
-			player.setStatus(new Request(PlayerStatus.PLAYING, "your turn", null));
+			player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),"Is '" +player.getName()+ "' turn")) ;
 			return;
 		}
@@ -215,9 +213,13 @@ public class Game extends Observable<CardDescriber>{
 
 	}
 
-	private void sendingCards() {
-		System.out.println("sendDD card");
+	private void sendingCardsAndSettingFamilyMembers() {
 		if(round==1){
+			
+			gameElements.getDices().rollDices();
+			for(Player p: players){
+				p.getFamilyMembers().setValues(gameElements.getDices());
+			}
 
 			territoryTowerCards= cards.getRandomDevelopmentCards(period, DevelopmentCardTypes.TERRITORYCARD);
 			buildingTowerCards= cards.getRandomDevelopmentCards(period, DevelopmentCardTypes.BUILDINGCARD);
@@ -226,20 +228,12 @@ public class Game extends Observable<CardDescriber>{
 						
 			//Sending cards to board
 			gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisRound(buildingTowerCards);
-			System.out.println("game 230");
 			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards);
-			System.out.println("game 231");
-
 			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
-			System.out.println("game 232");
-
 			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards);
-			System.out.println("game 234");
 
 			//sending to clients the cards for this round:
 			sendCardTool(0, 4, territoryTowerCards);
-			System.out.println("game 238");
-
 			sendCardTool(0, 4, buildingTowerCards);
 			sendCardTool(0, 4, characterTowerCards);
 			sendCardTool(0, 4, ventureTowerCards);
@@ -259,8 +253,6 @@ public class Game extends Observable<CardDescriber>{
 	
 	
 	private void sendCardTool(int startingPosition,int numbersToSend, List<DevelopmentCard> toSend){
-		System.out.println("game 261");
-
 		for(int i=startingPosition; i<numbersToSend; i++){
 			DevelopmentCard card= toSend.get(i);
 			notifyObservers(new CardDescriber(card));

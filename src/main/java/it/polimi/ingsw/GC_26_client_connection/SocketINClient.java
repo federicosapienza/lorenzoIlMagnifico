@@ -10,6 +10,7 @@ import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_client.ClientController;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_utilities.Message;
+import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
 public class SocketINClient implements Runnable{
@@ -70,6 +71,15 @@ public class SocketINClient implements Runnable{
 						PositionDescriber positionDescriber = (PositionDescriber) object;
 						controller.receivePosition(positionDescriber);
 						continue;}
+					
+					if(object instanceof FamilyMembersDescriber){
+						FamilyMembersDescriber familyMembersDescriber= (FamilyMembersDescriber) object;
+						controller.receiveFamilyMembers(familyMembersDescriber);
+						System.out.println("received family member");
+						continue;
+
+					}
+					
 					//manca family member
 					throw new IllegalArgumentException();
 				

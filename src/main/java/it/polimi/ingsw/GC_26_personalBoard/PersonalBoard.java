@@ -8,15 +8,11 @@ import it.polimi.ingsw.GC_26_server.Observable;
 
 import java.util.Set;
 
-import javax.sound.sampled.LineListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 
@@ -126,13 +122,13 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	public Set<DevelopmentCard> getCurrentCards(DevelopmentCardTypes type){
 		switch(type){
 		case TERRITORYCARD:
-			return territoryCardSet;
+			return  Collections.unmodifiableSet(territoryCardSet);
 		case BUILDINGCARD:
-			return buildingCardSet;
+			return Collections.unmodifiableSet(buildingCardSet);
 		case CHARACTERCARD:
-			return characterCardSet;
+			return Collections.unmodifiableSet(characterCardSet);
 		case VENTURECARD:
-			return ventureCardSet;
+			return Collections.unmodifiableSet(ventureCardSet);
 		default: 
 			throw new IllegalArgumentException();
 		}
@@ -166,7 +162,7 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	
 	/**
 	 * Method that sees if a player has already used a leaderCard in this game.
-	 * 
+	 * @return true if the card has been used yet.
 	 */
 	public boolean isLeaderCardUsedYet(LeaderCard leaderCard){
 		return leaderCardsUsed.contains(leaderCard);
@@ -177,7 +173,7 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	 * 
 	 */
 
-	public void setCardUsed(LeaderCard leaderCard){
+	public void setLeaderCardUsed(LeaderCard leaderCard){
 		if(!isLeaderCardUsedYet(leaderCard))
 			leaderCardsUsed.add(leaderCard);
 	}

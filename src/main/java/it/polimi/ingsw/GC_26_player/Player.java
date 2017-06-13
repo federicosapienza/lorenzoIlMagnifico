@@ -99,13 +99,12 @@ public class Player extends Observable<Message> {
 		if(temp!= this.status)
 			previousStatus= this.status;
 		this.status = temp;
-		if(temp!=PlayerStatus.SUSPENDED)
-			notifyObservers(request);
+		notifyObservers(request);
 		
 	}
 	
 	
-	public void backToPreviousStatus() {
+	public void backToPreviousStatusWithoutNotifying() {
 		status=previousStatus;
 	}
 	

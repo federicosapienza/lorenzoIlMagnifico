@@ -25,6 +25,9 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 * Choice rules: 0 stands for refuse trade , 2 stands for second choice if present, any other value for first choice. 
 * If second choice is not present 2 stands for accepting first choice
 * 
+* 
+* When trade is done if action is not ended yet production is restarted from where it was interrupted
+* 
 */
 public class TradeHandler {
 	private GameElements gameElements;

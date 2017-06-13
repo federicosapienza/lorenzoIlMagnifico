@@ -6,6 +6,7 @@ import it.polimi.ingsw.GC_26_actionsHandlers.LeaderCardHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.TradeHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.VaticanReportHandler;
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_server.Observer;
@@ -56,22 +57,28 @@ public class ChoiceController implements Observer<Integer>{
 			if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 				return;
 			 //going back to previous state of the game, if time not expired and restarting the action that was interrupted
-			player.backToPreviousStatus();
+			player.backToPreviousStatusWithoutNotifying();
+			}
 			//restarting the production
-			handlers.getHarvestAndProductionHandler().notifyAll();
+			handlers.getHarvestAndProductionHandler().continuePerforming(player);
+			
+			//going back from production: we must end his turn
+			synchronized (player) {
+				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
+					return;
+				 //going back to previous state of the game, if time not expired and restarting the action that was interrputed
+				if(player.getStatus()==PlayerStatus.TRADING)
+					return;
+				else player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 			
 			}
-		
-		
-		
-		}
+			  }
 		catch(IllegalArgumentException e){
 			e.printStackTrace();
 			synchronized (player) {
 				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, null , null));
 				//ends the turn
-			
-			}
+			}	
 		}
 	}
 		
@@ -103,7 +110,7 @@ public class ChoiceController implements Observer<Integer>{
 			} catch(IllegalArgumentException e){
 				e.printStackTrace();
 				synchronized (player) {
-					 player.backToPreviousStatus();
+					 player.backToPreviousStatusWithoutNotifying();
 					player.setStatus(new Request(player.getStatus(), "action not valid" , null));
 
 				}
@@ -139,6 +146,7 @@ public class ChoiceController implements Observer<Integer>{
 				e1.printStackTrace();
 				synchronized (player) {
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, "action not valid" , null));
+					
 
 				}
 				}	
