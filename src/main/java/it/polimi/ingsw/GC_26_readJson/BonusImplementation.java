@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.transform.Templates;
+
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoardTile;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
@@ -55,8 +57,20 @@ public class BonusImplementation implements BonusInterface {
 	 */
 	@Override
 	public List<PersonalBoardTile> get4RandomBonusTiles() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<PersonalBoardTile> temp=new ArrayList<>();
+		PersonalBoardTile temp1 =new PersonalBoardTile(ResourcesOrPoints.newResources(1, 0, 0, 0), ResourcesOrPoints.newResources(1, 0, 0, 0));
+		PersonalBoardTile temp2 =new PersonalBoardTile(ResourcesOrPoints.newResources(1, 0, 0, 0), ResourcesOrPoints.newResources(1, 0, 0, 0));
+		PersonalBoardTile temp3 =new PersonalBoardTile(ResourcesOrPoints.newResources(1, 0, 0, 0), ResourcesOrPoints.newResources(1, 0, 0, 0));
+		PersonalBoardTile temp4 =new PersonalBoardTile(ResourcesOrPoints.newResources(1, 0, 0, 0), ResourcesOrPoints.newResources(1, 0, 0, 0));
+
+		temp.add(temp1);
+		temp.add(temp2);
+		temp.add(temp3);
+		temp.add(temp4);
+
+		return temp;
+		
 	}
 
 

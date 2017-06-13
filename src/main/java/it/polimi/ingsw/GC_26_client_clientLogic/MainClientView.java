@@ -26,12 +26,13 @@ public class MainClientView {
 	}
 	
 	public void setPlayerUsername(String string){
+		System.out.println(string);
 		playerUsername= string;
 	}
 	
 	
 	public GameStatus getGameStatus() {
-		synchronized (gameStatus) {
+		synchronized (this) {
 			return gameStatus;
 		}
 	}
@@ -44,9 +45,12 @@ public class MainClientView {
 	
 	
 	public void setGameStatus(GameStatus gameStatus) {
-		synchronized (this.gameStatus) {
+		synchronized (this) {
+			System.out.println();
 			this.gameStatus = gameStatus;
 		}
+			
+		
 	}
 	
 	public void setPlayerStatus(PlayerStatus playerStatus) {
@@ -86,7 +90,7 @@ public class MainClientView {
 		}
 	}
 	
-	public PlayerView getPlayer(String playerUsername){
+	public PlayerView getPlayer(String playerUsername){ //calling it only if sure player has been initialised
 		return players.get(playerUsername);
 	}
 	
@@ -95,6 +99,7 @@ public class MainClientView {
 		
 		
 	}
+	
 	
 
 

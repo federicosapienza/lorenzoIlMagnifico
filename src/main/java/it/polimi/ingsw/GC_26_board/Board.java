@@ -114,7 +114,6 @@ public class Board extends Observable<PositionDescriber>{
 		harvestDescription();
 		productionDescription();
 		notifyObservers(new PositionDescriber(BoardZone.COUNCILPALACE, 1 ,GameParameters.getDefaultPositionValue(), null));
-
 	}
 	
 	private void towerDescription(BoardZone zone,Tower tower){

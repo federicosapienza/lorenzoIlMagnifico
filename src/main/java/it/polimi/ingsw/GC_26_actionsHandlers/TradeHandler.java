@@ -2,6 +2,7 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 
 
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
@@ -48,7 +49,7 @@ public class TradeHandler {
 		if(choice==2  && tradeEffect.getGive2() != null){ //if 2nd trade exists and the player has chosen it. 
 				boolean flag = player.getTestWarehouse().areResourcesEnough(tradeEffect.getGive2());
 				if(!flag){
-					player.notifyObservers(new Request(player.getStatus(),"cannot perform trade: not enough resources", player.getCardUsed()));
+					player.notifyObservers(new Request(player.getStatus(),"cannot perform trade: not enough resources", new CardDescriber(player.getCardUsed())));
 					return false;
 		}	
 				else return false;
@@ -56,7 +57,7 @@ public class TradeHandler {
 		// trade number 1 selected
 		boolean flag = player.getTestWarehouse().areResourcesEnough(tradeEffect.getGive1());
 		if(!flag){
-			player.notifyObservers(new Request(player.getStatus(),"cannot perform trade: not enough resources", player.getCardUsed()));
+			player.notifyObservers(new Request(player.getStatus(),"cannot perform trade: not enough resources", new CardDescriber(player.getCardUsed())));
 			return false;
 		}
 		else return true;

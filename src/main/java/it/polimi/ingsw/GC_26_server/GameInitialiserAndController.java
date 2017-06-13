@@ -63,13 +63,13 @@ public class GameInitialiserAndController implements Runnable{
 				if(player.getName().equals(view.getName())){ // for unicast messages
 					player.registerObserver(view.getMessageView());
 					player.getPersonalBoard().registerObserver(view.getCardDescriberView());
-
+					game.registerObserver(view.getCardDescriberView());
+					gameElements.getBoard().registerObserver(view.getPositionView());
 				}
 				//for broadcast messages
 				player.getWarehouse().registerObserver(view.getPlayerWalletView());
-				game.registerObserver(view.getCardDescriberView());
-				gameElements.getGameMemory().registerObserver(view.getActionView());
-				gameElements.getBoard().registerObserver(view.getPositionView());
+			//	game.registerObserver(view.getCardDescriberView());
+			//	gameElements.getBoard().registerObserver(view.getPositionView());
 				player.getFamilyMembers().registerObserver(view.getFamilyMembersView());
 
 			}

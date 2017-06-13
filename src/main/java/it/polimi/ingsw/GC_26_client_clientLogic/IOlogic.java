@@ -27,17 +27,19 @@ public class IOlogic  implements Runnable{
 
 		@Override
 		public void run() {
-			String username=null;
+			String username;
 
 
-			while (!view.isLoginDone()) {
-				// reads a new Line from the Scanner
-
-				 username = scanIN.nextLine();
+				username = scanIN.nextLine();
 				String password = scanIN.nextLine();
 				connection.login(username, password);
+				view.setPlayerUsername(username);
+
+			while(true){
+				if(view.isLoginDone())
+						break;
 				}
-			view.setPlayerUsername(username);
+			
 			while(true){
 				if(waitingAction){
 					view.getBoard().printBoard();
@@ -161,7 +163,8 @@ public class IOlogic  implements Runnable{
 			waitingResponse=true;
 		}
 		
-	
-	
+		public synchronized void askForUsernameAgain(){
+			
+		}
 
 }

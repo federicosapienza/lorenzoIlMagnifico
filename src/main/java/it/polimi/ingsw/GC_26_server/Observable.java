@@ -5,6 +5,7 @@ import java.util.List;
 
 
 public abstract class Observable<C> {
+	private int countObservers;
 
 	private List<Observer<C>> observers;
 
@@ -15,10 +16,13 @@ public abstract class Observable<C> {
 
 	public void registerObserver(Observer<C> o) {
 		observers.add(o);
+		countObservers++;
+
 	}
 
 	public void unregisterObserver(Observer<C> o) {
 		this.observers.remove(o);
+		countObservers--;
 	}
 
 
@@ -28,5 +32,10 @@ public abstract class Observable<C> {
 			o.update(c);
 		}
 
+	}
+	
+	
+	public int getCountObservers() {
+		return countObservers;
 	}
 }

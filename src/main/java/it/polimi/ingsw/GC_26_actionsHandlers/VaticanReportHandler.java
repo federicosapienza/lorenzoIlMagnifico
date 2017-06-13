@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTile;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
@@ -27,7 +28,7 @@ public class VaticanReportHandler {
 			ExcommunicationTile tile = gameElements.getGame().getThisRoundExcommunicationTiles();
 			tile.runEffect(player);
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "is excommunicated"));
-	    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), tile,
+	    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(tile) ,
 					 tile.toString(), null));
 			return;
 		}

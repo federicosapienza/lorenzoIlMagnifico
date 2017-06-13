@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_cards.developmentCards;
 
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
@@ -8,7 +9,7 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.Request;
 
 //It 's the implementation used by Character and Venture Cards. Territories and building cards extend this. 
-public class DevelopmentCardImplementation extends DevelopmentCard{
+public class DevelopmentCardImplementation implements DevelopmentCard{
 	/**
 	 * 
 	 */
@@ -84,14 +85,14 @@ public class DevelopmentCardImplementation extends DevelopmentCard{
 			int territoryCardOwned = player.getPersonalBoard().getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD);
 			if(player.getWarehouse().getMilitaryPoints() < GameParameters.getTerritoryCardRequirements(territoryCardOwned))
 				player.notifyObservers(new Request(player.getStatus(),"not enough resources military "
-						+ "Points for getting another military card",player.getCardUsed()))	;
+						+ "Points for getting another military card",new CardDescriber(player.getCardUsed())))	;
 				return false;
 		}
 		if(payment==null)
 			return true;
 		
 		 if(!payment.canPlayerGetThis(player, type)){
-			 player.notifyObservers(new Request(player.getStatus(),"not enough resources for getting the card",player.getCardUsed()));
+			 player.notifyObservers(new Request(player.getStatus(),"not enough resources for getting the card",new CardDescriber(player.getCardUsed())));
 		 	return false;
 		 	}
 		return true;
@@ -119,23 +120,33 @@ public class DevelopmentCardImplementation extends DevelopmentCard{
 
 	
 
-	@Override
+	
 	public DevelopmentCardTypes getCardType() {
 		return type;
 	}
 
-	@Override
+	
 	public String getImmediateEffectDescriber() {
-		return immediateEffect.toString();
+		if(immediateEffect!=null){
+			return immediateEffect.toString();
+		}
+		else return "none";
 	}
 
-	@Override
 	public String getPermanentEffectDescriber() {
-		return permanentEffect.toString();
+		if(permanentEffect!=null){
+			return permanentEffect.toString();
+		}
+		else return "none";
 	}
 
 	
 
-	
+	public String getPaymentDescriber(){
+		if(payment!=null){
+			return payment.toString();
+		}
+		else return "none";
+	}
 
 }

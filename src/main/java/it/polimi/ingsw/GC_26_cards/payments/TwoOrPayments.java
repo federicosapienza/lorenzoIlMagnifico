@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_cards.payments;
 
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
@@ -38,7 +39,7 @@ public class TwoOrPayments implements Payment{
 	public synchronized void pay(Player player,  DevelopmentCardTypes type) {
 		if(mode1.canPlayerGetThis(player, type)&& mode2.canPlayerGetThis(player,type))
 		synchronized (player) {
-			player.setStatus(new Request(PlayerStatus.CHOOSINGPAYMENT, null, player.getCardUsed()));
+			player.setStatus(new Request(PlayerStatus.CHOOSINGPAYMENT, null, new CardDescriber(player.getCardUsed())));
 			return;
 		}
 		if(mode1.canPlayerGetThis(player, type)){

@@ -1,11 +1,10 @@
 package it.polimi.ingsw.GC_26_client_clientLogic;
 
-import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
+import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
 //keeps status of players: points , resources, cards in personal board
@@ -21,21 +20,17 @@ public class PlayerView {
 	
 	PlayerView(PlayerWallet wallet){  //the first time the client receives a playerWallet of a player, it creates playerView
 		name= wallet.getPlayerName();
-		this.wallet=wallet;
 		developmentsCardOwned= new HashSet<>();
 		leadersCardOwned= new HashSet<>();
 		leadersCardUsed= new HashSet<>();
-
-		
-		
+		updateValues(wallet);
 		
 	}
 	
-	
-	
 	public void updateValues(PlayerWallet wallet){
 		this.wallet=wallet;
-		System.out.println(wallet.getCoins()+wallet.getServants()+wallet.getWood()+wallet.getStone());
+		System.out.println(name+" "+wallet.getCoins()+" coins, "+wallet.getServants()+
+		" servants, "+wallet.getWood()+" wood, "+wallet.getStone()+" stone.");
 		//TODO dividere visione di punti e risorse
 	}
 	
