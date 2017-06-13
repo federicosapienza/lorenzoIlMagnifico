@@ -1,35 +1,12 @@
 package it.polimi.ingsw.GC_26_readJson;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.*;
-
-
-import com.google.gson.*;
-
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
-import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
-import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
-import it.polimi.ingsw.GC_26_cards.leaderCard.PointsOrResourcesRequirement;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
-import it.polimi.ingsw.GC_26_cards.payments.ResourcesPayment;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import com.google.gson.reflect.TypeToken;
-
-
-public class CharacterCardsReader extends DevelopmentCardsReader {
+public class CharacterCardsReader extends CardsReader {
 		
 	private String name;
 	private int period;
@@ -39,14 +16,6 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 	private String immediateEffectType2;
 	private String paymentType;
 	private String paymentType2;
-	private BufferedReader br= null;
-	private Gson gson = new Gson();
-	private JsonObject jsonObject= null;
-	private JsonElement jsonElement= null;
-	private Type listTypeInt = new TypeToken<List<Integer>>() {}.getType();
-	private JsonPathData jsonPathData = new JsonPathData();
-	private DevelopmentCardTypes permanentCardNumberToResourcesCardType;
-	private String permanentCardsNumberToResourcesCardType;
 	private Payment payment;
 	private Payment paymentTemp;
 	private Effect immediateEffect;
@@ -58,9 +27,9 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 	private String doublePayment;
 		
 		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
-			String[] ListOfPaths = chooseListOfCards(numberOfPeriod);
+			String[] ListOfPaths = super.chooseListOfCards(numberOfPeriod, DevelopmentCardTypes.CHARACTERCARD);
 			for(String s:ListOfPaths){
-				jsonObject= super.createJsonObjectFromFile(s); //forse è inutile questo assegnamento
+				super.createJsonObjectFromFile(s); //forse è inutile questo assegnamento
 				name = super.readString("name");
 				period= super.readInt("period");
 				doublePayment = super.readString("doublePayment");
@@ -100,14 +69,9 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 					immediateEffect = super.createDoubleEffect(immediateEffect, immediateTemp);
 				}
 				createCharacterCard(cardsImplementation,numberOfPeriod);
-				if(br!= null){
-					try {
-						br.close();
-						}
-					catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
+				System.out.println(name);
+				System.out.println(period);
+				super.closeBufferedReader();
 			}
 		}
 
@@ -129,19 +93,5 @@ public class CharacterCardsReader extends DevelopmentCardsReader {
 			   }
 		   
 			}
-		
-		
-		private String[] chooseListOfCards(int numOfList){
-			switch(numOfList) {
-			case 1:
-				return jsonPathData.getCharacterCardsPeriod1PathArray();
-			case 2:
-				return jsonPathData.getCharacterCardsPeriod2PathArray();
-			case 3:
-				return jsonPathData.getCharacterCardsPeriod3PathArray();
-			default:
-				throw new IllegalArgumentException();
-			}
-		}
 			
 }	

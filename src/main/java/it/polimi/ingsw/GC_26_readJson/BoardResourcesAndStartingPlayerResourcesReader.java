@@ -6,26 +6,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
-public class BoardResourcesAndStartingPlayerResourcesReader extends DevelopmentCardsReader {
+public class BoardResourcesAndStartingPlayerResourcesReader {
 
 	private JsonPathData jsonPathData = new JsonPathData();
 	private String[] listOfPaths;
 	private BufferedReader br= null;
 	private Gson gson = new Gson();
 	private JsonObject jsonObject= null;
-	private JsonElement jsonElement= null;
-	private JsonElement jsonElement2= null;
 	private Type listTypeInt = new TypeToken<List<Integer>>() {}.getType();
 	private List<Integer> list =  new ArrayList<Integer>();
 	private List<Integer> list2 =  new ArrayList<Integer>();
@@ -45,7 +40,6 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends DevelopmentC
 				    jsonObject= gson.fromJson(br, JsonObject.class);
 					}
 				catch (FileNotFoundException e) {e.printStackTrace();}
-				jsonElement = jsonObject.get("resources").getAsJsonArray();
 		list = new Gson().fromJson(jsonObject.get("resources"), listTypeInt);
 		ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5),list.get(6),list.get(7));
 		addResourcesInArray(resourcesOrPoints);
@@ -72,7 +66,6 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends DevelopmentC
 					jsonObject= gson.fromJson(br, JsonObject.class);
 					}
 				catch (FileNotFoundException e) {e.printStackTrace();}
-			jsonElement = jsonObject.get("resources").getAsJsonArray();
 			list = new Gson().fromJson(jsonObject.get("resources"), listTypeInt);
 			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResources(list.get(0),list.get(1),list.get(2),list.get(3));
 			bonusImplementation.getResourcesOrPointsStarting().add(resourcesOrPoints);
@@ -85,9 +78,7 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends DevelopmentC
 			jsonObject= gson.fromJson(br, JsonObject.class);
 			}
 		catch (FileNotFoundException e) {e.printStackTrace();}
-	jsonElement = jsonObject.get("position").getAsJsonArray();
 	list = new Gson().fromJson(jsonObject.get("position"), listTypeInt);
-	jsonElement2 = jsonObject.get("victoryPoints").getAsJsonArray();
 	list2 = new Gson().fromJson(jsonObject.get("victoryPoints"), listTypeInt);
 		for(int i = 0; i<list.size() ;i++){
 			bonusImplementation.getFaithTrack().put(list.get(i), list2.get(i));
@@ -128,10 +119,9 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends DevelopmentC
 		if(counter==20){
 			councilResources[counter -20] = resOrPoint;
 			counter++;
-			System.out.println(counter);
 			return;
 		}
-		else{ System.out.println("counter exceeded");}	
+		else{ throw new IllegalArgumentException();}	
 	}
 	
 	

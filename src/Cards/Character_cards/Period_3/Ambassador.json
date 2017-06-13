@@ -1,6 +1,6 @@
 	   {
 	  	"name": "Ambassador",
-	  	"period": 1,
+	  	"period": 3,
 	  	"typeOfPayment" :"resources",
 	  	"payment": [
 	  	  6,0,0,0

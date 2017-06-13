@@ -3,6 +3,8 @@ package it.polimi.ingsw.GC_26_readJson;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.*;
 
 
@@ -31,7 +33,7 @@ import java.util.List;
 
 import com.google.gson.reflect.TypeToken;
 
-public class DevelopmentCardsReader {
+public class CardsReader {
 	
 
 	
@@ -51,17 +53,28 @@ public class DevelopmentCardsReader {
 	private JsonObject jsonObject= null;
 	private JsonElement jsonElement= null;
 	private Type listTypeInt = new TypeToken<List<Integer>>() {}.getType();
+	private JsonPathData jsonPathData = new JsonPathData();
+
 
 
 
 	
-	public JsonObject createJsonObjectFromFile(String path){
+	public void createJsonObjectFromFile(String path){
 		try {
 			br = new BufferedReader(new FileReader(path));
-			return jsonObject= gson.fromJson(br, JsonObject.class);
+			jsonObject= gson.fromJson(br, JsonObject.class);
 		} catch (FileNotFoundException e) {
 			   e.printStackTrace();
-			   return null;
+			   
+		}
+	}
+	
+	public void closeBufferedReader(){
+		try {
+			br.close();
+			}
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -76,8 +89,7 @@ public class DevelopmentCardsReader {
 	}
 	
 	public List<Integer> readIntList(String stringToRead){
-		jsonElement = jsonObject.get(stringToRead).getAsJsonArray();
-		return returnIntList = new Gson().fromJson(jsonObject.get(stringToRead), listTypeInt);
+		 return returnIntList = new Gson().fromJson(jsonObject.get(stringToRead), listTypeInt);
 	}
 
 	
@@ -279,6 +291,55 @@ public class DevelopmentCardsReader {
 		if(type.equals("council")){return BoardZone.COUNCILPALACE;}
 		return null;
 	}
+	
+	public String[] chooseListOfCards(int numOfList, DevelopmentCardTypes developmentCardTypes){
+		switch (numOfList) {
+		case 1:
+			switch (developmentCardTypes) {
+			case TERRITORYCARD:
+				return jsonPathData.getTerritoryCardsPeriod1PathArray();
+			case CHARACTERCARD:
+				return jsonPathData.getCharacterCardsPeriod1PathArray();
+			case BUILDINGCARD:
+				return jsonPathData.getBuildingCardsPeriod1PathArray();
+			case VENTURECARD:
+				return jsonPathData.getVentureCardsPeriod1PathArray();
+			default:
+				break;
+			}
+		case 2:
+			switch (developmentCardTypes) {
+			case TERRITORYCARD:
+				return jsonPathData.getTerritoryCardsPeriod2PathArray();
+			case CHARACTERCARD:
+				return jsonPathData.getCharacterCardsPeriod2PathArray();
+			case BUILDINGCARD:
+				return jsonPathData.getBuildingCardsPeriod2PathArray();
+			case VENTURECARD:
+				return jsonPathData.getVentureCardsPeriod2PathArray();
+			default:
+				break;
+			}
+		case 3:
+			switch (developmentCardTypes) {
+			case TERRITORYCARD:
+				return jsonPathData.getTerritoryCardsPeriod3PathArray();
+			case CHARACTERCARD:
+				return jsonPathData.getCharacterCardsPeriod3PathArray();
+			case BUILDINGCARD:
+				return jsonPathData.getBuildingCardsPeriod3PathArray();
+			case VENTURECARD:
+				return jsonPathData.getVentureCardsPeriod3PathArray();
+			default:
+				break;
+			}
+		default:
+			break;
+		}
+	return null;
+	}
+	
+	
 }
 	
 
