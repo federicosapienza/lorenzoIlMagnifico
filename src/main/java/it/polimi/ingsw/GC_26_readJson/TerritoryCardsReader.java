@@ -1,9 +1,5 @@
 package it.polimi.ingsw.GC_26_readJson;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-
-import com.google.gson.*;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
@@ -11,7 +7,7 @@ import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 
 
-public class TerritoryCardsReader extends DevelopmentCardsReader {
+public class TerritoryCardsReader extends CardsReader {
 		
 	private String name;
 	private int period;
@@ -23,17 +19,14 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 	private Effect permanentEffect;
 	private Effect immediateEffect;
 	private Effect immediateTemp;
-	private Effect permanentTemp;
-	private BufferedReader br= null;
-	private JsonObject jsonObject= null;
-	private JsonPathData jsonPathData = new JsonPathData();
+	private Effect permanentTemp;	
 	private String doubleImmediateEffect;
 	private String doublePermanentEffect;	
 		
 		public void readCards(int numberOfPeriod,CardsImplementation cards){
-				String[] listOfPaths = chooseListOfCards(numberOfPeriod);
+				String[] listOfPaths = super.chooseListOfCards(numberOfPeriod,DevelopmentCardTypes.TERRITORYCARD);
 				for(String s:listOfPaths){
-					jsonObject= super.createJsonObjectFromFile(s);
+					super.createJsonObjectFromFile(s);
 					name=super.readString("name");
 					period=super.readInt("period");
 					actionValue= super.readInt("actionValue");
@@ -61,32 +54,18 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 						immediateTemp = super.createImmediateEffect(immediateEffectType2);
 						immediateEffect = super.createDoubleEffect(immediateEffect, immediateTemp);
 					}
-					
 					createTerritoryCard(cards, numberOfPeriod);
-					stamp(); ;
-					if(br!= null){
-						try {
-							br.close();
-							}
-						catch (IOException e) {
-							e.printStackTrace();
-						}
+					System.out.println(name);
+					System.out.println(period);
+					super.closeBufferedReader();
 					}
 				}
-			}
-		
-		private void stamp(){
-			System.out.println(name);
-			System.out.println(period);
-			System.out.println(actionValue);
-		}
 		
 		
 		private void createTerritoryCard(CardsImplementation cards,int numOfPeriod){
 		    DevelopmentCard developmentCard= DevelopmentCardImplementation.territoryCard(name, period, null, immediateEffect, permanentEffect , actionValue);
 		   switch(numOfPeriod){
 		   case 1:
-
 			   cards.getRandomDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 			   break;
 		  
@@ -102,18 +81,6 @@ public class TerritoryCardsReader extends DevelopmentCardsReader {
 		   }
 	   
 		}
-		
-		private String[] chooseListOfCards(int numOfList){
-			switch(numOfList) {
-			case 1:
-				return jsonPathData.getTerritoryCardsPeriod1PathArray();
-			case 2:
-				return jsonPathData.getTerritoryCardsPeriod2PathArray();
-			case 3:
-				return jsonPathData.getTerritoryCardsPeriod3PathArray();
-			default:
-				throw new IllegalArgumentException();
-			}
-		}
+
 
 }
