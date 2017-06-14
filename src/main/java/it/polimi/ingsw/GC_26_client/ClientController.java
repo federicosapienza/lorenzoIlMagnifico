@@ -5,8 +5,9 @@ package it.polimi.ingsw.GC_26_client;
 
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
-import it.polimi.ingsw.GC_26_client_clientLogic.IOlogic;
+import it.polimi.ingsw.GC_26_client_clientLogic.InputlogicCli;
 import it.polimi.ingsw.GC_26_client_clientLogic.MainClientView;
+import it.polimi.ingsw.GC_26_client_clientLogic.Output;
 import it.polimi.ingsw.GC_26_client_clientLogic.PositionView;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_gameLogic.Game;
@@ -22,12 +23,14 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 public class ClientController {
 	private String playerPlaying;
 	private MainClientView view;
-	private IOlogic iOlogic;
+	private InputlogicCli iOlogic;
+	private Output output;
 	
 
-	public ClientController(IOlogic iOlogic, MainClientView view) {
+	public ClientController(InputlogicCli iOlogic, MainClientView view, Output output) {
 		this.iOlogic= iOlogic;
 		this.view= view;
+		this.output=output;
 	}
 	
 	public void setPlayerPlaying(String playerPlaying) {
@@ -37,7 +40,6 @@ public class ClientController {
 	
 	
 	public void receiveCard(CardDescriber card){
-		System.out.println(view.getGameStatus());
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME || view.getGameStatus()==GameStatus.INITIALIZINGTURN){
 			if(card.getTypeOfCard().equalsIgnoreCase("Development Card")){
 				view.getBoard().addCardWhereFree(card);
@@ -50,37 +52,20 @@ public class ClientController {
 			//TODO tutti i check
 		
 			if(card.getTypeOfCard().equalsIgnoreCase("Leader Card")){
-					view.getPlayer(view.getPlayerUsername()).addCard(card); 
+					view.getPlayer(view.getPlayerUsername()).addCard(card); //the card is sent only to "this" client
 					return;
 					}
 			else throw new IllegalArgumentException();	
 		}
-		/*dovrebbe essere diventato inutile
-		 * 
-		 * if(view.getGameStatus()== GameStatus.PLAYING){
-			if(card.getTypeOfCard().equalsIgnoreCase("Development Card"))
-				view.getPlayer(playerPlaying).addDevelopmentCard(card);;
-			if(card.getTypeOfCard().equalsIgnoreCase("Excommunication Tile"));
-				//TODO LAnciare eccezione 
-				 
-			
-			if(card.getTypeOfCard().equalsIgnoreCase("LeaderCard"))
-				view.getPlayer(playerPlaying).addLeaderCardUsed(card);
-
-			else throw new IllegalArgumentException();	
-		}
-		if(view.getGameStatus()== GameStatus.RECONNETTINGAPLAYER);
-			//TODO
-			*/
+		
 	}
 	
 	public void receiveAction(ActionNotification action){
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME||view.getGameStatus()==GameStatus.INITIALIZINGTURN)
-			throw new IllegalStateException();
+			throw new IllegalStateException();  //TODO come gestirla
 		if(view.getGameStatus()==GameStatus.PLAYING){
 			view.getBoard().addfamilyMember(action); 
-			System.out.println(action.toString());//TODO migliorare
-			view.getBoard().printBoard();
+			output.printString(action.toString());
 		}
 			
 	}
@@ -90,13 +75,12 @@ public class ClientController {
 			view.getBoard().addPosition(new PositionView(position));
 		if(view.getGameStatus()==GameStatus.PLAYING || view.getGameStatus()==GameStatus.INITIALIZINGTURN){}
 			//TODO lancia eccezione;
-		if(view.getGameStatus()==GameStatus.RECONNETTINGAPLAYER );
-			//just ignores themessages;
 		
 	}
 	
 	public void receivePlayerPocket(PlayerWallet playerWallet){
 		view.updatePlayerWallet((playerWallet));
+		//se il cambiamento riguarda questo player , notifico subito
 	}
 	
 	
@@ -136,9 +120,8 @@ public class ClientController {
 	private void handleRequests(Request request){
 		view.setPlayerStatus(request.getStatus());
 		if(request.getMessage()!=null)
-			System.out.println(request.getMessage());
+			output.printString(request.getMessage());
 		if(request.getStatus()==PlayerStatus.PLAYING){
-			System.out.println("CLICONTROLLER140startingPLaying");
 				iOlogic.setWaitingFirstAction();
 				return;}
 		if(request.getStatus()== PlayerStatus.SECONDPLAY){
@@ -163,10 +146,10 @@ public class ClientController {
 		if(info.getMessage()!=null){
 			System.out.println(info.getMessage());
 		}
-		GameStatus old= GameStatus.INITIALIZINGTURN;
+		GameStatus old=view.getGameStatus();
 		view.setGameStatus(info.getGameStatus());
 		if(old== GameStatus.INITIALIZINGTURN && info.getGameStatus()==GameStatus.PLAYING)  //TODO
-			view.getBoard().printBoard();
+			output.printBoard(view.getBoard());
 	}
 	
 	private void handlePersonalBoardChangeNotification(PersonalBoardChangeNotification change) {

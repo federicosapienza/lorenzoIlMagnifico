@@ -14,7 +14,7 @@ public class FamilyMember {
 	// this is the value of the family member, which is the same of the corresponding dice
 	private int value;
 	// this denotes if the family member is free, i.e. ready to be used (it can be used only once for each round)
-	private boolean free;
+	private boolean free=true;
 	// this is the colour of the family member
 	private Colour colour;
 	
@@ -37,12 +37,8 @@ public class FamilyMember {
 	 * @return false if the family member has been used already in this round.
 	 */
 	public boolean isFree() {
-		if (this.free == true) {
-			return true;
-		}
-		else{
-			return false;
-		}
+		return free;
+		
 	}
 	
 	/**

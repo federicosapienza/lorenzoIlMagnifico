@@ -140,6 +140,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		return WarehouseParameter>=test;
 		
 	}
+	//methods used to check if resources are gone below zero
 	private boolean moreThanZero(){  // as soon as one element (resources or scores) is less than zero, returns false
 		if(!greaterEqualThan(coins,0))  
 			return false;
@@ -201,7 +202,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		
 		//Council privileges spending is handled in other functions . So there is not its parameter here.
 		// To ensure nothing went wrong calls moreThanZero. 
-		if(moreThanZero())  
+		if(!moreThanZero())  
 			throw new IllegalArgumentException("Resources went below zero");
 		
 		

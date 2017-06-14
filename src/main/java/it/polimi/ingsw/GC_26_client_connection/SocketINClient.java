@@ -80,7 +80,6 @@ public class SocketINClient implements Runnable{
 
 					}
 					
-					//manca family member
 					throw new IllegalArgumentException();
 				
 					

@@ -82,7 +82,6 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 					}
 					if(object instanceof Action){
 						Action action = (Action) object;
-						System.out.println("SERVersOckeraction received");
 						views.getActionInputView().notifyNewAction(action);
 				} 
 					
@@ -130,7 +129,6 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 		}
 		@Override
 		public void send(CardDescriber cardDescriber) {
-			System.out.println("sending a card "+ cardDescriber.getName());
 			sendMethod(cardDescriber);
 			
 		}
