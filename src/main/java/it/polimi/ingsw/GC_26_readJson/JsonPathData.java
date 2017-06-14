@@ -31,6 +31,7 @@ public class JsonPathData {
 	String[] resources = {"src/ResourcesForBoard/Towers/TerritoriesTower/floor1.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor2.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor3.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor4.json","src/ResourcesForBoard/Towers/CharactersTower/floor1.json","src/ResourcesForBoard/Towers/CharactersTower/floor2.json","src/ResourcesForBoard/Towers/CharactersTower/floor3.json","src/ResourcesForBoard/Towers/CharactersTower/floor4.json","src/ResourcesForBoard/Towers/BuildingsTower/floor1.json","src/ResourcesForBoard/Towers/BuildingsTower/floor2.json","src/ResourcesForBoard/Towers/BuildingsTower/floor3.json","src/ResourcesForBoard/Towers/BuildingsTower/floor4.json","src/ResourcesForBoard/Towers/VenturesTower/floor1.json","src/ResourcesForBoard/Towers/VenturesTower/floor2.json","src/ResourcesForBoard/Towers/VenturesTower/floor3.json","src/ResourcesForBoard/Towers/VenturesTower/floor4.json","src/ResourcesForBoard/Market/position1.json","src/ResourcesForBoard/Market/position2.json","src/ResourcesForBoard/Market/position3.json","src/ResourcesForBoard/Market/position4.json","src/ResourcesForBoard/Council_Palace/council_palace.json"};
 	String[] startingResources = {"src/StartingResources/player1.json","src/StartingResources/player2.json","src/StartingResources/player3.json","src/StartingResources/player4.json"};
 	
+	String[] timers = {"src/Timers/timer.json"};
 	
 
 	public String[] getTerritoryCardsPeriod1PathArray() {
@@ -93,6 +94,9 @@ public class JsonPathData {
 	}
 	public String[] getPersonalBoardTilesAdvanced() {
 		return personalBoardTilesAdvanced;
+	}
+	public String[] getTimers() {
+		return timers;
 	}
 	
 }
