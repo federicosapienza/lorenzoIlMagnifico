@@ -6,13 +6,8 @@ import java.util.List;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26_cards.effects.MarketBanEffect;
-import it.polimi.ingsw.GC_26_cards.effects.SetSecondAction;
 import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTile;
-import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTileImplementation;
-import it.polimi.ingsw.GC_26_cards.leaderCard.CardNumbersRequirement;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
-import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCardImplementation;
 
 public class CardsImplementation implements Cards {
 	
@@ -34,6 +29,11 @@ public class CardsImplementation implements Cards {
 	
 	private List<LeaderCard> leaderCard = new ArrayList<LeaderCard>();
 	private List<LeaderCard> leaderCardTemp = new ArrayList<LeaderCard>();
+	
+	private List<ExcommunicationTile> excommunicationTilesPeriod1 = new ArrayList<ExcommunicationTile>();
+	private List<ExcommunicationTile> excommunicationTilesPeriod2 = new ArrayList<ExcommunicationTile>();
+	private List<ExcommunicationTile> excommunicationTilesPeriod3 = new ArrayList<ExcommunicationTile>();
+	private List<ExcommunicationTile> excommunicationTilesTemp = new ArrayList<ExcommunicationTile>();
 
 	
 	
@@ -97,6 +97,8 @@ public class CardsImplementation implements Cards {
 		}
 		return null;
 	}
+	
+	
 	
 	public List<DevelopmentCard> getDevelopmentCards(int period, DevelopmentCardTypes type) {
 		switch (period) {
@@ -175,17 +177,29 @@ public class CardsImplementation implements Cards {
 	}
 
 	@Override
-	public List<ExcommunicationTile> getExcommunicationTiles() {
-		List<ExcommunicationTile> list= new ArrayList<>();
-		ExcommunicationTile exc1 = new ExcommunicationTileImplementation(1, new MarketBanEffect());
-		ExcommunicationTile exc2 = new ExcommunicationTileImplementation(2, new MarketBanEffect());
-		ExcommunicationTile exc3 = new ExcommunicationTileImplementation(3, new MarketBanEffect());
-		list.add(exc1);
-		list.add(exc2);
-		list.add(exc3);
-		return list;
-		
+	public List<ExcommunicationTile> getRandomExcommunicationTiles() {
+		Collections.shuffle(excommunicationTilesPeriod1);
+		excommunicationTilesTemp.add(excommunicationTilesPeriod1.get(0));
+		Collections.shuffle(excommunicationTilesPeriod2);
+		excommunicationTilesTemp.add(excommunicationTilesPeriod2.get(0));
+		Collections.shuffle(excommunicationTilesPeriod3);
+		excommunicationTilesTemp.add(excommunicationTilesPeriod3.get(0));
+		return excommunicationTilesTemp;
 		}
+	
+	public List<ExcommunicationTile> getExcommunicationTiles(int period){
+		switch (period) {
+		case 1:
+			return excommunicationTilesPeriod1;
+		case 2:
+			return excommunicationTilesPeriod2;
+		case 3:
+			return excommunicationTilesPeriod3;
+		default:
+			return null;
+		}
+	}
+	
 	
 
 }

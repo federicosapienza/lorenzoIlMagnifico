@@ -10,7 +10,6 @@ public class LeaderCardsReader extends CardsReader {
 		
 	private JsonPathData pathData = new JsonPathData();
 	private String name;
-	private int period;
 	private String permanentEffectType;
 	private String immediateEffectType;
 	private String permanentEffectType2;

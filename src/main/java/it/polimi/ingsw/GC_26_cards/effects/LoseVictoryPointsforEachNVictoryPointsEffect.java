@@ -7,6 +7,10 @@ import it.polimi.ingsw.GC_26_player.Player;
 public class LoseVictoryPointsforEachNVictoryPointsEffect implements Effect{
 	int malus;
 
+	public LoseVictoryPointsforEachNVictoryPointsEffect(int malus) {
+		this.malus = malus;
+	}
+	
 	@Override
 	public void doEffect(Player player, boolean immediate) {
 		player.getPermanentModifiers().setVictoryPointsReducer(malus);
