@@ -96,7 +96,7 @@ public class FirstActionHandler extends ActionHandler{
 				getPerformerHandler().productionPerform(player, familyMemberUsed, action);
 			
 			//notify the players
-			getGameElements().getGameMemory().addAction(new ActionNotification(player.getName(), action));
+			getGameElements().notifyObservers(new ActionNotification(player.getName(), action));
 		
 	 }
 }

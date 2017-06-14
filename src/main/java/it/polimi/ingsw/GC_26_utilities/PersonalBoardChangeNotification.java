@@ -16,7 +16,6 @@ public class PersonalBoardChangeNotification extends Message{
 	private final GameStatus gameStatus;
 	private final String playerName;
 	private final CardDescriber card;
-	private final String permanentEffect; //necessary whenever a player activates a permanent Effect
 	
 
 	private final String boardTileValues; //not null only at the beginning
@@ -27,15 +26,13 @@ public class PersonalBoardChangeNotification extends Message{
 	 * @param status It's the status of the game
 	 * @param playerName It's the player's name
 	 * @param card It's the card
-	 * @param permanentEffect It's the permanent effect, if it's been activated by the player
 	 * @param boardTileValues It represents the values of the personal bonus tile
 	 */
-	public PersonalBoardChangeNotification(GameStatus status, String playerName, CardDescriber card, String permanentEffect,
+	public PersonalBoardChangeNotification(GameStatus status, String playerName, CardDescriber card, 
 			String boardTileValues) {
 		this.gameStatus=status;
 		this.playerName = playerName;
 		this.card = card;
-		this.permanentEffect = permanentEffect;
 		this.boardTileValues = boardTileValues;
 	}
 
@@ -55,13 +52,7 @@ public class PersonalBoardChangeNotification extends Message{
 		return card;
 	}
 
-	/**
-	 * Getter method that returns the permanent effect activated by the player
-	 * @return permanentEffect It's the permanent effect activated by the player
-	 */
-	public String getPermanentEffect() {
-		return permanentEffect;
-	}
+	
 
 	/**
 	 * Getter method that returns the values of the personal bonus tile

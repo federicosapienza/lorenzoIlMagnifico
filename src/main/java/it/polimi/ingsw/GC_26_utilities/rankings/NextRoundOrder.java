@@ -13,8 +13,7 @@ import it.polimi.ingsw.GC_26_player.Player;
  * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
  * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
  * 
- * Class that keeps a record of the rankings. It's periodically updated during the game.
- * Furthermore handles the changing order of the rounds.
+ * Class that keeps a record of the the changing order of the rounds.
  * 
  */
 

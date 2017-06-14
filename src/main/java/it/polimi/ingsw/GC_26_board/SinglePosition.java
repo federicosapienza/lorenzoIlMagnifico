@@ -26,7 +26,7 @@ public abstract class SinglePosition{
 		
 		
 		public boolean IsPositionOccupied(){
-			return positionFree;
+			return !positionFree;
 		}
 		
 		public void clear(){

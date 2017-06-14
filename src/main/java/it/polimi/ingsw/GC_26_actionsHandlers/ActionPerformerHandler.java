@@ -9,13 +9,16 @@ import it.polimi.ingsw.GC_26_board.SingleHarvest;
 import it.polimi.ingsw.GC_26_board.SingleProduction;
 import it.polimi.ingsw.GC_26_board.Tower;
 import it.polimi.ingsw.GC_26_board.TowerPosition;
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
+import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
+import it.polimi.ingsw.GC_26_utilities.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 
 public class ActionPerformerHandler {
@@ -63,7 +66,7 @@ public class ActionPerformerHandler {
 				if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)// character cards' permanent effect is immediately activated
 							card.runPermanentEffect(player);
 				player.setCardUsed(null);  //cleaning parameter of the card no more used
-						
+		gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(card), null));			
 				}
 		
 		

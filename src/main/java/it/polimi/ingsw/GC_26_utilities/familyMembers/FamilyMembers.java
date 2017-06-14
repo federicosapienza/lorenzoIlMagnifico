@@ -1,7 +1,6 @@
 package it.polimi.ingsw.GC_26_utilities.familyMembers;
 import it.polimi.ingsw.GC_26_utilities.dices.*;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -23,12 +22,11 @@ import it.polimi.ingsw.GC_26_server.Observable;
  * The values of the coloured family members correspond with the value of the dices of the same colour.
  * 
  */
-public class FamilyMembers extends Observable<FamilyMembersDescriber> implements Serializable{
+public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 
 	//it's the orange family member.
 	private FamilyMember orangeMember;
@@ -134,22 +132,22 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> implements
 	}
 	
 	/**
-	 * Method that returns the set of the family members that are actually free.
-	 * @return freeMembers It's the set of the family members that are actually free.
+	 * Method that returns the colors representing  the family members that are actually free.
+	 * @return freeMembers It's the set of the colors representing the family members that are actually free.
 	 */
-	public Set<FamilyMember> whatIsFree() {  
-		Set<FamilyMember> freeMembers = new HashSet<FamilyMember>();
+	public Set<Colour> whatIsFree() {  
+		Set<Colour> freeMembers = new HashSet<>();
 		if (blackMember.isFree() == true) {
-			freeMembers.add(blackMember);
+			freeMembers.add(Colour.BLACK);
 		}
 		if (orangeMember.isFree() == true) {
-			freeMembers.add(orangeMember);
+			freeMembers.add(Colour.ORANGE);
 		}
 		if (whiteMember.isFree() == true) {
-			freeMembers.add(whiteMember);
+			freeMembers.add(Colour.WHITE);
 		}
 		if (neutralMember.isFree() == true) {
-			freeMembers.add(neutralMember);
+			freeMembers.add(Colour.NEUTRAL);
 		}
 		return freeMembers;
 	}

@@ -15,7 +15,8 @@ public class MainActionHandler {
 	private VaticanReportHandler vaticanReportHandler;
 	private LeaderCardHandler leaderCardHandler;
 	 
-	public MainActionHandler() {
+	public MainActionHandler(GameElements gameElements) {
+		this.gameElements=gameElements;
 		harvestAndProductionHandler = new HarvestAndProductionHandler(gameElements);
 		
 		firstActionHandler =new FirstActionHandler(gameElements, harvestAndProductionHandler);

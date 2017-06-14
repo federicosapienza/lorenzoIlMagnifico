@@ -55,7 +55,6 @@ public class SocketOutClient implements ClientConnection{
 			objOut.writeObject(action);
 			objOut.flush();
 
-			System.out.println("socketOut- sent Action");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

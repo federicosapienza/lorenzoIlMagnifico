@@ -169,8 +169,8 @@ public class ChoiceController implements Observer<Integer>{
 			catch ( IllegalStateException e ) {
 				e.printStackTrace();
 				synchronized (player) {
-					player.setStatus(new Request(PlayerStatus.VATICANREPORTDECISION, "action not valid" , null));
-					handlers.getVaticanReportHandler().perform(player, 0);
+					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "action not valid" , null));
+					handlers.getVaticanReportHandler().perform(player, 0); //not loop because if 0 status is not checked
 				}
 				handlers.getGameElements().getGame().vaticanReportNext(); // automatically ends the turn
 				}	

@@ -1,0 +1,9 @@
+	   {
+	  	"name": "Advanced 3",
+	  	"resourcesOrPointsProduction": [
+	  		1,2,0,0,0,0,0,0
+	  		],
+	  	"resourcesOrPointsHarvest": [
+	  		0,0,1,1,0,1,0,0
+	  		]
+	  }

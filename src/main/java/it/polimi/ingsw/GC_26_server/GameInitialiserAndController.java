@@ -16,12 +16,10 @@ import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
 import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 
-public class GameInitialiserAndController implements Runnable{
+public class GameInitialiserAndController{
 	private Game game;
-	private boolean started;
 	private List<ClientMainServerView> clients= new ArrayList<>() ;
 	private int numOfPlayer=0 ; //new match are created when a player is in 
-	private Server server;
 	
 	public  GameInitialiserAndController(Cards cards, BonusInterface bonus, TimerValuesInterface times){
 		game = new Game( cards,  bonus,  times);
@@ -65,11 +63,10 @@ public class GameInitialiserAndController implements Runnable{
 					player.getPersonalBoard().registerObserver(view.getCardDescriberView());
 					game.registerObserver(view.getCardDescriberView());
 					gameElements.getBoard().registerObserver(view.getPositionView());
+					gameElements.registerObserver(view.getActionView());
 				}
 				//for broadcast messages
 				player.getWarehouse().registerObserver(view.getPlayerWalletView());
-			//	game.registerObserver(view.getCardDescriberView());
-			//	gameElements.getBoard().registerObserver(view.getPositionView());
 				player.getFamilyMembers().registerObserver(view.getFamilyMembersView());
 
 			}
@@ -90,11 +87,4 @@ public class GameInitialiserAndController implements Runnable{
 			game.startGame();
 	}
 	
-	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

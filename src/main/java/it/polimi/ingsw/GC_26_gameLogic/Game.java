@@ -33,21 +33,21 @@ public class Game extends Observable<CardDescriber>{
 	private int numberOfPlayers=0;
 	private GameElements gameElements;
 	private List<ResourcesOrPoints[]> resourcesOrPointsBonus;
+<<<<<<< HEAD
 	private final int numberOfPeriods =GameParameters.getNumberOfPeriods(); 
+=======
+>>>>>>> f7bd89a4994f2c0de30e416c49c67ea4de1d7d08
 	private GameStatus gameStatus=GameStatus.INITIALIZINGGAME;
 	
 	private List<ResourcesOrPoints> startingResources;
 	private TimerValuesInterface times;
 	private BonusInterface bonusInterface;
 	
-	private int periodNumber;
 	private List<ExcommunicationTile> excommunicationTiles;
 	
-	private int numPeriods =GameParameters.getNumberOfPeriods();
-	private int numRounds= GameParameters.getRoundsforPeriod();
 	private int period=1;
 	private int round=1;
-	
+	private int numberOfPeriods = GameParameters.getNumberOfPeriods();
 
 	
 	public Game(Cards cards, BonusInterface bonus, TimerValuesInterface times){
@@ -56,7 +56,7 @@ public class Game extends Observable<CardDescriber>{
 		this.startingResources= bonus.getResourcesOrPointsStarting();
 		this.bonusInterface =bonus;
 		this.times= times;
-		periodNumber=1;
+		period=1;
 		players= new ArrayList<>();
 		
 	}
@@ -93,8 +93,7 @@ public class Game extends Observable<CardDescriber>{
 	
 	
 	public void initialiseGame(){
-		System.out.println("game 96");
-		gameElements= new GameElements(this ,players, numberOfPlayers, resourcesOrPointsBonus, times);
+		gameElements= new GameElements(this ,players, numberOfPlayers, resourcesOrPointsBonus, bonusInterface.getFaithTrack());
 		
 		//TODO notificare i giocatori
 		
@@ -105,7 +104,7 @@ public class Game extends Observable<CardDescriber>{
 	
 	public void startGame(){
 		gameElements.notifyPlayers(new  Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
-		excommunicationTiles = cards.getExcommunicationTiles();
+		excommunicationTiles = cards.getRandomExcommunicationTiles();
 
 		//TODO send rules : such as timeout etc
 		 //send the first info about players
@@ -113,17 +112,18 @@ public class Game extends Observable<CardDescriber>{
 			p.getWarehouse().notifyObservers(new PlayerWallet(p.getWarehouse()));
 		}
 		//gives to players  and send to clients personal bonus Tiles
+		//"normal" to get normal PersonalBoardTiles , "advanced" to get advanced PersonalBoardTiles
+		List<PersonalBoardTile> bonusTiles=bonusInterface.get4RandomPersonalBoardTiles("advanced");
+		int temp =0;
 		for(Player p: players){ 
-			int temp =0;
-			List<PersonalBoardTile> bonusTiles=bonusInterface.get4RandomBonusTiles();
 			p.getPersonalBoard().setPersonalBoardTile(bonusTiles.get(temp));
-			gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.INITIALIZINGGAME,p.getName(), null, null, bonusTiles.get(temp).toString()));
+			gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.INITIALIZINGGAME,p.getName(), null, bonusTiles.get(temp).toString()));
 			temp++;
 		}   
 		
 		//sending positions of the board:
 		gameElements.getBoard().boardSendingDescription();
-		int temp =0;
+		temp =0;
 		List<LeaderCard> leaderCards=cards.getRandomLeaderCards(numberOfPlayers);
 		//taking and sending LeaderCard to the player
 		for(Player p: players){ 
@@ -134,11 +134,11 @@ public class Game extends Observable<CardDescriber>{
 			}
 		}
 		//taking and sending excommunication Tiles
-		excommunicationTiles= cards.getExcommunicationTiles();
+		excommunicationTiles= cards.getRandomExcommunicationTiles();
 		for(ExcommunicationTile tile : excommunicationTiles){
 			notifyObservers(new CardDescriber(tile));
 		}
-		
+
 		//starting game
 		nextStep();
 	}
@@ -152,7 +152,7 @@ public class Game extends Observable<CardDescriber>{
 	
 	public void nextStep() {
 		if(playersPerformedActions==-1){//starting new Round
-			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "starting period "+ period+ " round "+round ));;
+			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "Starting period "+ period+ " round "+round ));;
 			sendingCardsAndSettingFamilyMembers();
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, null ));
 			//than read to 202
@@ -261,7 +261,8 @@ public class Game extends Observable<CardDescriber>{
 	
 	
 	private void chooseAWinner(){
-		//TODO
+		EndGameLogic endGame= new EndGameLogic(gameElements);
+		endGame.start();
 	}
 	
 	private int playersDoneVatican=-1;
@@ -286,24 +287,23 @@ public class Game extends Observable<CardDescriber>{
 		
 		//if the player has not enough faith points , excommunication tile effect is automatically activated.
 		//Otherwise the player will be asked to choose.
-		  if(player.getWarehouse().getFaithPoints()< GameParameters.getFaithPointNeeded(periodNumber)){
+		  if(player.getWarehouse().getFaithPoints()< GameParameters.getFaithPointNeeded(period)){
 		    	excommunicationTile.runEffect(player);
 		    	gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "is excommunicated"));
 		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(excommunicationTile), 
-		    								 excommunicationTile.toString(), null));
+		    								  null));
 		    	vaticanReportNext();
 		    	return;
 		  }
 		synchronized (player) {
 			if(player.getStatus() == PlayerStatus.SUSPENDED){  
-		    	//if player is suspended, the effect is runned.
-		    	//TODO notificare i giocatori che il player salta il turno
+		    	//if player is suspended, the effect is run.
 		    	gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),
 		    			player.getName()+ "misses his turn and is excommunicated"));
-		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(),new CardDescriber(excommunicationTile), 
-						 excommunicationTile.toString(), null));
+		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(),
+		    			new CardDescriber(excommunicationTile),  null));
 		    	
-		    	excommunicationTile.runEffect(player);
+		    	excommunicationTile.runEffect(player);		    	
 		    	return;
 		
 		

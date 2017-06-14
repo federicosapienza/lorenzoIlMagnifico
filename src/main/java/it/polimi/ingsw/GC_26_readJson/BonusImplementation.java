@@ -1,11 +1,11 @@
 package it.polimi.ingsw.GC_26_readJson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.transform.Templates;
 
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoardTile;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
@@ -24,7 +24,9 @@ public class BonusImplementation implements BonusInterface {
 
 
 	private List<ResourcesOrPoints[]> listOfResourcesOfPointsArray = new ArrayList<ResourcesOrPoints[]>();
-	private List<ResourcesOrPoints> resourcesOrPointsStarting = new ArrayList<ResourcesOrPoints>(); 
+	private List<ResourcesOrPoints> resourcesOrPointsStarting = new ArrayList<ResourcesOrPoints>();
+	private List<PersonalBoardTile> personalBoardTilesNormal = new ArrayList<PersonalBoardTile>();
+	private List<PersonalBoardTile> personalBoardTilesAdvanced = new ArrayList<PersonalBoardTile>();
 	private Map<Integer,Integer> faithTrack = new HashMap<>();
 	
 	/**
@@ -56,22 +58,26 @@ public class BonusImplementation implements BonusInterface {
 	 * Getter method that returns the list of personal bonus tiles
 	 */
 	@Override
-	public List<PersonalBoardTile> get4RandomBonusTiles() {
-		
-		List<PersonalBoardTile> temp=new ArrayList<>();
-		PersonalBoardTile temp1 =new PersonalBoardTile(ResourcesOrPoints.newResources(1, 0, 0, 0), ResourcesOrPoints.newResources(1, 0, 0, 0));
-		PersonalBoardTile temp2 =new PersonalBoardTile(ResourcesOrPoints.newResources(1, 0, 0, 0), ResourcesOrPoints.newResources(1, 0, 0, 0));
-		PersonalBoardTile temp3 =new PersonalBoardTile(ResourcesOrPoints.newResources(1, 0, 0, 0), ResourcesOrPoints.newResources(1, 0, 0, 0));
-		PersonalBoardTile temp4 =new PersonalBoardTile(ResourcesOrPoints.newResources(1, 0, 0, 0), ResourcesOrPoints.newResources(1, 0, 0, 0));
-
-		temp.add(temp1);
-		temp.add(temp2);
-		temp.add(temp3);
-		temp.add(temp4);
-
-		return temp;
-		
+	public List<PersonalBoardTile> get4RandomPersonalBoardTiles(String normalOrAdvanced) {
+		if(normalOrAdvanced.equals("normal")){
+			Collections.shuffle(personalBoardTilesNormal);
+			return personalBoardTilesNormal;
+		}
+		if(normalOrAdvanced.equals("advanced")){
+			Collections.shuffle(personalBoardTilesAdvanced);
+			return personalBoardTilesAdvanced;
+		}
+		return null;
 	}
 
+	public List<PersonalBoardTile> getPersonalBoardTiles(String nomrmalOrAdvanced){
+		if(nomrmalOrAdvanced.equals("normal")){
+			return personalBoardTilesNormal;
+		}
+		if(nomrmalOrAdvanced.equals("advanced")){
+			return personalBoardTilesAdvanced;
+		}
+		return null;
+	}
 
 }

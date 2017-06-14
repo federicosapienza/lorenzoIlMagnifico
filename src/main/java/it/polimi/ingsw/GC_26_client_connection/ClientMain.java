@@ -7,8 +7,10 @@ import java.util.concurrent.Executors;
 
 
 import it.polimi.ingsw.GC_26_client.ClientController;
-import it.polimi.ingsw.GC_26_client_clientLogic.IOlogic;
+import it.polimi.ingsw.GC_26_client_clientLogic.InputlogicCli;
 import it.polimi.ingsw.GC_26_client_clientLogic.MainClientView;
+import it.polimi.ingsw.GC_26_client_clientLogic.Output;
+import it.polimi.ingsw.GC_26_client_clientLogic.OutputCLI;
 
 public class ClientMain {
 	private final static int PORT = 29997;
@@ -34,9 +36,10 @@ public class ClientMain {
 		}
 		MainClientView view = new MainClientView();
 		ExecutorService pool = Executors.newFixedThreadPool(2);
-		IOlogic iOlogic= new IOlogic(connection, view);
+		Output output= new OutputCLI();
+		InputlogicCli iOlogic= new InputlogicCli(connection, view, output);
 		SocketINClient socketINClient = new SocketINClient(socket);
-		socketINClient.setController( new ClientController(iOlogic,view));
+		socketINClient.setController( new ClientController(iOlogic,view, output));
 		pool.submit(iOlogic);
 		pool.submit(socketINClient);
 		//magari mettere a runnable il controller

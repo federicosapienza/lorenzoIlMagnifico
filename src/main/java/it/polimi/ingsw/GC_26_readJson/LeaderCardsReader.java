@@ -4,13 +4,12 @@ import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCardImplementation;
 import it.polimi.ingsw.GC_26_cards.leaderCard.Requirement;
-import it.polimi.ingsw.GC_26_cards.payments.Payment;
+
 
 public class LeaderCardsReader extends CardsReader {
 		
 	private JsonPathData pathData = new JsonPathData();
 	private String name;
-	private int period;
 	private String permanentEffectType;
 	private String immediateEffectType;
 	private String permanentEffectType2;

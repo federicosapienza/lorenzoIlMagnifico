@@ -16,7 +16,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
  */
 public class DiplomaticPrivilegesHandler {
 	private  ResourcesOrPoints[] diplomaticPrivilegesTrades= GameParameters.getDiplomaticPrivilegesTrades();
-	private boolean used[];
+	private boolean used[]= new boolean[GameParameters.getDiplomaticPrivilegesTrades().length];
 
 	public DiplomaticPrivilegesHandler() {
 		used= new boolean[diplomaticPrivilegesTrades.length];

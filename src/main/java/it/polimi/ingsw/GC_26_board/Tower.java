@@ -112,7 +112,7 @@ public class Tower {
 			return;
 		if( familyMember.getColour()!=Colour.NEUTRAL)
 			playersInTheTower.add(familyMember.getPlayer());
-		if(canFamilyMemberGoToTheTower(familyMember))
+		if(!canFamilyMemberGoToTheTower(familyMember))
 			throw new IllegalArgumentException();
 		isTowerFree = false;
 	}

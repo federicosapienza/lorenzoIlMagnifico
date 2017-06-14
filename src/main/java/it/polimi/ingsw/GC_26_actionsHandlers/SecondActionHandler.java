@@ -96,7 +96,7 @@ public class SecondActionHandler extends ActionHandler{
 		
 		
 		//notify the players of the action
-		getGameElements().getGameMemory().addAction(new ActionNotification(player.getName(), action));
+		getGameElements().notifyObservers(new ActionNotification(player.getName(), action));
 
 	}
 	
