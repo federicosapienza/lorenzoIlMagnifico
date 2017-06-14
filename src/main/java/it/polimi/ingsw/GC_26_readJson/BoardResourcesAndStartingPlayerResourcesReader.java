@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoardTile;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
-public class BoardResourcesAndStartingPlayerResourcesReader {
+public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader {
 
 	private JsonPathData jsonPathData = new JsonPathData();
 	private String[] listOfPaths;
@@ -26,6 +27,8 @@ public class BoardResourcesAndStartingPlayerResourcesReader {
 	private List<Integer> list =  new ArrayList<Integer>();
 	private List<Integer> list2 =  new ArrayList<Integer>();
 	int counter=0;
+	int timer;
+	JsonElement jsonElement;
 	private ResourcesOrPoints[] territoryTowerResources = new ResourcesOrPoints[4];
 	private ResourcesOrPoints[] characterTowerResources = new ResourcesOrPoints[4];
 	private ResourcesOrPoints[] buildingTowerResources = new ResourcesOrPoints[4];
@@ -111,6 +114,22 @@ public class BoardResourcesAndStartingPlayerResourcesReader {
 		}
 	}
 	
+	public void readTimers(TimerValueImplementation timerValueImplementation){
+		try {
+			br = new BufferedReader(new FileReader("src/Timers/timer.json"));
+			jsonObject= gson.fromJson(br, JsonObject.class);
+			}
+		catch (FileNotFoundException e) {e.printStackTrace();}
+		jsonElement = jsonObject.get("startingTimer");
+		timer = jsonElement.getAsInt();
+		timerValueImplementation.setStartingTimer(timer);
+		jsonElement = jsonObject.get("turnTimer");
+		timer = jsonElement.getAsInt();
+		timerValueImplementation.setTurnTimer(timer);
+		jsonElement = jsonObject.get("vaticanreportTimer");
+		timer = jsonElement.getAsInt();
+		timerValueImplementation.setVaticanReportTimer(timer);
+	}
 	
 	private void addResourcesInArray(ResourcesOrPoints resOrPoint){
 		if(counter<4){
