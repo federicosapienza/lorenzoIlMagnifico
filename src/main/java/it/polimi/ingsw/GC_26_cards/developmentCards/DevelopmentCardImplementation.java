@@ -13,7 +13,6 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	/**
 	 * 
 	 */
@@ -82,20 +81,21 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 		// if the card is a territory card we first of all need to check if player has enough military points
 		//also checks Cesare Borgia's like Effect is not active
 		if(type== DevelopmentCardTypes.TERRITORYCARD && !player.getPermanentModifiers().isMilitaryPointRequirementNotNeeded()){
-			int territoryCardOwned = player.getPersonalBoard().getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD);
-			if(player.getWarehouse().getMilitaryPoints() < GameParameters.getTerritoryCardRequirements(territoryCardOwned))
+			int territoryCardsOwned = player.getPersonalBoard().getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD);
+			if(player.getWarehouse().getMilitaryPoints() < GameParameters.getTerritoryCardRequirements(territoryCardsOwned+1)){//+1 because I want to increase my number of cards
 				player.notifyObservers(new Request(player.getStatus(),"not enough resources military "
 						+ "Points for getting another military card",new CardDescriber(player.getCardUsed())))	;
 				return false;
+			}
 		}
-		if(payment==null)
+		if(payment==null){
 			return true;
-		
+		}
 		 if(!payment.canPlayerGetThis(player, type)){
 			 player.notifyObservers(new Request(player.getStatus(),"not enough resources for getting the card",new CardDescriber(player.getCardUsed())));
 		 	return false;
 		 	}
-		return true;
+		 else return true;
 	}
 	@Override
 	public void pay(Player player) {

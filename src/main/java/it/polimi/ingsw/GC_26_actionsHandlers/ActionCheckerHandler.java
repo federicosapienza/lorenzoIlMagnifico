@@ -47,7 +47,7 @@ public class ActionCheckerHandler {
 		
 		 //checks if the player is already on the tower
 		Tower tower = gameElements.getBoard().getTower(action.getZone());
-		if(tower.canFamilyMemberGoToTheTower(familyMember)){ //familyMember== null ->second Action: (considered by canPlayerGoToTheTower=
+		if(!tower.canFamilyMemberGoToTheTower(familyMember)){ //familyMember== null ->second Action: (considered by canPlayerGoToTheTower=
 			player.notifyObservers(new Request(player.getStatus(),"Your coloured members are already in the tower", null));
 			return false ;
 					}

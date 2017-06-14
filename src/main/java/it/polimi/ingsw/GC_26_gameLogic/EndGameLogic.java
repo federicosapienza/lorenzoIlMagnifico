@@ -2,6 +2,7 @@ package it.polimi.ingsw.GC_26_gameLogic;
 
 
 
+import java.net.NetworkInterface;
 import java.util.List;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
@@ -15,8 +16,8 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
 public class EndGameLogic {
 	private final GameElements gameElements;
-	private final int territoryBonus[]= {0,0,1,4,10,20};
-	private final int charactersBonus[]= {1,3,6,10,15,21};
+	private final int territoryBonus[]= new  int[]{0,0,1,4,10,20};
+	private final int charactersBonus[]= new  int[]{1,3,6,10,15,21};
 	private final int resourcesBonus= 5;
 	private final ResourcesOrPoints militaryStrenghtFirstReward= ResourcesOrPoints.newPoints(5, 0, 0, 0);
 	private final ResourcesOrPoints militaryStrenghtSecondReward= ResourcesOrPoints.newPoints(2, 0, 0, 0);;

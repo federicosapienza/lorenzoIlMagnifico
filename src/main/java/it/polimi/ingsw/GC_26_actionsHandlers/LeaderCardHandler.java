@@ -9,6 +9,7 @@ import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.Info;
+import it.polimi.ingsw.GC_26_utilities.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26_utilities.Request;
 
 
@@ -58,8 +59,11 @@ public class LeaderCardHandler {
 		
 		setCardUsed(card);
 		card.runImmediateEffect(player);
-		if(!player.getPersonalBoard().isLeaderCardUsedYet(card))
+		if(!player.getPersonalBoard().isLeaderCardUsedYet(card)){
 			card.runPermanentEffect(player);
+			gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(card), null));			
+
+		}
 		//notifies the players
 		gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName() + " uses Leader Card "+ card));
 		player.getPersonalBoard().setLeaderCardUsed(card);

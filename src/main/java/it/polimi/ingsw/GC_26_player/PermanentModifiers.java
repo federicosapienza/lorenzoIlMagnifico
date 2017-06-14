@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_player;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -79,7 +80,7 @@ public class PermanentModifiers {
 	 * if the player owns this card, he doesn't need to satisfy the Military Points requirement 
 	 * when he takes Territory Cards.
 	 */
-	private boolean militaryPointRequirementNotNeeded; 
+	private boolean militaryPointRequirementNotNeeded=false; 
 	public boolean isMilitaryPointRequirementNotNeeded() {
 		return militaryPointRequirementNotNeeded;
 	}
@@ -192,9 +193,8 @@ public class PermanentModifiers {
 	 */
 	public void setDoubleEarningOn() {
 		doubleEarningOn = true;
+	
 	}
-	
-	
 	
 	
 	/**
@@ -204,7 +204,7 @@ public class PermanentModifiers {
 	 * They'll be checked and called in ActionCheckerHandler and SecondActionHandler
 	 */
 	
-	private Map<BoardZone, Integer> actionModifiers;
+	private Map<BoardZone, Integer> actionModifiers= new HashMap<>();
 	
 	/**
 	 * Method used to add an action modifier

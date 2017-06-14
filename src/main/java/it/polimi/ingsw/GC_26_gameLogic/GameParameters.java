@@ -22,9 +22,9 @@ public class GameParameters {
 	private static int defaultNeutralValue = 0;
 	private static ResourcesOrPoints towerOccupiedMalus = ResourcesOrPoints.newResources(3, 0, 0, 0);
 	private static int maxNumOfCards = 6;
-	private static Integer[] territoryCardRequirements = {0,0,3,7,12,18};
+	private static int[] territoryCardRequirements =new int[] {0,0,3,7,12,18};
 	private static int TowerFloors = 4;
-	private static Integer[] towersFloorsValues = {1,3,5,7};
+	private static int[] towersFloorsValues =new int[] {1,3,5,7};
 	private static int defaultPositionValue = 1;
 
 	private static int numPlayerforCompleteMarketActivation = 4;

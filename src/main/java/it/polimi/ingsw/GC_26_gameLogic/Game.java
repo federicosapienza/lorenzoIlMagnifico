@@ -256,7 +256,8 @@ public class Game extends Observable<CardDescriber>{
 	
 	
 	private void chooseAWinner(){
-		//TODO
+		EndGameLogic endGame= new EndGameLogic(gameElements);
+		endGame.start();
 	}
 	
 	private int playersDoneVatican=-1;

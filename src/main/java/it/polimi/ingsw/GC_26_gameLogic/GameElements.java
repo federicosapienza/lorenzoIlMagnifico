@@ -19,7 +19,7 @@ public class GameElements extends Observable<ActionNotification>{
 	private NextRoundOrder nextRoundOrder;
 	private List<Player> players;
 	private int numberOfPlayers;
-	private MainActionHandler handlers = new MainActionHandler();
+	private MainActionHandler handlers;
 	private Map<Integer, Integer> faithPointsTrack;
 	
 	public GameElements(Game game, List<Player> players, int numberOfPlayers, List<ResourcesOrPoints[]> resourcesOrPointsList, Map<Integer, Integer> faithPointsTrack ) {
@@ -29,6 +29,7 @@ public class GameElements extends Observable<ActionNotification>{
 		this.game =game;
 		this.faithPointsTrack= faithPointsTrack;
 		this.players=players;
+		this.handlers= new MainActionHandler(this);
 	}
 	
 	public Game getGame() {

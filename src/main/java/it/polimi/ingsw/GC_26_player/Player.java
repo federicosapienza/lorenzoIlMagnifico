@@ -162,9 +162,6 @@ public class Player extends Observable<Message> {
 	}
 	
 
-	 public void notify(Message message){
-		 System.out.println("notify player 167");
-	    }
 		
 	
 
