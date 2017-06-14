@@ -41,6 +41,7 @@ public class ReadAll implements ReadFromFile{
 		boardResourcesAndStartingPlayerResourcesReader.readResources(bonus);
 		boardResourcesAndStartingPlayerResourcesReader.readStartingPlayerResources(bonus);
 		boardResourcesAndStartingPlayerResourcesReader.readFaithTrack(bonus);
+		boardResourcesAndStartingPlayerResourcesReader.readPersonalBoardTiles(bonus, "advanced");
 		
 		excommunicationTilesReader.readCards(1, cards);
 		excommunicationTilesReader.readCards(2, cards);

@@ -25,6 +25,9 @@ public class JsonPathData {
 	String[] excommunicationTilesPeriod2 = {"src/Cards/Excommunication Tiles/Period_2/1.json","src/Cards/Excommunication Tiles/Period_2/2.json","src/Cards/Excommunication Tiles/Period_2/3.json","src/Cards/Excommunication Tiles/Period_2/4.json","src/Cards/Excommunication Tiles/Period_2/5.json","src/Cards/Excommunication Tiles/Period_2/6.json"};
 	String[] excommunicationTilesPeriod3 = {"src/Cards/Excommunication Tiles/Period_3/1.json","src/Cards/Excommunication Tiles/Period_3/2.json","src/Cards/Excommunication Tiles/Period_3/3.json","src/Cards/Excommunication Tiles/Period_3/4.json","src/Cards/Excommunication Tiles/Period_3/5.json","src/Cards/Excommunication Tiles/Period_3/7.json"};
 	
+	String[] personalBoardTilesNormal ={"src/Cards/PersonalBoard_Tiles/Normal_1.json","src/Cards/PersonalBoard_Tiles/Normal_1.json","src/Cards/PersonalBoard_Tiles/Normal_1.json","src/Cards/PersonalBoard_Tiles/Normal_1.json"};
+	String[] personalBoardTilesAdvanced ={"src/Cards/PersonalBoard_Tiles/Advanced_1.json","src/Cards/PersonalBoard_Tiles/Advanced_2.json","src/Cards/PersonalBoard_Tiles/Advanced_3.json","src/Cards/PersonalBoard_Tiles/Advanced_4.json"};
+	
 	String[] resources = {"src/ResourcesForBoard/Towers/TerritoriesTower/floor1.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor2.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor3.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor4.json","src/ResourcesForBoard/Towers/CharactersTower/floor1.json","src/ResourcesForBoard/Towers/CharactersTower/floor2.json","src/ResourcesForBoard/Towers/CharactersTower/floor3.json","src/ResourcesForBoard/Towers/CharactersTower/floor4.json","src/ResourcesForBoard/Towers/BuildingsTower/floor1.json","src/ResourcesForBoard/Towers/BuildingsTower/floor2.json","src/ResourcesForBoard/Towers/BuildingsTower/floor3.json","src/ResourcesForBoard/Towers/BuildingsTower/floor4.json","src/ResourcesForBoard/Towers/VenturesTower/floor1.json","src/ResourcesForBoard/Towers/VenturesTower/floor2.json","src/ResourcesForBoard/Towers/VenturesTower/floor3.json","src/ResourcesForBoard/Towers/VenturesTower/floor4.json","src/ResourcesForBoard/Market/position1.json","src/ResourcesForBoard/Market/position2.json","src/ResourcesForBoard/Market/position3.json","src/ResourcesForBoard/Market/position4.json","src/ResourcesForBoard/Council_Palace/council_palace.json"};
 	String[] startingResources = {"src/StartingResources/player1.json","src/StartingResources/player2.json","src/StartingResources/player3.json","src/StartingResources/player4.json"};
 	
@@ -84,6 +87,12 @@ public class JsonPathData {
 	}
 	public String[] getExcommunicationTilesPeriod3() {
 		return excommunicationTilesPeriod3;
+	}
+	public String[] getPersonalBoardTilesNormal() {
+		return personalBoardTilesNormal;
+	}
+	public String[] getPersonalBoardTilesAdvanced() {
+		return personalBoardTilesAdvanced;
 	}
 	
 }
