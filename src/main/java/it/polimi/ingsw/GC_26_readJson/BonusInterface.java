@@ -10,7 +10,7 @@ public interface BonusInterface {
 	List<ResourcesOrPoints> getResourcesOrPointsStarting();
 	List<ResourcesOrPoints[]> getListOfResourcesOfPointsArray();
 	Map<Integer, Integer> getFaithTrack();
-	List<PersonalBoardTile> get4RandomBonusTiles();
+	List<PersonalBoardTile> get4RandomPersonalBoardTiles(String normalOrAdvanced);
 	
 	
 }

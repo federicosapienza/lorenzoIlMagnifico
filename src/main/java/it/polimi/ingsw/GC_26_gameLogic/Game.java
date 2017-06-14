@@ -108,7 +108,8 @@ public class Game extends Observable<CardDescriber>{
 			p.getWarehouse().notifyObservers(new PlayerWallet(p.getWarehouse()));
 		}
 		//gives to players  and send to clients personal bonus Tiles
-		List<PersonalBoardTile> bonusTiles=bonusInterface.get4RandomBonusTiles();
+		//"normal" to get normal PersonalBoardTiles , "advanced" to get advanced PersonalBoardTiles
+		List<PersonalBoardTile> bonusTiles=bonusInterface.get4RandomPersonalBoardTiles("advanced");
 		int temp =0;
 		for(Player p: players){ 
 			p.getPersonalBoard().setPersonalBoardTile(bonusTiles.get(temp));

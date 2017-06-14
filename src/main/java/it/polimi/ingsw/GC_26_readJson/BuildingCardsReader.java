@@ -71,8 +71,6 @@ public class BuildingCardsReader extends CardsReader {
 					immediateEffect = super.createDoubleEffect(immediateEffect, immediateTemp);
 				}
 				createBuildingCard(cardsImplementation,numberOfPeriod);
-				System.out.println(name);
-				System.out.println(period);
 				super.closeBufferedReader();
 			}
 		}
