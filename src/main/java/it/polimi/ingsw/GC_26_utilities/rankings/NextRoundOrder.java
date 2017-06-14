@@ -50,7 +50,7 @@ public class NextRoundOrder {
 	public void nextRoundChanging(Player player){
 		String name = player.getName();
 		if(!nextRoundOrder.contains(name))
-		nextRoundOrder.add(name);
+			nextRoundOrder.add(name);
 	}
 	
 	/**

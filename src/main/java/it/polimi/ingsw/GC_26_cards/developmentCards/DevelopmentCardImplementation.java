@@ -92,7 +92,7 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 			return true;
 		
 		 if(!payment.canPlayerGetThis(player, type)){
-			 player.notifyObservers(new Request(player.getStatus(),"not enough resources for getting the card",new CardDescriber(player.getCardUsed())));
+			 player.notifyObservers(new Request(player.getStatus(),"not enough resources to get the card",new CardDescriber(player.getCardUsed())));
 		 	return false;
 		 	}
 		return true;

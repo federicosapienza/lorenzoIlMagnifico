@@ -79,7 +79,7 @@ public class Server {
 			newGame();
 			
 		}	
-		}
+	}
 
 	
 	

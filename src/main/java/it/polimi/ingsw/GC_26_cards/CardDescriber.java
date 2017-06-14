@@ -51,7 +51,7 @@ public class CardDescriber implements Serializable{
 		this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
 		this.requirement=null;
 		this.actionValue=cardImplementation.getActionValue();
-				}
+	}
 	public CardDescriber(LeaderCard card){
 		LeaderCardImplementation cardImplementation = (LeaderCardImplementation) card;
 		this.typeOfCard="Leader Card";

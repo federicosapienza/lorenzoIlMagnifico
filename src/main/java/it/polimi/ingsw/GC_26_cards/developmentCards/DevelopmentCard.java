@@ -12,7 +12,7 @@ public interface DevelopmentCard {
 	public abstract void runImmediateEffect(Player player);
 	public abstract void runPermanentEffect(Player player);	
 	public abstract int getActionValue();
-	public abstract  DevelopmentCardTypes getType();
+	public abstract DevelopmentCardTypes getType();
 	
 	
 }

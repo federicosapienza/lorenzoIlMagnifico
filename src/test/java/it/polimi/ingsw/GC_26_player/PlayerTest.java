@@ -13,13 +13,15 @@ import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembers;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class PlayerTest {
+	Player player1 = new Player("Luke", ResourcesOrPoints.newResources(5, 3, 2, 2));
+	Player player2 = new Player("Ivan", ResourcesOrPoints.newResources(6, 3, 2, 2));
+	Dices dices = new Dices();
 	
 	@Test
-	public void test() {
-		Dices dices = new Dices();
-		
-		Player player1 = new Player("Luke", ResourcesOrPoints.newResources(5, 3, 2, 2));
-		Player player2 = new Player("Ivan", ResourcesOrPoints.newResources(6, 3, 2, 2));
+	public void testValues() {
+		assertNotNull(player1);
+		assertNotNull(player2);
+
 		dices.rollDices();
 		player1.getFamilyMembers().setValues(dices);
 		player2.getFamilyMembers().setValues(dices);
