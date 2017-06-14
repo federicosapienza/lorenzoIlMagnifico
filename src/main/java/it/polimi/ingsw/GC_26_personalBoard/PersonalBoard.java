@@ -25,26 +25,25 @@ import java.util.List;
 
 
 public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we need to pass cards only to a player: (i.e LeaderCards)
-	//it's the set of territory cards
-	private Set<DevelopmentCard> territoryCardSet= new HashSet<>();
+	//it's the list of territory cards
+	private List<DevelopmentCard> territoryCardSet= new ArrayList<>();
 	
-	//it's the set of building cards
-	private Set<DevelopmentCard> buildingCardSet= new HashSet<>();
+	//it's the list of building cards
+	private List<DevelopmentCard> buildingCardSet= new ArrayList<>();
 	
-	//it's the set of character cards
-	private Set<DevelopmentCard> characterCardSet= new HashSet<>();
+	//it's the list of character cards
+	private List<DevelopmentCard> characterCardSet= new ArrayList<>();
 	
-	//it's the set of venture cards
-	private Set<DevelopmentCard> ventureCardSet= new HashSet<>();
+	//it's the list of venture cards
+	private List<DevelopmentCard> ventureCardSet= new ArrayList<>();
 	
 	//it's the list of leader cards owned
 	private List<LeaderCard> leadersCardList= new ArrayList<>();
 	
-	//it's the list of leader cards the player has used at least once yet.
+	//it's the set of leader cards the player has used at least once yet.
 	private Set<LeaderCard> leaderCardsUsed = new HashSet<>();
 	
-	//it's a counter that counts the number of territory cards
-	private int territoryCardCounter;
+	
 	
 	//it's the personal board tile to append at the left of the personal board
 	private PersonalBoardTile personalBoardTile;
@@ -108,27 +107,27 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	 * @return territoryCardCounter It's the number of territory cards in the personal board.
 	 */
 	public int checkNumberOfTerritoryCards(){
-		return territoryCardCounter;
+		return territoryCardSet.size();
 	}
 	
 	/**
 	 * Method that returns the set of development cards for the desired type of cards.
 	 * @param type It's the desired type of cards 
-	 * @return territoryCardSet The set of territory cards if the @param type is TERRITORYCARD
-	 * @return buildingCardSet The set of building cards if the @param type is BUILDINGCARD
-	 * @return characterCardSet The set of character cards if the @param type is CHARACTERCARD
-	 * @return ventureCardSet The set of venture cards if the @param type is VENTURECARD
+	 * @return territoryCardSet The list of territory cards if the @param type is TERRITORYCARD
+	 * @return buildingCardSet The list of building cards if the @param type is BUILDINGCARD
+	 * @return characterCardSet The list of character cards if the @param type is CHARACTERCARD
+	 * @return ventureCardSet The list of venture cards if the @param type is VENTURECARD
 	 */
-	public Set<DevelopmentCard> getCurrentCards(DevelopmentCardTypes type){
+	public List<DevelopmentCard> getCurrentCards(DevelopmentCardTypes type){
 		switch(type){
 		case TERRITORYCARD:
-			return  Collections.unmodifiableSet(territoryCardSet);
+			return  Collections.unmodifiableList(territoryCardSet);
 		case BUILDINGCARD:
-			return Collections.unmodifiableSet(buildingCardSet);
+			return Collections.unmodifiableList(buildingCardSet);
 		case CHARACTERCARD:
-			return Collections.unmodifiableSet(characterCardSet);
+			return Collections.unmodifiableList(characterCardSet);
 		case VENTURECARD:
-			return Collections.unmodifiableSet(ventureCardSet);
+			return Collections.unmodifiableList(ventureCardSet);
 		default: 
 			throw new IllegalArgumentException();
 		}
@@ -136,7 +135,7 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	
 	/**
 	 * Method that returns the list of leader cards.
-	 * @return leaderCardSet It's list of leader cards
+	 * @return leaderCardSet It's the list of leader cards
 	 */
 	public List<LeaderCard> getLeadersCard(){
 		List<LeaderCard>  temp = Collections.unmodifiableList(leadersCardList);

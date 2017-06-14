@@ -1,13 +1,8 @@
 package it.polimi.ingsw.GC_26_player;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Predicate;
 
-import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
@@ -403,6 +398,37 @@ public class PermanentModifiers {
 	}
 	
 	/**
+	 * The following lines represent the effects of the 4 excommunication cards of the 3rd period (see page 13
+	 * of 14 of the official rulebook)
+	 * They force the player to lose Victory points for any N victory Points owned.
+	 * or Conquered Territories.
+	 */
+	
+	private int victoryPointsReducer=1;
+	
+	/**
+	 * Method that sets the parameter which will divide the number of victory points owned. 
+	 * @param the parameter which will divide the number of victory points owned.
+	 */
+	
+	
+	public void setVictoryPointsReducer(int malus){
+		victoryPointsReducer=malus;
+	}
+	
+	/**
+	 * Getter method that returns the malus that shall divide the victory points owned. 
+	 * @return victoryPointsReducer : the value that indicates the malus that will divide the victory points owned,
+	 * If not changed the default value is 1.
+	 */
+	public int getVictoryPointsReducer(){
+		return victoryPointsReducer;
+	}
+	
+	
+	
+	
+	/**
 	 * The following lines represent the effects of the last 3 excommunication tiles of the 3rd period (see pag 13
 	 * of 14 of the official rulebook).
 	 * At the end of the game, players affected by the effects of any of these excommunication tiles, will lose
@@ -567,7 +593,7 @@ public class PermanentModifiers {
 	 * @return true if the effect is active; false if it isn't active.
 	 */
 	public boolean isOneDiceChangeOn() {
-		return threeDicesChangeOn;
+		return oneDicesChangeOn;
 	}
 	
 	/**

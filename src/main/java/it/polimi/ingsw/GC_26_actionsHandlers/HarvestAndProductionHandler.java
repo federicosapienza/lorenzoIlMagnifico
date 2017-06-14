@@ -1,6 +1,6 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
-import java.util.Set;
+import java.util.List;
 
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
@@ -22,7 +22,7 @@ public class HarvestAndProductionHandler {
 		if(value<1)
 			throw new IllegalArgumentException();
 		//taking the cards
-		Set<DevelopmentCard>  set = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.TERRITORYCARD);
+		List<DevelopmentCard>  list = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.TERRITORYCARD);
 		
 		//giving to the player the bonus of personal board tile
 		PersonalBoardTile tile = player.getPersonalBoard().getPersonalBoardTile();
@@ -30,7 +30,7 @@ public class HarvestAndProductionHandler {
 			player.getWarehouse().add(tile.getResourcesOrPointsHarvest());
 		
 		//launching harvest
-		perform(player, set , value);
+		perform(player, list , value);
 	}
 	
 	public void startProduction(Player player, int value){
@@ -38,7 +38,7 @@ public class HarvestAndProductionHandler {
 			throw new IllegalArgumentException();
 		
 		//taking the cards
-		Set<DevelopmentCard>  set = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.BUILDINGCARD);
+		List<DevelopmentCard>  list = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.BUILDINGCARD);
 		
 		//giving to the player the bonus of personal board tile
 				PersonalBoardTile tile = player.getPersonalBoard().getPersonalBoardTile();
@@ -46,10 +46,10 @@ public class HarvestAndProductionHandler {
 					player.getWarehouse().add(tile.getResourcesOrPointsProduction());
 				
 		//launching production
-		perform(player, set , value);
+		perform(player, list , value);
 	}
 
-	private void perform(Player player, Set<DevelopmentCard> set, int value) {
+	private void perform(Player player, List<DevelopmentCard> set, int value) {
 		//setting TestWarehouse: it is used in trades: we must ensure the player is not using resources just earned in trading.
 				player.setTemporaryWarehouse();
 		
@@ -62,8 +62,8 @@ public class HarvestAndProductionHandler {
 	
 	//called after trades
 	public void continuePerforming(Player player){
-		//retaking the right set of card at the right position
-		 Set<DevelopmentCard> set =player.getPersonalBoard().getCurrentCards(player.getCardUsed().getType()) ;
+		//taking again the right set of card at the right position
+		 List<DevelopmentCard> set =player.getPersonalBoard().getCurrentCards(player.getCardUsed().getType()) ;
 		 boolean found=false;
 		 for(DevelopmentCard card: set){
 			 if(!found && card.equals(player.getCardUsed())) //
