@@ -8,19 +8,21 @@ import it.polimi.ingsw.GC_26_client_connection.ClientConnection;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 
-public class IOlogic  implements Runnable{
+public class InputlogicCli  implements Runnable{
 		private ClientConnection connection;
 		private boolean waitingPlayer;  //useless
 		private boolean waitingAction=false;
 		private boolean waitingResponse = false;
 		private boolean firstAction =true;  //if first action true , if second is false
 		private MainClientView view; 
+		private Output output;
 	
 		private Scanner scanIN= new Scanner(System.in);
 		
-		public IOlogic(ClientConnection connection, MainClientView view) {
+		public InputlogicCli(ClientConnection connection, MainClientView view, Output output) {
 			this.connection=connection;
 			this.view=view;
+			this.output=output;
 
 		}
 		
@@ -41,9 +43,9 @@ public class IOlogic  implements Runnable{
 				}
 			while(true){
 				if(this.getWaitingAction()){
-					System.out.println(view.getThisPlayer().getFamilyMembers().getStatus());
-					System.out.println(view.getThisPlayer().getFamilyMembers().whatIsFree());
-					System.out.println("What Action?");
+					output.printFamilyMembers(view.getThisPlayer());
+					output.printResources(view.getThisPlayer());
+					output.printString("What Action?");
 					int boardChoice=0; //senza lo zero la seconda volta va male
 					int position=0;
 					int servants=-2;
@@ -51,24 +53,23 @@ public class IOlogic  implements Runnable{
 					int familyMember=0;
 					if(firstAction){
 								while(this.waitingAction && (familyMember<1 || familyMember>4)){
-								System.out.println("what family member? 1-orange 2-black 3-white 4-neutral");
+									output.printString("what family member? 1-orange 2-black 3-white 4-neutral");
 								familyMember = scanIN.nextInt();}
 								familyMemberColour=chooseColour(familyMember);
 					}
 					while(this.waitingAction && (boardChoice<1 || boardChoice>8)){
-						System.out.println("What Action? 1-terr 2-buil 3-char 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
+						output.printString("What Action? 1-terr 2-buil 3-char 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
 						boardChoice = scanIN.nextInt();
 						}
 					//TODO ovviamente aggiusteremo con limitazioni che varieranno a seconda di pos e quindi di partita,
 					//TODO possiamo fare cosa carina che intanto gli lanciamo view  della zona di interesse
 	
 					while(this.waitingAction && (position<1 || position>8)){ //!waitingAction In case timeout occurs
-							System.out.println("what position? '-1'-togoBack");
+						output.printString("what position? '-1'-togoBack");
 							position = scanIN.nextInt();
-							System.out.println(position);
 							}
 					while(this.waitingAction && servants<-1 && position!=99){
-						System.out.println("how many servants? '-1'togoBack");
+						output.printString("how many servants? '-1'togoBack");
 						servants = scanIN.nextInt();
 					}
 					if(position!= 99 &&servants!=-1){
@@ -77,7 +78,7 @@ public class IOlogic  implements Runnable{
 						connection.performAction(action);
 						this.waitingAction=false;
 						this.firstAction=false;
-						System.out.println("IOLOGIC 80");
+						
 					}
 
 

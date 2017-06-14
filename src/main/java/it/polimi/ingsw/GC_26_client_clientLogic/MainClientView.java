@@ -17,8 +17,7 @@ public class MainClientView {
 	private  String playerUsername;
 	private final Map< String, PlayerView> players;
 	private final BoardView board;
-	private  IOlogic iOlogic;
-	
+	private  InputlogicCli iOlogic;
 	
 	
 	

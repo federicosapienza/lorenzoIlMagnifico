@@ -89,7 +89,6 @@ public class Game extends Observable<CardDescriber>{
 	
 	
 	public void initialiseGame(){
-		System.out.println("game 96");
 		gameElements= new GameElements(this ,players, numberOfPlayers, resourcesOrPointsBonus, bonusInterface.getFaithTrack());
 		
 		//TODO notificare i giocatori
@@ -135,7 +134,7 @@ public class Game extends Observable<CardDescriber>{
 		for(ExcommunicationTile tile : excommunicationTiles){
 			notifyObservers(new CardDescriber(tile));
 		}
-		
+
 		//starting game
 		nextStep();
 	}
@@ -149,7 +148,7 @@ public class Game extends Observable<CardDescriber>{
 	
 	public void nextStep() {
 		if(playersPerformedActions==-1){//starting new Round
-			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "starting period "+ period+ " round "+round ));;
+			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "Starting period "+ period+ " round "+round ));;
 			sendingCardsAndSettingFamilyMembers();
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, null ));
 			//than read to 202

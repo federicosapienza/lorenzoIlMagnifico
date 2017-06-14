@@ -122,59 +122,44 @@ public class BoardView {
 		}
 		
 	}
-	
-	public void printBoard(){
-		System.out.println("Territory Tower");
-		printList(territoriesTower);
-		System.out.println("building Tower");
-		printList(buildingsTower);
-		System.out.println("Character Tower");
-		printList(charactersTower);
-		System.out.println("Venture Tower");
-		printList(venturesTower);
-		System.out.println("market");
-		printList(marketZone);
-		System.out.println("Production ");
-		printList(productionZone);
-		System.out.println("Harvest ");
-		printList(harvestZone);
-		System.out.println("CouncilPalace ");
-		printList(CouncilPalace);
-		
-		
-	}
-	
-	
-	private void printList(List<PositionView> positions){
-		for(PositionView p : positions){
-			printTool(p);
-		}
-	}
-	
-	private void printTool(PositionView position){
-		StringBuilder temp= new StringBuilder(" ");
-		if(position.getBonusPosition() !=null)
-			temp.append(position.getBonusPosition()+" ");
-		if(position.getCardHere()!=null)
-			temp.append(position.getCardHere()+ " ");
-		if(!position.getPlayersHere().isEmpty()){
-			Map<String , Colour> here= position.getPlayersHere();
-			for (Map.Entry<String, Colour> entry : here.entrySet()){
-			    temp.append(entry.getKey()+ " "+ entry.getValue()+" ");
-			}
 
-		}
-		System.out.println(position.getPositionValue()+" "+temp);
-	}
+	
+	
 	
 	
 	public void addExcommunication(CardDescriber card){
 		excommunicationThisGame.add(card);
-		System.out.println(card.getName()+" "+ card.getPermanentEffectDescriber());
+		System.out.println(card.getPeriod() +" "+  card.getPermanentEffectDescriber());
 	}
 	
 	
-	
+	public List<PositionView> getBuildingsTower() {
+		return buildingsTower;
+	}
+	public List<PositionView> getCharactersTower() {
+		return charactersTower;
+	}
+	public List<PositionView> getCouncilPalace() {
+		return CouncilPalace;
+	}
+	public List<PositionView> getMarketZone() {
+		return marketZone;
+	}
+	public List<PositionView> getProductionZone() {
+		return productionZone;
+	}
+	public List<PositionView> getTerritoriesTower() {
+		return territoriesTower;
+	}
+	public List<PositionView> getHarvestZone() {
+		return harvestZone;
+	}
+	public List<PositionView> getVenturesTower() {
+		return venturesTower;
+	}
+	public List<CardDescriber> getExcommunicationThisGame() {
+		return excommunicationThisGame;
+	}
 
 
 	}
