@@ -8,6 +8,7 @@ public class ReadAll implements ReadFromFile{
 	private CharacterCardsReader characterCardsReader = new CharacterCardsReader();
 	private VentureCardsReader ventureCardsReader = new VentureCardsReader();
 	private LeaderCardsReader leaderCardsReader = new LeaderCardsReader();
+	private ExcommunicationTilesReader excommunicationTilesReader = new ExcommunicationTilesReader();
 	private BoardResourcesAndStartingPlayerResourcesReader boardResourcesAndStartingPlayerResourcesReader = new BoardResourcesAndStartingPlayerResourcesReader();
 	private CardsImplementation cards= new CardsImplementation();
 	private BonusImplementation bonus = new BonusImplementation();
@@ -40,6 +41,10 @@ public class ReadAll implements ReadFromFile{
 		boardResourcesAndStartingPlayerResourcesReader.readResources(bonus);
 		boardResourcesAndStartingPlayerResourcesReader.readStartingPlayerResources(bonus);
 		boardResourcesAndStartingPlayerResourcesReader.readFaithTrack(bonus);
+		
+		excommunicationTilesReader.readCards(1, cards);
+		excommunicationTilesReader.readCards(2, cards);
+		excommunicationTilesReader.readCards(3, cards);
 	}
 	
 	public Cards getCards() {

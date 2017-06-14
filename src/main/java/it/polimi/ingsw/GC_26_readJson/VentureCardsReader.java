@@ -81,7 +81,7 @@ public class VentureCardsReader extends CardsReader {
 			DevelopmentCard developmentCard= DevelopmentCardImplementation.ventureCard(name, period, payment, immediateEffect, permanentEffect);
 			switch(numOfPeriod){
 			   case 1:
-				   cardsImplementation.getDevelopmentCards(1, DevelopmentCardTypes.VENTURECARD).add(developmentCard);
+				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.VENTURECARD).add(developmentCard);
 				   break;
 			   case 2:
 				   cardsImplementation.getDevelopmentCards(numOfPeriod,DevelopmentCardTypes.VENTURECARD ).add(developmentCard);

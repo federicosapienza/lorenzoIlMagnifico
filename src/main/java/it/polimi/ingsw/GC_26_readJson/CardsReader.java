@@ -25,6 +25,7 @@ import it.polimi.ingsw.GC_26_cards.effects.FamilyMembersValueSetterEffect;
 import it.polimi.ingsw.GC_26_cards.effects.GainVictoryPointsPerAnyMilitaryPointEffect;
 import it.polimi.ingsw.GC_26_cards.effects.GoingToOccupiedActionSpacesAllowedEffect;
 import it.polimi.ingsw.GC_26_cards.effects.LoseVictoryPointForResourcesOrPointsEffect;
+import it.polimi.ingsw.GC_26_cards.effects.LoseVictoryPointsforEachNVictoryPointsEffect;
 import it.polimi.ingsw.GC_26_cards.effects.MarketBanEffect;
 import it.polimi.ingsw.GC_26_cards.effects.NoVictoryPointForCardTypeEffect;
 import it.polimi.ingsw.GC_26_cards.effects.PermanentResourcesMalusEffect;
@@ -234,6 +235,11 @@ public class CardsReader {
 				intList = readIntList("permanentLoseVictoryPointForResourcesOrPoints");
 				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
 				LoseVictoryPointForResourcesOrPointsEffect effect = new LoseVictoryPointForResourcesOrPointsEffect(resourcesOrPoints);
+				return effect;
+			}
+			if(effectType.equals("LoseVictoryPointsforEachNVictoryPoints")){
+				intInt = readInt("LoseVictoryPointsforEachNVictoryPointsNumber");
+				LoseVictoryPointsforEachNVictoryPointsEffect effect = new LoseVictoryPointsforEachNVictoryPointsEffect(intInt);
 				return effect;
 			}
 			if(effectType.equals("null")){

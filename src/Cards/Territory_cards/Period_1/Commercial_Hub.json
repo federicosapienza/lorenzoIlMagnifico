@@ -3,10 +3,7 @@
 	  	"period": 1,
 	  	"doubleImmediateEffect": "false",
 	  	  "doublePermanentEffect": "false",
-	  	"typeOfImmediateEffect" : "addResourcesAndPoints",
-	  	"immediateResourcesAndPoints": [
-	  		0,0,0,0,0,0,0,0
-	  		],
+	  	"typeOfImmediateEffect" : "null",
 	  		"typeOfPermanentEffect" : "addResourcesAndPoints",
 	  	"permanentResourcesAndPoints": [
 	  		1,0,0,0,0,0,0,0

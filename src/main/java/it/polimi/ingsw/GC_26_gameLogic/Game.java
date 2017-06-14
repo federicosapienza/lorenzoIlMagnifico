@@ -100,7 +100,7 @@ public class Game extends Observable<CardDescriber>{
 	
 	public void startGame(){
 		gameElements.notifyPlayers(new  Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
-		excommunicationTiles = cards.getExcommunicationTiles();
+		excommunicationTiles = cards.getRandomExcommunicationTiles();
 
 		//TODO send rules : such as timeout etc
 		 //send the first info about players
@@ -129,7 +129,7 @@ public class Game extends Observable<CardDescriber>{
 			}
 		}
 		//taking and sending excommunication Tiles
-		excommunicationTiles= cards.getExcommunicationTiles();
+		excommunicationTiles= cards.getRandomExcommunicationTiles();
 		for(ExcommunicationTile tile : excommunicationTiles){
 			notifyObservers(new CardDescriber(tile));
 		}

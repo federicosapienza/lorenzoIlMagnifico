@@ -21,6 +21,10 @@ public class JsonPathData {
 	
 	String[] leaderCards= {"src/Cards/Leader_cards/Bartolomeo Colleoni.json","src/Cards/Leader_cards/Cesare Borgia.json","src/Cards/Leader_cards/Cosimo de Medici.json","src/Cards/Leader_cards/Federico da Montefeltro.json","src/Cards/Leader_cards/Filippo Brunelleschi.json","src/Cards/Leader_cards/Francesco Sforza.json","src/Cards/Leader_cards/Giovanni dalle Bande Nere.json","src/Cards/Leader_cards/Girolamo Savonarola.json","src/Cards/Leader_cards/Leonardo da Vinci.json","src/Cards/Leader_cards/Lucrezia Borgia.json","src/Cards/Leader_cards/Ludovico Ariosto.json","src/Cards/Leader_cards/Ludovico III Gonzaga.json","src/Cards/Leader_cards/Ludovico il Moro.json","src/Cards/Leader_cards/Michelangelo Buonarroti.json","src/Cards/Leader_cards/Pico della Mirandola.json","src/Cards/Leader_cards/Sandro Botticelli.json","src/Cards/Leader_cards/Santa Rita.json","src/Cards/Leader_cards/Sigismondo Malatesta.json","src/Cards/Leader_cards/Sisto IV.json"};
 	
+	String[] excommunicationTilesPeriod1 = {"src/Cards/Excommunication Tiles/Period_1/1.json","src/Cards/Excommunication Tiles/Period_1/2.json","src/Cards/Excommunication Tiles/Period_1/3.json","src/Cards/Excommunication Tiles/Period_1/4.json","src/Cards/Excommunication Tiles/Period_1/5.json","src/Cards/Excommunication Tiles/Period_1/6.json","src/Cards/Excommunication Tiles/Period_1/7.json"};
+	String[] excommunicationTilesPeriod2 = {"src/Cards/Excommunication Tiles/Period_2/1.json","src/Cards/Excommunication Tiles/Period_2/2.json","src/Cards/Excommunication Tiles/Period_2/3.json","src/Cards/Excommunication Tiles/Period_2/4.json","src/Cards/Excommunication Tiles/Period_2/5.json","src/Cards/Excommunication Tiles/Period_2/6.json"};
+	String[] excommunicationTilesPeriod3 = {"src/Cards/Excommunication Tiles/Period_3/1.json","src/Cards/Excommunication Tiles/Period_3/2.json","src/Cards/Excommunication Tiles/Period_3/3.json","src/Cards/Excommunication Tiles/Period_3/4.json","src/Cards/Excommunication Tiles/Period_3/5.json","src/Cards/Excommunication Tiles/Period_3/7.json"};
+	
 	String[] resources = {"src/ResourcesForBoard/Towers/TerritoriesTower/floor1.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor2.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor3.json","src/ResourcesForBoard/Towers/TerritoriesTower/floor4.json","src/ResourcesForBoard/Towers/CharactersTower/floor1.json","src/ResourcesForBoard/Towers/CharactersTower/floor2.json","src/ResourcesForBoard/Towers/CharactersTower/floor3.json","src/ResourcesForBoard/Towers/CharactersTower/floor4.json","src/ResourcesForBoard/Towers/BuildingsTower/floor1.json","src/ResourcesForBoard/Towers/BuildingsTower/floor2.json","src/ResourcesForBoard/Towers/BuildingsTower/floor3.json","src/ResourcesForBoard/Towers/BuildingsTower/floor4.json","src/ResourcesForBoard/Towers/VenturesTower/floor1.json","src/ResourcesForBoard/Towers/VenturesTower/floor2.json","src/ResourcesForBoard/Towers/VenturesTower/floor3.json","src/ResourcesForBoard/Towers/VenturesTower/floor4.json","src/ResourcesForBoard/Market/position1.json","src/ResourcesForBoard/Market/position2.json","src/ResourcesForBoard/Market/position3.json","src/ResourcesForBoard/Market/position4.json","src/ResourcesForBoard/Council_Palace/council_palace.json"};
 	String[] startingResources = {"src/StartingResources/player1.json","src/StartingResources/player2.json","src/StartingResources/player3.json","src/StartingResources/player4.json"};
 	
@@ -72,6 +76,16 @@ public class JsonPathData {
 	public String[] getLeaderCards() {
 		return leaderCards;
 	}
+	public String[] getExcommunicationTilesPeriod1() {
+		return excommunicationTilesPeriod1;
+	}
+	public String[] getExcommunicationTilesPeriod2() {
+		return excommunicationTilesPeriod2;
+	}
+	public String[] getExcommunicationTilesPeriod3() {
+		return excommunicationTilesPeriod3;
+	}
+	
 }
 	
 	
