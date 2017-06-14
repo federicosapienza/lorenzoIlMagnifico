@@ -21,7 +21,7 @@ public class ReadAll implements ReadFromFile{
 	}
 	
 	public void start(){
-		/*territoryCardsReader.readCards(1,cards);
+		territoryCardsReader.readCards(1,cards);
 		territoryCardsReader.readCards(2,cards);
 		territoryCardsReader.readCards(3,cards);
 		
@@ -42,12 +42,12 @@ public class ReadAll implements ReadFromFile{
 		boardResourcesAndStartingPlayerResourcesReader.readResources(bonus);
 		boardResourcesAndStartingPlayerResourcesReader.readStartingPlayerResources(bonus);
 		boardResourcesAndStartingPlayerResourcesReader.readFaithTrack(bonus);
-		boardResourcesAndStartingPlayerResourcesReader.readPersonalBoardTiles(bonus, "advanced");*/
+		boardResourcesAndStartingPlayerResourcesReader.readPersonalBoardTiles(bonus, "advanced");
 		boardResourcesAndStartingPlayerResourcesReader.readTimers(timer);
 		
-		/*excommunicationTilesReader.readCards(1, cards);
+		excommunicationTilesReader.readCards(1, cards);
 		excommunicationTilesReader.readCards(2, cards);
-		excommunicationTilesReader.readCards(3, cards);*/
+		excommunicationTilesReader.readCards(3, cards);
 		
 		
 	}

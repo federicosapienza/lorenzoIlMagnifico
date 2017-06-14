@@ -1,8 +1,6 @@
 package it.polimi.ingsw.GC_26_readJson;
 
 
-import java.util.jar.Attributes.Name;
-
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTile;
 import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTileImplementation;
@@ -20,13 +18,13 @@ private Effect permanentEffect;
 		String[] listOfPaths = chooseListOfExcommunicationTIles(numberOfPeriod);
 		for(String s:listOfPaths){
 			super.createJsonObjectFromFile(s);
-			
 			period = super.readInt("period");
 			permanentEffectType= super.readString("typeOfPermanentEffect");
 			permanentEffect=super.createPermanentEffect(permanentEffectType);
 			name = super.readString("name");
 			System.out.println(name);
 			createExcommunicationTiles(cards,numberOfPeriod);
+			super.closeBufferedReader();
 		}
 
 

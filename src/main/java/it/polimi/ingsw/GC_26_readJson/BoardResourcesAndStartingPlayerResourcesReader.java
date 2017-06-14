@@ -73,6 +73,12 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 			list = new Gson().fromJson(jsonObject.get("resources"), listTypeInt);
 			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResources(list.get(0),list.get(1),list.get(2),list.get(3));
 			bonusImplementation.getResourcesOrPointsStarting().add(resourcesOrPoints);
+			try {
+				br.close();
+				}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -95,9 +101,13 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 				list = new Gson().fromJson(jsonObject.get("resourcesOrPointsHarvest"), listTypeInt);
 				ResourcesOrPoints resourcesOrPointsHarvest = ResourcesOrPoints.newResourcesOrPoints(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5),list.get(6),list.get(7));
 				createPersonalBoardTiles(bonusImplementation, normalOrAdvanced, resourcesOrPointsProduction, resourcesOrPointsHarvest);
-			}
-			
-			
+				try {
+					br.close();
+					}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			}		
 		}
 	
 	
@@ -111,6 +121,12 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 	list2 = new Gson().fromJson(jsonObject.get("victoryPoints"), listTypeInt);
 		for(int i = 0; i<list.size() ;i++){
 			bonusImplementation.getFaithTrack().put(list.get(i), list2.get(i));
+		}
+		try {
+			br.close();
+			}
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -129,6 +145,12 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 		jsonElement = jsonObject.get("vaticanreportTimer");
 		timer = jsonElement.getAsInt();
 		timerValueImplementation.setVaticanReportTimer(timer);
+		try {
+			br.close();
+			}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void addResourcesInArray(ResourcesOrPoints resOrPoint){

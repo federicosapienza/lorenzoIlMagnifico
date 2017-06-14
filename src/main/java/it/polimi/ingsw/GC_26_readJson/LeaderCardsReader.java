@@ -4,7 +4,7 @@ import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCardImplementation;
 import it.polimi.ingsw.GC_26_cards.leaderCard.Requirement;
-import it.polimi.ingsw.GC_26_cards.payments.Payment;
+
 
 public class LeaderCardsReader extends CardsReader {
 		
