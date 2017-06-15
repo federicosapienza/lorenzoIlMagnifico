@@ -11,7 +11,6 @@ public class ExcommunicationTilesReader extends CardsReader {
 private JsonPathData jsonPathData = new JsonPathData();
 private int period;
 private String permanentEffectType;
-private String name;
 private Effect permanentEffect;
 	
 	public void readCards(int numberOfPeriod,CardsImplementation cards){
@@ -21,7 +20,6 @@ private Effect permanentEffect;
 			period = super.readInt("period");
 			permanentEffectType= super.readString("typeOfPermanentEffect");
 			permanentEffect=super.createPermanentEffect(permanentEffectType);
-			name = super.readString("name");
 			createExcommunicationTiles(cards,numberOfPeriod);
 			super.closeBufferedReader();
 		}
@@ -43,7 +41,7 @@ private Effect permanentEffect;
 	}
 	
 	private void createExcommunicationTiles(CardsImplementation cardsImplementation,int numOfperiod){
-		ExcommunicationTile excommunicationTile = new ExcommunicationTileImplementation(numOfperiod, permanentEffect,name);
+		ExcommunicationTile excommunicationTile = new ExcommunicationTileImplementation(numOfperiod, permanentEffect);
 		cardsImplementation.getExcommunicationTiles(numOfperiod).add(excommunicationTile);
 	}
 }

@@ -407,14 +407,14 @@ public class CardsReader {
 		return requirements;
 	}
 	
-	private DevelopmentCardTypes getDevelopmentCardType(String type){
+	public DevelopmentCardTypes getDevelopmentCardType(String type){
 			if(type.equals("territory")){ return DevelopmentCardTypes.TERRITORYCARD;}
 			if(type.equals("building")){ return DevelopmentCardTypes.BUILDINGCARD;}
 			if(type.equals("character")){ return DevelopmentCardTypes.CHARACTERCARD;}
 			if(type.equals("venture")){ return DevelopmentCardTypes.VENTURECARD;}
 			return null;
 		}
-	private BoardZone getBoardZoneType(String type){
+	public BoardZone getBoardZoneType(String type){
 		if(type.equals("territory")){return BoardZone.TERRITORYTOWER;}
 		if(type.equals("building")){return BoardZone.BUILDINGTOWER;}
 		if(type.equals("character")){return BoardZone.CHARACTERTOWER;}

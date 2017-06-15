@@ -55,8 +55,6 @@ public class TerritoryCardsReader extends CardsReader {
 						immediateEffect = super.createDoubleEffect(immediateEffect, immediateTemp);
 					}
 					createTerritoryCard(cards, numberOfPeriod);
-					System.out.println(name);
-					System.out.println(period);
 					super.closeBufferedReader();
 					}
 				}

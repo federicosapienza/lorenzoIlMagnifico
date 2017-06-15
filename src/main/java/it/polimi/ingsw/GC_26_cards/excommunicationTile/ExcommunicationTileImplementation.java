@@ -9,12 +9,10 @@ public class ExcommunicationTileImplementation implements ExcommunicationTile{
 	 */
 	private final Effect effect;
 	private final int period;
-	private final String name;
 	
-	public ExcommunicationTileImplementation(int period, Effect effect,String name) {
+	public ExcommunicationTileImplementation(int period, Effect effect) {
 		this.effect=effect;
 		this.period=period;
-		this.name = name;
 	}
 
 	public Effect getEffect() {
@@ -33,10 +31,6 @@ public class ExcommunicationTileImplementation implements ExcommunicationTile{
 	}
 	public int getPeriod() {
 		return period;
-	}
-
-	public String getName(){
-		return name;
 	}
 
 

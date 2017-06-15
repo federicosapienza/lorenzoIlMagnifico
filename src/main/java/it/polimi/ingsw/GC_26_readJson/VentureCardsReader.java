@@ -70,8 +70,6 @@ public class VentureCardsReader extends CardsReader {
 					immediateEffect = super.createDoubleEffect(immediateEffect, immediateTemp);
 				}
 				createVentureCard(cardsImplementation,numberOfPeriod);
-				System.out.println(name);
-				System.out.println(period);
 				super.closeBufferedReader();
 			}
 		}
