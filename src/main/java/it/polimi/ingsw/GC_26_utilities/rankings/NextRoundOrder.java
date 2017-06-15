@@ -38,6 +38,7 @@ public class NextRoundOrder {
 	private void initialise(List<Player> players) {
 		for(Player p: players){
 			String name = p.getName();
+			nextRoundOrder.add(name);
 		}
 	}
 
@@ -65,8 +66,9 @@ public class NextRoundOrder {
 	/**
 	 * Method that changes the order for the next round, if it has to be changed.
 	 * @param players It's the list of players playing the game
+	 * @return temp It's the order for the next round
 	 */
-	public void changeNextRoundOrder(List<Player> players){  
+	public List<Player> changeNextRoundOrder(List<Player> players){  
 		//completing the nextRoundOrderList: adding all the players that are not contained in nextRoundOrder
 		for (Player p: players) {
 			if (!nextRoundOrder.contains(p.getName()))
@@ -76,18 +78,18 @@ public class NextRoundOrder {
 		List<Player> temp = new ArrayList<>();
 		for(String name: nextRoundOrder){
 			for(Player p : players){
-				if(name== p.getName()){
+				if(name.equals(p.getName())){
 					temp.add(p);
 					break;
 				}
 				else throw new IllegalArgumentException("could not sort the List");
 			}
 		}
-		players = temp;
 		// clearing nextRoundOrder List
 		while(!nextRoundOrder.isEmpty()){
 			nextRoundOrder.remove(0);
 		}
+		return temp;
 	}
 	
 }

@@ -43,6 +43,7 @@ public class InputlogicCli  implements Runnable{
 				}
 			while(true){
 				if(this.getWaitingAction()){
+					System.out.println("io46");
 					output.printFamilyMembers(view.getThisPlayer());
 					output.printResources(view.getThisPlayer());
 					output.printString("What Action?");
@@ -51,7 +52,7 @@ public class InputlogicCli  implements Runnable{
 					int servants=-2;
 					Colour familyMemberColour =null;
 					int familyMember=0;
-					if(firstAction){
+					if(this.firstAction){
 								while(this.waitingAction && (familyMember<1 || familyMember>4)){
 									output.printString("what family member? 1-orange 2-black 3-white 4-neutral");
 								familyMember = scanIN.nextInt();}
@@ -102,7 +103,7 @@ public class InputlogicCli  implements Runnable{
 					waitingResponse=false;
 				}
 			}
-				
+	
 		}
 		
 		
@@ -163,13 +164,14 @@ public class InputlogicCli  implements Runnable{
 		}
 		
 		public synchronized void setWaitingFirstAction(){
-			waitingAction=true;
 			firstAction=true;
+			waitingAction=true;
+			System.out.println("io logic 169 waiting called");
 
 		}
 		public synchronized void setWaitingSecondAction(){
-			waitingAction=true;
 			firstAction=false;
+			waitingAction=true;
 		}
 		
 		

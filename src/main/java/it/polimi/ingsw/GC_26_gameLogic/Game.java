@@ -155,10 +155,7 @@ public class Game extends Observable<CardDescriber>{
 		 */
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
 		
-		/**
-		 * Random excommunication tiles are chosen for this game
-		 */
-		excommunicationTiles = cards.getRandomExcommunicationTiles();
+		
 
 		//TODO send rules : such as timeout etc
 		 //send the first info about players
@@ -299,7 +296,7 @@ public class Game extends Observable<CardDescriber>{
 			 * but in the same period.
 			 */
 			if(round==1){
-				gameElements.getNextRoundOrder().changeNextRoundOrder(players);
+				players= gameElements.getNextRoundOrder().changeNextRoundOrder(players);
 				gameElements.getBoard().endRound();
 				round++;
 				playersPerformedActions=-1;
@@ -327,8 +324,8 @@ public class Game extends Observable<CardDescriber>{
 			 * If the player has not been suspended, his status will change to PLAYING and the other players
 			 * will be notified that it's his turn
 			 */
-			player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),"Is '" +player.getName()+ "' turn")) ;
+			player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
 			return;
 		}
 

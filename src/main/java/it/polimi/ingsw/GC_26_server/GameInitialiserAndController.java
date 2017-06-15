@@ -73,8 +73,14 @@ public class GameInitialiserAndController{
 		}
 		//controllers' observers of view
 				MainActionHandler handlers = gameElements.getHandlers();  //instead of giving all the model to the controllers we give handlers: 
-				for(Player player: players){
 					for(ClientMainServerView view : clients){
+						Player player=null;
+						//finds correspondent name
+						for(Player p: players){
+							if(p.getName()==view.getName()){
+								player=p;
+								break;}
+							}
 						ActionController actionController= new ActionController(player, handlers);
 						ChoiceController choiceController=  new ChoiceController(player, handlers);
 						EndTurnController endTurnController = new EndTurnController(player, handlers);
@@ -83,6 +89,8 @@ public class GameInitialiserAndController{
 						view.getStringInputView().registerObserver(choiceController);
 						view.getEndTurnView().registerObserver(endTurnController);
 
+					if(player==null){
+						throw new IllegalArgumentException();
 					}
 				}
 			game.startGame();

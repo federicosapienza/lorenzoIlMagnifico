@@ -39,7 +39,7 @@ public class MainClientView {
 		}
 	}
 	
-	public PlayerStatus getPlayerStatus() {
+	public synchronized PlayerStatus getPlayerStatus() {
 		synchronized (playerStatus) {
 			return playerStatus;
 		}
