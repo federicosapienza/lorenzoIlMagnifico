@@ -72,8 +72,36 @@ public  class PlayerWallet  implements Serializable{
 		return victoryPoints;
 	}
 	
+	@Override
 	
+	public boolean equals(Object obj) {
+	    if (this == obj)               
+	        return true;
+	    if (obj == null)               
+	        return false;
+	    if (getClass() != obj.getClass())   
+	        return false;
+	    PlayerWallet other = (PlayerWallet) obj;                
+	    if (this.getPlayerName() != other.getPlayerName() || this.getCoins()!=other.getCoins() || this.getServants()!=other.getServants()
+	    		 || this.getWood()!=other.getWood() || this.getStone()!=other.getStone() || this.getMilitaryPoints()!= other.getMilitaryPoints()
+	    		 || this.getVictoryPoints()!=other.getVictoryPoints() || this.getFaithPoints()!=other.getFaithPoints()
+	    		 || this.getCouncilPrivileges()!=other.getCouncilPrivileges())        
+	        return false;                 
+	    return true; 
+
+	}
 	
+	public String toStringResources() {
+		return coins+" coins"+ servants +" servants" + stone +" stone"+wood+ " wood";
+	}
+	public String toStringPoints() {
+		return victoryPoints+" victory points"+ militaryPoints +" military points" + faithPoints +" faith points"+ councilPrivileges + " council privileges";
+	}
 	
 
+	@Override
+	public String toString() {
+		
+		return playerName+": " + toStringResources()+ " "+toStringPoints();
+		}
 }

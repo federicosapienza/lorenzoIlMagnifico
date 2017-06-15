@@ -13,6 +13,7 @@ import it.polimi.ingsw.GC_26_board.SinglePosition;
 import it.polimi.ingsw.GC_26_board.SingleProduction;
 import it.polimi.ingsw.GC_26_board.Tower;
 import it.polimi.ingsw.GC_26_board.TowerPosition;
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
@@ -69,8 +70,9 @@ public class ActionCheckerHandler {
 
 		
 		if(!card.canPlayerGetThis(player)){
+			 player.notifyObservers(new Request(player.getStatus(),"not enough resources to get the card",new CardDescriber(card)));
 			return false;
-			//the card will notify why card could not be bought: 
+			//could mean
 			// 1) not enough resources
 			// 2) military points' requirements needed for getting 3,4,5,6 territory card not reached
 		}

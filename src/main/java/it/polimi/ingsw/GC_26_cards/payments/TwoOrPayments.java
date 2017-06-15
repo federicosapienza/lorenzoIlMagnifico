@@ -56,7 +56,7 @@ public class TwoOrPayments implements Payment{
 	
 	@Override
 	public String toString() {
-		return "choice over two payment: "+  mode1.toString()+" or "+mode2.toString();
+		return "choice over two payment: (1) "+  mode1.toString()+" or (2) "+mode2.toString();
 	}
 
 }

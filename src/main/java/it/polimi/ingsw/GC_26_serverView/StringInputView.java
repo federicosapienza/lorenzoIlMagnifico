@@ -14,7 +14,7 @@ public class StringInputView extends Observable<Integer>{
 		String temp = "end turn";
 		if(string.equalsIgnoreCase(temp) || string.equals("999")){
 				endTurnView.notifyEndTurn(false);
-			
+				return;
 		}
 		if(isInteger(string)){
 			int number = Integer.parseInt(string);

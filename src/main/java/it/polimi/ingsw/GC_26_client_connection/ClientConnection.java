@@ -8,7 +8,7 @@ public interface ClientConnection {
 
 	void login(String username, String password);
 
-	void sendResponce(int responce);
+	void sendResponce(String temp);
 
 	void performAction(Action action);
 	

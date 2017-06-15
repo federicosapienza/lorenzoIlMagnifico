@@ -38,9 +38,9 @@ public class SocketOutClient implements ClientConnection{
 	}
 
 	@Override
-	public void sendResponce(int responce) {
+	public void sendResponce(String string) {
 		try {
-			objOut.writeObject(responce);
+			objOut.writeObject(string);
 			objOut.flush();
 			
 		} catch (IOException e) {

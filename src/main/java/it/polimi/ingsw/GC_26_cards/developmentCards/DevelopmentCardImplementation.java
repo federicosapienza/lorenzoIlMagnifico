@@ -92,7 +92,6 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 			return true;
 		}
 		 if(!payment.canPlayerGetThis(player, type)){
-			 player.notifyObservers(new Request(player.getStatus(),"not enough resources to get the card",new CardDescriber(player.getCardUsed())));
 		 	return false;
 		 	}
 		 else return true;
@@ -118,12 +117,7 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 		
 	}
 
-	
 
-	
-	public DevelopmentCardTypes getCardType() {
-		return type;
-	}
 
 	
 	public String getImmediateEffectDescriber() {

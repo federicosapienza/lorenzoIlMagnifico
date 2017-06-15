@@ -111,7 +111,9 @@ public class ClientMainServerView {
 	}
 
 
-
+	public EndTurnView getEndTurnView() {
+		return endTurnView;
+	}
 	
 
 

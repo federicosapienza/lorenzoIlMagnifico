@@ -3,7 +3,6 @@ package it.polimi.ingsw.GC_26_board;
 import java.util.*;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 //To import Set interface
 import it.polimi.ingsw.GC_26_player.Player;
@@ -21,7 +20,7 @@ import it.polimi.ingsw.GC_26_utilities.familyMembers.*;
  *
  */
 public class Tower {
-	private boolean isTowerFree;
+	private boolean isTowerFree=true;
 	private List<Player> playersInTheTower = new ArrayList<>();
 	private List<DevelopmentCard> cardsForThisRound = new ArrayList<>();
 	private TowerPosition towerPositionFloor1;
@@ -98,10 +97,10 @@ public class Tower {
 			return true;
 		for(Player p: playersInTheTower){
 			if(p.equals(familyMember.getPlayer())){
-				return isTowerFree=true;
+				return false;
 			}
 		}
-			return isTowerFree=false; 	
+			return true; 	
 	}
 	
 	//sets that the player is in the Tower, passing the familyMember so that:
@@ -110,11 +109,12 @@ public class Tower {
 	public void setPlayerInTheTower(FamilyMember familyMember){
 		if(familyMember== null)
 			return;
-		if( familyMember.getColour()!=Colour.NEUTRAL)
-			playersInTheTower.add(familyMember.getPlayer());
-		if(!canFamilyMemberGoToTheTower(familyMember))
-			throw new IllegalArgumentException();
-		isTowerFree = false;
+		if( familyMember.getColour()!=Colour.NEUTRAL){
+			if(!canFamilyMemberGoToTheTower(familyMember))
+				throw new IllegalArgumentException();
+			else{ playersInTheTower.add(familyMember.getPlayer());
+			      isTowerFree = false; }
+		}
 	}
 	
 	public boolean isTheTowerOccupied(){

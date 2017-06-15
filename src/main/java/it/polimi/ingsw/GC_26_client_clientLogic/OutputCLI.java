@@ -18,13 +18,13 @@ public class OutputCLI implements Output{
 	public synchronized void printBoard(BoardView board) {
 		System.out.println("Territory Tower");
 		printList(board.getTerritoriesTower());
-		System.out.println("building Tower");
-		printList(board.getCharactersTower());
 		System.out.println("Character Tower");
+		printList(board.getCharactersTower());
+		System.out.println("Building Tower");
 		printList(board.getBuildingsTower());
 		System.out.println("Venture Tower");
 		printList(board.getVenturesTower());
-		System.out.println("market");
+		System.out.println("Market");
 		printList(board.getMarketZone());
 		System.out.println("Production ");
 		printList(board.getProductionZone());
@@ -67,7 +67,7 @@ public class OutputCLI implements Output{
 	}
 	@Override
 	public  void printResources(PlayerView player) {
-		System.out.println(player.getWallet());
+		System.out.println(player.getWallet().toString());
 		
 	}
 	@Override
@@ -93,13 +93,16 @@ public class OutputCLI implements Output{
 	
 	public  void printFamilyMembers(PlayerView player){
 		System.out.println(player.getFamilyMembers().getStatus());
-		System.out.println(player.getFamilyMembers().whatIsFree());
+		System.out.println(player.getFamilyMembers().whatIsFree().toString());
+		//si  potrebbe fare un modo più elaborato prendendo uno alla volta
 	}
 	@Override
 	public void printCards(PlayerView thisPlayer) {
-		// TODO Auto-generated method stub
-		
+	//TODO
 	}
+	
+
+
 	
 
 }

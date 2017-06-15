@@ -31,15 +31,14 @@ public class PlayerView {
 		leadersCardOwned= new HashSet<>();
 		leadersCardUsed= new HashSet<>();
 		
-		updateValues(wallet);
+		this.wallet=wallet;
 		
 	}
 	
 	public void updateValues(PlayerWallet wallet){
+		if(!this.wallet.equals(wallet))
 		this.wallet=wallet;
-		System.out.println(name+" "+wallet.getCoins()+" coins, "+wallet.getServants()+
-		" servants, "+wallet.getWood()+" wood, "+wallet.getStone()+" stone.");
-		//TODO dividere visione di punti e risorse
+		
 	}
 	
 	
@@ -58,7 +57,7 @@ public class PlayerView {
 			temp.add(card);
 		}
 		if(card.getTypeOfCard().contains("Leader"))
-			leadersCardUsed.add(card);
+			leadersCardOwned.add(card);
 		
 	}
 	
@@ -77,35 +76,24 @@ public class PlayerView {
 		return name;
 	}
 	
-	public void add(CardDescriber card){
-		switch(card.getType()){
-		case TERRITORYCARD: 
-			territoryCardSet.add(card);
-		case BUILDINGCARD: 
-			buildingCardSet.add(card);
-		case CHARACTERCARD:
-			characterCardSet.add(card);
-		case VENTURECARD:
-			ventureCardSet.add(card);
-		default:
-			throw new IllegalArgumentException();
-		}
-	}
+
 	
 	public Set<CardDescriber> getCurrentCards(DevelopmentCardTypes type){
 		switch(type){
 		case TERRITORYCARD:
-			return  Collections.unmodifiableSet(territoryCardSet);
+			return  territoryCardSet;
 		case BUILDINGCARD:
-			return Collections.unmodifiableSet(buildingCardSet);
+			return buildingCardSet;
 		case CHARACTERCARD:
-			return Collections.unmodifiableSet(characterCardSet);
+			return characterCardSet;
 		case VENTURECARD:
-			return Collections.unmodifiableSet(ventureCardSet);
+			return ventureCardSet;
 		default: 
 			throw new IllegalArgumentException();
 		}
 	}
 	
-	
+	public Set<CardDescriber> getLeadersCardOwned() {
+		return leadersCardOwned;
+	}
 }

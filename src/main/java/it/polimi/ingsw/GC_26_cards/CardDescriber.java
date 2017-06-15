@@ -44,7 +44,7 @@ public class CardDescriber implements Serializable{
 		DevelopmentCardImplementation cardImplementation = (DevelopmentCardImplementation) card;
 		this.typeOfCard="Development Card";
 		this.name= cardImplementation.getName();
-		this.type=cardImplementation.getCardType();
+		this.type=cardImplementation.getType();
 		this.period=cardImplementation.getPeriod();
 		this.payment=cardImplementation.getPaymentDescriber();
 		this.immediateEffect=cardImplementation.getImmediateEffectDescriber();
@@ -126,16 +126,16 @@ public class CardDescriber implements Serializable{
 			if(name!=null)
 				temp.append(name );
 			if(payment!=null)
-					temp.append(" payment: " +payment);
+					temp.append(" PAY: " +payment);
 			if(requirement!=null)
-					temp.append(" requirement "+ requirement);
+					temp.append(" REQ "+ requirement);
 			
 			if(immediateEffect!=null)
-					temp.append(" immediate effect :" + immediateEffect);
-			if(immediateEffect!=null)
-				temp.append(" permanent effect :" + permanentEffect);
+					temp.append(" IMMEDIATE EFF. :" + immediateEffect);
+			if(permanentEffect!=null)
+				temp.append(" PERMAMENT EFF :" + permanentEffect);
 			if(actionValue !=0)
-				temp.append(" action value "+ actionValue);
+				temp.append(" ACTION VALUE "+ actionValue);
 			temp.append(".");
 			return temp.toString();
 		

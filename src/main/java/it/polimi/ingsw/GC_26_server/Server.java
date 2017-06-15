@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_readJson.ReadAll;
@@ -26,9 +25,8 @@ public class Server {
 	
 	public void start() {
 		ReadFromFile gamesSpecific= new ReadAll();
-		GameParameters gameParameters= new GameParameters();  // others useful values not in files
+		//GameParameters gameParameters= new GameParameters();  // others useful values not in files
 		gamesSpecific.start();
-		System.out.println("Server30");
 		cards= gamesSpecific.getCards();
 		bonus = gamesSpecific.getBonus();
 		times= null;

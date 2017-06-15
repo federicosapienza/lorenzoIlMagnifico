@@ -4,10 +4,11 @@ import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
+import it.polimi.ingsw.GC_26_server.Observer;
 import it.polimi.ingsw.GC_26_utilities.Info;
 import it.polimi.ingsw.GC_26_utilities.Request;
 
-public class EndTurnController {
+public class EndTurnController implements Observer<Boolean>{
 	
 	Player player;
 	MainActionHandler handlers;
@@ -17,14 +18,10 @@ public class EndTurnController {
 		this.handlers= handlers;
 	}
 	
-	public void update(boolean timeOutOccured){ //todo 
-		//potrei mettere synronysed il controller per evitare problemi di 2 azioni in contemporane
-		
-		
-		
-		PlayerStatus status;
+	public void update(Boolean timeOutOccured){ 
+		PlayerStatus previousStatus;
 		synchronized (player) {
-				 status= player.getStatus();
+			previousStatus= player.getStatus();
 			
 			if(!timeOutOccured && player.isPlayerActive())
 				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "end turn", null));
@@ -36,7 +33,6 @@ public class EndTurnController {
 			
 					}
 		}
-		PlayerStatus previousStatus = player.getPreviousStatus();
 		
 		//setting the default parameters and calling the actions that were suspended if the turn ends where it should not
 		if(previousStatus == PlayerStatus.TRADING)
@@ -62,7 +58,7 @@ public class EndTurnController {
 	handlers.getDiplomaticPrivilegesHandler().resetMemory();
 	handlers.getHarvestAndProductionHandler();
 	handlers.getGameElements().getGame().nextStep();
-		
+	return;	
 	}	
 		
 	

@@ -9,7 +9,7 @@ public interface ExcommunicationTile {
 
 	public abstract void runEffect(Player player);
 	
-	
+	public abstract int getPeriod();
 	
 	
 	

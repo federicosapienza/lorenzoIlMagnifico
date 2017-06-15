@@ -1,6 +1,8 @@
 package it.polimi.ingsw.GC_26_client_clientLogic;
 
-import it.polimi.ingsw.GC_26_board.Board;
+import java.util.Set;
+
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 
 public interface Output {
 	void printBoard(BoardView board);
@@ -11,4 +13,5 @@ public interface Output {
 	void printRankings(MainClientView view);  //prints the rankings: military points , victory points, faith points
 	void printFamilyMembers(PlayerView player);
 	void printCards(PlayerView thisPlayer);
+	void printCards(Set<CardDescriber> cards);
 }

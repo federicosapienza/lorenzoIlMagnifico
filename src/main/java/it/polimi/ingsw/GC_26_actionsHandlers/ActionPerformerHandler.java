@@ -34,13 +34,15 @@ public class ActionPerformerHandler {
 	 
 	 protected void towerPerformPayment(Player player, FamilyMember familyMember, Action action){
 		Tower tower = gameElements.getBoard().getTower(action.getZone());
-		//sets that the player is in the Tower, passing the familyMember so that:
-		//1) if the member is neutral , player is not added to the list 
-		//2) if is a secondary action familyMember is null and player is not added
-		tower.setPlayerInTheTower(familyMember);  
+		
 		//if the tower is occupied pay coins(or any payment if rules are changed)(and Brunelleschi effect is not activated)
 		if(tower.isTheTowerOccupied()&& !player.getPermanentModifiers().isTowerOccupiedMalusDisabled())
 			player.getWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
+		
+		//sets that the player is in the Tower, passing the familyMember so that:
+				//1) if the member is neutral , player is not added to the list 
+				//2) if is a secondary action familyMember is null and player is not added
+				tower.setPlayerInTheTower(familyMember);  
 		
 		//going to position 
 		TowerPosition position =gameElements.getBoard().getTower(action.getZone()).getPosition(action.getPosition());

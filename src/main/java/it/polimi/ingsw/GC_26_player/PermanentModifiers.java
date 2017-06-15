@@ -1,6 +1,8 @@
 package it.polimi.ingsw.GC_26_player;
 
+import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -95,7 +97,8 @@ public class PermanentModifiers {
 	 */
 	
 	private Boolean discountOnResources=false;
-	private Map<BoardZone, ResourcesOrPoints>  discounts;
+	private Map<BoardZone, ResourcesOrPoints>  discounts= new HashMap<>();
+;
 	public Boolean IsTherediscountOnResources(BoardZone zone) {
 		return discountOnResources;
 	}
@@ -372,7 +375,7 @@ public class PermanentModifiers {
 	 * or Conquered Territories.
 	 */
 	
-	private Set<DevelopmentCardTypes> noVictoryPointsTypes;
+	private Set<DevelopmentCardTypes> noVictoryPointsTypes= new HashSet<>();
 	
 	/**
 	 * Method that adds the type of card to the list of types of cards that won't influence anymore the score of 

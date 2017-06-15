@@ -58,7 +58,7 @@ public class TradeEffect implements Effect{
 		}
 		
 		synchronized (player.getStatus()) {
-			player.setStatus(new Request(PlayerStatus.TRADING,null,  new CardDescriber(player.getCardUsed())));// status change will call the interaction!
+			player.setStatus(new Request(PlayerStatus.TRADING, null,  new CardDescriber(player.getCardUsed())));// status change will call the interaction!
 		}
 		
 	}
@@ -66,9 +66,7 @@ public class TradeEffect implements Effect{
 	public String toString() {
 		if(receive2==null && give2==null)
 			return "Trade Action:" + give1+ " to "+receive1;
-		if(receive2==null && give2!=null || receive2!= null && give2==null)
-			throw new IllegalArgumentException("error in creating card"); //  creation rules not followed!
-		return "Trade Action:" + give1+ " to "+receive1+" or " + give2+ " to " +receive2;
+		else return "Trade Action: (1) " + give1+ " to "+receive1+" or (2) " + give2+ " to " +receive2;
 	}
 	
 	

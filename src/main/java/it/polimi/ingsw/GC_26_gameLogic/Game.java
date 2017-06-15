@@ -10,6 +10,7 @@ import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTile;
+import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTileImplementation;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoardTile;
 import it.polimi.ingsw.GC_26_player.Player;
@@ -100,8 +101,6 @@ public class Game extends Observable<CardDescriber>{
 	
 	public void startGame(){
 		gameElements.notifyPlayers(new  Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
-		excommunicationTiles = cards.getRandomExcommunicationTiles();
-
 		//TODO send rules : such as timeout etc
 		 //send the first info about players
 		for(Player p: players){ 
@@ -124,10 +123,11 @@ public class Game extends Observable<CardDescriber>{
 		//taking and sending LeaderCard to the player
 		for(Player p: players){ 
 			for(int i=0; i<4; i++){
-				LeaderCard leaderCard = leaderCards.get(temp);
+				LeaderCard leaderCard = leaderCards.get(temp+i);
 				p.getPersonalBoard().addLeaderCard(leaderCard);
 				p.getPersonalBoard().notifyObservers(new CardDescriber(leaderCard));
 			}
+			temp+=4;
 		}
 		//taking and sending excommunication Tiles
 		excommunicationTiles= cards.getRandomExcommunicationTiles();

@@ -10,7 +10,6 @@ import it.polimi.ingsw.GC_26_client_clientLogic.MainClientView;
 import it.polimi.ingsw.GC_26_client_clientLogic.Output;
 import it.polimi.ingsw.GC_26_client_clientLogic.PositionView;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
-import it.polimi.ingsw.GC_26_gameLogic.Game;
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.Info;
@@ -21,7 +20,6 @@ import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
 public class ClientController {
-	private String playerPlaying;
 	private MainClientView view;
 	private InputlogicCli iOlogic;
 	private Output output;
@@ -33,9 +31,7 @@ public class ClientController {
 		this.output=output;
 	}
 	
-	public void setPlayerPlaying(String playerPlaying) {
-		this.playerPlaying = playerPlaying;
-	}
+	
 
 	
 	
@@ -80,8 +76,8 @@ public class ClientController {
 	
 	public void receivePlayerPocket(PlayerWallet playerWallet){
 		view.updatePlayerWallet((playerWallet));
-		//se il cambiamento riguarda questo player , notifico subito
-	}
+		output.printResources(view.getPlayer(playerWallet.getPlayerName()));
+		}
 	
 	
 	
@@ -163,10 +159,11 @@ public class ClientController {
 			if(change.getBoardTileValues()!=null)
 				view.getPlayer(change.getPlayerName()).setPersonalTileValues(change.getBoardTileValues());
 		}
-		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME){
-			if(change.getBoardTileValues()!=null)
-				view.getPlayer(change.getPlayerName());
-		}		
+		if(view.getGameStatus()==GameStatus.PLAYING){
+			if(change.getBoardTileValues()==null && change.getCard()!=null)
+				view.getPlayer(change.getPlayerName()).addCard(change.getCard());
+		}
+				
 	}
 
 

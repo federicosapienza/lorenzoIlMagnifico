@@ -22,11 +22,13 @@ public class ResourcesPayment implements Payment{
 	@Override
 	public synchronized boolean canPlayerGetThis(Player player, DevelopmentCardTypes type) {
 		
-		//calculating discount 
+		//calculating discount(if exists) 
 		BoardZone zone = cardTypeToBoardZone(type);
-		ResourcesOrPoints temp= player.getPermanentModifiers().resourcesOrPointsDiscount(zone, price);
+		ResourcesOrPoints temp= price;
+		if(player.getPermanentModifiers().IsTherediscountOnResources(zone))
+			 temp= player.getPermanentModifiers().resourcesOrPointsDiscount(zone, price);
 		
-		// The player is notified if the player has not enough resources for getting the card, and false is returned
+		// The player is notified if he has not enough resources for getting the card, and false is returned
 		if (!player.getTestWarehouse().areResourcesEnough(temp)){
 			return false;
 		}
@@ -39,8 +41,9 @@ public class ResourcesPayment implements Payment{
 	public synchronized void pay(Player player, DevelopmentCardTypes type) { 
 		//calculating discount 
 		BoardZone zone = cardTypeToBoardZone(type);
-		ResourcesOrPoints temp= player.getPermanentModifiers().resourcesOrPointsDiscount(zone, price);
-		
+		ResourcesOrPoints temp= price;
+		if(player.getPermanentModifiers().IsTherediscountOnResources(zone))
+			 temp= player.getPermanentModifiers().resourcesOrPointsDiscount(zone, price);	
 		player.getWarehouse().spendResources(temp);
 	
 	}

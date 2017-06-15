@@ -16,8 +16,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 		this.handlers= handlers;
 	}
 	
-	public void update(Action action){ //todo 
-		//potrei mettere synronysed il controller per evitare problemi di 2 azioni in contemporane
+	public void update(Action action){ 
 		PlayerStatus status;
 	
 		synchronized (player) {

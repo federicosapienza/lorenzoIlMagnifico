@@ -58,7 +58,7 @@ public class InputlogicCli  implements Runnable{
 								familyMemberColour=chooseColour(familyMember);
 					}
 					while(this.waitingAction && (boardChoice<1 || boardChoice>8)){
-						output.printString("What Action? 1-terr 2-buil 3-char 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
+						output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
 						boardChoice = scanIN.nextInt();
 						}
 					//TODO ovviamente aggiusteremo con limitazioni che varieranno a seconda di pos e quindi di partita,
@@ -68,11 +68,12 @@ public class InputlogicCli  implements Runnable{
 						output.printString("what position? '-1'-togoBack");
 							position = scanIN.nextInt();
 							}
-					while(this.waitingAction && servants<-1 && position!=99){
-						output.printString("how many servants? '-1'togoBack");
+					while(this.waitingAction && servants<-1 ){
+						output.printString("how many servants?; '-1' to go Back");
 						servants = scanIN.nextInt();
 					}
-					if(position!= 99 &&servants!=-1){
+					//mettere un sei sure?
+					if(servants!=-1){
 						BoardZone boardZone=chooseBoardZone(boardChoice);
 						Action action = new Action(boardZone, position, familyMemberColour, servants);
 						connection.performAction(action);
@@ -87,13 +88,17 @@ public class InputlogicCli  implements Runnable{
 				}
 				
 				if(this.getWaitingResponce()){
-					System.out.println("waiting, 100 to close turn");
+					System.out.println("waiting, 999 to close turn");
 					int responce = scanIN.nextInt();
+					String temp;
 						if(responce==999){
-							//TODO String end ="end turn";
+						temp=	"end turn" ;
 						}
-							
-					connection.sendResponce(responce);
+						else {
+							temp=String.valueOf(responce) ;
+
+						}
+					connection.sendResponce(temp);
 					waitingResponse=false;
 				}
 			}
@@ -122,9 +127,9 @@ public class InputlogicCli  implements Runnable{
 			case 1:
 				return BoardZone.TERRITORYTOWER;
 			case 2:
-				return BoardZone.BUILDINGTOWER;
-			case 3:
 				return BoardZone.CHARACTERTOWER;
+			case 3:
+				return BoardZone.BUILDINGTOWER;
 			case 4:
 				return BoardZone.VENTURETOWER;
 			case 5:
@@ -178,8 +183,9 @@ public class InputlogicCli  implements Runnable{
 		}
 
 		public void setActionPerformed() {
-			output.printCards(view.getThisPlayer());
-			
+			output.printCards(view.getThisPlayer().getLeadersCardOwned());
+			output.printString("choose a value between 1 and 4 to try activating the correspondent Leader Card");
+			this.setWaitingResponse();
 		}
 
 }

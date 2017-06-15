@@ -77,10 +77,11 @@ public class GameInitialiserAndController{
 					for(ClientMainServerView view : clients){
 						ActionController actionController= new ActionController(player, handlers);
 						ChoiceController choiceController=  new ChoiceController(player, handlers);
-						new EndTurnController(player, handlers);
+						EndTurnController endTurnController = new EndTurnController(player, handlers);
 					
 						view.getActionInputView().registerObserver(actionController);
 						view.getStringInputView().registerObserver(choiceController);
+						view.getEndTurnView().registerObserver(endTurnController);
 
 					}
 				}
