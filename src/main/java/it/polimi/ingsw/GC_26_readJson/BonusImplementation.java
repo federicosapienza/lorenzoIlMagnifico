@@ -46,7 +46,7 @@ public class BonusImplementation implements BonusInterface {
 	}
 
 	/**
-	 * Getter method that returns the faithTrack as a map.
+	 * Getter method that returns the current status of the faithTrack as a map.
 	 */
 	@Override
 
@@ -55,7 +55,8 @@ public class BonusImplementation implements BonusInterface {
 	}
 	
 	/**
-	 * Getter method that returns the list of personal bonus tiles
+	 * Getter method that returns the list of personal bonus tiles, after a random shuffle: normal if the game has been playing with basic rules,
+	 * advanced if the games has been playing with advanced rules.
 	 */
 	@Override
 	public List<PersonalBoardTile> get4RandomPersonalBoardTiles(String normalOrAdvanced) {
@@ -70,11 +71,15 @@ public class BonusImplementation implements BonusInterface {
 		return null;
 	}
 
-	public List<PersonalBoardTile> getPersonalBoardTiles(String nomrmalOrAdvanced){
-		if(nomrmalOrAdvanced.equals("normal")){
+	/**
+	 * Getter method that returns the list of personal bonus tiles: normal if the game has been playing with basic rules,
+	 * advanced if the games has been playing with advanced rules.
+	 */
+	public List<PersonalBoardTile> getPersonalBoardTiles(String normalOrAdvanced){
+		if(normalOrAdvanced.equals("normal")){
 			return personalBoardTilesNormal;
 		}
-		if(nomrmalOrAdvanced.equals("advanced")){
+		if(normalOrAdvanced.equals("advanced")){
 			return personalBoardTilesAdvanced;
 		}
 		return null;
