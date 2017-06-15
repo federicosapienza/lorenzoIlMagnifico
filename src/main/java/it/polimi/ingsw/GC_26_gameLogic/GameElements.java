@@ -46,7 +46,7 @@ public class GameElements extends Observable<ActionNotification>{
 	public List<Player> getPlayers() {
 		return players;
 	}
-	public NextRoundOrder getNextROundOrder() {
+	public NextRoundOrder getNextRoundOrder() {
 		return nextRoundOrder;
 	}
 	

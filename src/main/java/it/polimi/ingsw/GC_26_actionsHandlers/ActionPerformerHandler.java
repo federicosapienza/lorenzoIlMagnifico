@@ -89,7 +89,7 @@ public class ActionPerformerHandler {
 		 position.setFamilyMember(familyMember);
 		 player.getWarehouse().add(position.getResourcesOrPointsInPosition());
 		 //setting the player in the list for new round order
-		 gameElements.getNextROundOrder().nextRoundChanging(player);
+		 gameElements.getNextRoundOrder().nextRoundChanging(player);
 	 }
 	 protected void productionPerform(Player player, FamilyMember familyMember, Action action){
 		 int servants =action.getServantsUsed();

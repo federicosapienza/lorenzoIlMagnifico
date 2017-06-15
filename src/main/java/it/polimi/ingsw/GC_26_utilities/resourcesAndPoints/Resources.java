@@ -16,7 +16,7 @@ public class Resources {
 	
 	@Override
 	public String toString(){     //returns only the non 0 fields.
-		StringBuilder temp = new StringBuilder(" ");
+		StringBuilder temp = new StringBuilder("");
 		if(coins!=0)
 			temp.append(coins + " coins ");
 		if(servants!=0)

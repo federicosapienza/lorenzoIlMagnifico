@@ -23,7 +23,7 @@ public class FamilyMember {
 	
 	/**
 	 * Constructor that creates a family member 
-	 * @param colour It's the colour of the family member
+	 * @param colour the colour of the family member
 	 * @param player It's the player that this family member belongs to.
 	 */
 	public FamilyMember(Colour colour, Player player) {
@@ -33,8 +33,8 @@ public class FamilyMember {
 	
 	/**
 	 * Method that checks if the family member is free and it returns the result of this check.
-	 * @return true if the family member hasn't been used in this round
-	 * @return false if the family member has been used already in this round.
+	 * @return true if the family member hasn't been used in this round; 
+	 * false if the family member has been already used in this round.
 	 */
 	public boolean isFree() {
 		return free;
@@ -43,7 +43,7 @@ public class FamilyMember {
 	
 	/**
 	 * Method that returns the colour of the family member
-	 * @return colour It's the colour of the family member
+	 * @return the colour of the family member
 	 */
 	public Colour getColour() {
 		return colour;
@@ -59,7 +59,7 @@ public class FamilyMember {
 	
 	/**
 	 * Method that returns the value of the family member
-	 * @return value It's the value of the family member
+	 * @return the value of the family member
 	 */
 	public int getValue() {
 		return this.value;
@@ -81,7 +81,7 @@ public class FamilyMember {
 	
 	/**
 	 * Method that returns the player who owns this family member.
-	 * @return player It's the player who owns this family member.
+	 * @return the player who owns this family member.
 	 */
 	public Player getPlayer() {
 		return player;

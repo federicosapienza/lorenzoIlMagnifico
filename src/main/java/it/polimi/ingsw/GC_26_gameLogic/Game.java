@@ -25,15 +25,24 @@ import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
-
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * Class that contains the logic of the game.
+ *
+ */
 
 
 public class Game extends Observable<CardDescriber>{
 	private final it.polimi.ingsw.GC_26_readJson.Cards cards;
 	private  List<Player> players;
-	private int numberOfPlayers=0;
+	private int numberOfPlayers = 0;
 	private GameElements gameElements;
 	private List<ResourcesOrPoints[]> resourcesOrPointsBonus;
+	private final int numberOfPeriods = GameParameters.getNumberOfPeriods(); 
 	private GameStatus gameStatus=GameStatus.INITIALIZINGGAME;
 	
 	private List<ResourcesOrPoints> startingResources;
@@ -44,28 +53,46 @@ public class Game extends Observable<CardDescriber>{
 	
 	private int period=1;
 	private int round=1;
-	private int numberOfPeriods = GameParameters.getNumberOfPeriods();
 
-	
+	/**
+	 * Constructor: it creates a game with the characteristics expressed in the parameters
+	 * @param cards are the cards of the game
+	 * @param bonus It contains all the information around the starting resources, the resources and points, the faith track and the personal bonus tile
+	 * @param times It contains all the information around the intervals of time for every action of each player: if the 
+	 * action is not done within this interval, the player that should have done that action is suspended.
+	 */
 	public Game(Cards cards, BonusInterface bonus, TimerValuesInterface times){
-		this.cards= cards;
-		this.resourcesOrPointsBonus= bonus.getListOfResourcesOfPointsArray();
-		this.startingResources= bonus.getResourcesOrPointsStarting();
-		this.bonusInterface =bonus;
-		this.times= times;
-		period=1;
-		players= new ArrayList<>();
+		this.cards = cards;
+		this.resourcesOrPointsBonus = bonus.getListOfResourcesOfPointsArray();
+		this.startingResources = bonus.getResourcesOrPointsStarting();
+		this.bonusInterface = bonus;
+		this.times = times;
+		period =1;
+		players = new ArrayList<>();
 		
 	}
 	
+	/**
+	 * Getter method that returns the elements of the current game
+	 * @return the elements of the current
+	 */
 	public GameElements getGameElements() {
 		return gameElements;
 	}
 	
+	/**
+	 * Getter method that returns the list of the players who are playing the current game
+	 * @return the list of the players who are playing the current game
+	 */
 	public List<Player> getPlayers() {
 		return players;
 	}
 	
+	/**
+	 * Method used when a new player wants to join the current game 
+	 * @param name It's the name of the player who wants to join the current game.
+	 * @return the player who has just been added into the list of the players who are playing the current game
+	 */
 	public Player addPlayer(String name){
 		numberOfPlayers++;
 		Player player = new Player(name, startingResources.get(numberOfPlayers-1));
@@ -73,24 +100,45 @@ public class Game extends Observable<CardDescriber>{
 		return player;
 	}
 	
+	/**
+	 * Getter method that returns the current period of the game
+	 * @return the current period of the game
+	 */
 	public int getPeriod() {
 		return period;
 	}
 	
+	/**
+	 * Method used to update the status of the game whenever it changes 
+	 * @param status It's the new status of the game after the change, that will become the current status of the current game 
+	 */
 	public synchronized void setGameStatus(GameStatus status){
-		gameStatus= status;
+		gameStatus = status;
 	}
+	
+	/**
+	 * Getter method that returns the current status of the game
+	 * @return the current status of the game
+	 */
 	public synchronized GameStatus getGameStatus() {
 		return gameStatus;
 	}
 	
+	/**
+	 * Getter method that returns the excommunication tile of the current period: it searches in the list of excommunication
+	 * tiles the corresponding one to the current period and returns it.
+	 * @return the excommunication tile of the current period
+	 */
 	public ExcommunicationTile getThisRoundExcommunicationTiles() {
 		return excommunicationTiles.get(period-1);
 	}
 	
-	
+	/**
+	 * Method that initializes the game: it creates a new set of game elements for the players contained in the list of the
+	 * current players of the game.
+	 */
 	public void initialiseGame(){
-		gameElements= new GameElements(this ,players, numberOfPlayers, resourcesOrPointsBonus, bonusInterface.getFaithTrack());
+		gameElements= new GameElements(this, players, numberOfPlayers, resourcesOrPointsBonus, bonusInterface.getFaithTrack());
 		
 		//TODO notificare i giocatori
 		
@@ -98,16 +146,40 @@ public class Game extends Observable<CardDescriber>{
 		//TODO prendere 4 carte leader per giocatore e notificarliele 
 	}
 	
-	
+	/**
+	 * Method used to start the game
+	 */
 	public void startGame(){
 		gameElements.notifyPlayers(new  Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
+		/**
+		 * Every player playing this game is notified that the game has just begun.
+		 */
+		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
+		
+		/**
+		 * Random excommunication tiles are chosen for this game
+		 */
+		excommunicationTiles = cards.getRandomExcommunicationTiles();
+
 		//TODO send rules : such as timeout etc
 		 //send the first info about players
+		
+		/**
+		 * Every player playing this game gets his warehouse and the observers are notified about this
+		 */
 		for(Player p: players){ 
 			p.getWarehouse().notifyObservers(new PlayerWallet(p.getWarehouse()));
 		}
-		//gives to players  and send to clients personal bonus Tiles
-		//"normal" to get normal PersonalBoardTiles , "advanced" to get advanced PersonalBoardTiles
+		
+		/**
+		 * The following lines of code represent the situation of giving the personal bonus tiles to the players and sending
+		 * them to the clients.
+		 * If the the game has been playing with basic rules, players will get the normal personal bonus tile, which is the 
+		 * same for every player;
+		 * if the game has been playing with advanced rules, players will get the advanced personal bonus tile, which
+		 * is different for every player.
+		 */
+
 		List<PersonalBoardTile> bonusTiles=bonusInterface.get4RandomPersonalBoardTiles("advanced");
 		int temp =0;
 		for(Player p: players){ 
@@ -116,11 +188,16 @@ public class Game extends Observable<CardDescriber>{
 			temp++;
 		}   
 		
-		//sending positions of the board:
+		/**
+		 * Sending positions of the board:
+		 */
 		gameElements.getBoard().boardSendingDescription();
 		temp =0;
 		List<LeaderCard> leaderCards=cards.getRandomLeaderCards(numberOfPlayers);
-		//taking and sending LeaderCard to the player
+		
+		/**
+		 * taking and sending Leader Cards to the players, and notifying the observers about the cards taken.
+		 */
 		for(Player p: players){ 
 			for(int i=0; i<4; i++){
 				LeaderCard leaderCard = leaderCards.get(temp+i);
@@ -129,31 +206,49 @@ public class Game extends Observable<CardDescriber>{
 			}
 			temp+=4;
 		}
-		//taking and sending excommunication Tiles
-		excommunicationTiles= cards.getRandomExcommunicationTiles();
+		/**
+		 * Taking and sending excommunication Tiles and notifying the observers about the excommunication tiles 
+		 * that are chosen
+		 */
+		excommunicationTiles = cards.getRandomExcommunicationTiles();
 		for(ExcommunicationTile tile : excommunicationTiles){
 			notifyObservers(new CardDescriber(tile));
 		}
 
-		//starting game
+		/**
+		 * Initialization completed. Now the game can start really.
+		 */
 		nextStep();
 	}
 	
-	private int playersPerformedActions=-1;  //-1 means a new round is starting
+	/**
+	 * This indicates how many players performed an action. -1 is the value that indicates the a new round is starting
+	 */
+	private int playersPerformedActions = -1; 
 	private List<DevelopmentCard> territoryTowerCards;
 	private List<DevelopmentCard> buildingTowerCards;
 	private List<DevelopmentCard> characterTowerCards;
 	private List<DevelopmentCard> ventureTowerCards;
 	private boolean vaticanDone= false;
 	
+	/**
+	 * Method that describes what to do next
+	 */
 	public void nextStep() {
+		
+		/**
+		 * If a new round is starting, players will be notified about it: the turn will be initialized and the game 
+		 * will be really playable after sending the cards and the family members to the players.
+		 */
 		if(playersPerformedActions==-1){//starting new Round
-			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "Starting period "+ period+ " round "+round ));;
+			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "Starting period "+ period+ " round "+round ));
 			sendingCardsAndSettingFamilyMembers();
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, null ));
-			//than read to 202
+			//then read to 202
 		}
-		//starting vatican Turn
+		/**
+		 * starting Vatican Turn
+		 */
 		if(playersPerformedActions==numberOfPlayers){
 			if(round==2 && !vaticanDone){
 				vaticanReportNext();
@@ -164,10 +259,27 @@ public class Game extends Observable<CardDescriber>{
 
 		if(playersPerformedActions==numberOfPlayers){
 			if(round==2&& vaticanDone){
-				vaticanDone=false; //re initialaising
-				gameElements.getNextROundOrder().changeNextRoundOrder(players); //as determined by council
+				
+				/**
+				 * At the end of the period, vaticanDone has to be reinitialized to false
+				 */
+				vaticanDone=false; 
+				
+				/**
+				 * The order for the next round will be determined by the order of the family members present in the
+				 * Council Palace. If there are no family members there, the order for the next round will be the same as
+				 * the current one.
+				 */
+				gameElements.getNextRoundOrder().changeNextRoundOrder(players); 
+				
+				/**
+				 * Round ends
+				 */
 				gameElements.getBoard().endRound();
-				//is the Game finishing?
+				
+				/**
+				 * If the game is ended, it has to be chosen a winner, else, the game will go on with next period.
+				 */
 				if(period==numberOfPeriods && round==2){
 					gameElements.notifyPlayers(new Info(GameStatus.ENDING, null, "calculating results "+ period+ " round "+round ));;
 					chooseAWinner();  //si può fare che da view parte timeout e dopo tot libero risorse
@@ -178,29 +290,44 @@ public class Game extends Observable<CardDescriber>{
 				period++;
 				round=1;
 				playersPerformedActions=-1;
-				nextStep();//calls nextStep
+				nextStep();
 				return;
 				}
 			}//end of if(playersPerformedActions==numberOfPlayers)
-				
-			if(round==1){//end round
-				gameElements.getNextROundOrder().changeNextRoundOrder(players);
+			
+			/**
+			 * If the first round of the current period has come to the end, the game will go on with the next round,
+			 * but in the same period.
+			 */
+			if(round==1){
+				gameElements.getNextRoundOrder().changeNextRoundOrder(players);
 				gameElements.getBoard().endRound();
 				round++;
 				playersPerformedActions=-1;
-				nextStep();//calls nextStep
+				nextStep();
 				return;
 			}
-			}
+		}
 			
-		
-		Player player= players.get(playersPerformedActions); //get the next player that has to perform an Action
+		/**
+		 * Getting the next player that has to perform an action
+		 */
+		Player player = players.get(playersPerformedActions); 
 		synchronized(player){
-			if(player.getStatus()==PlayerStatus.SUSPENDED){
+			
+			/**
+			 * If the player has been suspended, he'll miss his turn
+			 */
+			if(player.getStatus() == PlayerStatus.SUSPENDED){
 				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn")) ;
 				nextStep();
 				return;
 			}
+			
+			/**
+			 * If the player has not been suspended, his status will change to PLAYING and the other players
+			 * will be notified that it's his turn
+			 */
 			player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
 			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),"Is '" +player.getName()+ "' turn")) ;
 			return;
@@ -209,6 +336,9 @@ public class Game extends Observable<CardDescriber>{
 
 	}
 
+	/**
+	 * Method called to send cards and set the family members
+	 */
 	private void sendingCardsAndSettingFamilyMembers() {
 		if(round==1){
 			
@@ -222,20 +352,26 @@ public class Game extends Observable<CardDescriber>{
 			characterTowerCards= cards.getRandomDevelopmentCards(period, DevelopmentCardTypes.CHARACTERCARD);
 			ventureTowerCards= cards.getRandomDevelopmentCards(period, DevelopmentCardTypes.VENTURECARD);
 						
-			//Sending cards to board
+			/**
+			 * Sending cards to board
+			 */
 			gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisRound(buildingTowerCards);
 			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards);
 			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
 			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards);
 
-			//sending to clients the cards for this round:
+			/**
+			 * sending the cards for this round to the clients
+			 */
 			sendCardTool(0, 4, territoryTowerCards);
 			sendCardTool(0, 4, buildingTowerCards);
 			sendCardTool(0, 4, characterTowerCards);
 			sendCardTool(0, 4, ventureTowerCards);
 	}
 		if(round==2){
-			//sending to clients the cards for this round:
+			/**
+			 * sending the cards for this round to the clients 
+			 */
 			sendCardTool(4, 4, territoryTowerCards);
 			sendCardTool(4, 4, buildingTowerCards);
 			sendCardTool(4, 4, characterTowerCards);
@@ -255,7 +391,9 @@ public class Game extends Observable<CardDescriber>{
 		}
 	}
 	
-	
+	/** 
+	 * Method called at the end of the game to determine which player has won.
+	 */
 	private void chooseAWinner(){
 		EndGameLogic endGame= new EndGameLogic(gameElements);
 		endGame.start();
@@ -277,35 +415,41 @@ public class Game extends Observable<CardDescriber>{
 		
 	}
 	
-	
+	/**
+	 * Method that describes the logic of the Vatican Report phase.
+	 * @param player the player who has to do the Vatican Report
+	 */
 	private void vaticanLogic(Player player){
 		ExcommunicationTile excommunicationTile = excommunicationTiles.get(period-1);
 		
-		//if the player has not enough faith points , excommunication tile effect is automatically activated.
-		//Otherwise the player will be asked to choose.
-		  if(player.getWarehouse().getFaithPoints()< GameParameters.getFaithPointNeeded(period)){
+		/**
+		 * if the player has not enough faith points, the excommunication tile effect is automatically activated.
+		 * Otherwise the player will be asked to choose if he wants to support the Church, avoiding the 
+		 * excommunication and getting a certain amount of Victory Points but resetting his Faith Track from
+		 * the beginning, or if he prefers not to support the Church, getting the excommunication, but leaving 
+		 * his Faith Track intact.
+		 *  
+		 */
+		  if(player.getWarehouse().getFaithPoints() < GameParameters.getFaithPointNeeded(period)){
 		    	excommunicationTile.runEffect(player);
 		    	gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "is excommunicated"));
-		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(excommunicationTile), 
-		    								  null));
+		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(excommunicationTile), null));
 		    	vaticanReportNext();
 		    	return;
 		  }
-		synchronized (player) {
-			if(player.getStatus() == PlayerStatus.SUSPENDED){  
-		    	//if player is suspended, the effect is run.
-		    	gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),
-		    			player.getName()+ "misses his turn and is excommunicated"));
-		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(),
-		    			new CardDescriber(excommunicationTile),  null));
-		    	
-		    	excommunicationTile.runEffect(player);		    	
-		    	return;
-		
-		
-		}
-	  player.notifyObservers(new Request(PlayerStatus.VATICANREPORTDECISION, "take your choice", new CardDescriber(excommunicationTile)));
-		}	
+		  
+		  /**
+		   * If the player has been suspended, he gets the excommunication automatically.
+		   */
+		  synchronized (player) {
+			  if(player.getStatus() == PlayerStatus.SUSPENDED){
+				  gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn and is excommunicated"));
+				  gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(excommunicationTile),  null));
+				  excommunicationTile.runEffect(player);		    	
+				  return;
+				  }
+			  player.notifyObservers(new Request(PlayerStatus.VATICANREPORTDECISION, "take your choice", new CardDescriber(excommunicationTile)));
+		  }
 	}
 	
 }
