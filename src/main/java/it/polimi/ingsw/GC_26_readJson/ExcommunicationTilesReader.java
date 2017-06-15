@@ -21,10 +21,7 @@ private Effect permanentEffect;
 			period = super.readInt("period");
 			permanentEffectType= super.readString("typeOfPermanentEffect");
 			permanentEffect=super.createPermanentEffect(permanentEffectType);
-<<<<<<< HEAD
-=======
 			name = super.readString("name");
->>>>>>> cd6f5e1ae44d1713a7d4e23b232ca34001143eff
 			createExcommunicationTiles(cards,numberOfPeriod);
 			super.closeBufferedReader();
 		}

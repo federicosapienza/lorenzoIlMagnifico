@@ -10,7 +10,6 @@ import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTile;
-import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTileImplementation;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoardTile;
 import it.polimi.ingsw.GC_26_player.Player;
