@@ -14,19 +14,35 @@ import it.polimi.ingsw.GC_26_utilities.Info;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
 
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the logic followed at the end of the game to determine the winner.
+ *
+ */
 public class EndGameLogic {
 	private final GameElements gameElements;
-	private final int territoryBonus[]= new  int[]{0,0,1,4,10,20};
-	private final int charactersBonus[]= new  int[]{1,3,6,10,15,21};
-	private final int resourcesBonus= 5;
-	private final ResourcesOrPoints militaryStrenghtFirstReward= ResourcesOrPoints.newPoints(5, 0, 0, 0);
-	private final ResourcesOrPoints militaryStrenghtSecondReward= ResourcesOrPoints.newPoints(2, 0, 0, 0);;
+	private final int territoryBonus[] = new  int[]{0,0,1,4,10,20};
+	private final int charactersBonus[] = new  int[]{1,3,6,10,15,21};
+	private final int resourcesBonus = 5;
+	private final ResourcesOrPoints militaryStrenghtFirstReward = ResourcesOrPoints.newPoints(5, 0, 0, 0);
+	private final ResourcesOrPoints militaryStrenghtSecondReward = ResourcesOrPoints.newPoints(2, 0, 0, 0);
 
-	
+	/**
+	 * Constructor: it allows the game to analyze, based on the game elements, all the information about the game
+	 * and determine the winner
+	 * @param gameElements the game elements of the current game
+	 */
 	public EndGameLogic(GameElements gameElements) {
 		this.gameElements=gameElements;
 	}
 	
+	/**
+	 * Method used to start the analysis of the game
+	 */
 	public void start(){
 		for(Player player: gameElements.getPlayers()){
 			PermanentModifiers modifiers =player.getPermanentModifiers();
@@ -103,8 +119,8 @@ public class EndGameLogic {
 		//finding the winner
 		bestValue=0;
 		for(Player p: gameElements.getPlayers()){
-			if( bestValue> p.getWarehouse().getVictoryPoints())
-				bestValue= p.getWarehouse().getVictoryPoints();
+			if( bestValue > p.getWarehouse().getVictoryPoints())
+				bestValue = p.getWarehouse().getVictoryPoints();
 
 		}
 		// notifying of the winner: the player list is ordered so it ' s guaranteed that

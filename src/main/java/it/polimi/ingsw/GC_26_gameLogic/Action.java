@@ -8,9 +8,6 @@ import java.util.PrimitiveIterator.OfDouble;
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 
-/* position stands for:
- *  floor for towers, specifier of position for production, harvest, market. Useless for council Palace.
- */
 
 /**
  * 

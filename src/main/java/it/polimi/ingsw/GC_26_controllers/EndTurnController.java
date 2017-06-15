@@ -38,12 +38,12 @@ public class EndTurnController implements Observer<Boolean>{
 		if(previousStatus == PlayerStatus.TRADING)
 			handlers.getTradeHandler().perform(player, 0);
 			
-		if(previousStatus== PlayerStatus.CHOOSINGPAYMENT)
+		if(previousStatus == PlayerStatus.CHOOSINGPAYMENT)
 			handlers.getTwoPaymentHandler().perform(player, 1);
 		
 		//scelta malus
 		
-		if(previousStatus==PlayerStatus.VATICANREPORTDECISION){
+		if(previousStatus == PlayerStatus.VATICANREPORTDECISION){
 			handlers.getVaticanReportHandler().perform(player, 0);
 			handlers.getGameElements().getGame().vaticanReportNext();
 		}

@@ -65,7 +65,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 			}
 			
 		}
-		catch ( IllegalStateException e1 ) {
+		catch (IllegalStateException e1 ) {
 			e1.printStackTrace();
 			synchronized (player) {
 				player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
@@ -86,13 +86,13 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 				 if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 						return;
 				 if(player.getWarehouse().getCouncilPrivileges()>0){
-						player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
-				 	}
-				 else 	player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
-;
-				
-			}
-			 
+					 player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
+					 }
+				 else{
+					 player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
+				 }
+
+			 }
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			synchronized (player) {
@@ -102,7 +102,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 			
 			
 		}
-		catch ( IllegalStateException e1 ) {
+		catch (IllegalStateException e1 ) {
 			e1.printStackTrace();
 			synchronized (player) {
 				player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
