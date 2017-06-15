@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_readJson;
 
+
 import it.polimi.ingsw.GC_26_server.ReadFromFile;
 
 public class ReadAll implements ReadFromFile{

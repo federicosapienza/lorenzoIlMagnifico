@@ -43,8 +43,8 @@ private Effect permanentEffect;
 		}
 	}
 	
-	private void createExcommunicationTiles(CardsImplementation cardsImplementation,int numOfPeriod){
-		ExcommunicationTile excommunicationTile = new ExcommunicationTileImplementation(period, permanentEffect);
-		cardsImplementation.getExcommunicationTiles(period).add(excommunicationTile);
+	private void createExcommunicationTiles(CardsImplementation cardsImplementation,int numOfperiod){
+		ExcommunicationTile excommunicationTile = new ExcommunicationTileImplementation(numOfperiod, permanentEffect);
+		cardsImplementation.getExcommunicationTiles(numOfperiod).add(excommunicationTile);
 	}
 }
