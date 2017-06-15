@@ -22,7 +22,6 @@ private Effect permanentEffect;
 			permanentEffectType= super.readString("typeOfPermanentEffect");
 			permanentEffect=super.createPermanentEffect(permanentEffectType);
 			name = super.readString("name");
-			System.out.println(name);
 			createExcommunicationTiles(cards,numberOfPeriod);
 			super.closeBufferedReader();
 		}
@@ -44,7 +43,7 @@ private Effect permanentEffect;
 	}
 	
 	private void createExcommunicationTiles(CardsImplementation cardsImplementation,int numOfperiod){
-		ExcommunicationTile excommunicationTile = new ExcommunicationTileImplementation(numOfperiod, permanentEffect);
+		ExcommunicationTile excommunicationTile = new ExcommunicationTileImplementation(numOfperiod, permanentEffect,name);
 		cardsImplementation.getExcommunicationTiles(numOfperiod).add(excommunicationTile);
 	}
 }
