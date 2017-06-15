@@ -1,8 +1,8 @@
 	   {
 	  	"name": "2.3",
 	  	"period": 2,
-	  	"typeOfPermanentEffect" : "ActionValueModifierEffect",
+	  	"typeOfPermanentEffect" : "actionValueModifier",
 	  	"permanentBoardzone": "character",
-	    "ActionValueModifierEffectValue" : -4
+	    "permanentValueModifier" : -4
 	  }
 	 

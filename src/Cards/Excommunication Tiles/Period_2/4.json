@@ -1,8 +1,8 @@
 	   {
 	  	"name": "2.4",
 	  	"period": 2,
-	  	"typeOfPermanentEffect" : "ActionValueModifierEffect",
+	  	"typeOfPermanentEffect" : "actionValueModifier",
 	  	"permanentBoardzone": "venture",
-	    "ActionValueModifierEffectValue" : -4
+	    "permanentValueModifier" : -4
 	  }
 	 

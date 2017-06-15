@@ -1,8 +1,8 @@
 	   {
 	  	"name": "1.5",
 	  	"period": 1,
-	  	"typeOfPermanentEffect" : "ActionValueModifierEffect",
-	  	"permanentBoardzone": "harvest",
-	    "ActionValueModifierEffectValue" : -3
+	  	"typeOfPermanentEffect" :"actionValueModifier",
+	  	"permanentBoardzone":"harvest",
+	    "permanentValueModifier" : -3
 	  }
 	 
