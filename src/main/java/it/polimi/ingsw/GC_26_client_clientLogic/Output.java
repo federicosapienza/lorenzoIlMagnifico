@@ -10,4 +10,5 @@ public interface Output {
 	void printCompleteStatus(PlayerView player); // for the player given displays name, permanents effect, personal board.
 	void printRankings(MainClientView view);  //prints the rankings: military points , victory points, faith points
 	void printFamilyMembers(PlayerView player);
+	void printCards(PlayerView thisPlayer);
 }

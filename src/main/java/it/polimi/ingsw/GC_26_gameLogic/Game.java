@@ -41,7 +41,10 @@ public class Game extends Observable<CardDescriber>{
 	private int numberOfPlayers = 0;
 	private GameElements gameElements;
 	private List<ResourcesOrPoints[]> resourcesOrPointsBonus;
+<<<<<<< HEAD
 	private final int numberOfPeriods = GameParameters.getNumberOfPeriods(); 
+=======
+>>>>>>> 83e530ed19e870d039c36b5b9b86854aebb99193
 	private GameStatus gameStatus=GameStatus.INITIALIZINGGAME;
 	
 	private List<ResourcesOrPoints> startingResources;

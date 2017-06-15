@@ -177,4 +177,9 @@ public class InputlogicCli  implements Runnable{
 			
 		}
 
+		public void setActionPerformed() {
+			output.printCards(view.getThisPlayer());
+			
+		}
+
 }

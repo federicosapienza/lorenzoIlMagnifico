@@ -95,6 +95,11 @@ public class OutputCLI implements Output{
 		System.out.println(player.getFamilyMembers().getStatus());
 		System.out.println(player.getFamilyMembers().whatIsFree());
 	}
+	@Override
+	public void printCards(PlayerView thisPlayer) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
