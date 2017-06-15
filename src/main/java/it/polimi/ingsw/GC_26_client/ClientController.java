@@ -136,6 +136,10 @@ public class ClientController {
 		if(request.getStatus()==PlayerStatus.WAITINGHISTURN){
 			return;
 		}
+		
+		if(request.getStatus()==PlayerStatus.ACTIONPERFORMED)
+			iOlogic.setActionPerformed();
+		
 		else {
 			iOlogic.setWaitingResponse();
 		}
