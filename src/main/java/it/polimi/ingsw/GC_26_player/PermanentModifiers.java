@@ -290,7 +290,7 @@ public class PermanentModifiers {
 	}
 	
 	
-	private int neutralMemberChange;
+	private int neutralMemberChange=0;
 	
 	/**
 	 * Getter method that returns the value of the neutral family members under the effect of the 

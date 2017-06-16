@@ -42,10 +42,11 @@ public class HarvestZone {
 	public void addPlayerHere(FamilyMember familyMember){
 		if(familyMember== null)
 			return;
-		if( familyMember.getColour()!=Colour.NEUTRAL)
-			playersHere.add(familyMember.getPlayer());
 		if(playerAlreadyHere(familyMember))
 			throw new IllegalArgumentException();
+		if( familyMember.getColour()!=Colour.NEUTRAL)
+			playersHere.add(familyMember.getPlayer());
+		
 		
 	}
 	

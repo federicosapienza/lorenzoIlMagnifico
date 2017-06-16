@@ -77,7 +77,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 		try {
 			Boolean flag = handlers.getSecondActionHandler().isPossible(player, action);
 			// if action not possible player is notified in IsPossible and linked methods
-			if(flag)
+			if(!flag)
 				return;
 
 			handlers.getSecondActionHandler().perform(player, action);
@@ -111,7 +111,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+				player.setStatus(new Request(PlayerStatus.SECONDPLAY, "repeat your action" , null));
 
 			}
 			

@@ -39,8 +39,10 @@ public class LeaderCardHandler {
 		if(player.getPersonalBoard().isLeaderCardUsedYet(card))//if the card has been activated yet, we must not check requirement is satisfied.
 			return true;
 			
-		return card.checkRequirement(player);
-			
+		boolean flag= card.checkRequirement(player);
+		if(!flag)
+			player.notifyObservers(new Request(player.getStatus(),"You do not have the requirements for using the card", new CardDescriber(card)));
+		return flag;
 		
 		
 	}

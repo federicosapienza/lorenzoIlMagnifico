@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.print.event.PrintJobAttributeListener;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 import javax.swing.text.Position;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
@@ -162,5 +163,25 @@ public class BoardView {
 	}
 
 
+	public void cleanBoard(){
+		clean(territoriesTower);
+		clean(charactersTower);
+		clean(buildingsTower);
+		clean(venturesTower);
+		clean(marketZone);
+		clean(harvestZone);
+		clean(productionZone);
+		clean(CouncilPalace);
+		
+	}
+	
+	private void clean(List<PositionView> list){
+		for(PositionView p: list){
+			p.getPlayersHere().clear();
+			p.setCardHere(null);
+		}
+	}
+	
+	
 	}
 

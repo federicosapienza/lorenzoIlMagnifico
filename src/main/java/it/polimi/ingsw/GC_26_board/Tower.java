@@ -75,6 +75,7 @@ public class Tower {
 			
 	public void clearCardsAndFamilyMembers(){ 
 		isTowerFree=true;
+		playersInTheTower.clear();
 		towerPositionFloor1.clear();
 		towerPositionFloor2.clear();
 		towerPositionFloor3.clear();

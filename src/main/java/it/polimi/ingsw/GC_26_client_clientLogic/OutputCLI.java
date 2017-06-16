@@ -97,8 +97,8 @@ public class OutputCLI implements Output{
 		//si  potrebbe fare un modo più elaborato prendendo uno alla volta
 	}
 	@Override
-	public void printCards(PlayerView thisPlayer) {
-	//TODO
+	public void printCards(PlayerView thisPlayer) {  //stampare tutta la persona board
+		//TODO
 	}
 	
 

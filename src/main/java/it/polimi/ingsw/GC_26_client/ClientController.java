@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26_client;
 
 
 
+import it.polimi.ingsw.GC_26_board.Board;
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_client_clientLogic.InputlogicCli;
@@ -154,6 +155,9 @@ public class ClientController {
 		view.setGameStatus(info.getGameStatus());
 		if(old== GameStatus.INITIALIZINGTURN && info.getGameStatus()==GameStatus.PLAYING)  //TODO
 			output.printBoard(view.getBoard());
+		
+		if(info.getGameStatus()==GameStatus.INITIALIZINGTURN)
+			view.getBoard().cleanBoard();
 	}
 	
 	private void handlePersonalBoardChangeNotification(PersonalBoardChangeNotification change) {

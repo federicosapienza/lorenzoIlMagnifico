@@ -64,9 +64,10 @@ public class SecondActionHandler extends ActionHandler{
 		player.getWarehouse().spendResources(ResourcesOrPoints.newResources(0,action.getServantsUsed(),0,0));
 		//calling the right performer
 		if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
-				action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER)
+				action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER){
 			getPerformerHandler().towerPerformPayment(player, null, action);
-		
+			return;
+		}
 		
 		//adding the servants to the value and calling Harvest
 		if(action.getZone()== BoardZone.HARVEST){
@@ -77,6 +78,7 @@ public class SecondActionHandler extends ActionHandler{
 		
 			harvestAndProductionHandler.startHarvest(player, actionValue);	
 			handler.startHarvest(player, player.getSecondactionValue()+action.getServantsUsed());
+			return;
 		}
 		if(action.getZone()== BoardZone.PRODUCTION){
 			HarvestAndProductionHandler handler = super.getHarvestAndProductionHandler();
@@ -85,14 +87,16 @@ public class SecondActionHandler extends ActionHandler{
 					throw new IllegalArgumentException();
 			harvestAndProductionHandler.startProduction(player, actionValue);	
 			handler.startProduction(player, player.getSecondactionValue()+action.getServantsUsed());
-		}		
+		}
+				
 		//they do not exists in standard game but they were put for flexibility
 		if(action.getZone()==BoardZone.MARKET)
 			getPerformerHandler().marketPerform(player, null, action);
+			
 		if(action.getZone()== BoardZone.COUNCILPALACE)
 			getPerformerHandler().councilPalacePerform(player, null, action);
+			
 		
-		else throw new IllegalArgumentException();
 		
 		
 		//notify the players of the action

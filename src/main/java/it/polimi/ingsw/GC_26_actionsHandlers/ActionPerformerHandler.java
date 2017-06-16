@@ -137,8 +137,8 @@ public class ActionPerformerHandler {
 			 	//launching harvest 
 			 	int actionValue= servants+ familyMember.getValue() 
 			 								+player.getPermanentModifiers().getActionModifier(BoardZone.HARVEST); //permanent Effect
-			 	if(actionValue<1) //checking if action value is valid
-					throw new IllegalArgumentException();
+			 	if(actionValue<1){ //checking if action value is valid
+					throw new IllegalArgumentException();}
 			 	harvestAndProductionHandler.startHarvest(player, actionValue);		
 			 	}
 			 else  if(action.getPosition()==2){ //multiple position

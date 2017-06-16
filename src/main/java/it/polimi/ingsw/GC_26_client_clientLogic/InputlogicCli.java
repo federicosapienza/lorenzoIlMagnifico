@@ -49,10 +49,8 @@ public class InputlogicCli implements Runnable{
 				
 				
 			scanIN=new Scanner(System.in);
-			System.out.println("iologic 51");
 
 			while(true){
-				System.out.println("iologic 57");
 				int value = scanIN.nextInt();
 				if(value==999){  //if player asks to end the turn
 					String	temp="end turn" ;

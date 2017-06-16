@@ -4,6 +4,7 @@ package it.polimi.ingsw.GC_26_gameLogic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
@@ -214,6 +215,7 @@ public class Game extends Observable<CardDescriber>{
 		/**
 		 * Initialization completed. Now the game can start really.
 		 */
+		startingRound();
 		nextStep();
 	}
 	
@@ -221,100 +223,60 @@ public class Game extends Observable<CardDescriber>{
 	 * This indicates how many players performed an action. -1 is the value that indicates the a new round is starting
 	 */
 	private int playersPerformedActions = -1; 
+	private int turn=1;
 	private List<DevelopmentCard> territoryTowerCards;
 	private List<DevelopmentCard> buildingTowerCards;
 	private List<DevelopmentCard> characterTowerCards;
 	private List<DevelopmentCard> ventureTowerCards;
-	private boolean vaticanDone= false;
+	private final int turnsNumber=1;  //TODO
 	
 	/**
 	 * Method that describes what to do next
 	 */
 	public void nextStep() {
 		
-		/**
-		 * If a new round is starting, players will be notified about it: the turn will be initialized and the game 
-		 * will be really playable after sending the cards and the family members to the players.
-		 */
-		if(playersPerformedActions==-1){//starting new Round
-			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "Starting period "+ period+ " round "+round ));
-			sendingCardsAndSettingFamilyMembers();
-			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, null ));
-			//then read to 202
+		playersPerformedActions++;
+		
+		if(playersPerformedActions== numberOfPlayers && turn!=turnsNumber){
+			playersPerformedActions=0;
+			turn++; //then read 303
 		}
 		/**
 		 * starting Vatican Turn
 		 */
-		if(playersPerformedActions==numberOfPlayers){
-			if(round==2 && !vaticanDone){
+		if(turn ==turnsNumber && playersPerformedActions==numberOfPlayers){
+			if(round==1){
+				/**
+				 * If the first round of the current period has come to the end, the game will go on with the next round,
+				 * but in the same period.
+				 */
+				players= gameElements.getNextRoundOrder().changeNextRoundOrder(players);
+				turn=1;
+				round++;
+				startingRound();
+				playersPerformedActions=-1;
+				nextStep();
+				return;
+			}
+			if(round==2 ){
 				vaticanReportNext();
 				return;
 			}
-		}
-		playersPerformedActions++;
-
-		if(playersPerformedActions==numberOfPlayers){
-			if(round==2&& vaticanDone){
-				
-				/**
-				 * At the end of the period, vaticanDone has to be reinitialized to false
-				 */
-				vaticanDone=false; 
-				
-				/**
-				 * The order for the next round will be determined by the order of the family members present in the
-				 * Council Palace. If there are no family members there, the order for the next round will be the same as
-				 * the current one.
-				 */
-				gameElements.getNextRoundOrder().changeNextRoundOrder(players); 
-				
-				/**
-				 * Round ends
-				 */
-				gameElements.getBoard().endRound();
-				
-				/**
-				 * If the game is ended, it has to be chosen a winner, else, the game will go on with next period.
-				 */
-				if(period==numberOfPeriods && round==2){
-					gameElements.notifyPlayers(new Info(GameStatus.ENDING, null, "calculating results "+ period+ " round "+round ));;
-					chooseAWinner();  //si può fare che da view parte timeout e dopo tot libero risorse
-					return; //o forse no;
-					
-				}
-				else{
-				period++;
-				round=1;
-				playersPerformedActions=-1;
-				nextStep();
-				return;
-				}
 			}//end of if(playersPerformedActions==numberOfPlayers)
 			
-			/**
-			 * If the first round of the current period has come to the end, the game will go on with the next round,
-			 * but in the same period.
-			 */
-			if(round==1){
-				players= gameElements.getNextRoundOrder().changeNextRoundOrder(players);
-				gameElements.getBoard().endRound();
-				round++;
-				playersPerformedActions=-1;
-				nextStep();
-				return;
-			}
-		}
 			
 		/**
 		 * Getting the next player that has to perform an action
 		 */
 		Player player = players.get(playersPerformedActions); 
+		PlayerStatus status;
 		synchronized(player){
-			
+				 status= player.getStatus();
+		}
 			/**
 			 * If the player has been suspended, he'll miss his turn
 			 */
-			if(player.getStatus() == PlayerStatus.SUSPENDED){
+			if(status == PlayerStatus.SUSPENDED){
 				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn")) ;
 				nextStep();
 				return;
@@ -330,18 +292,23 @@ public class Game extends Observable<CardDescriber>{
 		}
 
 
-	}
+	
 
 	/**
 	 * Method called to send cards and set the family members
 	 */
-	private void sendingCardsAndSettingFamilyMembers() {
+	private void startingRound() {
+		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "Starting period "+ period+ " round "+round ));
+		
+		gameElements.getBoard().endRound();
+		gameElements.getDices().rollDices();
+		for(Player p: players){
+			p.getFamilyMembers().setFreeAll(); //first of all values are resetted
+			p.getFamilyMembers().setValues(gameElements.getDices());
+		}
 		if(round==1){
 			
-			gameElements.getDices().rollDices();
-			for(Player p: players){
-				p.getFamilyMembers().setValues(gameElements.getDices());
-			}
+			
 
 			territoryTowerCards= cards.getRandomDevelopmentCards(period, DevelopmentCardTypes.TERRITORYCARD);
 			buildingTowerCards= cards.getRandomDevelopmentCards(period, DevelopmentCardTypes.BUILDINGCARD);
@@ -381,7 +348,7 @@ public class Game extends Observable<CardDescriber>{
 	
 	
 	private void sendCardTool(int startingPosition,int numbersToSend, List<DevelopmentCard> toSend){
-		for(int i=startingPosition; i<numbersToSend; i++){
+		for(int i=startingPosition; i<numbersToSend+startingPosition; i++){
 			DevelopmentCard card= toSend.get(i);
 			notifyObservers(new CardDescriber(card));
 		}
@@ -400,12 +367,36 @@ public class Game extends Observable<CardDescriber>{
 	public void vaticanReportNext(){
 		playersDoneVatican++;
 
-		if(playersDoneVatican==numberOfPlayers){
-			vaticanDone=true;
+		if(playersDoneVatican==numberOfPlayers){ //else read 401
+			/**
+			 * If the game is ended, it has to be chosen a winner, else, the game will go on with next period.
+			 */	
+			if(period==numberOfPeriods){
+				gameElements.notifyPlayers(new Info(GameStatus.ENDING, null, "calculating results "+ period+ " round "+round ));;
+				chooseAWinner();  
+				return; 
+				
+			}
+			else{ 
+			/**
+			 * The order for the next round will be determined by the order of the family members present in the
+			 * Council Palace. If there are no family members there, the order for the next round will be the same as
+			 * the current one.
+			 */
+			gameElements.getNextRoundOrder().changeNextRoundOrder(players); 
+			
+			/**
+			 * Round ends
+			 */
+			turn=1;
+			period++;
+			round=1;
+			playersPerformedActions=-1;
 			playersDoneVatican=-1;
-		
+			startingRound();
 			nextStep();
 			return;
+			}
 		}
 		vaticanLogic(players.get(playersDoneVatican));
 		

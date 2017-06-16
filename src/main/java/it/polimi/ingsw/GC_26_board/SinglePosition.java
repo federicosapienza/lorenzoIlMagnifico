@@ -8,11 +8,12 @@ import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 public abstract class SinglePosition{
 		private final int valueOfPosition;
 		private List<FamilyMember> familyMemberInPosition;
-		private boolean positionFree=true;
+		private boolean positionFree;
 		
 		public SinglePosition(int valueOfPosition){
 			this.valueOfPosition=valueOfPosition;
 			 familyMemberInPosition =new ArrayList<>();
+			 positionFree=true;
 		}
 		
 		public int getValueOfPosition(){
