@@ -12,7 +12,7 @@ public class ServerTest {
 	Server server = new Server();
 	Map<String, String> listOfPlayers = new HashMap<>();
 	@Test
-	public void test() {
+	public void loginTest() {
 		listOfPlayers.put("tizio", "caio");
 		server.start();
 		assertTrue(server.doLogin("tizio", "caio"));

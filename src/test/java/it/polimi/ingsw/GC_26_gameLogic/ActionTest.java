@@ -11,7 +11,7 @@ public class ActionTest {
 	
 	Action action = new Action(BoardZone.TERRITORYTOWER, 2, Colour.BLACK, 0);
 	@Test
-	public void test() {
+	public void testActionValues() {
 		assertNotNull(action);
 		assertTrue(Colour.BLACK==action.getFamilyMemberColour());
 		assertEquals(0, action.getServantsUsed());

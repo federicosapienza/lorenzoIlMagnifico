@@ -17,7 +17,7 @@ import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCardImplementation;
  * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
  * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
  *
- * It's the  class that describes the card object sent to remote connections.
+ * It's the class that describes the card object sent to remote connections.
  */
 public class CardDescriber implements Serializable{
 	/**

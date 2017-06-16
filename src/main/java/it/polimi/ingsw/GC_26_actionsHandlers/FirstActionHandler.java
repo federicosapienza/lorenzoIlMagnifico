@@ -24,7 +24,7 @@ public class FirstActionHandler extends ActionHandler{
 	}  */	  
 
 	
-	public boolean isPossible(Player player, Action action ) throws IllegalArgumentException{
+	public boolean isPossible(Player player, Action action) throws IllegalArgumentException{
 		
 		//spiegare che programmazione molto difensiva
 		

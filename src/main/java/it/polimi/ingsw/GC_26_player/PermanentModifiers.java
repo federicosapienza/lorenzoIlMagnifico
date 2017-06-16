@@ -41,6 +41,7 @@ public class PermanentModifiers {
 	 * Malus effects of excommunication tiles on resources (the first 4 in the GameRules pdf)
 	 */
 	private boolean resourcesMalusOn=false;
+	
 	// at the beginning of the game there is no malus effect
 	private ResourcesOrPoints resourcesMalus= ResourcesOrPoints.newResources(0, 0, 0, 0); 
 	
