@@ -49,7 +49,8 @@ public class ProductionZone {
 	
 	public void clear(){
 		singleProduction.clear();
-		multipleProduction.clear();
+		if(multipleProduction!=null)
+			multipleProduction.clear();
 		playersHere.clear();
 	} 
 		//checks if there is one coloured family member for the player passed;

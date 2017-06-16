@@ -60,7 +60,9 @@ public class ClientController {
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME||view.getGameStatus()==GameStatus.INITIALIZINGTURN)
 			throw new IllegalStateException();  //TODO come gestirla
 		if(view.getGameStatus()==GameStatus.PLAYING){
-			view.getBoard().addfamilyMember(action); 
+			view.getBoard().update(action);
+			if(action.getFamilyMemberColour()!=null) //means it is not second action
+				view.getPlayer(action.getPlayerName()).getFamilyMembers().whatIsFree().remove(action.getFamilyMemberColour());
 			output.printString(action.toString());
 		}
 			
@@ -118,8 +120,9 @@ public class ClientController {
 		if(request.getMessage()!=null)
 			output.printString(request.getMessage());
 		if(request.getStatus()==PlayerStatus.PLAYING){
-				iOlogic.setWaitingFirstAction();
+			if(request.getMessage()==null) //in our protocol means starting new round(if there is a message, is a error message=request to repeat)
 				output.printBoard(view.getBoard());
+				iOlogic.setWaitingFirstAction();
 				return;}
 		if(request.getStatus()== PlayerStatus.SECONDPLAY){
 				iOlogic.setWaitingSecondAction();

@@ -112,7 +112,7 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
 
 	@Override
 	public void runPermanentEffect(Player player) {
-		if(immediateEffect!= null)
+		if(permanentEffect!= null)
 			permanentEffect.doEffect(player, false);
 		
 	}

@@ -119,16 +119,19 @@ public class ChoiceController implements Observer<Integer>{
 		private void diplomaticPrivilegesController(int choice) {
 			try{
 				DiplomaticPrivilegesHandler handler= handlers.getDiplomaticPrivilegesHandler();
-				boolean flag = handler.isPossible(player, choice--);  //because player will send a value >=1, but we want it starting from zero
+				int temp=choice-1;
+				boolean flag = handler.isPossible(player, temp);  //because player will send a value >=1, but we want it starting from zero
 				if (!flag)  // the player is notified by the handler
 					return;
-				handler.perform(player, choice--);
+				handler.perform(player, temp);
 				synchronized (player) {
 					if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 						return;
 					 //going back to previous state of the game, if time not expired and restarting the action that was interrputed
-					if(player.getWarehouse().getCouncilPrivileges()>0)
+					if(player.getWarehouse().getCouncilPrivileges()>0){
+						player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
 						return;
+					}
 					if(player.isThereAsecondaryAction())
 						player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
 					else player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));;

@@ -154,7 +154,9 @@ public class Warehouse  extends Observable<PlayerWallet> {
 			return false;
 		if(!greaterEqualThan(faithPoints, 0)) 
 			return false;
-		if(!greaterEqualThan(militaryPoints,0 ))  
+		if(!greaterEqualThan(militaryPoints,0 ))
+			return false;
+		if(!greaterEqualThan(councilPrivileges, 0))
 			return false;
 		return true;
 	}
@@ -199,8 +201,8 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		this.militaryPoints -=resources.getPoints().getMilitaryPoints();
 		this.victoryPoints -= resources.getPoints().getVictoryPoints();
 		this.faithPoints -=resources.getPoints().getFaithPoints();
+		this.councilPrivileges-=resources.getPoints().getCouncilPrivileges();
 		
-		//Council privileges spending is handled in other functions . So there is not its parameter here.
 		// To ensure nothing went wrong calls moreThanZero. 
 		if(!moreThanZero())  
 			throw new IllegalArgumentException("Resources went below zero");
@@ -227,7 +229,5 @@ public class Warehouse  extends Observable<PlayerWallet> {
 	}
 	
 	
-	public void notifyChange(){
-		notifyObservers(new PlayerWallet(this));
-	}
+	
 }

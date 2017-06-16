@@ -54,7 +54,7 @@ public class BoardView {
 			list.add(position.getPositionIndex()-1, position);; //position Index starts from 1: in list from zero;	
 		}
 		
-		public void addfamilyMember(ActionNotification action){
+		public void update(ActionNotification action){
 			PositionView position= findPosition(action);
 			position.setPlayerhere(action.getPlayerName(), action.getFamilyMemberColour());
 			position.setCardHere(null);

@@ -59,8 +59,10 @@ public class Market {
 	public void clearMarket(){
 		marketPosition1.clear();
 		marketPosition2.clear();
-		marketPosition3.clear();
-		marketPosition4.clear();
+		if(marketPosition3!=null)
+			marketPosition3.clear();
+		if(marketPosition4!=null)
+			marketPosition4.clear();
 	} 
 	
 	

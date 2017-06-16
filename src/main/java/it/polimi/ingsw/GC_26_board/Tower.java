@@ -81,11 +81,6 @@ public class Tower {
 		towerPositionFloor4.clear();
 	    }
 	
-	public void newRound(){
-		clearCardsAndFamilyMembers();
-		setCardsInPositions();
-	}
-	
 
 	
 	
@@ -118,7 +113,7 @@ public class Tower {
 	}
 	
 	public boolean isTheTowerOccupied(){
-		return isTowerFree;
+		return !isTowerFree;
 	}
 
 	

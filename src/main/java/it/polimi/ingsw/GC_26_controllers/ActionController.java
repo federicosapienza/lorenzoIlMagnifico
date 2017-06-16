@@ -55,7 +55,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
 				}
 				else if(player.isThereAsecondaryAction())
-					player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+					player.setStatus(new Request(PlayerStatus.SECONDPLAY, "Perform your allowed second action" , null));
 				else 
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 			}

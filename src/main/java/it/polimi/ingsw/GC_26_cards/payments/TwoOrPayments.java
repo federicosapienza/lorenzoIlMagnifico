@@ -31,8 +31,8 @@ public class TwoOrPayments implements Payment{
 	public synchronized boolean canPlayerGetThis(Player player, DevelopmentCardTypes type) {
 		//returns true as long as one payment is ok!
 		if(mode1.canPlayerGetThis(player,type) || mode2.canPlayerGetThis(player, type))
-			return false;
-		else return true;
+			return true;
+		else return false;
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class TwoOrPayments implements Payment{
 				mode2.pay(player,type);
 				return;
 		}
-		throw new IllegalArgumentException();
+		throw new IllegalArgumentException("not enough resources");
 		
 	}
 	

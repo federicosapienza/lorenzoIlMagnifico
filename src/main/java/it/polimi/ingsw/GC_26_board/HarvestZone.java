@@ -52,7 +52,8 @@ public class HarvestZone {
 	
 	public void clear(){
 		singleHarvest.clear();
-		multipleHarvest.clear();
+		if(multipleHarvest!=null)
+			multipleHarvest.clear();
 		playersHere.clear();
 	} 
 		//checks if there is one coloured family member for the player passed;

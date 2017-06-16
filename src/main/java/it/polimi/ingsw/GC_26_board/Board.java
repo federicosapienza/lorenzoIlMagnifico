@@ -102,6 +102,7 @@ public class Board extends Observable<PositionDescriber>{
 		market.clearMarket();
 		harvestZone.clear();
 		productionZone.clear();
+		councilPalace.clear();
 	}
 	// called at the beginning of the game and whenever a player is re-inserted in a game, 
 	//to send any boardElement, position by position.

@@ -29,8 +29,9 @@ public class DiplomaticPrivilegesHandler {
 			throw new IllegalStateException();
 		}
 		
-		if(choice >= diplomaticPrivilegesTrades.length){   // If the integer is greater than the number of choice, the first reward possible is given.
-			choice=findNotUsed();
+		if(choice >= diplomaticPrivilegesTrades.length){   
+			player.notifyObservers(new Request(player.getStatus(),"Insert a valid choice", null));
+			return false;
 		}
 			
 		if(used[choice]){

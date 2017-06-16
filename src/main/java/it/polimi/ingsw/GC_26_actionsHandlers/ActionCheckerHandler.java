@@ -63,7 +63,8 @@ public class ActionCheckerHandler {
 				player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
 		}
 		TowerPosition position = tower.getPosition(action.getPosition());
-		canMemberGoToPosition( position,  player,  familyMember, action);
+		if(!canMemberGoToPosition( position,  player,  familyMember, action))
+			return false;
 		
 		//calling the card
 		DevelopmentCard card = position.getCard();

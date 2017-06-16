@@ -46,13 +46,13 @@ public class InputlogicCli implements Runnable{
 				String password = scanIN.nextLine();
 				connection.login(username, password);
 				view.setPlayerUsername(username);
+				
+				
+			scanIN=new Scanner(System.in);
+			System.out.println("iologic 51");
 
 			while(true){
-				if(view.isLoginDone())
-					break;
-				}
-			
-			while(true){
+				System.out.println("iologic 57");
 				int value = scanIN.nextInt();
 				if(value==999){  //if player asks to end the turn
 					String	temp="end turn" ;
@@ -83,7 +83,7 @@ public class InputlogicCli implements Runnable{
 					if(!positionChosen &&  (value>0 && value<5)){
 						position=value;
 						output.printString("How many servants? '-1'-togoBack");
-						positionChosen=false;
+						positionChosen=true;
 						continue;
 					}
 					if(value>=0){
@@ -104,9 +104,8 @@ public class InputlogicCli implements Runnable{
 					waitingResponse=false;
 					continue;
 				}
-				
+				System.out.println("iologic107");
 			}
-		
 		}
 		
 		private synchronized boolean getWaitingAction(){
@@ -119,13 +118,13 @@ public class InputlogicCli implements Runnable{
 		}
 		
 		public synchronized void setWaitingFirstAction(){
-			output.printFamilyMembers(view.getThisPlayer());
-			output.printResources(view.getThisPlayer());
-			output.printString("What Action?");
-			output.printString("what family member? 1-orange 2-black 3-white 4-neutral");
-			restartValues();
 			firstAction=true;
 			waitingAction=true;
+			restartValues();
+			output.printFamilyMembers(view.getThisPlayer());
+			output.printResources(view.getThisPlayer());
+			output.printString("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
+			
 
 		}
 		public synchronized void setWaitingSecondAction(){

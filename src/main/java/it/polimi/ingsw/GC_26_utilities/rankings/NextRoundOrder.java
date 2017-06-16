@@ -1,9 +1,7 @@
 package it.polimi.ingsw.GC_26_utilities.rankings;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import it.polimi.ingsw.GC_26_player.Player;
 
@@ -82,7 +80,6 @@ public class NextRoundOrder {
 					temp.add(p);
 					break;
 				}
-				else throw new IllegalArgumentException("could not sort the List");
 			}
 		}
 		// clearing nextRoundOrder List
