@@ -38,7 +38,8 @@ public class GameParameters {
 	private static ResourcesOrPoints[] diplomaticPrivilegesTrades = {ResourcesOrPoints.newResources(0,0,1,1),
 							ResourcesOrPoints.newResources(0,2,0,0),ResourcesOrPoints.newResources(2,0,0,0),
 							ResourcesOrPoints.newPoints(0, 2, 0, 0),ResourcesOrPoints.newPoints(0, 0, 1, 0)};
-			
+	private static String diplomaticPrivilegesDescription= "choose between 1) 1 rock and 1 stone, 2)2 servants,"
+			+ " 3) 2 coins, 4) 2 military points 5) 1 faith point";
 
 	/**
 	 * Method that returns the number of players involved in the game
@@ -247,6 +248,18 @@ public class GameParameters {
 	public static int getDefaultPositionValue() {
 		return defaultPositionValue;
 	}
+	
+	/**
+	 * Method that returns the string describing the possibles diplomatic trades.
+	 * @return diplomaticPrivilegesDescription It's the the string describing the possibles diplomatic trades
+	 */
+	
+	
+	public static String getDiplomaticPrivilegesDescription() {
+		return diplomaticPrivilegesDescription;
+	}
 }	
+
+
 
 

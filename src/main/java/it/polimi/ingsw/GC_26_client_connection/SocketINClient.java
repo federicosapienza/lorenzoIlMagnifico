@@ -75,7 +75,6 @@ public class SocketINClient implements Runnable{
 					if(object instanceof FamilyMembersDescriber){
 						FamilyMembersDescriber familyMembersDescriber= (FamilyMembersDescriber) object;
 						controller.receiveFamilyMembers(familyMembersDescriber);
-						System.out.println("received family member");
 						continue;
 
 					}

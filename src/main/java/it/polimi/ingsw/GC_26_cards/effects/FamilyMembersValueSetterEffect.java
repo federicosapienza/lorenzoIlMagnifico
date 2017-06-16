@@ -17,8 +17,9 @@ public class FamilyMembersValueSetterEffect implements Effect{
 	
 	
 	@Override
-	public void doEffect(Player player, boolean immediate) {
+	public synchronized void doEffect(Player player, boolean immediate) {
 		player.getPermanentModifiers().setDicesSetted(howManyDicesSetted, value);
+		player.getFamilyMembers().changeValues();
 		
 	}
 	

@@ -2,6 +2,7 @@ package it.polimi.ingsw.GC_26_controllers;
 
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
+import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_server.Observer;
@@ -51,7 +52,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT)  //server waits for action
 					return;
 				if(player.getWarehouse().getCouncilPrivileges()>0){
-					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
 				}
 				else if(player.isThereAsecondaryAction())
 					player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
@@ -86,7 +87,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 				 if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 						return;
 				 if(player.getWarehouse().getCouncilPrivileges()>0){
-					 player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
+					 player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
 					 }
 				 else{
 					 player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));

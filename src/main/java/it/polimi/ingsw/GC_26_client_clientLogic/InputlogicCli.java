@@ -16,8 +16,18 @@ public class InputlogicCli  implements Runnable{
 		private boolean firstAction =true;  //if first action true , if second is false
 		private MainClientView view; 
 		private Output output;
-	
 		private Scanner scanIN= new Scanner(System.in);
+		
+		private int boardChoice=0; //senza lo zero la seconda volta va male
+		private int position=0;
+		private int servants=-2;
+		private Colour familyMemberColour =null;
+		private int familyMember=0;
+		private BoardZone zone=null;
+		private boolean zoneChosen=false;
+		private boolean positionChosen=false;;
+		private boolean familyMemberChosen=false;
+		
 		
 		public InputlogicCli(ClientConnection connection, MainClientView view, Output output) {
 			this.connection=connection;
@@ -41,73 +51,110 @@ public class InputlogicCli  implements Runnable{
 				if(view.isLoginDone())
 						break;
 				}
+			
 			while(true){
-				if(this.getWaitingAction()){
-					System.out.println("io46");
-					output.printFamilyMembers(view.getThisPlayer());
-					output.printResources(view.getThisPlayer());
-					output.printString("What Action?");
-					int boardChoice=0; //senza lo zero la seconda volta va male
-					int position=0;
-					int servants=-2;
-					Colour familyMemberColour =null;
-					int familyMember=0;
-					if(this.firstAction){
-								while(this.waitingAction && (familyMember<1 || familyMember>4)){
-									output.printString("what family member? 1-orange 2-black 3-white 4-neutral");
-								familyMember = scanIN.nextInt();}
-								familyMemberColour=chooseColour(familyMember);
-					}
-					while(this.waitingAction && (boardChoice<1 || boardChoice>8)){
-						output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
-						boardChoice = scanIN.nextInt();
-						}
-					//TODO ovviamente aggiusteremo con limitazioni che varieranno a seconda di pos e quindi di partita,
-					//TODO possiamo fare cosa carina che intanto gli lanciamo view  della zona di interesse
-	
-					while(this.waitingAction && (position<1 || position>8)){ //!waitingAction In case timeout occurs
-						output.printString("what position? '-1'-togoBack");
-							position = scanIN.nextInt();
-							}
-					while(this.waitingAction && servants<-1 ){
-						output.printString("how many servants?; '-1' to go Back");
-						servants = scanIN.nextInt();
-					}
-					//mettere un sei sure?
-					if(servants!=-1){
-						BoardZone boardZone=chooseBoardZone(boardChoice);
-						Action action = new Action(boardZone, position, familyMemberColour, servants);
-						connection.performAction(action);
-						this.waitingAction=false;
-						this.firstAction=false;
-						
-					}
-
-
-					
-					
+				int value = scanIN.nextInt();
+				if(value==999){  //if player asks to end the turn
+					String	temp="end turn" ;
+					connection.sendResponce(temp);
 				}
-				
+				if(value<0){  //the player asks to end the turn
+					restartValues();
+				}	
+				if(this.getWaitingAction()){  //if waiting action
+					if(firstAction && !familyMemberChosen && (value>0 && value<5)){ // family member is not chosen in second action
+						familyMember=value;
+						familyMemberColour= chooseColour(familyMember);
+						output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
+						familyMemberChosen=true;
+						continue;
+					}
+					if(!zoneChosen && (value>0 && value<9)){
+						boardChoice=value;
+						zone=chooseBoardZone(boardChoice);
+						output.printString("what position? '-1'-togoBack");
+						zoneChosen=true;
+						continue;
+					}
+					if(!positionChosen &&  (value>0 && value<5)){
+						position=value;
+						output.printString("how many servants?; '-1' to go Back");
+						positionChosen=true;
+						continue;	
+					}
+					if(value>=0){
+						servants=value;
+						Action action = new Action(zone, position, familyMemberColour, servants);
+						connection.performAction(action);
+						restartValues();
+						waitingAction=false;
+						continue;
+					}
+					output.printString("Not Valid! Repeat!");
+				}
 				if(this.getWaitingResponce()){
-					System.out.println("waiting, 999 to close turn");
-					int responce = scanIN.nextInt();
-					String temp;
-						if(responce==999){
-						temp=	"end turn" ;
-						}
-						else {
-							temp=String.valueOf(responce) ;
-
-						}
+					String temp=String.valueOf(value);
 					connection.sendResponce(temp);
 					waitingResponse=false;
+					continue;
 				}
+				
 			}
-	
+		
+		}
+		
+		private synchronized boolean getWaitingAction(){
+			return waitingAction;
 		}
 		
 		
+		private synchronized boolean getWaitingResponce(){
+			return waitingResponse;
+		}
 		
+		public synchronized void setWaitingFirstAction(){
+			output.printFamilyMembers(view.getThisPlayer());
+			output.printResources(view.getThisPlayer());
+			output.printString("What Action?");
+			output.printString("what family member? 1-orange 2-black 3-white 4-neutral");
+			restartValues();
+			firstAction=true;
+			waitingAction=true;
+
+		}
+		public synchronized void setWaitingSecondAction(){
+			output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
+			restartValues();
+			firstAction=false;
+			waitingAction=true;
+			
+		}
+	
+		public synchronized void setWaitingResponse(){
+			System.out.println("waiting, 999 to close turn");
+			restartValues();
+			waitingResponse=true;
+		}
+		
+		public void setActionPerformed() {
+			output.printCards(view.getThisPlayer().getLeadersCardOwned());
+			output.printString("choose a value between 1 and 4 to try activating the correspondent Leader Card");
+			this.setWaitingResponse();
+		}
+		
+		private void restartValues() {
+			boardChoice=0; //senza lo zero la seconda volta va male
+			position=0;
+			servants=-2;
+			familyMemberColour =null;
+			familyMember=0;
+			zone=null;
+			zoneChosen=false;
+			positionChosen=false;;
+			familyMemberChosen=false;
+		}
+
+
 		private Colour chooseColour(int familyMember) {
 			switch (familyMember) {
 			case 1:
@@ -147,47 +194,5 @@ public class InputlogicCli  implements Runnable{
 			}
 		}
 		
-		private synchronized boolean getWaitingAction(){
-			return waitingAction;
-		}
-		
-		
-		private synchronized boolean getWaitingResponce(){
-			return waitingResponse;
-		}
-		public synchronized void setWaitingPlayer(){
-			waitingPlayer= true;
-		}
-		
-		private synchronized void setNotWaitingPlayer(){
-			waitingPlayer=true;
-		}
-		
-		public synchronized void setWaitingFirstAction(){
-			firstAction=true;
-			waitingAction=true;
-			System.out.println("io logic 169 waiting called");
-
-		}
-		public synchronized void setWaitingSecondAction(){
-			firstAction=false;
-			waitingAction=true;
-		}
-		
-		
-		
-		public synchronized void setWaitingResponse(){
-			waitingResponse=true;
-		}
-		
-		public synchronized void askForUsernameAgain(){
-			
-		}
-
-		public void setActionPerformed() {
-			output.printCards(view.getThisPlayer().getLeadersCardOwned());
-			output.printString("choose a value between 1 and 4 to try activating the correspondent Leader Card");
-			this.setWaitingResponse();
-		}
 
 }

@@ -1,7 +1,9 @@
 package it.polimi.ingsw.GC_26_client_clientLogic;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -25,6 +27,7 @@ public class PlayerView {
 	private PlayerWallet wallet;
 	private String personalTileValues;
 	private FamilyMembersDescriber familyMembers;
+	private List<String> permamentsEffect= new ArrayList<>();
 	
 	PlayerView(PlayerWallet wallet){  //the first time the client receives a playerWallet of a player, it creates playerView
 		name= wallet.getPlayerName();
@@ -51,6 +54,10 @@ public class PlayerView {
 		personalTileValues= string;
 	}
 	
+	public void addLeaderCardOwned(CardDescriber card){ //called only at the beginning of the game
+		leadersCardOwned.add(card);
+	}
+	
 	public void addCard(CardDescriber card){
 		if(card.getTypeOfCard().contains("Development")){
 			Set<CardDescriber> temp= getCurrentCards(card.getType());
@@ -58,7 +65,9 @@ public class PlayerView {
 		}
 		if(card.getTypeOfCard().contains("Leader"))
 			leadersCardOwned.add(card);
-		
+		if(card.getPermanentEffectDescriber()!=null )
+			permamentsEffect.add(card.getPermanentEffectDescriber());
+			
 	}
 	
 	public void setFamilyMembers(FamilyMembersDescriber familyMembers) {

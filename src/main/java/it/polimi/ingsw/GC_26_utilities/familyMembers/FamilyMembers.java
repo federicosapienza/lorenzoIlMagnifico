@@ -43,6 +43,10 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	//it's the player that owns these family members.
 	private Player player;
 	
+	//saves the values of the lastDices passsed to setvalues(); useful for changeValues();
+	private Dices lastDices;
+	
+	
 	/**
 	 * Constructor that creates the set of family members of a player.
 	 * @param player It's the player that owns these family members.
@@ -101,6 +105,7 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	 */
 	public void setValues(Dices dices){
 		//changes of permanent effect	
+		lastDices= dices;
 		
 		int orangeDice= dices.readDice(Colour.ORANGE);
 		int blackDice=dices.readDice(Colour.BLACK);
@@ -111,12 +116,12 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 			blackDice= player.getPermanentModifiers().getValue3dicesChanged();
 		}
 		if(player.getPermanentModifiers().isOneDiceChangeOn()){ //Federico Da Montefeltro effect
-			int test = searchSmaller(orangeDice,whiteDice,blackDice);
-			if(test==1)
+			FamilyMember test = searchSmallerFree();  //necessary if a permanent effect is activated during the turn
+			if(test!=null && test.equals(orangeMember))
 				orangeDice=player.getPermanentModifiers().getValue1diceChanged();
-			else  if(test==2)
+			else  if(test!=null &&test.equals(blackDice))
 				blackDice=player.getPermanentModifiers().getValue1diceChanged();
-			else if(test==3)
+			else if(test!=null && test.equals(whiteMember))
 				whiteDice=player.getPermanentModifiers().getValue1diceChanged();		
 		}
 			
@@ -130,6 +135,22 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
         neutralMember.setValue(GameParameters.getDefaultNeutralValue()+neutralChange);
         notifyObservers(new FamilyMembersDescriber(this));
 	}
+	
+	/**
+	 * Method that sets the value for every family member to the correct value after the activation of a permanent effect.
+	 *
+	 * 
+	 */
+	public void changeValues(){
+		//changes of permanent effect	
+		Dices dices= lastDices;
+		setValues(dices);
+        notifyObservers(new FamilyMembersDescriber(this));
+	}
+	
+	
+	
+	
 	
 	/**
 	 * Method that returns the colors representing  the family members that are actually free.
@@ -178,6 +199,46 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 		blackMember.setFree();
 		neutralMember.setFree();
 	}
+	
+	/**
+	 * Method that finds the smaller between the colored and free family members. In case two are equals 
+	 * the  arbitrary priority is: orange, white, black.
+	 * 
+	 * @return  the smaller between the colored and free family members. If none of them is free, null is returned
+	 */
+	
+	
+	private FamilyMember searchSmallerFree(){
+		int testOrange;
+		int testBlack;
+		int testWhite;
+		if(!orangeMember.isFree())
+			testOrange=7;
+		else testOrange=orangeMember.getValue();
+		if(!whiteMember.isFree())
+			testWhite=7;
+		else testWhite=whiteMember.getValue();
+		if(!blackMember.isFree())
+			testBlack=7;
+		else testBlack=blackMember.getValue();
+		
+		
+		if(!orangeMember.isFree() && !blackMember.isFree() && whiteMember.isFree())
+			return null;
+		else {
+			int test = searchSmaller(testOrange,testWhite, testBlack);
+				if(test==1)
+					return  orangeMember;
+				else  if(test==2)
+					return whiteMember;
+				else if(test==3)
+					return blackMember;	
+		}
+		return null;
+		
+	}
+	
+	
 	
 	/**
 	 * Method that finds the smaller of three integer(in case two are equals the first is preferred.)
