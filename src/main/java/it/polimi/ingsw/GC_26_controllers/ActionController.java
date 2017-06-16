@@ -38,7 +38,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 			if(!flag)
 				return;
 			
-			handlers.getFirstActionHandler().perform(player,  action);
+			handlers.getFirstActionHandler().perform(player, action);
 			synchronized (player) {
 				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT)
 					return;
@@ -57,15 +57,13 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 					player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
 				else 
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
-			}
+			} 
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			synchronized (player) {
 				player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
 			}
-			
-		}
-		catch (IllegalStateException e1 ) {
+		} catch (IllegalStateException e1 ) {
 			e1.printStackTrace();
 			synchronized (player) {
 				player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
@@ -80,19 +78,19 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 			// if action not possible player is notified in IsPossible and linked methods
 			if(flag)
 				return;
-				handlers.getSecondActionHandler().perform(player,  action);
-				player.resetSecondAction();
-			 synchronized (player) {
-				 if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
-						return;
-				 if(player.getWarehouse().getCouncilPrivileges()>0){
-					 player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
-					 }
-				 else{
-					 player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
-				 }
-
-			 }
+			handlers.getSecondActionHandler().perform(player, action);
+			player.resetSecondAction();	 
+			synchronized (player) {
+				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
+					return;
+				if(player.getWarehouse().getCouncilPrivileges()>0){
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
+				}
+				else{
+					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
+				}
+			
+			}
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			synchronized (player) {
