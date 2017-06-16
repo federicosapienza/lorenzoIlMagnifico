@@ -25,7 +25,7 @@ public class PersonalBoardTest {
 	PersonalBoard personalBoard = new PersonalBoard();
 	
 	@Test
-	public void testCreation() {
+	public void creationTest() {
 		assertNotNull(personalBoard);
 	}
 	

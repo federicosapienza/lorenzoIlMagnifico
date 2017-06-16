@@ -23,21 +23,46 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the handler that checks whether the action chosen by a player is possible or not and 
+ *
+ */
 public class ActionCheckerHandler {
 	private GameElements gameElements;
 	protected HarvestAndProductionHandler harvestAndProductionHandler;
 	
+	/**
+	 * Constructor: it creates a handler that checks the regularity and possibility of an action, by the evaluation of the
+	 * parameters expressed by gameElements and harvestAndProductionHandler 
+	 * @param gameElements the game elements that the handler will evaluate to check the action
+	 * @param harvestAndProductionHandler the handler for harvest and production
+	 */
 	public ActionCheckerHandler(GameElements gameElements, HarvestAndProductionHandler harvestAndProductionHandler){
 		this.gameElements =gameElements;
 		this.harvestAndProductionHandler=harvestAndProductionHandler;
 	}
 	
-//////checkers
+	/**
+	 * Method that checks if an action that involves a tower is possible or not
+	 * @param player the current player that wants to perform the action 
+	 * @param familyMember the family member that the player would put in a tower
+	 * @param action the action of the current player 
+	 * @return true if the action can be performed in the tower, according to the rules; false if it can't be performed
+	 */
 	protected boolean towerIsPossible(Player player, FamilyMember familyMember, Action action){
-		//validating action sent
+		/**
+		 * Validation of the action that has been sent
+		 */
 		if(action.getPosition()<=0 || action.getPosition()>GameParameters.getTowerFloorsNumber()) 
 			throw new IllegalArgumentException();
-		//checks if the player has not already the maximum number of cards allowed
+		/**
+		 * Checks if the player is not already owning the maximum number of cards allowed
+		 */
 		if(player.getPersonalBoard().getNumberOfCardPerType(convertZoneInCard(action.getZone()))
 									== GameParameters.getMaxNumOfCards()){
 					player.notifyObservers(new Request(player.getStatus(),"maximum number of card already reached", null));
@@ -46,14 +71,19 @@ public class ActionCheckerHandler {
 			
 		
 		
-		 //checks if the player is already on the tower
+		/**
+		 * Checks if the player has already put a family member on the tower
+		 */
 		Tower tower = gameElements.getBoard().getTower(action.getZone());
 		if(!tower.canFamilyMemberGoToTheTower(familyMember)){ //familyMember== null ->second Action: (considered by canPlayerGoToTheTower=
 			player.notifyObservers(new Request(player.getStatus(),"Your coloured members are already in the tower", null));
-			return false ;
-					}
+			return false;
+			}
 		
-		//if the tower is occupied pay coins(or whatever payment, if rules are changed)if possible; also checks that Brunelleschi effect not activated
+		/**
+		 * If the tower is occupied, the player has to pay coins(or whatever payment, if rules are changed)if he owns them; 
+		 * it also checks that Brunelleschi effect is not activated
+		 */
 		if(tower.isTheTowerOccupied()&& !player.getPermanentModifiers().isTowerBonusRevokedOn()){
 				if (!player.getTestWarehouse().areResourcesEnough(GameParameters.getTowerOccupiedMalus())){
 					player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
@@ -66,30 +96,45 @@ public class ActionCheckerHandler {
 		if(!canMemberGoToPosition( position,  player,  familyMember, action))
 			return false;
 		
-		//calling the card
+		/**
+		 * Calling the card
+		 */
 		DevelopmentCard card = position.getCard();
 
-		
+		/**
+		 * Checking if the player can get the card: if he can't, it means two possible things:
+		 * 1) The player has not enough resources
+		 * 2) The player has not enough military points requirements needed to get 3,4,5,6 Territory card
+		 */
 		if(!card.canPlayerGetThis(player)){
 			 player.notifyObservers(new Request(player.getStatus(),"not enough resources to get the card",new CardDescriber(card)));
 			return false;
-			//could mean
-			// 1) not enough resources
-			// 2) military points' requirements needed for getting 3,4,5,6 territory card not reached
+			
 		}
 		return true;
 	 }
 	 
+	/**
+	 * Method that checks if the action that the player wants to perform in the market is possible
+	 * @param player It's the player that wants to perform the action
+	 * @param familyMember It's the family member involved in the action
+	 * @param action It's the action that the player wants to perform
+	 * @return true if the action is possible according to the rules of the game; false if it is not possible 
+	 */
 	 protected boolean marketIsPossible(Player player, FamilyMember familyMember, Action action){
-		 //validating action
+		 /**
+		  * Validating action
+		  */
 		 if(player.getPermanentModifiers().getMarketBanFlag()){
 			player.notifyObservers(new Request(player.getStatus(),"player is banned from the Market!", null));
 			 return false;
 		 }
 		 
-		 
-		 if(action.getPosition()<=0 ||  //market's number of positions depends on number of players
-					// with standard rules: if (numPlayers<4 && position>2)||(numPlayers=4 && position>4) throws exception.
+		 /**
+		  * The number of the positions in the market depends on the number of players, with standard rules:
+		  * if (numPlayers<4 && position>2)||(numPlayers=4 && position>4) an exception has to be thrown.
+		  */
+		 if(action.getPosition()<=0 || 
 					(gameElements.getNumberOfPlayers()<GameParameters.getNumPlayerforCompleteMarketActivation() 
 							&& action.getPosition()>GameParameters.getMinMarketZones())||
 					(gameElements.getNumberOfPlayers()>=GameParameters.getNumPlayerforCompleteMarketActivation() 
@@ -100,48 +145,86 @@ public class ActionCheckerHandler {
 		 return canMemberGoToPosition(position, player, familyMember, action);
 	 }
 
+	 /**
+	  * Method that checks if the action that the player wants to perform in the Council Palace is possible
+	  * @param player It's the player that wants to perform the action
+	  * @param familyMember It's the family member involved in the action
+	  * @param action It's the action that the player wants to perform
+	  * @return true if the action is possible according to the rules of the game; false if it is not possible 
+	  */
 	 protected boolean councilPalaceIsPossible(Player player, FamilyMember familyMember, Action action){
 		 
 		 CouncilPalace position = gameElements.getBoard().getCouncilPalace();
 				return canMemberGoToPosition(position, player, familyMember, action);
 			}
 	 
+	 /**
+	  * Method that checks if the action that the player wants to perform in the Harvest zone is possible
+	  * @param player It's the player that wants to perform the action
+	  * @param familyMember It's the family member involved in the action
+	  * @param action It's the action that the player wants to perform
+	  * @return true if the action is possible according to the rules of the game; false if it is not possible 
+	  */
 	 protected boolean harvestIsPossible(Player player, FamilyMember familyMember, Action action){
-		 //validating action
-		 if(action.getPosition()<=0 ||  //harvest  number of positions depends on number of players
-					// with standard rules: if (numPlayers<3 && position>1)||(numPlayers>=3 && position>2) throws exception.
+		 /**
+		  * Validating the action.
+		  * The number of positions in the Harvest zone depends on the number of players 
+		  * with standard rules: if (numPlayers<3 && position>1)||(numPlayers>=3 && position>2) throws exception.
+		  */
+		 if(action.getPosition()<=0 ||  
 					(gameElements.getNumberOfPlayers()<GameParameters.getNumPlayersForMultipleZones() 
 							&& action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())||
 					(gameElements.getNumberOfPlayers()>=GameParameters.getNumPlayerforCompleteMarketActivation() 
 							&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()))
 				throw new IllegalArgumentException();
-		 //checking
+		 /**
+		  * Checking
+		  */
 		 HarvestZone zone =gameElements.getBoard().getHarvestZone();
 		 if(zone.playerAlreadyHere(familyMember)){
 				player.notifyObservers(new Request(player.getStatus(),"Already used a coloured member in harvest", null));
 			 return false;
 		 }
 
-		 if(action.getPosition()==1){ //single position
+		 /**
+		  * Single position case
+		  */
+		 if(action.getPosition()==1){ 
 			SingleHarvest position = zone.getSingleHarvest();
 			return canMemberGoToPosition(position, player, familyMember, action);}
-		  if(action.getPosition()==2){ //multiple position
+		 
+		 /**
+		  * Multiple position case
+		  */
+		  if(action.getPosition()==2){ 
 			 MultipleHarvest position = gameElements.getBoard().getHarvestZone().getMultipleHarvest();
 			 return canMemberGoToPosition(position, player, familyMember, action);}
 		  throw new IllegalArgumentException();
 	 }
 	 
+	 /**
+	  * Method that checks if the action that the player wants to perform in the Council Palace is possible
+	  * @param player It's the player that wants to perform the action
+	  * @param familyMember It's the family member involved in the action
+	  * @param action It's the action that the player wants to perform
+	  * @return true if the action is possible according to the rules of the game; false if it is not possible 
+	  */
 	 protected boolean productionIsPossible(Player player, FamilyMember familyMember, Action action){
-		 //validating action. 
-		 if(action.getPosition()<=0 ||  //harvest  number of positions depends on number of players
-					// with standard rules: if (numPlayers<3 && position>1)||(numPlayers>=3 && position>2) throws exception.
+		 /**
+		  * Validating action. 
+		  * The number of positions in the Production zone depends on the number of players 
+		  * with standard rules: if (numPlayers<3 && position>1)||(numPlayers>=3 && position>2) throws exception.
+		  */
+		 if(action.getPosition()<=0 || 
 					(gameElements.getNumberOfPlayers()<GameParameters.getNumPlayersForMultipleZones() 
 							&& action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())||
 					(gameElements.getNumberOfPlayers()>=GameParameters.getNumPlayerforCompleteMarketActivation() 
 							&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()))
 				throw new IllegalArgumentException();
 	
-		 //checking
+		 /**
+		  * Checking
+		  */
 		 ProductionZone zone =gameElements.getBoard().getProductionZone();
 		 if(zone.playerAlreadyHere(familyMember)){
 			 player.notifyObservers(new Request(player.getStatus(),"Already used a coloured member in production", null));
@@ -161,10 +244,22 @@ public class ActionCheckerHandler {
 	 
 	 
 	 
-	 //methods created to reduce lines of codes: 
-	 //1)checking the position is free; 2)checking family member' s value is big enough for performing the action
+	 /**
+	  * The following methods created to reduce lines of codes.
+	  * 
+	  * This method checks if the position if free and if the family member's value is enough to perform the action
+	  * @param position It's the position that has to be checked
+	  * @param player It's the player that wants to perform the action
+	  * @param familyMember It's the family member involved in the action: its value has to be checked
+	  * @param action It's the action that the player wants to perform
+	  * @return true if the action can be performed according to the rules; false if it cannot be performed
+	  */
+	 
 	 private boolean canMemberGoToPosition(SinglePosition position, Player player, FamilyMember familyMember, Action action) {
-		 if(player.getPermanentModifiers().isGoingInOccupiedPositionsAllowed())//Ariosto Effect
+		 /**
+		  * Ludovico Ariosto's effect
+		  */
+		 if(player.getPermanentModifiers().isGoingInOccupiedPositionsAllowed()) 
 			 return true;
 		 
 		 if(position.IsPositionOccupied()){
@@ -173,7 +268,9 @@ public class ActionCheckerHandler {
 			}
 		 
 		 int servants =action.getServantsUsed();
-		 //handling permanent effect that doubles the servants neeeded:
+		 /**
+		  * handling permanent effect that doubles the servants needed:
+		  */
 		 if(servants!=0 && player.getPermanentModifiers().isDoubleServantsOn())
 			 servants = servants/2;
 			 
@@ -190,15 +287,28 @@ public class ActionCheckerHandler {
 				}
 		 else return true;
 	}
-	 //multiple position
-	// 1)checking family member' s value is big enough for performing the action
+	 /**
+	  * Method that checks the possibility of an action that involves multiple positions
+	  * @param position It's the multiple position involved in the action
+	  * @param player It's the player who wants to perform the action
+	  * @param familyMember It's the player's family member involved in the action
+	  * @param action It's the action that the player wants to perform
+	  * @return true if the action can be performed according to the rules; false if it can't be performed
+	  */
+
 	 private boolean canMemberGoToPosition(MultiplePosition position, Player player, FamilyMember familyMember, Action action){
+		 
 		 int servants =action.getServantsUsed();
-		 //handling permanent effect that doubles the servants neeeded:
+		 /**
+		  * Handling the permanent effect that doubles the servants needed:
+		  */
 		 if(servants!=0 && player.getPermanentModifiers().isDoubleServantsOn())
 			 servants = servants/2;
 		 
-		 if(  (familyMember != null && familyMember.getValue() + servants+ 
+		 /**
+		  * Checking if the value of the family member is enough to perform the action or not
+		  */
+		 if((familyMember != null && familyMember.getValue() + servants+ 
 				 	player.getPermanentModifiers().getActionModifier(action.getZone()) < position.getValueOfPosition())){  //first action
 					player.notifyObservers(new Request(player.getStatus(),"Family member's value and servants used not enough", null));
 					return false; 
@@ -213,7 +323,11 @@ public class ActionCheckerHandler {
 		 else return true;
 	 }
 	
-	 
+	 /**
+	  * Method that converts the board zone expressed in the parameter to the corresponding type of development card
+	  * @param zone It's the board zone that has to be converted to a development card
+	  * @return the type of development card that matches with the board zone expressed in the parameter
+	  */
 		protected DevelopmentCardTypes convertZoneInCard(BoardZone zone){
 			switch (zone) {
 			case TERRITORYTOWER: 

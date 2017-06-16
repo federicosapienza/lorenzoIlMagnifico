@@ -26,7 +26,7 @@ public class BoardTest {
 	Player player3;
 	Player player4;
 	@Test
-	public void test() {
+	public void existenceTest() {
 		
 		resourcesOrPointsArray1[0] = ResourcesOrPoints.newResourcesOrPoints(0, 0, 0, 0, 0, 0, 0, 0);
 		resourcesOrPointsArray1[1] = ResourcesOrPoints.newResourcesOrPoints(0, 0, 0, 0, 0, 0, 0, 0);

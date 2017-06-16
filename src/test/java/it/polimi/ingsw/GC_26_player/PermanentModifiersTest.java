@@ -26,7 +26,6 @@ public class PermanentModifiersTest {
 		resourcesOrPoints.newResourcesOrPoints(1, 0, 0, 0, 0, 0, 0, 0);
 		permMod.setMalus(ResourcesOrPoints.newResourcesOrPoints(1, 0, 0, 0, 0, 0, 0, 0));
 		assertTrue(permMod.IsresourcesMalusOn());
-		assertEquals(resourcesOrPoints, permMod.getResourcesAfterMalus(ResourcesOrPoints.newResourcesOrPoints(2, 0, 0, 0, 0, 0, 0, 0)));
 		
 	}
 	
@@ -36,6 +35,27 @@ public class PermanentModifiersTest {
 		permMod.setMilitaryPointRequirementNotNeeded();
 		assertTrue(permMod.isMilitaryPointRequirementNotNeeded());
 		
+	}
+	
+	@Test
+	public void testBonusRevoked(){
+		assertFalse(permMod.isTowerBonusRevokedOn());
+		permMod.setBonusRevokedOn();
+		assertTrue(permMod.isTowerBonusRevokedOn());
+		
+	}
+	
+	@Test
+	public void testVictoryPointsReducer(){
+		assertEquals(1, permMod.getVictoryPointsReducer());
+		permMod.setVictoryPointsReducer(3);
+		assertEquals(3, permMod.getVictoryPointsReducer());
+	}
+	
+	@Test
+	public void testThreeDicesChange(){
+		assertFalse(permMod.isThreeDicesChangeOn());
+		assertEquals(0, permMod.getValue3dicesChanged());
 	}
 	
 	

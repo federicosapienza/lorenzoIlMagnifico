@@ -20,16 +20,23 @@ public class PlayerTest {
 	Request request1 = new Request(PlayerStatus.PLAYING, "Player 1 is playing", null);
 	Request request2 = new Request(PlayerStatus.CHOOSINGPAYMENT, "Player 1 is choosing the payment", null);
 	@Test
-	public void testValues() {
+	public void testExistence() {
 		assertNotNull(player1);
 		assertNotNull(player2);
-
+	}
+	
+	@Test
+	public void testValues(){
 		dices.rollDices();
 		player1.getFamilyMembers().setValues(dices);
 		player2.getFamilyMembers().setValues(dices);
 		assertTrue(player1.getFamilyMembers().getfamilyMember(Colour.BLACK).getValue() == player2.getFamilyMembers().getfamilyMember(Colour.BLACK).getValue());
 		assertTrue(player1.getFamilyMembers().getfamilyMember(Colour.WHITE).getValue() == player2.getFamilyMembers().getfamilyMember(Colour.WHITE).getValue());
 		assertNotEquals(player1.getFamilyMembers(), player2.getFamilyMembers());
+	}
+	
+	@Test
+	public void testStatus(){
 		player1.setStatus(request1);
 		assertNotNull(player1.getStatus());
 		assertEquals(PlayerStatus.PLAYING, player1.getStatus());

@@ -12,7 +12,7 @@ public class FamilyMembersTest {
     ResourcesOrPoints startingResources= ResourcesOrPoints.newResources(1, 1, 0, 0);
     
     @Test
-    public void test() {
+    public void testValues() {
     	dices.rollDices();
     	int whiteValue = dices.readDice(Colour.WHITE);
     	int blackValue = dices.readDice(Colour.BLACK);

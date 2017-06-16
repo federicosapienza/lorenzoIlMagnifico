@@ -22,13 +22,20 @@ public class NextRoundOrderTest {
 	Player player3 = new Player("Charles", ResourcesOrPoints.newResourcesOrPoints(7, 3, 2, 2, 0, 0, 0, 0));
 	
 	@Test
-	public void test() {
+	public void testExistence() {
 		playersList.add(player1);
 		playersList.add(player2);
+		
 		nextRoundOrder = new NextRoundOrder(playersList);
 		assertNotNull(nextRoundOrder);
-		assertFalse(nextRoundOrder.getNextRoundOrder().contains(player1.getName()));
-		assertFalse(nextRoundOrder.getNextRoundOrder().contains(player2.getName()));
+	}
+	
+	@Test
+	public void testNextRoundOrder(){
+		playersList.add(player1);
+		playersList.add(player2);
+		
+		nextRoundOrder = new NextRoundOrder(playersList);
 		nextRoundOrder.nextRoundChanging(player1);
 		nextRoundOrder.nextRoundChanging(player2);
 		assertTrue(nextRoundOrder.getNextRoundOrder().contains(player1.getName()));

@@ -20,8 +20,12 @@ public class ActionControllerTest {
 	MainActionHandler handlers;
 	ActionController actionCtrl = new ActionController(player1, handlers);
 	@Test
-	public void test() {
+	public void testExistence() {
 		assertNotNull(actionCtrl);
+	}
+	
+	@Test
+	public void testStatus(){
 		player1.setStatus(request1);
 		assertNotNull(player1.getStatus());
 		assertEquals(PlayerStatus.PLAYING, player1.getStatus());
