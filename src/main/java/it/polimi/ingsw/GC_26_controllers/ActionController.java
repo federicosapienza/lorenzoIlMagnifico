@@ -79,7 +79,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 			// if action not possible player is notified in IsPossible and linked methods
 			if(flag)
 				return;
-<<<<<<< HEAD
+
 			handlers.getSecondActionHandler().perform(player, action);
 			player.resetSecondAction();	 
 			synchronized (player) {
@@ -93,7 +93,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 				}
 			
 			}
-=======
+
 				handlers.getSecondActionHandler().perform(player,  action);
 				player.resetSecondAction();
 			 synchronized (player) {
@@ -107,7 +107,7 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 				 }
 
 			 }
->>>>>>> b655108fb47f3739b9c4bbbab8fd6559cfc1ae69
+
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			synchronized (player) {
