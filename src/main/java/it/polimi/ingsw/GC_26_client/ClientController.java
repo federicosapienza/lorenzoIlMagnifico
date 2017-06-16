@@ -119,6 +119,7 @@ public class ClientController {
 			output.printString(request.getMessage());
 		if(request.getStatus()==PlayerStatus.PLAYING){
 				iOlogic.setWaitingFirstAction();
+				output.printBoard(view.getBoard());
 				return;}
 		if(request.getStatus()== PlayerStatus.SECONDPLAY){
 				iOlogic.setWaitingSecondAction();
@@ -153,8 +154,6 @@ public class ClientController {
 	}
 	
 	private void handlePersonalBoardChangeNotification(PersonalBoardChangeNotification change) {
-		if(view.getGameStatus() == GameStatus.RECONNETTINGAPLAYER)
-			return;
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME){
 			if(change.getBoardTileValues()!=null)
 				view.getPlayer(change.getPlayerName()).setPersonalTileValues(change.getBoardTileValues());

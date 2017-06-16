@@ -22,7 +22,7 @@ public class ChangeFamilyMembersValue implements Effect{
 	public synchronized void doEffect(Player player, boolean immediate) {
 		player.getPermanentModifiers().setColouredMembersChange(colouredMemberChange);
 		player.getPermanentModifiers().setColouredMembersChange(neutralMemberChange);
-		
+		player.getFamilyMembers().changeValues();
 		
 	}
 	
