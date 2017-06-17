@@ -28,10 +28,19 @@ public class Tower {
 	private TowerPosition towerPositionFloor3;
 	private TowerPosition towerPositionFloor4;
 	
+	/**
+	 * Constructor: it creates the towers with the corresponding array of resources or points
+	 * @param resourcesOrPoints It's the array of resources or points that have to be put in the floors of the towers 
+	 */
 	public Tower(ResourcesOrPoints[] resourcesOrPoints){
 		createTowerPositions(resourcesOrPoints);
 	}
 	
+	/**
+	 * Method that creates the floors of the towers with the correct corresponding resources or points taken from the array
+	 * of resources or points indicated in the parameter
+	 * @param resourcesOrPoints It's the array of resources or points which contains the correct resources for every floor
+	 */
 	private void createTowerPositions(ResourcesOrPoints[] resourcesOrPoints){
 		towerPositionFloor1 = new TowerPosition(1,resourcesOrPoints[0],getFloorValue(1));
 		towerPositionFloor2 = new TowerPosition(2,resourcesOrPoints[1],getFloorValue(2));
@@ -39,6 +48,11 @@ public class Tower {
 		towerPositionFloor4 = new TowerPosition(4,resourcesOrPoints[3],getFloorValue(4));
 	}
 
+	/**
+	 * Method that returns the position of the tower that corresponds to the floor contained in the parameter
+	 * @param floor It's the floor to analyze to get the corresponding position of the tower
+	 * @return the correct position of the tower that corresponds to the floor contained in the parameter
+	 */
 	public TowerPosition getPosition(int floor){
 		switch(floor) {
 		case 1:
@@ -54,16 +68,29 @@ public class Tower {
 		}
 	}
 	
+	/**
+	 * Method that returns the minimum required value that the family member must have to be put in the corresponding 
+	 * floor indicated in the parameter
+	 * @param floor It's the number of floor to analyze
+	 * @return the minimum required value that the family member must have to be put in the corresponding 
+	 * floor indicated in the parameter
+	 */
 	public int getFloorValue(int floor){
 		return GameParameters.getTowersFloorsValues(floor);
 	}
 	
+	/**
+	 * Method that sets the list of development cards to use in the current round
+	 * @param cards the list of development cards to use in the current round
+	 */
 	public void setCardsForThisRound(List<DevelopmentCard> cards){
 		cardsForThisRound=cards;
 		setCardsInPositions();
 	}
 	
-	
+	/**
+	 * Method that sets the cards in the corresponding towers with the correct order
+	 */
 	private void setCardsInPositions(){
 		towerPositionFloor1.setCard(cardsForThisRound.get(0));
 		towerPositionFloor2.setCard(cardsForThisRound.get(1));
@@ -71,8 +98,10 @@ public class Tower {
 		towerPositionFloor4.setCard(cardsForThisRound.get(3));
 	}
 	
-	
-			
+	/**
+	 * Method called at the end of every round to remove all the cards and the family members present in the towers
+	 * and to reset the towers as free
+	 */
 	public void clearCardsAndFamilyMembers(){ 
 		isTowerFree=true;
 		playersInTheTower.clear();
@@ -83,11 +112,20 @@ public class Tower {
 	    }
 	
 
+	/**
+	 * Method that checks if the family member can be put in the tower
+	 * @param familyMember It's the family member that the player wants to put in the tower
+	 * @return true if it is possible; there are three possibilties 
+	 * 1)the tower doesn't contain other coloured family members that belong to the player who wants to put another 
+	 * coloured family member 
+	 * 2) the player wants to put a neutral family member
+	 * 3) the family member is null, which implies the action is a second action.
+	 * 
+	 * It returns false if it isn't possible (there is already a coloured family member of the player who wants to put another coloured
+	 * family member in the same tower)
+	 */
 	
 	
-	    //checks if  the family member can be put there 
-		//1) if the member is neutral , player is not added to the list 
-		//2) if is a second action familyMember is null and player is not added
 	public boolean canFamilyMemberGoToTheTower(FamilyMember familyMember){
 		if(familyMember==null ||  familyMember.getColour()==Colour.NEUTRAL)
 			return true;
@@ -99,9 +137,14 @@ public class Tower {
 			return true; 	
 	}
 	
-	//sets that the player is in the Tower, passing the familyMember so that:
-	//1) if the member is neutral , player is not added to the list 
-	//2) if is a second action familyMember is null and player is not added
+	/**
+	 * Method that sets a family member in the tower. Every time this is done, the player that has performed this action
+	 * is added to the list of players who are occupying the tower except in two cases:
+	 * 1) the family member is neutral;
+	 * 2) the family member is null, which implies the action is a second action
+	 * @param familyMember It's the family member that has to be put in the tower
+	 */
+
 	public void setPlayerInTheTower(FamilyMember familyMember){
 		if(familyMember== null)
 			return;
@@ -113,8 +156,12 @@ public class Tower {
 		}
 	}
 	
-	public boolean isTheTowerOccupied(){
-		return !isTowerFree;
+	/**
+	 * Method that checks if the tower is free or not
+	 * @return true if the tower is free; false if it isn't
+	 */
+	public boolean isTheTowerFree(){
+		return isTowerFree;
 	}
 
 	

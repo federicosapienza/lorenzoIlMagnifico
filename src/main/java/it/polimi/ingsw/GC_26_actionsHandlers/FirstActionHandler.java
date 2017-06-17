@@ -10,10 +10,24 @@ import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
-// synchronization is ensured by Controllers which calls method of this function, only if the player is allowed
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ *
+ * Extending class of action handler that represents the handler for the first action.
+ * Synchronization is ensured by Controllers which call methods of this class, only if the player is allowed
+ */
+
 public class FirstActionHandler extends ActionHandler{
 	
-	
+	/**
+	 * Constructor: it creates a handler for the first action that involves the game elements and the handler for Harvest
+	 * and Production, expressed by the parameters
+	 * @param gameElements the game elements involved in the first action
+	 * @param handler It's the handler for Harvest and Production
+	 */
 	public FirstActionHandler(GameElements gameElements, HarvestAndProductionHandler handler){
 		super(gameElements, handler);
 	}
@@ -23,7 +37,11 @@ public class FirstActionHandler extends ActionHandler{
 		
 	}  */	  
 
-	
+	/**
+	 * Method that checks if the action that the players wants to perform can be done according to the rules
+	 * @param player It's the player who wants to perform the action
+	 * @param action It's the action that the player wants to perform
+	 */
 	public boolean isPossible(Player player, Action action) throws IllegalArgumentException{
 		
 		//spiegare che programmazione molto difensiva
