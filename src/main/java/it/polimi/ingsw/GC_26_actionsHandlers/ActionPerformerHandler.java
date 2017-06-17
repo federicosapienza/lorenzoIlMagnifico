@@ -48,7 +48,7 @@ public class ActionPerformerHandler {
 	/**
 	 * Method used to pay the corresponding payment when performing an action in a tower
 	 * @param player It's the player who wants to perform the action
-	 * @param familyMember the family memebrs involved in the action of the player
+	 * @param familyMember the family members involved in the action of the player
 	 * @param action It's the action that the player wants to perform
 	 */
 	 protected void towerPerformPayment(Player player, FamilyMember familyMember, Action action){
@@ -57,7 +57,7 @@ public class ActionPerformerHandler {
 		/**
 		 * If the tower is occupied, pay coins (or any payment if rules are changed) (Brunelleschi effect is not activated)
 		 */
-		if(tower.isTheTowerOccupied()&& !player.getPermanentModifiers().isTowerOccupiedMalusDisabled())
+		if(tower.isTheTowerFree()&& !player.getPermanentModifiers().isTowerOccupiedMalusDisabled())
 			player.getWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
 		
 		/**
