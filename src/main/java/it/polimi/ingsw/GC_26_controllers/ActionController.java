@@ -13,11 +13,17 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 	MainActionHandler handlers;
 	
 	public ActionController(Player player, MainActionHandler handlers) {
+		if(player==null || handlers==null)
+			throw new NullPointerException("player or handlers are null"); 
 		this.player=player;
 		this.handlers= handlers;
 	}
 	
 	public void update(Action action){ 
+		if (action == null) {
+			throw new NullPointerException("action is null");
+		}
+		
 		PlayerStatus status;
 	
 		synchronized (player) {
@@ -32,6 +38,8 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 	
 	
 	private void firstActionController(Action action){
+		if(action==null)
+			throw new NullPointerException(); 
 		player.setPlayerActive();
 		try {
 			Boolean flag = handlers.getFirstActionHandler().isPossible(player, action);
@@ -74,6 +82,9 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 	}
 	
 	private void secondActionController(Action action){
+		if (action == null) {
+			throw new NullPointerException("action is null");
+		}
 		try {
 			Boolean flag = handlers.getSecondActionHandler().isPossible(player, action);
 			// if action not possible player is notified in IsPossible and linked methods

@@ -34,6 +34,9 @@ public class Board extends Observable<PositionDescriber>{
 	 * @param resourcesOrPointsList It's the list of the starting resources and points 
 	 */
 	public Board(int numberOfPlayers, List<ResourcesOrPoints []> resourcesOrPointsList){
+		if (resourcesOrPointsList == null) {
+			throw new NullPointerException("resourcesOrPointsList is null");
+		}
 		this.numberOfPlayers=numberOfPlayers;	
 		create(numberOfPlayers,resourcesOrPointsList);
 		this.resourcesOrPointsList= resourcesOrPointsList;
@@ -46,6 +49,9 @@ public class Board extends Observable<PositionDescriber>{
 	 * @param resourcesOrPointsList It's the list of the starting resources and points 
 	 */
 	public void create(int numberOfPlayers,List<ResourcesOrPoints []> resourcesOrPointsList){
+		if (resourcesOrPointsList == null) {
+			throw new NullPointerException("resourcesOrPointsList is null");
+		}
 		createTowers(resourcesOrPointsList);
 		createMarket(resourcesOrPointsList);
 		ResourcesOrPoints [] resourcesOrPointsCouncilPalace=resourcesOrPointsList.get(5);
@@ -60,6 +66,9 @@ public class Board extends Observable<PositionDescriber>{
 	 * when players occupy it with their family members
 	 */
 	private void createTowers(List<ResourcesOrPoints []> resourcesOrPointsList){
+		if (resourcesOrPointsList == null) {
+			throw new NullPointerException("resourcesOrPointsList is null");
+		}
 		territoriesTower=new Tower(resourcesOrPointsList.get(0)); 
 		buildingsTower=new Tower(resourcesOrPointsList.get(1));   
 		charactersTower=new Tower(resourcesOrPointsList.get(2));  
@@ -72,6 +81,9 @@ public class Board extends Observable<PositionDescriber>{
 	 * a bonus when players occupy it with their family members
 	 */
 	private void createMarket(List<ResourcesOrPoints []> resourcesOrPointsList){
+		if (resourcesOrPointsList == null) {
+			throw new NullPointerException("resourcesOrPointsList is null");
+		}
 		market=new Market(numberOfPlayers,resourcesOrPointsList.get(4));
 	}
 	
@@ -83,6 +95,9 @@ public class Board extends Observable<PositionDescriber>{
 	 * @param value It's the required value of the family members 
 	 */
 	private void createCouncilPalace(ResourcesOrPoints resourcesOrPoints,int value){
+		if (resourcesOrPoints == null) {
+			throw new NullPointerException("resourcesOrPoints is null");
+		}
 		councilPalace= new CouncilPalace(resourcesOrPoints,1);
 	}
 	
@@ -197,6 +212,9 @@ public class Board extends Observable<PositionDescriber>{
 	 * @param tower It's the tower of the corresponding board zone
 	 */
 	private void towerDescription(BoardZone zone,Tower tower){
+		if (zone == null || tower == null) {
+			throw new NullPointerException("zone or tower is null");
+		}
 		for(int i=1; i<= GameParameters.getTowerFloorsNumber(); i++){
 			TowerPosition position = tower.getPosition(i);
 			

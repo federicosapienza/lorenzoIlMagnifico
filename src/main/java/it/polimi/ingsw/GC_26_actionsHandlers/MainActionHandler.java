@@ -16,6 +16,9 @@ public class MainActionHandler {
 	private LeaderCardHandler leaderCardHandler;
 	 
 	public MainActionHandler(GameElements gameElements) {
+		if (gameElements == null) {
+			throw new NullPointerException("gameElements are null");
+		}
 		this.gameElements=gameElements;
 		harvestAndProductionHandler = new HarvestAndProductionHandler(gameElements);
 		

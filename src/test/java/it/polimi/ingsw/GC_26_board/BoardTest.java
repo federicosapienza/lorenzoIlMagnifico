@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_readJson.BonusImplementation;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class BoardTest {
@@ -25,6 +26,34 @@ public class BoardTest {
 	Player player2;
 	Player player3;
 	Player player4;
+	
+	@Test
+	public void testCorrectConstructor() {
+		List<ResourcesOrPoints[]> listOfResourcesOrPoints = null;
+		boolean thrownException = false;
+		try {
+			Board testBoard = new Board(2, listOfResourcesOrPoints);
+		} catch (NullPointerException e) {
+			thrownException = true;
+		}
+		assertTrue(thrownException);
+	}
+	/*
+	@Test
+	public void testCorrectCreation() {
+		List<ResourcesOrPoints[]> startingResources = new BonusImplementation().getListOfResourcesOfPointsArray();
+		List<ResourcesOrPoints[]> listOfResourcesOrPoints = null;
+		boolean thrownException = false;
+		Board testBoard = new Board(2, startingResources);
+		try {
+			testBoard.create(2, listOfResourcesOrPoints);
+		} catch (NullPointerException e) {
+			thrownException = true;
+		}
+		assertTrue(thrownException);
+	}
+	*/
+	
 	@Test
 	public void existenceTest() {
 		
@@ -59,13 +88,18 @@ public class BoardTest {
 		assertNotNull(resourcesOrPointsArray4);
 		assertNotNull(resourcesOrPointsArray5);
 		assertNotNull(resourcesOrPointsList);
-		//board = new Board(4, resourcesOrPointsList);
-		//assertNotNull(board);
-		//assertEquals(4, board.getNumberOfPlayers());
-		//Last three lines give errors but I don't know why.
+		//board = new Board(2, resourcesOrPointsList);
+		//BonusImplementation startingresources = new BonusImplementation();
+		//Board board4 = new Board(4, startingresources.getListOfResourcesOfPointsArray());
+		//assertNotNull(board4);
+		//assertEquals(4, board4.getNumberOfPlayers());
+		//assertEquals(2, board.getNumberOfPlayers());
+		//Commented lines give errors but I don't know why.
 		
 		
 		
 	}
+	
+	
 
 }

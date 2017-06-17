@@ -24,6 +24,12 @@ public class NextRoundOrder {
 	 * @param players It's the list of players playing the game
 	 */
 	public NextRoundOrder(List<Player> players) {
+		if (players == null) {
+			throw new NullPointerException();
+		}
+		if (players.size()>4) {
+			throw new IllegalArgumentException();
+		}
 		initialise(players);
 	}
 	

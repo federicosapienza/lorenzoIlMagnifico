@@ -57,6 +57,10 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	 * @param card It's the card to add
 	 */
 	public void add(DevelopmentCard card){
+		if (card == null) {
+			throw new NullPointerException("card is null");
+		}
+		
 			switch(card.getType()){
 			case TERRITORYCARD: 
 				territoryCardSet.add(card);
@@ -99,6 +103,9 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	 * @param leaderCard It's the leader card to add
 	 */
 	public void addLeaderCard(LeaderCard leaderCard){
+		if (leaderCard == null) {
+			throw new NullPointerException("leaderCard is null");
+		}
 		leadersCardList.add(leaderCard);
 	}
 	
@@ -155,6 +162,9 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	 * 
 	 */
 	public void setPersonalBoardTile(PersonalBoardTile personalBoardTile) {
+		if (personalBoardTile == null) {
+			throw new NullPointerException("personalBoardTile is null");
+		}
 		this.personalBoardTile = personalBoardTile;
 	}
 	
@@ -173,6 +183,9 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	 */
 
 	public void setLeaderCardUsed(LeaderCard leaderCard){
+		if (leaderCard == null) {
+			throw new NullPointerException("leaderCard is null");
+		}
 		if(!isLeaderCardUsedYet(leaderCard))
 			leaderCardsUsed.add(leaderCard);
 	}

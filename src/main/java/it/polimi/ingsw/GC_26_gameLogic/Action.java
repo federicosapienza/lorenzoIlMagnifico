@@ -36,6 +36,9 @@ public class Action implements Serializable{
 	 * @param servantsUsed It's the number of the servants used to increase the value of the action
 	 */
 	public Action(BoardZone zone, int position, Colour familyMemberColour, int servantsUsed) {
+		//if(zone==null || familyMemberColour==null)
+			//throw new NullPointerException(); 
+	
 		this.zone=zone;
 		this.position=position;
 		this.familyMemberColour = familyMemberColour;

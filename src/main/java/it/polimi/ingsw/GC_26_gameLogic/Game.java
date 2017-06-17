@@ -113,6 +113,9 @@ public class Game extends Observable<CardDescriber>{
 	 * @param status It's the new status of the game after the change, that will become the current status of the current game 
 	 */
 	public synchronized void setGameStatus(GameStatus status){
+		if (status == null) {
+			throw new NullPointerException();
+		}
 		gameStatus = status;
 	}
 	
@@ -150,7 +153,7 @@ public class Game extends Observable<CardDescriber>{
 	 * Method used to start the game
 	 */
 	public void startGame(){
-		gameElements.notifyPlayers(new  Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
+		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
 		/**
 		 * Every player playing this game is notified that the game has just begun.
 		 */
@@ -178,7 +181,7 @@ public class Game extends Observable<CardDescriber>{
 		 */
 
 		List<PersonalBoardTile> bonusTiles=bonusInterface.get4RandomPersonalBoardTiles("advanced");
-		int temp =0;
+		int temp = 0;
 		for(Player p: players){ 
 			p.getPersonalBoard().setPersonalBoardTile(bonusTiles.get(temp));
 			gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.INITIALIZINGGAME,p.getName(), null, bonusTiles.get(temp).toString()));

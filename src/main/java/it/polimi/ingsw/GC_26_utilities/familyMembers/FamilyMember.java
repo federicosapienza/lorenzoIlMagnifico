@@ -27,6 +27,8 @@ public class FamilyMember {
 	 * @param player It's the player that this family member belongs to.
 	 */
 	public FamilyMember(Colour colour, Player player) {
+		if(colour == null || player == null)
+			throw new NullPointerException("null parameter"); 
 		this.colour = colour;
 		this.player= player;
 	}
@@ -54,6 +56,8 @@ public class FamilyMember {
 	 * @param value It's the value that will be assigned to the family member.
 	 */
 	public void setValue(int value) {
+		if(value<0)
+			throw new IllegalArgumentException("value must be greater than 1"); 
 		this.value = value;
 	}
 	

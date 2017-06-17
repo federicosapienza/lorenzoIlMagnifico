@@ -20,14 +20,46 @@ public class NextRoundOrderTest {
 	List<Player> playersList = new ArrayList<Player>();
 	NextRoundOrder nextRoundOrder;
 	Player player3 = new Player("Charles", ResourcesOrPoints.newResourcesOrPoints(7, 3, 2, 2, 0, 0, 0, 0));
+	Player player4 = new Player("Greg", ResourcesOrPoints.newResourcesOrPoints(8, 3, 2, 2, 0, 0, 0, 0));
+	Player player5 = new Player("Matt", ResourcesOrPoints.newResourcesOrPoints(9, 3, 2, 2, 0, 0, 0, 0));
 	
 	@Test
-	public void testExistence() {
+	public void testNotNull() {
 		playersList.add(player1);
 		playersList.add(player2);
 		
 		nextRoundOrder = new NextRoundOrder(playersList);
 		assertNotNull(nextRoundOrder);
+	}
+	
+	@Test
+	public void testNullPlayersList(){
+		boolean thrownNullExcep = false;
+		List<Player> nullPlayersList = null;
+		try {
+			nextRoundOrder = new NextRoundOrder(nullPlayersList);
+		} catch (NullPointerException e) {
+			thrownNullExcep = true;
+		}
+		assertTrue(thrownNullExcep);
+	}
+	
+	@Test
+	public void testSizePlayersList() {
+		boolean thrownIllegalExcep = false;
+		List<Player> players = new ArrayList<Player>();
+		players.add(player1);
+		players.add(player2);
+		players.add(player3);
+		players.add(player4);
+		players.add(player5);
+		assertEquals(5, players.size());
+		try {
+			nextRoundOrder = new NextRoundOrder(players);
+		} catch (IllegalArgumentException e) {
+			thrownIllegalExcep = true;
+		}
+		assertTrue(thrownIllegalExcep);
 	}
 	
 	@Test

@@ -36,8 +36,8 @@ public class Dices {
 	 * @return value is the value of the dice that I want to read.
 	 */
 	public int readDice(Colour colour) {
-		
-		
+		if(colour==null)
+			throw new NullPointerException(); 
 		if (colour == Colour.BLACK) {
 			value = blackDice.getValue();
 		}

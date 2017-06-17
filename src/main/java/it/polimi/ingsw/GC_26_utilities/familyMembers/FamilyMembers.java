@@ -52,11 +52,27 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	 * @param player It's the player that owns these family members.
 	 */
 	public FamilyMembers(Player player) {
+		if (player == null) {
+			throw new NullPointerException("Attention: player is null");
+		}
 		this.player= player;
+		
 		orangeMember = new FamilyMember(Colour.ORANGE, player);
+		if (orangeMember == null) {
+			throw new NullPointerException("Attention: the orange family member is null");
+		}
 		whiteMember = new FamilyMember(Colour.WHITE, player);
+		if (whiteMember == null) {
+			throw new NullPointerException("Attention: the white family member is null");
+		}
 		blackMember = new FamilyMember(Colour.BLACK, player);
+		if (blackMember == null) {
+			throw new NullPointerException("Attention: the black family member is null");
+		}
 		neutralMember = new FamilyMember(Colour.NEUTRAL, player);
+		if (neutralMember == null) {
+			throw new NullPointerException("Attention: the neutral family member is null");
+		}
 	}
 	
 	/**
@@ -93,7 +109,7 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 			return neutralMember;
 		}
 		else 
-			throw  new IllegalArgumentException();
+			throw new IllegalArgumentException();
 		
 	}
 	
@@ -104,6 +120,23 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	 * @param dices It's the set of dices that assigns the corresponding value for every family member. 
 	 */
 	public void setValues(Dices dices){
+		if (dices == null) {
+			throw new NullPointerException("Attention: dices are null");
+		}
+		
+		if (dices.readDice(Colour.BLACK) < 1 || dices.readDice(Colour.BLACK) > 6) {
+			throw new IllegalArgumentException("The value of the black dice should be between 1 and 6");
+		}
+		
+		if (dices.readDice(Colour.ORANGE) < 1 || dices.readDice(Colour.ORANGE) > 6) {
+			throw new IllegalArgumentException("The value of the orange dice should be between 1 and 6");
+		}
+		
+		if (dices.readDice(Colour.WHITE) < 1 || dices.readDice(Colour.WHITE) > 6) {
+			throw new IllegalArgumentException("The value of the white dice should be between 1 and 6");
+		}
+		
+		
 		//changes of permanent effect	
 		lastDices= dices;
 		
@@ -145,7 +178,10 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 		//changes of permanent effect	
 		Dices dices= lastDices;
 		setValues(dices);
-        notifyObservers(new FamilyMembersDescriber(this));
+		if (dices == null) {
+			throw new NullPointerException("Attention: dices are null");
+		}
+		notifyObservers(new FamilyMembersDescriber(this));
 	}
 	
 	
@@ -180,7 +216,7 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	 */
 	
 	public Map<Colour, Integer> getStatus(){
-		Map<Colour, Integer> mapDescriber =new HashMap<>();
+		Map<Colour, Integer> mapDescriber = new HashMap<>();
 		mapDescriber.put(Colour.ORANGE, orangeMember.getValue());
 		mapDescriber.put(Colour.BLACK, orangeMember.getValue());
 		mapDescriber.put(Colour.WHITE, whiteMember.getValue());
@@ -201,10 +237,10 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	}
 	
 	/**
-	 * Method that finds the smaller between the colored and free family members. In case two are equals 
-	 * the  arbitrary priority is: orange, white, black.
+	 * Method that finds the smallest between the coloured and free family members. In case two are equals 
+	 * the arbitrary priority is: orange, white, black.
 	 * 
-	 * @return  the smaller between the colored and free family members. If none of them is free, null is returned
+	 * @return the smallest between the colored and free family members. If none of them is free, null is returned
 	 */
 	
 	
@@ -223,12 +259,12 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 		else testBlack=blackMember.getValue();
 		
 		
-		if(!orangeMember.isFree() && !blackMember.isFree() && whiteMember.isFree())
+		if(!orangeMember.isFree() && !blackMember.isFree() && !whiteMember.isFree())
 			return null;
 		else {
-			int test = searchSmaller(testOrange,testWhite, testBlack);
+			int test = searchSmaller(testOrange, testWhite, testBlack);
 				if(test==1)
-					return  orangeMember;
+					return orangeMember;
 				else  if(test==2)
 					return whiteMember;
 				else if(test==3)

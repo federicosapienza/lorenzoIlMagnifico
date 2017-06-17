@@ -28,6 +28,11 @@ public class Dice {
 	 */
 	public Dice(int nrFaces, Colour colour)
 	{
+		if(nrFaces<0 || nrFaces>6) {
+			throw new IllegalArgumentException("nrFaces must be between 1 and 6"); 
+		}
+		if(colour==null) 
+			throw new NullPointerException(); 
 		this.colour = colour;
 		this.nrFaces = nrFaces;
 		

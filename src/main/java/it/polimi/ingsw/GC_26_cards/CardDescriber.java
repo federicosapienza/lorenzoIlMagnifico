@@ -88,7 +88,7 @@ public class CardDescriber implements Serializable{
 		//getter method to get the name of the card
 		public String getName() {
 			return name;
-		};
+		}
 		
 		//getter method to get the value of the action
 		public  int getActionValue(){
@@ -111,7 +111,7 @@ public class CardDescriber implements Serializable{
 		}
 		
 		//getter method to get the permanent effect describer of the card as a string
-		public  String getPermanentEffectDescriber(){
+		public String getPermanentEffectDescriber(){
 			return permanentEffect;
 		}
 		
