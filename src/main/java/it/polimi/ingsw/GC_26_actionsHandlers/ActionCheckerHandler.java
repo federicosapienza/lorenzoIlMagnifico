@@ -1,25 +1,13 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
-import java.awt.Checkbox;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
-import it.polimi.ingsw.GC_26_board.CouncilPalace;
-import it.polimi.ingsw.GC_26_board.HarvestZone;
-import it.polimi.ingsw.GC_26_board.MarketPosition;
-import it.polimi.ingsw.GC_26_board.MultipleHarvest;
 import it.polimi.ingsw.GC_26_board.MultiplePosition;
-import it.polimi.ingsw.GC_26_board.MultipleProduction;
-import it.polimi.ingsw.GC_26_board.ProductionZone;
-import it.polimi.ingsw.GC_26_board.SingleHarvest;
+
 import it.polimi.ingsw.GC_26_board.SinglePosition;
-import it.polimi.ingsw.GC_26_board.SingleProduction;
-import it.polimi.ingsw.GC_26_board.Tower;
-import it.polimi.ingsw.GC_26_board.TowerPosition;
-import it.polimi.ingsw.GC_26_cards.CardDescriber;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
-import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.Request;
