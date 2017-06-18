@@ -72,7 +72,7 @@ public class ActionCheckerHandler {
 	 */
 	public boolean checkMaximumNumberOfCardsNotReached(Player player, Action action){
 	if(player.getPersonalBoard().getNumberOfCardPerType(convertZoneInCard(action.getZone()))
-								== GameParameters.getMaxNumOfCards()){
+								>= GameParameters.getMaxNumOfCards()){
 				player.notifyObservers(new Request(player.getStatus(),"maximum number of card already reached", null));
 				return false;
 								}
