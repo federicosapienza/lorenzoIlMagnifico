@@ -4,11 +4,8 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26_cards.effects.Effect;
-import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
 import it.polimi.ingsw.GC_26_cards.payments.TwoOrPayments;
-import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
 
 
@@ -21,11 +18,7 @@ import it.polimi.ingsw.GC_26_player.Player;
  */
 
 public class TwoPaymentsHandler {
-	GameElements gameElements;
 
-	public TwoPaymentsHandler(GameElements gameElements) {
-		this.gameElements= gameElements;
-	}
 	
 	public void perform(Player player, int choice){
 		// we will need to recast  DevelopmentCard to  DevelopmentCardImplementation and to recast Payment to DoublePayment;

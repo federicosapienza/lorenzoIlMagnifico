@@ -11,12 +11,9 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 
 public class HarvestAndProductionHandler {
-	private GameElements gameElements;
 	private int actionValue; //updated when player is interrupted due to trading , no need to reset at the end of the turn
 	
-	public HarvestAndProductionHandler(GameElements gameElements) {
-		this.gameElements=gameElements;
-	}
+	
 	
 	public void startHarvest(Player player, int value){
 		if(value<1)

@@ -30,11 +30,9 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 * 
 */
 public class TradeHandler {
-	private GameElements gameElements;
 	public HarvestAndProductionHandler harvestAndProductionHandler;
 
-	public TradeHandler(GameElements gameElements, HarvestAndProductionHandler harvestAndProductionHandler) {
-		this.gameElements =gameElements;
+	public TradeHandler(HarvestAndProductionHandler harvestAndProductionHandler) {
 		this.harvestAndProductionHandler=harvestAndProductionHandler;
 	}
 	

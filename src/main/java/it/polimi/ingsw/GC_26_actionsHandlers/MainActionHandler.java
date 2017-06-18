@@ -20,13 +20,13 @@ public class MainActionHandler {
 			throw new NullPointerException("gameElements are null");
 		}
 		this.gameElements=gameElements;
-		harvestAndProductionHandler = new HarvestAndProductionHandler(gameElements);
+		harvestAndProductionHandler = new HarvestAndProductionHandler();
 		
 		firstActionHandler =new FirstActionHandler(gameElements, harvestAndProductionHandler);
 		secondActionHandler= new SecondActionHandler(gameElements, harvestAndProductionHandler);
-		harvestAndProductionHandler = new HarvestAndProductionHandler(gameElements);
-		tradeHandler = new TradeHandler(gameElements, harvestAndProductionHandler);
-		twoPaymentHandler = new TwoPaymentsHandler(gameElements);
+	
+		tradeHandler = new TradeHandler(harvestAndProductionHandler);
+		twoPaymentHandler = new TwoPaymentsHandler();
 		diplomaticPrivilegesHandler= new DiplomaticPrivilegesHandler();
 		vaticanReportHandler = new VaticanReportHandler(gameElements);
 		leaderCardHandler =new LeaderCardHandler( gameElements);
