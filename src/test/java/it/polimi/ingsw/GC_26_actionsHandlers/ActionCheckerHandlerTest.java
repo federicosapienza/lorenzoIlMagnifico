@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
+import it.polimi.ingsw.GC_26_board.CouncilPalace;
 import it.polimi.ingsw.GC_26_board.MarketPosition;
 import it.polimi.ingsw.GC_26_board.MultiplePosition;
 import it.polimi.ingsw.GC_26_board.SinglePosition;
@@ -125,14 +126,14 @@ public class ActionCheckerHandlerTest {
 	
 	/*@Test
 	public void testCanMemberGoToPositionMultiplePositionTrue() {
-		ResourcesOrPoints resourcesOrPointsMarket = ResourcesOrPoints.newResources(0, 0, 0, 0);
-		MarketPosition position = new MarketPosition(3, resourcesOrPointsMarket, 1);
+		ResourcesOrPoints resourcesOrPointsCouncil = ResourcesOrPoints.newResources(0, 0, 0, 0);
+		CouncilPalace councilPalace = new CouncilPalace(resourcesOrPointsCouncil, 1);
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
 		Player player = new Player("Leon", startingResources);
 		FamilyMember familyMember = new FamilyMember(Colour.BLACK,player);
 		player.getFamilyMembers().getfamilyMember(Colour.BLACK).setValue(6);
 		Action action = new Action(BoardZone.MARKET, 3, familyMember.getColour(), 0);
-		assertTrue(actionCheckerHandler.canMemberGoToPosition(position, player, familyMember, action));
+		assertTrue(actionCheckerHandler.canMemberGoToPosition(councilPalace, player, familyMember, action));
 	}*/
 
 	/*@Test
