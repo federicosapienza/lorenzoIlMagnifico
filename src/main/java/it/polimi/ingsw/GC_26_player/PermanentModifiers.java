@@ -33,6 +33,9 @@ public class PermanentModifiers {
 	  * @param player It's the player associated to these permanent modifiers
 	  */
 	public PermanentModifiers(Player player) {
+		if (player == null) {
+			throw new NullPointerException();
+		}
 		this.player = player;
 	}
 	
@@ -97,11 +100,82 @@ public class PermanentModifiers {
 	 * have potentially much more cards with this kind of effect (not only money, but also servants...)	
 	 */
 	
-	private Boolean discountOnResources=false;
-	private Map<BoardZone, ResourcesOrPoints>  discounts= new HashMap<>();
-;
-	public Boolean IsTherediscountOnResources(BoardZone zone) {
-		return discountOnResources;
+	private boolean discountOnBuildingTowerResources=false;
+	private boolean discountOnTerritoryTowerResources=false;
+	private boolean discountOnCharacterResources=false;
+	private boolean discountOnVentureResources=false;
+	private boolean discountOnCouncilPalaceResources=false;
+	private boolean discountOnMarketResources=false;
+	private boolean discountOnHarvestResources=false;
+	private boolean discountOnProductionResources=false;
+	private Map<BoardZone, ResourcesOrPoints> discounts= new HashMap<>();
+	
+	/**
+	 * Method that checks the presence of a discount in the zone expressed in the parameter
+	 * @param zone It's the zone to check
+	 * @return true if there's a discount in the zone; false if there isn't any discount in the zone
+	 */
+	public boolean IsTherediscountOnResources(BoardZone zone) {
+		if (zone == BoardZone.BUILDINGTOWER) {
+			return discountOnBuildingTowerResources;
+		}
+		else if (zone == BoardZone.TERRITORYTOWER) {
+			return discountOnTerritoryTowerResources;
+		} 
+		else if (zone == BoardZone.CHARACTERTOWER) {
+			return discountOnCharacterResources;
+		}
+		else if (zone == BoardZone.VENTURETOWER) {
+			return discountOnVentureResources;
+		}
+		else if (zone == BoardZone.COUNCILPALACE) {
+			return discountOnCouncilPalaceResources;
+		}
+		else if (zone == BoardZone.MARKET) {
+			return discountOnMarketResources;
+		}
+		else if (zone == BoardZone.PRODUCTION) {
+			return discountOnProductionResources;
+		}
+		else if (zone == BoardZone.HARVEST) {
+			return discountOnHarvestResources;
+		}
+		else {
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	/**
+	 * Method that activates the flag that indicates that a discount has been activated in the zone expressed in the parameter
+	 * @param zone It's the zone where the flag must be activated
+	 */
+	public void activateFlagDiscountOnResources(BoardZone zone) {
+		
+		if (zone == BoardZone.BUILDINGTOWER) {
+			discountOnBuildingTowerResources = true;
+		}
+		else if (zone == BoardZone.TERRITORYTOWER) {
+			discountOnTerritoryTowerResources = true;
+		} 
+		else if (zone == BoardZone.CHARACTERTOWER) {
+			discountOnCharacterResources = true;
+		}
+		else if (zone == BoardZone.VENTURETOWER) {
+			discountOnVentureResources = true;
+		}
+		else if (zone == BoardZone.COUNCILPALACE) {
+			discountOnCouncilPalaceResources = true;
+		}
+		else if (zone == BoardZone.MARKET) {
+			discountOnMarketResources = true;
+		}
+		else if (zone == BoardZone.PRODUCTION) {
+			discountOnProductionResources = true;
+		}
+		else if (zone == BoardZone.HARVEST) {
+			discountOnHarvestResources = true;
+		}
+		
 	}
 	
 	/**
@@ -113,27 +187,39 @@ public class PermanentModifiers {
 	public void addDiscount(BoardZone zone, ResourcesOrPoints res){
 		ResourcesOrPoints temp = discounts.get(zone);
 		if(temp==null){  // if there is no discount
-			if(zone!=null) //(i.e Dame effect)
+			if(zone!=null) { //(i.e Dame effect)
 				discounts.put(zone, res);
+				activateFlagDiscountOnResources(zone);
+			}
 			else{
 				//zone==null 
 				//means that a discount will be applied on every tower: Pico della mirandola effect
 					discounts.put(BoardZone.TERRITORYTOWER, res);
+					activateFlagDiscountOnResources(BoardZone.TERRITORYTOWER);
 					discounts.put(BoardZone.VENTURETOWER, res);
+					activateFlagDiscountOnResources(BoardZone.VENTURETOWER);
 					discounts.put(BoardZone.CHARACTERTOWER, res);
+					activateFlagDiscountOnResources(BoardZone.CHARACTERTOWER);
 					discounts.put(BoardZone.BUILDINGTOWER, res);
+					activateFlagDiscountOnResources(BoardZone.BUILDINGTOWER);
 				}
 		}
 		else{ //there is a discount
-			if(zone!=null) //(i.e. Dame effect)
+			if(zone!=null) { //(i.e. Dame effect)
 				discounts.put(zone, ResourcesOrPoints.sum(res, temp));
+				activateFlagDiscountOnResources(zone);
+			}
 			else{
 				//zone==null 
 				//means that a discount will be applied on every tower: Pico della mirandola effect
 					discounts.put(BoardZone.TERRITORYTOWER, ResourcesOrPoints.sum(res, temp));
+					activateFlagDiscountOnResources(BoardZone.TERRITORYTOWER);
 					discounts.put(BoardZone.VENTURETOWER,ResourcesOrPoints.sum(res, temp));
+					activateFlagDiscountOnResources(BoardZone.VENTURETOWER);
 					discounts.put(BoardZone.CHARACTERTOWER,ResourcesOrPoints.sum(res, temp));
+					activateFlagDiscountOnResources(BoardZone.CHARACTERTOWER);
 					discounts.put(BoardZone.BUILDINGTOWER, ResourcesOrPoints.sum(res, temp));
+					activateFlagDiscountOnResources(BoardZone.BUILDINGTOWER);
 				}
 			}	
 	}

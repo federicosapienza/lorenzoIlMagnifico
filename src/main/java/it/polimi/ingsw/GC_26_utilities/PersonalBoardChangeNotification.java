@@ -30,12 +30,22 @@ public class PersonalBoardChangeNotification extends Message{
 	 */
 	public PersonalBoardChangeNotification(GameStatus status, String playerName, CardDescriber card, 
 			String boardTileValues) {
+		if (status == null || playerName == null) {
+			throw new NullPointerException("Status is null");
+		}
 		this.gameStatus=status;
 		this.playerName = playerName;
 		this.card = card;
 		this.boardTileValues = boardTileValues;
 	}
 
+	/**
+	 * Getter method that returns the status of the name
+	 * @return the status of the current game
+	 */
+	public GameStatus getGameStatus() {
+		return gameStatus;
+	}
 	/**
 	 * Getter method that returns the player's name
 	 * @return playerName It's the player's name

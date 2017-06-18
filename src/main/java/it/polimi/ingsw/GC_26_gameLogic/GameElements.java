@@ -42,8 +42,15 @@ public class GameElements extends Observable<ActionNotification>{
 		/**
 		 * Creating the correct board according to the number of players
 		 */
-		board=new Board(numberOfPlayers, resourcesOrPointsList);
-		dices= new Dices();
+		if (game == null) {
+			throw new NullPointerException();
+		}
+		
+		if (numberOfPlayers < 0 || numberOfPlayers > 4) {
+			throw new IllegalArgumentException();
+		}
+		board = new Board(numberOfPlayers, resourcesOrPointsList);
+		dices = new Dices();
 		nextRoundOrder = new NextRoundOrder(players);
 		this.game =game;
 		this.faithPointsTrack= faithPointsTrack;
