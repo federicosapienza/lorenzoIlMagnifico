@@ -23,13 +23,23 @@ public class Warehouse  extends Observable<PlayerWallet> {
 	private int faithPoints;
 	private int councilPrivileges;
 	
-	public Warehouse(Player player, ResourcesOrPoints startingResources){  //initialisation
+	public Warehouse(Player player, ResourcesOrPoints startingResources){
+		if (player == null || startingResources == null) {
+			throw new NullPointerException();
+		}
+		
+		if (startingResources.getFaithPoints()!=0 || startingResources.getCouncilPrivileges()!=0 || startingResources.getVictoryPoints()!=0 || startingResources.getMilitaryPoints()!=0) {
+			throw new IllegalArgumentException();
+		}
 		this.player = player;
 		this.playerName= player.getName(); 
 		add(startingResources);
 	}
 	
 	public Warehouse(Warehouse other){
+		if (other == null) {
+			throw new NullPointerException("other is null");
+		}
 		this.playerName=other.getPlayerName();
 		this.player=other.getPlayer();
 		this.coins =other.getCoins();
@@ -175,10 +185,10 @@ public class Warehouse  extends Observable<PlayerWallet> {
 	
 	public void add(ResourcesOrPoints resources){
 		ResourcesOrPoints temp=resources;
-			if(player.getPermanentModifiers().IsresourcesMalusOn())
-			//check if any malus on getting resources is on (look at permanentModifier class)
-		//calls  the permanent effect to reduce the resources the player can earn
-			 temp= player.getPermanentModifiers().getResourcesAfterMalus(resources);
+		if(player.getPermanentModifiers().IsresourcesMalusOn())
+		//check if any malus on getting resources is on (look at permanentModifier class)
+		//calls the permanent effect to reduce the resources the player can earn
+			temp= player.getPermanentModifiers().getResourcesAfterMalus(resources);
 
 		this.coins  += temp.getResources().getCoins();
 		this.servants += temp.getResources().getServants();
@@ -193,7 +203,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 	}
 	
 	
-	public void spendResources(ResourcesOrPoints resources)throws IllegalArgumentException{
+	public void spendResources(ResourcesOrPoints resources) {//throws IllegalArgumentException
 		this.coins  -= resources.getResources().getCoins();
 		this.servants -= resources.getResources().getServants();
 		this.wood -= resources.getResources().getWood();

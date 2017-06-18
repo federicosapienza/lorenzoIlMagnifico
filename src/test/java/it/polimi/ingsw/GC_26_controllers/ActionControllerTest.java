@@ -41,10 +41,13 @@ public class ActionControllerTest {
 	MainActionHandler handlers;
 	ActionController actionCtrl = new ActionController(player1, handlers);
 	*/
+	
+	
+	
 	@Test
 	public void testCorrectConstructor(){
-		Player player1 = new Player("Lorenzo", ResourcesOrPoints.newResourcesOrPoints(5, 3, 2, 2, 0, 0, 0, 0));
 		MainActionHandler nullHandler = null;
+		Player player1 = new Player("Lorenzo", ResourcesOrPoints.newResourcesOrPoints(5, 3, 2, 2, 0, 0, 0, 0));
 		boolean thrownNullPointerException = false;
 		try {
 			ActionController ctrl = new ActionController(player1, nullHandler);

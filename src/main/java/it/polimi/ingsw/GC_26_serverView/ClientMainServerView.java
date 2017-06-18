@@ -19,6 +19,9 @@ public class ClientMainServerView {
 	
 	
 	public ClientMainServerView(String name, ServerConnectionToClient connection) {
+		if (name == null || connection == null) {
+			throw new NullPointerException();
+		}
 		this.name = name;
 		playerWalletView =  new PlayerWalletView(connection);
 		cardDescriberView = new CardDescriberView(connection);
@@ -72,6 +75,9 @@ public class ClientMainServerView {
 
 
 	public void setActionView(ActionView actionView) {
+		if (actionView == null) {
+			throw new NullPointerException();
+		}
 		this.actionView = actionView;
 	}
 
@@ -82,6 +88,9 @@ public class ClientMainServerView {
 
 
 	public void setStringInputView(StringInputView stringInputView) {
+		if (stringInputView == null) {
+			throw new NullPointerException();
+		}
 		this.stringInputView = stringInputView;
 	}
 
@@ -92,6 +101,9 @@ public class ClientMainServerView {
 
 
 	public void setActionInputView(ActionInputView actionInputView) {
+		if (actionInputView == null) {
+			throw new NullPointerException();
+		}
 		this.actionInputView = actionInputView;
 	}
 

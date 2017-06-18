@@ -43,6 +43,9 @@ public class ResourcesOrPoints{
 	
 	
 	public static  ResourcesOrPoints sum(ResourcesOrPoints res1, ResourcesOrPoints res2){
+		if (res1 == null || res2 == null) {
+			throw new NullPointerException();
+		}
 		//static method that sums the elements of two ResourcesOrPoints objects and returns a third one
 		int coins = res1.getResources().getCoins()+res2.getResources().getCoins();
 		int servants = res1.getResources().getServants()+res2.getResources().getServants();

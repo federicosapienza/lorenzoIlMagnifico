@@ -32,7 +32,7 @@ public class Server {
 		times= null;
 		game= new GameInitialiserAndController(cards, bonus, times);
 		
-		SocketServer socketServer= new SocketServer(this, PORT);
+		SocketServer socketServer = new SocketServer(this, PORT);
 		try {
 			socketServer.run();
 		} catch (IOException e) {
@@ -44,6 +44,9 @@ public class Server {
 	}
 	
 	public synchronized void addClient(ServerConnectionToClient connection, String username){
+		if (connection == null || username == null) {
+			throw new NullPointerException();
+		}
 		ClientMainServerView views= new ClientMainServerView(username, connection);
 		connection.addViews( views);
 		GameInitialiserAndController gamestarted= findPlayerInExistingGame(username);
@@ -59,6 +62,9 @@ public class Server {
 //	}
 	
 	public synchronized boolean doLogin(String username, String password){
+		if (username == null || password == null) {
+			throw new NullPointerException();
+		}
 		if(listOfPlayers.containsKey(username)){
 			if(listOfPlayers.get(username).equals(password)){
 				return true;}
@@ -69,7 +75,10 @@ public class Server {
 	}
 	
 	
-	private  void enterInANewGame(ClientMainServerView clientView){
+	private void enterInANewGame(ClientMainServerView clientView){
+		if (clientView == null) {
+			throw new NullPointerException();
+		}
 		System.out.println("new Client");
 		game.addClient(clientView);
 		if(game.getNumOfPlayer()==2){  //TODO  //preparing for a new game
@@ -96,12 +105,15 @@ public class Server {
 	
 	
 	public void endGame(GameInitialiserAndController game){
+		if (game == null) {
+			throw new NullPointerException();
+		}
 		games.remove(game);
 	}
 	
 	
 	public static void main(String args[]){
-		Server  server =  new Server();
+		Server server =  new Server();
 			server.start();
 	}
 	

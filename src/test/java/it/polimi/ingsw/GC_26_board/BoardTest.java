@@ -55,7 +55,7 @@ public class BoardTest {
 	*/
 	
 	@Test
-	public void existenceTest() {
+	public void testNotNull() {
 		
 		resourcesOrPointsArray1[0] = ResourcesOrPoints.newResourcesOrPoints(0, 0, 0, 0, 0, 0, 0, 0);
 		resourcesOrPointsArray1[1] = ResourcesOrPoints.newResourcesOrPoints(0, 0, 0, 0, 0, 0, 0, 0);
