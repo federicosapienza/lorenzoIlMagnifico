@@ -21,9 +21,7 @@ public class TwoPaymentsHandler {
 
 	
 	public void perform(Player player, int choice){
-		if (choice < 0) {
-			throw new IllegalArgumentException();
-		}
+		
 		// we will need to recast  DevelopmentCard to  DevelopmentCardImplementation and to recast Payment to DoublePayment;
 		DevelopmentCard temp=  player.getCardUsed();
 		DevelopmentCardImplementation card= (DevelopmentCardImplementation) temp;

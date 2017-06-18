@@ -27,18 +27,6 @@ public class TwoPaymentsHandlerTest {
 	}
 	*/
 	
-	@Test
-	public void testIllegalChoice() {
-		int illegalChoice = -1;
-		boolean thrownIllegalChoiceExcep = false;
-		Player player = new Player("Esther", ResourcesOrPoints.newResources(7, 3, 2, 2));
-		TwoPaymentsHandler twoPaymentsHandler = new TwoPaymentsHandler();
-		try {
-			twoPaymentsHandler.perform(player, illegalChoice);
-		} catch (IllegalArgumentException e) {
-			thrownIllegalChoiceExcep = true;
-		}
-		assertTrue(thrownIllegalChoiceExcep);
-	}
+
 	
 }
