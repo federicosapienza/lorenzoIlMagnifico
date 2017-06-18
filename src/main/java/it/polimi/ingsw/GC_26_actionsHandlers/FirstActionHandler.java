@@ -64,17 +64,17 @@ public class FirstActionHandler extends ActionHandler{
 				return super.towerIsPossible(player, familyMemberUsed, action);
 			}
 			if(action.getZone()==BoardZone.MARKET){
-					return getCheckerHandler().marketIsPossible(player, familyMemberUsed, action);
+				return super.marketIsPossible(player, familyMemberUsed, action);
 			}
 			if(action.getZone()==BoardZone.COUNCILPALACE){
-				return getCheckerHandler().councilPalaceIsPossible(player, familyMemberUsed, action);
+				return super.councilPalaceIsPossible(player, familyMemberUsed, action);
 			}
 			if(action.getZone()==BoardZone.HARVEST){
-				return getCheckerHandler().harvestIsPossible(player, familyMemberUsed, action);
+				return super.harvestIsPossible(player, familyMemberUsed, action);
 			}
 			if(action.getZone()==BoardZone.PRODUCTION){
 				
-			 return getCheckerHandler().productionIsPossible(player, familyMemberUsed, action);
+			 return super.productionIsPossible(player, familyMemberUsed, action);
 			}
 			else {
 				throw new IllegalArgumentException();

@@ -3,6 +3,14 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 
 
+import it.polimi.ingsw.GC_26_board.CouncilPalace;
+import it.polimi.ingsw.GC_26_board.HarvestZone;
+import it.polimi.ingsw.GC_26_board.MarketPosition;
+import it.polimi.ingsw.GC_26_board.MultipleHarvest;
+import it.polimi.ingsw.GC_26_board.MultipleProduction;
+import it.polimi.ingsw.GC_26_board.ProductionZone;
+import it.polimi.ingsw.GC_26_board.SingleHarvest;
+import it.polimi.ingsw.GC_26_board.SingleProduction;
 import it.polimi.ingsw.GC_26_board.Tower;
 import it.polimi.ingsw.GC_26_board.TowerPosition;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
@@ -42,7 +50,7 @@ public abstract class ActionHandler {
 	public ActionHandler(GameElements gameElements, HarvestAndProductionHandler harvestAndProductionHandler){
 		this.gameElements = gameElements;
 		this.harvestAndProductionHandler = harvestAndProductionHandler;
-		checkerHandler = new ActionCheckerHandler(gameElements, harvestAndProductionHandler);
+		checkerHandler = new ActionCheckerHandler();
 		performerHandler = new ActionPerformerHandler(gameElements, harvestAndProductionHandler);
 		
 	}
@@ -156,9 +164,129 @@ public abstract class ActionHandler {
 		return true;
 	 }
 	 
+
+	/**
+	 * Method that checks if the action that the player wants to perform in the market is possible
+	 * @param player It's the player that wants to perform the action
+	 * @param familyMember It's the family member involved in the action
+	 * @param action It's the action that the player wants to perform
+	 * @return true if the action is possible according to the rules of the game; false if it is not possible 
+	 */
+	 protected boolean marketIsPossible(Player player, FamilyMember familyMember, Action action){
+		 /**
+		  * Validating action
+		  */
+		 if(player.getPermanentModifiers().getMarketBanFlag()){
+			player.notifyObservers(new Request(player.getStatus(),"player is banned from the Market!", null));
+			 return false;
+		 }
+		 
+		 /**
+		  * The number of the positions in the market depends on the number of players, with standard rules:
+		  * if (numPlayers<4 && position>2)||(numPlayers=4 && position>4) an exception has to be thrown.
+		  */
+		 if(action.getPosition()<=0 || 
+					(gameElements.getNumberOfPlayers()<GameParameters.getNumPlayerforCompleteMarketActivation() 
+							&& action.getPosition()>GameParameters.getMinMarketZones())||
+					(gameElements.getNumberOfPlayers()>=GameParameters.getNumPlayerforCompleteMarketActivation() 
+							&& action.getPosition()>GameParameters.getMinMarketZones()))
+				throw new IllegalArgumentException();
+		 
+		 MarketPosition position = gameElements.getBoard().getMarket().getPosition(action.getPosition());
+		 return checkerHandler.canMemberGoToPosition(position, player, familyMember, action);
+	 }
+	 
+	 /**
+	  * Method that checks if the action that the player wants to perform in the Council Palace is possible
+	  * @param player It's the player that wants to perform the action
+	  * @param familyMember It's the family member involved in the action
+	  * @param action It's the action that the player wants to perform
+	  * @return true if the action is possible according to the rules of the game; false if it is not possible 
+	  */
+	 protected boolean councilPalaceIsPossible(Player player, FamilyMember familyMember, Action action){
+		 
+		 CouncilPalace position = gameElements.getBoard().getCouncilPalace();
+				return checkerHandler.canMemberGoToPosition(position, player, familyMember, action);
+			}
 	
+	 /**
+	  * Method that checks if the action that the player wants to perform in the Harvest zone is possible
+	  * @param player It's the player that wants to perform the action
+	  * @param familyMember It's the family member involved in the action
+	  * @param action It's the action that the player wants to perform
+	  * @return true if the action is possible according to the rules of the game; false if it is not possible 
+	  */
+	 protected boolean harvestIsPossible(Player player, FamilyMember familyMember, Action action){
+		 /**
+		  * Validating the action.
+		  * The number of positions in the Harvest zone depends on the number of players 
+		  * with standard rules: if (numPlayers<3 && position>1)||(numPlayers>=3 && position>2) throws exception.
+		  */
+		 if(action.getPosition()<=0 ||  
+					(gameElements.getNumberOfPlayers()<GameParameters.getNumPlayersForMultipleZones() 
+							&& action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())||
+					(gameElements.getNumberOfPlayers()>=GameParameters.getNumPlayerforCompleteMarketActivation() 
+							&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()))
+				throw new IllegalArgumentException();
+		 /**
+		  * Checking
+		  */
+		 HarvestZone zone =gameElements.getBoard().getHarvestZone();
+		 if(zone.playerAlreadyHere(familyMember)){
+				player.notifyObservers(new Request(player.getStatus(),"Already used a coloured member in harvest", null));
+			 return false;
+		 }
+
+		 /**
+		  * Single position case
+		  */
+		 if(action.getPosition()==1){ 
+			SingleHarvest position = zone.getSingleHarvest();
+			return getCheckerHandler().canMemberGoToPosition(position, player, familyMember, action);}
+		 
+		 /**
+		  * Multiple position case
+		  */
+		  if(action.getPosition()==2){ 
+			 MultipleHarvest position = gameElements.getBoard().getHarvestZone().getMultipleHarvest();
+			 return getCheckerHandler().canMemberGoToPosition(position, player, familyMember, action);}
+		  throw new IllegalArgumentException();
+	 }
+	 
+	 protected boolean productionIsPossible(Player player, FamilyMember familyMember, Action action){
+		 /**
+		  * Validating action. 
+		  * The number of positions in the Production zone depends on the number of players 
+		  * with standard rules: if (numPlayers<3 && position>1)||(numPlayers>=3 && position>2) throws exception.
+		  */
+		 if(action.getPosition()<=0 || 
+					(gameElements.getNumberOfPlayers()<GameParameters.getNumPlayersForMultipleZones() 
+							&& action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())||
+					(gameElements.getNumberOfPlayers()>=GameParameters.getNumPlayerforCompleteMarketActivation() 
+							&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()))
+				throw new IllegalArgumentException();
 	
-	
-	
-	
+		 /**
+		  * Checking
+		  */
+		 ProductionZone zone =gameElements.getBoard().getProductionZone();
+		 if(zone.playerAlreadyHere(familyMember)){
+			 player.notifyObservers(new Request(player.getStatus(),"Already used a coloured member in production", null));
+			 return false;
+		 }
+			 
+		 if(action.getPosition()==1){ //single position
+			SingleProduction position = zone.getSingleProduction();
+		 	return checkerHandler.canMemberGoToPosition(position, player, familyMember, action);	
+		 }
+		 else  if(action.getPosition()==2){ //multiple position
+			 MultipleProduction position = gameElements.getBoard().getProductionZone().getMultipleProduction();
+			 return checkerHandler.canMemberGoToPosition(position, player, familyMember, action);
+		 } 
+		 throw new IllegalArgumentException();
+		}
+	 
+	 
+	 
+	 
 }

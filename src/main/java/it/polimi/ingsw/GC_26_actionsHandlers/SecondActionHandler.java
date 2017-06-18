@@ -48,10 +48,10 @@ public class SecondActionHandler extends ActionHandler{
 				return super.towerIsPossible(player, null , action);
 		//not present in standard game. anyway implemented for flexibility:
 		if(action.getZone()==BoardZone.MARKET)
-			return getCheckerHandler().marketIsPossible(player, null, action);
+			return super.marketIsPossible(player, null, action);
 		//not present in standard game. anyway implemented for flexibility:
 		if(action.getZone()==BoardZone.COUNCILPALACE)
-			return getCheckerHandler().councilPalaceIsPossible(player, null, action);
+			return super.councilPalaceIsPossible(player, null, action);
 		if(action.getZone()==BoardZone.HARVEST ||action.getZone()==BoardZone.PRODUCTION)
 				return true;
 		else throw new IllegalArgumentException();
