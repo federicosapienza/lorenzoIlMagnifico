@@ -65,7 +65,7 @@ public class SecondActionHandler extends ActionHandler{
 		//calling the right performer
 		if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 				action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER){
-			getPerformerHandler().towerPerformPayment(player, null, action);
+			super.towerPerformPayment(player, null, action);
 			return;
 		}
 		
@@ -91,10 +91,10 @@ public class SecondActionHandler extends ActionHandler{
 				
 		//they do not exists in standard game but they were put for flexibility
 		if(action.getZone()==BoardZone.MARKET)
-			getPerformerHandler().marketPerform(player, null, action);
+			super.marketPerform(player, null, action);
 			
 		if(action.getZone()== BoardZone.COUNCILPALACE)
-			getPerformerHandler().councilPalacePerform(player, null, action);
+			super.councilPalacePerform(player, null, action);
 			
 		
 		

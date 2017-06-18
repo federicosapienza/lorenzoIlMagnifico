@@ -6,7 +6,6 @@ import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
@@ -100,15 +99,15 @@ public class FirstActionHandler extends ActionHandler{
 		//calling the right performer
 			if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 					action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER)
-				getPerformerHandler().towerPerformPayment(player, familyMemberUsed, action);			
+				super.towerPerformPayment(player, familyMemberUsed, action);			
 			if(action.getZone()==BoardZone.MARKET)
-				getPerformerHandler().marketPerform(player, familyMemberUsed, action);
+				super.marketPerform(player, familyMemberUsed, action);
 			if(action.getZone()== BoardZone.COUNCILPALACE)
-				getPerformerHandler().councilPalacePerform(player, familyMemberUsed, action);
+				super.councilPalacePerform(player, familyMemberUsed, action);
 			if(action.getZone()==BoardZone.HARVEST)
-				getPerformerHandler().harvestPerform(player, familyMemberUsed, action);
+				super.harvestPerform(player, familyMemberUsed, action);
 			if(action.getZone()==BoardZone.PRODUCTION)
-				getPerformerHandler().productionPerform(player, familyMemberUsed, action);
+				super.productionPerform(player, familyMemberUsed, action);
 			
 			//notify the players
 			getGameElements().notifyObservers(new ActionNotification(player.getName(), action));
