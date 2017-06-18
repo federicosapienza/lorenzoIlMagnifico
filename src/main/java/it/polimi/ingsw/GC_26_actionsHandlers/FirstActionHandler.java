@@ -48,23 +48,20 @@ public class FirstActionHandler extends ActionHandler{
 		
 		player.setTemporaryWarehouse();  // prepares the action
 		
-		//enough servants?
-		if(!player.getTestWarehouse().areResourcesEnough(ResourcesOrPoints.newResources(0,action.getServantsUsed(),0,0))){
-			player.notifyObservers(new Request(player.getStatus(),"Not enough servants", null));
-			return false;}
+		if(!super.getCheckerHandler().areServantsEnough(player, action))
+			return false;
 		player.getTestWarehouse().spendResources(ResourcesOrPoints.newResources(0,action.getServantsUsed(),0,0));
 		
 		//takes the family member used and checks is free
 		FamilyMember familyMemberUsed = player.getFamilyMembers().getfamilyMember(action. getFamilyMemberColour());
-		if(!familyMemberUsed.isFree()){
-			player.notifyObservers(new Request(player.getStatus(),"Family member not free", null));
+		
+		if(!super.getCheckerHandler().isFamilyMemberFree(familyMemberUsed, player))
 			return false;
-		}
 		
 		//calling the right checker
 			if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 					action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER){
-				return getCheckerHandler().towerIsPossible(player, familyMemberUsed, action);
+				return super.towerIsPossible(player, familyMemberUsed, action);
 			}
 			if(action.getZone()==BoardZone.MARKET){
 					return getCheckerHandler().marketIsPossible(player, familyMemberUsed, action);

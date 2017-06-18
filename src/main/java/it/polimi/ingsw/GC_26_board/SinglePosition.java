@@ -18,7 +18,7 @@ import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 public abstract class SinglePosition{
 		private final int valueOfPosition;
 		private List<FamilyMember> familyMemberInPosition;
-		private boolean positionFree;
+		private boolean positionFree=true;
 		
 		/**
 		 * Constructor: it creates a free single position zone with the minimum required value that the family members of the player 

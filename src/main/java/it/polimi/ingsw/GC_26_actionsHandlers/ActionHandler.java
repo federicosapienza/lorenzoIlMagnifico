@@ -3,9 +3,16 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 
 
+import it.polimi.ingsw.GC_26_board.Tower;
+import it.polimi.ingsw.GC_26_board.TowerPosition;
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
+import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.Request;
+import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)
@@ -87,6 +94,68 @@ public abstract class ActionHandler {
 	public ActionPerformerHandler getPerformerHandler() {
 		return performerHandler;
 	}
+	
+	
+	/**
+	 * Method that checks if an action that involves a tower is possible or not
+	 * @param player the current player that wants to perform the action 
+	 * @param familyMember the family member that the player would put in a tower
+	 * @param action the action of the current player 
+	 * @return true if the action can be performed in the tower, according to the rules; false if it can't be performed
+	 */
+	
+	protected boolean towerIsPossible(Player player, FamilyMember familyMember, Action action){
+		/**
+		 * Validation of the action that has been sent
+		 */
+		if(action.getPosition()<=0 || action.getPosition()>GameParameters.getTowerFloorsNumber()) 
+			throw new IllegalArgumentException();
+		if(!checkerHandler.checkMaximumNumberOfCardsNotReached(player, action))
+			return false;			
+	
+		/**
+		 * Checks if the player has already put a family member on the tower
+		 */
+		Tower tower = gameElements.getBoard().getTower(action.getZone());
+		if(!tower.canFamilyMemberGoToTheTower(familyMember)){ //familyMember== null ->second Action: (considered by canPlayerGoToTheTower=
+			player.notifyObservers(new Request(player.getStatus(),"Your coloured members are already in the tower", null));
+			return false;
+			}
+		
+		/**
+		 * If the tower is occupied, the player has to pay coins(or whatever payment, if rules are changed)if he owns them; 
+		 * it also checks that Brunelleschi effect is not activated
+		 */
+		if(tower.isTheTowerFree()&& !player.getPermanentModifiers().isTowerBonusRevokedOn()){
+				if (!player.getTestWarehouse().areResourcesEnough(GameParameters.getTowerOccupiedMalus())){
+					player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
+					player.notifyObservers(new Request(player.getStatus(),"Not enough resources for going in a occupied tower", null));
+					return false;
+				}
+				player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
+		}
+		TowerPosition position = tower.getPosition(action.getPosition());
+		if(!checkerHandler.canMemberGoToPosition( position,  player,  familyMember, action))
+			return false;
+			
+		/**
+		 * Calling the card
+		 */
+		DevelopmentCard card = position.getCard();
+
+		/**
+		 * Checking if the player can get the card: if he can't, it means two possible things:
+		 * 1) The player has not enough resources
+		 * 2) The player has not enough military points requirements needed to get 3,4,5,6 Territory card
+		 */
+		if(!card.canPlayerGetThis(player)){
+			 player.notifyObservers(new Request(player.getStatus(),"not enough resources to get the card",new CardDescriber(card)));
+			return false;
+			
+		}
+		return true;
+	 }
+	 
 	
 	
 	

@@ -45,7 +45,7 @@ public class SecondActionHandler extends ActionHandler{
 			// calls the right checker	
 		if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 					action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER)
-				return getCheckerHandler().towerIsPossible(player, null , action);
+				return super.towerIsPossible(player, null , action);
 		//not present in standard game. anyway implemented for flexibility:
 		if(action.getZone()==BoardZone.MARKET)
 			return getCheckerHandler().marketIsPossible(player, null, action);

@@ -64,12 +64,16 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 			switch(card.getType()){
 			case TERRITORYCARD: 
 				territoryCardSet.add(card);
+				return; 
 			case BUILDINGCARD: 
 				buildingCardSet.add(card);
+				return;
 			case CHARACTERCARD:
 				characterCardSet.add(card);
+				return;
 			case VENTURECARD:
 				ventureCardSet.add(card);
+				return;
 			default:
 				throw new IllegalArgumentException();
 			}
