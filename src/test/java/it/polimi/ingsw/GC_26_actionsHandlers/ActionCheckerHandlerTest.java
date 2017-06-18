@@ -9,13 +9,8 @@ import org.junit.Test;
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_board.CouncilPalace;
 import it.polimi.ingsw.GC_26_board.MarketPosition;
-import it.polimi.ingsw.GC_26_board.MultiplePosition;
-import it.polimi.ingsw.GC_26_board.SinglePosition;
-import it.polimi.ingsw.GC_26_board.Tower;
-import it.polimi.ingsw.GC_26_board.TowerPosition;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
@@ -103,47 +98,73 @@ public class ActionCheckerHandlerTest {
 		assertFalse(actionCheckerHandler.checkMaximumNumberOfCardsNotReached(player,action));
 	}
 	
-	//Tip : start from method invocation that suggest you what you need
 	
-	/*@Test
+	
+	@Test
 	public void testCanMemberGoToPositionSinglePositionTrue() {
 		ResourcesOrPoints resourcesOrPointsPosition = ResourcesOrPoints.newResources(1, 1, 1, 1);
-		SinglePosition position = new TowerPosition(3, resourcesOrPointsPosition, 5);
+		MarketPosition position = new MarketPosition(1, resourcesOrPointsPosition, 1);
 		ResourcesOrPoints startingResourcesOrPoints = ResourcesOrPoints.newResources(2, 2, 2, 2);
 		Player player = new Player("Leon", startingResourcesOrPoints);
-		FamilyMember familyMember = new FamilyMember(Colour.BLACK, player);
-		Action action = new Action(BoardZone.BUILDINGTOWER, 3, Colour.BLACK, 0);
-		familyMember.setValue(7);
-		ResourcesOrPoints[] arrayResOrPt = new ResourcesOrPoints[4];
-		arrayResOrPt[0]=resourcesOrPointsPosition;
-		arrayResOrPt[1]=resourcesOrPointsPosition;
-		arrayResOrPt[2]=resourcesOrPointsPosition;
-		arrayResOrPt[3]=resourcesOrPointsPosition;
-		Tower tower = new Tower(arrayResOrPt);
-		tower.clearCardsAndFamilyMembers();
+		FamilyMember familyMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
+		familyMember.setValue(5);
+		position.clear();
+		Action action = new Action(BoardZone.BUILDINGTOWER, 3, familyMember.getColour(), 0);
 		assertTrue(actionCheckerHandler.canMemberGoToPosition(position, player, familyMember, action));
-	}*/
+	}
 	
-	/*@Test
+	@Test
+	public void testCanMemberGoToPositionSinglePositionFalse() {
+		ResourcesOrPoints resourcesOrPointsPosition = ResourcesOrPoints.newResources(1, 1, 1, 1);
+		MarketPosition position = new MarketPosition(1, resourcesOrPointsPosition, 5);
+		ResourcesOrPoints startingResourcesOrPoints = ResourcesOrPoints.newResources(2, 2, 2, 2);
+		Player player = new Player("Leon", startingResourcesOrPoints);
+		FamilyMember familyMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
+		familyMember.setValue(3);
+		position.clear();
+		Action action = new Action(BoardZone.BUILDINGTOWER, 3, familyMember.getColour(), 0);
+		assertFalse(actionCheckerHandler.canMemberGoToPosition(position, player, familyMember, action));
+	}
+	
+	@Test
+	public void testCanMemberGoToPositionSinglePositionTruePermanentModifiersON() {
+		ResourcesOrPoints resourcesOrPointsPosition = ResourcesOrPoints.newResources(1, 1, 1, 1);
+		MarketPosition position = new MarketPosition(1, resourcesOrPointsPosition, 5);
+		ResourcesOrPoints startingResourcesOrPoints = ResourcesOrPoints.newResources(10, 2, 2, 2);
+		Player player = new Player("Leon", startingResourcesOrPoints);
+		FamilyMember familyMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
+		familyMember.setValue(6);
+		FamilyMember familyMember2 = player.getFamilyMembers().getfamilyMember(Colour.ORANGE);
+		position.setFamilyMember(familyMember2);
+		familyMember2.setValue(6);
+		player.getPermanentModifiers().setGoingInOccupiedPositionsAllowed();
+		Action action = new Action(BoardZone.BUILDINGTOWER, 3, familyMember.getColour(), 0);
+		assertTrue(actionCheckerHandler.canMemberGoToPosition(position, player, familyMember, action));
+	}
+	
+	@Test
 	public void testCanMemberGoToPositionMultiplePositionTrue() {
 		ResourcesOrPoints resourcesOrPointsCouncil = ResourcesOrPoints.newResources(0, 0, 0, 0);
 		CouncilPalace councilPalace = new CouncilPalace(resourcesOrPointsCouncil, 1);
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
 		Player player = new Player("Leon", startingResources);
-		FamilyMember familyMember = new FamilyMember(Colour.BLACK,player);
-		player.getFamilyMembers().getfamilyMember(Colour.BLACK).setValue(6);
+		FamilyMember familyMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
 		Action action = new Action(BoardZone.MARKET, 3, familyMember.getColour(), 0);
+		familyMember.setValue(6);
+		System.out.println(familyMember.getValue());
 		assertTrue(actionCheckerHandler.canMemberGoToPosition(councilPalace, player, familyMember, action));
-	}*/
-
-	/*@Test
-	public void testCanMemberGoToPositionMultiplePositionTrue() {
-		fail("Not yet implemented");
 	}
-	
+
 	@Test
 	public void testCanMemberGoToPositionMultiplePositionFalse() {
-		fail("Not yet implemented");
-	}*/
+		ResourcesOrPoints resourcesOrPointsCouncil = ResourcesOrPoints.newResources(0, 0, 0, 0);
+		CouncilPalace councilPalace = new CouncilPalace(resourcesOrPointsCouncil, 5);
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
+		Player player = new Player("Leon", startingResources);
+		FamilyMember familyMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
+		familyMember.setValue(1);
+		Action action = new Action(BoardZone.MARKET, 3, familyMember.getColour(), 0);
+		assertFalse(actionCheckerHandler.canMemberGoToPosition(councilPalace, player, familyMember, action));
+	}
 
 }

@@ -92,7 +92,7 @@ public class ActionCheckerHandler {
 		 if(player.getPermanentModifiers().isGoingInOccupiedPositionsAllowed()) 
 			 return true;
 		 
-		 if(position.IsPositionFree()){
+		 if(!position.IsPositionFree()){
 				player.notifyObservers(new Request(player.getStatus(),"position not free", null));
 				return false;
 			}
