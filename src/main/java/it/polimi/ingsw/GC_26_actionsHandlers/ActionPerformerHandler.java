@@ -31,7 +31,7 @@ public class ActionPerformerHandler {
 	 * If the tower is occupied, pay coins (or any payment if rules are changed) (Brunelleschi effect is not activated)
 	 */
 	public void payCoinsIfTowerOccupied(Tower tower, Player player){
-	if(tower.isTheTowerFree()&& !player.getPermanentModifiers().isTowerOccupiedMalusDisabled())
+	if(!tower.isTheTowerFree()&& !player.getPermanentModifiers().isTowerOccupiedMalusDisabled())
 		player.getWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
 	}
 
