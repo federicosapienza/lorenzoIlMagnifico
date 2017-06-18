@@ -19,7 +19,7 @@ public class HarvestAndProductionHandler {
 		if(value<1)
 			throw new IllegalArgumentException();
 		//taking the cards
-		List<DevelopmentCard>  list = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.TERRITORYCARD);
+		List<DevelopmentCard> list = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.TERRITORYCARD);
 		
 		//giving to the player the bonus of personal board tile
 		PersonalBoardTile tile = player.getPersonalBoard().getPersonalBoardTile();
@@ -27,7 +27,7 @@ public class HarvestAndProductionHandler {
 			player.getWarehouse().add(tile.getResourcesOrPointsHarvest());
 		
 		//launching harvest
-		perform(player, list , value);
+		perform(player, list, value);
 	}
 	
 	public void startProduction(Player player, int value){
@@ -35,20 +35,20 @@ public class HarvestAndProductionHandler {
 			throw new IllegalArgumentException();
 		
 		//taking the cards
-		List<DevelopmentCard>  list = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.BUILDINGCARD);
+		List<DevelopmentCard> list = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.BUILDINGCARD);
 		
 		//giving to the player the bonus of personal board tile
-				PersonalBoardTile tile = player.getPersonalBoard().getPersonalBoardTile();
-				if(value>= tile.getValue())
-					player.getWarehouse().add(tile.getResourcesOrPointsProduction());
+		PersonalBoardTile tile = player.getPersonalBoard().getPersonalBoardTile();
+		if(value>= tile.getValue())
+			player.getWarehouse().add(tile.getResourcesOrPointsProduction());
 				
 		//launching production
-		perform(player, list , value);
+		perform(player, list, value);
 	}
 
 	private void perform(Player player, List<DevelopmentCard> set, int value) {
 		//setting TestWarehouse: it is used in trades: we must ensure the player is not using resources just earned in trading.
-				player.setTemporaryWarehouse();
+		player.setTemporaryWarehouse();
 		
 		for(DevelopmentCard card: set){
 			player.setCardUsed(card);  //  pointer to the card used necessary if action is suspended due to trading
@@ -64,7 +64,7 @@ public class HarvestAndProductionHandler {
 		 boolean found=false;
 		 for(DevelopmentCard card: set){
 			 if(!found && card.equals(player.getCardUsed())) //
-					 found=true;
+				 found=true;
 				 
 			 
 		 //once card has been found we continue the action performing

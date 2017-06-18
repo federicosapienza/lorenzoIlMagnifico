@@ -98,6 +98,7 @@ public class CardsReaderTest {
 	ReceiveResourcesOrPointsEffect resourcesOrPointsEffect2 = new ReceiveResourcesOrPointsEffect(resourcesOrPoints);
 	Effect effect = new TwoAndEffect(resourcesOrPointsEffect, resourcesOrPointsEffect2);
 	Effect effect2 = new TwoAndEffect(resourcesOrPointsEffect, resourcesOrPointsEffect2);
+	/*
 	@Test
 	public void testCreateDoubleEffect(){
 		Effect myReturnedObject = cardsReader.createDoubleEffect(resourcesOrPointsEffect,resourcesOrPointsEffect2);
