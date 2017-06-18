@@ -13,11 +13,6 @@ public class Request extends Message{
 	private final CardDescriber card;
 	
 	public Request(PlayerStatus status, String message, CardDescriber card) {
-		super();
-		if (status == null || message == null || card == null) {
-			throw new NullPointerException();
-		}
-		
 		this.status = status;
 		Message = message;
 		this.card = card;
