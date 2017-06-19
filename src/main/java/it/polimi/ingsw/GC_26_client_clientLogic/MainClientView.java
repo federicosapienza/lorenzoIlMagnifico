@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
-import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
@@ -17,7 +16,6 @@ public class MainClientView {
 	private  String playerUsername;
 	private final Map< String, PlayerView> players;
 	private final BoardView board;
-	private  InputlogicCli iOlogic;
 	
 	
 	

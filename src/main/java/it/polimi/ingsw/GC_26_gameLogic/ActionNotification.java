@@ -10,6 +10,10 @@ package it.polimi.ingsw.GC_26_gameLogic;
  *
  */
 public class ActionNotification extends Action{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String playerName;
 
 	/**
@@ -28,6 +32,11 @@ public class ActionNotification extends Action{
 	 */
 	public String getPlayerName() {
 		return playerName;
+	}
+	
+	@Override
+	public String toString() {
+		return "Player " +playerName+":"+ super.toString();
 	}
 
 }

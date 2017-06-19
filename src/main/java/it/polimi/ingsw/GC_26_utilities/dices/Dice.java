@@ -19,7 +19,7 @@ public class Dice {
 	private Colour colour;
 	
 	// this is the value of the superior face of the dice.
-	private int value;
+	private int value=0;
 	
 	/**
 	 * Constructor of the dice with the number of faces denoted by @param nrFaces and with colour denoted by @param colour.

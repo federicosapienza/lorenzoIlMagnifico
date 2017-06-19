@@ -140,7 +140,7 @@ public abstract class ActionHandler extends Handler{
 		 * If the tower is occupied, the player has to pay coins(or whatever payment, if rules are changed)if he owns them; 
 		 * it also checks that Brunelleschi effect is not activated
 		 */
-		if(tower.isTheTowerFree()&& !player.getPermanentModifiers().isTowerBonusRevokedOn()){
+		if(!tower.isTheTowerFree()&& !player.getPermanentModifiers().isTowerBonusRevokedOn()){
 				if (!player.getTestWarehouse().areResourcesEnough(GameParameters.getTowerOccupiedMalus())){
 					player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
 					player.notifyObservers(new Request(player.getStatus(),"Not enough resources for going in a occupied tower", null));

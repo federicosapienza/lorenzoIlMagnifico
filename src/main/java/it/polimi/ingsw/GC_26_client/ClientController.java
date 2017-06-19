@@ -3,7 +3,8 @@ package it.polimi.ingsw.GC_26_client;
 
 
 
-import it.polimi.ingsw.GC_26_board.Board;
+
+
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_client_clientLogic.InputlogicCli;
@@ -46,10 +47,9 @@ public class ClientController {
 				return;
 			}
 			
-			//TODO tutti i check
 		
 			if(card.getTypeOfCard().equalsIgnoreCase("Leader Card")){
-					view.getPlayer(view.getPlayerUsername()).addCard(card); //the card is sent only to "this" client
+					view.getPlayer(view.getPlayerUsername()).addLeaderCardOwned(card); //the card is sent only to "this" client
 					return;
 					}
 			else throw new IllegalArgumentException();	
@@ -79,7 +79,6 @@ public class ClientController {
 	
 	public void receivePlayerPocket(PlayerWallet playerWallet){
 		view.updatePlayerWallet((playerWallet));
-		output.printResources(view.getPlayer(playerWallet.getPlayerName()));
 		}
 	
 	
@@ -121,10 +120,12 @@ public class ClientController {
 		if(request.getMessage()!=null)
 			output.printString(request.getMessage());
 		if(request.getStatus()==PlayerStatus.PLAYING){
-			if(request.getMessage()==null) //in our protocol means starting new round(if there is a message, is a error message=request to repeat)
+			if(request.getMessage()==null) {//in our protocol means starting new round(if there is a message, is a error message=request to repeat)
 				output.printBoard(view.getBoard());
-				iOlogic.setWaitingFirstAction();
-				return;}
+				output.printCompleteStatus(view.getThisPlayer());
+			}
+			iOlogic.setWaitingFirstAction();
+			return;}
 		if(request.getStatus()== PlayerStatus.SECONDPLAY){
 				iOlogic.setWaitingSecondAction();
 				return;
@@ -158,7 +159,10 @@ public class ClientController {
 		
 		if(info.getGameStatus()==GameStatus.INITIALIZINGTURN)
 			view.getBoard().cleanBoard();
+		if(info.getMessage().contains("ended the turn")) //TODO cambiare se cambia in EndTurnController
+				output.printCompleteStatus(view.getPlayer(info.getPlayerReferred()));
 	}
+	
 	
 	private void handlePersonalBoardChangeNotification(PersonalBoardChangeNotification change) {
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME){

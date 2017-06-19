@@ -53,9 +53,12 @@ public class PlayerView {
 	public void setPersonalTileValues(String string){
 		personalTileValues= string;
 	}
+
 	
-	public void addLeaderCardOwned(CardDescriber card){ //called only at the beginning of the game
+	//called only at the beginning of the game
+	public void addLeaderCardOwned(CardDescriber card){//used to add LeaderCard at the beginning ogf the game for "this" player
 		leadersCardOwned.add(card);
+
 	}
 	
 	public void addCard(CardDescriber card){
@@ -64,7 +67,7 @@ public class PlayerView {
 			temp.add(card);
 		}
 		if(card.getTypeOfCard().contains("Leader"))
-			leadersCardOwned.add(card);
+			leadersCardUsed.add(card);
 		if(card.getPermanentEffectDescriber()!=null )
 			permamentsEffect.add(card.getPermanentEffectDescriber());
 			
@@ -85,7 +88,9 @@ public class PlayerView {
 		return name;
 	}
 	
-
+	public List<String> getPermamentsEffect() {
+		return permamentsEffect;
+	}
 	
 	public Set<CardDescriber> getCurrentCards(DevelopmentCardTypes type){
 		switch(type){

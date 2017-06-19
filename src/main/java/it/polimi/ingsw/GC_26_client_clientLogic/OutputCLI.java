@@ -16,6 +16,7 @@ public class OutputCLI implements Output{
 	
 	@Override
 	public synchronized void printBoard(BoardView board) {
+		System.out.println("*****************************************************************************************");
 		System.out.println("Territory Tower");
 		printList(board.getTerritoriesTower());
 		System.out.println("Character Tower");
@@ -32,6 +33,8 @@ public class OutputCLI implements Output{
 		printList(board.getHarvestZone());
 		System.out.println("CouncilPalace ");
 		printList(board.getCouncilPalace());
+		System.out.println("*****************************************************************************************");
+
 	}
 	private void printList(List<PositionView> positions){
 		for(PositionView p : positions){
@@ -73,12 +76,9 @@ public class OutputCLI implements Output{
 	@Override
 	public  void printCompleteStatus(PlayerView player) {
 		System.out.println(player.getName());
+		System.out.println("Family members value: " + player.getFamilyMembers().getStatus());
 		System.out.println("Free family members: " + player.getFamilyMembers().whatIsFree());
-		printCards(player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD));
-		printCards(player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD));
-		printCards(player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD));
-		printCards(player.getCurrentCards(DevelopmentCardTypes.VENTURECARD));
-
+		printResources(player);		
 	}
 	@Override
 	public  void printRankings(MainClientView view) {
@@ -94,15 +94,31 @@ public class OutputCLI implements Output{
 	public  void printFamilyMembers(PlayerView player){
 		System.out.println(player.getFamilyMembers().getStatus());
 		System.out.println(player.getFamilyMembers().whatIsFree().toString());
-		//si  potrebbe fare un modo più elaborato prendendo uno alla volta
 	}
+	
 	@Override
-	public void printCards(PlayerView thisPlayer) {  //stampare tutta la persona board
-		//TODO
+	public void printCards(PlayerView player) {  //stampare tutta la persona board
+		if(!player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD).isEmpty()){
+			System.out.println("territory Cards owned");
+			printCards(player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD));}
+		if(!player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD).isEmpty()){
+			System.out.println("character cards owned");
+			printCards(player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD));}
+		if(!player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD).isEmpty()){
+			System.out.println("building cards owned");
+			printCards(player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD));}
+		if(!player.getCurrentCards(DevelopmentCardTypes.VENTURECARD).isEmpty()){
+			System.out.println("venture cards owned");
+			printCards(player.getCurrentCards(DevelopmentCardTypes.VENTURECARD));}
+		
+		if(!player.getPermamentsEffect().isEmpty()){
+		System.out.println("permanents effect owned");
+		for(String s: player.getPermamentsEffect())
+			System.out.println(s);
 	}
 	
 
-
+	}
 	
 
 }

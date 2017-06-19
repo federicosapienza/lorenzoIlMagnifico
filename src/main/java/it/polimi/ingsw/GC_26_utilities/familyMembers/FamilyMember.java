@@ -31,6 +31,7 @@ public class FamilyMember {
 			throw new NullPointerException("null parameter"); 
 		this.colour = colour;
 		this.player= player;
+		this.value=0;
 	}
 	
 	/**

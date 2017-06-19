@@ -75,20 +75,20 @@ public class InputlogicCli implements Runnable{
 						familyMemberChosen=true;
 						continue;
 					}
-					if(!zoneChosen && (value>0 && value<9)){
+					if(familyMemberChosen && !zoneChosen && (value>0 && value<9)){
 						boardChoice=value;
 						zone=chooseBoardZone(boardChoice);
 						output.printString("what position? '-1'-togoBack");
 						zoneChosen=true;
 						continue;
 					}
-					if(!positionChosen &&  (value>0 && value<5)){
+					if(zoneChosen && !positionChosen &&  (value>0 && value<5)){
 						position=value;
 						output.printString("How many servants? '-1'-togoBack");
 						positionChosen=true;
 						continue;
 					}
-					if(value>=0){
+					if(positionChosen && value>=0){
 						servants=value;
 						Action action = new Action(zone, position, familyMemberColour, servants);
 						connection.performAction(action);
@@ -106,7 +106,6 @@ public class InputlogicCli implements Runnable{
 					waitingResponse=false;
 					continue;
 				}
-				System.out.println("iologic107");
 			}
 		}
 		
@@ -116,6 +115,7 @@ public class InputlogicCli implements Runnable{
 		
 		
 		private synchronized boolean getWaitingResponce(){
+			output.printResources(view.getThisPlayer());
 			return waitingResponse;
 		}
 		
@@ -123,21 +123,24 @@ public class InputlogicCli implements Runnable{
 			firstAction=true;
 			waitingAction=true;
 			restartValues();
-			output.printFamilyMembers(view.getThisPlayer());
-			output.printResources(view.getThisPlayer());
+			//the print of board and complete status at the beginning of the turn are done by clientController()
 			output.printString("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
 			
 
 		}
 		public synchronized void setWaitingSecondAction(){
+			output.printResources(view.getThisPlayer());
 			output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
 			restartValues();
+			familyMemberChosen=true;
 			firstAction=false;
 			waitingAction=true;
+			
 			
 		}
 	
 		public synchronized void setWaitingResponse(){
+			output.printResources(view.getThisPlayer());
 			System.out.println("waiting, 999 to close turn");
 			restartValues();
 			waitingResponse=true;
