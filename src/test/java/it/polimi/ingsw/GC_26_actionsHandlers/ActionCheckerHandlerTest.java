@@ -149,7 +149,6 @@ public class ActionCheckerHandlerTest {
 		FamilyMember familyMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
 		Action action = new Action(BoardZone.MARKET, 3, familyMember.getColour(), 0);
 		familyMember.setValue(6);
-		System.out.println(familyMember.getValue());
 		assertTrue(actionCheckerHandler.canMemberGoToPosition(councilPalace, player, familyMember, action));
 
 	}
@@ -168,4 +167,85 @@ public class ActionCheckerHandlerTest {
 		assertFalse(actionCheckerHandler.canMemberGoToPosition(councilPalace, player, familyMember, action));
 	}
 */
+	
+	
+	@Test
+	public void towerActionValidationTrueTest(){
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
+		Player player = new Player("Leon", startingResources);
+		Action action = new Action(BoardZone.TERRITORYTOWER, 1,player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour(), 0);
+		assertTrue(actionCheckerHandler.towerActionValidation(player, action));
+	}
+	
+	@Test
+	public void towerActionValidationFalse1Test(){
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
+		Player player = new Player("Leon", startingResources);
+		Action action = new Action(BoardZone.TERRITORYTOWER, -1,player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour(), 0);
+		assertFalse(actionCheckerHandler.towerActionValidation(player, action));
+	}
+	
+	@Test
+	public void towerActionValidationFalse2Test(){
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
+		Player player = new Player("Leon", startingResources);
+		Action action = new Action(BoardZone.TERRITORYTOWER, 5,player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour(), 0);
+		assertFalse(actionCheckerHandler.towerActionValidation(player, action));
+	}
+	
+	@Test
+	public void marketActionValidationTrueTest(){
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
+		Player player = new Player("Leon", startingResources);
+		Action action = new Action(BoardZone.MARKET, 4,player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour(), 0);
+		assertTrue(actionCheckerHandler.marketActionValidation(player, action, 4));	
+	}
+	
+	@Test
+	public void marketActionValidationFalse1Test(){
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
+		Player player = new Player("Leon", startingResources);
+		Action action = new Action(BoardZone.MARKET, 0,player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour(), 0);
+		assertFalse(actionCheckerHandler.marketActionValidation(player, action, 4));	
+	}
+	
+	@Test
+	public void marketActionValidationFalse2Test(){
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
+		Player player = new Player("Leon", startingResources);
+		Action action = new Action(BoardZone.MARKET, 3,player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour(), 0);
+		assertFalse(actionCheckerHandler.marketActionValidation(player, action, 2));	
+	}
+	
+	@Test
+	public void productionAndHarvestValidationTrueTest(){
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
+		Player player = new Player("Leon", startingResources);
+		Action action = new Action(BoardZone.PRODUCTION, 2,player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour(), 0);
+		assertTrue(actionCheckerHandler.productionAndHarvestValidation(player, action, 4));
+	}
+	
+	@Test
+	public void productionAndHarvestValidationFalse1Test(){
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
+		Player player = new Player("Leon", startingResources);
+		Action action = new Action(BoardZone.PRODUCTION, 2,player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour(), 0);
+		assertFalse(actionCheckerHandler.productionAndHarvestValidation(player, action, 2));
+	}
+	
+	@Test
+	public void productionAndHarvestValidationFalse2Test(){
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
+		Player player = new Player("Leon", startingResources);
+		Action action = new Action(BoardZone.PRODUCTION, 3,player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour(), 0);
+		assertFalse(actionCheckerHandler.productionAndHarvestValidation(player, action, 4));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

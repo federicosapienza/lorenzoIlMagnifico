@@ -2,7 +2,6 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 
 
-import javax.net.ssl.ExtendedSSLSession;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_board.MultiplePosition;
@@ -59,7 +58,7 @@ public class ActionCheckerHandler {
 	if((numOfPlayers<GameParameters.getNumPlayerforCompleteMarketActivation() 
 			&& action.getPosition()>GameParameters.getMinMarketZones())||
 			(numOfPlayers>=GameParameters.getNumPlayerforCompleteMarketActivation() 
-			&& action.getPosition()>GameParameters.getMinMarketZones())){
+			&& action.getPosition()>GameParameters.getMaxMarketZones())){
 			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
 			return false;
 	 }
@@ -81,8 +80,9 @@ public class ActionCheckerHandler {
 	 if ( (numOfPlayers<GameParameters.getNumPlayersForMultipleZones() 
 						&& action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())||
 				( numOfPlayers>=GameParameters.getNumPlayersForMultipleZones() 
-						&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones())){
+						&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()+GameParameters.getSingleHarvestOrProductionZones())){
 			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+			System.out.println("lol");
 			return false;
 	 }
 	 else return true;
