@@ -27,7 +27,7 @@ public class BoardView {
 	private List<PositionView> marketZone;
 	private List<PositionView> productionZone;
 	private List<PositionView> harvestZone;
-	private List<PositionView> CouncilPalace;
+	private List<PositionView> councilPalace;
 	
 	private List<CardDescriber> excommunicationThisGame;
 
@@ -42,7 +42,7 @@ public class BoardView {
 		this.marketZone =new ArrayList<>();
 		this.productionZone = new ArrayList<>();
 		this.harvestZone = new ArrayList<>();
-		this.CouncilPalace = new ArrayList<>();  
+		this.councilPalace = new ArrayList<>();  
 		//even if there is only one council Palace set was chosen no order to be less specific
 		this.excommunicationThisGame= new ArrayList<>();
 		
@@ -52,7 +52,7 @@ public class BoardView {
 		//called at the beginning of the connection to save status of the board
 		public void addPosition(PositionView position){
 			List<PositionView> list = findSet(position.getZone());
-			list.add(position.getPositionIndex()-1, position);; //position Index starts from 1: in list from zero;	
+			list.add(position.getPositionIndex()-1, position); //position Index starts from 1: in list from zero;	
 		}
 		
 		public void update(ActionNotification action){
@@ -68,13 +68,13 @@ public class BoardView {
 				//TODO lanciare exception;
 		}
 		
-		private boolean  findAndAddPositionWithoutCard(List<PositionView> list,CardDescriber card){
+		private boolean findAndAddPositionWithoutCard(List<PositionView> list,CardDescriber card){
 			for(PositionView p: list){
 				if(p.getCardHere()==null){
 					p.setCardHere(card);
 					return true;
 				}
-				}
+			}
 			 return false;	
 		}
 		
@@ -97,7 +97,7 @@ public class BoardView {
 				case MARKET:
 					return marketZone;
 				default: 
-					return CouncilPalace;
+					return councilPalace;
 					}
 		}
 	
@@ -141,7 +141,7 @@ public class BoardView {
 		return charactersTower;
 	}
 	public List<PositionView> getCouncilPalace() {
-		return CouncilPalace;
+		return councilPalace;
 	}
 	public List<PositionView> getMarketZone() {
 		return marketZone;
@@ -171,7 +171,7 @@ public class BoardView {
 		clean(marketZone);
 		clean(harvestZone);
 		clean(productionZone);
-		clean(CouncilPalace);
+		clean(councilPalace);
 		
 	}
 	

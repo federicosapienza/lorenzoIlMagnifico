@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26_controllers;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +31,19 @@ import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class ActionControllerTest {
-	
+	ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 3, 2, 2);
 	MainActionHandler handler;
+	ResourcesOrPoints startingResources1 = ResourcesOrPoints.newResources(5, 3, 2, 2);
+	ResourcesOrPoints startingResources2 = ResourcesOrPoints.newResources(6, 3, 2, 2);
+	ResourcesOrPoints startingResources3 = ResourcesOrPoints.newResources(7, 3, 2, 2);
+	ResourcesOrPoints startingResources4 = ResourcesOrPoints.newResources(8, 3, 2, 2);
+	
+	ResourcesOrPoints[] resOrPts = new ResourcesOrPoints[4];
+	ResourcesOrPoints[] startRes = new ResourcesOrPoints[4];
+	ResourcesOrPoints resOrPts1 = ResourcesOrPoints.newResources(5, 0, 0, 0);
+	ResourcesOrPoints resOrPts2 = ResourcesOrPoints.newResources(0, 5, 0, 0);
+	ResourcesOrPoints resOrPts3 = ResourcesOrPoints.newResourcesOrPoints(2, 0, 0, 0, 0, 3, 0, 0);
+	ResourcesOrPoints resOrPts4 = ResourcesOrPoints.newPoints(0, 0, 0, 2);
 	/*
 	DevelopmentCard card;
 	DevelopmentCardImplementation developmentCard;
@@ -57,7 +69,34 @@ public class ActionControllerTest {
 		assertTrue(thrownNullPointerException);
 		
 	}
-	
+	/*
+	@Test
+	public void testNoUpdateIfNotPlaying() {
+		resOrPts[0] = resOrPts1;
+		resOrPts[1] = resOrPts2;
+		resOrPts[2] = resOrPts3;
+		resOrPts[3] = resOrPts4;
+		startRes[0] = startingResources1;
+		startRes[1] = startingResources2;
+		startRes[2] = startingResources3;
+		startRes[3] = startingResources4;
+		Player player = new Player("David", startingResources);
+		Player player2 = new Player("Steph", startingResources2);
+		List<Player> players = new ArrayList<>();
+		players.add(player);
+		players.add(player2);
+		Colour colour = player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour();
+		Action action = new Action(BoardZone.VENTURETOWER, 1, colour, 1);
+		List<ResourcesOrPoints[]> resourcesOrPointsList = Arrays.asList(resOrPts, startRes);
+		Map<Integer, Integer> faithPointsTrack = new HashMap<>();
+		faithPointsTrack.put(0, 0);
+		Game game = new Game(new CardsImplementation(), new BonusImplementation(), new TimerValueImplementation());
+		GameElements gameElements = new GameElements(game, players, players.size(), resourcesOrPointsList, faithPointsTrack);
+		handler = new MainActionHandler(gameElements);
+		ActionController actionController = new ActionController(player, handler);
+		actionController.update(action);
+		assertEquals(PlayerStatus.WAITINGHISTURN, player.getStatus());
+	}
 	
 	/*
 	@Test

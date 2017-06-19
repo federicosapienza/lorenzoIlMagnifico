@@ -85,14 +85,30 @@ public class PermanentModifiersTest {
 	@Test
 	public void testDiscounts() {
 		//Map<BoardZone, ResourcesOrPoints> discounts= new HashMap<>();
+		boolean thrownIllegalZoneExcep = false;
 		BoardZone zone = BoardZone.BUILDINGTOWER;
 		ResourcesOrPoints res = ResourcesOrPoints.newResources(1, 1, 1, 1);
 		assertFalse(permMod.IsTherediscountOnResources(zone));
 		assertNull(permMod.getDiscount(zone));
-		permMod.addDiscount(zone, res);
-		assertNotNull(permMod.getDiscount(zone));
-		assertTrue(permMod.IsTherediscountOnResources(zone));
-		assertEquals(res, permMod.getDiscount(zone));
+		try {
+			permMod.addDiscount(zone, res);
+		} catch (IllegalArgumentException e) {
+			thrownIllegalZoneExcep = true;
+		}
+		assertTrue(!thrownIllegalZoneExcep && permMod.IsTherediscountOnResources(zone) && permMod.getDiscount(zone) == res);
+	}
+	
+	@Test
+	public void testNullZone() {
+		boolean thrownIllegalZoneExcep = false;
+		BoardZone zone = null;
+		try {
+			permMod.IsTherediscountOnResources(zone);
+			
+		} catch (IllegalArgumentException e) {
+			thrownIllegalZoneExcep = true;
+		}
+		assertTrue(thrownIllegalZoneExcep && permMod.getDiscount(zone).getCoins() == 0 && permMod.getDiscount(zone).getServants() == 0 && permMod.getDiscount(zone).getWood() == 0 && permMod.getDiscount(zone).getStone() == 0);
 	}
 
 }
