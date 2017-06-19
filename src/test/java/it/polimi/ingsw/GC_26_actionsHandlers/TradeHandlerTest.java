@@ -66,8 +66,7 @@ public class TradeHandlerTest {
 		assertTrue(TradeHandler.isPossible(player, 0));
 	}
 	
-	//Test not working ,nullPointerException
-	//try to sysout at line 192 or 201 . 
+ 
 	@Test
 	public void performTest() {
 		ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResources(3, 0, 5, 0);
@@ -81,8 +80,7 @@ public class TradeHandlerTest {
 		Effect permanent = new TradeEffect(resourcesOrPoints4, null,resourcesOrPoints5, null);
 		DevelopmentCard developmentCard = DevelopmentCardImplementation.buildingCard("Chapel", 1, payment, immediate, permanent, 2);
 		player.setCardUsed(developmentCard);
-		TradeEffect tradeEffect= (TradeEffect) permanent;
-		player.setTemporaryWarehouse();//per sicurezza
+		player.setTemporaryWarehouse();
 		TradeHandler.perform(player, 1);
 		assertEquals(1, player.getWarehouse().getFaithPoints());
 	}

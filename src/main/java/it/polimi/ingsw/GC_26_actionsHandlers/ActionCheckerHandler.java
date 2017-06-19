@@ -82,7 +82,6 @@ public class ActionCheckerHandler {
 				( numOfPlayers>=GameParameters.getNumPlayersForMultipleZones() 
 						&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()+GameParameters.getSingleHarvestOrProductionZones())){
 			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
-			System.out.println("lol");
 			return false;
 	 }
 	 else return true;

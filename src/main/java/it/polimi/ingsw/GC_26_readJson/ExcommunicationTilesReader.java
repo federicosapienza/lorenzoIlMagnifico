@@ -9,7 +9,6 @@ import it.polimi.ingsw.GC_26_cards.excommunicationTile.ExcommunicationTileImplem
 public class ExcommunicationTilesReader extends CardsReader {
 
 private JsonPathData jsonPathData = new JsonPathData();
-private int period;
 private String permanentEffectType;
 private Effect permanentEffect;
 	
@@ -17,7 +16,6 @@ private Effect permanentEffect;
 		String[] listOfPaths = chooseListOfExcommunicationTIles(numberOfPeriod);
 		for(String s:listOfPaths){
 			super.createJsonObjectFromFile(s);
-			period = super.readInt("period");
 			permanentEffectType= super.readString("typeOfPermanentEffect");
 			permanentEffect=super.createPermanentEffect(permanentEffectType);
 			createExcommunicationTiles(cards,numberOfPeriod);

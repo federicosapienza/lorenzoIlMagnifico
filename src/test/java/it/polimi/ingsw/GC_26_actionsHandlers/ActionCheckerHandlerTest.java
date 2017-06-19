@@ -147,13 +147,13 @@ public class ActionCheckerHandlerTest {
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
 		Player player = new Player("Leon", startingResources);
 		FamilyMember familyMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
-		Action action = new Action(BoardZone.MARKET, 3, familyMember.getColour(), 0);
+		Action action = new Action(BoardZone.COUNCILPALACE, 3, familyMember.getColour(), 0);
 		familyMember.setValue(6);
 		assertTrue(actionCheckerHandler.canMemberGoToPosition(councilPalace, player, familyMember, action));
 
 	}
 
-	/*
+	
 
 	@Test
 	public void testCanMemberGoToPositionMultiplePositionFalse() {
@@ -163,10 +163,10 @@ public class ActionCheckerHandlerTest {
 		Player player = new Player("Leon", startingResources);
 		FamilyMember familyMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
 		familyMember.setValue(1);
-		Action action = new Action(BoardZone.MARKET, 3, familyMember.getColour(), 0);
+		Action action = new Action(BoardZone.COUNCILPALACE, 3, familyMember.getColour(), 0);
 		assertFalse(actionCheckerHandler.canMemberGoToPosition(councilPalace, player, familyMember, action));
 	}
-*/
+
 	
 	
 	@Test

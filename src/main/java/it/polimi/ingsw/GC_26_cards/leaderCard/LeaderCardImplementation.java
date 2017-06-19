@@ -40,8 +40,8 @@ public class LeaderCardImplementation implements LeaderCard{
 	
 	@Override
 	public void  runPermanentEffect(Player player) {
-		if(immediateEffect!=null){
-			immediateEffect.doEffect(player, false);
+		if(permanentEffect!=null){
+			permanentEffect.doEffect(player, false);
 		}
 	}
 	
