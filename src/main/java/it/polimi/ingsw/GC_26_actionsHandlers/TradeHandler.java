@@ -53,7 +53,7 @@ public class TradeHandler {
 					player.notifyObservers(new Request(player.getStatus(),"cannot perform trade: not enough resources", new CardDescriber(player.getCardUsed())));
 					return false;
 		}	
-				else return false;
+				else return true;
 		}
 		// trade number 1 selected
 		boolean flag = player.getTestWarehouse().areResourcesEnough(tradeEffect.getGive1());
@@ -79,7 +79,7 @@ public class TradeHandler {
 				ResourcesOrPoints receive = tradeEffect.getReceive2();
 				ResourcesOrPoints give= tradeEffect.getGive2();
 				player.getWarehouse().spendResources(give);
-				player.getWarehouse().spendResources(receive);
+				player.getWarehouse().add(receive);
 				return;
 			}	
 		
@@ -87,7 +87,7 @@ public class TradeHandler {
 		ResourcesOrPoints receive = tradeEffect.getReceive1();
 		ResourcesOrPoints give= tradeEffect.getGive1();
 		player.getWarehouse().spendResources(give);
-		player.getWarehouse().spendResources(receive);
+		player.getWarehouse().add(receive);
 		return;
 		
 		

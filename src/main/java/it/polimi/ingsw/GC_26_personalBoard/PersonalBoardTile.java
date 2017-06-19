@@ -65,6 +65,14 @@ public class PersonalBoardTile {
 		return resourcesOrPointsProduction;
 	}
 	
+	public void setResourcesOrPointsHarvest(ResourcesOrPoints resourcesOrPoints){
+		resourcesOrPointsHarvest= resourcesOrPoints;
+	}
+	
+	public void setResourcesOrPointsProduction(ResourcesOrPoints resourcesOrPoints){
+		resourcesOrPointsProduction= resourcesOrPoints;
+	}
+	
 	/**
 	 * Method that returns the required value to activate this personal bonus tile
 	 * @return value It's the required value to activate this personal bonus tile

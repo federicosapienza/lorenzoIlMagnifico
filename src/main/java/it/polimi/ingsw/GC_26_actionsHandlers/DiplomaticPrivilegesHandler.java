@@ -127,6 +127,14 @@ public class DiplomaticPrivilegesHandler {
 		return false;
 		
 	}
+	//Need these for testing
+	public boolean[] getUsedArray(){
+		return used;
+	}
+	
+	public void setUsedToTrue(int position){
+		used[position] = true;
+	}
 	
 }
 	

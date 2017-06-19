@@ -20,7 +20,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class CardsReaderTest {
 
-	CardsReader cardsReader = new CardsReader();
+	/*CardsReader cardsReader = new CardsReader();
 	DevelopmentCardTypes developmentCardTypes;
 	BoardZone boardZone;
 	String[] stringArray;
@@ -98,13 +98,14 @@ public class CardsReaderTest {
 	ReceiveResourcesOrPointsEffect resourcesOrPointsEffect2 = new ReceiveResourcesOrPointsEffect(resourcesOrPoints);
 	Effect effect = new TwoAndEffect(resourcesOrPointsEffect, resourcesOrPointsEffect2);
 	Effect effect2 = new TwoAndEffect(resourcesOrPointsEffect, resourcesOrPointsEffect2);
+	/*
 	@Test
 	public void testCreateDoubleEffect(){
 		Effect myReturnedObject = cardsReader.createDoubleEffect(resourcesOrPointsEffect,resourcesOrPointsEffect2);
 		assertNotNull(myReturnedObject);
 		assertTrue(myReturnedObject instanceof TwoAndEffect);
 		assertTrue(effect.equals(myReturnedObject));
-	}
+	}*/
 
 
 	/*public Effect createDoubleEffect(Effect effect1,Effect effect2){

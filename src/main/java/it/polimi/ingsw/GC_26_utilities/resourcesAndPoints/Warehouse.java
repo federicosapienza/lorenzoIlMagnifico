@@ -189,7 +189,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		//check if any malus on getting resources is on (look at permanentModifier class)
 		//calls the permanent effect to reduce the resources the player can earn
 			temp= player.getPermanentModifiers().getResourcesAfterMalus(resources);
-
+		
 		this.coins  += temp.getResources().getCoins();
 		this.servants += temp.getResources().getServants();
 		this.wood += temp.getResources().getWood();
