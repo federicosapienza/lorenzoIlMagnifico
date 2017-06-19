@@ -2,20 +2,13 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import static org.junit.Assert.*;
 
-
-
 import org.junit.Test;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_board.CouncilPalace;
-import it.polimi.ingsw.GC_26_board.MarketPosition;
-import it.polimi.ingsw.GC_26_board.MultiplePosition;
-import it.polimi.ingsw.GC_26_board.SinglePosition;
-import it.polimi.ingsw.GC_26_board.Tower;
-import it.polimi.ingsw.GC_26_board.TowerPosition;
+
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
@@ -124,7 +117,7 @@ public class ActionCheckerHandlerTest {
 		assertTrue(actionCheckerHandler.canMemberGoToPosition(position, player, familyMember, action));
 	}*/
 	
-	/*@Test
+	@Test
 	public void testCanMemberGoToPositionMultiplePositionTrue() {
 		ResourcesOrPoints resourcesOrPointsCouncil = ResourcesOrPoints.newResources(0, 0, 0, 0);
 		CouncilPalace councilPalace = new CouncilPalace(resourcesOrPointsCouncil, 1);
@@ -134,7 +127,7 @@ public class ActionCheckerHandlerTest {
 		player.getFamilyMembers().getfamilyMember(Colour.BLACK).setValue(6);
 		Action action = new Action(BoardZone.MARKET, 3, familyMember.getColour(), 0);
 		assertTrue(actionCheckerHandler.canMemberGoToPosition(councilPalace, player, familyMember, action));
-	}*/
+	}
 
 	/*@Test
 	public void testCanMemberGoToPositionMultiplePositionTrue() {

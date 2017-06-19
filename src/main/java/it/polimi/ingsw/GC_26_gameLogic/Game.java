@@ -231,7 +231,7 @@ public class Game extends Observable<CardDescriber>{
 	private List<DevelopmentCard> buildingTowerCards;
 	private List<DevelopmentCard> characterTowerCards;
 	private List<DevelopmentCard> ventureTowerCards;
-	private final int turnsNumber=1;  //TODO
+	private final int turnsNumber=2;  //TODO
 	
 	/**
 	 * Method that describes what to do next

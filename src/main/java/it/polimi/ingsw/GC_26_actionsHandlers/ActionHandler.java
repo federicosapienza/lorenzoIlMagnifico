@@ -352,10 +352,15 @@ public abstract class ActionHandler {
 			 */
 			if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)
 				card.runPermanentEffect(player);
+		
 			/**
 			 * cleaning the parameter of the card that will no more be used
 			 */
-			player.setCardUsed(null);  
+			player.setCardUsed(null); 
+			/**
+			 * removing the card from the tower
+			 */
+			position.setCard(null);
 			
 			/**
 			 * Notifying players about changes to the personal board

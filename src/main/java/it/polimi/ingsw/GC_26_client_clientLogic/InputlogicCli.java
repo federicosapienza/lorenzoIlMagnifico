@@ -61,10 +61,14 @@ public class InputlogicCli implements Runnable{
 				}
 				if(value<0){  //the player asks to reset action , if he was performing an action. useless while waiting response.
 					restartValues();
+					if(firstAction)
+						output.printString("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
+					else output.printString("choose a value between 1 and 4 to try activating the correspondent Leader Card");
+
 					continue;
 				}	
 				if(this.getWaitingAction()){  //if waiting action
-					if(firstAction && !familyMemberChosen && (value>0 && value<5)){ // family member is not chosen in second action
+					if(firstAction && !familyMemberChosen && (value<5 && value>0)){ // family member is not chosen in second action
 						familyMember=value;
 						familyMemberColour= chooseColour(familyMember);
 						output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");

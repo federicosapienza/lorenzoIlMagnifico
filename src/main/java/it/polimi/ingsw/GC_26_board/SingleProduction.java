@@ -30,12 +30,10 @@ public class SingleProduction extends SinglePosition{
 		setFamilyMember(null);	
 	}
 	
-	public void doSingleProduction(Player player){
-		int value=getValueOfPosition();
-		//for che scorre le carte della userboard
-		//due if,uno che controlla valore dado evalore position 
-		//uno che controlla valore dado,valore carta
-	}	
 	
+	@Override
+	public int getValueOfPosition() {
+		return super.getValueOfPosition();
+	}
 	
 }
