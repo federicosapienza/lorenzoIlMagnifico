@@ -37,7 +37,9 @@ public class ProductionZoneTest {
 		playersList.add(player2);
 		ProductionZone productionZone = new ProductionZone(1, 1, playersList.size());
 		productionZone.addPlayerHere(player1.getFamilyMembers().getfamilyMember(Colour.BLACK));
-		assertTrue(productionZone.playerAlreadyHere(player1.getFamilyMembers().getfamilyMember(Colour.WHITE)));
+		productionZone.addPlayerHere(player2.getFamilyMembers().getfamilyMember(Colour.ORANGE));
+		assertTrue(productionZone.playerAlreadyHere(player1.getFamilyMembers().getfamilyMember(Colour.BLACK)));
+		assertTrue(productionZone.playerAlreadyHere(player2.getFamilyMembers().getfamilyMember(Colour.ORANGE)));
 	}
 	
 	@Test
@@ -113,5 +115,25 @@ public class ProductionZoneTest {
 		}
 		assertTrue(productionZone.playerAlreadyHere(player1.getFamilyMembers().getfamilyMember(Colour.BLACK)) && !thrownIllegalAddPlayerHere);
 		
+	}
+	
+	@Test
+	public void testProductionClear() {
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 3, 2, 2);
+		ResourcesOrPoints startingResources2 = ResourcesOrPoints.newResources(6, 3, 2, 2);
+		ResourcesOrPoints startingResources3 = ResourcesOrPoints.newResources(7, 3, 2, 2);
+		Player player1 = new Player("John", startingResources);
+		Player player2 = new Player("Matt", startingResources2);
+		Player player3 = new Player("Luke", startingResources3);
+		List<Player> playersList = new ArrayList<>();
+		playersList.add(player1);
+		playersList.add(player2);
+		playersList.add(player3);
+		ProductionZone productionZone = new ProductionZone(1, 1, playersList.size());
+		productionZone.addPlayerHere(player1.getFamilyMembers().getfamilyMember(Colour.BLACK));
+		productionZone.addPlayerHere(player2.getFamilyMembers().getfamilyMember(Colour.ORANGE));
+		productionZone.addPlayerHere(player3.getFamilyMembers().getfamilyMember(Colour.WHITE));
+		productionZone.clear();
+		assertTrue(productionZone.getMultipleProduction().getCounter() == 0 && productionZone.getMultipleProduction().isPositionFree() && productionZone.getSingleProduction().IsPositionFree());
 	}
 }
