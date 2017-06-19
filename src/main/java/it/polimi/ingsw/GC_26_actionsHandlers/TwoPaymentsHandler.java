@@ -21,25 +21,27 @@ public class TwoPaymentsHandler {
 
 	
 	public void perform(Player player, int choice){
+		
 		// we will need to recast  DevelopmentCard to  DevelopmentCardImplementation and to recast Payment to DoublePayment;
-				DevelopmentCard temp=  player.getCardUsed();
-				DevelopmentCardImplementation  card= (DevelopmentCardImplementation) temp;
-				Payment payment = card.getPayment();
-				TwoOrPayments twoOrPayments =(TwoOrPayments) payment;
+		DevelopmentCard temp=  player.getCardUsed();
+		DevelopmentCardImplementation card= (DevelopmentCardImplementation) temp;
+		Payment payment = card.getPayment();
+		TwoOrPayments twoOrPayments =(TwoOrPayments) payment;
 		//paying
-				if(choice==1){
-					twoOrPayments.getMode1().pay(player,card.getType());
-				}
-				else {
-					twoOrPayments.getMode2().pay(player,card.getType());
-					}
-				card.runImmediateEffect(player);
-				if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)// character cards' permanent effect is immediately activated
-							card.runPermanentEffect(player);
-				player.setCardUsed(null);  //cleaning parameter of the card no more used
+		if(choice==1){
+			twoOrPayments.getMode1().pay(player,card.getType());
+		}
+		else {
+			twoOrPayments.getMode2().pay(player,card.getType());
+		}
+		card.runImmediateEffect(player);
+		// character cards' permanent effect is immediately activated 
+		if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)
+			card.runPermanentEffect(player);
+		player.setCardUsed(null);  //cleaning parameter of the card no more used
 				
 				
-				}
+	}
 	
 					
 				
