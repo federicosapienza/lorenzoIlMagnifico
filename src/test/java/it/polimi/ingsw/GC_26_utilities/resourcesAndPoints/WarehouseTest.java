@@ -27,15 +27,8 @@ public class WarehouseTest {
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResourcesOrPoints(5, 3, 2, 2, 0, 0, 0, 0);
 		Player player = new Player("Jess", startingResources);
 		Warehouse warehouse = new Warehouse(player, startingResources);
-		assertEquals("Jess", warehouse.getPlayerName());
 		assertEquals(5, warehouse.getCoins());
-		assertEquals(3, warehouse.getServants());
-		assertEquals(2, warehouse.getStone());
-		assertEquals(2, warehouse.getWood());
-		assertEquals(0, warehouse.getVictoryPoints());
-		assertEquals(0, warehouse.getFaithPoints());
-		assertEquals(0, warehouse.getMilitaryPoints());
-		assertEquals(0, warehouse.getCouncilPrivileges());
+		
 		
 	}
 	
@@ -52,17 +45,24 @@ public class WarehouseTest {
 	}
 	
 	@Test
-	public void testSameWarehouse() {
-		ResourcesOrPoints res1 = ResourcesOrPoints.newResourcesOrPoints(6, 3, 2, 2, 0, 0, 0, 0);
-		Player player = new Player("James", res1);
-		Warehouse warehouse1 = new Warehouse(player, res1);
-		Warehouse warehouse2 = new Warehouse(warehouse1);
-		assertEquals(warehouse1.getPlayerName(), warehouse2.getPlayerName());
-		assertEquals(warehouse1.getFaithPoints(), warehouse2.getFaithPoints());
-		warehouse1.resetFaithPoints();
-		assertEquals(0, warehouse1.getFaithPoints());
-		
+	public void testResourcesNotEnough() {
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResourcesOrPoints(5, 3, 2, 2, 0, 0, 0, 0);
+		Player player = new Player("Daphne", startingResources);
+		Warehouse warehouse = new Warehouse(player, startingResources);
+		ResourcesOrPoints res = ResourcesOrPoints.newResourcesOrPoints(4, 1, 1, 7, 1, 1, 1, 1);
+		assertFalse(warehouse.areResourcesEnough(res));
 	}
+	
+	/*
+	@Test
+	public void testResourcesAreEnough() {
+		ResourcesOrPoints startingResources = ResourcesOrPoints.newResourcesOrPoints(5, 3, 3, 3, 2, 2, 2, 2);
+		Player player = new Player("Daphne", startingResources);
+		Warehouse warehouse = new Warehouse(player, startingResources);
+		ResourcesOrPoints res = ResourcesOrPoints.newResourcesOrPoints(2, 2, 2, 2, 1, 1, 1, 1);
+		assertTrue(warehouse.areResourcesEnough(res));
+	}
+	*/
 	
 	@Test
 	public void testSpendResources() {
@@ -72,8 +72,7 @@ public class WarehouseTest {
 		Warehouse warehouse = new Warehouse(player, res1);
 		warehouse.spendResources(resources);
 		assertEquals(5, warehouse.getCoins());
-		assertEquals(2, warehouse.getServants());
-		assertEquals(1, warehouse.getWood());
+		
 	}
 	
 	@Test
