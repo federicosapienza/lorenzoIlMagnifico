@@ -74,6 +74,14 @@ public class CardsReader {
 	private JsonPathData jsonPathData = new JsonPathData();
 
 
+	public JsonObject getJsonObject(){
+		return jsonObject;
+	}
+	
+	public BufferedReader getBuffedredReader(){
+		return br;
+	}
+	
 	public void createJsonObjectFromFile(String path){
 		try {
 			br = new BufferedReader(new FileReader(path));
