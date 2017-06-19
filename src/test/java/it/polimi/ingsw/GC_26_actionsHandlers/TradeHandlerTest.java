@@ -50,7 +50,21 @@ public class TradeHandlerTest {
 		assertFalse(TradeHandler.isPossible(player, 1));
 	}
 	
-	
+	@Test
+	public void testRefusedTrade() {
+		ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResources(1, 0, 0, 0);
+		Player player = new Player("Leon", resourcesOrPoints);
+		ResourcesOrPoints resourcesOrPoints2 = ResourcesOrPoints.newResources(0, 0, 2, 0);
+		Payment payment = new ResourcesPayment(resourcesOrPoints2);
+		ResourcesOrPoints resourcesOrPoints3 = ResourcesOrPoints.newResourcesOrPoints(0, 0, 0, 0, 0, 0, 1, 0);
+		Effect immediate = new ReceiveResourcesOrPointsEffect(resourcesOrPoints3);
+		ResourcesOrPoints resourcesOrPoints4 = ResourcesOrPoints.newResources(1, 0,0,0);
+		Effect permanent = new TradeEffect(resourcesOrPoints4, resourcesOrPoints3, null, null);
+		DevelopmentCard developmentCard = DevelopmentCardImplementation.buildingCard("Chapel", 1, payment, immediate, permanent, 2);
+		player.setCardUsed(developmentCard);
+		player.setTemporaryWarehouse();
+		assertTrue(TradeHandler.isPossible(player, 0));
+	}
 	
 	//Test not working ,nullPointerException
 	//try to sysout at line 192 or 201 . 

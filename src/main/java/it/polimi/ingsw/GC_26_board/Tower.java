@@ -148,7 +148,7 @@ public class Tower {
 	public void setPlayerInTheTower(FamilyMember familyMember){
 		if(familyMember== null)
 			return;
-		if( familyMember.getColour()!=Colour.NEUTRAL){
+		if(familyMember.getColour()!=Colour.NEUTRAL){
 			if(!canFamilyMemberGoToTheTower(familyMember))
 				throw new IllegalArgumentException();
 			else{ playersInTheTower.add(familyMember.getPlayer());
