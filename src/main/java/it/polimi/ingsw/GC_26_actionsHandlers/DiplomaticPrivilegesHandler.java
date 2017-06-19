@@ -17,15 +17,14 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
  * The player sends an int value that identifies the choice. If the Integer is greater than the number of choices,
  * 	the first reward possible is given. (The values for the choices are set between 1 and 5 in the standard game)
  */
-public class DiplomaticPrivilegesHandler extends Handler{
+public class DiplomaticPrivilegesHandler{
 	private  ResourcesOrPoints[] diplomaticPrivilegesTrades= GameParameters.getDiplomaticPrivilegesTrades();
 	private boolean used[]= new boolean[GameParameters.getDiplomaticPrivilegesTrades().length];
 
 	/**
 	 * Constructor: it creates an array of boolean initialized to false
 	 */
-	public DiplomaticPrivilegesHandler(List<Player> players) {
-		super(players);
+	public DiplomaticPrivilegesHandler() {
 		used= new boolean[diplomaticPrivilegesTrades.length];
 		resetMemory();
 		

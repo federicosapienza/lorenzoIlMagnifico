@@ -19,13 +19,9 @@ import it.polimi.ingsw.GC_26_player.Player;
  * Choice method: 1 stands for first method, any other value for second.
  */
 
-public class TwoPaymentsHandler extends Handler{
+public class TwoPaymentsHandler{
 
-	
-	public TwoPaymentsHandler(List<Player> players) {
-		super(players);
-		
-	}
+
 
 	public void perform(Player player, int choice){
 		

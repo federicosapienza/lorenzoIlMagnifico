@@ -9,12 +9,9 @@ import it.polimi.ingsw.GC_26_personalBoard.PersonalBoardTile;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 
-public class HarvestAndProductionHandler extends Handler{
+public class HarvestAndProductionHandler {
 	private int actionValue; //updated when player is interrupted due to trading , no need to reset at the end of the turn
 	
-	public HarvestAndProductionHandler(List<Player> players) {
-		super(players);
-	}
 	
 	
 	public void startHarvest(Player player, int value){
