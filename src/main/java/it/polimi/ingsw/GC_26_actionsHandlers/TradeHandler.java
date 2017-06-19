@@ -85,6 +85,8 @@ public class TradeHandler {
 		
 		// trade number 1 selected
 		ResourcesOrPoints receive = tradeEffect.getReceive1();
+		if(receive==null)
+		System.out.println("z");
 		ResourcesOrPoints give= tradeEffect.getGive1();
 		player.getWarehouse().spendResources(give);
 		player.getWarehouse().add(receive);

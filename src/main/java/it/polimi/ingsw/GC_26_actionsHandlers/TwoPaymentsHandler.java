@@ -1,6 +1,8 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
 
+import java.util.List;
+
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
@@ -17,9 +19,14 @@ import it.polimi.ingsw.GC_26_player.Player;
  * Choice method: 1 stands for first method, any other value for second.
  */
 
-public class TwoPaymentsHandler {
+public class TwoPaymentsHandler extends Handler{
 
 	
+	public TwoPaymentsHandler(List<Player> players) {
+		super(players);
+		
+	}
+
 	public void perform(Player player, int choice){
 		
 		// we will need to recast  DevelopmentCard to  DevelopmentCardImplementation and to recast Payment to DoublePayment;

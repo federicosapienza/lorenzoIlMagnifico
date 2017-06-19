@@ -1,12 +1,15 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
+import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_board.CouncilPalace;
 import it.polimi.ingsw.GC_26_board.MarketPosition;
 
 import it.polimi.ingsw.GC_26_board.Tower;
 import it.polimi.ingsw.GC_26_board.TowerPosition;
+import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 
 /**
  * 
@@ -21,8 +24,7 @@ public class ActionPerformerHandler {
 	/**
 	 * Constructor: it creates a handler to perform an action, by the evaluation of the parameters expressed by 
 	 * gameElements and harvestAndProductionHandler 
-	 * @param gameElements the game elements involved in the action
-	 * @param harvestAndProductionHandler the handler for harvest and production
+	 * 
 	 */
 	
 	 
@@ -53,7 +55,8 @@ public class ActionPerformerHandler {
 		 player.getWarehouse().add(position.getResourcesOrPointsInPosition());
 		}
 
-		
+	
+	
 	
 	
 }

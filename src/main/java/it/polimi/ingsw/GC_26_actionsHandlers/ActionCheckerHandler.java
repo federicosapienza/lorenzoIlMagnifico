@@ -1,6 +1,9 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
 
+
+import javax.net.ssl.ExtendedSSLSession;
+
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_board.MultiplePosition;
 
@@ -31,10 +34,61 @@ public class ActionCheckerHandler {
 	 * @param gameElements the game elements that the handler will evaluate to check the action
 	 * @param harvestAndProductionHandler the handler for harvest and production
 	 */
-/*	public ActionCheckerHandler(GameElements gameElements, HarvestAndProductionHandler harvestAndProductionHandler){
-		this.gameElements =gameElements;
-		this.harvestAndProductionHandler=harvestAndProductionHandler;
-	} */
+
+	
+	/**
+	 * Validation of the action that has been sent
+	 */
+	public boolean towerActionValidation(Player player, Action action){
+		if (action.getPosition()<=0 || action.getPosition()>GameParameters.getTowerFloorsNumber()){
+			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+			return false;
+		}
+		return true;
+	}
+	
+	 /**
+	  * The number of the positions in the market depends on the number of players, with standard rules:
+	  * if (numPlayers<4 && position>2)||(numPlayers=4 && position>4) an exception has to be thrown.
+	  */
+	public boolean marketActionValidation(Player player, Action action, int  numOfPlayers){
+	 if(action.getPosition()<=0 ){
+			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+	 		return false;
+	 }
+	if((numOfPlayers<GameParameters.getNumPlayerforCompleteMarketActivation() 
+			&& action.getPosition()>GameParameters.getMinMarketZones())||
+			(numOfPlayers>=GameParameters.getNumPlayerforCompleteMarketActivation() 
+			&& action.getPosition()>GameParameters.getMinMarketZones())){
+			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+			return false;
+	 }
+	 else return true;
+	}
+
+	 
+	 /**
+	  * Validating the action.
+	  * The number of positions in the Harvest and Production zone depends on the number of players 
+	  * with standard rules: if (numPlayers<3 && position>1)||(numPlayers>=3 && position>2) throws exception.
+	  */
+	
+	public boolean productionAndHarvestValidation(Player player, Action action, int  numOfPlayers){
+		if(action.getPosition()<=0 ){
+			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+	 		return false;
+		}
+	 if ( (numOfPlayers<GameParameters.getNumPlayersForMultipleZones() 
+						&& action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())||
+				( numOfPlayers>=GameParameters.getNumPlayersForMultipleZones() 
+						&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones())){
+			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+			return false;
+	 }
+	 else return true;
+	}
+	
+	
 	
 	//check if the player has enough servants compared to those he asked to use in action
 	public boolean areServantsEnough(Player player, Action action){
@@ -75,7 +129,7 @@ public class ActionCheckerHandler {
 	 
 	 
 	 /**
-	  * The following methods created to reduce lines of codes.
+	  * 
 	  * 
 	  * This method checks if the position if free and if the family member's value is enough to perform the action
 	  * @param position It's the position that has to be checked

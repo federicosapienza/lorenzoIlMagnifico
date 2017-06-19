@@ -17,11 +17,12 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
  */
 
 
-public class VaticanReportHandler {
+public class VaticanReportHandler extends Handler{
 
 	private GameElements gameElements;
 
 	public VaticanReportHandler(GameElements gameElements) {
+		super(gameElements.getPlayers());
 		this.gameElements =gameElements;
 	}
 	
@@ -30,8 +31,8 @@ public class VaticanReportHandler {
 		if(choice == 0) {// player has decided to be excommunicated.
 			ExcommunicationTile tile = gameElements.getGame().getThisRoundExcommunicationTiles();
 			tile.runEffect(player);
-			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "is excommunicated"));
-	    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), 
+			super.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "is excommunicated"));
+	    	super.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), 
 	    			new CardDescriber(tile) ,null));
 			return;
 		}
@@ -45,7 +46,7 @@ public class VaticanReportHandler {
 		 //giving the player more bonus points if associated permanent effects is on
 		temp += player.getPermanentModifiers().getAdditionalVP();
 		 
-		 gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), 
+		 super.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), 
 				 				player.getName()+" support the Church and gains "+ temp+" victory points" ));
 		 player.getWarehouse().add(ResourcesOrPoints.newPoints(temp, 0, 0, 0));
 		 player.getWarehouse().resetFaithPoints();

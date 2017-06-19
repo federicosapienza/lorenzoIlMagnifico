@@ -5,14 +5,16 @@ import java.util.List;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_personalBoard.PersonalBoardTile;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 
-public class HarvestAndProductionHandler {
+public class HarvestAndProductionHandler extends Handler{
 	private int actionValue; //updated when player is interrupted due to trading , no need to reset at the end of the turn
 	
+	public HarvestAndProductionHandler(List<Player> players) {
+		super(players);
+	}
 	
 	
 	public void startHarvest(Player player, int value){

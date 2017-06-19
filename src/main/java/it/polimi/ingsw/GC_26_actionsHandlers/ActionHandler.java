@@ -39,7 +39,7 @@ import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
  */
 
 
-public abstract class ActionHandler {
+public abstract class ActionHandler extends Handler{
 	private GameElements gameElements;
 	protected HarvestAndProductionHandler harvestAndProductionHandler;
 	private ActionCheckerHandler checkerHandler;
@@ -53,6 +53,7 @@ public abstract class ActionHandler {
 	 * @param harvestAndProductionHandler the handler for harvest and production 
 	 */
 	public ActionHandler(GameElements gameElements, HarvestAndProductionHandler harvestAndProductionHandler){
+		super(gameElements.getPlayers());
 		this.gameElements = gameElements;
 		this.harvestAndProductionHandler = harvestAndProductionHandler;
 		checkerHandler = new ActionCheckerHandler();
@@ -121,8 +122,8 @@ public abstract class ActionHandler {
 		/**
 		 * Validation of the action that has been sent
 		 */
-		if(action.getPosition()<=0 || action.getPosition()>GameParameters.getTowerFloorsNumber()) 
-			throw new IllegalArgumentException();
+		if(!checkerHandler.towerActionValidation(player, action))
+			return false;
 		if(!checkerHandler.checkMaximumNumberOfCardsNotReached(player, action))
 			return false;			
 	
@@ -190,13 +191,8 @@ public abstract class ActionHandler {
 		  * The number of the positions in the market depends on the number of players, with standard rules:
 		  * if (numPlayers<4 && position>2)||(numPlayers=4 && position>4) an exception has to be thrown.
 		  */
-		 if(action.getPosition()<=0 || 
-					(gameElements.getNumberOfPlayers()<GameParameters.getNumPlayerforCompleteMarketActivation() 
-							&& action.getPosition()>GameParameters.getMinMarketZones())||
-					(gameElements.getNumberOfPlayers()>=GameParameters.getNumPlayerforCompleteMarketActivation() 
-							&& action.getPosition()>GameParameters.getMinMarketZones()))
-				throw new IllegalArgumentException();
-		 
+		 if(!checkerHandler.marketActionValidation(player, action, gameElements.getNumberOfPlayers()))
+			 return false;
 		 MarketPosition position = gameElements.getBoard().getMarket().getPosition(action.getPosition());
 		 return checkerHandler.canMemberGoToPosition(position, player, familyMember, action);
 	 }
@@ -227,12 +223,8 @@ public abstract class ActionHandler {
 		  * The number of positions in the Harvest zone depends on the number of players 
 		  * with standard rules: if (numPlayers<3 && position>1)||(numPlayers>=3 && position>2) throws exception.
 		  */
-		 if(action.getPosition()<=0 ||  
-					(gameElements.getNumberOfPlayers()<GameParameters.getNumPlayersForMultipleZones() 
-							&& action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())||
-					(gameElements.getNumberOfPlayers()>=GameParameters.getNumPlayerforCompleteMarketActivation() 
-							&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()))
-				throw new IllegalArgumentException();
+		 if(!checkerHandler.productionAndHarvestValidation(player, action, gameElements.getNumberOfPlayers()))
+			 return false;
 		 /**
 		  * Checking
 		  */
@@ -264,12 +256,8 @@ public abstract class ActionHandler {
 		  * The number of positions in the Production zone depends on the number of players 
 		  * with standard rules: if (numPlayers<3 && position>1)||(numPlayers>=3 && position>2) throws exception.
 		  */
-		 if(action.getPosition()<=0 || 
-					(gameElements.getNumberOfPlayers()<GameParameters.getNumPlayersForMultipleZones() 
-							&& action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())||
-					(gameElements.getNumberOfPlayers()>=GameParameters.getNumPlayerforCompleteMarketActivation() 
-							&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()))
-				throw new IllegalArgumentException();
+		 if(!checkerHandler.productionAndHarvestValidation(player, action, gameElements.getNumberOfPlayers()))
+			 return false;
 	
 		 /**
 		  * Checking
@@ -419,12 +407,9 @@ public abstract class ActionHandler {
 			 	position.setFamilyMember(familyMember);
 			 	//Launching production, considering also the permanent effects 
 			 	int actionValue= servants+ familyMember.getValue() 
-					+player.getPermanentModifiers().getActionModifier(BoardZone.PRODUCTION);
-			 	//checking if the action value is valid
-				if(actionValue<1){  
-					throw new IllegalArgumentException();
-				}
-				harvestAndProductionHandler.startProduction(player, actionValue);	
+				+player.getPermanentModifiers().getActionModifier(BoardZone.PRODUCTION);
+				harvestAndProductionHandler.startProduction(player, actionValue);
+				return;
 			 }
 			 else  if(action.getPosition()==2){
 				 MultipleProduction position = gameElements.getBoard().getProductionZone().getMultipleProduction();
@@ -434,8 +419,6 @@ public abstract class ActionHandler {
 				 int actionValue= servants+ familyMember.getValue() +position.getMultipleActionMalus()
 					+player.getPermanentModifiers().getActionModifier(BoardZone.PRODUCTION); 
 				//Checking if action value is valid
-				 if(actionValue<1) //checking if action value is valid
-						throw new IllegalArgumentException();
 				harvestAndProductionHandler.startProduction(player, actionValue);
 				return;
 		 }
@@ -461,10 +444,9 @@ public abstract class ActionHandler {
 			 	//Launching Harvest, considering also the permanent effects
 			 	int actionValue= servants+ familyMember.getValue() 
 			 								+player.getPermanentModifiers().getActionModifier(BoardZone.HARVEST); 
-			 	//Checking if action value is valid
-			 	if(actionValue<1) 
-					throw new IllegalArgumentException();
-			 	harvestAndProductionHandler.startHarvest(player, actionValue);		
+			 	
+			 	harvestAndProductionHandler.startHarvest(player, actionValue);	
+			 	return;
 			 	}
 		 //Multiple position case
 			 else if(action.getPosition()==2){ 
@@ -473,11 +455,9 @@ public abstract class ActionHandler {
 				//Launching Harvest, considering also the permanent effects and the malus equal to -3 implied by multiple position
 				 int actionValue= servants+ familyMember.getValue() +position.getMultipleActionMalus() 
 							+player.getPermanentModifiers().getActionModifier(BoardZone.HARVEST); 
-				//checking if action value is valid
-				 if(actionValue<1) 
-						throw new IllegalArgumentException();
-				 	harvestAndProductionHandler.startHarvest(player, actionValue);	
-				 	return;
+			
+			 	harvestAndProductionHandler.startHarvest(player, actionValue);	
+			 	return;
 				 	}
 
 			 

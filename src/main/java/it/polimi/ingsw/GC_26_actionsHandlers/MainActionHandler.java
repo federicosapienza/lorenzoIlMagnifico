@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
+
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 
 /* a list of the actions : all of them are called by different controllers.
@@ -20,16 +21,16 @@ public class MainActionHandler {
 			throw new NullPointerException("gameElements are null");
 		}
 		this.gameElements=gameElements;
-		harvestAndProductionHandler = new HarvestAndProductionHandler();
+		harvestAndProductionHandler = new HarvestAndProductionHandler(gameElements.getPlayers());
 		
 		firstActionHandler =new FirstActionHandler(gameElements, harvestAndProductionHandler);
 		secondActionHandler= new SecondActionHandler(gameElements, harvestAndProductionHandler);
 	
 		tradeHandler = new TradeHandler(harvestAndProductionHandler);
-		twoPaymentHandler = new TwoPaymentsHandler();
-		diplomaticPrivilegesHandler= new DiplomaticPrivilegesHandler();
+		twoPaymentHandler = new TwoPaymentsHandler(gameElements.getPlayers());
+		diplomaticPrivilegesHandler= new DiplomaticPrivilegesHandler(gameElements.getPlayers());
 		vaticanReportHandler = new VaticanReportHandler(gameElements);
-		leaderCardHandler =new LeaderCardHandler( gameElements);
+		leaderCardHandler =new LeaderCardHandler( gameElements.getPlayers());
 		
 	}
 
