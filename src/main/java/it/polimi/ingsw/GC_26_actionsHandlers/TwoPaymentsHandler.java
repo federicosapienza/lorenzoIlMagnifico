@@ -3,12 +3,15 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import java.util.List;
 
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
 import it.polimi.ingsw.GC_26_cards.payments.TwoOrPayments;
+import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_utilities.PersonalBoardChangeNotification;
 
 
 /* Handles the cases in which the player is asked to choose between two different payments:
@@ -19,9 +22,13 @@ import it.polimi.ingsw.GC_26_player.Player;
  * Choice method: 1 stands for first method, any other value for second.
  */
 
-public class TwoPaymentsHandler{
+public class TwoPaymentsHandler extends Handler{
 
 
+
+	public TwoPaymentsHandler(List<Player> players) {
+		super(players);
+	}
 
 	public void perform(Player player, int choice){
 		
@@ -41,9 +48,22 @@ public class TwoPaymentsHandler{
 		// character cards' permanent effect is immediately activated 
 		if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)
 			card.runPermanentEffect(player);
+		
+		
 		player.setCardUsed(null);  //cleaning parameter of the card no more used
-				
-				
+		
+		/**
+		 * adding the card to personal board
+		 */
+		
+		player.getPersonalBoard().add(card);
+			
+		
+		/**
+		 * Notifying players about changes to the personal board
+		 */
+		super.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(card), null));
+		
 	}
 	
 					

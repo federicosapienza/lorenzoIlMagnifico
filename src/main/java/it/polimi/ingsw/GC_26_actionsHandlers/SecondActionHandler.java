@@ -65,7 +65,7 @@ public class SecondActionHandler extends ActionHandler{
 		//calling the right performer
 		if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 				action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER){
-			super.towerPerformPayment(player, null, action);
+			super.towerPerform(player, null, action);
 			return;
 		}
 		

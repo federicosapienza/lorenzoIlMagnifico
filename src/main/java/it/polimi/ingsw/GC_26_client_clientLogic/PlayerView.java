@@ -1,7 +1,6 @@
 package it.polimi.ingsw.GC_26_client_clientLogic;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -65,10 +64,13 @@ public class PlayerView {
 		if(card.getTypeOfCard().contains("Development")){
 			Set<CardDescriber> temp= getCurrentCards(card.getType());
 			temp.add(card);
+			if(card.getPermanentEffectDescriber()!=null && card.getType()==DevelopmentCardTypes.CHARACTERCARD)
+				permamentsEffect.add(card.getPermanentEffectDescriber());
+			return;
 		}
 		if(card.getTypeOfCard().contains("Leader"))
 			leadersCardUsed.add(card);
-		if(card.getPermanentEffectDescriber()!=null )
+		if(card.getPermanentEffectDescriber()!=null ) //if is a leader card , or a excommunication Tile 
 			permamentsEffect.add(card.getPermanentEffectDescriber());
 			
 	}
@@ -109,5 +111,9 @@ public class PlayerView {
 	
 	public Set<CardDescriber> getLeadersCardOwned() {
 		return leadersCardOwned;
+	}
+	
+	public String getPersonalTileValues() {
+		return personalTileValues;
 	}
 }

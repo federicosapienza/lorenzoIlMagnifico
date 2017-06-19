@@ -15,8 +15,10 @@ public class HarvestAndProductionHandler {
 	
 	
 	public void startHarvest(Player player, int value){
-		if(value<1)
-			throw new IllegalArgumentException();
+		if(value<1){
+			return;
+		}
+			
 		//taking the cards
 		List<DevelopmentCard> list = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.TERRITORYCARD);
 		
@@ -31,7 +33,7 @@ public class HarvestAndProductionHandler {
 	
 	public void startProduction(Player player, int value){
 		if(value<1)
-			throw new IllegalArgumentException();
+			return;
 		
 		//taking the cards
 		List<DevelopmentCard> list = player.getPersonalBoard().getCurrentCards(DevelopmentCardTypes.BUILDINGCARD);

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
@@ -75,14 +76,16 @@ public class OutputCLI implements Output{
 	}
 	@Override
 	public  void printCompleteStatus(PlayerView player) {
-		System.out.println(player.getName());
+		System.out.println(player.getName() +": recap");
 		System.out.println("Family members value: " + player.getFamilyMembers().getStatus());
 		System.out.println("Free family members: " + player.getFamilyMembers().whatIsFree());
-		printResources(player);		
+		printResources(player);	
+		printCards(player);
+		System.out.println("Production Bonus: "+ player.getPersonalTileValues());
 	}
 	@Override
 	public  void printRankings(MainClientView view) {
-		// TODO Auto-generated method stub
+		// TODO sarebbe bello stampare classifica a parte da punti
 		
 	}
 	

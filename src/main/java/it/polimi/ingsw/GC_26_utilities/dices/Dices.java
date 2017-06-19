@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_utilities.dices;
 
+
 /** 
  * @author David Yun (david.yun@mail.polimi.it)
  * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
@@ -10,9 +11,7 @@ package it.polimi.ingsw.GC_26_utilities.dices;
 public class Dices {
 	
 	// the game is based on basic dices with 6 faces.
-	private final int nrFaces = 6;
-	// the following attribute represents the value of the superior face of each dice.
-	private int value;
+	private static final int nrFaces = 6;
 	
 	/**
 	 * The following 3 lines of code create the 3 dices of the game: they're white, black and orange.
@@ -39,14 +38,15 @@ public class Dices {
 		if(colour==null)
 			throw new NullPointerException(); 
 		if (colour == Colour.BLACK) {
-			value = blackDice.getValue();
+			return  blackDice.getValue();
 		}
 		else if(colour == Colour.WHITE) {
-			value = whiteDice.getValue();
+			return whiteDice.getValue();
 		}
 		else if(colour == Colour.ORANGE) {
-			value = orangeDice.getValue();
+			return  orangeDice.getValue();
 		}
-		return value;
+		else throw new IllegalArgumentException();
+
 	}
 }

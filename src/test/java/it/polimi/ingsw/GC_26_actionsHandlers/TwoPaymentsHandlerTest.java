@@ -2,6 +2,9 @@ package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import it.polimi.ingsw.GC_26_player.Player;
@@ -17,8 +20,8 @@ import it.polimi.ingsw.GC_26_cards.payments.ResourcesPayment;
 import it.polimi.ingsw.GC_26_cards.payments.TwoOrPayments;
 
 public class TwoPaymentsHandlerTest {
-	
-	TwoPaymentsHandler twoPaymentsHandler = new TwoPaymentsHandler();
+	List<Player> players= new ArrayList<>();
+	TwoPaymentsHandler twoPaymentsHandler = new TwoPaymentsHandler(players);
 	@Test
 	public void performTestTrue() {
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);

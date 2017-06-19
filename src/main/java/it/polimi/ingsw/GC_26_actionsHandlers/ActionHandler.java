@@ -289,7 +289,7 @@ public abstract class ActionHandler extends Handler{
 		 */
 		 
 	 
-	 protected void towerPerformPayment(Player player, FamilyMember familyMember, Action action){
+	 protected void towerPerform(Player player, FamilyMember familyMember, Action action){
 			Tower tower = gameElements.getBoard().getTower(action.getZone());
 			
 			/**
@@ -349,11 +349,18 @@ public abstract class ActionHandler extends Handler{
 			 * removing the card from the tower
 			 */
 			position.setCard(null);
+			/**
+			 * adding the card to personal board
+			 */
+			
+			player.getPersonalBoard().add(card);
 			
 			/**
 			 * Notifying players about changes to the personal board
 			 */
-			gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(card), null));			
+			gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(card), null));
+			
+			
 			}
 	 
 		

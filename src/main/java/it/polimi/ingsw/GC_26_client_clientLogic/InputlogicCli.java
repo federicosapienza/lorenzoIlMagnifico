@@ -51,7 +51,13 @@ public class InputlogicCli implements Runnable{
 			scanIN=new Scanner(System.in);
 
 			while(true){
+				while(!scanIN.hasNextInt()) { //used to be sure integer is an input
+				    scanIN.next();
+				    System.out.println("not valid input");
+				}
 				int value = scanIN.nextInt();
+				if(scanIN==null)  // if user insert enter key twice 
+					continue;
 				if(value==999){  //if player asks to end the turn
 					String	temp="end turn" ;
 					connection.sendResponce(temp);

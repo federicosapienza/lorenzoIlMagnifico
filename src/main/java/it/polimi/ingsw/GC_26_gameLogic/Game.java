@@ -4,6 +4,8 @@ package it.polimi.ingsw.GC_26_gameLogic;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.print.attribute.Size2DSyntax;
+
 import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
@@ -321,10 +323,10 @@ public class Game extends Observable<CardDescriber>{
 			/**
 			 * Sending cards to board
 			 */
-			gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisRound(buildingTowerCards);
-			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards);
-			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
-			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards);
+			gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisRound(buildingTowerCards.subList(0,4));
+			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards.subList(0, 4));
+			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards.subList(0, 4));
+			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards.subList(0, 4));
 
 			/**
 			 * sending the cards for this round to the clients
@@ -342,10 +344,11 @@ public class Game extends Observable<CardDescriber>{
 			sendCardTool(4, 4, buildingTowerCards);
 			sendCardTool(4, 4, characterTowerCards);
 			sendCardTool(4, 4, ventureTowerCards);
-			gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisRound(buildingTowerCards);
-			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards);
-			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards);
-			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards);
+			gameElements.getBoard().getTower(BoardZone.BUILDINGTOWER).setCardsForThisRound(buildingTowerCards.subList(4, buildingTowerCards.size()));
+			gameElements.getBoard().getTower(BoardZone.CHARACTERTOWER).setCardsForThisRound(characterTowerCards.subList(4, characterTowerCards.size()));
+			gameElements.getBoard().getTower(BoardZone.TERRITORYTOWER).setCardsForThisRound(territoryTowerCards.subList(4, territoryTowerCards.size()));
+			gameElements.getBoard().getTower(BoardZone.VENTURETOWER).setCardsForThisRound(ventureTowerCards.subList(4, ventureTowerCards.size()));
+
 		}	
 	}
 	
