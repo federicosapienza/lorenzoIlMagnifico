@@ -56,8 +56,8 @@ public class GameTest {
 		} catch (NullPointerException e) {
 			thrownNullPointerException = true;
 		}
-		assertFalse(thrownNullPointerException);
-		assertEquals(correctStatus, game4.getGameStatus());
+		
+		assertTrue(!thrownNullPointerException && game4.getGameStatus() == GameStatus.PLAYING);
 	}
 
 }

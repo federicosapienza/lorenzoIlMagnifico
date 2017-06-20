@@ -52,7 +52,7 @@ public class Player extends Observable<Message> {
 		familyMembers = new FamilyMembers(this);
 		playerActive= false;
 		warehouse= new Warehouse(this, startingResources);
-		}
+	}
 
 
 	

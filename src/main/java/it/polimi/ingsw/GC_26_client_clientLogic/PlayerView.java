@@ -28,7 +28,7 @@ public class PlayerView {
 	private FamilyMembersDescriber familyMembers;
 	private List<String> permamentsEffect= new ArrayList<>();
 	
-	PlayerView(PlayerWallet wallet){  //the first time the client receives a playerWallet of a player, it creates playerView
+	public PlayerView(PlayerWallet wallet){  //the first time the client receives a playerWallet of a player, it creates playerView
 		name= wallet.getPlayerName();
 		leadersCardOwned= new HashSet<>();
 		leadersCardUsed= new HashSet<>();
@@ -43,17 +43,10 @@ public class PlayerView {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
 	public void setPersonalTileValues(String string){
 		personalTileValues= string;
 	}
 
-	
 	//called only at the beginning of the game
 	public void addLeaderCardOwned(CardDescriber card){//used to add LeaderCard at the beginning ogf the game for "this" player
 		leadersCardOwned.add(card);
