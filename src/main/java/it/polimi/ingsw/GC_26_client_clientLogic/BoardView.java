@@ -75,7 +75,7 @@ public class BoardView {
 					return true;
 				}
 			}
-			 return false;	
+			return false;	
 		}
 		
 		
@@ -103,7 +103,7 @@ public class BoardView {
 	
 	private PositionView findPosition(Action action){
 		List<PositionView> list = findSet(action.getZone());
-		return  list.get(action.getPosition()-1);
+		return list.get(action.getPosition()-1);
 		
 	}
 	

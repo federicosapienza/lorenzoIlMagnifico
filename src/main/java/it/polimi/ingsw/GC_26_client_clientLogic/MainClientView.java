@@ -13,15 +13,15 @@ public class MainClientView {
 	private PlayerStatus playerStatus=PlayerStatus.WAITINGHISTURN;
 	private boolean loginDone=false;
 	
-	private  String playerUsername;
-	private final Map< String, PlayerView> players;
+	private String playerUsername;
+	private final Map<String, PlayerView> players;
 	private final BoardView board;
 	
 	
 	
 	public MainClientView() {
 		players = new HashMap<>();
-		board =new BoardView();
+		board = new BoardView();
 	}
 	
 	public void setPlayerUsername(String string){
