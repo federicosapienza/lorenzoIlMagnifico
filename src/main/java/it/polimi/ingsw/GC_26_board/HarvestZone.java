@@ -3,8 +3,6 @@ package it.polimi.ingsw.GC_26_board;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.core.Is;
-
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
