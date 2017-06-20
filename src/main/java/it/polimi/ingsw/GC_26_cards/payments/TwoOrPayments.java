@@ -37,16 +37,19 @@ public class TwoOrPayments implements Payment{
 
 	@Override
 	public synchronized void pay(Player player,  DevelopmentCardTypes type) {
-		if(mode1.canPlayerGetThis(player, type)&& mode2.canPlayerGetThis(player,type))
+		boolean pay1 =mode1.canPlayerGetThis(player, type);
+		boolean pay2 = mode2.canPlayerGetThis(player,type);
+		
+		if(pay1&& pay2)
 		synchronized (player) {
 			player.setStatus(new Request(PlayerStatus.CHOOSINGPAYMENT, null, new CardDescriber(player.getCardUsed())));
 			return;
 		}
-		if(mode1.canPlayerGetThis(player, type)){
+		if(pay1){
 				mode1.pay(player,type);
 				return;
 		}
-		if(mode2.canPlayerGetThis(player, type)){
+		if(pay2){
 				mode2.pay(player,type);
 				return;
 		}

@@ -40,7 +40,7 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	//it's the list of leader cards owned
 	private List<LeaderCard> leadersCardList= new ArrayList<>();
 	
-	//it's the set of leader cards the player has used at least once yet.
+	//it's the set of leader cards the player has used at least once yet(if ther effect is permanent, or in this round if the effect is "once for round"
 	private Set<LeaderCard> leaderCardsUsed = new HashSet<>();
 	
 	
@@ -48,9 +48,6 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	//it's the personal board tile to append at the left of the personal board
 	private PersonalBoardTile personalBoardTile;
 	
-	public PersonalBoard(){
-		
-	}
 	
 	/**
 	 * Method that adds a development card to the personal board.
@@ -152,6 +149,15 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 		List<LeaderCard>  temp = Collections.unmodifiableList(leadersCardList);
 		return temp;
 	}
+	/**
+	 * Method that returns the list of leader cards used .
+	 * @return leaderCardSet It's the list of leader cards
+	 */
+	
+	public Set<LeaderCard> getLeaderCardsUsed() {
+		return leaderCardsUsed;
+	}
+	
 	
 	/**
 	 * Method that returns the personal board tile.
@@ -182,10 +188,12 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	}
 	
 	/**
-	 * Method that sets the Leader Card as used during this game by this player, if this was note before.
+	 * Method that sets the Leader Card as used during this game(for leaders cards with permanent effect) 
+	 * or this round(for leaders cards with immediate, once per round effect) by this player.
 	 * 
 	 */
 
+	
 	public void setLeaderCardUsed(LeaderCard leaderCard){
 		if (leaderCard == null) {
 			throw new NullPointerException("leaderCard is null");
@@ -194,5 +202,18 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 			leaderCardsUsed.add(leaderCard);
 	}
 	
+	/**
+	 * Method that  cleans the memory of the Leader Cards with an " once per round ability", so that they results as usable again 
+	 * 
+	 */
+
+	
+	
+	public void endRound(){
+		for(LeaderCard card:leaderCardsUsed){
+			if(!card.isAPermanentEffect())//means there is an ability of the type "once per round"
+				leaderCardsUsed.remove(card);
+		}
+	}
 	
 }

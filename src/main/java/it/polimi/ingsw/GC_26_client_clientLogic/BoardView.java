@@ -3,20 +3,12 @@ package it.polimi.ingsw.GC_26_client_clientLogic;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.print.event.PrintJobAttributeListener;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
-import javax.swing.text.Position;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
-import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 
 
 public class BoardView {

@@ -70,12 +70,12 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
+				player.setStatus(new Request(PlayerStatus.PLAYING, "repeat your action" , null));
 			}
 		} catch (IllegalStateException e1 ) {
 			e1.printStackTrace();
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
+				player.setStatus(new Request(PlayerStatus.PLAYING, "repeat your action" , null));
 
 			}
 		}

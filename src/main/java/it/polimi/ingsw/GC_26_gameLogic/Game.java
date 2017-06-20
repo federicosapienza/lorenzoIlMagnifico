@@ -160,12 +160,9 @@ public class Game extends Observable<CardDescriber>{
 		 * Every player playing this game is notified that the game has just begun.
 		 */
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
-		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Number of players: "+numberOfPlayers+". Time for round: "+times.getTurnTimer()));
+		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Number of players: "+numberOfPlayers+". Time for round: "+times.getTurnTimer()+" s"));
 
 		
-
-		//TODO send rules : such as timeout etc
-		 //send the first info about players
 		
 		/**
 		 * Every player playing this game gets his warehouse and the observers are notified about this
@@ -234,12 +231,12 @@ public class Game extends Observable<CardDescriber>{
 	private List<DevelopmentCard> buildingTowerCards;
 	private List<DevelopmentCard> characterTowerCards;
 	private List<DevelopmentCard> ventureTowerCards;
-	private final int turnsNumber=2;  //TODO
+	private final int turnsNumber=2;  //TODO rimettere 4
 	
 	/**
 	 * Method that describes what to do next
 	 */
-	public void nextStep() {
+	public void nextStep() {  //TODO RImettere i tempo giust
 		
 		playersPerformedActions++;
 		
@@ -319,6 +316,7 @@ public class Game extends Observable<CardDescriber>{
 		gameElements.getBoard().endRound();
 		gameElements.getDices().rollDices();
 		for(Player p: players){
+			p.getPersonalBoard().endRound(); //cleans the memory of the Leader Cards with an " once per round ability"
 			p.getFamilyMembers().setFreeAll(); //first of all values are resetted
 			p.getFamilyMembers().setValues(gameElements.getDices());
 		}

@@ -12,7 +12,6 @@ public class StartGameTask extends TimerTask{
 	@Override
 	public void run() {
 		server.newGame();
-		
 	}
 	
 

@@ -51,9 +51,7 @@ public class Server {
 		enterInANewGame(views);
 		
 	}
-//	public synchronized boolean isPlayerSignedIn(String username){
-	//	return listOfPlayers.containsKey(username);
-//	}
+
 	
 	
 	private  void enterInANewGame(ClientMainServerView clientView){

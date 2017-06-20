@@ -29,10 +29,9 @@ public class ResourcesPayment implements Payment{
 			 temp= player.getPermanentModifiers().resourcesOrPointsDiscount(zone, price);
 		
 		// The player is notified if he has not enough resources for getting the card, and false is returned
-		if (!player.getTestWarehouse().areResourcesEnough(temp)){
-			return false;
-		}
-		else return true;
+		return player.getTestWarehouse().areResourcesEnough(temp);
+			
+		
 	}
 	
 	

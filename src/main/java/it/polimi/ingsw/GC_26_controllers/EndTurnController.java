@@ -56,7 +56,6 @@ public class EndTurnController implements Observer<Boolean>{
 	player.getWarehouse().resetCouncilPriviledges();
 	player.endTurn();
 	handlers.getGameElements().notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ " has ended the turn" )); 
-	handlers.getLeaderCardHandler().endTurn();
 	handlers.getDiplomaticPrivilegesHandler().resetMemory();
 	handlers.getHarvestAndProductionHandler();
 	handlers.getGameElements().getGame().nextStep();

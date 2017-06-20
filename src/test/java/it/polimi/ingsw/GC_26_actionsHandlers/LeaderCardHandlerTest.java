@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
@@ -82,7 +81,6 @@ public class LeaderCardHandlerTest {
 		LeaderCard leaderCard = new LeaderCardImplementation("Giovanni dalle Bande Nere", requirement, immediateEffect, permanentEffect);
 		player.getWarehouse().add(ResourcesOrPoints.newPoints(0, 12, 0, 0));
 		player.getPersonalBoard().addLeaderCard(leaderCard);
-		player.getPersonalBoard().setLeaderCardUsed(leaderCard);
 		assertTrue(leaderCardHandler.isPossible(player, 0));
 	}
 	

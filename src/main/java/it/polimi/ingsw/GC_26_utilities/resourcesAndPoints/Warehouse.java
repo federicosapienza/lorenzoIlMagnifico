@@ -152,22 +152,31 @@ public class Warehouse  extends Observable<PlayerWallet> {
 	}
 	//methods used to check if resources are gone below zero
 	private boolean moreThanZero(){  // as soon as one element (resources or scores) is less than zero, returns false
-		if(!greaterEqualThan(coins,0))  
+		if(!greaterEqualThan(coins,0)) {
+			coins=0; //something went wrong , we reinitialize to make sure not negative values.
 			return false;
-		if(!greaterEqualThan(servants, 0))  
-			return false;
-		if(!greaterEqualThan(wood, 0))  
-			return false;
-		if(!greaterEqualThan(stone, 0))  
-			return false;
-		if(!greaterEqualThan(victoryPoints, 0))
-			return false;
-		if(!greaterEqualThan(faithPoints, 0)) 
-			return false;
-		if(!greaterEqualThan(militaryPoints,0 ))
-			return false;
-		if(!greaterEqualThan(councilPrivileges, 0))
-			return false;
+		}
+		if(!greaterEqualThan(servants, 0)){
+			servants=0;
+			return false;}
+		if(!greaterEqualThan(wood, 0)){
+				wood=0;
+				return false;}
+		if(!greaterEqualThan(stone, 0)){
+				stone=0;
+				return false;}
+		if(!greaterEqualThan(victoryPoints, 0)){
+				victoryPoints=0;
+				return false;}
+		if(!greaterEqualThan(faithPoints, 0)){
+			faithPoints=0;
+			return false;}
+		if(!greaterEqualThan(militaryPoints,0 )){
+			militaryPoints=0;
+			return false;}
+		if(!greaterEqualThan(councilPrivileges, 0)){
+			councilPrivileges=0;
+			return false;}
 		return true;
 	}
 	

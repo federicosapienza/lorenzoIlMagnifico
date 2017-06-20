@@ -68,4 +68,10 @@ public class LeaderCardImplementation implements LeaderCard{
 		}
 		else return null;
 	}
+
+
+	@Override
+	public boolean isAPermanentEffect() {
+		return permanentEffect!=null; //if null it will means there is an immediate effect
+	}
 }

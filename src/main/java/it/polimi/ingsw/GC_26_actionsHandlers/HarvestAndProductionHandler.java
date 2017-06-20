@@ -75,7 +75,7 @@ public class HarvestAndProductionHandler {
 	
 	
 	private void performTool(DevelopmentCard card, int value, Player player){
-		if(card.getActionValue()>=value){
+		if(value>=card.getActionValue()){
 			card.runPermanentEffect(player);
 			//calling the card. Going back we must be sure turn is not finished or player has been asked for choice
 			synchronized (player) {
