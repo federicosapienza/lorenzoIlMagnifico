@@ -180,10 +180,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		return true;
 	}
 	
-	public ResourcesOrPoints warehouseStatus(){
-		return ResourcesOrPoints.newResourcesOrPoints(coins, servants, wood, stone, victoryPoints, 
-													militaryPoints, faithPoints, councilPrivileges);
-	}
+	
 	
 	
 	
