@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26_server;
+/*package it.polimi.ingsw.GC_26_server;
 
 import static org.junit.Assert.*;
 
@@ -70,3 +70,4 @@ public class ServerTest {
 		assertTrue(thrownNullExcep);
 	}
 }
+*/

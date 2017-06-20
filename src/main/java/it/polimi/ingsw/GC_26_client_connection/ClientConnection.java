@@ -6,7 +6,7 @@ public interface ClientConnection {
 
 	
 
-	void login(String username, String password);
+	void login(String username);
 
 	void sendResponce(String temp);
 

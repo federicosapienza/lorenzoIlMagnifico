@@ -3,10 +3,9 @@ package it.polimi.ingsw.GC_26_gameLogic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.print.attribute.Size2DSyntax;
 
-import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
@@ -50,6 +49,8 @@ public class Game extends Observable<CardDescriber>{
 	private List<ResourcesOrPoints> startingResources;
 	private TimerValuesInterface times;
 	private BonusInterface bonusInterface;
+	private List<Player> playersNoMoreSuspended= new CopyOnWriteArrayList<>();
+	
 	
 	private List<ExcommunicationTile> excommunicationTiles;
 	
@@ -155,12 +156,12 @@ public class Game extends Observable<CardDescriber>{
 	 * Method used to start the game
 	 */
 	public void startGame(){
-		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
 		/**
 		 * Every player playing this game is notified that the game has just begun.
 		 */
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
-		
+		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Number of players: "+numberOfPlayers+". Time for round: "+times.getTurnTimer()));
+
 		
 
 		//TODO send rules : such as timeout etc
@@ -268,7 +269,17 @@ public class Game extends Observable<CardDescriber>{
 				return;
 			}
 			}//end of if(playersPerformedActions==numberOfPlayers)
-			
+		
+		/**
+		 *Notifying of players no more suspended
+		 */
+			if(!playersNoMoreSuspended.isEmpty()){
+				for(Player p: playersNoMoreSuspended){
+					gameElements.notifyPlayers(new Info(GameStatus.PLAYING, p.getName(), p.getName()+ "is no more suspended")) ;
+					playersNoMoreSuspended.remove(p);
+				}
+			}
+		
 			
 		/**
 		 * Getting the next player that has to perform an action
@@ -444,5 +455,13 @@ public class Game extends Observable<CardDescriber>{
 			  player.notifyObservers(new Request(PlayerStatus.VATICANREPORTDECISION, "take your choice", new CardDescriber(excommunicationTile)));
 		  }
 	}
+	
+	
+	public void addPlayerNoMoreSuspended(Player player) {
+		playersNoMoreSuspended.add(player);
+		
+	}
+
+	
 	
 }

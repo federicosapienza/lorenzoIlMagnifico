@@ -21,14 +21,13 @@ public class SocketOutClient implements ClientConnection{
 	
 
 	@Override
-	public void login(String username, String password) {
+	public void login(String username) {
 		try {
 
 			objOut.writeUTF(username);
 			objOut.flush();
+			
 
-			objOut.writeUTF(password);
-			objOut.flush();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

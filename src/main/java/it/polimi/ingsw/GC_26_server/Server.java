@@ -2,9 +2,8 @@ package it.polimi.ingsw.GC_26_server;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.Timer;
 
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;
@@ -16,20 +15,19 @@ import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 
 public class Server {
 	private GameInitialiserAndController game;
-	private Set<GameInitialiserAndController> games = new HashSet<>();
 	private Map<String ,String> listOfPlayers =new HashMap<>();
 	private Cards cards;
 	private BonusInterface bonus;
 	private TimerValuesInterface times;
+	private Timer startGameTimer;
 	private final static int PORT = 29997;
 	
 	public void start() {
 		ReadFromFile gamesSpecific= new ReadAll();
-		//GameParameters gameParameters= new GameParameters();  // others useful values not in files
 		gamesSpecific.start();
 		cards= gamesSpecific.getCards();
 		bonus = gamesSpecific.getBonus();
-		times= null;
+		times= gamesSpecific.getTimes();
 		game= new GameInitialiserAndController(cards, bonus, times);
 		
 		SocketServer socketServer = new SocketServer(this, PORT);
@@ -42,73 +40,57 @@ public class Server {
 		
 		
 	}
+
 	
 	public synchronized void addClient(ServerConnectionToClient connection, String username){
 		if (connection == null || username == null) {
 			throw new NullPointerException();
 		}
-		ClientMainServerView views= new ClientMainServerView(username, connection);
+		ClientMainServerView views= new ClientMainServerView(username, connection, times);
 		connection.addViews( views);
-		GameInitialiserAndController gamestarted= findPlayerInExistingGame(username);
-		if(gamestarted!=null){
-			gamestarted.addClientAgain(views);
-			return;
-		}
-		else enterInANewGame(views);
+		enterInANewGame(views);
 		
 	}
 //	public synchronized boolean isPlayerSignedIn(String username){
 	//	return listOfPlayers.containsKey(username);
 //	}
 	
-	public synchronized boolean doLogin(String username, String password){
-		if (username == null || password == null) {
-			throw new NullPointerException();
-		}
-		if(listOfPlayers.containsKey(username)){
-			if(listOfPlayers.get(username).equals(password)){
-				return true;}
-			else return false;		
-		}
-		listOfPlayers.put(username, password);
-		return true;
-	}
 	
-	
-	private void enterInANewGame(ClientMainServerView clientView){
+	private  void enterInANewGame(ClientMainServerView clientView){
 		if (clientView == null) {
 			throw new NullPointerException();
 		}
+		synchronized (this) {  //to avoid synchronization risks between new requests and timer
+
 		System.out.println("new Client");
 		game.addClient(clientView);
-		if(game.getNumOfPlayer()==2){  //TODO  //preparing for a new game
-			game.initialiseGame();
-			games.add(game);
+		int num = game.getNumOfPlayer();
+		if(num==2){  
+			startGameTimer = new Timer(true);
+			startGameTimer.schedule(new StartGameTask(this),(long) times.getStartingTimer()*1000 );
+			return;
+		}
+		if(num==4){
+			startGameTimer.cancel();
 			newGame();
-			
+		}
+
 		}	
 	}
 
 	
 	
-	private void newGame() {
+	public void newGame() {
+		synchronized (this) {//to avoid synchronization risks between new requests and timer
+		game.initialiseGame();
 		this.game= new GameInitialiserAndController(cards, bonus, times);
 	}
-
-	private GameInitialiserAndController findPlayerInExistingGame(String playerName){
-		for(GameInitialiserAndController game: games){
-			if(game.isPlayerHere(playerName))
-				return game;
-		}
-		 return null;
 	}
+
 	
 	
 	public void endGame(GameInitialiserAndController game){
-		if (game == null) {
-			throw new NullPointerException();
-		}
-		games.remove(game);
+		//TODO
 	}
 	
 	

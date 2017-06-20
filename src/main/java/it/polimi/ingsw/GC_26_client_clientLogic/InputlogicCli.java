@@ -40,12 +40,19 @@ public class InputlogicCli implements Runnable{
 		@Override
 		public void run() {
 			String username;
-
-
+				while(true){
 				username = scanIN.nextLine();
-				String password = scanIN.nextLine();
-				connection.login(username, password);
+				if(username!=null)
+					break;
+				}
+				connection.login(username);
 				view.setPlayerUsername(username);
+			/*username = scanIN.nextLine();
+			String password = scanIN.nextLine();
+			connection.login(username, password);
+			view.setPlayerUsername(username);
+			
+			*/
 				
 				
 			scanIN=new Scanner(System.in);
@@ -158,6 +165,18 @@ public class InputlogicCli implements Runnable{
 			this.setWaitingResponse();
 		}
 		
+		public synchronized void setTurnEnded(){
+			waitingResponse=false;
+			waitingAction=false;
+		}
+		
+		public void setPlayerSuspended(){
+			setTurnEnded();
+			output.printString("You are now suspended : press any key to be able to play again");
+			setWaitingResponse();
+		}
+		
+		
 		private void restartValues() {
 			boardChoice=0; //senza lo zero la seconda volta va male
 			position=0;
@@ -211,6 +230,5 @@ public class InputlogicCli implements Runnable{
 		}
 		
 		
-	
+}	
 
-}

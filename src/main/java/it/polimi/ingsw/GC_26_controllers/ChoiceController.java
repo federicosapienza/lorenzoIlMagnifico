@@ -27,6 +27,8 @@ public class ChoiceController implements Observer<Integer>{
 		synchronized (player) {
 			status = player.getStatus();
 		}
+		if(status==PlayerStatus.SUSPENDED)
+			restartingPlayer();
 		if(status == PlayerStatus.TRADING)
 			 tradeController(choice);
 		if(status == PlayerStatus.CHOOSINGPAYMENT)
@@ -45,6 +47,11 @@ public class ChoiceController implements Observer<Integer>{
 	}
 
 
+
+	private void restartingPlayer() {
+		player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, null, null));
+		handlers.getGameElements().getGame().addPlayerNoMoreSuspended(player);
+	}
 
 	private void tradeController(int choice){
 		try{
@@ -157,6 +164,7 @@ public class ChoiceController implements Observer<Integer>{
 			}
 		private void vaticanReportController(int choice) {
 			try{
+				player.setPlayerActive();
 				VaticanReportHandler handler= handlers.getVaticanReportHandler();
 				handler.perform(player, choice);
 				synchronized (player) {

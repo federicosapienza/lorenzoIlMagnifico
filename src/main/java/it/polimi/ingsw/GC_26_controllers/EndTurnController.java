@@ -10,8 +10,8 @@ import it.polimi.ingsw.GC_26_utilities.Request;
 
 public class EndTurnController implements Observer<Boolean>{
 	
-	Player player;
-	MainActionHandler handlers;
+	private Player player;
+	private MainActionHandler handlers;
 	
 	public EndTurnController(Player player, MainActionHandler handlers) {
 		this.player=player;
@@ -22,16 +22,18 @@ public class EndTurnController implements Observer<Boolean>{
 		PlayerStatus previousStatus;
 		synchronized (player) {
 			previousStatus= player.getStatus();
-			
-			if(!timeOutOccured && player.isPlayerActive())
-				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "end turn", null));
-
-			
-			else{
-				player.setStatus(new Request(PlayerStatus.SUSPENDED, "end turn", null));
-				handlers.getGameElements().notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+" is suspended"));
-			
-					}
+		
+		if(timeOutOccured && !player.isPlayerActive() ){
+			player.setStatus(new Request(PlayerStatus.SUSPENDED, "end turn", null));
+			handlers.getGameElements().notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+" is suspended"));
+				}
+		else  {
+			player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "end turn", null));
+		}
+		
+		//notifying the player is turn is ended if timeout occurred
+		if(timeOutOccured &&player.isPlayerActive()){
+			player.notifyObservers(new Request(PlayerStatus.WAITINGHISTURN, "Your turn was ended due to time out occurrence", null));
 		}
 		
 		//setting the default parameters and calling the actions that were suspended if the turn ends where it should not
@@ -62,5 +64,5 @@ public class EndTurnController implements Observer<Boolean>{
 	}	
 		
 	
-	
+	}
 }

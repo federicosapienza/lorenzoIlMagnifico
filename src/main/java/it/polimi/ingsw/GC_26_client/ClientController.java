@@ -131,11 +131,12 @@ public class ClientController {
 				return;
 		}
 		if(request.getStatus()==PlayerStatus.SUSPENDED){
-			//TODO dovrà chiedere reinserimento
+			iOlogic.setPlayerSuspended();
 			return;
 		}
 			
 		if(request.getStatus()==PlayerStatus.WAITINGHISTURN){
+			iOlogic.setTurnEnded();
 			return;
 		}
 		

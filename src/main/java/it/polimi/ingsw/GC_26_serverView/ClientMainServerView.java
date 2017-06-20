@@ -1,13 +1,13 @@
 package it.polimi.ingsw.GC_26_serverView;
 
-
+import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
 import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
 
 public class ClientMainServerView {
 	private final String name;
 	private PlayerWalletView playerWalletView;
 	private CardDescriberView cardDescriberView;
-	private MessageView stringView;
+	private MessageView messageView;
 	private ActionView actionView;
 	private StringInputView stringInputView ;
 	private ActionInputView actionInputView;
@@ -15,25 +15,23 @@ public class ClientMainServerView {
 	private FamilyMembersView familyMembersView;
 	private EndTurnView endTurnView;
 	
-	private ServerConnectionToClient connection;
 	
 	
-	public ClientMainServerView(String name, ServerConnectionToClient connection) {
+	public ClientMainServerView(String name, ServerConnectionToClient connection, TimerValuesInterface times) {
 		if (name == null || connection == null) {
 			throw new NullPointerException();
 		}
 		this.name = name;
 		playerWalletView =  new PlayerWalletView(connection);
 		cardDescriberView = new CardDescriberView(connection);
-		stringView = new MessageView(connection);
-		actionView = new ActionView(connection);
 		endTurnView= new EndTurnView();
+		messageView = new MessageView(connection, endTurnView , times);
+		actionView = new ActionView(connection);
 		stringInputView = new StringInputView(endTurnView);
 		actionInputView = new ActionInputView();
 		positionView =new PositionView(connection);
 		familyMembersView = new FamilyMembersView(connection);
 		EndTurnView endTurnView= new EndTurnView();
-		this.connection= connection;
 		
 	}
 	
@@ -60,12 +58,12 @@ public class ClientMainServerView {
 
 
 	public MessageView getMessageView() {
-		return stringView;
+		return messageView;
 	}
 
 
 	public void setStringView(MessageView stringView) {
-		this.stringView = stringView;
+		this.messageView = stringView;
 	}
 
 
@@ -127,7 +125,6 @@ public class ClientMainServerView {
 		return endTurnView;
 	}
 	
-
 
 	
 }

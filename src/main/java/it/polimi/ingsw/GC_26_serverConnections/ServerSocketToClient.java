@@ -52,23 +52,21 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 				objOut.flush();
 				Boolean loginDone= false;
 				String username=null;
-				String password=null;
 				while(!loginDone){
 					objOut.writeUTF("Insert username and password");
 					objOut.flush();
 					username = objIn.readUTF();
-					password = objIn.readUTF();
-					loginDone= server.doLogin(username, password);
-					if(!loginDone){
-						objOut.writeUTF("Password wrong! Or perhaps you are trying to sign in with an already used username");
+					if(username==null){
+						continue;
+
 					}
-					else
-						objOut.writeUTF("Login or signing in successful");
-					objOut.flush();
+					else{
+						loginDone=true;
+						objOut.writeUTF("Entering in a game");
+					objOut.flush();}
 				}
-				if(username!=null){
-				server.addClient(this, username);
-				}
+				if(username!=null)
+					server.addClient(this, username);
 				while(true){
 					
 					//reading objects
@@ -86,7 +84,7 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 				} 
 					
 						
-						}
+				}
 						// closes the scanner
 					//	socketIn.close();
 						// closes the printWriter

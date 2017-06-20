@@ -30,15 +30,16 @@ public class SocketINClient implements Runnable{
 
 		@Override
 		public void run() {
-				try {
-					while (true){
-			        String string = objIn.readUTF();
-			        System.out.println(string);
-			        if(string.equals("Login or signing in successful")){//any change here must be changed also in server
-			        	controller.setLoginDone();
-			        	break;
-			        }
-					}
+					try {
+						while (true){
+				        String string = objIn.readUTF();
+				        System.out.println(string);
+				        if(string.equals("Entering in a game")){//any change here must be changed also in server
+				        	controller.setLoginDone();
+				        	break;
+				        }
+						}
+					
 					controller.setLoginDone();
 
 					while(true){

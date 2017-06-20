@@ -60,4 +60,9 @@ public class ReadAll implements ReadFromFile{
 	public BonusInterface getBonus() {
 		return bonus;
 	}
+	
+	@Override
+	public TimerValuesInterface getTimes() {
+		return timer;
+	}
 }

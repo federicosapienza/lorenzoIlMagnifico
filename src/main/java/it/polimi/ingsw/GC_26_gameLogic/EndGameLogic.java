@@ -61,12 +61,12 @@ public class EndGameLogic {
 			//conquered territories
 			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.TERRITORYCARD)){
 				temp=personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD);
-				warehouse.add(ResourcesOrPoints.newPoints(territoryBonus[temp-1], 0, 0, 0));
+				warehouse.add(ResourcesOrPoints.newPoints(territoryBonus[temp], 0, 0, 0));
 			}
 			//character cards owned
 			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.CHARACTERCARD)){
 				temp=personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.CHARACTERCARD);
-				warehouse.add(ResourcesOrPoints.newPoints(charactersBonus[temp-1], 0, 0, 0));
+				warehouse.add(ResourcesOrPoints.newPoints(charactersBonus[temp], 0, 0, 0));
 			}
 			//venture cards owned
 			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.VENTURECARD)){
