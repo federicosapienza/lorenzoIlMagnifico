@@ -1,4 +1,4 @@
-/*package it.polimi.ingsw.GC_26_server;
+package it.polimi.ingsw.GC_26_server;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +11,7 @@ import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
 import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 
 public class ServerTest {
-	
+	/*
 	Server server = new Server();
 	Map<String, String> listOfPlayers = new HashMap<>();
 	@Test
@@ -69,5 +69,6 @@ public class ServerTest {
 		}
 		assertTrue(thrownNullExcep);
 	}
+	*/
+	
 }
-*/

@@ -39,7 +39,7 @@ public class PlayerView {
 	
 	public void updateValues(PlayerWallet wallet){
 		if(!this.wallet.equals(wallet))
-		this.wallet=wallet;
+			this.wallet=wallet;
 		
 	}
 	
