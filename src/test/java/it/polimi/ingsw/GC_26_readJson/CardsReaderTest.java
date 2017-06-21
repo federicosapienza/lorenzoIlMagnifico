@@ -282,12 +282,14 @@ public class CardsReaderTest {
 		assertTrue(effect instanceof GainVictoryPointsPerAnyMilitaryPointEffect);
 	}
 	
+	/*
 	@Test
 	public void createImmediateFamilyMembersValueSetterEffectTest(){
 		cardsReader.createJsonObjectFromFile("src/Cards/Leader_cards/Federico da Montefeltro.json");
 		Effect effect = cardsReader.createImmediateEffect("FamilyMembersValueSetterEffect");
 		assertTrue(effect instanceof FamilyMembersValueSetterEffect);
 	}
+	*/
 	
 	@Test
 	public void createPaymentResourcesTest(){
@@ -310,6 +312,7 @@ public class CardsReaderTest {
 		assertTrue(requirement instanceof PointsOrResourcesRequirement);
 	}
 	
+	/*
 	@Test
 	public void createCardsNumberRequirementTest(){
 		cardsReader.createJsonObjectFromFile("src/Cards/Leader_cards/Federico da Montefeltro.json");
@@ -317,6 +320,7 @@ public class CardsReaderTest {
 		assertTrue(requirement instanceof CardNumbersRequirement);
 	}
 	
+	*/
 	@Test
 	public void createCardsNumberORRequirementTest(){
 		cardsReader.createJsonObjectFromFile("src/Cards/Leader_cards/Lucrezia Borgia.json");

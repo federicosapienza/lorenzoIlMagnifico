@@ -10,53 +10,39 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class FamilyMemberTest {
 
-	@Test
+	@Test (expected = NullPointerException.class)
 	public void testColourException() {
 		Colour colour = null;
-		boolean thrownException = false;
-		try {
-			FamilyMember nullMember = new FamilyMember(colour, new Player("Antonio", ResourcesOrPoints.newResourcesOrPoints(5, 3, 2, 2, 0, 0, 0, 0)));
-		} catch (NullPointerException e) {
-			thrownException = true;
-		}
-		
+		Player player = new Player("David", ResourcesOrPoints.newResources(5, 3, 2, 2));
+		FamilyMember nullMember = new FamilyMember(colour, player);
+		nullMember.setUsed();
 	}
 
-	@Test
+	@Test (expected = NullPointerException.class)
 	public void testNullPlayer() {
 		Colour colour = Colour.BLACK;
-		boolean thrownException = false;
-		try {
-			FamilyMember nullMember = new FamilyMember(colour, null);
-		} catch (NullPointerException e) {
-			thrownException = true;
-		}
+		FamilyMember nullMember = new FamilyMember(colour, null);
+		nullMember.setValue(2);
 	}
 	
 	@Test
-	public void testCorrectCreation() {
+	public void testCorrectFamilyMembersValues() {
 		Colour colour = Colour.ORANGE;
 		Player justine = new Player("Justine", ResourcesOrPoints.newResourcesOrPoints(5, 3, 2, 2, 0, 0, 0, 0));
+		Player david = new Player("David", ResourcesOrPoints.newResources(6, 3, 2, 2));
 		FamilyMember correctFamilyMember = new FamilyMember(colour, justine);
-		assertNotNull(correctFamilyMember);
-		assertEquals(justine, correctFamilyMember.getPlayer());
-		assertEquals(colour, correctFamilyMember.getColour());
-		assertTrue(correctFamilyMember.isFree());
+		FamilyMember correctFamilyMember2 = new FamilyMember(Colour.WHITE, david);
+		correctFamilyMember2.setUsed();
+		assertTrue(correctFamilyMember.isFree() && !correctFamilyMember2.isFree() && 
+				!correctFamilyMember.equals(correctFamilyMember2) && correctFamilyMember.getColour() == colour && 
+				correctFamilyMember2.getColour() == Colour.WHITE);
 	}
 	
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testIllegalValue() {
-		boolean thrownException = false;
 		Colour colour = Colour.WHITE;
 		Player player1 = new Player("Greg", ResourcesOrPoints.newResourcesOrPoints(5, 3, 2, 2, 0, 0, 0, 0));
 		FamilyMember familyMember = new FamilyMember(colour, player1);
-		familyMember.setValue(3);
-		assertEquals(3, familyMember.getValue());
-		try {
-			familyMember.setValue(-1);
-		} catch (IllegalArgumentException e) {
-			thrownException = true;
-		}
-		assertTrue(thrownException);
+		familyMember.setValue(-1);
 	}
 }

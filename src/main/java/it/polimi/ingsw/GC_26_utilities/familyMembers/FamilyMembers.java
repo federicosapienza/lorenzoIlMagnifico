@@ -43,7 +43,7 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	//it's the player that owns these family members.
 	private Player player;
 	
-	//saves the values of the lastDices passsed to setvalues(); useful for changeValues();
+	//saves the values of the lastDices passed to setvalues(); useful for changeValues();
 	private Dices lastDices;
 	
 	
@@ -58,21 +58,13 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 		this.player= player;
 		
 		orangeMember = new FamilyMember(Colour.ORANGE, player);
-		if (orangeMember == null) {
-			throw new NullPointerException("Attention: the orange family member is null");
-		}
+		
 		whiteMember = new FamilyMember(Colour.WHITE, player);
-		if (whiteMember == null) {
-			throw new NullPointerException("Attention: the white family member is null");
-		}
+		
 		blackMember = new FamilyMember(Colour.BLACK, player);
-		if (blackMember == null) {
-			throw new NullPointerException("Attention: the black family member is null");
-		}
+		
 		neutralMember = new FamilyMember(Colour.NEUTRAL, player);
-		if (neutralMember == null) {
-			throw new NullPointerException("Attention: the neutral family member is null");
-		}
+		
 	}
 	
 	/**
@@ -163,10 +155,10 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 		int neutralChange = player.getPermanentModifiers().getneutralMemberChange();
 		
 		orangeMember.setValue(orangeDice+colouredChange);
-        blackMember.setValue(blackDice+colouredChange);
-        whiteMember.setValue(whiteDice+colouredChange);
-        neutralMember.setValue(GameParameters.getDefaultNeutralValue()+neutralChange);
-        notifyObservers(new FamilyMembersDescriber(this));
+		blackMember.setValue(blackDice+colouredChange);
+		whiteMember.setValue(whiteDice+colouredChange);
+		neutralMember.setValue(GameParameters.getDefaultNeutralValue()+neutralChange);
+		notifyObservers(new FamilyMembersDescriber(this));
 	}
 	
 	/**
@@ -177,10 +169,19 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	public void changeValues(){
 		//changes of permanent effect	
 		Dices dices= lastDices;
-		setValues(dices);
+		
 		if (dices == null) {
 			throw new NullPointerException("Attention: dices are null");
 		}
+		
+		if (dices.readDice(Colour.BLACK) < 1 || dices.readDice(Colour.BLACK) > 6 ||  
+			dices.readDice(Colour.WHITE) < 1 || dices.readDice(Colour.WHITE) > 6 || 
+			dices.readDice(Colour.ORANGE) < 1 || dices.readDice(Colour.ORANGE) > 6) {
+				throw new IllegalArgumentException();
+		}
+		
+		setValues(dices);
+		
 		notifyObservers(new FamilyMembersDescriber(this));
 	}
 	

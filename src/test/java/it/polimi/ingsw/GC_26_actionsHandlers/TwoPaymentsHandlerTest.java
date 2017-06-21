@@ -8,12 +8,14 @@ import java.util.List;
 import org.junit.Test;
 
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_player.PlayerStatus;
+
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
+
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.ReceiveResourcesOrPointsEffect;
+
 import it.polimi.ingsw.GC_26_cards.payments.MilitaryPointPayment;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
 import it.polimi.ingsw.GC_26_cards.payments.ResourcesPayment;
@@ -58,23 +60,7 @@ public class TwoPaymentsHandlerTest {
 		assertNull(player.getCardUsed());
 	}
 
-	@Test
-	public void testCorrectConstructor() {
-		assertNotNull(twoPaymentsHandler);
-	}
 	
-	//Il seguente test dà errore, ma perform dovrebbe terminare settando la used card come null!
-	/*
-	@Test
-	public void testNullCard() {
-		Player player = new Player("Gigi", ResourcesOrPoints.newResources(5, 3, 2, 2));
-		int choice = 2;
-		TwoPaymentsHandler twoPaymentsHandler = new TwoPaymentsHandler();
-		twoPaymentsHandler.perform(player, choice);
-		assertNull(player.getCardUsed());
-	}
-	*/
 	
-
 	
 }

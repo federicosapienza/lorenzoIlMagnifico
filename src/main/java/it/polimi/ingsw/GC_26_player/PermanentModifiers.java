@@ -406,6 +406,7 @@ public class PermanentModifiers {
 	 * to access to the market.
 	 * This eventuality will be checked and called in the ActionCheckerHandler class.
 	 */
+	
 	//it's a flag that indicates if the player has been banned from the market
 	private boolean marketBanFlag=false; 
 	

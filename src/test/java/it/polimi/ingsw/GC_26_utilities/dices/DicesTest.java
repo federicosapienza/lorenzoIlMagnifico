@@ -23,4 +23,15 @@ public class DicesTest {
         assertTrue(dices.readDice(Colour.ORANGE)>=1 && dices.readDice(Colour.ORANGE)<=6);
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void testExceptionWhenReadingNeutralColour() {
+    		dices.rollDices();
+    		dices.readDice(Colour.NEUTRAL);
+    }
+    
+    @Test (expected = NullPointerException.class)
+    public void testExceptionWhenReadingNullColour() {
+    		dices.rollDices();
+    		dices.readDice(null);
+    }
 }

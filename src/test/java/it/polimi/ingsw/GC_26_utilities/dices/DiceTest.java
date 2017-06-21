@@ -6,45 +6,28 @@ import org.junit.Test;
 
 public class DiceTest {
 
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testWrongNrFaces() {
 		Colour colour = Colour.BLACK;
 		int nrFaces = -2; 
-		boolean thrown = false; 
-		try {
-			Dice dice = new Dice(nrFaces, colour); 
-		} catch(IllegalArgumentException e) {
-			thrown = true; 
-		}
-		assertTrue(thrown);
+		Dice dice = new Dice(nrFaces, colour);
+		dice.rollDice();
 	}
-	@Test
+	@Test (expected = NullPointerException.class)
 	public void testNullColour() {
 		Colour colour = null; 
 		int nrFaces = 3; 
-		boolean thrown = false; 
-		try {
-			Dice dice = new Dice(nrFaces, colour); 
-		} catch(NullPointerException e) {
-			thrown = true; 
-		}
-		assertTrue(thrown);
-	}
-	
-	@Test
-	public void testCorrectConstructor() {
-		Dice dice = new Dice(6, Colour.BLACK); 
-		Dice dice2 = new Dice(); 
-		assertNotNull(dice);
-		assertNotNull(dice2);
+		Dice dice = new Dice(nrFaces, colour);
+		dice.rollDice();
 	}
 	
 	@Test
 	public void testCorrectRoll(){
-		Dice dice = new Dice(6, Colour.ORANGE);
-		int x = dice.rollDice(); 
-		assertTrue(x>=1 && x<=6);
-		
+		Dice dice = new Dice(20, Colour.ORANGE);
+		dice.rollDice(); 
+		Dice dice2 = new Dice();
+		dice2.rollDice();
+		assertTrue(dice.getValue() >= 1 && dice.getValue() <= 20 && dice2.getValue() >= 1 && dice2.getValue() <= 6);
 	}
 
 }
