@@ -1,6 +1,5 @@
 package it.polimi.ingsw.GC_26_player;
 
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -672,54 +671,19 @@ public class PermanentModifiers {
 		return value3dicesChanged;
 	}
 	
-	/**
-	 * Parameters and methods for "Federico da Montefeltro"
-	 */
 	
-	private boolean oneDicesChangeOn=false;
-	int value1diceChanged=0;
 	
 	/**
-	 * Method that checks if the effect of the "Federico da Montefeltro" Leader card is active.
-	 * @return true if the effect is active; false if it isn't active.
-	 */
-	public boolean isOneDiceChangeOn() {
-		return oneDicesChangeOn;
-	}
-	
-	/**
-	 * Method used to activate the effect of the "Federico da Montefeltro" Leader card.
-	 * @param value It's the new value that the family members belonging to the player who owns the 
-	 * "Federico da Montefeltro" Leader card will assume.
-	 */
-	private void setValue1diceChanged(int value) {  
-		this.value1diceChanged = value;
-		oneDicesChangeOn=true;
-	}
-	
-	/**
-	 * Method that returns the updated value of the chosen coloured family member belonging to the player 
-	 * who owns the "Federico da Montefeltro" Leader card
-	 * @return the updated value of the chosen coloured family member belonging to the player who owns 
-	 * the "Federico da Montefeltro" Leader card
-	 */
-	public int getValue1diceChanged() {
-		return value1diceChanged;
-	}
-	
-	/**
-	 * Method that checks if the player has the "Ludovico il Moro" Leader card or the "Federico da Montefeltro" 
-	 * Leader card, and activates the corresponding permanent effects.
+	 * Method that checks if the player has the "Ludovico il Moro" Leader card  and activates the corresponding permanent effects.
 	 * @param howManyDicesSetted It indicates if the player has the "Ludovico il Moro" Leader card 
-	 * (howManyDicesSetted==3) or the "Federico da Montefeltro" Leader card (howManyDicesSetted==1)
+	 * (howManyDicesSetted==3) 
 	 * @param value It's the new value that the family members belonging to the player who owns the 
-	 * "Ludovico il Moro" Leader card or the "Federico da Montefeltro" Leader card will assume.
+	 * "Ludovico il Moro" Leader card will assume.
 	 */
 	
 	public void setDicesSetted(int howManyDicesSetted, int value){
-		if(howManyDicesSetted==1)
-			setValue1diceChanged(value);
-		else setValue3dicesChanged(value);
+		if(howManyDicesSetted==3)
+		 setValue3dicesChanged(value);
 	}
 	
 	/**

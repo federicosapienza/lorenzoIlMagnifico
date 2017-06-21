@@ -33,14 +33,14 @@ public class ActionCheckerHandler {
 	 * @param gameElements the game elements that the handler will evaluate to check the action
 	 * @param harvestAndProductionHandler the handler for harvest and production
 	 */
-
+	private final String positionNotValid= "Position not valid";
 	
 	/**
 	 * Validation of the action that has been sent
 	 */
 	public boolean towerActionValidation(Player player, Action action){
 		if (action.getPosition()<=0 || action.getPosition()>GameParameters.getTowerFloorsNumber()){
-			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
 			return false;
 		}
 		return true;
@@ -52,14 +52,14 @@ public class ActionCheckerHandler {
 	  */
 	public boolean marketActionValidation(Player player, Action action, int  numOfPlayers){
 	 if(action.getPosition()<=0 ){
-			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
 	 		return false;
 	 }
 	if((numOfPlayers<GameParameters.getNumPlayerforCompleteMarketActivation() 
 			&& action.getPosition()>GameParameters.getMinMarketZones())||
 			(numOfPlayers>=GameParameters.getNumPlayerforCompleteMarketActivation() 
 			&& action.getPosition()>GameParameters.getMaxMarketZones())){
-			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
 			return false;
 	 }
 	 else return true;
@@ -74,14 +74,14 @@ public class ActionCheckerHandler {
 	
 	public boolean productionAndHarvestValidation(Player player, Action action, int  numOfPlayers){
 		if(action.getPosition()<=0 ){
-			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
 	 		return false;
 		}
 	 if ( (numOfPlayers<GameParameters.getNumPlayersForMultipleZones() 
 						&& action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())||
 				( numOfPlayers>=GameParameters.getNumPlayersForMultipleZones() 
 						&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()+GameParameters.getSingleHarvestOrProductionZones())){
-			player.notifyObservers(new Request(player.getStatus(),"Position not valid", null));
+			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
 			return false;
 	 }
 	 else return true;

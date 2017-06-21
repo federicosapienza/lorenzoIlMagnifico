@@ -53,7 +53,9 @@ public class HarvestAndProductionHandler {
 		
 		for(DevelopmentCard card: set){
 			player.setCardUsed(card);  //  pointer to the card used necessary if action is suspended due to trading
-			performTool(card, value, player);
+			boolean actionCompleted = performTool(card, value, player);
+			if(!actionCompleted)
+				break;
 			player.setCardUsed(null);
 		}
 	}
@@ -65,29 +67,29 @@ public class HarvestAndProductionHandler {
 		 boolean found=false;
 		 for(DevelopmentCard card: set){
 			 if(!found && card.equals(player.getCardUsed())) //
-				 found=true;
-				 
-			 
+				 found=true; 
 		 //once card has been found we continue the action performing
-		 performTool(card, actionValue, player);
+			 boolean actionCompleted =performTool(card, actionValue, player);
+			 if(!actionCompleted)
+					break;
 	}
 	}
 	
-	
-	private void performTool(DevelopmentCard card, int value, Player player){
+	//if false action is been suspended
+	private boolean performTool(DevelopmentCard card, int value, Player player){
+		boolean flag=true;
 		if(value>=card.getActionValue()){
 			card.runPermanentEffect(player);
 			//calling the card. Going back we must be sure turn is not finished or player has been asked for choice
+			
 			synchronized (player) {
 				if(player.getStatus()== PlayerStatus.TRADING){
 					actionValue=value;
-					return;
+					flag =false;
 				}
-				
-			}
-			
+			}	
 		}
-		
+		return flag;
 	}
 
 	

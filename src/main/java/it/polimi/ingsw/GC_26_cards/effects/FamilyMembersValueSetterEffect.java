@@ -3,7 +3,7 @@ package it.polimi.ingsw.GC_26_cards.effects;
 import it.polimi.ingsw.GC_26_player.Player;
 
 //Setting dices Value: 
-	//Ludovico Il Moro and Federico da Montefeltro effect. 
+	//Ludovico Il Moro and Federico da Montefeltro effect. (Federico Da Montefeltro has not been implemented)
 	//The first parameter shows how many colored family Member will have "value" value
 public class FamilyMembersValueSetterEffect implements Effect{
 	private final int value;

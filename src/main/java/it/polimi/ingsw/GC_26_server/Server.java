@@ -1,8 +1,6 @@
 package it.polimi.ingsw.GC_26_server;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Timer;
 
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
@@ -15,7 +13,6 @@ import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 
 public class Server {
 	private GameInitialiserAndController game;
-	private Map<String ,String> listOfPlayers =new HashMap<>();
 	private Cards cards;
 	private BonusInterface bonus;
 	private TimerValuesInterface times;

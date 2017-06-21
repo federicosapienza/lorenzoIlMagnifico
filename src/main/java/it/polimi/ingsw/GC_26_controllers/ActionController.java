@@ -8,7 +8,7 @@ import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_server.Observer;
 import it.polimi.ingsw.GC_26_utilities.Request;
 
-public class ActionController implements Observer<Action>{  //TODO extends actionObserver etc
+public class ActionController implements Observer<Action>{  
 	Player player;
 	MainActionHandler handlers;
 	
@@ -48,20 +48,17 @@ public class ActionController implements Observer<Action>{  //TODO extends actio
 				return;
 			
 			handlers.getFirstActionHandler().perform(player, action);
-			synchronized (player) {
-				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT)
-					return;
-			}
-			//otherwise
+			
 	
 			synchronized (player) {
 				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 					return;
-				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT)  //server waits for action
+				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT || player.getStatus()==PlayerStatus.TRADING)  //server waits for action
 					return;
 				if(player.getWarehouse().getCouncilPrivileges()>0){
 					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
 				}
+				
 				else if(player.isThereAsecondaryAction())
 					player.setStatus(new Request(PlayerStatus.SECONDPLAY, "Perform your allowed second action" , null));
 				else 

@@ -450,7 +450,9 @@ public class Game extends Observable<CardDescriber>{
 				  excommunicationTile.runEffect(player);		    	
 				  return;
 				  }
-			  player.notifyObservers(new Request(PlayerStatus.VATICANREPORTDECISION, "take your choice", new CardDescriber(excommunicationTile)));
+			  player.notifyObservers(new Request(PlayerStatus.VATICANREPORTDECISION, "1)do you prefer getting"
+			  		+ " excommunicated and getting "+ bonusInterface.getFaithTrack().get(player.getWarehouse().getFaithPoints()) +" , "+
+			  				 "or not?", new CardDescriber(excommunicationTile)));
 		  }
 	}
 	

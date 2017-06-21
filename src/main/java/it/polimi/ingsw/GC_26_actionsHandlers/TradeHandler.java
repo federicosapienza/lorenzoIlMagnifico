@@ -7,7 +7,6 @@ import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.effects.Effect;
 import it.polimi.ingsw.GC_26_cards.effects.TradeEffect;
-import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;

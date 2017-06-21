@@ -1,7 +1,7 @@
 package it.polimi.ingsw.GC_26_utilities.familyMembers;
 import it.polimi.ingsw.GC_26_utilities.dices.*;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -140,16 +140,6 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 			whiteDice= player.getPermanentModifiers().getValue3dicesChanged();
 			blackDice= player.getPermanentModifiers().getValue3dicesChanged();
 		}
-		if(player.getPermanentModifiers().isOneDiceChangeOn()){ //Federico Da Montefeltro effect
-			FamilyMember test = searchSmallerFree();  //necessary if a permanent effect is activated during the turn
-			if(test!=null && test.equals(orangeMember))
-				orangeDice=player.getPermanentModifiers().getValue1diceChanged();
-			else  if(test!=null &&test.equals(blackDice))
-				blackDice=player.getPermanentModifiers().getValue1diceChanged();
-			else if(test!=null && test.equals(whiteMember))
-				whiteDice=player.getPermanentModifiers().getValue1diceChanged();		
-		}
-			
 		
 		int colouredChange = player.getPermanentModifiers().getColouredMemberChange();
 		int neutralChange = player.getPermanentModifiers().getneutralMemberChange();
@@ -174,11 +164,15 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 			throw new NullPointerException("Attention: dices are null");
 		}
 		
-		if (dices.readDice(Colour.BLACK) < 1 || dices.readDice(Colour.BLACK) > 6 ||  
-			dices.readDice(Colour.WHITE) < 1 || dices.readDice(Colour.WHITE) > 6 || 
-			dices.readDice(Colour.ORANGE) < 1 || dices.readDice(Colour.ORANGE) > 6) {
-				throw new IllegalArgumentException();
-		}
+		if (dices.readDice(Colour.BLACK) < 1 || dices.readDice(Colour.BLACK) > 6 )
+			throw new IllegalArgumentException();
+
+		if (dices.readDice(Colour.WHITE) < 1 || dices.readDice(Colour.WHITE) > 6)
+			throw new IllegalArgumentException();
+
+		if (dices.readDice(Colour.ORANGE) < 1 || dices.readDice(Colour.ORANGE) > 6) 
+			throw new IllegalArgumentException();
+
 		
 		setValues(dices);
 		
@@ -195,16 +189,16 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	 */
 	public Set<Colour> whatIsFree() {  
 		Set<Colour> freeMembers = new HashSet<>();
-		if (blackMember.isFree() == true) {
+		if (blackMember.isFree() ) {
 			freeMembers.add(Colour.BLACK);
 		}
-		if (orangeMember.isFree() == true) {
+		if (orangeMember.isFree()) {
 			freeMembers.add(Colour.ORANGE);
 		}
-		if (whiteMember.isFree() == true) {
+		if (whiteMember.isFree()) {
 			freeMembers.add(Colour.WHITE);
 		}
-		if (neutralMember.isFree() == true) {
+		if (neutralMember.isFree()) {
 			freeMembers.add(Colour.NEUTRAL);
 		}
 		return freeMembers;
@@ -217,9 +211,9 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 	 */
 	
 	public Map<Colour, Integer> getStatus(){
-		Map<Colour, Integer> mapDescriber = new HashMap<>();
+		Map<Colour, Integer> mapDescriber = new EnumMap<>(Colour.class);
 		mapDescriber.put(Colour.ORANGE, orangeMember.getValue());
-		mapDescriber.put(Colour.BLACK, orangeMember.getValue());
+		mapDescriber.put(Colour.BLACK, blackMember.getValue());
 		mapDescriber.put(Colour.WHITE, whiteMember.getValue());
 		mapDescriber.put(Colour.NEUTRAL, neutralMember.getValue());
 		return mapDescriber;
@@ -237,66 +231,7 @@ public class FamilyMembers extends Observable<FamilyMembersDescriber> {
 		neutralMember.setFree();
 	}
 	
-	/**
-	 * Method that finds the smallest between the coloured and free family members. In case two are equals 
-	 * the arbitrary priority is: orange, white, black.
-	 * 
-	 * @return the smallest between the colored and free family members. If none of them is free, null is returned
-	 */
 	
 	
-	private FamilyMember searchSmallerFree(){
-		int testOrange;
-		int testBlack;
-		int testWhite;
-		if(!orangeMember.isFree())
-			testOrange=7;
-		else testOrange=orangeMember.getValue();
-		if(!whiteMember.isFree())
-			testWhite=7;
-		else testWhite=whiteMember.getValue();
-		if(!blackMember.isFree())
-			testBlack=7;
-		else testBlack=blackMember.getValue();
-		
-		
-		if(!orangeMember.isFree() && !blackMember.isFree() && !whiteMember.isFree())
-			return null;
-		else {
-			int test = searchSmaller(testOrange, testWhite, testBlack);
-				if(test==1)
-					return orangeMember;
-				else  if(test==2)
-					return whiteMember;
-				else if(test==3)
-					return blackMember;	
-		}
-		return null;
-		
-	}
-	
-	
-	
-	/**
-	 * Method that finds the smaller of three integer(in case two are equals the first is preferred.)
-	 * 
-	 * @param test1. : the first integer value
-	 * @param test1. : the second integer value
-	 * @param test3. : the third integer value
-	 * 
-	 * @return temp It's the number corresponding to the number of the argument received which was smaller
-	 */
-	
-	private int searchSmaller(int test1, int test2, int test3){
-		int temp=1;
-		int smallerValue=test1;
-		if(test2<smallerValue){
-			temp=2;
-			smallerValue=test2;
-		}
-		if(test3<smallerValue)
-			temp=3;
-		return temp;
-	}
 	
 }

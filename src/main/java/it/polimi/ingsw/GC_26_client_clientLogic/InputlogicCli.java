@@ -128,7 +128,7 @@ public class InputlogicCli implements Runnable{
 		
 		
 		private synchronized boolean getWaitingResponce(){
-			output.printResources(view.getThisPlayer());
+			System.out.println("inputlogiccli131");
 			return waitingResponse;
 		}
 		
@@ -173,8 +173,29 @@ public class InputlogicCli implements Runnable{
 		public void setPlayerSuspended(){
 			setTurnEnded();
 			output.printString("You are now suspended : press any key to be able to play again");
-			setWaitingResponse();
+			this.setWaitingResponse();
 		}
+		public void setWaitingVaticanChoice() {
+			output.printString("enter 0 to be excommunicated or 1 for not");
+			this.setWaitingResponse();
+			
+		}
+
+
+		public void setWaitingPaymentChoice() {
+			output.printString("enter 1 for first payment, 2 per second");
+			this.setWaitingResponse();
+		}
+
+
+		public void setWaitingTrading() {
+			output.printString("enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
+					+ "and you choose that ");	
+			this.setWaitingResponse();
+
+		}
+		
+		
 		
 		
 		private void restartValues() {
@@ -228,6 +249,8 @@ public class InputlogicCli implements Runnable{
 				
 			}
 		}
+
+
 		
 		
 }	

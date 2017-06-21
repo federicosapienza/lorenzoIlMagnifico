@@ -140,9 +140,20 @@ public class ClientController {
 			return;
 		}
 		
-		if(request.getStatus()==PlayerStatus.ACTIONPERFORMED)
+		if(request.getStatus()==PlayerStatus.ACTIONPERFORMED){
 			iOlogic.setActionPerformed();
+			return;}
 		
+		if(request.getStatus()==PlayerStatus.VATICANREPORTDECISION){
+			iOlogic.setWaitingVaticanChoice();
+			return;}
+		if(request.getStatus()==PlayerStatus.CHOOSINGPAYMENT){
+			iOlogic.setWaitingPaymentChoice();
+			return;
+		}
+		if(request.getStatus()==PlayerStatus.TRADING){
+			iOlogic.setWaitingTrading();
+			return;}
 		else {
 			iOlogic.setWaitingResponse();
 		}
