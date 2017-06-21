@@ -127,7 +127,7 @@ public class Tower {
 	
 	
 	public boolean canFamilyMemberGoToTheTower(FamilyMember familyMember){
-		if(familyMember==null ||  familyMember.getColour()==Colour.NEUTRAL)
+		if(familyMember==null || familyMember.getColour()==Colour.NEUTRAL)
 			return true;
 		for(Player p: playersInTheTower){
 			if(p.equals(familyMember.getPlayer())){

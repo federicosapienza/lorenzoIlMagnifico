@@ -37,6 +37,9 @@ public class Board extends Observable<PositionDescriber>{
 		if (resourcesOrPointsList == null) {
 			throw new NullPointerException("resourcesOrPointsList is null");
 		}
+		if (numberOfPlayers >4 || numberOfPlayers <2) {
+			throw new IllegalArgumentException();
+		}
 		this.numberOfPlayers=numberOfPlayers;	
 		create(numberOfPlayers,resourcesOrPointsList);
 		this.resourcesOrPointsList= resourcesOrPointsList;
@@ -51,6 +54,9 @@ public class Board extends Observable<PositionDescriber>{
 	public void create(int numberOfPlayers,List<ResourcesOrPoints []> resourcesOrPointsList){
 		if (resourcesOrPointsList == null) {
 			throw new NullPointerException("resourcesOrPointsList is null");
+		}
+		if (numberOfPlayers > 4 || numberOfPlayers <2) {
+			throw new IllegalArgumentException();
 		}
 		createTowers(resourcesOrPointsList);
 		createMarket(resourcesOrPointsList);
