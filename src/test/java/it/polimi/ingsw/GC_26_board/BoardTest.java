@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+import it.polimi.ingsw.GC_26_actionsHandlers.ActionCheckerHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.ActionPerformerHandler;
+import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_readJson.ReadAll;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
@@ -245,6 +247,106 @@ public class BoardTest {
 		assertTrue(player.getWarehouse().getCoins() == 10 && player2.getWarehouse().getServants() == 8 &&
 				!board4.getMarket().getPosition(1).IsPositionFree() && !board4.getMarket().getPosition(2).IsPositionFree() &&
 				board4.getMarket().getPosition(3).IsPositionFree() && board4.getMarket().getPosition(4).IsPositionFree());
+	}
+	
+	@Test
+	public void testCorrectCouncilPalaceValue() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		Board board4 = new Board(4, resourcesOrPointsList);
+		assertEquals(1, board4.getCouncilPalace().getValueOfPosition());
+	}
+	@Test
+	public void testCanPlayerGoToCouncilPalace() {
+		readAll.start();
+		Dices dices = new Dices();
+		dices.rollDices();
+		Player player = new Player("David", ResourcesOrPoints.newResources(5, 3, 2, 2));
+		player.getFamilyMembers().setValues(dices);
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		Board board4 = new Board(4, resourcesOrPointsList);
+		ActionCheckerHandler councilPalaceChecker = new ActionCheckerHandler();
+		ActionPerformerHandler councilPalacePerformer = new ActionPerformerHandler();
+		councilPalacePerformer.goToCouncilPalacePosition(board4.getCouncilPalace(), player.getFamilyMembers().getfamilyMember(Colour.WHITE));
+		Action action = new Action(BoardZone.COUNCILPALACE, 1, player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour(), 0);
+		Action action2 = new Action(BoardZone.COUNCILPALACE, 2, player.getFamilyMembers().getfamilyMember(Colour.ORANGE).getColour(), 0);
+		assertTrue(councilPalaceChecker.canMemberGoToPosition(board4.getCouncilPalace(), player, player.getFamilyMembers().getfamilyMember(Colour.BLACK), action) &&
+				councilPalaceChecker.canMemberGoToPosition(board4.getCouncilPalace(), player, player.getFamilyMembers().getfamilyMember(Colour.ORANGE), action2));
+	}
+	
+	@Test
+	public void testCanPlayerGoToMarketInTheBeginning() {
+		readAll.start();
+		Dices dices = new Dices();
+		dices.rollDices();
+		Player player = new Player("David", ResourcesOrPoints.newResources(5, 3, 2, 2));
+		player.getFamilyMembers().setValues(dices);
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		Colour blackMemberColour = player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour();
+		FamilyMember blackMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
+		Board board4 = new Board(4, resourcesOrPointsList);
+		ActionCheckerHandler marketChecker = new ActionCheckerHandler();
+		Action action1 = new Action(BoardZone.MARKET, 1, blackMemberColour, 0);
+		Action action4 = new Action(BoardZone.MARKET, 4, blackMemberColour, 0);
+		assertTrue(marketChecker.canMemberGoToPosition(board4.getMarket().getPosition(1), player, blackMember, action1) &&
+				marketChecker.canMemberGoToPosition(board4.getMarket().getPosition(4), player, blackMember, action4));
+	}
+	
+	@Test
+	public void testPlayerCannotGoToOccupiedMarketPosition() {
+		readAll.start();
+		Dices dices = new Dices();
+		dices.rollDices();
+		Player player = new Player("David", ResourcesOrPoints.newResources(5, 3, 2, 2));
+		Player player2 = new Player("Seth", ResourcesOrPoints.newResources(6, 3, 2, 2));
+		player.getFamilyMembers().setValues(dices);
+		player2.getFamilyMembers().setValues(dices);
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		Colour blackMemberColour = player.getFamilyMembers().getfamilyMember(Colour.BLACK).getColour();
+		FamilyMember blackMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
+		FamilyMember orangeMember = player.getFamilyMembers().getfamilyMember(Colour.ORANGE);
+		FamilyMember orangeMember2 = player2.getFamilyMembers().getfamilyMember(Colour.ORANGE);
+		Board board4 = new Board(4, resourcesOrPointsList);
+		ActionCheckerHandler marketChecker = new ActionCheckerHandler();
+		Action action1 = new Action(BoardZone.MARKET, 1, blackMemberColour, 0);
+		ActionPerformerHandler marketPerformer = new ActionPerformerHandler();
+		marketPerformer.goToMarketPositions(board4.getMarket().getPosition(1), blackMember);
+		assertFalse(marketChecker.canMemberGoToPosition(board4.getMarket().getPosition(1), player, orangeMember, action1) &&
+				marketChecker.canMemberGoToPosition(board4.getMarket().getPosition(1), player2, orangeMember2, action1));
+	}
+	
+	@Test
+	public void testCorrectMarketPositionsValues() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		Board board4 = new Board(4, resourcesOrPointsList);
+		assertTrue(board4.getMarket().getPosition(1).getValueOfPosition() == 1 &&
+				board4.getMarket().getPosition(2).getValueOfPosition() == 1 &&
+				board4.getMarket().getPosition(3).getValueOfPosition() == 1 &&
+				board4.getMarket().getPosition(4).getValueOfPosition() == 1);
+	}
+	
+	@Test
+	public void testEndRound() {
+		readAll.start();
+		Dices dices = new Dices();
+		dices.rollDices();
+		Player player = new Player("David", ResourcesOrPoints.newResources(5, 3, 2, 2));
+		Player player2 = new Player("Seth", ResourcesOrPoints.newResources(6, 3, 2, 2));
+		player.getFamilyMembers().setValues(dices);
+		player2.getFamilyMembers().setValues(dices);
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		FamilyMember blackMember = player.getFamilyMembers().getfamilyMember(Colour.BLACK);
+		FamilyMember orangeMember2 = player2.getFamilyMembers().getfamilyMember(Colour.ORANGE);
+		Board board4 = new Board(4, resourcesOrPointsList);
+		ActionPerformerHandler actionPerformerHandler = new ActionPerformerHandler();
+		actionPerformerHandler.goToMarketPositions(board4.getMarket().getPosition(1), blackMember);
+		actionPerformerHandler.goToMarketPositions(board4.getMarket().getPosition(2), orangeMember2);
+		boolean marketPosition1Occupied = board4.getMarket().getPosition(1).IsPositionFree();
+		boolean marketPosition2Occupied = board4.getMarket().getPosition(2).IsPositionFree();
+		board4.endRound();
+		assertTrue(board4.getMarket().getPosition(1).IsPositionFree() && board4.getMarket().getPosition(2).IsPositionFree() &&
+				!marketPosition1Occupied && !marketPosition2Occupied);
 	}
 	
 }

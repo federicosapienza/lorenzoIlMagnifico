@@ -174,7 +174,7 @@ public class Game extends Observable<CardDescriber>{
 		/**
 		 * The following lines of code represent the situation of giving the personal bonus tiles to the players and sending
 		 * them to the clients.
-		 * If the the game has been playing with basic rules, players will get the normal personal bonus tile, which is the 
+		 * If the game has been playing with basic rules, players will get the normal personal bonus tile, which is the 
 		 * same for every player;
 		 * if the game has been playing with advanced rules, players will get the advanced personal bonus tile, which
 		 * is different for every player.
@@ -216,7 +216,7 @@ public class Game extends Observable<CardDescriber>{
 		}
 
 		/**
-		 * Initialization completed. Now the game can start really.
+		 * Initialization completed. Now the game can really start.
 		 */
 		startingRound();
 		nextStep();
@@ -247,7 +247,7 @@ public class Game extends Observable<CardDescriber>{
 		/**
 		 * starting Vatican Turn
 		 */
-		if(turn ==turnsNumber && playersPerformedActions==numberOfPlayers){
+		if(turn == turnsNumber && playersPerformedActions==numberOfPlayers){
 			if(round==1){
 				/**
 				 * If the first round of the current period has come to the end, the game will go on with the next round,
@@ -265,17 +265,17 @@ public class Game extends Observable<CardDescriber>{
 				vaticanReportNext();
 				return;
 			}
-			}//end of if(playersPerformedActions==numberOfPlayers)
+		}
 		
 		/**
 		 *Notifying of players no more suspended
 		 */
-			if(!playersNoMoreSuspended.isEmpty()){
-				for(Player p: playersNoMoreSuspended){
-					gameElements.notifyPlayers(new Info(GameStatus.PLAYING, p.getName(), p.getName()+ "is no more suspended")) ;
-					playersNoMoreSuspended.remove(p);
-				}
+		if(!playersNoMoreSuspended.isEmpty()){
+			for(Player p: playersNoMoreSuspended){
+				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, p.getName(), p.getName()+ "is no more suspended")) ;
+				playersNoMoreSuspended.remove(p);
 			}
+		}
 		
 			
 		/**
@@ -284,25 +284,25 @@ public class Game extends Observable<CardDescriber>{
 		Player player = players.get(playersPerformedActions); 
 		PlayerStatus status;
 		synchronized(player){
-				 status= player.getStatus();
+			status= player.getStatus();
 		}
-			/**
-			 * If the player has been suspended, he'll miss his turn
-			 */
-			if(status == PlayerStatus.SUSPENDED){
-				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn")) ;
-				nextStep();
-				return;
-			}
-			
-			/**
-			 * If the player has not been suspended, his status will change to PLAYING and the other players
-			 * will be notified that it's his turn
-			 */
-			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),"Is '" +player.getName()+ "' turn")) ;
-			player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
+		/**
+		 * If the player has been suspended, he'll miss his turn
+		 */
+		if(status == PlayerStatus.SUSPENDED){
+			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn")) ;
+			nextStep();
 			return;
 		}
+		
+		/**
+		 * If the player has not been suspended, his status will change to PLAYING and the other players
+		 * will be notified that it's his turn
+		 */
+		gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),"Is '" +player.getName()+ "' turn")) ;
+		player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
+		return;
+	}
 
 
 	
