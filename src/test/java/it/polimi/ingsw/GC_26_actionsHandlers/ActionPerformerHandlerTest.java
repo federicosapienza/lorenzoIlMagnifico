@@ -36,7 +36,7 @@ public class ActionPerformerHandlerTest {
 		assertEquals(2, player2.getWarehouse().getCoins());
 	}
 	
-	@Test
+/*	@Test
 	public void getResourcesBonusFromTowerPositionsTest(){
 		ResourcesOrPoints resourcesOrPointsinPosition = ResourcesOrPoints.newResourcesOrPoints(0, 0, 2, 0, 0, 0, 0, 0);
 		TowerPosition towerPosition = new TowerPosition(3, resourcesOrPointsinPosition, 5);
@@ -65,4 +65,5 @@ public class ActionPerformerHandlerTest {
 		actionPerformerHandler.goToCouncilPalacePosition(councilPalace, player);
 		assertEquals(7, player.getWarehouse().getCoins());
 	}
+	*/
 }
