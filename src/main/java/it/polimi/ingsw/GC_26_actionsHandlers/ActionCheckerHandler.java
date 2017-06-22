@@ -87,6 +87,14 @@ public class ActionCheckerHandler {
 	 else return true;
 	}
 	
+	public boolean councilPalaceValidation(Player player, Action action){
+		if(action.getPosition()!=1){
+			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
+			return false;
+		}
+		else return true;
+	}
+	
 	
 	
 	//check if the player has enough servants compared to those he asked to use in action

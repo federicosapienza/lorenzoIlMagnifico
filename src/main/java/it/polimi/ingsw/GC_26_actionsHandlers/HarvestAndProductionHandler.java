@@ -65,14 +65,19 @@ public class HarvestAndProductionHandler {
 		//taking again the right set of card at the right position
 		 List<DevelopmentCard> set =player.getPersonalBoard().getCurrentCards(player.getCardUsed().getType()) ;
 		 boolean found=false;
+		 DevelopmentCard cardTemp=null;
 		 for(DevelopmentCard card: set){
-			 if(!found && card.equals(player.getCardUsed())) //
-				 found=true; 
+			 if(!found && card.equals(player.getCardUsed())){ //
+				 found=true;
+				 cardTemp= player.getCardUsed(); //the card from which production restart after break
+			 }
 		 //once card has been found we continue the action performing
-			 boolean actionCompleted =performTool(card, actionValue, player);
-			 if(!actionCompleted)
+			 if(found && !card.equals(cardTemp)){
+				 boolean actionCompleted =performTool(card, actionValue, player);
+				 if(!actionCompleted)
 					break;
-	}
+			 }
+		 }
 	}
 	
 	//if false action is been suspended

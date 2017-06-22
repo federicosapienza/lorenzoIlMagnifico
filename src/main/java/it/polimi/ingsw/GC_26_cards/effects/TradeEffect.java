@@ -48,14 +48,6 @@ public class TradeEffect implements Effect{
 	
 	@Override
 	public synchronized void doEffect(Player player, boolean immediate) {
-		//if effect is immediate player is not asked to choose: if he did not wanted trade , he would not have gone here.
-		if(immediate){
-			if(player.getWarehouse().areResourcesEnough(receive1)){
-					player.getWarehouse().spendResources(give1);
-					player.getWarehouse().add(receive1);
-			}
-			return;
-		}
 		
 		synchronized (player.getStatus()) {
 			player.setStatus(new Request(PlayerStatus.TRADING, null,  new CardDescriber(player.getCardUsed())));// status change will call the interaction!

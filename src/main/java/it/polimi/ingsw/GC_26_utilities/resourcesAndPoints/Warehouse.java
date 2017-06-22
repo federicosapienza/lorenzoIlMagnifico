@@ -45,7 +45,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		this.coins =other.getCoins();
 		this.servants =other.getServants();
 		this.wood= other.getWood();
-		this.stone=other.getWood();
+		this.stone=other.getStone();
 		this.victoryPoints=other.getVictoryPoints();
 		this.militaryPoints=other.getMilitaryPoints();
 		this.faithPoints=other.getFaithPoints();

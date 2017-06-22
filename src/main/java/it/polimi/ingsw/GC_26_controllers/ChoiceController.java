@@ -27,8 +27,9 @@ public class ChoiceController implements Observer<Integer>{
 		synchronized (player) {
 			status = player.getStatus();
 		}
-		if(status==PlayerStatus.SUSPENDED)
+		if(status==PlayerStatus.SUSPENDED){
 			restartingPlayer();
+			return;}
 		if(status == PlayerStatus.TRADING)
 			 tradeController(choice);
 		if(status == PlayerStatus.CHOOSINGPAYMENT)
@@ -102,9 +103,11 @@ public class ChoiceController implements Observer<Integer>{
 						if(player.getWarehouse().getCouncilPrivileges()>0){
 							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
 									+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
+							return;
 						}
-						else if(player.isThereAsecondaryAction())
+						else if(player.isThereAsecondaryAction()){
 							player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+							return;}
 						else 
 							player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 					}	
@@ -133,9 +136,11 @@ public class ChoiceController implements Observer<Integer>{
 					if(player.getWarehouse().getCouncilPrivileges()>0){
 						player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
 								+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
+						return;
 					}
-					if(player.isThereAsecondaryAction())
+					if(player.isThereAsecondaryAction()){
 						player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+						return;}
 					else player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));;
 				}
 				}
@@ -165,10 +170,8 @@ public class ChoiceController implements Observer<Integer>{
 				synchronized (player) {
 					if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 						return;
-					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, "action not valid" , null));
-					
-
-					}
+					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, null, null));
+			}
 				handlers.getGameElements().getGame().vaticanReportNext(); // automatically ends the turn
 		}
 			
@@ -199,12 +202,13 @@ public class ChoiceController implements Observer<Integer>{
 				if(player.getWarehouse().getCouncilPrivileges()>0){
 					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
 							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
-				};
+					return;
+				}
 				//otherwise the status does not change
 				}
 		}
 		catch( IllegalStateException e){
-			player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
+			player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED,null, null));
 		}
 		}
 }

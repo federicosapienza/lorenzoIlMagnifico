@@ -58,10 +58,12 @@ public class ActionController implements Observer<Action>{
 				if(player.getWarehouse().getCouncilPrivileges()>0){
 					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
 							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
+					return;
 				}
-				
-				else if(player.isThereAsecondaryAction())
+				else if(player.isThereAsecondaryAction()){
 					player.setStatus(new Request(PlayerStatus.SECONDPLAY, "Perform your allowed second action" , null));
+					return;
+				}
 				else 
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 			} 
@@ -99,27 +101,13 @@ public class ActionController implements Observer<Action>{
 				if(player.getWarehouse().getCouncilPrivileges()>0){
 					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
 							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
+					return;
 				}
 				else{
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 				}
-			
+				
 			}
-
-				handlers.getSecondActionHandler().perform(player,  action);
-				player.resetSecondAction();
-			 synchronized (player) {
-				 if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
-						return;
-				 if(player.getWarehouse().getCouncilPrivileges()>0){
-					 player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
-					 }
-				 else{
-					 player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
-				 }
-
-			 }
-
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			synchronized (player) {

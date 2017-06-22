@@ -187,7 +187,8 @@ public abstract class ActionHandler extends Handler{
 	  * @return true if the action is possible according to the rules of the game; false if it is not possible 
 	  */
 	 protected boolean councilPalaceIsPossible(Player player, FamilyMember familyMember, Action action){
-		 
+		 if(!checkerHandler.councilPalaceValidation(player, action))
+			 return false;
 		 CouncilPalace position = gameElements.getBoard().getCouncilPalace();
 				return checkerHandler.canMemberGoToPosition(position, player, familyMember, action);
 			}

@@ -51,7 +51,7 @@ public class GameElements extends Observable<ActionNotification>{
 		}
 		board = new Board(numberOfPlayers, resourcesOrPointsList);
 		dices = new Dices();
-		nextRoundOrder = new NextRoundOrder(players);
+		nextRoundOrder = new NextRoundOrder();
 		this.game =game;
 		this.faithPointsTrack= faithPointsTrack;
 		this.players=players;
