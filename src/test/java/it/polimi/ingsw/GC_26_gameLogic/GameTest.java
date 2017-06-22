@@ -8,6 +8,9 @@ import java.util.List;
 import org.junit.Test;
 
 import it.polimi.ingsw.GC_26_actionsHandlers.ActionPerformerHandler;
+import it.polimi.ingsw.GC_26_actionsHandlers.FirstActionHandler;
+import it.polimi.ingsw.GC_26_actionsHandlers.HarvestAndProductionHandler;
+import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_board.CouncilPalace;
 import it.polimi.ingsw.GC_26_board.MultiplePosition;
 import it.polimi.ingsw.GC_26_player.Player;
@@ -116,10 +119,9 @@ public class GameTest {
 		assertEquals(2, game.getPeriod());
 	}
 	
-	/*
+	
 	@Test
 	public void testChangeNextRoundOrder() {
-		
 		readAll.start();
 		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
 		cards = readAll.getCards();
@@ -134,17 +136,18 @@ public class GameTest {
 		game.startGame();
 		FamilyMember orangeMember1 = player1.getFamilyMembers().getfamilyMember(Colour.ORANGE);
 		FamilyMember blackMember2 = player2.getFamilyMembers().getfamilyMember(Colour.BLACK);
-		ActionPerformerHandler actionPerformerHandler = new ActionPerformerHandler();
-		CouncilPalace councilPalace = game.getGameElements().getBoard().getCouncilPalace(); 
-		actionPerformerHandler.goToCouncilPalacePosition(councilPalace, blackMember2);
-		game.getGameElements().getNextRoundOrder().nextRoundChanging(player2);
+		HarvestAndProductionHandler handler = new HarvestAndProductionHandler();
+		FirstActionHandler firstActionHandler = new FirstActionHandler(game.getGameElements(), handler);
+		Action action2 = new Action(BoardZone.COUNCILPALACE, 1, Colour.NEUTRAL, 1);
+		Action action1 = new Action(BoardZone.COUNCILPALACE, 1, orangeMember1.getColour(), 0);
+		firstActionHandler.perform(player2, action2);
 		game.nextStep();
-		actionPerformerHandler.goToCouncilPalacePosition(councilPalace, orangeMember1);
-		game.getGameElements().getNextRoundOrder().nextRoundChanging(player1);
-		game.vaticanReportNext();
-		assertEquals("Steph", game.getPlayers().get(0).getName());
+		firstActionHandler.perform(player1, action1);
+		assertTrue(game.getGameElements().getNextRoundOrder().getNextRoundOrder().get(0) == "Steph" &&
+				game.getGameElements().getNextRoundOrder().getNextRoundOrder().get(1) == "David");
 	}
-	*/
+	
+	
 	
 
 }
