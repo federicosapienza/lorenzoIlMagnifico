@@ -47,12 +47,6 @@ public class InputlogicCli implements Runnable{
 				}
 				connection.login(username);
 				view.setPlayerUsername(username);
-			/*username = scanIN.nextLine();
-			String password = scanIN.nextLine();
-			connection.login(username, password);
-			view.setPlayerUsername(username);
-			
-			*/
 				
 				
 			scanIN=new Scanner(System.in);
@@ -148,7 +142,7 @@ public class InputlogicCli implements Runnable{
 			familyMemberChosen=true;
 			firstAction=false;
 			waitingAction=true;
-			
+			waitingResponse=false;
 			
 		}
 	
@@ -194,7 +188,12 @@ public class InputlogicCli implements Runnable{
 			this.setWaitingResponse();
 
 		}
-		
+
+		public void setWaitingCouncilPriviledge() {
+			output.printString("insert the correspondent number");
+			this.setWaitingResponse();
+		}
+
 		
 		
 		
@@ -249,6 +248,7 @@ public class InputlogicCli implements Runnable{
 				
 			}
 		}
+
 
 
 		

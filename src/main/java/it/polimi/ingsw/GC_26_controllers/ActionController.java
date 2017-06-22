@@ -56,7 +56,8 @@ public class ActionController implements Observer<Action>{
 				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT || player.getStatus()==PlayerStatus.TRADING)  //server waits for action
 					return;
 				if(player.getWarehouse().getCouncilPrivileges()>0){
-					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 				}
 				
 				else if(player.isThereAsecondaryAction())
@@ -91,10 +92,13 @@ public class ActionController implements Observer<Action>{
 			handlers.getSecondActionHandler().perform(player, action);
 			player.resetSecondAction();	 
 			synchronized (player) {
+				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT || player.getStatus()==PlayerStatus.TRADING)  //server waits for action
+					return;
 				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 					return;
 				if(player.getWarehouse().getCouncilPrivileges()>0){
-					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,"you have" +player.getWarehouse().getCouncilPrivileges() +"diplomatic privileges left", null));
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 				}
 				else{
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));

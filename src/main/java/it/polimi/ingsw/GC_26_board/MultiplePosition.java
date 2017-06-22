@@ -50,7 +50,7 @@ public class MultiplePosition {
 	public void setFamilyMember(FamilyMember familyMemberInPosition){
 		this.familyMemberInPosition.add(familyMemberInPosition);
 		positionFree=false;
-		setCounter(getCounter() + 1);
+		counter++;
 	}
 	
 	/**
@@ -73,13 +73,6 @@ public class MultiplePosition {
 		return positionFree;
 	}
 	
-	/**
-	 * Method that sets the boolean positionFree as indicated in the parameter
-	 * @param isPositionFree It's value that positionFree will assume after calling this method
-	 */
-	public void setIsPositionFree(boolean isPositionFree){
-		this.positionFree=isPositionFree;
-	}
 
 	/**
 	 * Method that returns the counter of the family members that are occupying this multiple position zone
@@ -89,14 +82,6 @@ public class MultiplePosition {
 		return counter;
 	}
 
-	/**
-	 * Method that sets the counter of the family members to the one contained in the parameter
-	 * @param counter It's the counter of the family members that this multiple position zone will assume after calling
-	 * this method
-	 */
-	public void setCounter(int counter) {
-		this.counter = counter;
-	}
 	
 	/**
 	 * Method that returns the malus that is applied to the value of the action when putting a family member in this 
@@ -113,7 +98,8 @@ public class MultiplePosition {
 	 */
 	public void clear(){
 		familyMemberInPosition.clear();
-		setIsPositionFree(true);
+		positionFree=true;
+		counter=0;
 	}
 	
 	

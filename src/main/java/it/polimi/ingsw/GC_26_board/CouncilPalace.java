@@ -45,11 +45,5 @@ public class CouncilPalace extends MultiplePosition {
 	public ResourcesOrPoints getResourcesOrPointsInPosition() {
 		return ResourcesOrPointsInPosition;
 	}
-	/*public String PrintList(){
-		//TODO
-	}*/
 	
-	/*public ArrayList getRanking(){
-		//TODO
-	}*/
 }

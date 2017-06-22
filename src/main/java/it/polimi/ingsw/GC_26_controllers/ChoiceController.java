@@ -100,18 +100,13 @@ public class ChoiceController implements Observer<Integer>{
 					PlayerStatus previousStatus =player.getPreviousStatus(); 
 					if(previousStatus ==PlayerStatus.PLAYING){
 						if(player.getWarehouse().getCouncilPrivileges()>0){
-							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
+							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+									+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 						}
 						else if(player.isThereAsecondaryAction())
 							player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
 						else 
 							player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
-					}
-					if(previousStatus ==PlayerStatus.SECONDPLAY){
-						if(player.getWarehouse().getCouncilPrivileges()>0){
-							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
-					 	}
-					 else 	player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 					}	
 					}
 			} catch(IllegalArgumentException e){
@@ -136,8 +131,8 @@ public class ChoiceController implements Observer<Integer>{
 						return;
 					 //going back to previous state of the game, if time not expired and restarting the action that was interrputed
 					if(player.getWarehouse().getCouncilPrivileges()>0){
-						player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
-						return;
+						player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+								+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 					}
 					if(player.isThereAsecondaryAction())
 						player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
@@ -201,9 +196,11 @@ public class ChoiceController implements Observer<Integer>{
 				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 					return;
 				 //going back to previous state of the game, if time not expired and restarting the action that was interrupted
-				if(player.getWarehouse().getCouncilPrivileges()>0)
-					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
-				//altrimenti lo stato resta lo stesso
+				if(player.getWarehouse().getCouncilPrivileges()>0){
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
+				};
+				//otherwise the status does not change
 				}
 		}
 		catch( IllegalStateException e){

@@ -153,11 +153,12 @@ public class ClientController {
 		}
 		if(request.getStatus()==PlayerStatus.TRADING){
 			iOlogic.setWaitingTrading();
-			return;}
-		else {
-			iOlogic.setWaitingResponse();
+			return;
+			}
+		if(request.getStatus()==PlayerStatus.TRADINGCOUNCILPRIVILEDGES){
+			iOlogic.setWaitingCouncilPriviledge();
+			return;
 		}
-		
 	}
 	
 	private void handleInfo(Info info) {
