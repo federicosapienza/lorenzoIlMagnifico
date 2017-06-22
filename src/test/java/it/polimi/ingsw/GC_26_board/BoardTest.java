@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import it.polimi.ingsw.GC_26_actionsHandlers.ActionPerformerHandler;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_readJson.ReadAll;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
@@ -167,14 +168,19 @@ public class BoardTest {
 		dices.rollDices();
 		Player player = new Player("David", ResourcesOrPoints.newResources(5, 3, 2, 2));
 		player.getFamilyMembers().setValues(dices);
-		Player player2 = new Player("Bob", ResourcesOrPoints.newResources(6, 3, 2, 2));
+		Player player2 = new Player("Stephen", ResourcesOrPoints.newResources(6, 3, 2, 2));
 		player2.getFamilyMembers().setValues(dices);
 		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
 		Board board2 = new Board(2, resourcesOrPointsList);
-		board2.getCouncilPalace().addBonusResources(player);
+		ActionPerformerHandler actionPerformerHandler = new ActionPerformerHandler();
+		actionPerformerHandler.goToCouncilPalacePosition(board2.getCouncilPalace(), player.getFamilyMembers().getfamilyMember(Colour.BLACK));
+		actionPerformerHandler.goToCouncilPalacePosition(board2.getCouncilPalace(), player2.getFamilyMembers().getfamilyMember(Colour.ORANGE));
 		assertTrue(player.getWarehouse().getCoins() == 6 && player.getWarehouse().getCouncilPrivileges() == 1 &&
 				board2.getCouncilPalace().getResourcesOrPointsInPosition().getCoins() == 1 &&
-				board2.getCouncilPalace().getResourcesOrPointsInPosition().getCouncilPrivileges() == 1);
+				board2.getCouncilPalace().getResourcesOrPointsInPosition().getCouncilPrivileges() == 1 &&
+				board2.getCouncilPalace().getFamilyMember(0) == player.getFamilyMembers().getfamilyMember(Colour.BLACK) &&
+				board2.getCouncilPalace().getFamilyMember(1) == player2.getFamilyMembers().getfamilyMember(Colour.ORANGE) &&
+				board2.getCouncilPalace().getCounter() == 2);
 	}
 	
 	@Test
@@ -221,4 +227,24 @@ public class BoardTest {
 		
 	}
 
+	
+	@Test
+	public void testMarketGivingRightResourcesAndOccupiedCorrectly() {
+		readAll.start();
+		Dices dices = new Dices();
+		dices.rollDices();
+		Player player = new Player("David", ResourcesOrPoints.newResources(5, 3, 2, 2));
+		player.getFamilyMembers().setValues(dices);
+		Player player2 = new Player("Claudia", ResourcesOrPoints.newResources(6, 3, 2, 2));
+		player2.getFamilyMembers().setValues(dices);
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		Board board4 = new Board(4, resourcesOrPointsList);
+		ActionPerformerHandler marketHandler = new ActionPerformerHandler();
+		marketHandler.goToMarketPositions(board4.getMarket().getPosition(1), player.getFamilyMembers().getfamilyMember(Colour.WHITE));
+		marketHandler.goToMarketPositions(board4.getMarket().getPosition(2), player2.getFamilyMembers().getfamilyMember(Colour.ORANGE));
+		assertTrue(player.getWarehouse().getCoins() == 10 && player2.getWarehouse().getServants() == 8 &&
+				!board4.getMarket().getPosition(1).IsPositionFree() && !board4.getMarket().getPosition(2).IsPositionFree() &&
+				board4.getMarket().getPosition(3).IsPositionFree() && board4.getMarket().getPosition(4).IsPositionFree());
+	}
+	
 }

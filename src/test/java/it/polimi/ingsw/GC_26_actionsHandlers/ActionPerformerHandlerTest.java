@@ -36,23 +36,24 @@ public class ActionPerformerHandlerTest {
 		assertEquals(2, player2.getWarehouse().getCoins());
 	}
 	
-/*	@Test
+	@Test
 	public void getResourcesBonusFromTowerPositionsTest(){
 		ResourcesOrPoints resourcesOrPointsinPosition = ResourcesOrPoints.newResourcesOrPoints(0, 0, 2, 0, 0, 0, 0, 0);
 		TowerPosition towerPosition = new TowerPosition(3, resourcesOrPointsinPosition, 5);
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
 		Player player = new Player("Leon", startingResources);
-		actionPerformerHandler.getResourcesBonusFromTowerPositions(towerPosition, player);
+		actionPerformerHandler.goToTowerPosition(towerPosition, player.getFamilyMembers().getfamilyMember(Colour.BLACK));
 		assertEquals(7, player.getWarehouse().getWood());
 	}
 
+	
 	@Test
 	public void getResourcesBonusFromMarketPositionsTest(){
 		ResourcesOrPoints resourcesOrPointsinPosition = ResourcesOrPoints.newResourcesOrPoints(0, 0, 0, 2, 0, 0, 0, 0);
 		MarketPosition marketPosition = new MarketPosition(1, resourcesOrPointsinPosition, 1);
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
 		Player player = new Player("Leon", startingResources);
-		actionPerformerHandler.goToMarketPositions(marketPosition, player);
+		actionPerformerHandler.goToMarketPositions(marketPosition, player.getFamilyMembers().getfamilyMember(Colour.ORANGE));
 		assertEquals(7, player.getWarehouse().getStone());
 	}
 	
@@ -62,8 +63,8 @@ public class ActionPerformerHandlerTest {
 		CouncilPalace councilPalace = new CouncilPalace(resourcesOrPointsinPosition, 1);
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
 		Player player = new Player("Leon", startingResources);
-		actionPerformerHandler.goToCouncilPalacePosition(councilPalace, player);
+		actionPerformerHandler.goToCouncilPalacePosition(councilPalace, player.getFamilyMembers().getfamilyMember(Colour.WHITE));
 		assertEquals(7, player.getWarehouse().getCoins());
 	}
-	*/
+	
 }

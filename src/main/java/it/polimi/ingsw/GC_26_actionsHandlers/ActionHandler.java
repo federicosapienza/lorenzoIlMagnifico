@@ -295,7 +295,7 @@ public abstract class ActionHandler extends Handler{
 			/**
 			 *  getting resources if the permanent effect which revokes this chance is off(preacher card)and setting the family member in position
 			 */
-			performerHandler.goToTowerPosition(position,familyMember, player);
+			performerHandler.goToTowerPosition(position, familyMember);
 			
 			/**
 			 * Getting the card
@@ -338,7 +338,7 @@ public abstract class ActionHandler extends Handler{
 		 if(player.getPermanentModifiers().getMarketBanFlag())
 			 throw new IllegalArgumentException();
 		 MarketPosition position =gameElements.getBoard().getMarket().getPosition(action.getPosition());
-		 performerHandler.goToMarketPositions(position, familyMember, player);
+		 performerHandler.goToMarketPositions(position, familyMember);
 	 }
 	 
 	 /**
@@ -349,7 +349,7 @@ public abstract class ActionHandler extends Handler{
 	  */
 	 protected void councilPalacePerform(Player player, FamilyMember familyMember, Action action){
 		 CouncilPalace position =gameElements.getBoard().getCouncilPalace();
-		 performerHandler.goToCouncilPalacePosition(position,familyMember, player);
+		 performerHandler.goToCouncilPalacePosition(position, familyMember);
 		 /**
 		  * setting the player in the list for the new round order
 		  */

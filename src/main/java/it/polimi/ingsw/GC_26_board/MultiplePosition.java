@@ -58,7 +58,7 @@ public class MultiplePosition {
 	 * @param number It's the number of position from which the corresponding family member has to be got
 	 * @return the family member in the corresponding number of position
 	 */
-	public FamilyMember GetFamilyMember(int number){
+	public FamilyMember getFamilyMember(int number){
 		if(number<=counter){
 			return familyMemberInPosition.get(number);
 		}
