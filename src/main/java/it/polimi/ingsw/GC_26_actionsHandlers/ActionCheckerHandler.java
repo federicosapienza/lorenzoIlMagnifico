@@ -7,7 +7,7 @@ import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_board.MultiplePosition;
 
 import it.polimi.ingsw.GC_26_board.SinglePosition;
-
+import it.polimi.ingsw.GC_26_board.Tower;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
@@ -121,7 +121,28 @@ public class ActionCheckerHandler {
 	}
 	
 	
-
+	public boolean towerActionCheck(Tower tower , FamilyMember familyMember, Player player){
+	if(!tower.canFamilyMemberGoToTheTower(familyMember)){ //familyMember== null ->second Action: (considered by canPlayerGoToTheTower=
+		player.notifyObservers(new Request(player.getStatus(),"Your coloured members are already in the tower", null));
+		return false;
+		}
+	
+	/**
+	 * If the tower is occupied, the player has to pay coins(or whatever payment, if rules are changed)if he owns them; 
+	 * it also checks that Brunelleschi effect is not activated
+	 */
+	if(!tower.isTheTowerFree()&& !player.getPermanentModifiers().isTowerBonusRevokedOn()){
+			if (!player.getTestWarehouse().areResourcesEnough(GameParameters.getTowerOccupiedMalus())){
+				player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
+				player.notifyObservers(new Request(player.getStatus(),"Not enough resources for going in a occupied tower", null));
+				return false;
+			}
+			player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
+	}
+	return true;
+	
+	}
+	
 	
 	 
 

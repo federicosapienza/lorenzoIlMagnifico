@@ -5,8 +5,12 @@ import it.polimi.ingsw.GC_26_board.MarketPosition;
 
 import it.polimi.ingsw.GC_26_board.Tower;
 import it.polimi.ingsw.GC_26_board.TowerPosition;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_player.PlayerStatus;
+import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 
 /**
  * 
@@ -34,25 +38,52 @@ public class ActionPerformerHandler {
 		player.getWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
 	}
 
-	/**
+	/**setting the family member and
 	 * getting resources if the permanent effect which revokes this chance is off(preacher card)
+	 * @param familyMember 
 	 */
-	public void getResourcesBonusFromTowerPositions(TowerPosition position, Player player){
-	if(! player.getPermanentModifiers().isTowerBonusRevokedOn())
+	public void goToTowerPosition(TowerPosition position, FamilyMember familyMember, Player player){
+		if(familyMember!=null) //means second action
+			position.setFamilyMember(familyMember);
+		if(! player.getPermanentModifiers().isTowerBonusRevokedOn())
 		player.getWarehouse().add(position.getResourcesOrPointsinPosition());
 	}
 	
 		
 	 
-	public void getResourcesBonusFromMarketPositions(MarketPosition position, Player player){
-	 player.getWarehouse().add(position.getResourcesOrPointsinPosition());
+	public void goToMarketPositions(MarketPosition position,FamilyMember familyMember, Player player){
+		 position.setFamilyMember(familyMember);
+		 player.getWarehouse().add(position.getResourcesOrPointsinPosition());
 	}
 	 
-	public void getResourcesBonusFromCouncilPalacePosition(CouncilPalace position, Player player){
+	public void goToCouncilPalacePosition(CouncilPalace position, FamilyMember familyMember, Player player){
+		 position.setFamilyMember(familyMember);
 		 player.getWarehouse().add(position.getResourcesOrPointsInPosition());
 		}
 
+	public void useCard(DevelopmentCard card, FamilyMember familyMember , Player player){
+		/**
+		 * Paying the card
+		 */
+		card.pay(player);
+		synchronized (player) {
+			if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT)
+				return;
+		}
+		
+		card.runImmediateEffect(player);  //repeat any change here in TwoPaymentHandler
+		/** 
+		 * The permanent effects of character cards are immediately activated
+		 */
+		if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)
+			card.runPermanentEffect(player);
 	
+		/**
+		 * cleaning the parameter of the card that will no more be used
+		 */
+		player.setCardUsed(null); 
+		
+	}
 	
 	
 	

@@ -52,7 +52,7 @@ public class ActionPerformerHandlerTest {
 		MarketPosition marketPosition = new MarketPosition(1, resourcesOrPointsinPosition, 1);
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
 		Player player = new Player("Leon", startingResources);
-		actionPerformerHandler.getResourcesBonusFromMarketPositions(marketPosition, player);
+		actionPerformerHandler.goToMarketPositions(marketPosition, player);
 		assertEquals(7, player.getWarehouse().getStone());
 	}
 	
@@ -62,7 +62,7 @@ public class ActionPerformerHandlerTest {
 		CouncilPalace councilPalace = new CouncilPalace(resourcesOrPointsinPosition, 1);
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 5);
 		Player player = new Player("Leon", startingResources);
-		actionPerformerHandler.getResourcesBonusFromCouncilPalacePosition(councilPalace, player);
+		actionPerformerHandler.goToCouncilPalacePosition(councilPalace, player);
 		assertEquals(7, player.getWarehouse().getCoins());
 	}
 }

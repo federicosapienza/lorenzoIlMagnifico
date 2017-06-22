@@ -16,13 +16,10 @@ import it.polimi.ingsw.GC_26_board.Tower;
 import it.polimi.ingsw.GC_26_board.TowerPosition;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.GameElements;
-import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.Player;
-import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_utilities.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
@@ -131,23 +128,8 @@ public abstract class ActionHandler extends Handler{
 		 * Checks if the player has already put a family member on the tower
 		 */
 		Tower tower = gameElements.getBoard().getTower(action.getZone());
-		if(!tower.canFamilyMemberGoToTheTower(familyMember)){ //familyMember== null ->second Action: (considered by canPlayerGoToTheTower=
-			player.notifyObservers(new Request(player.getStatus(),"Your coloured members are already in the tower", null));
+		if(!checkerHandler.towerActionCheck(tower, familyMember, player))
 			return false;
-			}
-		
-		/**
-		 * If the tower is occupied, the player has to pay coins(or whatever payment, if rules are changed)if he owns them; 
-		 * it also checks that Brunelleschi effect is not activated
-		 */
-		if(!tower.isTheTowerFree()&& !player.getPermanentModifiers().isTowerBonusRevokedOn()){
-				if (!player.getTestWarehouse().areResourcesEnough(GameParameters.getTowerOccupiedMalus())){
-					player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
-					player.notifyObservers(new Request(player.getStatus(),"Not enough resources for going in a occupied tower", null));
-					return false;
-				}
-				player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
-		}
 		TowerPosition position = tower.getPosition(action.getPosition());
 		if(!checkerHandler.canMemberGoToPosition( position,  player,  familyMember, action))
 			return false;
@@ -306,15 +288,14 @@ public abstract class ActionHandler extends Handler{
 			tower.setPlayerInTheTower(familyMember);  
 			
 			/**
-			 * Setting the family member in the correct position of the tower
+			 * Taking the correct position of the tower
 			 */
-			TowerPosition position =gameElements.getBoard().getTower(action.getZone()).getPosition(action.getPosition());
-			position.setFamilyMember(familyMember);
+			TowerPosition position =tower.getPosition(action.getPosition());
 			
 			/**
-			 * getting resources if the permanent effect which revokes this chance is off(preacher card)
+			 *  getting resources if the permanent effect which revokes this chance is off(preacher card)and setting the family member in position
 			 */
-			performerHandler.getResourcesBonusFromTowerPositions(position, player);
+			performerHandler.goToTowerPosition(position,familyMember, player);
 			
 			/**
 			 * Getting the card
@@ -325,26 +306,9 @@ public abstract class ActionHandler extends Handler{
 			 * Saving the reference to the used card: it's useful if the action is interrupted (i.e. for double payments choice)
 			 */
 			player.setCardUsed(card);
-			/**
-			 * Paying the card
-			 */
-			card.pay(player);
-			synchronized (player) {
-				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT)
-					return;
-			}
 			
-			card.runImmediateEffect(player);  //repeat any change here in TwoPaymentHandler
-			/** 
-			 * The permanent effects of character cards are immediately activated
-			 */
-			if(card.getType() == DevelopmentCardTypes.CHARACTERCARD)
-				card.runPermanentEffect(player);
-		
-			/**
-			 * cleaning the parameter of the card that will no more be used
-			 */
-			player.setCardUsed(null); 
+			performerHandler.useCard(card, familyMember, player);
+			
 			/**
 			 * removing the card from the tower
 			 */
@@ -374,7 +338,7 @@ public abstract class ActionHandler extends Handler{
 		 if(player.getPermanentModifiers().getMarketBanFlag())
 			 throw new IllegalArgumentException();
 		 MarketPosition position =gameElements.getBoard().getMarket().getPosition(action.getPosition());
-		 position.setFamilyMember(familyMember);
+		 performerHandler.goToMarketPositions(position, familyMember, player);
 	 }
 	 
 	 /**
@@ -385,8 +349,7 @@ public abstract class ActionHandler extends Handler{
 	  */
 	 protected void councilPalacePerform(Player player, FamilyMember familyMember, Action action){
 		 CouncilPalace position =gameElements.getBoard().getCouncilPalace();
-		 position.setFamilyMember(familyMember);
-		 performerHandler.getResourcesBonusFromCouncilPalacePosition(position, player);
+		 performerHandler.goToCouncilPalacePosition(position,familyMember, player);
 		 /**
 		  * setting the player in the list for the new round order
 		  */
