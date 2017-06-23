@@ -60,7 +60,7 @@ public class ActionController implements Observer<Action>{
 							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 					return;
 				}
-				else if(player.isThereAsecondaryAction()){
+				if(player.isThereAsecondaryAction()){
 					player.setStatus(new Request(PlayerStatus.SECONDPLAY, "Perform your allowed second action" , null));
 					return;
 				}

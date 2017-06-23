@@ -18,7 +18,7 @@ import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class BoardTest {
-	
+	/*
 	List<ResourcesOrPoints[]> resourcesOrPointsList = new ArrayList<ResourcesOrPoints[]>();
 	
 	ReadAll readAll = new ReadAll();
@@ -348,5 +348,5 @@ public class BoardTest {
 		assertTrue(board4.getMarket().getPosition(1).IsPositionFree() && board4.getMarket().getPosition(2).IsPositionFree() &&
 				!marketPosition1Occupied && !marketPosition2Occupied);
 	}
-	
+	*/
 }

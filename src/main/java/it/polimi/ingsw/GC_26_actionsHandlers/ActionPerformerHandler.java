@@ -42,8 +42,7 @@ public class ActionPerformerHandler {
 	 * getting resources if the permanent effect which revokes this chance is off(preacher card)
 	 * @param familyMember 
 	 */
-	public void goToTowerPosition(TowerPosition position, FamilyMember familyMember){
-		Player player = familyMember.getPlayer();
+	public void goToTowerPosition(TowerPosition position, FamilyMember familyMember, Player player){
 		if(familyMember!=null) //means second action
 			position.setFamilyMember(familyMember);
 		if(!player.getPermanentModifiers().isTowerBonusRevokedOn())
@@ -52,14 +51,12 @@ public class ActionPerformerHandler {
 	
 		
 	 
-	public void goToMarketPositions(MarketPosition position,FamilyMember familyMember){
-		Player player = familyMember.getPlayer();
+	public void goToMarketPositions(MarketPosition position,FamilyMember familyMember, Player player){
 		position.setFamilyMember(familyMember);
 		player.getWarehouse().add(position.getResourcesOrPointsinPosition());
 	}
 	 
-	public void goToCouncilPalacePosition(CouncilPalace position, FamilyMember familyMember){
-		Player player = familyMember.getPlayer();
+	public void goToCouncilPalacePosition(CouncilPalace position, FamilyMember familyMember, Player player){
 		position.setFamilyMember(familyMember);
 		player.getWarehouse().add(position.getResourcesOrPointsInPosition());
 	}

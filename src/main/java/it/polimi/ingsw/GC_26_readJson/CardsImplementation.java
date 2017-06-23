@@ -28,12 +28,10 @@ public class CardsImplementation implements Cards {
 	private List<DevelopmentCard> ventureCardsPeriod3 = new ArrayList<DevelopmentCard>();
 	
 	private List<LeaderCard> leaderCard = new ArrayList<LeaderCard>();
-	private List<LeaderCard> leaderCardTemp = new ArrayList<LeaderCard>();
 	
 	private List<ExcommunicationTile> excommunicationTilesPeriod1 = new ArrayList<ExcommunicationTile>();
 	private List<ExcommunicationTile> excommunicationTilesPeriod2 = new ArrayList<ExcommunicationTile>();
 	private List<ExcommunicationTile> excommunicationTilesPeriod3 = new ArrayList<ExcommunicationTile>();
-	private List<ExcommunicationTile> excommunicationTilesTemp = new ArrayList<ExcommunicationTile>();
 
 	
 	
@@ -149,6 +147,7 @@ public class CardsImplementation implements Cards {
 	
 	@Override
 	public List<LeaderCard> getRandomLeaderCards(int numOfPlayers) {
+		List<LeaderCard> leaderCardTemp = new ArrayList<LeaderCard>();
 		Collections.shuffle(leaderCard);
 		switch (numOfPlayers) {
 		case 2:
@@ -178,6 +177,7 @@ public class CardsImplementation implements Cards {
 
 	@Override
 	public List<ExcommunicationTile> getRandomExcommunicationTiles() {
+		List<ExcommunicationTile> excommunicationTilesTemp = new ArrayList<ExcommunicationTile>();
 		Collections.shuffle(excommunicationTilesPeriod1);
 		excommunicationTilesTemp.add(excommunicationTilesPeriod1.get(0));
 		Collections.shuffle(excommunicationTilesPeriod2);

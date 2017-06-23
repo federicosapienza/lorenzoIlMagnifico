@@ -27,6 +27,7 @@ public class InputlogicCli implements Runnable{
 		private boolean zoneChosen=false;
 		private boolean positionChosen=false;;
 		private boolean familyMemberChosen=false;
+		private String lastString;
 		
 		
 		public InputlogicCli(ClientConnection connection, MainClientView view, Output output) {
@@ -68,10 +69,7 @@ public class InputlogicCli implements Runnable{
 				}
 				if(value<0){  //the player asks to reset action , if he was performing an action. useless while waiting response.
 					restartValues();
-					if(firstAction)
-						output.printString("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
-					else output.printString("choose a value between 1 and 4 to try activating the correspondent Leader Card");
-
+					output.printString(lastString);
 					continue;
 				}	
 				if(this.getWaitingAction()){  //if waiting action
@@ -122,7 +120,6 @@ public class InputlogicCli implements Runnable{
 		
 		
 		private synchronized boolean getWaitingResponce(){
-			System.out.println("inputlogiccli131");
 			return waitingResponse;
 		}
 		
@@ -131,7 +128,7 @@ public class InputlogicCli implements Runnable{
 			waitingAction=true;
 			restartValues();
 			//the print of board and complete status at the beginning of the turn are done by clientController()
-			output.printString("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
+			printRequest("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
 			
 
 		}
@@ -148,14 +145,14 @@ public class InputlogicCli implements Runnable{
 	
 		public synchronized void setWaitingResponse(){
 			output.printResources(view.getThisPlayer());
-			System.out.println("waiting, 999 to close turn");
+			output.printString("waiting, 999 to close turn"); // do not use printRequest here (= this line would always be saved as last) 
 			restartValues();
 			waitingResponse=true;
 		}
 		
 		public void setActionPerformed() {
 			output.printCards(view.getThisPlayer().getLeadersCardOwned());
-			output.printString("choose a value between 1 and 4 to try activating the correspondent Leader Card");
+			printRequest("choose a value between 1 and 4 to try activating the correspondent Leader Card");
 			this.setWaitingResponse();
 		}
 		
@@ -166,31 +163,31 @@ public class InputlogicCli implements Runnable{
 		
 		public void setPlayerSuspended(){
 			setTurnEnded();
-			output.printString("You are now suspended : press any key to be able to play again");
+			printRequest("You are now suspended : press any key to be able to play again");
 			this.setWaitingResponse();
 		}
 		public void setWaitingVaticanChoice() {
-			output.printString("enter 0 to be excommunicated or 1 for not");
+			printRequest("enter 0 to be excommunicated or 1 for not");
 			this.setWaitingResponse();
 			
 		}
 
 
 		public void setWaitingPaymentChoice() {
-			output.printString("enter 1 for first payment, 2 per second");
+			printRequest("enter 1 for first payment, 2 per second");
 			this.setWaitingResponse();
 		}
 
 
 		public void setWaitingTrading() {
-			output.printString("enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
+			printRequest("enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
 					+ "and you choose that ");	
 			this.setWaitingResponse();
 
 		}
 
 		public void setWaitingCouncilPriviledge() {
-			output.printString("insert the correspondent number");
+			printRequest("insert the correspondent number");
 			this.setWaitingResponse();
 		}
 
@@ -198,15 +195,17 @@ public class InputlogicCli implements Runnable{
 		
 		
 		private void restartValues() {
-			boardChoice=0; //senza lo zero la seconda volta va male
+			boardChoice=0;
 			position=0;
 			servants=-2;
 			familyMemberColour =null;
 			familyMember=0;
 			zone=null;
 			zoneChosen=false;
-			positionChosen=false;;
-			familyMemberChosen=false;
+			positionChosen=false;
+			if(firstAction)
+				familyMemberChosen=false;
+			else familyMemberChosen=true;
 		}
 
 
@@ -248,6 +247,13 @@ public class InputlogicCli implements Runnable{
 				
 			}
 		}
+		
+		private void printRequest(String string){  //so we keep track of last string sent
+			lastString=string;
+			output.printString(string);
+		}
+		
+
 
 
 
