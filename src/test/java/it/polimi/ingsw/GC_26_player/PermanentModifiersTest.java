@@ -104,4 +104,18 @@ public class PermanentModifiersTest {
 	}
 	
 	
+	
+	@Test
+	public void testAddDiscountToEveryDiscountedZone() {
+		permMod.addDiscount(BoardZone.BUILDINGTOWER, ResourcesOrPoints.newResourcesOrPoints(1, 2, 3, 4, 5, 6, 7, 8));
+		permMod.addDiscount(null, ResourcesOrPoints.newResources(4, 6, 7, 1));
+		assertTrue(permMod.getDiscount(BoardZone.BUILDINGTOWER).getCoins() == 5 &&
+				permMod.getDiscount(BoardZone.BUILDINGTOWER).getWood() == 10 &&
+				permMod.getDiscount(BoardZone.CHARACTERTOWER).getServants() == 6 &&
+				permMod.IsTherediscountOnResources(BoardZone.BUILDINGTOWER) &&
+				permMod.IsTherediscountOnResources(BoardZone.VENTURETOWER) &&
+				permMod.IsTherediscountOnResources(BoardZone.CHARACTERTOWER) &&
+				permMod.IsTherediscountOnResources(BoardZone.TERRITORYTOWER));
+	}
+	
 }

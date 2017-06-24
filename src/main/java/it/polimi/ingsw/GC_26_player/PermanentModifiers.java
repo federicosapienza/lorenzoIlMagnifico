@@ -185,10 +185,11 @@ public class PermanentModifiers {
 	 */
 	public void addDiscount(BoardZone zone, ResourcesOrPoints res){
 		ResourcesOrPoints temp = discounts.get(zone);
-		if(temp==null){  // if there is no discount
+		if(discounts.isEmpty()){  // if there is no discount
 			if(zone!=null) { //(i.e Dame effect)
 				discounts.put(zone, res);
 				activateFlagDiscountOnResources(zone);
+				return;
 			}
 			else{
 				//zone==null 
@@ -201,28 +202,55 @@ public class PermanentModifiers {
 					activateFlagDiscountOnResources(BoardZone.CHARACTERTOWER);
 					discounts.put(BoardZone.BUILDINGTOWER, res);
 					activateFlagDiscountOnResources(BoardZone.BUILDINGTOWER);
+					return;
 				}
 		}
-		else{ //there is a discount
+		else if (!discounts.isEmpty()){ //there is a discount
 			if(zone!=null) { //(i.e. Dame effect)
 				discounts.put(zone, ResourcesOrPoints.sum(res, temp));
 				activateFlagDiscountOnResources(zone);
+				return;
 			}
 			else{
 				//zone==null 
 				//means that a discount will be applied on every tower: Pico della mirandola effect
-				
-				//David: I think this is a bug: if zone is null, temp would be discounts.get(null) and we cannot use it in the sum.
-					discounts.put(BoardZone.TERRITORYTOWER, ResourcesOrPoints.sum(res, temp));
+				if (discounts.containsKey(BoardZone.TERRITORYTOWER)) {
+					discounts.put(BoardZone.TERRITORYTOWER, ResourcesOrPoints.sum(res, discounts.get(BoardZone.TERRITORYTOWER)));
 					activateFlagDiscountOnResources(BoardZone.TERRITORYTOWER);
-					discounts.put(BoardZone.VENTURETOWER,ResourcesOrPoints.sum(res, temp));
+				}
+				else {
+					discounts.put(BoardZone.TERRITORYTOWER, res);
+					activateFlagDiscountOnResources(BoardZone.TERRITORYTOWER);
+				}
+				if (discounts.containsKey(BoardZone.VENTURETOWER)) {
+					discounts.put(BoardZone.VENTURETOWER,ResourcesOrPoints.sum(res, discounts.get(BoardZone.VENTURETOWER)));
 					activateFlagDiscountOnResources(BoardZone.VENTURETOWER);
-					discounts.put(BoardZone.CHARACTERTOWER,ResourcesOrPoints.sum(res, temp));
+				}
+				else {
+					discounts.put(BoardZone.VENTURETOWER, res);
+					activateFlagDiscountOnResources(BoardZone.VENTURETOWER);
+				}
+				if (discounts.containsKey(BoardZone.CHARACTERTOWER)) {
+					discounts.put(BoardZone.CHARACTERTOWER,ResourcesOrPoints.sum(res, discounts.get(BoardZone.CHARACTERTOWER)));
 					activateFlagDiscountOnResources(BoardZone.CHARACTERTOWER);
-					discounts.put(BoardZone.BUILDINGTOWER, ResourcesOrPoints.sum(res, temp));
+				}
+				else {
+					discounts.put(BoardZone.CHARACTERTOWER, res);
+					activateFlagDiscountOnResources(BoardZone.CHARACTERTOWER);
+				}
+				if (discounts.get(BoardZone.BUILDINGTOWER) != null) {
+					ResourcesOrPoints buildingRes = discounts.get(BoardZone.BUILDINGTOWER);
+					ResourcesOrPoints totalBuildingRes = ResourcesOrPoints.sum(buildingRes, res);
+					discounts.put(BoardZone.BUILDINGTOWER, totalBuildingRes);
 					activateFlagDiscountOnResources(BoardZone.BUILDINGTOWER);
 				}
-			}	
+				else {
+					discounts.put(BoardZone.BUILDINGTOWER, res);
+					activateFlagDiscountOnResources(BoardZone.BUILDINGTOWER);
+				}
+				return;
+			}
+		}	
 	}
 	
 	/**

@@ -21,7 +21,6 @@ public class ExcommunicationTileImplementation implements ExcommunicationTile{
 	@Override
 	public void runEffect(Player player) {
 		effect.doEffect(player, false);
-		player.setExcommunicated();
 	}
 
 	public String getPermanentEffectDescriber() {

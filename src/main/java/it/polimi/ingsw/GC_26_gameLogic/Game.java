@@ -248,7 +248,7 @@ public class Game extends Observable<CardDescriber>{
 		playersPerformedActions++;
 		
 		if(playersPerformedActions== numberOfPlayers && turn!=turnsNumber){
-			//playersPerformedActions=0; --> I think it's a bug: round and period never change if playersPerformed is 0
+			playersPerformedActions=0; 
 			turn++; //then read 303
 		}
 		/**

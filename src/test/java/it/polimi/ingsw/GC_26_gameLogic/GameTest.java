@@ -130,6 +130,10 @@ public class GameTest {
 		game.nextStep();
 		game.nextStep();
 		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
 		assertTrue(game.getPeriod() == 2 && game.getRound() == 1);
 	}
 	
@@ -162,7 +166,7 @@ public class GameTest {
 	
 	
 	@Test
-	public void testExcommunicationAndLastRound() {
+	public void testSuspendedAndLastRound() {
 		readAll.start();
 		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
 		cards = readAll.getCards();
@@ -183,12 +187,22 @@ public class GameTest {
 		game.nextStep();
 		game.nextStep();
 		
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		
 		game.getPlayers().get(0).setStatus(new Request(PlayerStatus.SUSPENDED, "David suspended", null));
 		game.nextStep();
 		game.nextStep();
 		game.addPlayerNoMoreSuspended(game.getPlayers().get(0));
 		game.nextStep();
-		assertTrue(game.getPlayers().get(0).isExcommunicated() && game.getPeriod() == 3 && game.getRound() == 2);
+		assertTrue(game.getPlayers().get(0).getStatus() == PlayerStatus.SUSPENDED && game.getPeriod() == 3 && game.getRound() == 2);
 		
 	}
 	
