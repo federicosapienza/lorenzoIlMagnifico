@@ -450,17 +450,17 @@ public class Game extends Observable<CardDescriber>{
 		  /**
 		   * If the player has been suspended, he gets the excommunication automatically.
 		   */
-		  synchronized (player) {
-			  if(player.getStatus() == PlayerStatus.SUSPENDED){
-				  gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn and is excommunicated"));
-				  gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(excommunicationTile),  null));
-				  excommunicationTile.runEffect(player);		    	
-				  return;
-				  }
-			  player.notifyObservers(new Request(PlayerStatus.VATICANREPORTDECISION, "1)do you prefer getting"
-			  		+ " excommunicated and getting "+ bonusInterface.getFaithTrack().get(player.getWarehouse().getFaithPoints()) +" , "+
-			  				 "or not?", new CardDescriber(excommunicationTile)));
-		  }
+	
+		  if(player.getStatus() == PlayerStatus.SUSPENDED){
+			  gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn and is excommunicated"));
+			  gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(excommunicationTile),  null));
+			  excommunicationTile.runEffect(player);		    	
+			  return;
+			  }
+		  player.setStatus(new Request(PlayerStatus.VATICANREPORTDECISION, "1)do you prefer getting"
+		  		+ " excommunicated and getting "+ bonusInterface.getFaithTrack().get(player.getWarehouse().getFaithPoints()) +" , "+
+		  				 "victory points or not?", new CardDescriber(excommunicationTile)));
+		  
 	}
 	
 	

@@ -38,7 +38,7 @@ public class PlayerWallet implements Serializable{
 		this.coins =warehouse.getCoins();
 		this.servants =warehouse.getServants();
 		this.wood= warehouse.getWood();
-		this.stone=warehouse.getWood();
+		this.stone=warehouse.getStone();
 		this.victoryPoints=warehouse.getVictoryPoints();
 		this.militaryPoints=warehouse.getMilitaryPoints();
 		this.faithPoints=warehouse.getFaithPoints();

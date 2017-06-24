@@ -108,9 +108,9 @@ public class Warehouse  extends Observable<PlayerWallet> {
 
 	@Override
 	public String toString(){
-		return coins+" coins,  "+ servants+ " servants, "+wood+ " wood, "+stone+ " stone"
-	    		+ victoryPoints+ " victoryPoints"+  militaryPoints+" military points" + victoryPoints+ " victory points"+
-	    		 faithPoints+ " faith points" + councilPrivileges +" council priviledges.";
+		return coins+" coins,  "+ servants+ " servants, "+wood+ " wood, "+stone+ " stone, "
+	    		+ victoryPoints+ " victoryPoints, "+  militaryPoints+" military points, " 
+	    		+ faithPoints+ " faith points, " + councilPrivileges +" council priviledges.";
 	}
 
 	public String MilitaryPointStatus(){

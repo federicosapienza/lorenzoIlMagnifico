@@ -47,7 +47,7 @@ public class TradeHandler {
 		TradeEffect tradeEffect = (TradeEffect) effect;
 		
 		if(choice==2  && tradeEffect.getGive2() != null){ //if 2nd trade exists and the player has chosen it. 
-				boolean flag = player.getTestWarehouse().areResourcesEnough(tradeEffect.getGive2())&&player.getWarehouse().areResourcesEnough(tradeEffect.getGive1());
+				boolean flag = player.getTestWarehouse().areResourcesEnough(tradeEffect.getGive2())&&player.getWarehouse().areResourcesEnough(tradeEffect.getGive2());
 				if(!flag){
 					player.notifyObservers(new Request(player.getStatus(),"cannot perform trade: not enough resources", new CardDescriber(player.getCardUsed())));
 					return false;
@@ -57,7 +57,7 @@ public class TradeHandler {
 		// trade number 1 selected
 		boolean flag = player.getTestWarehouse().areResourcesEnough(tradeEffect.getGive1())&& player.getWarehouse().areResourcesEnough(tradeEffect.getGive1());
 		if(!flag){
-			player.notifyObservers(new Request(player.getStatus(),"cannot perform trade: not enough resources", new CardDescriber(player.getCardUsed())));
+			player.notifyObservers(new Request(player.getStatus(),"can not perform trade: not enough resources", new CardDescriber(player.getCardUsed())));
 			return false;
 		}
 		else return true;
