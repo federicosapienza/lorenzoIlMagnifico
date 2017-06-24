@@ -42,6 +42,7 @@ public class Player extends Observable<Message> {
 	private Action typeOfSecondaryAction;
 	private int secondActionValue;
 	
+	private boolean excommunicated = false;
 	public Player(String name, ResourcesOrPoints startingResources) {
 		if(name==null || startingResources==null)
 			throw new NullPointerException(); 
@@ -52,6 +53,7 @@ public class Player extends Observable<Message> {
 		familyMembers = new FamilyMembers(this);
 		playerActive= false;
 		warehouse= new Warehouse(this, startingResources);
+		excommunicated = false;
 	}
 
 
@@ -92,7 +94,9 @@ public class Player extends Observable<Message> {
 		return playerActive;
 	}
 	
-	
+	public boolean isExcommunicated() {
+		return excommunicated;
+	}
 	
 	//setters methods
 	
@@ -163,7 +167,9 @@ public class Player extends Observable<Message> {
 		this.cardUsed = cardUsed;
 	}
 	
-
+	public void setExcommunicated() {
+		this.excommunicated = true;
+	}
 		
 	
 

@@ -191,7 +191,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 	
 	public void add(ResourcesOrPoints resources){
 		ResourcesOrPoints temp=resources;
-		if(player.getPermanentModifiers().IsresourcesMalusOn())
+		if(player.getPermanentModifiers().isResourcesMalusOn())
 		//check if any malus on getting resources is on (look at permanentModifier class)
 		//calls the permanent effect to reduce the resources the player can earn
 			temp= player.getPermanentModifiers().getResourcesAfterMalus(resources);

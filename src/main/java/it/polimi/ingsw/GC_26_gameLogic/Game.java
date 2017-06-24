@@ -111,6 +111,10 @@ public class Game extends Observable<CardDescriber>{
 		return period;
 	}
 	
+	public int getRound() {
+		return round;
+	}
+	
 	/**
 	 * Method used to update the status of the game whenever it changes 
 	 * @param status It's the new status of the game after the change, that will become the current status of the current game 
@@ -144,6 +148,9 @@ public class Game extends Observable<CardDescriber>{
 	 * current players of the game.
 	 */
 	public void initialiseGame(){
+		if (numberOfPlayers < 0 || numberOfPlayers > 4) {
+			throw new IllegalArgumentException();
+		}
 		gameElements= new GameElements(this, players, numberOfPlayers, resourcesOrPointsBonus, bonusInterface.getFaithTrack());
 		
 		//TODO notificare i giocatori
@@ -241,7 +248,7 @@ public class Game extends Observable<CardDescriber>{
 		playersPerformedActions++;
 		
 		if(playersPerformedActions== numberOfPlayers && turn!=turnsNumber){
-			playersPerformedActions=0;
+			//playersPerformedActions=0; --> I think it's a bug: round and period never change if playersPerformed is 0
 			turn++; //then read 303
 		}
 		/**
@@ -290,7 +297,7 @@ public class Game extends Observable<CardDescriber>{
 		 * If the player has been suspended, he'll miss his turn
 		 */
 		if(status == PlayerStatus.SUSPENDED){
-			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn")) ;
+			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn"));
 			nextStep();
 			return;
 		}

@@ -52,7 +52,7 @@ public class PermanentModifiers {
 	 * @return resourcesMalusOn It's the boolean that indicates if the malus has been activated: 
 	 * it's true if it's been activated, else it's false.
 	 */
-	public boolean IsresourcesMalusOn() {
+	public boolean isResourcesMalusOn() {
 		return resourcesMalusOn;
 	}
 	
@@ -211,6 +211,8 @@ public class PermanentModifiers {
 			else{
 				//zone==null 
 				//means that a discount will be applied on every tower: Pico della mirandola effect
+				
+				//David: I think this is a bug: if zone is null, temp would be discounts.get(null) and we cannot use it in the sum.
 					discounts.put(BoardZone.TERRITORYTOWER, ResourcesOrPoints.sum(res, temp));
 					activateFlagDiscountOnResources(BoardZone.TERRITORYTOWER);
 					discounts.put(BoardZone.VENTURETOWER,ResourcesOrPoints.sum(res, temp));
@@ -252,7 +254,7 @@ public class PermanentModifiers {
 	 * expressed in the @param zone: it's the subtraction between price and an eventual discount, if it exists.
 	 */
 	
-	public  ResourcesOrPoints resourcesOrPointsDiscount(BoardZone zone, ResourcesOrPoints price){  
+	public ResourcesOrPoints resourcesOrPointsDiscount(BoardZone zone, ResourcesOrPoints price){  
 		ResourcesOrPoints discount= discounts.get(zone);
 		return ResourcesOrPoints.subtract(price, discount);
 			
@@ -314,7 +316,7 @@ public class PermanentModifiers {
 	 * @param zone It's the zone in which I want to get the value of the action modifier.
 	 * @return 0 if the zone has no action modifiers, temp if it has.
 	 */
-	public  int getActionModifier(BoardZone zone){
+	public int getActionModifier(BoardZone zone){
 		Integer temp = actionModifiers.get(zone);
 		if(temp==null)
 			return 0;

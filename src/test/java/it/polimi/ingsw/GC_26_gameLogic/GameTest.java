@@ -7,21 +7,20 @@ import java.util.List;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26_actionsHandlers.ActionPerformerHandler;
+
 import it.polimi.ingsw.GC_26_actionsHandlers.FirstActionHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.HarvestAndProductionHandler;
 import it.polimi.ingsw.GC_26_board.BoardZone;
-import it.polimi.ingsw.GC_26_board.CouncilPalace;
-import it.polimi.ingsw.GC_26_board.MultiplePosition;
+
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
-import it.polimi.ingsw.GC_26_readJson.BonusImplementation;
+
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;
-import it.polimi.ingsw.GC_26_readJson.CardsImplementation;
 import it.polimi.ingsw.GC_26_readJson.ReadAll;
-import it.polimi.ingsw.GC_26_readJson.TimerValueImplementation;
+
 import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
+import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
@@ -69,6 +68,19 @@ public class GameTest {
 	}
 	
 	@Test
+	public void testWaitingPlayersBeforeStartingGame() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		cards = readAll.getCards();
+		bonus = readAll.getBonus();
+		times = readAll.getTimes();
+		Game game = new Game(cards, bonus, times);
+		Player player1 = game.addPlayer("David");
+		Player player2 = game.addPlayer("Steph");
+		assertTrue(player1.getStatus() == PlayerStatus.WAITINGHISTURN && player2.getStatus() == PlayerStatus.WAITINGHISTURN);
+	}
+	
+	@Test
 	public void testStartGame() {
 		readAll.start();
 		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
@@ -103,7 +115,7 @@ public class GameTest {
 	}
 	
 	@Test
-	public void testVaticanNextChangesPeriod() {
+	public void testCorrectPeriodChange() {
 		readAll.start();
 		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
 		cards = readAll.getCards();
@@ -115,8 +127,10 @@ public class GameTest {
 		game.initialiseGame();
 		game.startGame();
 		game.nextStep();
-		game.vaticanReportNext();
-		assertEquals(2, game.getPeriod());
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		assertTrue(game.getPeriod() == 2 && game.getRound() == 1);
 	}
 	
 	
@@ -135,7 +149,6 @@ public class GameTest {
 		game.initialiseGame();
 		game.startGame();
 		FamilyMember orangeMember1 = player1.getFamilyMembers().getfamilyMember(Colour.ORANGE);
-		FamilyMember blackMember2 = player2.getFamilyMembers().getfamilyMember(Colour.BLACK);
 		HarvestAndProductionHandler handler = new HarvestAndProductionHandler();
 		FirstActionHandler firstActionHandler = new FirstActionHandler(game.getGameElements(), handler);
 		Action action2 = new Action(BoardZone.COUNCILPALACE, 1, Colour.NEUTRAL, 1);
@@ -148,6 +161,102 @@ public class GameTest {
 	}
 	
 	
+	@Test
+	public void testExcommunicationAndLastRound() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		cards = readAll.getCards();
+		bonus = readAll.getBonus();
+		times = readAll.getTimes();
+		Game game = new Game(cards, bonus, times);
+		game.addPlayer("David");
+		game.addPlayer("Steph");
+		game.initialiseGame();
+		game.startGame();
+		game.nextStep(); //playersPerformedActions = 1
+		game.nextStep(); //playersPerformedActions = 2 --> round = 2, turn =1, playerPerformedActions = 0
+		game.nextStep();
+		game.nextStep();
+		
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		
+		game.getPlayers().get(0).setStatus(new Request(PlayerStatus.SUSPENDED, "David suspended", null));
+		game.nextStep();
+		game.nextStep();
+		game.addPlayerNoMoreSuspended(game.getPlayers().get(0));
+		game.nextStep();
+		assertTrue(game.getPlayers().get(0).isExcommunicated() && game.getPeriod() == 3 && game.getRound() == 2);
+		
+	}
 	
+	@Test
+	public void testCorrectPreviousStatusAfterStarting() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		cards = readAll.getCards();
+		bonus = readAll.getBonus();
+		times = readAll.getTimes();
+		Game game = new Game(cards, bonus, times);
+		game.addPlayer("David");
+		game.addPlayer("Steph");
+		game.initialiseGame();
+		game.startGame();
+		
+		assertTrue(game.getPlayers().get(0).getPreviousStatus() == PlayerStatus.WAITINGHISTURN && 
+				game.getPlayers().get(0).getStatus() == PlayerStatus.PLAYING &&
+				game.getPlayers().get(1).getStatus() == PlayerStatus.WAITINGHISTURN);
+		
+	}
+	
+	@Test
+	public void testCorrectPreviousStatusDuringGame() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		cards = readAll.getCards();
+		bonus = readAll.getBonus();
+		times = readAll.getTimes();
+		Game game = new Game(cards, bonus, times);
+		game.addPlayer("David");
+		game.addPlayer("Steph");
+		game.initialiseGame();
+		game.startGame();
+		game.nextStep(); //playersPerformedActions = 1
+		game.nextStep(); //playersPerformedActions = 2 --> round = 2, turn =1, playerPerformedActions = 0
+		game.nextStep();
+		game.nextStep();
+		
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		
+		game.getPlayers().get(0).setStatus(new Request(PlayerStatus.SUSPENDED, "David suspended", null));
+		game.nextStep();
+		assertEquals(PlayerStatus.PLAYING, game.getPlayers().get(0).getPreviousStatus());
+		
+	}
+	
+	
+	/*
+	@Test (expected = IllegalArgumentException.class)
+	public void testCannotCreateA5PlayersGame() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		cards = readAll.getCards();
+		bonus = readAll.getBonus();
+		times = readAll.getTimes();
+		Game game = new Game(cards, bonus, times);
+		game.addPlayer("David");
+		game.addPlayer("Steph");
+		game.addPlayer("Flash");
+		game.addPlayer("Hulk");
+		game.addPlayer("Tony");
+	
+		game.initialiseGame();
+	}
+	*/
 
 }
