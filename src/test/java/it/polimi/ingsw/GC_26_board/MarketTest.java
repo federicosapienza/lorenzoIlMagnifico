@@ -47,9 +47,8 @@ public class MarketTest {
 		assertTrue(positionsActivated == 2 && !thrownIllegalPositionExcep);
 	}
 
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testGetIllegalPosition() {
-		boolean thrownIllegalPositionExcep = false;
 		MarketPosition marketPosition;
 		marketResOrPts[0] = marketResOrPts1;
 		marketResOrPts[1] = marketResOrPts2;
@@ -63,13 +62,8 @@ public class MarketTest {
 		playersList.add(player2);
 		playersList.add(player3);
 		Market market = new Market(playersList.size(), marketResOrPts);
-		
-		try {
-			marketPosition = market.getPosition(3);
-		} catch (IllegalArgumentException e) {
-			thrownIllegalPositionExcep = true;
-		}
-		assertTrue(thrownIllegalPositionExcep);
+		marketPosition = market.getPosition(3);
+		marketPosition.clear();
 	}
 	
 	@Test
@@ -93,6 +87,7 @@ public class MarketTest {
 		
 		try {
 			marketPosition = market.getPosition(3);
+			marketPosition.clear();
 		} catch (IllegalArgumentException e) {
 			thrownIllegalPositionExcep = true;
 		}

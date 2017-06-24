@@ -44,7 +44,7 @@ public class BoardTest {
 		readAll.start();
 		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
 		Board board = new Board(5, resourcesOrPointsList);
-		int numberOfPlayers = board.getNumberOfPlayers();
+		board.endRound();
 	}
 	
 	@Test
@@ -104,7 +104,8 @@ public class BoardTest {
 		readAll.start();
 		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
 		Board board4 = new Board(4, resourcesOrPointsList);
-		int illegalFloorValue = board4.getTower(BoardZone.CHARACTERTOWER).getFloorValue(5);
+		board4.getTower(BoardZone.CHARACTERTOWER).getFloorValue(5);
+		
 	}
 	
 	@Test
@@ -121,6 +122,7 @@ public class BoardTest {
 		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
 		Board board4 = new Board(4, resourcesOrPointsList);
 		TowerPosition illegalTowerPosition = board4.getTower(BoardZone.BUILDINGTOWER).getPosition(5);
+		illegalTowerPosition.clear();
 	}
 	
 	@Test
