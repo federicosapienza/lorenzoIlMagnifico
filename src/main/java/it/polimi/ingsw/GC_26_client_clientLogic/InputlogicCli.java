@@ -162,7 +162,6 @@ public class InputlogicCli implements Runnable{
 		}
 		
 		public void setPlayerSuspended(){
-			setTurnEnded();
 			printRequest("You are now suspended : press any key to be able to play again");
 			this.setWaitingResponse();
 		}

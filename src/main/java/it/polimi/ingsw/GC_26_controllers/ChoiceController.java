@@ -35,8 +35,9 @@ public class ChoiceController implements Observer<Integer>{
 		if(status == PlayerStatus.CHOOSINGPAYMENT)
 			twoPaymentsController(choice);
 		
-		if(status == PlayerStatus.VATICANREPORTDECISION)
+		if(status == PlayerStatus.VATICANREPORTDECISION){
 			vaticanReportController(choice);
+			return;}
 		
 		if(status==PlayerStatus.TRADINGCOUNCILPRIVILEDGES )
 			//player is trading diplomatic privileges
@@ -167,11 +168,7 @@ public class ChoiceController implements Observer<Integer>{
 				player.setPlayerActive();
 				VaticanReportHandler handler= handlers.getVaticanReportHandler();
 				handler.perform(player, choice);
-				synchronized (player) {
-					if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
-						return;
-					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, null, null));
-			}
+				
 				handlers.getGameElements().getGame().vaticanReportNext(); // automatically ends the turn
 		}
 			
