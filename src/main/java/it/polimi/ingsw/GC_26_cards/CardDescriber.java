@@ -12,7 +12,7 @@ import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCardImplementation;
 
 
 /**
- * 
+ *
  * @author David Yun (david.yun@mail.polimi.it)
  * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
  * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
@@ -20,125 +20,163 @@ import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCardImplementation;
  * It's the class that describes the card object sent to remote connections.
  */
 public class CardDescriber implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 * 
-	 * 
-	 */
-	private final String typeOfCard;
-	private final String name;
-	private final int period;
-	private final DevelopmentCardTypes type;
-	private final String payment;
-	private final String immediateEffect;
-	private final String permanentEffect;
-	private final int actionValue;
-	private final String requirement;
-	
-	
-	public CardDescriber(DevelopmentCard card){ //recasting is needed here
-		DevelopmentCardImplementation cardImplementation = (DevelopmentCardImplementation) card;
-		this.typeOfCard="Development Card";
-		this.name= cardImplementation.getName();
-		this.type=cardImplementation.getType();
-		this.period=cardImplementation.getPeriod();
-		this.payment=cardImplementation.getPaymentDescriber();
-		this.immediateEffect=cardImplementation.getImmediateEffectDescriber();
-		this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
-		this.requirement=null;
-		this.actionValue=cardImplementation.getActionValue();
-	}
-	public CardDescriber(LeaderCard card){
-		LeaderCardImplementation cardImplementation = (LeaderCardImplementation) card;
-		this.typeOfCard="Leader Card";
-		this.name= cardImplementation.getName();
-		this.type=null;
-		this.period=0;
-		this.payment=null;
-		this.immediateEffect=cardImplementation.getPermanentEffectDescriber();
-		this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
-		this.requirement=cardImplementation.getRequirementDescriber();
-		this.actionValue=0;
-	}
-	public CardDescriber(ExcommunicationTile card){
-		ExcommunicationTileImplementation cardImplementation = (ExcommunicationTileImplementation) card;
-		this.typeOfCard="Excommunication Tile";
-		this.name= null;
-		this.type=null;
-		this.period=cardImplementation.getPeriod();
-		this.payment=null;
-		this.immediateEffect=null;
-		this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
-		this.requirement=null;
-		this.actionValue=0;
-	}
-	
-	
-	
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     *
+     *
+     *
+     */
+    private final String typeOfCard;
+    private final String name;
+    private final int period;
+    private final DevelopmentCardTypes type;
+    private final String payment;
+    private final String immediateEffect;
+    private final String permanentEffect;
+    private final int actionValue;
+    private final String requirement;
 
-	// getter method to get the type of the card as a string
-		public  String getTypeOfCard(){
-			return typeOfCard;
-		}
-		
-		//getter method to get the name of the card
-		public String getName() {
-			return name;
-		}
-		
-		//getter method to get the value of the action
-		public  int getActionValue(){
-			return actionValue;
-		}
-		
-		//getter method to get the type of the card as type of development card
-		public DevelopmentCardTypes getType() {
-			return type;
-		}
-		
-		//getter method to get the period of the card
-		public int getPeriod() {
-			return period;
-		}
-		
-		//getter method to get the immediate effect describer of the card as a string
-		public String getImmediateEffectDescriber() {
-			return immediateEffect.toString();
-		}
-		
-		//getter method to get the permanent effect describer of the card as a string
-		public String getPermanentEffectDescriber(){
-			return permanentEffect;
-		}
-		
-		//getter method to get the requirement describer of the card as a string
-		public  String getRequirementDescriber(){
-			return requirement;
-		}
+    /**
+     * Constructor that creates a card describer which describes a development card
+     * @param card is the development card described by the card describer
+     */
+    public CardDescriber(DevelopmentCard card){ //recasting is needed here
+        DevelopmentCardImplementation cardImplementation = (DevelopmentCardImplementation) card;
+        this.typeOfCard="Development Card";
+        this.name= cardImplementation.getName();
+        this.type=cardImplementation.getType();
+        this.period=cardImplementation.getPeriod();
+        this.payment=cardImplementation.getPaymentDescriber();
+        this.immediateEffect=cardImplementation.getImmediateEffectDescriber();
+        this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
+        this.requirement=null;
+        this.actionValue=cardImplementation.getActionValue();
+    }
 
-		@Override
-		public String toString() {
-			StringBuilder temp= new StringBuilder(" ");
-			if(name!=null)
-				temp.append(name );
-			if(payment!=null)
-					temp.append(" PAY: " +payment);
-			if(requirement!=null)
-					temp.append(" REQ "+ requirement);
-			
-			if(immediateEffect!=null)
-					temp.append(" IMMEDIATE EFF. :" + immediateEffect);
-			if(permanentEffect!=null)
-				temp.append(" PERMAMENT EFF :" + permanentEffect);
-			if(actionValue !=0)
-				temp.append(" ACTION VALUE "+ actionValue);
-			temp.append(".");
-			return temp.toString();
-		
-		}
-		
+    /**
+     * Constructor that creates a card describer which describes an Leader card.
+     * @param card is the Leader card described by the card describer
+     */
+    public CardDescriber(LeaderCard card){
+        LeaderCardImplementation cardImplementation = (LeaderCardImplementation) card;
+        this.typeOfCard="Leader Card";
+        this.name= cardImplementation.getName();
+        this.type=null;
+        this.period=0;
+        this.payment=null;
+        this.immediateEffect=cardImplementation.getPermanentEffectDescriber();
+        this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
+        this.requirement=cardImplementation.getRequirementDescriber();
+        this.actionValue=0;
+    }
+
+    /**
+     * Constructor that creates a card describer which describes an excommunication tile.
+     * @param card is the excommunication tile described by the card describer
+     */
+    public CardDescriber(ExcommunicationTile card){
+        ExcommunicationTileImplementation cardImplementation = (ExcommunicationTileImplementation) card;
+        this.typeOfCard="Excommunication Tile";
+        this.name= null;
+        this.type=null;
+        this.period=cardImplementation.getPeriod();
+        this.payment=null;
+        this.immediateEffect=null;
+        this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
+        this.requirement=null;
+        this.actionValue=0;
+    }
+
+    /**
+     * Method that returns the type of the card described by the card describer
+     * @return the type of the card
+     */
+    public  String getTypeOfCard(){
+        return typeOfCard;
+    }
+
+    /**
+     * Getter method that returns the name of the card
+     * @return the name of the card
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Getter method that returns the value of the action, required by the card
+     * @return the value of the action required by the card
+     */
+    public int getActionValue(){
+        return actionValue;
+    }
+
+    /**
+     * Getter method that returns the type of development card described by the card describer
+     * @return the type of development card described by the card describer
+     */
+    public DevelopmentCardTypes getType() {
+        return type;
+    }
+
+    /**
+     * Getter method that returns the period of the card described by the card describer
+     * @return the period of the card described by the card describer
+     */
+    public int getPeriod() {
+        return period;
+    }
+
+    /**
+     * Getter method that returns the immediate effect describer of the card described by the card describer
+     * @return the immediate effect describer of the card described by the card describer
+     */
+    public String getImmediateEffectDescriber() {
+        return immediateEffect.toString();
+    }
+
+    /**
+     * Getter method that returns the permanent effect describer of the card described by the card describer
+     * @return the permanent effect describer of the card described by the card describer
+     */
+    public String getPermanentEffectDescriber(){
+        return permanentEffect;
+    }
+
+    /**
+     * Getter method that returns the resources or points requirement describer of the card described by the card describer
+     * @return the resources or points requirement describer of the card described by the card describer
+     */
+    public  String getRequirementDescriber(){
+        return requirement;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder temp= new StringBuilder(" ");
+        if(name!=null)
+            temp.append(name );
+        if(payment!=null)
+            temp.append(" PAY: " +payment);
+        if(requirement!=null)
+            temp.append(" REQ "+ requirement);
+
+        if(immediateEffect!=null)
+            temp.append(" IMMEDIATE EFF. :" + immediateEffect);
+        if(permanentEffect!=null)
+            temp.append(" PERMAMENT EFF :" + permanentEffect);
+        if(actionValue !=0)
+            temp.append(" ACTION VALUE "+ actionValue);
+        temp.append(".");
+        return temp.toString();
+
+    }
+
+
+
+
+
 }
