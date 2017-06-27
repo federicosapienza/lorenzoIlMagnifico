@@ -516,10 +516,9 @@ public class PermanentModifiers {
     }
 
     /**
-     * The following lines represent the effects of the 4 excommunication cards of the 3rd period (see page 13
+     * The following lines represent the effects of the last 4 excommunication cards of the 3rd period (see page 13
      * of 14 of the official rulebook)
-     * They force the player to lose Victory points for any N victory Points owned.
-     * or Conquered Territories.
+     * They force the player to lose 1 Victory point for every N type of Points owned.
      */
 
     private int victoryPointsReducer=1;
