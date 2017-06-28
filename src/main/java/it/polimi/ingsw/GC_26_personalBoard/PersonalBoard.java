@@ -211,7 +211,7 @@ public class PersonalBoard extends Observable<CardDescriber>{  //sometimes we ne
 	
 	public void endRound(){
 		for(LeaderCard card:leaderCardsUsed){
-			if(!card.isAPermanentEffect())//means there is an ability of the type "once per round"
+			if(!card.hasAPermanentEffect())//means there is an ability of the type "once per round"
 				leaderCardsUsed.remove(card);
 		}
 	}

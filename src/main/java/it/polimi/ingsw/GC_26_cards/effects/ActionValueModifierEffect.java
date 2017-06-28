@@ -40,7 +40,7 @@ public class ActionValueModifierEffect implements Effect{
 	}
 
 	/**
-	 * Method that affects the player
+	 * Method called to apply the effect to the player who is involved in the effect
 	 */
 	@Override
 	public synchronized void doEffect(Player player, boolean immediate) {
