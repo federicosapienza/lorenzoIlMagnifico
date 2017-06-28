@@ -11,29 +11,29 @@ import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
 
 public class CardsImplementation implements Cards {
 	
-	private List<DevelopmentCard> territoryCardsPeriod1 = new ArrayList<DevelopmentCard>();
-	private List<DevelopmentCard> territoryCardsPeriod2 = new ArrayList<DevelopmentCard>();
-	private List<DevelopmentCard> territoryCardsPeriod3 = new ArrayList<DevelopmentCard>();
+	private List<DevelopmentCard> territoryCardsPeriod1 = new ArrayList<>();
+	private List<DevelopmentCard> territoryCardsPeriod2 = new ArrayList<>();
+	private List<DevelopmentCard> territoryCardsPeriod3 = new ArrayList<>();
 	
-	private List<DevelopmentCard> buildingCardsPeriod1 = new ArrayList<DevelopmentCard>();
-	private List<DevelopmentCard> buildingCardsPeriod2 = new ArrayList<DevelopmentCard>();
-	private List<DevelopmentCard> buildingCardsPeriod3 = new ArrayList<DevelopmentCard>();
+	private List<DevelopmentCard> buildingCardsPeriod1 = new ArrayList<>();
+	private List<DevelopmentCard> buildingCardsPeriod2 = new ArrayList<>();
+	private List<DevelopmentCard> buildingCardsPeriod3 = new ArrayList<>();
 	
-	private List<DevelopmentCard> characterCardsPeriod1 = new ArrayList<DevelopmentCard>();
-	private List<DevelopmentCard> characterCardsPeriod2 = new ArrayList<DevelopmentCard>();
-	private List<DevelopmentCard> characterCardsPeriod3 = new ArrayList<DevelopmentCard>();
+	private List<DevelopmentCard> characterCardsPeriod1 = new ArrayList<>();
+	private List<DevelopmentCard> characterCardsPeriod2 = new ArrayList<>();
+	private List<DevelopmentCard> characterCardsPeriod3 = new ArrayList<>();
 	
-	private List<DevelopmentCard> ventureCardsPeriod1 = new ArrayList<DevelopmentCard>();
-	private List<DevelopmentCard> ventureCardsPeriod2 = new ArrayList<DevelopmentCard>();
-	private List<DevelopmentCard> ventureCardsPeriod3 = new ArrayList<DevelopmentCard>();
+	private List<DevelopmentCard> ventureCardsPeriod1 = new ArrayList<>();
+	private List<DevelopmentCard> ventureCardsPeriod2 = new ArrayList<>();
+	private List<DevelopmentCard> ventureCardsPeriod3 = new ArrayList<>();
 	
-	private List<LeaderCard> leaderCard = new ArrayList<LeaderCard>();
-	private List<LeaderCard> leaderCardTemp = new ArrayList<LeaderCard>();
+	private List<LeaderCard> leaderCard = new ArrayList<>();
+	private List<LeaderCard> leaderCardTemp = new ArrayList<>();
 	
-	private List<ExcommunicationTile> excommunicationTilesPeriod1 = new ArrayList<ExcommunicationTile>();
-	private List<ExcommunicationTile> excommunicationTilesPeriod2 = new ArrayList<ExcommunicationTile>();
-	private List<ExcommunicationTile> excommunicationTilesPeriod3 = new ArrayList<ExcommunicationTile>();
-	private List<ExcommunicationTile> excommunicationTilesTemp = new ArrayList<ExcommunicationTile>();
+	private List<ExcommunicationTile> excommunicationTilesPeriod1 = new ArrayList<>();
+	private List<ExcommunicationTile> excommunicationTilesPeriod2 = new ArrayList<>();
+	private List<ExcommunicationTile> excommunicationTilesPeriod3 = new ArrayList<>();
+	private List<ExcommunicationTile> excommunicationTilesTemp = new ArrayList<>();
 
 	
 	
@@ -58,6 +58,7 @@ public class CardsImplementation implements Cards {
 			default:
 				break;
 			}
+			break;
 		case 2:
 			switch (type) {
 			case TERRITORYCARD:
@@ -75,6 +76,7 @@ public class CardsImplementation implements Cards {
 			default:
 				break;
 			}
+			break;
 		case 3:
 			switch (type) {
 			case TERRITORYCARD:
@@ -92,10 +94,11 @@ public class CardsImplementation implements Cards {
 			default:
 				break;
 			}
+			break;
 		default:
 			break;
 		}
-		return null;
+		return Collections.emptyList();
 	}
 	
 	
@@ -115,6 +118,7 @@ public class CardsImplementation implements Cards {
 			default:
 				break;
 			}
+			break;
 		case 2:
 			switch (type) {
 			case TERRITORYCARD:
@@ -128,6 +132,7 @@ public class CardsImplementation implements Cards {
 			default:
 				break;
 			}
+			break;
 		case 3:
 			switch (type) {
 			case TERRITORYCARD:
@@ -141,10 +146,11 @@ public class CardsImplementation implements Cards {
 			default:
 				break;
 			}
+			break;
 		default:
 			break;
 		}
-		return null;
+		return Collections.emptyList();
 	}
 	
 	@Override
@@ -169,7 +175,7 @@ public class CardsImplementation implements Cards {
 		default:
 			break;
 		}
-		return null;
+		return Collections.emptyList();
 		}
 	
 	public List<LeaderCard> getLeaderCards(){
@@ -196,7 +202,7 @@ public class CardsImplementation implements Cards {
 		case 3:
 			return excommunicationTilesPeriod3;
 		default:
-			return null;
+			return Collections.emptyList();
 		}
 	}
 	

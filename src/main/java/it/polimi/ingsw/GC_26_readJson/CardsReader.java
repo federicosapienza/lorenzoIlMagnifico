@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.*;
 
 
@@ -48,6 +49,7 @@ import it.polimi.ingsw.GC_26_cards.payments.TwoOrPayments;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -55,25 +57,24 @@ public class CardsReader {
 	
 
 	
-	private List<Integer> intList = new ArrayList<Integer>();
-	private List<Integer> intList2 = new ArrayList<Integer>();
-	private List<Integer> intList3 = new ArrayList<Integer>();
-	private List<Integer> intList4 = new ArrayList<Integer>();
+	private List<Integer> intList = new ArrayList<>();
+	private List<Integer> intList2 = new ArrayList<>();
+	private List<Integer> intList3 = new ArrayList<>();
+	private List<Integer> intList4 = new ArrayList<>();
 	private int intInt;
 	private int intInt2;
 	private String string;
-	private String returnString;
-	private int returnInt;
-	private List<Integer> returnIntList = new ArrayList<Integer>();
-
+	
 	private BufferedReader br= null;
 	private Gson gson = new Gson();
 	private JsonObject jsonObject= null;
 	private JsonElement jsonElement= null;
 	private Type listTypeInt = new TypeToken<List<Integer>>() {}.getType();
 	private JsonPathData jsonPathData = new JsonPathData();
-
-
+	private Logger logger;
+	
+	
+	
 	public JsonObject getJsonObject(){
 		return jsonObject;
 	}
@@ -87,8 +88,7 @@ public class CardsReader {
 			br = new BufferedReader(new FileReader(path));
 			jsonObject= gson.fromJson(br, JsonObject.class);
 		} catch (FileNotFoundException e) {
-			   e.printStackTrace();
-			   
+			logger.log(null, "File not Found!", e);
 		}
 	}
 	
@@ -97,36 +97,41 @@ public class CardsReader {
 			br.close();
 			}
 		catch (IOException e) {
-			e.printStackTrace();
+			logger.log(null, "Buffered Reader not closed!", e);
 		}
 	}
 	
 	public String readString(String stringToRead){
+		String returnString;
 		jsonElement= jsonObject.get(stringToRead);
-		return returnString = jsonElement.getAsString();
+		returnString = jsonElement.getAsString();
+		return returnString;
 	}
 	
 	public int readInt(String stringToRead){
-			jsonElement = jsonObject.get(stringToRead);
-			return returnInt = jsonElement.getAsInt();
+		int returnInt;
+		jsonElement = jsonObject.get(stringToRead);
+		returnInt = jsonElement.getAsInt();
+		return returnInt;
 	}
 	
 	public List<Integer> readIntList(String stringToRead){
-		 return returnIntList = new Gson().fromJson(jsonObject.get(stringToRead), listTypeInt);
+		List<Integer> returnIntList;
+		returnIntList = new Gson().fromJson(jsonObject.get(stringToRead), listTypeInt);
+		return returnIntList;
 	}
 
 	
 	public Effect createPermanentEffect(String effectType){
 		
-			if(effectType.equals("singleTrade")){
+			if("singleTrade".equals(effectType)){
 				intList=readIntList("permanentTradeEffectGive1");
 				intList2= readIntList("permanentTradeEffectReceive1");
 				ResourcesOrPoints resourcesOrPointsGive1 = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
 				ResourcesOrPoints resourcesOrPointsReceive1 = ResourcesOrPoints.newResourcesOrPoints(intList2.get(0),intList2.get(1),intList2.get(2),intList2.get(3),intList2.get(4),intList2.get(5),intList2.get(6),intList2.get(7));
-				TradeEffect Effect = new TradeEffect(resourcesOrPointsGive1, null, resourcesOrPointsReceive1, null);
-				return Effect;
+				return new TradeEffect(resourcesOrPointsGive1, null, resourcesOrPointsReceive1, null);
 				}
-			if(effectType.equals("doubleTrade")){
+			if("doubleTrade".equals(effectType)){
 				intList=readIntList("permanentTradeEffectGive1");
 				intList2= readIntList("permanentTradeEffectReceive1");
 				intList3=readIntList("permanentTradeEffectGive2");
@@ -135,122 +140,101 @@ public class CardsReader {
 				ResourcesOrPoints resourcesOrPointsReceive1 = ResourcesOrPoints.newResourcesOrPoints(intList2.get(0),intList2.get(1),intList2.get(2),intList2.get(3),intList2.get(4),intList2.get(5),intList2.get(6),intList2.get(7));
 				ResourcesOrPoints resourcesOrPointsGive2 = ResourcesOrPoints.newResourcesOrPoints(intList3.get(0),intList3.get(1),intList3.get(2),intList3.get(3),intList3.get(4),intList3.get(5),intList3.get(6),intList3.get(7));
 				ResourcesOrPoints resourcesOrPointsReceive2 = ResourcesOrPoints.newResourcesOrPoints(intList4.get(0),intList4.get(1),intList4.get(2),intList4.get(3),intList4.get(4),intList4.get(5),intList4.get(6),intList4.get(7));
-				TradeEffect Effect = new TradeEffect(resourcesOrPointsGive1, resourcesOrPointsGive2, resourcesOrPointsReceive1, resourcesOrPointsReceive2);
-				return Effect;
+				return new TradeEffect(resourcesOrPointsGive1, resourcesOrPointsGive2, resourcesOrPointsReceive1, resourcesOrPointsReceive2);
 				}
-			if(effectType.equals("cardsNumberToResources")){
+			if("cardsNumberToResources".equals(effectType)){
 				intList=readIntList("permanentCardsNumberToResourcesResources");
 				string=readString("permanentCardsNumberToResourcesCardType");
 				DevelopmentCardTypes type = getDevelopmentCardType(string);
 				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-				CardsNumberToResourcesEffect Effect = new CardsNumberToResourcesEffect(type, resourcesOrPoints);
-				return Effect;
+				return new CardsNumberToResourcesEffect(type, resourcesOrPoints);
 				}
-			if(effectType.equals("addResourcesAndPoints")){
+			if("addResourcesAndPoints".equals(effectType)){
 				intList=readIntList("permanentResourcesAndPoints");
-				ReceiveResourcesOrPointsEffect Effect= new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7)));
-				return Effect;
+				return new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7)));
 				}
-			if(effectType.equals("discountOnAction")){
+			if("discountOnAction".equals(effectType)){
 				intList = readIntList("permanentResDiscount");
 				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
 				string = readString("permanentBoardzone");
 				BoardZone boardZoneType = getBoardZoneType(string);
-				ReceiveDiscountOnActionsEffect effect = new ReceiveDiscountOnActionsEffect(boardZoneType, resourcesOrPoints);
-				return effect;
+				return new ReceiveDiscountOnActionsEffect(boardZoneType, resourcesOrPoints);
 			}
-			if (effectType.equals("actionValueModifier")){
+			if ("actionValueModifier".equals(effectType)){
 				intInt = readInt("permanentValueModifier");
 				string = readString("permanentBoardzone");
 				BoardZone boardZoneType = getBoardZoneType(string);
-				ActionValueModifierEffect effect = new ActionValueModifierEffect(boardZoneType, intInt);
-				return effect;
+				return new ActionValueModifierEffect(boardZoneType, intInt);
 			}
-			if (effectType.equals("deletingBonusFloorsEffect")){
-				DeletingBonusFloorsEffect effect = new DeletingBonusFloorsEffect();
-				return effect;
+			if ("deletingBonusFloorsEffect".equals(effectType)){
+				return new DeletingBonusFloorsEffect();
 			}
-			if(effectType.equals("setSecondAction")){
+			if("setSecondAction".equals(effectType)){
 				string = readString("permanentBoardzone");
 				BoardZone boardZoneType = getBoardZoneType(string);
 				intInt =readInt("permanentValue");
 				intList= readIntList("permanentDiscount");
 				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-				SetSecondAction effect = new SetSecondAction(boardZoneType, intInt, resourcesOrPoints);
-				return effect;
+				return new SetSecondAction(boardZoneType, intInt, resourcesOrPoints);
 			}
-			if(effectType.equals("GainPointsPerAnyMilitaryPoint")){
+			if("GainPointsPerAnyMilitaryPoint".equals(effectType)){
 				intList = readIntList("permanentGainPointsPerAnyMilitaryPointResources");
 				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-				GainVictoryPointsPerAnyMilitaryPointEffect effect = new GainVictoryPointsPerAnyMilitaryPointEffect(resourcesOrPoints);
-				return effect;
+				return new GainVictoryPointsPerAnyMilitaryPointEffect(resourcesOrPoints);
 			}
-			if (effectType.equals("GoingToOccupiedActionSpacesAllowedEffect")){
-				GoingToOccupiedActionSpacesAllowedEffect effect = new GoingToOccupiedActionSpacesAllowedEffect();
-				return effect;
+			if ("GoingToOccupiedActionSpacesAllowedEffect".equals(effectType)){
+				return new GoingToOccupiedActionSpacesAllowedEffect();
 			}
-			if (effectType.equals("DisableTowerOccupiedMalus")){
-				DisableTowerOccupiedMalus effect = new DisableTowerOccupiedMalus();
-				return effect;
+			if ("DisableTowerOccupiedMalus".equals(effectType)){
+				return new DisableTowerOccupiedMalus();
 			}
-			if(effectType.equals("FamilyMembersValueSetterEffect")){
+			if("FamilyMembersValueSetterEffect".equals(effectType)){
 				intInt = readInt("permanentFamilyMemberValue");
 				intInt2 = readInt("permanentNumberOfDices");
-				FamilyMembersValueSetterEffect effect = new FamilyMembersValueSetterEffect(intInt2, intInt);
-				return effect;
+				return new FamilyMembersValueSetterEffect(intInt2, intInt);
 			}
-			if(effectType.equals("ChangeFamilyMembersValue")){
+			if("ChangeFamilyMembersValue".equals(effectType)){
 				intInt = readInt("permanentColouredMemberChange");
 				intInt2 = readInt("permanentNeutralMemberChange");
-				ChangeFamilyMembersValue effect = new ChangeFamilyMembersValue(intInt, intInt);
-				return effect;
+				return new ChangeFamilyMembersValue(intInt, intInt);
 			}
-			if(effectType.equals("DisableMilitaryPointsRequirement")){
-				DisableMilitaryPointsRequirement effect = new DisableMilitaryPointsRequirement();
-				return effect;
+			if("DisableMilitaryPointsRequirement".equals(effectType)){
+				return new DisableMilitaryPointsRequirement();
 			}
-			if (effectType.equals("DoublePermanentResourcesFromCards")) {
-				DoubleImmediateResourcesFromCards effect = new DoubleImmediateResourcesFromCards();
-				return effect;
+			if ("DoublePermanentResourcesFromCards".equals(effectType)) {
+				return new DoubleImmediateResourcesFromCards();
 			}
-			if(effectType.equals("vaticanSupportBonus")){
+			if("vaticanSupportBonus".equals(effectType)){
 				intList = readIntList("permanentVaticanSupportBonus");
 				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-				VaticanSupportBonus effect = new VaticanSupportBonus(resourcesOrPoints);
-				return effect;
+				return new VaticanSupportBonus(resourcesOrPoints);
 			}
-			if(effectType.equals("PermanentResourcesMalusEffect")){
+			if("PermanentResourcesMalusEffect".equals(effectType)){
 				intList = readIntList("permanentResourcesAndPointsMalus");
 				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-				PermanentResourcesMalusEffect effect = new PermanentResourcesMalusEffect(resourcesOrPoints);
-				return effect;
+				return new PermanentResourcesMalusEffect(resourcesOrPoints);
 			}
-			if(effectType.equals("MarketBan")){
-				MarketBanEffect effect = new MarketBanEffect();
-				return effect;
+			if("MarketBan".equals(effectType)){
+				return new MarketBanEffect();
 			}
-			if(effectType.equals("DoubleServantsNeededEffect")){
-				DoubleServantsNeededEffect effect = new DoubleServantsNeededEffect();
-				return effect;
+			if("DoubleServantsNeededEffect".equals(effectType)){
+				return new DoubleServantsNeededEffect();
 			}
-			if(effectType.equals("NoVictoryPointForCardTypeEffect")){
+			if("NoVictoryPointForCardTypeEffect".equals(effectType)){
 				string = readString("permanentCardType");
 				DevelopmentCardTypes type = getDevelopmentCardType(string);
-				NoVictoryPointForCardTypeEffect effect = new NoVictoryPointForCardTypeEffect(type);
-				return effect;
+				return new NoVictoryPointForCardTypeEffect(type);
 			}
-			if(effectType.equals("LoseVictoryPointForResourcesOrPoints")){
+			if("LoseVictoryPointForResourcesOrPoints".equals(effectType)){
 				intList = readIntList("permanentLoseVictoryPointForResourcesOrPoints");
 				ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-				LoseVictoryPointForResourcesOrPointsEffect effect = new LoseVictoryPointForResourcesOrPointsEffect(resourcesOrPoints);
-				return effect;
+				return new LoseVictoryPointForResourcesOrPointsEffect(resourcesOrPoints);
 			}
-			if(effectType.equals("LoseVictoryPointsforEachNVictoryPoints")){
+			if("LoseVictoryPointsforEachNVictoryPoints".equals(effectType)){
 				intInt = readInt("LoseVictoryPointsforEachNVictoryPointsNumber");
-				LoseVictoryPointsforEachNVictoryPointsEffect effect = new LoseVictoryPointsforEachNVictoryPointsEffect(intInt);
-				return effect;
+				return new LoseVictoryPointsforEachNVictoryPointsEffect(intInt);
 			}
-			if(effectType.equals("null")){
+			if("null".equals(effectType)){
 				return null;
 			}
 			return null;
@@ -259,15 +243,14 @@ public class CardsReader {
 	
 	
 	public Effect createImmediateEffect(String effectType){
-		if(effectType.equals("singleTrade")){
+		if("singleTrade".equals(effectType)){
 			intList=readIntList("immediateTradeEffectGive1");
 			intList2= readIntList("immediateTradeEffectReceive1");
 			ResourcesOrPoints resourcesOrPointsGive1 = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
 			ResourcesOrPoints resourcesOrPointsReceive1 = ResourcesOrPoints.newResourcesOrPoints(intList2.get(0),intList2.get(1),intList2.get(2),intList2.get(3),intList2.get(4),intList2.get(5),intList2.get(6),intList2.get(7));
-			TradeEffect effect = new TradeEffect(resourcesOrPointsGive1, null, resourcesOrPointsReceive1, null);
-			return effect;
+			return new TradeEffect(resourcesOrPointsGive1, null, resourcesOrPointsReceive1, null);
 			}
-		if(effectType.equals("doubleTrade")){
+		if("doubleTrade".equals(effectType)){
 			intList=readIntList("immediateTradeEffectGive1");
 			intList2= readIntList("immediateTradeEffectGive1");
 			intList3= readIntList("immediateTradeEffectGive2");
@@ -276,87 +259,73 @@ public class CardsReader {
 			ResourcesOrPoints resourcesOrPointsReceive1 = ResourcesOrPoints.newResourcesOrPoints(intList2.get(0),intList2.get(1),intList2.get(2),intList2.get(3),intList2.get(4),intList2.get(5),intList2.get(6),intList2.get(7));
 			ResourcesOrPoints resourcesOrPointsGive2 = ResourcesOrPoints.newResourcesOrPoints(intList3.get(0),intList3.get(1),intList3.get(2),intList3.get(3),intList3.get(4),intList3.get(5),intList3.get(6),intList3.get(7));
 			ResourcesOrPoints resourcesOrPointsReceive2 = ResourcesOrPoints.newResourcesOrPoints(intList4.get(0),intList4.get(1),intList4.get(2),intList4.get(3),intList4.get(4),intList4.get(5),intList4.get(6),intList4.get(7));	
-			TradeEffect effect = new TradeEffect(resourcesOrPointsGive1, resourcesOrPointsGive2, resourcesOrPointsReceive1, resourcesOrPointsReceive2);
-			return effect;
+			return new TradeEffect(resourcesOrPointsGive1, resourcesOrPointsGive2, resourcesOrPointsReceive1, resourcesOrPointsReceive2);
 			}
-		if(effectType.equals("cardsNumberToResources")){
+		if("cardsNumberToResources".equals(effectType)){
 			intList=readIntList("immediateCardsNumberToResourcesResources");
 			string=readString("immediateCardsNumberToResourcesCardType");
 			DevelopmentCardTypes type = getDevelopmentCardType(string);
 			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-			CardsNumberToResourcesEffect effect = new CardsNumberToResourcesEffect(type, resourcesOrPoints);
-			return effect;
+			return new CardsNumberToResourcesEffect(type, resourcesOrPoints);
 			}
-		if(effectType.equals("addResourcesAndPoints")){
+		if("addResourcesAndPoints".equals(effectType)){
 			intList=readIntList("immediateResourcesAndPoints");
-			ReceiveResourcesOrPointsEffect effect= new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7)));
-			return effect;
+			return new ReceiveResourcesOrPointsEffect(ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7)));
 			}
-		if(effectType.equals("discountOnAction")){
+		if("discountOnAction".equals(effectType)){
 			intList = readIntList("immediateResDiscount");
 			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
 			string = readString("immediateBoardzone");
 			BoardZone boardZoneType = getBoardZoneType(string);
-			ReceiveDiscountOnActionsEffect effect = new ReceiveDiscountOnActionsEffect(boardZoneType, resourcesOrPoints);
-			return effect;
+			return new ReceiveDiscountOnActionsEffect(boardZoneType, resourcesOrPoints);
 		}
-		if (effectType.equals("actionValueModifier")){
+		if ("actionValueModifier".equals(effectType)){
 			intInt = readInt("immediateValueModifier");
 			string = readString("immediateBoardzone");
 			BoardZone boardZoneType = getBoardZoneType(string);
-			ActionValueModifierEffect effect = new ActionValueModifierEffect(boardZoneType, intInt);
-			return effect;
+			return new ActionValueModifierEffect(boardZoneType, intInt);
 		}
-		if (effectType.equals("deletingBonusFloorsEffect")){
-			DeletingBonusFloorsEffect effect = new DeletingBonusFloorsEffect();
-			return effect;
+		if ("deletingBonusFloorsEffect".equals(effectType)){
+			return new DeletingBonusFloorsEffect();
 		}
-		if(effectType.equals("setSecondAction")){
+		if("setSecondAction".equals(effectType)){
 			string = readString("immediateBoardzone");
-			BoardZone boardZoneType = getBoardZoneType(string);//gestito il null
+			BoardZone boardZoneType = getBoardZoneType(string);
 			intInt =readInt("immediateValue");
 			intList= readIntList("immediateDiscount");
 			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-			SetSecondAction effect = new SetSecondAction(boardZoneType, intInt, resourcesOrPoints);
-			return effect;
+			return new SetSecondAction(boardZoneType, intInt, resourcesOrPoints);
 		}
-		if(effectType.equals("GainPointsPerAnyMilitaryPoint")){
+		if("GainPointsPerAnyMilitaryPoint".equals(effectType)){
 			intList = readIntList("immediateGainPointsPerAnyMilitaryPointResources");
 			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-			GainVictoryPointsPerAnyMilitaryPointEffect effect = new GainVictoryPointsPerAnyMilitaryPointEffect(resourcesOrPoints);
-			return effect;
+			return new GainVictoryPointsPerAnyMilitaryPointEffect(resourcesOrPoints);
 		}
-		if (effectType.equals("GoingToOccupiedActionSpacesAllowedEffect")){
-			GoingToOccupiedActionSpacesAllowedEffect effect = new GoingToOccupiedActionSpacesAllowedEffect();
-			return effect;
+		if ("GoingToOccupiedActionSpacesAllowedEffect".equals(effectType)){
+			return new GoingToOccupiedActionSpacesAllowedEffect();
 		}
-		if (effectType.equals("DisableTowerOccupiedMalus")){
-			DisableTowerOccupiedMalus effect = new DisableTowerOccupiedMalus();
-			return effect;
+		if ("DisableTowerOccupiedMalus".equals(effectType)){
+			return new DisableTowerOccupiedMalus();
 		}
-		if(effectType.equals("FamilyMembersValueSetterEffect")){
+		if("FamilyMembersValueSetterEffect".equals(effectType)){
 			intInt = readInt("immediateFamilyMemberValue");
 			intInt2 = readInt("immediateNumberOfDices");
-			FamilyMembersValueSetterEffect effect = new FamilyMembersValueSetterEffect(intInt2, intInt);
-			return effect;
+			return new FamilyMembersValueSetterEffect(intInt2, intInt);
 		}
-		if(effectType.equals("ChangeFamilyMembersValue")){
+		if("ChangeFamilyMembersValue".equals(effectType)){
 			intInt = readInt("immediateColouredMemberChange");
 			intInt2 = readInt("immediateNeutralMemberChange");
-			ChangeFamilyMembersValue effect = new ChangeFamilyMembersValue(intInt, intInt);
-			return effect;
+			return new ChangeFamilyMembersValue(intInt, intInt);
 		}
-		if(effectType.equals("DisableMilitaryPointsRequirement")){
-			DisableMilitaryPointsRequirement effect = new DisableMilitaryPointsRequirement();
-			return effect;
+		if("DisableMilitaryPointsRequirement".equals(effectType)){
+			return new DisableMilitaryPointsRequirement();
 		}
-		if(effectType.equals("vaticanSupportBonus")){
+		if("vaticanSupportBonus".equals(effectType)){
 			intList = readIntList("immediateVaticanSupportBonus");
 			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
-			VaticanSupportBonus effect = new VaticanSupportBonus(resourcesOrPoints);
-			return effect;
+			return new VaticanSupportBonus(resourcesOrPoints);
 		}
-		if(effectType.equals("null")){
+		if("null".equals(effectType)){
 			return null;
 		}
 		
@@ -365,72 +334,77 @@ public class CardsReader {
 	
 	
 	public Payment createPayment(String paymentType){
-		if(paymentType.equals("resources")){
+		if("resources".equals(paymentType)){
 			intList = readIntList("payment");
 			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResources(intList.get(0),intList.get(1),intList.get(2),intList.get(3));
-			ResourcesPayment payment = new ResourcesPayment(resourcesOrPoints);
-			return payment;
+			return new ResourcesPayment(resourcesOrPoints);
 		}
-		if(paymentType.equals("militaryPointPayment")){
+		if("militaryPointPayment".equals(paymentType)){
 			intInt = readInt("toSpend");
 			intInt2 = readInt("needed");
-			MilitaryPointPayment militaryPointPayment = new MilitaryPointPayment(intInt, intInt2);
-			return militaryPointPayment;
+			return new MilitaryPointPayment(intInt, intInt2);
 		}
 		return null;
 	}
 	
 	public Requirement createRequirement(String requirementType){
-		if(requirementType.equals("pointsOrResources")){
+		if("pointsOrResources".equals(requirementType)){
 			intList = readIntList("pointsOrResourcesRequirement");
 			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResources(intList.get(0),intList.get(1),intList.get(2),intList.get(3));
-			PointsOrResourcesRequirement requirement = new PointsOrResourcesRequirement(resourcesOrPoints);
-			return requirement;
+			return new PointsOrResourcesRequirement(resourcesOrPoints);
 		}
-		if(requirementType.equals("cardsNumber")){
+		if("cardsNumber".equals(requirementType)){
 			intList = readIntList("cardNumberRequirement");
-			CardNumbersRequirement requirement = new CardNumbersRequirement(intList.get(0),intList.get(1),intList.get(2),intList.get(3));
-			return requirement;
+			return new CardNumbersRequirement(intList.get(0),intList.get(1),intList.get(2),intList.get(3));
 		}
-		if(requirementType.equals("cardsNumberOR")){
+		if("cardsNumberOR".equals(requirementType)){
 			intList = readIntList("cardNumberRequirementOR");
-			CardNumbersOrRequirement requirement = new CardNumbersOrRequirement(intList.get(0),intList.get(0),intList.get(0),intList.get(0));
-			return requirement;
+			return new CardNumbersOrRequirement(intList.get(0),intList.get(0),intList.get(0),intList.get(0));
 		}
 		return null;
 	}
 	
 	public Effect createDoubleEffect(Effect effect1,Effect effect2){
-		 TwoAndEffect effect = new TwoAndEffect(effect1, effect2);
-		 return effect;
+		 return new TwoAndEffect(effect1, effect2);
 	}
 	
 	public Payment createDoublePayment(Payment payment1,Payment payment2){
-		TwoOrPayments payment = new TwoOrPayments(payment1, payment2);
-		return payment;
+		return new TwoOrPayments(payment1, payment2);
+		
 	}
 	
 	public Requirement createDoubleRequirement(Requirement requirement,Requirement requirement2){
-		TwoAndRequirements requirements = new TwoAndRequirements(requirement, requirement2);
-		return requirements;
+		return new TwoAndRequirements(requirement, requirement2);
 	}
 	
 	public DevelopmentCardTypes getDevelopmentCardType(String type){
-			if(type.equals("territory")){ return DevelopmentCardTypes.TERRITORYCARD;}
-			if(type.equals("building")){ return DevelopmentCardTypes.BUILDINGCARD;}
-			if(type.equals("character")){ return DevelopmentCardTypes.CHARACTERCARD;}
-			if(type.equals("venture")){ return DevelopmentCardTypes.VENTURECARD;}
+			if("territory".equals(type)){ 
+				return DevelopmentCardTypes.TERRITORYCARD;}
+			if("building".equals(type)){ 
+				return DevelopmentCardTypes.BUILDINGCARD;}
+			if("character".equals(type)){ 
+				return DevelopmentCardTypes.CHARACTERCARD;}
+			if("venture".equals(type)){ 
+				return DevelopmentCardTypes.VENTURECARD;}
 			return null;
 		}
 	public BoardZone getBoardZoneType(String type){
-		if(type.equals("territory")){return BoardZone.TERRITORYTOWER;}
-		if(type.equals("building")){return BoardZone.BUILDINGTOWER;}
-		if(type.equals("character")){return BoardZone.CHARACTERTOWER;}
-		if(type.equals("venture")){return BoardZone.VENTURETOWER;}
-		if(type.equals("harvest")){return BoardZone.HARVEST;}
-		if(type.equals("production")){return BoardZone.PRODUCTION;}
-		if(type.equals("market")){return BoardZone.MARKET;}
-		if(type.equals("council")){return BoardZone.COUNCILPALACE;}
+		if("territory".equals(type)){
+			return BoardZone.TERRITORYTOWER;}
+		if("building".equals(type)){
+			return BoardZone.BUILDINGTOWER;}
+		if("character".equals(type)){
+			return BoardZone.CHARACTERTOWER;}
+		if("venture".equals(type)){
+			return BoardZone.VENTURETOWER;}
+		if("harvest".equals(type)){
+			return BoardZone.HARVEST;}
+		if("production".equals(type)){
+			return BoardZone.PRODUCTION;}
+		if("market".equals(type)){
+			return BoardZone.MARKET;}
+		if("council".equals(type)){
+			return BoardZone.COUNCILPALACE;}
 		return null;
 	}
 	
@@ -449,6 +423,7 @@ public class CardsReader {
 			default:
 				break;
 			}
+				break;
 		case 2:
 			switch (developmentCardTypes) {
 			case TERRITORYCARD:
@@ -461,7 +436,8 @@ public class CardsReader {
 				return jsonPathData.getVentureCardsPeriod2PathArray();
 			default:
 				break;
-			}
+			}	
+				break;
 		case 3:
 			switch (developmentCardTypes) {
 			case TERRITORYCARD:
@@ -475,10 +451,11 @@ public class CardsReader {
 			default:
 				break;
 			}
+			break;
 		default:
 			break;
 		}
-	return null;
+	return new String[0]; //return an empty array of strings instead null
 	}
 	
 	

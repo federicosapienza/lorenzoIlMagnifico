@@ -23,10 +23,10 @@ public class BonusImplementation implements BonusInterface {
 
 
 
-	private List<ResourcesOrPoints[]> listOfResourcesOfPointsArray = new ArrayList<ResourcesOrPoints[]>();
-	private List<ResourcesOrPoints> resourcesOrPointsStarting = new ArrayList<ResourcesOrPoints>();
-	private List<PersonalBoardTile> personalBoardTilesNormal = new ArrayList<PersonalBoardTile>();
-	private List<PersonalBoardTile> personalBoardTilesAdvanced = new ArrayList<PersonalBoardTile>();
+	private List<ResourcesOrPoints[]> listOfResourcesOfPointsArray = new ArrayList<>();
+	private List<ResourcesOrPoints> resourcesOrPointsStarting = new ArrayList<>();
+	private List<PersonalBoardTile> personalBoardTilesNormal = new ArrayList<>();
+	private List<PersonalBoardTile> personalBoardTilesAdvanced = new ArrayList<>();
 	private Map<Integer,Integer> faithTrack = new HashMap<>();
 	
 	/**
@@ -60,15 +60,15 @@ public class BonusImplementation implements BonusInterface {
 	 */
 	@Override
 	public List<PersonalBoardTile> get4RandomPersonalBoardTiles(String normalOrAdvanced) {
-		if(normalOrAdvanced.equals("normal")){
+		if("normal".equals(normalOrAdvanced)){
 			Collections.shuffle(personalBoardTilesNormal);
 			return personalBoardTilesNormal;
 		}
-		if(normalOrAdvanced.equals("advanced")){
+		if("advanced".equals(normalOrAdvanced)){
 			Collections.shuffle(personalBoardTilesAdvanced);
 			return personalBoardTilesAdvanced;
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -76,13 +76,13 @@ public class BonusImplementation implements BonusInterface {
 	 * advanced if the games has been playing with advanced rules.
 	 */
 	public List<PersonalBoardTile> getPersonalBoardTiles(String normalOrAdvanced){
-		if(normalOrAdvanced.equals("normal")){
+		if("normal".equals(normalOrAdvanced)){
 			return personalBoardTilesNormal;
 		}
-		if(normalOrAdvanced.equals("advanced")){
+		if("advanced".equals(normalOrAdvanced)){
 			return personalBoardTilesAdvanced;
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 }

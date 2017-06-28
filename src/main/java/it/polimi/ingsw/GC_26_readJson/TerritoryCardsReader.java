@@ -32,22 +32,22 @@ public class TerritoryCardsReader extends CardsReader {
 					actionValue= super.readInt("actionValue");
 					doubleImmediateEffect= super.readString("doubleImmediateEffect");
 					doublePermanentEffect= super.readString("doublePermanentEffect");
-					if(doubleImmediateEffect.equals("false")){
+					if("false".equals(doubleImmediateEffect)){
 							immediateEffectType= super.readString("typeOfImmediateEffect");
 							immediateEffect= super.createImmediateEffect(immediateEffectType);
 							}
-					if(doublePermanentEffect.equals("false")){
+					if("false".equals(doublePermanentEffect)){
 						permanentEffectType= super.readString("typeOfPermanentEffect");
 						permanentEffect=super.createPermanentEffect(permanentEffectType);
 						}
-					if(doublePermanentEffect.equals("true")){
+					if("true".equals(doublePermanentEffect)){
 						permanentEffectType = super.readString("typeOfPermanentEffect");
 						permanentEffectType2= super.readString("typeOfPermanentEffect2");
 						permanentEffect= super.createPermanentEffect(permanentEffectType);
 						permanentTemp= super.createPermanentEffect(permanentEffectType2);
 						permanentEffect = super.createDoubleEffect(permanentEffect,permanentTemp);
 					}
-					if(doubleImmediateEffect.equals("true")){
+					if("true".equals(doubleImmediateEffect)){
 						immediateEffectType = super.readString("typeOfPermanentEffect");
 						immediateEffectType2 = super.readString("typeOfPermanentEffect2");
 						immediateEffect = super.createImmediateEffect(immediateEffectType);

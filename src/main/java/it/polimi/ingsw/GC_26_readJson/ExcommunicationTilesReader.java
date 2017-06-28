@@ -34,7 +34,7 @@ private Effect permanentEffect;
 		case 3:
 			return jsonPathData.getExcommunicationTilesPeriod3();
 		default:
-			return null;
+			return new String[0];
 		}
 	}
 	

@@ -32,11 +32,11 @@ public class LeaderCardsReader extends CardsReader {
 			super.createJsonObjectFromFile(s);
 			name = super.readString("name");
 			doubleRequirements = super.readString("doubleRequirements");
-			if(doubleRequirements.equals("false")){
+			if("false".equals(doubleRequirements)){
 				requirementType = super.readString("typeOfRequirements");
 				requirement = super.createRequirement(requirementType);
 			}
-			if (doubleRequirements.equals("true")){
+			if ("true".equals(doubleRequirements)){
 				requirementType = super.readString("typeOfRequirements");
 				requirementType2 = super.readString("typeOfRequirements2");
 				requirement = super.createRequirement(requirementType);
@@ -45,22 +45,22 @@ public class LeaderCardsReader extends CardsReader {
 			}
 			doubleImmediateEffect= super.readString("doubleImmediateEffect");
 			doublePermanentEffect= super.readString("doublePermanentEffect");
-			if(doubleImmediateEffect.equals("false")){
+			if("false".equals(doubleImmediateEffect)){
 					immediateEffectType= super.readString("typeOfImmediateEffect");
 					immediateEffect= super.createImmediateEffect(immediateEffectType);
 					}
-			if(doublePermanentEffect.equals("false")){
+			if("false".equals(doublePermanentEffect)){
 				permanentEffectType= super.readString("typeOfPermanentEffect");
 				permanentEffect=super.createPermanentEffect(permanentEffectType);
 				}
-			if(doublePermanentEffect.equals("true")){
+			if("true".equals(doublePermanentEffect)){
 				permanentEffectType = super.readString("typeOfPermanentEffect");
 				permanentEffectType2= super.readString("typeOfPermanentEffect2");
 				permanentEffect= super.createPermanentEffect(permanentEffectType);
 				permanentTemp= super.createPermanentEffect(permanentEffectType2);
 				permanentEffect = super.createDoubleEffect(permanentEffect,permanentTemp);
 			}
-			if(doubleImmediateEffect.equals("true")){
+			if("true".equals(doubleImmediateEffect)){
 				immediateEffectType = super.readString("typeOfImmediateEffect");
 				immediateEffectType2 = super.readString("typeOfImmediateEffect2");
 				immediateEffect = super.createImmediateEffect(immediateEffectType);

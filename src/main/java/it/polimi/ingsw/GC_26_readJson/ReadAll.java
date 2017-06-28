@@ -53,10 +53,12 @@ public class ReadAll implements ReadFromFile{
 		
 	}
 	
+	@Override
 	public Cards getCards() {
 		return  cards;
 	}
 	
+	@Override
 	public BonusInterface getBonus() {
 		return bonus;
 	}

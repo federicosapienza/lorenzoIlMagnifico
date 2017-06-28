@@ -28,18 +28,18 @@ public class BuildingCardsReader extends CardsReader {
 	private String doublePayment;
 		
 		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
-			String[] ListOfPaths = super.chooseListOfCards(numberOfPeriod, DevelopmentCardTypes.BUILDINGCARD);
-			for(String s:ListOfPaths){
+			String[] listOfPaths = super.chooseListOfCards(numberOfPeriod, DevelopmentCardTypes.BUILDINGCARD);
+			for(String s:listOfPaths){
 				super.createJsonObjectFromFile(s);
 				name = super.readString("name");
 				period= super.readInt("period");
 				actionValue=super.readInt("actionValue");
 				doublePayment = super.readString("doublePayment");
-				if(doublePayment.equals("false")){
+				if("false".equals(doublePayment)){
 					paymentType=super.readString("typeOfPayment");
 					payment=super.createPayment(paymentType);
 					}
-				if(doublePayment.equals("true")){
+				if("true".equals(doublePayment)){
 					paymentType= super.readString("typeOfPayment");
 					paymentType2= super.readString("typeOfPayment2");
 					payment= super.createPayment(paymentType);
@@ -48,22 +48,22 @@ public class BuildingCardsReader extends CardsReader {
 				}
 				doubleImmediateEffect= super.readString("doubleImmediateEffect");
 				doublePermanentEffect= super.readString("doublePermanentEffect");
-				if(doubleImmediateEffect.equals("false")){
+				if("false".equals(doubleImmediateEffect)){
 						immediateEffectType= super.readString("typeOfImmediateEffect");
 						immediateEffect= super.createImmediateEffect(immediateEffectType);
 						}
-				if(doublePermanentEffect.equals("false")){
+				if("false".equals(doublePermanentEffect)){
 					permanentEffectType= super.readString("typeOfPermanentEffect");
 					permanentEffect=super.createPermanentEffect(permanentEffectType);
 					}
-				if(doublePermanentEffect.equals("true")){
+				if("true".equals(doublePermanentEffect)){
 					permanentEffectType = super.readString("typeOfPermanentEffect");
 					permanentEffectType2= super.readString("typeOfPermanentEffect2");
 					permanentEffect= super.createPermanentEffect(permanentEffectType);
 					permanentTemp= super.createPermanentEffect(permanentEffectType2);
 					permanentEffect = super.createDoubleEffect(permanentEffect,permanentTemp);
 				}
-				if(doubleImmediateEffect.equals("true")){
+				if("true".equals(doubleImmediateEffect)){
 					immediateEffectType = super.readString("typeOfImmediateEffect");
 					immediateEffectType2 = super.readString("typeOfImmediateEffect2");
 					immediateEffect = super.createImmediateEffect(immediateEffectType);
