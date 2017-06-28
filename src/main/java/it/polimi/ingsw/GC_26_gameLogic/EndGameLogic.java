@@ -24,8 +24,8 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
  */
 public class EndGameLogic {
 	private final GameElements gameElements;
-	private final static int territoryBonus[] = new  int[]{0,0,1,4,10,20};
-	private final static int charactersBonus[] = new  int[]{1,3,6,10,15,21};
+	private final static int[] territoryBonus = new  int[]{0,0,1,4,10,20};
+	private final static int[] charactersBonus = new  int[]{1,3,6,10,15,21};
 	private final static int resourcesBonus = 5;
 	private final ResourcesOrPoints militaryStrenghtFirstReward = ResourcesOrPoints.newPoints(5, 0, 0, 0);
 	private final ResourcesOrPoints militaryStrenghtSecondReward = ResourcesOrPoints.newPoints(2, 0, 0, 0);
@@ -46,6 +46,8 @@ public class EndGameLogic {
 		
 		calcultatingPoints();
 		
+		elaboratingMilitaryPointResult();
+		
 		elaboratingResult();
 		
 	}
@@ -60,7 +62,7 @@ public class EndGameLogic {
 			PermanentModifiers modifiers =player.getPermanentModifiers();
 			PersonalBoard personalBoard= player.getPersonalBoard();
 			Warehouse warehouse= player.getWarehouse();
-			int temp=0;
+			int temp;
 			
 			temp= warehouse.getVictoryPoints()-warehouse.getVictoryPoints()/modifiers.getVictoryPointsReducer();
 			warehouse.spendResources(ResourcesOrPoints.newPoints(temp, 0, 0, 0)) ;
@@ -98,7 +100,7 @@ public class EndGameLogic {
 	}
 	
 	
-	private void elaboratingResult(){
+	private void elaboratingMilitaryPointResult(){
 // starting elaborating results
 		//military strenght:
 		int bestValue=0;
@@ -111,7 +113,7 @@ public class EndGameLogic {
 				bestValue=temp;
 				continue;
 			}
-			if(temp>secondValue){
+			else if(temp>secondValue){
 				secondValue=temp;
 				continue;
 			}
@@ -130,23 +132,27 @@ public class EndGameLogic {
 			}
 				
 		}	
+		
+	}
+	
+	private void elaboratingResult(){
 		//finding the winner
-		bestValue=0;
-		for(Player p: gameElements.getPlayers()){
-			if( p.getWarehouse().getVictoryPoints() > bestValue )
-				bestValue = p.getWarehouse().getVictoryPoints();
+			int bestValue=0;
+			for(Player p: gameElements.getPlayers()){
+				if( p.getWarehouse().getVictoryPoints() > bestValue )
+					bestValue = p.getWarehouse().getVictoryPoints();
 
-		}
-		// notifying of the winner: the player list is ordered so it ' s guaranteed that
-		//if there is a parity the first in round order will win, as in game rules
-		for(Player p: gameElements.getPlayers()){
-			if( bestValue== p.getWarehouse().getVictoryPoints()){
-				gameElements.notifyPlayers(new Info(GameStatus.ENDING, p.getName(), p.getName() +" has won!!!!!"));
-				break;
+			}
+			// notifying of the winner: the player list is ordered so it ' s guaranteed that
+			//if there is a parity the first in round order will win, as in game rules
+			for(Player p: gameElements.getPlayers()){
+				if( bestValue== p.getWarehouse().getVictoryPoints()){
+					gameElements.notifyPlayers(new Info(GameStatus.ENDING, p.getName(), p.getName() +" has won!!!!!"));
+					break;
+				}
+					
 			}
 				
-		}
-		
 	}
 	
 	

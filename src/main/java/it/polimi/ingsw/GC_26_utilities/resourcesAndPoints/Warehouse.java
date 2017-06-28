@@ -220,10 +220,9 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		this.councilPrivileges-=resources.getPoints().getCouncilPrivileges();
 		
 		// To ensure nothing went wrong calls moreThanZero. 
-		if(!moreThanZero())  
+		if(!moreThanZero())  {
 			throw new IllegalArgumentException("Resources went below zero");
-		
-		
+		}
 		//notify the clients
 			notifyObservers(new PlayerWallet(this));
 		}

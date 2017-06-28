@@ -187,10 +187,7 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
         if(payment==null){
             return true;
         }
-        if(!payment.canPlayerGetThis(player, type)){
-            return false;
-        }
-        else return true;
+        return payment.canPlayerGetThis(player, type);
     }
 
     /**

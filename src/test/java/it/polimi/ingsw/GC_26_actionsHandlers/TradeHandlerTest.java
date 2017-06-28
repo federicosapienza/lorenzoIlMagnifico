@@ -16,7 +16,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class TradeHandlerTest {
 	HarvestAndProductionHandler harvestAndProductionHandler = new HarvestAndProductionHandler();
-	TradeHandler TradeHandler = new TradeHandler(harvestAndProductionHandler);
+	TradeHandler TradeHandler = new TradeHandler();
 	
 	@Test
 	public void isPossibleTrueTest() {

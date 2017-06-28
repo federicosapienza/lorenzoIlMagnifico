@@ -33,7 +33,7 @@ public class ActionCheckerHandler {
 	 * @param gameElements the game elements that the handler will evaluate to check the action
 	 * @param harvestAndProductionHandler the handler for harvest and production
 	 */
-	private final String positionNotValid= "Position not valid";
+	private static final String positionNotValid= "Position not valid";
 	
 	/**
 	 * Validation of the action that has been sent

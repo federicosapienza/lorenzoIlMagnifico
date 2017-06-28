@@ -13,6 +13,10 @@ import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
  *
  */
 public class PersonalBoardChangeNotification extends Message{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final GameStatus gameStatus;
 	private final String playerName;
 	private final CardDescriber card;

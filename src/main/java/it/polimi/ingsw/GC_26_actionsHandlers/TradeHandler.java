@@ -29,12 +29,6 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 * 
 */
 public class TradeHandler {
-	public HarvestAndProductionHandler harvestAndProductionHandler;
-
-	public TradeHandler(HarvestAndProductionHandler harvestAndProductionHandler) {
-		this.harvestAndProductionHandler=harvestAndProductionHandler;
-	}
-	
 	
 	public boolean isPossible(Player player , int choice){  // could throw runtime exception: ClassCastException
 		if(choice == 0){ //if player has refused the trade

@@ -348,7 +348,7 @@ public abstract class ActionHandler extends Handler{
 	  * @param familyMember It's the family member of the player involved in the action
 	  * @param action It's the action that the player wants to perform
 	  */
-	 protected void councilPalacePerform(Player player, FamilyMember familyMember, Action action){
+	 protected void councilPalacePerform(Player player, FamilyMember familyMember){
 		 CouncilPalace position =gameElements.getBoard().getCouncilPalace();
 		 performerHandler.goToCouncilPalacePosition(position, familyMember, player);
 		 /**

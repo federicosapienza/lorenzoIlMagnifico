@@ -32,13 +32,6 @@ public class MarketPosition extends SinglePosition {
 		this.resourcesOrPointsinPosition=resourcesOrPointsinPosition;
 	}
 
-	/**
-	 * Method used at the end of every turn to remove the eventual family member from the action space 
-	 */
-	@Override
-	public void clear() {
-		super.clear();
-	}
 	
 	/**
 	 * Method that gives the bonus resources or points present in the action space to the player who has put a family member
@@ -56,5 +49,13 @@ public class MarketPosition extends SinglePosition {
 	 */
 	public ResourcesOrPoints getResourcesOrPointsinPosition(){
 		return resourcesOrPointsinPosition;
+	}
+	
+	/**
+	 * Method that returns the value of the market position
+	 * @return
+	 */
+	public int getNumber() {
+		return number;
 	}
 }

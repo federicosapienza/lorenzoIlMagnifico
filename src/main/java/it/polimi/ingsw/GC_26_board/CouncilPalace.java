@@ -1,7 +1,5 @@
 package it.polimi.ingsw.GC_26_board;
 
-
-import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 /**

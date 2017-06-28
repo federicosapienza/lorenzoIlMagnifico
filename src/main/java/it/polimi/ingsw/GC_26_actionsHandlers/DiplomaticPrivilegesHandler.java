@@ -1,7 +1,6 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
 
-import java.util.List;
 
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;

@@ -92,7 +92,7 @@ public class SecondActionHandler extends ActionHandler{
 			super.marketPerform(player, null, action);
 			
 		if(action.getZone()== BoardZone.COUNCILPALACE)
-			super.councilPalacePerform(player, null, action);
+			super.councilPalacePerform(player, null);
 			
 		
 		

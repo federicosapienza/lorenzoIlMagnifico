@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
@@ -15,8 +17,10 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
 public class SocketINClient implements Runnable{
 	private	 Socket socket= null;
-	 private   ObjectInputStream objIn  = null;
-	 private  ClientController controller=null;;
+	private   ObjectInputStream objIn  = null;
+	private  ClientController controller=null;
+	private boolean running= true;
+	private final static Logger LOG = Logger.getLogger(ClientMain.class.getName());
 		
 		public SocketINClient(Socket socket) throws IOException {
 	        this.socket= socket;
@@ -31,7 +35,7 @@ public class SocketINClient implements Runnable{
 		@Override
 		public void run() {
 					try {
-						while (true){
+						while (running){
 				        String string = objIn.readUTF();
 				        System.out.println(string);
 				        if(string.equals("Entering in a game")){//any change here must be changed also in server
@@ -42,7 +46,7 @@ public class SocketINClient implements Runnable{
 					
 					controller.setLoginDone();
 
-					while(true){
+					while(running){
 					Object object = objIn.readObject();
 
 					if(object instanceof Message){
@@ -98,19 +102,20 @@ public class SocketINClient implements Runnable{
 				catch(IllegalArgumentException e2){
 					//TODO
 				}
-				
-				
-				finally {
-					try {
-						socket.close();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
 			
-		
+				finally {
+					close();
+				}
 		}
+		
+	public void close(){
+		try {
+			socket.close();
+			objIn.close();
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, "Can't establish Socket connection. ", e);	
+		}
+	}
 
 		
 }

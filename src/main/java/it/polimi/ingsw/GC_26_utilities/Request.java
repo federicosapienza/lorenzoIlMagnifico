@@ -8,6 +8,10 @@ public class Request extends Message{
 	
 	//sent unicast to the Player
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final PlayerStatus status;
 	private final String Message;
 	private final CardDescriber card;

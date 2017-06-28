@@ -26,7 +26,7 @@ public class MainActionHandler {
 		firstActionHandler =new FirstActionHandler(gameElements, harvestAndProductionHandler);
 		secondActionHandler= new SecondActionHandler(gameElements, harvestAndProductionHandler);
 	
-		tradeHandler = new TradeHandler(harvestAndProductionHandler);
+		tradeHandler = new TradeHandler();
 		twoPaymentHandler = new TwoPaymentsHandler(gameElements.getPlayers());
 		diplomaticPrivilegesHandler= new DiplomaticPrivilegesHandler();
 		vaticanReportHandler = new VaticanReportHandler(gameElements);

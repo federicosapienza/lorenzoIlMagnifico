@@ -135,7 +135,7 @@ public class CardDescriber implements Serializable{
      * @return the immediate effect describer of the card described by the card describer
      */
     public String getImmediateEffectDescriber() {
-        return immediateEffect.toString();
+        return immediateEffect;
     }
 
     /**

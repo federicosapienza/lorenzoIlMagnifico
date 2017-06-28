@@ -1,7 +1,6 @@
 package it.polimi.ingsw.GC_26_serverView;
 
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
-import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_server.Observer;
 import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
 

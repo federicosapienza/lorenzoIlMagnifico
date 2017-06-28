@@ -13,6 +13,7 @@ import it.polimi.ingsw.GC_26_utilities.Request;
 
 //Handles the activation of leaderCards : he keeps memory of the cards used this turn to prevent the player from trying using the same card twice
 public class LeaderCardHandler extends Handler{
+	private String errorString = "Wrong value";
 
 	public LeaderCardHandler(List<Player> players) {
 		super(players);
@@ -20,15 +21,15 @@ public class LeaderCardHandler extends Handler{
 	
 	public boolean isPossible(Player player , int choice){  
 		List<LeaderCard> list = player.getPersonalBoard().getLeadersCard();
-		LeaderCard card=null;
+		LeaderCard card;
 		if(choice>4){
-			player.notifyObservers(new Request(player.getStatus(),"Wrong value", null));
+			player.notifyObservers(new Request(player.getStatus(),errorString, null));
 			return false;
 		}	
 		try {
 			card= list.get(choice);
 		} catch (IndexOutOfBoundsException e) {
-			player.notifyObservers(new Request(player.getStatus(),"Wrong value", null));
+			player.notifyObservers(new Request(player.getStatus(),errorString, null));
 			return false;
 		}
 		if(player.getPersonalBoard().isLeaderCardUsedYet(card)){
@@ -49,7 +50,7 @@ public class LeaderCardHandler extends Handler{
 		try {
 			card= list.get(choice);
 		} catch (IndexOutOfBoundsException e) {
-			player.notifyObservers(new Request(player.getStatus(),"Wrong value", null));
+			player.notifyObservers(new Request(player.getStatus(),errorString, null));
 			throw new IllegalStateException();
 		}
 		if (player.getPersonalBoard().isLeaderCardUsedYet(card) || !card.checkRequirement(player))

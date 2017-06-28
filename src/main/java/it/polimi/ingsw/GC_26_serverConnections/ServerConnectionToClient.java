@@ -2,7 +2,6 @@ package it.polimi.ingsw.GC_26_serverConnections;
 
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
-import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 import it.polimi.ingsw.GC_26_utilities.Message;

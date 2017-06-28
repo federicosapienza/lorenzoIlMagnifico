@@ -10,14 +10,14 @@ import it.polimi.ingsw.GC_26_gameLogic.Action;
 public class SocketOutClient implements ClientConnection{
 	
 	 Socket socket= null;
-	    ObjectOutputStream objOut =  null;
+	 ObjectOutputStream objOut =  null;
 		
-		public SocketOutClient(Socket socket) throws IOException {
-	        this.socket= socket;
-			objOut = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
-			objOut.flush();
-			
-	        }
+	public SocketOutClient(Socket socket) throws IOException {
+        this.socket= socket;
+		objOut = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
+		objOut.flush();
+		
+        }
 	
 
 	@Override
@@ -54,6 +54,17 @@ public class SocketOutClient implements ClientConnection{
 			objOut.writeObject(action);
 			objOut.flush();
 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Override
+	public void close() {
+		try { //socket is closed by input stream
+			objOut.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

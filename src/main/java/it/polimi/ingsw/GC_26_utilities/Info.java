@@ -12,6 +12,10 @@ import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
  *
  */
 public class Info extends Message{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final GameStatus status;
 	private final String playerReferred; //can be null
 	private final String message;

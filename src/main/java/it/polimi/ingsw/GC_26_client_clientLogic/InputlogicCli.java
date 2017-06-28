@@ -27,7 +27,8 @@ public class InputlogicCli implements Runnable{
 		private boolean zoneChosen=false;
 		private boolean positionChosen=false;;
 		private boolean familyMemberChosen=false;
-		private String lastString;
+		private String lastString; //it s called any time we want to repeat the last request
+		private boolean close=false;
 		
 		
 		public InputlogicCli(ClientConnection connection, MainClientView view, Output output) {
@@ -37,7 +38,7 @@ public class InputlogicCli implements Runnable{
 
 		}
 		
-
+		//main class
 		@Override
 		public void run() {
 			String username;
@@ -58,8 +59,8 @@ public class InputlogicCli implements Runnable{
 				    System.out.println("not valid input");
 				}
 				int value = scanIN.nextInt();
-				if(scanIN==null)  // if user insert enter key twice 
-					continue;
+				/*if(scanIN==null)  // if user insert enter key twice 
+					continue; */
 				if(value==999){  //if player asks to end the turn
 					String	temp="end turn" ;
 					connection.sendResponce(temp);
@@ -72,38 +73,8 @@ public class InputlogicCli implements Runnable{
 					output.printString(lastString);
 					continue;
 				}	
-				if(this.getWaitingAction()){  //if waiting action
-					if(firstAction && !familyMemberChosen && (value<5 && value>0)){ // family member is not chosen in second action
-						familyMember=value;
-						familyMemberColour= chooseColour(familyMember);
-						output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
-						familyMemberChosen=true;
-						continue;
-					}
-					if(familyMemberChosen && !zoneChosen && (value>0 && value<9)){
-						boardChoice=value;
-						zone=chooseBoardZone(boardChoice);
-						output.printString("what position? '-1'-togoBack");
-						zoneChosen=true;
-						continue;
-					}
-					if(zoneChosen && !positionChosen &&  (value>0 && value<5)){
-						position=value;
-						output.printString("How many servants? '-1'-togoBack");
-						positionChosen=true;
-						continue;
-					}
-					if(positionChosen && value>=0){
-						servants=value;
-						Action action = new Action(zone, position, familyMemberColour, servants);
-						connection.performAction(action);
-						this.waitingAction=false;
-						this.firstAction=false;
-						restartValues();
-						waitingAction=false;
-						continue;	
-					}
-					output.printString("Not Valid! Repeat!");
+				if(this.getWaitingAction()){
+					handleAction(value);
 				}
 				if(this.getWaitingResponce()){
 					String temp=String.valueOf(value);
@@ -111,8 +82,50 @@ public class InputlogicCli implements Runnable{
 					waitingResponse=false;
 					continue;
 				}
-			}
+				if(close)
+					break;
+			}	
 		}
+	
+		
+		
+		public void handleAction(int value){
+		  //if waiting action
+		if(firstAction && !familyMemberChosen && (value<5 && value>0)){ // family member is not chosen in second action
+			familyMember=value;
+			familyMemberColour= chooseColour(familyMember);
+			output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
+			familyMemberChosen=true;
+			return;
+		}
+		if(familyMemberChosen && !zoneChosen && (value>0 && value<9)){
+			boardChoice=value;
+			zone=chooseBoardZone(boardChoice);
+			output.printString("what position? '-1'-togoBack");
+			zoneChosen=true;
+			return;
+		}
+		if(zoneChosen && !positionChosen &&  (value>0 && value<5)){
+			position=value;
+			output.printString("How many servants? '-1'-togoBack");
+			positionChosen=true;
+			return;
+		}
+		if(positionChosen && value>=0){
+			servants=value;
+			Action action = new Action(zone, position, familyMemberColour, servants);
+			connection.performAction(action);
+			this.waitingAction=false;
+			this.firstAction=false;
+			restartValues();
+			waitingAction=false;
+			return;	
+		}
+			output.printString("Not Valid! Repeat!");
+		}
+		
+		
+		
 		
 		private synchronized boolean getWaitingAction(){
 			return waitingAction;
@@ -149,6 +162,12 @@ public class InputlogicCli implements Runnable{
 			restartValues();
 			waitingResponse=true;
 		}
+		
+		public synchronized void close(){
+			close=true;
+			connection.close();
+		}
+		
 		
 		public void setActionPerformed() {
 			output.printCards(view.getThisPlayer().getLeadersCardOwned());
@@ -190,9 +209,6 @@ public class InputlogicCli implements Runnable{
 			this.setWaitingResponse();
 		}
 
-		
-		
-		
 		private void restartValues() {
 			boardChoice=0;
 			position=0;
@@ -252,7 +268,6 @@ public class InputlogicCli implements Runnable{
 			output.printString(string);
 		}
 		
-
 
 
 
