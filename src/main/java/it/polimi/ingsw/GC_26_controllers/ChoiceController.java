@@ -27,15 +27,17 @@ public class ChoiceController implements Observer<Integer>{
 		synchronized (player) {
 			status = player.getStatus();
 		}
-		if(status==PlayerStatus.SUSPENDED)
+		if(status==PlayerStatus.SUSPENDED){
 			restartingPlayer();
+			return;}
 		if(status == PlayerStatus.TRADING)
 			 tradeController(choice);
 		if(status == PlayerStatus.CHOOSINGPAYMENT)
 			twoPaymentsController(choice);
 		
-		if(status == PlayerStatus.VATICANREPORTDECISION)
+		if(status == PlayerStatus.VATICANREPORTDECISION){
 			vaticanReportController(choice);
+			return;}
 		
 		if(status==PlayerStatus.TRADINGCOUNCILPRIVILEDGES )
 			//player is trading diplomatic privileges
@@ -100,18 +102,15 @@ public class ChoiceController implements Observer<Integer>{
 					PlayerStatus previousStatus =player.getPreviousStatus(); 
 					if(previousStatus ==PlayerStatus.PLAYING){
 						if(player.getWarehouse().getCouncilPrivileges()>0){
-							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
+							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+									+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
+							return;
 						}
-						else if(player.isThereAsecondaryAction())
+						else if(player.isThereAsecondaryAction()){
 							player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+							return;}
 						else 
 							player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
-					}
-					if(previousStatus ==PlayerStatus.SECONDPLAY){
-						if(player.getWarehouse().getCouncilPrivileges()>0){
-							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
-					 	}
-					 else 	player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 					}	
 					}
 			} catch(IllegalArgumentException e){
@@ -136,11 +135,13 @@ public class ChoiceController implements Observer<Integer>{
 						return;
 					 //going back to previous state of the game, if time not expired and restarting the action that was interrputed
 					if(player.getWarehouse().getCouncilPrivileges()>0){
-						player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
+						player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+								+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 						return;
 					}
-					if(player.isThereAsecondaryAction())
+					if(player.isThereAsecondaryAction()){
 						player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
+						return;}
 					else player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));;
 				}
 				}
@@ -167,13 +168,7 @@ public class ChoiceController implements Observer<Integer>{
 				player.setPlayerActive();
 				VaticanReportHandler handler= handlers.getVaticanReportHandler();
 				handler.perform(player, choice);
-				synchronized (player) {
-					if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
-						return;
-					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, "action not valid" , null));
-					
-
-					}
+				
 				handlers.getGameElements().getGame().vaticanReportNext(); // automatically ends the turn
 		}
 			
@@ -201,13 +196,16 @@ public class ChoiceController implements Observer<Integer>{
 				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 					return;
 				 //going back to previous state of the game, if time not expired and restarting the action that was interrupted
-				if(player.getWarehouse().getCouncilPrivileges()>0)
-					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
-				//altrimenti lo stato resta lo stesso
+				if(player.getWarehouse().getCouncilPrivileges()>0){
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
+					return;
+				}
+				//otherwise the status does not change
 				}
 		}
 		catch( IllegalStateException e){
-			player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription(), null));
+			player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED,null, null));
 		}
 		}
 }

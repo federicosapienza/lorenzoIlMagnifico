@@ -2,46 +2,59 @@ package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
+import it.polimi.ingsw.GC_26_gameLogic.Game;
 import it.polimi.ingsw.GC_26_player.Player;
+import it.polimi.ingsw.GC_26_readJson.BonusInterface;
+import it.polimi.ingsw.GC_26_readJson.Cards;
+import it.polimi.ingsw.GC_26_readJson.ReadAll;
+import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
 
 public class WarehouseTest {
-
+	Cards cards;
+	BonusInterface bonus;
+	TimerValuesInterface times;
+	List<ResourcesOrPoints[]> resourcesOrPointsList = new ArrayList<ResourcesOrPoints[]>();
+	ReadAll readAll = new ReadAll();
+	
 	@Test
+	public void testCorrectPlayersList() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		cards = readAll.getCards();
+		bonus = readAll.getBonus();
+		times = readAll.getTimes();
+		Game game = new Game(cards, bonus, times);
+		game.addPlayer("David");
+		game.addPlayer("Steph");
+		game.addPlayer("Daniel");
+		Player player4 = game.addPlayer("Emma");
+		game.initialiseGame();
+		game.startGame();
+		assertEquals(8, player4.getWarehouse().getCoins());
+	}
+
+	@Test (expected = NullPointerException.class)
 	public void testNullPlayerException() {
-		boolean thrownNullPlayerExcep = false;
 		Player nullPlayer = null;
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResourcesOrPoints(5, 3, 2, 2, 0, 0, 0, 0);
-		try {
-			Warehouse warehouse = new Warehouse(nullPlayer, startingResources);
-		} catch (NullPointerException e) {
-			thrownNullPlayerExcep = true;
-		}
-		assertTrue(thrownNullPlayerExcep);
+		Warehouse warehouse = new Warehouse(nullPlayer, startingResources);
+		warehouse.notifyAll();
 		
 	}
 	
-	@Test
-	public void testCorrectGetStatus() {
-		ResourcesOrPoints startingResources = ResourcesOrPoints.newResourcesOrPoints(5, 3, 2, 2, 0, 0, 0, 0);
-		Player player = new Player("Jess", startingResources);
-		Warehouse warehouse = new Warehouse(player, startingResources);
-		assertEquals(5, warehouse.getCoins());
-		
-		
-	}
 	
-	@Test
+	
+	@Test (expected = NullPointerException.class)
 	public void testNullWarehouse() {
-		boolean thrownNullExcep = false;
+		
 		Warehouse other = null;
-		try {
-			Warehouse warehouse = new Warehouse(other);
-		} catch (NullPointerException e) {
-			thrownNullExcep = true;
-		}
-		assertTrue(thrownNullExcep);
+		Warehouse warehouse = new Warehouse(other);
+		warehouse.notifyAll();
 	}
 	
 	@Test
@@ -53,16 +66,7 @@ public class WarehouseTest {
 		assertFalse(warehouse.areResourcesEnough(res));
 	}
 	
-	/*
-	@Test
-	public void testResourcesAreEnough() {
-		ResourcesOrPoints startingResources = ResourcesOrPoints.newResourcesOrPoints(5, 3, 3, 3, 2, 2, 2, 2);
-		Player player = new Player("Daphne", startingResources);
-		Warehouse warehouse = new Warehouse(player, startingResources);
-		ResourcesOrPoints res = ResourcesOrPoints.newResourcesOrPoints(2, 2, 2, 2, 1, 1, 1, 1);
-		assertTrue(warehouse.areResourcesEnough(res));
-	}
-	*/
+	
 	
 	@Test
 	public void testSpendResources() {
@@ -75,19 +79,14 @@ public class WarehouseTest {
 		
 	}
 	
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testIllegalSpendResources() {
-		boolean thrownIllegalArgExcep = false;
+
 		ResourcesOrPoints resources = ResourcesOrPoints.newResourcesOrPoints(7, 1, 1, 1, 0, 0, 0, 0);
 		ResourcesOrPoints res1 = ResourcesOrPoints.newResourcesOrPoints(6, 3, 2, 2, 0, 0, 0, 0);
 		Player player = new Player("Ben", res1);
 		Warehouse illegalWarehouse = new Warehouse(player, res1);
-		try {
-			illegalWarehouse.spendResources(resources);
-			
-		} catch (IllegalArgumentException e) {
-			thrownIllegalArgExcep = true;
-		}
-		assertTrue(thrownIllegalArgExcep);
+		illegalWarehouse.spendResources(resources);
+		
 	}
 }

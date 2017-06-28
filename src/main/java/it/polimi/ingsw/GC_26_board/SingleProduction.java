@@ -23,10 +23,4 @@ public class SingleProduction extends SinglePosition{
 	}
 	
 	
-	
-	@Override
-	public int getValueOfPosition() {
-		return super.getValueOfPosition();
-	}
-	
 }

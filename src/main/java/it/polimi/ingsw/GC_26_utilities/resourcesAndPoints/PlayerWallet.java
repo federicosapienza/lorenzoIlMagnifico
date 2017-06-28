@@ -38,7 +38,7 @@ public class PlayerWallet implements Serializable{
 		this.coins =warehouse.getCoins();
 		this.servants =warehouse.getServants();
 		this.wood= warehouse.getWood();
-		this.stone=warehouse.getWood();
+		this.stone=warehouse.getStone();
 		this.victoryPoints=warehouse.getVictoryPoints();
 		this.militaryPoints=warehouse.getMilitaryPoints();
 		this.faithPoints=warehouse.getFaithPoints();
@@ -128,14 +128,25 @@ public class PlayerWallet implements Serializable{
 	    if (getClass() != obj.getClass())   
 	        return false;
 	    PlayerWallet other = (PlayerWallet) obj;                
-	    if (this.getPlayerName() != other.getPlayerName() || this.getCoins()!=other.getCoins() || this.getServants()!=other.getServants()
-	    		 || this.getWood()!=other.getWood() || this.getStone()!=other.getStone() || this.getMilitaryPoints()!= other.getMilitaryPoints()
+	    if (this.getPlayerName() != other.getPlayerName() )
+	    	return false;
+	    if( this.getCoins()!=other.getCoins() || this.getServants()!=other.getServants()
+	    		 || this.getWood()!=other.getWood() || this.getStone()!=other.getStone() )
+	    	return false;
+	    else if( this.getMilitaryPoints()!= other.getMilitaryPoints()
 	    		 || this.getVictoryPoints()!=other.getVictoryPoints() || this.getFaithPoints()!=other.getFaithPoints()
-	    		 || this.getCouncilPrivileges()!=other.getCouncilPrivileges())        
-	        return false;                 
+	    		 || this.getCouncilPrivileges()!=other.getCouncilPrivileges()) {       
+	        return false;     
+	        }     
 	    return true; 
 
 	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	
 	
 	public String toStringResources() {
 		return coins+" coins"+ servants +" servants" + stone +" stone"+wood+ " wood";

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.GC_26_board;
 
-import it.polimi.ingsw.GC_26_player.Player;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)

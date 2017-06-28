@@ -58,22 +58,21 @@ public class FirstActionHandler extends ActionHandler{
 			return false;
 		
 		//calling the right checker
-			if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
+		else if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 					action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER){
 				return super.towerIsPossible(player, familyMemberUsed, action);
 			}
-			if(action.getZone()==BoardZone.MARKET){
+		else if(action.getZone()==BoardZone.MARKET){
 				return super.marketIsPossible(player, familyMemberUsed, action);
 			}
-			if(action.getZone()==BoardZone.COUNCILPALACE){
+		else if(action.getZone()==BoardZone.COUNCILPALACE){
 				return super.councilPalaceIsPossible(player, familyMemberUsed, action);
 			}
-			if(action.getZone()==BoardZone.HARVEST){
+		else if(action.getZone()==BoardZone.HARVEST){
 				return super.harvestIsPossible(player, familyMemberUsed, action);
 			}
-			if(action.getZone()==BoardZone.PRODUCTION){
-				
-			 return super.productionIsPossible(player, familyMemberUsed, action);
+		else if(action.getZone()==BoardZone.PRODUCTION){
+				return super.productionIsPossible(player, familyMemberUsed, action);
 			}
 			else {
 				throw new IllegalArgumentException();
@@ -103,7 +102,7 @@ public class FirstActionHandler extends ActionHandler{
 			if(action.getZone()==BoardZone.MARKET)
 				super.marketPerform(player, familyMemberUsed, action);
 			if(action.getZone()== BoardZone.COUNCILPALACE)
-				super.councilPalacePerform(player, familyMemberUsed, action);
+				super.councilPalacePerform(player, familyMemberUsed);
 			if(action.getZone()==BoardZone.HARVEST)
 				super.harvestPerform(player, familyMemberUsed, action);
 			if(action.getZone()==BoardZone.PRODUCTION)

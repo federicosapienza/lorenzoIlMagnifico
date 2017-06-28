@@ -111,6 +111,10 @@ public class Game extends Observable<CardDescriber>{
 		return period;
 	}
 	
+	public int getRound() {
+		return round;
+	}
+	
 	/**
 	 * Method used to update the status of the game whenever it changes 
 	 * @param status It's the new status of the game after the change, that will become the current status of the current game 
@@ -144,6 +148,9 @@ public class Game extends Observable<CardDescriber>{
 	 * current players of the game.
 	 */
 	public void initialiseGame(){
+		if (numberOfPlayers < 0 || numberOfPlayers > 4) {
+			throw new IllegalArgumentException();
+		}
 		gameElements= new GameElements(this, players, numberOfPlayers, resourcesOrPointsBonus, bonusInterface.getFaithTrack());
 		
 		//TODO notificare i giocatori
@@ -174,7 +181,7 @@ public class Game extends Observable<CardDescriber>{
 		/**
 		 * The following lines of code represent the situation of giving the personal bonus tiles to the players and sending
 		 * them to the clients.
-		 * If the the game has been playing with basic rules, players will get the normal personal bonus tile, which is the 
+		 * If the game has been playing with basic rules, players will get the normal personal bonus tile, which is the 
 		 * same for every player;
 		 * if the game has been playing with advanced rules, players will get the advanced personal bonus tile, which
 		 * is different for every player.
@@ -216,7 +223,7 @@ public class Game extends Observable<CardDescriber>{
 		}
 
 		/**
-		 * Initialization completed. Now the game can start really.
+		 * Initialization completed. Now the game can really start.
 		 */
 		startingRound();
 		nextStep();
@@ -231,7 +238,7 @@ public class Game extends Observable<CardDescriber>{
 	private List<DevelopmentCard> buildingTowerCards;
 	private List<DevelopmentCard> characterTowerCards;
 	private List<DevelopmentCard> ventureTowerCards;
-	private final int turnsNumber=2;  //TODO rimettere 4
+	private final static int turnsNumber=2;  //TODO rimettere 4
 	
 	/**
 	 * Method that describes what to do next
@@ -241,13 +248,13 @@ public class Game extends Observable<CardDescriber>{
 		playersPerformedActions++;
 		
 		if(playersPerformedActions== numberOfPlayers && turn!=turnsNumber){
-			playersPerformedActions=0;
+			playersPerformedActions=0; 
 			turn++; //then read 303
 		}
 		/**
 		 * starting Vatican Turn
 		 */
-		if(turn ==turnsNumber && playersPerformedActions==numberOfPlayers){
+		if(turn == turnsNumber && playersPerformedActions==numberOfPlayers){
 			if(round==1){
 				/**
 				 * If the first round of the current period has come to the end, the game will go on with the next round,
@@ -265,17 +272,17 @@ public class Game extends Observable<CardDescriber>{
 				vaticanReportNext();
 				return;
 			}
-			}//end of if(playersPerformedActions==numberOfPlayers)
+		}
 		
 		/**
 		 *Notifying of players no more suspended
 		 */
-			if(!playersNoMoreSuspended.isEmpty()){
-				for(Player p: playersNoMoreSuspended){
-					gameElements.notifyPlayers(new Info(GameStatus.PLAYING, p.getName(), p.getName()+ "is no more suspended")) ;
-					playersNoMoreSuspended.remove(p);
-				}
+		if(!playersNoMoreSuspended.isEmpty()){
+			for(Player p: playersNoMoreSuspended){
+				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, p.getName(), p.getName()+ "is no more suspended")) ;
+				playersNoMoreSuspended.remove(p);
 			}
+		}
 		
 			
 		/**
@@ -284,25 +291,25 @@ public class Game extends Observable<CardDescriber>{
 		Player player = players.get(playersPerformedActions); 
 		PlayerStatus status;
 		synchronized(player){
-				 status= player.getStatus();
+			status= player.getStatus();
 		}
-			/**
-			 * If the player has been suspended, he'll miss his turn
-			 */
-			if(status == PlayerStatus.SUSPENDED){
-				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn")) ;
-				nextStep();
-				return;
-			}
-			
-			/**
-			 * If the player has not been suspended, his status will change to PLAYING and the other players
-			 * will be notified that it's his turn
-			 */
-			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),"Is '" +player.getName()+ "' turn")) ;
-			player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
+		/**
+		 * If the player has been suspended, he'll miss his turn
+		 */
+		if(status == PlayerStatus.SUSPENDED){
+			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn"));
+			nextStep();
 			return;
 		}
+		
+		/**
+		 * If the player has not been suspended, his status will change to PLAYING and the other players
+		 * will be notified that it's his turn
+		 */
+		gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(),"Is '" +player.getName()+ "' turn")) ;
+		player.setStatus(new Request(PlayerStatus.PLAYING, null , null));
+		return;
+	}
 
 
 	
@@ -443,17 +450,17 @@ public class Game extends Observable<CardDescriber>{
 		  /**
 		   * If the player has been suspended, he gets the excommunication automatically.
 		   */
-		  synchronized (player) {
-			  if(player.getStatus() == PlayerStatus.SUSPENDED){
-				  gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn and is excommunicated"));
-				  gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(excommunicationTile),  null));
-				  excommunicationTile.runEffect(player);		    	
-				  return;
-				  }
-			  player.notifyObservers(new Request(PlayerStatus.VATICANREPORTDECISION, "1)do you prefer getting"
-			  		+ " excommunicated and getting "+ bonusInterface.getFaithTrack().get(player.getWarehouse().getFaithPoints()) +" , "+
-			  				 "or not?", new CardDescriber(excommunicationTile)));
-		  }
+	
+		  if(player.getStatus() == PlayerStatus.SUSPENDED){
+			  gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn and is excommunicated"));
+			  gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(excommunicationTile),  null));
+			  excommunicationTile.runEffect(player);		    	
+			  return;
+			  }
+		  player.setStatus(new Request(PlayerStatus.VATICANREPORTDECISION, "1)do you prefer getting"
+		  		+ " excommunicated and getting "+ bonusInterface.getFaithTrack().get(player.getWarehouse().getFaithPoints()) +" , "+
+		  				 "victory points or not?", new CardDescriber(excommunicationTile)));
+		  
 	}
 	
 	

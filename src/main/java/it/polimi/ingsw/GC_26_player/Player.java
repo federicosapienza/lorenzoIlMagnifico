@@ -42,6 +42,7 @@ public class Player extends Observable<Message> {
 	private Action typeOfSecondaryAction;
 	private int secondActionValue;
 	
+
 	public Player(String name, ResourcesOrPoints startingResources) {
 		if(name==null || startingResources==null)
 			throw new NullPointerException(); 
@@ -163,7 +164,7 @@ public class Player extends Observable<Message> {
 		this.cardUsed = cardUsed;
 	}
 	
-
+	
 		
 	
 

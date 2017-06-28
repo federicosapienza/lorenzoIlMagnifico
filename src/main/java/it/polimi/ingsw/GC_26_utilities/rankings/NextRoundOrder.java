@@ -17,34 +17,17 @@ import it.polimi.ingsw.GC_26_player.Player;
 
 public class NextRoundOrder {
 	
-	private List<String> nextRoundOrder= new ArrayList<>();
+	private List<String> nextRoundOrder;
 	
 	/**
 	 * Constructor of the order for the next round.
 	 * @param players It's the list of players playing the game
 	 */
-	public NextRoundOrder(List<Player> players) {
-		if (players == null) {
-			throw new NullPointerException();
-		}
-		if (players.size()>4) {
-			throw new IllegalArgumentException();
-		}
-		initialise(players);
+	public NextRoundOrder() {
+		 nextRoundOrder= new ArrayList<>();
 	}
 	
-	/**
-	 * Method that is used for the first initialization. 
-	 * In the first round, the order is determined by the order in which the player were added to the game:
-	 * a "fair" principle common in multiplayer online games.
-	 * @param players
-	 */
-	private void initialise(List<Player> players) {
-		for(Player p: players){
-			String name = p.getName();
-			nextRoundOrder.add(name);
-		}
-	}
+	
 
 	// logic of new round' s order 
 	/**

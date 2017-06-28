@@ -40,8 +40,6 @@ import it.polimi.ingsw.GC_26_cards.payments.MilitaryPointPayment;
 import it.polimi.ingsw.GC_26_cards.payments.Payment;
 import it.polimi.ingsw.GC_26_cards.payments.ResourcesPayment;
 import it.polimi.ingsw.GC_26_cards.payments.TwoOrPayments;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPointsTest;
 
 public class CardsReaderTest {
 

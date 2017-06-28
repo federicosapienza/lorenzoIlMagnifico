@@ -45,7 +45,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		this.coins =other.getCoins();
 		this.servants =other.getServants();
 		this.wood= other.getWood();
-		this.stone=other.getWood();
+		this.stone=other.getStone();
 		this.victoryPoints=other.getVictoryPoints();
 		this.militaryPoints=other.getMilitaryPoints();
 		this.faithPoints=other.getFaithPoints();
@@ -108,9 +108,9 @@ public class Warehouse  extends Observable<PlayerWallet> {
 
 	@Override
 	public String toString(){
-		return coins+" coins,  "+ servants+ " servants, "+wood+ " wood, "+stone+ " stone"
-	    		+ victoryPoints+ " victoryPoints"+  militaryPoints+" military points" + victoryPoints+ " victory points"+
-	    		 faithPoints+ " faith points" + councilPrivileges +" council priviledges.";
+		return coins+" coins,  "+ servants+ " servants, "+wood+ " wood, "+stone+ " stone, "
+	    		+ victoryPoints+ " victoryPoints, "+  militaryPoints+" military points, " 
+	    		+ faithPoints+ " faith points, " + councilPrivileges +" council priviledges.";
 	}
 
 	public String MilitaryPointStatus(){
@@ -191,7 +191,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 	
 	public void add(ResourcesOrPoints resources){
 		ResourcesOrPoints temp=resources;
-		if(player.getPermanentModifiers().IsresourcesMalusOn())
+		if(player.getPermanentModifiers().isResourcesMalusOn())
 		//check if any malus on getting resources is on (look at permanentModifier class)
 		//calls the permanent effect to reduce the resources the player can earn
 			temp= player.getPermanentModifiers().getResourcesAfterMalus(resources);
@@ -220,10 +220,9 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		this.councilPrivileges-=resources.getPoints().getCouncilPrivileges();
 		
 		// To ensure nothing went wrong calls moreThanZero. 
-		if(!moreThanZero())  
+		if(!moreThanZero())  {
 			throw new IllegalArgumentException("Resources went below zero");
-		
-		
+		}
 		//notify the clients
 			notifyObservers(new PlayerWallet(this));
 		}

@@ -27,6 +27,8 @@ public class InputlogicCli implements Runnable{
 		private boolean zoneChosen=false;
 		private boolean positionChosen=false;;
 		private boolean familyMemberChosen=false;
+		private String lastString; //it s called any time we want to repeat the last request
+		private boolean close=false;
 		
 		
 		public InputlogicCli(ClientConnection connection, MainClientView view, Output output) {
@@ -36,7 +38,7 @@ public class InputlogicCli implements Runnable{
 
 		}
 		
-
+		//main class
 		@Override
 		public void run() {
 			String username;
@@ -47,12 +49,6 @@ public class InputlogicCli implements Runnable{
 				}
 				connection.login(username);
 				view.setPlayerUsername(username);
-			/*username = scanIN.nextLine();
-			String password = scanIN.nextLine();
-			connection.login(username, password);
-			view.setPlayerUsername(username);
-			
-			*/
 				
 				
 			scanIN=new Scanner(System.in);
@@ -63,8 +59,8 @@ public class InputlogicCli implements Runnable{
 				    System.out.println("not valid input");
 				}
 				int value = scanIN.nextInt();
-				if(scanIN==null)  // if user insert enter key twice 
-					continue;
+				/*if(scanIN==null)  // if user insert enter key twice 
+					continue; */
 				if(value==999){  //if player asks to end the turn
 					String	temp="end turn" ;
 					connection.sendResponce(temp);
@@ -74,44 +70,11 @@ public class InputlogicCli implements Runnable{
 				}
 				if(value<0){  //the player asks to reset action , if he was performing an action. useless while waiting response.
 					restartValues();
-					if(firstAction)
-						output.printString("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
-					else output.printString("choose a value between 1 and 4 to try activating the correspondent Leader Card");
-
+					output.printString(lastString);
 					continue;
 				}	
-				if(this.getWaitingAction()){  //if waiting action
-					if(firstAction && !familyMemberChosen && (value<5 && value>0)){ // family member is not chosen in second action
-						familyMember=value;
-						familyMemberColour= chooseColour(familyMember);
-						output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
-						familyMemberChosen=true;
-						continue;
-					}
-					if(familyMemberChosen && !zoneChosen && (value>0 && value<9)){
-						boardChoice=value;
-						zone=chooseBoardZone(boardChoice);
-						output.printString("what position? '-1'-togoBack");
-						zoneChosen=true;
-						continue;
-					}
-					if(zoneChosen && !positionChosen &&  (value>0 && value<5)){
-						position=value;
-						output.printString("How many servants? '-1'-togoBack");
-						positionChosen=true;
-						continue;
-					}
-					if(positionChosen && value>=0){
-						servants=value;
-						Action action = new Action(zone, position, familyMemberColour, servants);
-						connection.performAction(action);
-						this.waitingAction=false;
-						this.firstAction=false;
-						restartValues();
-						waitingAction=false;
-						continue;	
-					}
-					output.printString("Not Valid! Repeat!");
+				if(this.getWaitingAction()){
+					handleAction(value);
 				}
 				if(this.getWaitingResponce()){
 					String temp=String.valueOf(value);
@@ -119,8 +82,50 @@ public class InputlogicCli implements Runnable{
 					waitingResponse=false;
 					continue;
 				}
-			}
+				if(close)
+					break;
+			}	
 		}
+	
+		
+		
+		public void handleAction(int value){
+		  //if waiting action
+		if(firstAction && !familyMemberChosen && (value<5 && value>0)){ // family member is not chosen in second action
+			familyMember=value;
+			familyMemberColour= chooseColour(familyMember);
+			output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
+			familyMemberChosen=true;
+			return;
+		}
+		if(familyMemberChosen && !zoneChosen && (value>0 && value<9)){
+			boardChoice=value;
+			zone=chooseBoardZone(boardChoice);
+			output.printString("what position? '-1'-togoBack");
+			zoneChosen=true;
+			return;
+		}
+		if(zoneChosen && !positionChosen &&  (value>0 && value<5)){
+			position=value;
+			output.printString("How many servants? '-1'-togoBack");
+			positionChosen=true;
+			return;
+		}
+		if(positionChosen && value>=0){
+			servants=value;
+			Action action = new Action(zone, position, familyMemberColour, servants);
+			connection.performAction(action);
+			this.waitingAction=false;
+			this.firstAction=false;
+			restartValues();
+			waitingAction=false;
+			return;	
+		}
+			output.printString("Not Valid! Repeat!");
+		}
+		
+		
+		
 		
 		private synchronized boolean getWaitingAction(){
 			return waitingAction;
@@ -128,7 +133,6 @@ public class InputlogicCli implements Runnable{
 		
 		
 		private synchronized boolean getWaitingResponce(){
-			System.out.println("inputlogiccli131");
 			return waitingResponse;
 		}
 		
@@ -137,7 +141,7 @@ public class InputlogicCli implements Runnable{
 			waitingAction=true;
 			restartValues();
 			//the print of board and complete status at the beginning of the turn are done by clientController()
-			output.printString("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
+			printRequest("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
 			
 
 		}
@@ -148,20 +152,26 @@ public class InputlogicCli implements Runnable{
 			familyMemberChosen=true;
 			firstAction=false;
 			waitingAction=true;
-			
+			waitingResponse=false;
 			
 		}
 	
 		public synchronized void setWaitingResponse(){
 			output.printResources(view.getThisPlayer());
-			System.out.println("waiting, 999 to close turn");
+			output.printString("waiting, 999 to close turn"); // do not use printRequest here (= this line would always be saved as last) 
 			restartValues();
 			waitingResponse=true;
 		}
 		
+		public synchronized void close(){
+			close=true;
+			connection.close();
+		}
+		
+		
 		public void setActionPerformed() {
 			output.printCards(view.getThisPlayer().getLeadersCardOwned());
-			output.printString("choose a value between 1 and 4 to try activating the correspondent Leader Card");
+			printRequest("choose a value between 1 and 4 to try activating the correspondent Leader Card");
 			this.setWaitingResponse();
 		}
 		
@@ -171,43 +181,46 @@ public class InputlogicCli implements Runnable{
 		}
 		
 		public void setPlayerSuspended(){
-			setTurnEnded();
-			output.printString("You are now suspended : press any key to be able to play again");
+			printRequest("You are now suspended : press any key to be able to play again");
 			this.setWaitingResponse();
 		}
 		public void setWaitingVaticanChoice() {
-			output.printString("enter 0 to be excommunicated or 1 for not");
+			printRequest("enter 0 to be excommunicated or 1 for not");
 			this.setWaitingResponse();
 			
 		}
 
 
 		public void setWaitingPaymentChoice() {
-			output.printString("enter 1 for first payment, 2 per second");
+			printRequest("enter 1 for first payment, 2 per second");
 			this.setWaitingResponse();
 		}
 
 
 		public void setWaitingTrading() {
-			output.printString("enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
+			printRequest("enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
 					+ "and you choose that ");	
 			this.setWaitingResponse();
 
 		}
-		
-		
-		
-		
+
+		public void setWaitingCouncilPriviledge() {
+			printRequest("insert the correspondent number");
+			this.setWaitingResponse();
+		}
+
 		private void restartValues() {
-			boardChoice=0; //senza lo zero la seconda volta va male
+			boardChoice=0;
 			position=0;
 			servants=-2;
 			familyMemberColour =null;
 			familyMember=0;
 			zone=null;
 			zoneChosen=false;
-			positionChosen=false;;
-			familyMemberChosen=false;
+			positionChosen=false;
+			if(firstAction)
+				familyMemberChosen=false;
+			else familyMemberChosen=true;
 		}
 
 
@@ -249,6 +262,13 @@ public class InputlogicCli implements Runnable{
 				
 			}
 		}
+		
+		private void printRequest(String string){  //so we keep track of last string sent
+			lastString=string;
+			output.printString(string);
+		}
+		
+
 
 
 		

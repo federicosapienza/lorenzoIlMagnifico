@@ -29,12 +29,6 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 * 
 */
 public class TradeHandler {
-	public HarvestAndProductionHandler harvestAndProductionHandler;
-
-	public TradeHandler(HarvestAndProductionHandler harvestAndProductionHandler) {
-		this.harvestAndProductionHandler=harvestAndProductionHandler;
-	}
-	
 	
 	public boolean isPossible(Player player , int choice){  // could throw runtime exception: ClassCastException
 		if(choice == 0){ //if player has refused the trade
@@ -47,7 +41,7 @@ public class TradeHandler {
 		TradeEffect tradeEffect = (TradeEffect) effect;
 		
 		if(choice==2  && tradeEffect.getGive2() != null){ //if 2nd trade exists and the player has chosen it. 
-				boolean flag = player.getTestWarehouse().areResourcesEnough(tradeEffect.getGive2());
+				boolean flag = player.getTestWarehouse().areResourcesEnough(tradeEffect.getGive2())&&player.getWarehouse().areResourcesEnough(tradeEffect.getGive2());
 				if(!flag){
 					player.notifyObservers(new Request(player.getStatus(),"cannot perform trade: not enough resources", new CardDescriber(player.getCardUsed())));
 					return false;
@@ -55,9 +49,9 @@ public class TradeHandler {
 				else return true;
 		}
 		// trade number 1 selected
-		boolean flag = player.getTestWarehouse().areResourcesEnough(tradeEffect.getGive1());
+		boolean flag = player.getTestWarehouse().areResourcesEnough(tradeEffect.getGive1())&& player.getWarehouse().areResourcesEnough(tradeEffect.getGive1());
 		if(!flag){
-			player.notifyObservers(new Request(player.getStatus(),"cannot perform trade: not enough resources", new CardDescriber(player.getCardUsed())));
+			player.notifyObservers(new Request(player.getStatus(),"can not perform trade: not enough resources", new CardDescriber(player.getCardUsed())));
 			return false;
 		}
 		else return true;
@@ -84,8 +78,6 @@ public class TradeHandler {
 		
 		// trade number 1 selected
 		ResourcesOrPoints receive = tradeEffect.getReceive1();
-		if(receive==null)
-		System.out.println("z");
 		ResourcesOrPoints give= tradeEffect.getGive1();
 		player.getWarehouse().spendResources(give);
 		player.getWarehouse().add(receive);

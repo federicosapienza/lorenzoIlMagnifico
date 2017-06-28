@@ -10,12 +10,22 @@ import org.junit.Test;
 
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_readJson.BonusImplementation;
+import it.polimi.ingsw.GC_26_readJson.BonusInterface;
+import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_readJson.CardsImplementation;
+import it.polimi.ingsw.GC_26_readJson.ReadAll;
 import it.polimi.ingsw.GC_26_readJson.TimerValueImplementation;
+import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 public class GameElementsTest {
 
+	Cards cards;
+	BonusInterface bonus;
+	TimerValuesInterface times;
+	List<ResourcesOrPoints[]> resourcesOrPointsList = new ArrayList<ResourcesOrPoints[]>();
+	ReadAll readAll = new ReadAll();
+	
 	@Test (expected = NullPointerException.class)
 	public void testNullGameException() {
 		Game nullGame = null;
@@ -53,6 +63,22 @@ public class GameElementsTest {
 	}
 
 	
+	
+	@Test
+	public void testCorrectNumberOfPlayers() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		cards = readAll.getCards();
+		bonus = readAll.getBonus();
+		times = readAll.getTimes();
+		Game game = new Game(cards, bonus, times);
+		game.addPlayer("David");
+		game.addPlayer("Steph");
+		game.initialiseGame();
+		game.startGame();
+		GameElements gameElements = game.getGameElements();
+		assertEquals(2, gameElements.getPlayers().size());
+	}
 	
 	
 }

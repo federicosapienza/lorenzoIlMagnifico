@@ -81,7 +81,7 @@ public class OutputCLI implements Output{
 		System.out.println("Free family members: " + player.getFamilyMembers().whatIsFree());
 		printResources(player);	
 		printCards(player);
-		System.out.println("Production Bonus: "+ player.getPersonalTileValues());
+		System.out.println( player.getPersonalTileValues());
 	}
 	@Override
 	public  void printRankings(MainClientView view) {

@@ -25,6 +25,9 @@ public class TowerPosition extends SinglePosition{
 	 */
 	public TowerPosition(int floor, ResourcesOrPoints resourcesOrPointsinPosition,int valueOfPosition){
 		super(valueOfPosition); 
+		if (floor < 1 || floor > 4) {
+			throw new IllegalArgumentException();
+		}
 		this.floor=floor;
 		this.resourcesOrPointsinPosition=resourcesOrPointsinPosition;
 	}

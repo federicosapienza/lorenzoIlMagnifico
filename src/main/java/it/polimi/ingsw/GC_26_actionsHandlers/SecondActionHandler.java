@@ -66,7 +66,6 @@ public class SecondActionHandler extends ActionHandler{
 		if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 				action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER){
 			super.towerPerform(player, null, action);
-			return;
 		}
 		
 		//adding the servants to the value and calling Harvest
@@ -78,7 +77,6 @@ public class SecondActionHandler extends ActionHandler{
 		
 			harvestAndProductionHandler.startHarvest(player, actionValue);	
 			handler.startHarvest(player, player.getSecondactionValue()+action.getServantsUsed());
-			return;
 		}
 		if(action.getZone()== BoardZone.PRODUCTION){
 			HarvestAndProductionHandler handler = super.getHarvestAndProductionHandler();
@@ -94,7 +92,7 @@ public class SecondActionHandler extends ActionHandler{
 			super.marketPerform(player, null, action);
 			
 		if(action.getZone()== BoardZone.COUNCILPALACE)
-			super.councilPalacePerform(player, null, action);
+			super.councilPalacePerform(player, null);
 			
 		
 		

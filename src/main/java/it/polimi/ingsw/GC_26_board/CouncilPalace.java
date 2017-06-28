@@ -1,7 +1,5 @@
 package it.polimi.ingsw.GC_26_board;
 
-
-import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
 
 /**
@@ -30,13 +28,6 @@ public class CouncilPalace extends MultiplePosition {
 		this.ResourcesOrPointsInPosition=resourcesOrPoints;
 	}
 	
-	/**
-	 * Method used to add the resources or points that the player has obtained from the Council Palace to his warehouse
-	 * @param player It's the player that has obtained the resources or points from the Council Palace
-	 */
-	public void addBonusResources(Player player){
-		player.getWarehouse().add(ResourcesOrPointsInPosition);
-	}
 	
 	/**
 	 * Method that returns the resources or points given by the Council Palace
@@ -45,11 +36,5 @@ public class CouncilPalace extends MultiplePosition {
 	public ResourcesOrPoints getResourcesOrPointsInPosition() {
 		return ResourcesOrPointsInPosition;
 	}
-	/*public String PrintList(){
-		//TODO
-	}*/
 	
-	/*public ArrayList getRanking(){
-		//TODO
-	}*/
 }

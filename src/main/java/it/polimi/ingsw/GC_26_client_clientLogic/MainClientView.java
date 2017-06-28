@@ -53,7 +53,7 @@ public class MainClientView {
 		
 	}
 	
-	public void setPlayerStatus(PlayerStatus playerStatus) {
+	public synchronized void setPlayerStatus(PlayerStatus playerStatus) {
 		synchronized (this.playerStatus) {
 			this.playerStatus = playerStatus;
 		}

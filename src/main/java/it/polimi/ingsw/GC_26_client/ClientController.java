@@ -1,16 +1,12 @@
 package it.polimi.ingsw.GC_26_client;
 
-
-
-
-
-
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_client_clientLogic.InputlogicCli;
 import it.polimi.ingsw.GC_26_client_clientLogic.MainClientView;
 import it.polimi.ingsw.GC_26_client_clientLogic.Output;
 import it.polimi.ingsw.GC_26_client_clientLogic.PositionView;
+import it.polimi.ingsw.GC_26_client_connection.ClientMain;
 import it.polimi.ingsw.GC_26_gameLogic.ActionNotification;
 import it.polimi.ingsw.GC_26_gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
@@ -25,18 +21,17 @@ public class ClientController {
 	private MainClientView view;
 	private InputlogicCli iOlogic;
 	private Output output;
+	private ClientMain main;
 	
 
-	public ClientController(InputlogicCli iOlogic, MainClientView view, Output output) {
+	public ClientController(InputlogicCli iOlogic, MainClientView view, Output output, ClientMain main) {
 		this.iOlogic= iOlogic;
 		this.view= view;
 		this.output=output;
+		this.main = main;
 	}
 	
-	
 
-	
-	
 	public void receiveCard(CardDescriber card){
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME || view.getGameStatus()==GameStatus.INITIALIZINGTURN){
 			if(card.getTypeOfCard().equalsIgnoreCase("Development Card")){
@@ -80,9 +75,6 @@ public class ClientController {
 	public void receivePlayerPocket(PlayerWallet playerWallet){
 		view.updatePlayerWallet((playerWallet));
 		}
-	
-	
-	
 	
 	public void receiveMessage(Message message){
 		if(message instanceof Request ){
@@ -153,11 +145,12 @@ public class ClientController {
 		}
 		if(request.getStatus()==PlayerStatus.TRADING){
 			iOlogic.setWaitingTrading();
-			return;}
-		else {
-			iOlogic.setWaitingResponse();
+			return;
+			}
+		if(request.getStatus()==PlayerStatus.TRADINGCOUNCILPRIVILEDGES){
+			iOlogic.setWaitingCouncilPriviledge();
+			return;
 		}
-		
 	}
 	
 	private void handleInfo(Info info) {
@@ -173,6 +166,10 @@ public class ClientController {
 			view.getBoard().cleanBoard();
 		if(info.getMessage().contains("ended the turn")) //TODO cambiare se cambia in EndTurnController
 				output.printCompleteStatus(view.getPlayer(info.getPlayerReferred()));
+		
+		if(info.getGameStatus()==GameStatus.ENDING)
+			main.restart();
+			
 	}
 	
 	

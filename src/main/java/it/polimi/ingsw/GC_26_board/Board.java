@@ -25,7 +25,7 @@ public class Board extends Observable<PositionDescriber>{
 	private CouncilPalace councilPalace;
 	private HarvestZone harvestZone;
 	private ProductionZone productionZone;
-	List<ResourcesOrPoints []> resourcesOrPointsList;
+	private String errorString="resourcesOrPointsList is null";
 	
 	/**
 	 * Constructor: it creates the correct version of the board according to the number of the players that are playing 
@@ -35,11 +35,13 @@ public class Board extends Observable<PositionDescriber>{
 	 */
 	public Board(int numberOfPlayers, List<ResourcesOrPoints []> resourcesOrPointsList){
 		if (resourcesOrPointsList == null) {
-			throw new NullPointerException("resourcesOrPointsList is null");
+			throw new NullPointerException();
+		}
+		if (numberOfPlayers >4 || numberOfPlayers <2) {
+			throw new IllegalArgumentException();
 		}
 		this.numberOfPlayers=numberOfPlayers;	
 		create(numberOfPlayers,resourcesOrPointsList);
-		this.resourcesOrPointsList= resourcesOrPointsList;
 	}
 	
 	/**
@@ -50,7 +52,10 @@ public class Board extends Observable<PositionDescriber>{
 	 */
 	public void create(int numberOfPlayers,List<ResourcesOrPoints []> resourcesOrPointsList){
 		if (resourcesOrPointsList == null) {
-			throw new NullPointerException("resourcesOrPointsList is null");
+			throw new NullPointerException(errorString);
+		}
+		if (numberOfPlayers > 4 || numberOfPlayers <2) {
+			throw new IllegalArgumentException();
 		}
 		createTowers(resourcesOrPointsList);
 		createMarket(resourcesOrPointsList);
@@ -67,7 +72,7 @@ public class Board extends Observable<PositionDescriber>{
 	 */
 	private void createTowers(List<ResourcesOrPoints []> resourcesOrPointsList){
 		if (resourcesOrPointsList == null) {
-			throw new NullPointerException("resourcesOrPointsList is null");
+			throw new NullPointerException(errorString);
 		}
 		territoriesTower=new Tower(resourcesOrPointsList.get(0)); 
 		buildingsTower=new Tower(resourcesOrPointsList.get(1));   
@@ -82,7 +87,7 @@ public class Board extends Observable<PositionDescriber>{
 	 */
 	private void createMarket(List<ResourcesOrPoints []> resourcesOrPointsList){
 		if (resourcesOrPointsList == null) {
-			throw new NullPointerException("resourcesOrPointsList is null");
+			throw new NullPointerException(errorString);
 		}
 		market=new Market(numberOfPlayers,resourcesOrPointsList.get(4));
 	}
@@ -96,9 +101,9 @@ public class Board extends Observable<PositionDescriber>{
 	 */
 	private void createCouncilPalace(ResourcesOrPoints resourcesOrPoints,int value){
 		if (resourcesOrPoints == null) {
-			throw new NullPointerException("resourcesOrPoints is null");
+			throw new NullPointerException(errorString);
 		}
-		councilPalace= new CouncilPalace(resourcesOrPoints,1);
+		councilPalace= new CouncilPalace(resourcesOrPoints, value);
 	}
 	
 	/**

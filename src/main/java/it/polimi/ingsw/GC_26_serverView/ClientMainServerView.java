@@ -31,8 +31,6 @@ public class ClientMainServerView {
 		actionInputView = new ActionInputView();
 		positionView =new PositionView(connection);
 		familyMembersView = new FamilyMembersView(connection);
-		EndTurnView endTurnView= new EndTurnView();
-		
 	}
 	
 	
@@ -125,6 +123,5 @@ public class ClientMainServerView {
 		return endTurnView;
 	}
 	
-
 	
 }

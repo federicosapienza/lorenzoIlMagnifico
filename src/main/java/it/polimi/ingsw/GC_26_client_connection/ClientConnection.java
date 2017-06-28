@@ -11,6 +11,8 @@ public interface ClientConnection {
 	void sendResponce(String temp);
 
 	void performAction(Action action);
+
+	void close();
 	
 
 }

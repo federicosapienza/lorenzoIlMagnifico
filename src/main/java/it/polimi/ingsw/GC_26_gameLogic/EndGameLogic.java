@@ -2,7 +2,6 @@ package it.polimi.ingsw.GC_26_gameLogic;
 
 
 
-import java.net.NetworkInterface;
 import java.util.List;
 
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
@@ -25,9 +24,9 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.Warehouse;
  */
 public class EndGameLogic {
 	private final GameElements gameElements;
-	private final int territoryBonus[] = new  int[]{0,0,1,4,10,20};
-	private final int charactersBonus[] = new  int[]{1,3,6,10,15,21};
-	private final int resourcesBonus = 5;
+	private final static int[] territoryBonus = new  int[]{0,0,1,4,10,20};
+	private final static int[] charactersBonus = new  int[]{1,3,6,10,15,21};
+	private final static int resourcesBonus = 5;
 	private final ResourcesOrPoints militaryStrenghtFirstReward = ResourcesOrPoints.newPoints(5, 0, 0, 0);
 	private final ResourcesOrPoints militaryStrenghtSecondReward = ResourcesOrPoints.newPoints(2, 0, 0, 0);
 
@@ -44,13 +43,29 @@ public class EndGameLogic {
 	 * Method used to start the analysis of the game
 	 */
 	public void start(){
+		
+		calcultatingPoints();
+		
+		elaboratingMilitaryPointResult();
+		
+		elaboratingResult();
+		
+	}
+		
+		
+		
+		
+	
+
+	private void calcultatingPoints(){
 		for(Player player: gameElements.getPlayers()){
 			PermanentModifiers modifiers =player.getPermanentModifiers();
 			PersonalBoard personalBoard= player.getPersonalBoard();
 			Warehouse warehouse= player.getWarehouse();
-			int temp=0;
+			int temp;
 			
-			temp=warehouse.getVictoryPoints()/modifiers.getVictoryPointsReducer();
+			temp= warehouse.getVictoryPoints()-warehouse.getVictoryPoints()/modifiers.getVictoryPointsReducer();
+			warehouse.spendResources(ResourcesOrPoints.newPoints(temp, 0, 0, 0)) ;
 			// player can lose victory points if permanent effect are activated : if his victory points go below zero they are set to zero.
 			temp = modifiers.howManyVictoryPointLess();
 			if(warehouse.getVictoryPoints()<temp)
@@ -71,6 +86,7 @@ public class EndGameLogic {
 			//venture cards owned
 			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.VENTURECARD)){
 				temp=personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.VENTURECARD);
+				warehouse.add(ResourcesOrPoints.newPoints(charactersBonus[temp], 0, 0, 0));
 				List<DevelopmentCard> list = personalBoard.getCurrentCards(DevelopmentCardTypes.VENTURECARD);
 				//activating permanent effect of character cards in order to give them victory points
 				for(DevelopmentCard card: list){ 
@@ -79,13 +95,13 @@ public class EndGameLogic {
 			}
 			temp= warehouse.getCoins()+warehouse.getServants()+warehouse.getStone()+warehouse.getWood();
 			warehouse.add(ResourcesOrPoints.newPoints(temp/resourcesBonus, 0, 0, 0));
-			// player can lose victory points if permanent effect are activated : if his victory points go below zero they are set to zero.
-			temp = modifiers.howManyVictoryPointLess();
-			if(warehouse.getVictoryPoints()<temp)
-				warehouse.spendResources(ResourcesOrPoints.newPoints(warehouse.getVictoryPoints(), 0, 0, 0));
-			else warehouse.spendResources(ResourcesOrPoints.newPoints(temp, 0, 0, 0));
-
 		}
+
+	}
+	
+	
+	private void elaboratingMilitaryPointResult(){
+// starting elaborating results
 		//military strenght:
 		int bestValue=0;
 		int secondValue=0;
@@ -97,7 +113,7 @@ public class EndGameLogic {
 				bestValue=temp;
 				continue;
 			}
-			if(temp>secondValue){
+			else if(temp>secondValue){
 				secondValue=temp;
 				continue;
 			}
@@ -116,21 +132,28 @@ public class EndGameLogic {
 			}
 				
 		}	
-		//finding the winner
-		bestValue=0;
-		for(Player p: gameElements.getPlayers()){
-			if( bestValue > p.getWarehouse().getVictoryPoints())
-				bestValue = p.getWarehouse().getVictoryPoints();
-
-		}
-		// notifying of the winner: the player list is ordered so it ' s guaranteed that
-		//if there is a parity the first in round order will win, as in game rules
-		for(Player p: gameElements.getPlayers()){
-			if( bestValue== p.getWarehouse().getVictoryPoints())
-				gameElements.notifyPlayers(new Info(GameStatus.ENDING, p.getName(), p.getName() +" has won!!!!!"));
-		}
-		
-		
 		
 	}
+	
+	private void elaboratingResult(){
+		//finding the winner
+			int bestValue=0;
+			for(Player p: gameElements.getPlayers()){
+				if( p.getWarehouse().getVictoryPoints() > bestValue )
+					bestValue = p.getWarehouse().getVictoryPoints();
+
+			}
+			// notifying of the winner: the player list is ordered so it ' s guaranteed that
+			//if there is a parity the first in round order will win, as in game rules
+			for(Player p: gameElements.getPlayers()){
+				if( bestValue== p.getWarehouse().getVictoryPoints()){
+					gameElements.notifyPlayers(new Info(GameStatus.ENDING, p.getName(), p.getName() +" has won!!!!!"));
+					break;
+				}
+					
+			}
+				
+	}
+	
+	
 }

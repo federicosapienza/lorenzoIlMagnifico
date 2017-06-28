@@ -2,6 +2,11 @@ package it.polimi.ingsw.GC_26_cards.developmentCards;
 
 
 /**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
  * Enumeration created in order to reduce the complexity and the length of the code.
  * It's used by some types of effects only.
  * It must not be misunderstood as the four subclasses that really implement the differences between

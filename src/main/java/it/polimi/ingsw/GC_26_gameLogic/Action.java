@@ -3,7 +3,6 @@ package it.polimi.ingsw.GC_26_gameLogic;
 
 
 import java.io.Serializable;
-import java.util.PrimitiveIterator.OfDouble;
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
@@ -80,6 +79,9 @@ public class Action implements Serializable{
 	 */
 	@Override
 	public String toString() {
+		if(familyMemberColour!=null){
 		return familyMemberColour+ " in "+ zone.getStringDescriber()+", position "+ position;
+		}
+		else return "goes to " + zone.getStringDescriber()+", position "+ position + "with a second action";
 	}
 }
