@@ -21,12 +21,11 @@ public class ClientMain {
 	private ExecutorService pool;
 	private SocketINClient socketINClient;
 	private InputlogicCli inputlogicCli;
-	
+	private Socket socket;
 	
 	
 	private synchronized void start(){
 		ClientConnection connection=null;
-		Socket socket=null;
 		try {
 			 socket= new Socket(IP, PORT);
 			connection= new SocketOutClient(socket);
@@ -53,9 +52,15 @@ public class ClientMain {
 	
 
 	public synchronized void restart(){
-		this.notify();
+		this.notifyAll();
 		inputlogicCli.close();
 		socketINClient.close();
+		try {
+			socket.close();
+		} catch (IOException e) {
+			LOG.log( Level.SEVERE, "error in socket connection ", e);	
+		}
+		
 		
 		Scanner scanIN=new Scanner(System.in);
 
