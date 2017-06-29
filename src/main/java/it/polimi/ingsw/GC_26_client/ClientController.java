@@ -137,14 +137,14 @@ public class ClientController {
 			return;}
 		
 		if(request.getStatus()==PlayerStatus.VATICANREPORTDECISION){
-			iOlogic.setWaitingVaticanChoice();
+			iOlogic.setWaitingVaticanChoice(request.getCard());
 			return;}
 		if(request.getStatus()==PlayerStatus.CHOOSINGPAYMENT){
 			iOlogic.setWaitingPaymentChoice();
 			return;
 		}
 		if(request.getStatus()==PlayerStatus.TRADING){
-			iOlogic.setWaitingTrading();
+			iOlogic.setWaitingTrading(request.getCard());
 			return;
 			}
 		if(request.getStatus()==PlayerStatus.TRADINGCOUNCILPRIVILEDGES){

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 
 import it.polimi.ingsw.GC_26_board.BoardZone;
+import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_client_connection.ClientConnection;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
@@ -184,8 +185,8 @@ public class InputlogicCli implements Runnable{
 			printRequest("You are now suspended : press any key to be able to play again");
 			this.setWaitingResponse();
 		}
-		public void setWaitingVaticanChoice() {
-			printRequest("enter 0 to be excommunicated or 1 for not");
+		public void setWaitingVaticanChoice(CardDescriber card) {
+			printRequest("enter 0 to be excommunicated or 1 for not; excommunication:" +card.getPermanentEffectDescriber());
 			this.setWaitingResponse();
 			
 		}
@@ -197,9 +198,9 @@ public class InputlogicCli implements Runnable{
 		}
 
 
-		public void setWaitingTrading() {
+		public void setWaitingTrading(CardDescriber card) {
 			printRequest("enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
-					+ "and you choose that ");	
+					+ " and you choose that: "+card.getName()+" :"+ card.getPermanentEffectDescriber());	
 			this.setWaitingResponse();
 
 		}

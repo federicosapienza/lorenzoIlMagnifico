@@ -20,11 +20,11 @@ public class Resources {
 		if(coins!=0)
 			temp.append(coins + " coins ");
 		if(servants!=0)
-			temp.append(servants + " servants");
+			temp.append(servants + " servants ");
 		if(stone!=0)
-			temp.append(stone + " stone");
+			temp.append(stone + " stone ");
 		if(wood!=0)
-			temp.append(wood + " wood");
+			temp.append(wood + " wood ");
 		return temp.toString(); 
 	}
 

@@ -67,7 +67,7 @@ public class CardDescriber implements Serializable{
         this.type=null;
         this.period=0;
         this.payment=null;
-        this.immediateEffect=cardImplementation.getPermanentEffectDescriber();
+        this.immediateEffect=cardImplementation.getImmediateEffectDescriber();
         this.permanentEffect=cardImplementation.getPermanentEffectDescriber();
         this.requirement=cardImplementation.getRequirementDescriber();
         this.actionValue=0;

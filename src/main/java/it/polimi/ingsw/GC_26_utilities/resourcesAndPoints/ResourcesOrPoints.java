@@ -61,7 +61,17 @@ public class ResourcesOrPoints{
 			
 	@Override
 	public String toString(){
-		return resources.toString() + " "+ points.toString()+ " ";
+		String none= "";
+		StringBuilder temp = new StringBuilder(none);
+		if(!resources.toString().equals(none))
+			temp.append(resources.toString());
+		 //in case both of them are zero this space will be the only digit printed 
+		if(!points.toString().equals(none))
+				temp.append(points.toString());
+		//in case both of them are zero this space will be the only digit printed 
+		if(!resources.toString().equals(none) && !points.toString().equals(none))
+			temp.append(" ");
+		return temp.toString();
 	}
 	
 	public static  ResourcesOrPoints subtract(ResourcesOrPoints main , ResourcesOrPoints subtrahend){

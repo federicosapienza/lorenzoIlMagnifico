@@ -1,5 +1,7 @@
 package it.polimi.ingsw.GC_26_cards.effects;
 
+
+
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
@@ -61,7 +63,7 @@ public class CardsNumberToResourcesEffect implements Effect{
 	 */
 	@Override
 	public String toString(){
-		return " gives "+ resourcesOrPoints+ " for any "+resourcesOrPoints.toString(); 
+		return " gives "+ resourcesOrPoints+ " for any card of type " +type.toString(); 
 	}
 		
 
