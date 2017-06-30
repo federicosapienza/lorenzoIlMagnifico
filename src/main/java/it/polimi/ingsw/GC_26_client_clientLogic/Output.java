@@ -14,4 +14,5 @@ public interface Output {
 	void printFamilyMembers(PlayerView player);
 	void printCards(PlayerView thisPlayer);
 	void printCards(Set<CardDescriber> cards);
+	void printLeaderCards(Set<CardDescriber> cards);
 }

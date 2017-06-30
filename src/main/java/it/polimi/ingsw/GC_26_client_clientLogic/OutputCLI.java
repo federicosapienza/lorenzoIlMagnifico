@@ -148,6 +148,41 @@ public class OutputCLI implements Output{
 	}
 	
 	@Override
+	public void printLeaderCards(Set<CardDescriber> cards){
+		String repeated = new String();
+		StringBuilder temp = new StringBuilder(" ");
+		System.out.println("");
+		System.out.println(" LEADER CARDS:");
+		System.out.println(" |NAME:-------------------------|-REQUIREMENTS------------------------------------------------------------------------------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:-------------------------------------------------------------------------------------------------------------------------------------");
+		for(CardDescriber cardDescriber : cards){
+			repeated = new String(new char[30-cardDescriber.getName().length()]).replace("\0", " ");
+			temp.append("|" + cardDescriber.getName() + repeated +"|");
+			repeated = new String(new char[150-cardDescriber.getRequirementDescriber().length()]).replace("\0", " ");
+			temp.append(" " + cardDescriber.getRequirementDescriber() + repeated+"|");
+			if(cardDescriber.getImmediateEffectDescriber()!=null){
+				repeated = new String(new char[150-cardDescriber.getImmediateEffectDescriber().length()]).replace("\0", " ");
+				temp.append(cardDescriber.getImmediateEffectDescriber() + repeated+"|");
+			}
+			if(cardDescriber.getImmediateEffectDescriber()==null){
+				repeated = new String(new char[150]).replace("\0", " ");
+				temp.append(repeated +"|");
+			}
+			if(cardDescriber.getPermanentEffectDescriber()!=null){
+				repeated = new String(new char[150-cardDescriber.getPermanentEffectDescriber().length()]).replace("\0", " ");
+				temp.append(cardDescriber.getPermanentEffectDescriber() + repeated+"|");
+			}
+			if(cardDescriber.getPermanentEffectDescriber()==null){
+				repeated = new String(new char[150]).replace("\0", " ");
+				temp.append(repeated +"|");
+			}
+			System.out.println(temp);
+			temp = new StringBuilder(" ");
+		}
+		System.out.println(" |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("");
+	}
+	
+	@Override
 	public  void printExcommunicationTiles(BoardView board) {
 		String repeated = new String();
 		System.out.println(" ");
