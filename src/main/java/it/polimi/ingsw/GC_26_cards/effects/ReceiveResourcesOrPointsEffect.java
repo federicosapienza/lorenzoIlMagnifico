@@ -59,7 +59,7 @@ public class ReceiveResourcesOrPointsEffect implements Effect{
 	 */
 	@Override 
 	public String toString(){
-		return " receive: "+ resources.toString(); 
+		return " Receive: "+ resources.toString(); 
 	}
 	
 

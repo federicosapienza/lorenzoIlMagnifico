@@ -69,7 +69,7 @@ public class ResourcesOrPoints{
 		if(!points.toString().equals(none))
 				temp.append(points.toString());
 		//in case both of them are zero this space will be the only digit printed 
-		if(!resources.toString().equals(none) && !points.toString().equals(none))
+		if(resources.toString().equals(none) && points.toString().equals(none))
 			temp.append(" ");
 		return temp.toString();
 	}

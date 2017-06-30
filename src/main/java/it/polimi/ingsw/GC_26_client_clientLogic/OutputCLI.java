@@ -5,9 +5,11 @@ import java.util.Map;
 import java.util.Set;
 
 
+import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
+import junit.framework.Test;
 
 
 //methods are synchronized to avoid ugly mixtures of requests from InputLogic and infos from views.
@@ -17,26 +19,45 @@ public class OutputCLI implements Output{
 	
 	@Override
 	public synchronized void printBoard(BoardView board) {
-		System.out.println("*****************************************************************************************");
-		System.out.println("Territory Tower");
+		System.out.println("*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
+		System.out.println("TERRITORY TOWER:");
+		System.out.println("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 		printList(board.getTerritoriesTower());
-		System.out.println("Character Tower");
+		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("CHARACTER TOWER:");
+		System.out.println("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 		printList(board.getCharactersTower());
-		System.out.println("Building Tower");
+		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("BUILDING TOWER:");
+		System.out.println("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 		printList(board.getBuildingsTower());
-		System.out.println("Venture Tower");
+		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("VENTURE TOWER:");
+		System.out.println("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 		printList(board.getVenturesTower());
-		System.out.println("Market");
+		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("MARKET:");
+		System.out.println("VALUE:|-BONUS:-------------------------|");
 		printList(board.getMarketZone());
-		System.out.println("Production ");
-		printList(board.getProductionZone());
-		System.out.println("Harvest ");
-		printList(board.getHarvestZone());
-		System.out.println("CouncilPalace ");
+		System.out.println("---------------------------------------|");
+		System.out.println("COUNCIL PALACE:");
+		System.out.println("VALUE:|-BONUS:-------------------------|");
 		printList(board.getCouncilPalace());
-		System.out.println("*****************************************************************************************");
+		System.out.println("---------------------------------------|");
+		System.out.println("PRODUCTION");
+		System.out.println("VALUE:|");
+		printList(board.getProductionZone());
+		System.out.println("------|");
+		System.out.println("HARVEST:");
+		System.out.println("VALUE:|");
+		printList(board.getHarvestZone());
+		System.out.println("------|");
+		System.out.println("*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
 
 	}
+	
+	
+	
 	private void printList(List<PositionView> positions){
 		for(PositionView p : positions){
 			printTool(p);
@@ -45,10 +66,15 @@ public class OutputCLI implements Output{
 	
 	private  void printTool(PositionView position){
 		StringBuilder temp= new StringBuilder(" ");
+		String test = new String();
 		if(position.getBonusPosition() !=null)
-			temp.append(position.getBonusPosition()+" ");
-		if(position.getCardHere()!=null)
-			temp.append(position.getCardHere()+ " ");
+			test = printBonusPosition(position.getPositionDescriber());
+			temp.append(test);
+		if(position.getCardHere()!=null){
+			//temp.append(position.getCardHere()+ " ");//before
+			test = printCardsFinal(position.getCardHere());//How should it be.
+			temp.append(test);
+			}
 		if(!position.getPlayersHere().isEmpty()){
 			Map<String , Colour> here= position.getPlayersHere();
 			for (Map.Entry<String, Colour> entry : here.entrySet()){
@@ -56,8 +82,71 @@ public class OutputCLI implements Output{
 			}
 
 		}
-		System.out.println(position.getPositionValue()+" "+temp);
+		System.out.println(position.getPositionValue()+"     |"+temp);
 	}
+	
+	
+	private String printBonusPosition(PositionDescriber positionDescriber){
+		String repeated = new String();
+		StringBuilder temp = new StringBuilder(" ");
+		if("null".equals(positionDescriber.getResourcesOrPointsOnPosition())){
+			return temp.toString();
+		}
+		if(" ".equals(positionDescriber.getResourcesOrPointsOnPosition())){
+			repeated = new String(new char[30]).replace("\0", " ");
+			temp.append(repeated +"|");
+			}
+		else{
+			repeated = new String(new char[30-positionDescriber.getResourcesOrPointsOnPosition().length()]).replace("\0", " ");
+			temp.append(positionDescriber.getResourcesOrPointsOnPosition() + repeated +"|");
+			}
+		return temp.toString();
+	}
+	
+	private String printCardsFinal(CardDescriber card){
+	String repeated = new String();
+	StringBuilder temp = new StringBuilder(" ");
+	if("Development Card".equals(card.getTypeOfCard())){//Dev cards finished
+		if(card.getName()!=null){
+			repeated = new String(new char[25-card.getName().length()]).replace("\0", " ");
+			temp.append(card.getName() + repeated + "|");
+		}
+		if(card.getActionValue()==0){ //Valore di inizializzazione
+			repeated = new String(new char[14]).replace("\0", " ");
+			temp.append (repeated + "|");
+		}
+		if(card.getActionValue()!=0){ //Valore di inizializzazione
+			repeated = new String(new char[13]).replace("\0", " ");
+			temp.append (card.getActionValue() + repeated + "|");
+		}
+		if(card.getPaymentDescriber()!=null){
+			repeated = new String(new char[80-card.getPaymentDescriber().length()]).replace("\0", " ");
+			temp.append(card.getPaymentDescriber() + repeated + "|");
+		}
+		if(card.getPaymentDescriber()==null){
+			repeated = new String(new char[80]).replace("\0", " ");
+			temp.append(repeated + "|");
+		}
+		if(card.getImmediateEffectDescriber()!=null){
+			repeated = new String(new char[120-card.getImmediateEffectDescriber().length()]).replace("\0", " ");
+			temp.append(card.getImmediateEffectDescriber() + repeated + "|");
+		}
+		if(card.getImmediateEffectDescriber()==null){
+			repeated = new String(new char[120]).replace("\0", " ");//120 should be enough
+			temp.append(repeated + "|");
+		}
+		if(card.getPermanentEffectDescriber()!=null){
+			repeated = new String(new char[140-card.getPermanentEffectDescriber().length()]).replace("\0", " ");
+			temp.append(card.getPermanentEffectDescriber() + repeated + "|");
+		}
+		if(card.getPermanentEffectDescriber()==null){
+			repeated = new String(new char[140]).replace("\0", " ");//140 should be enough
+			temp.append(repeated + "|");
+		}
+	}
+	return temp.toString();
+	}
+	
 	@Override
 	public  void printExcommunicationTiles(BoardView board) {
 		for(CardDescriber card: board.getExcommunicationThisGame())

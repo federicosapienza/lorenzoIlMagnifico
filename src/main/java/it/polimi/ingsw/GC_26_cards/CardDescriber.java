@@ -153,6 +153,10 @@ public class CardDescriber implements Serializable{
     public  String getRequirementDescriber(){
         return requirement;
     }
+    
+    public String getPaymentDescriber(){
+    	return payment;
+    }
 
     @Override
     public String toString() {

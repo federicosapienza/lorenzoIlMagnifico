@@ -73,7 +73,7 @@ public class ResourcesPayment implements Payment{
 	 */
 	@Override
 	public String toString(){
-		return " payment of "+ price.toString();
+		return " "+ price.toString();
 	}
 	
 	/**

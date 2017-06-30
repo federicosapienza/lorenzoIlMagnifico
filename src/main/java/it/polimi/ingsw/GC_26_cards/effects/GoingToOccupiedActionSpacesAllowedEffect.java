@@ -29,7 +29,7 @@ public class GoingToOccupiedActionSpacesAllowedEffect implements Effect{
 	 */
 	@Override
 	public String toString() {
-		return "Player can place family member in occupied action spaces";
+		return " Player can place family member in occupied action spaces";
 	}
 
 }

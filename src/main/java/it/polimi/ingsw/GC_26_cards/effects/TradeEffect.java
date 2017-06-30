@@ -100,8 +100,8 @@ public class TradeEffect implements Effect{
 	@Override
 	public String toString() {
 		if(receive2==null && give2==null)
-			return "Trade Action:" + give1+ " to "+receive1;
-		else return "Trade Action: (1) " + give1+ " to "+receive1+" or (2) " + give2+ " to " +receive2;
+			return " Trade Action:" + give1+ " to "+receive1;
+		else return " Trade Action: (1) " + give1+ " to "+receive1+" or (2) " + give2+ " to " +receive2;
 	}
 	
 	

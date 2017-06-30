@@ -26,7 +26,7 @@ public class DisableMilitaryPointsRequirement implements Effect{
 	 */
 	@Override
 	public String toString() {
-		return "Player does not need to satisfy the Military Points requirement when takes Territory Cards.";
+		return " Player does not need to satisfy the Military Points requirement when takes Territory Cards.";
 	}
 
 }

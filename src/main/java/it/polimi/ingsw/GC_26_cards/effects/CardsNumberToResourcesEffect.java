@@ -63,7 +63,7 @@ public class CardsNumberToResourcesEffect implements Effect{
 	 */
 	@Override
 	public String toString(){
-		return " gives "+ resourcesOrPoints+ " for any card of type " +type.toString(); 
+		return " Gives "+ resourcesOrPoints+ " for any card of type " +type.toString(); 
 	}
 		
 

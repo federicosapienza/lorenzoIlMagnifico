@@ -208,7 +208,7 @@ public class Board extends Observable<PositionDescriber>{
 		marketDescription();
 		harvestDescription();
 		productionDescription();
-		notifyObservers(new PositionDescriber(BoardZone.COUNCILPALACE, 1 ,GameParameters.getDefaultPositionValue(), null));
+		notifyObservers(new PositionDescriber(BoardZone.COUNCILPALACE, 1 ,GameParameters.getDefaultPositionValue(), councilPalace.getResourcesOrPointsInPosition().toString()));
 	}
 	
 	/**
@@ -242,7 +242,7 @@ public class Board extends Observable<PositionDescriber>{
 	 */
 	private void harvestDescription(){
 		for(int i=1 ; i<=harvestZone.getPositionsActivated(); i++){
-			notifyObservers(new PositionDescriber(BoardZone.HARVEST, i,GameParameters.getDefaultPositionValue(), null));
+			notifyObservers(new PositionDescriber(BoardZone.HARVEST, i,GameParameters.getDefaultPositionValue(),"null"));
 		}
 	}
 	
@@ -251,7 +251,7 @@ public class Board extends Observable<PositionDescriber>{
 	 */
 	private void productionDescription(){
 		for(int i=1 ; i<=productionZone.getPositionsActivated(); i++){
-			notifyObservers(new PositionDescriber(BoardZone.PRODUCTION, i,GameParameters.getDefaultPositionValue(), null));
+			notifyObservers(new PositionDescriber(BoardZone.PRODUCTION, i,GameParameters.getDefaultPositionValue(), "null"));
 		}
 	}
 }

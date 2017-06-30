@@ -42,7 +42,7 @@ public class LoseVictoryPointForResourcesOrPointsEffect implements Effect{
 	 */
 	@Override
 	public String toString() {
-		return "At the end of the game, playes loses  Victory Point : (means:  number of loss for every type written) " + malus;
+		return " At the end of the game, player loses Victory Point : (means:  number of loss for every type written) " + malus;
 	}
 
 }

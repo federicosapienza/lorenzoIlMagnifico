@@ -53,9 +53,9 @@ public class ActionValueModifierEffect implements Effect{
 	@Override
 	public String toString() {
 		if(value>0)
-			return "increment the actions of type "+ zone+ " of value "+value;
+			return " Increment the actions of type "+ zone+ " of value "+value;
 		else
-			return "decrease the actions of type "+ zone + " of value "+value;
+			return " Decrease the actions of type "+ zone + " of value "+value;
 	}
 
 }

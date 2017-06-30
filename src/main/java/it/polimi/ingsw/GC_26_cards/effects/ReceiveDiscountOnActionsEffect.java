@@ -46,11 +46,11 @@ public class ReceiveDiscountOnActionsEffect implements Effect{
 	 @Override
 	public String toString() {
 		if(zone!= null){
-			return "discount of "+discount+" on actions of type "+ zone;
+			return " Discount of "+discount+" on actions of type "+ zone;
 		}
 		else
 			return 
-					"discount of "+discount+" on actions on any tower";
+					" Discount of "+discount+" on actions on any tower";
 	}
 	
 

@@ -38,7 +38,7 @@ public class VaticanSupportBonus implements Effect{
 	 */
 	@Override
 	public String toString() {
-			return "Player gains "+ bonus.getVictoryPoints() +" Victory Points when supporting the Church in a Vatican Report phase.";
+			return " Player gains "+ bonus.getVictoryPoints() +" victory Points when supporting the Church in a Vatican Report phase.";
 	}
 
 }

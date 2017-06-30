@@ -27,6 +27,6 @@ public class DoubleServantsNeededEffect implements Effect{
 	 */
 	@Override
 	public String toString() {
-		return "player has to spend 2 servants to increase his action value by 1";
+		return " Player has to spend 2 servants to increase his action value by 1";
 	}
 }

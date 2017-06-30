@@ -41,7 +41,7 @@ public class PermanentResourcesMalusEffect implements Effect{
 	 */
 	@Override
 	public String toString() {
-		return "Each time player gains something, gains "+ malus+ " less";
+		return " Each time player gains something, gains "+ malus+ " less";
 	}
 
 }

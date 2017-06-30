@@ -37,7 +37,7 @@ public class NoVictoryPointForCardTypeEffect implements Effect{
 	 */
 	@Override
 	public String toString() {
-		return "Player don’t score points for any of "+ type.toString()+ " card"; 
+		return " Player don’t score points for any of "+ type.toString()+ " card"; 
 	}
 	
 	

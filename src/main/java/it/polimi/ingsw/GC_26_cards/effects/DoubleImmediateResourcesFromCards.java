@@ -26,7 +26,7 @@ public class DoubleImmediateResourcesFromCards implements Effect{
 	 */
 	@Override
 	public String toString() {
-		return "Each time you receiveresources as an immediate effect from Development Cards  you receive theresources twice.";
+		return " Each time you receive resources as an immediate effect from Development Cards you receive the resources twice.";
 	}
 	
 

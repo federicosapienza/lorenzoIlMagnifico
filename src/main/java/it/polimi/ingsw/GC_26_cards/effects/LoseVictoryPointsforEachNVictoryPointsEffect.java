@@ -38,7 +38,7 @@ public class LoseVictoryPointsforEachNVictoryPointsEffect implements Effect{
 	 */
 	@Override
 	public String toString() {
-		return " before the Final Scoring, you lose 1 Victory Point for every"+  malus+" Victory Points you have";
+		return " Before the Final Scoring, you lose 1 Victory Point for every"+  malus+" Victory Points you have";
 	}
 
 }

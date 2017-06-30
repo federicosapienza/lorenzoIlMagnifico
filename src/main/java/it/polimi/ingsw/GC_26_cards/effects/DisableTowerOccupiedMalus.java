@@ -28,7 +28,7 @@ public class DisableTowerOccupiedMalus implements Effect{
 	 */
 	@Override
 	public String toString() {
-		return "Player does not  have to spend 3 coins when you place your Family Members in a Tower that is already occupied.";
+		return " Player does not have to spend 3 coins when you place your Family Members in a Tower that is already occupied.";
 	}
 
 }

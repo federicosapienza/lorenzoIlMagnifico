@@ -69,12 +69,12 @@ public class SetSecondAction implements Effect{
 	public String toString() {
 		if(action.getZone()!=null){
 		if(secondActionDiscount==null)
-			return "Second action of type" +action.getZone() +" of value " +value;
+			return " Second action of type " +action.getZone() +" of value " +value;
 		else{
-			return "Second action of type" +action.getZone() +" of value " +value+ " with discount "+ secondActionDiscount;
+			return " Second action of type " +action.getZone() +" of value " +value+ " with discount "+ secondActionDiscount;
 		}
 	}
-		else return "Second action: pick a card in any tower " +", with action  value " +value;
+		else return " Second action: pick a card in any tower " +", with action value " +value;
 	}
 
 }

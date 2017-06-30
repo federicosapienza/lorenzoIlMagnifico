@@ -31,7 +31,7 @@ public class GainVictoryPointsPerAnyMilitaryPointEffect implements Effect{
 
 		@Override
 		public String toString(){
-			return " gives "+ toHave+ " for any Military Point"; 
+			return " Gives "+ toHave+ " for any Military Point"; 
 		}
 			
 

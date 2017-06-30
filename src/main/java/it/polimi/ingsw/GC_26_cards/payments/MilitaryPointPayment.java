@@ -73,7 +73,7 @@ public class MilitaryPointPayment implements Payment{
 	 */
 	@Override
 	public String toString(){
-		return "military points payment: needed: "+needed +", to consume: "+ toSpend;
+		return " Military points: needed: "+needed +", to consume: "+ toSpend;
 		
 	}
 	

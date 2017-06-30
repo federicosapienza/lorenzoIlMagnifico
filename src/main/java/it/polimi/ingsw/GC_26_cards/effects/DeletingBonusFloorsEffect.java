@@ -27,7 +27,7 @@ public class DeletingBonusFloorsEffect implements Effect{
 	 */
 	@Override
 	public String toString() {
-		return "revoke the chance of getting bonuses from towers positions";
+		return " Revoke the chance of getting bonuses from tower's positions";
 	}
 
 }

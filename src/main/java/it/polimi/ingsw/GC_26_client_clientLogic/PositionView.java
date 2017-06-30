@@ -40,6 +40,10 @@ public class PositionView {
 		return cardHere;
 	}
 	
+	public PositionDescriber getPositionDescriber(){
+		return describer;
+	}
+	
 	public Map<String, Colour> getPlayersHere() {
 		return playersHere;
 	}
