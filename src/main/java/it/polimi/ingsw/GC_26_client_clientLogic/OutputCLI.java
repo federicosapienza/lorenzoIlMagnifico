@@ -10,7 +10,6 @@ import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
-import junit.framework.Test;
 
 
 //methods are synchronized to avoid ugly mixtures of requests from InputLogic and infos from views.
