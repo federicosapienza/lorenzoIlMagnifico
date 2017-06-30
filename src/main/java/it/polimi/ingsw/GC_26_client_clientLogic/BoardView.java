@@ -122,8 +122,8 @@ public class BoardView {
 	
 	public void addExcommunication(CardDescriber card){
 		excommunicationThisGame.add(card);
-		System.out.println(card.getPeriod() +" "+  card.getPermanentEffectDescriber());
 	}
+
 	
 	
 	public List<PositionView> getBuildingsTower() {

@@ -159,6 +159,9 @@ public class ClientController {
 		}
 		GameStatus old=view.getGameStatus();
 		view.setGameStatus(info.getGameStatus());
+		if(old== GameStatus.INITIALIZINGGAME && info.getGameStatus()==GameStatus.INITIALIZINGTURN)
+			output.printExcommunicationTiles(view.getBoard());
+			
 		if(old== GameStatus.INITIALIZINGTURN && info.getGameStatus()==GameStatus.PLAYING)  //TODO
 			output.printBoard(view.getBoard());
 		

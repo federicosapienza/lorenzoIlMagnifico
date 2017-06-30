@@ -149,16 +149,16 @@ public class PlayerWallet implements Serializable{
 	
 	
 	public String toStringResources() {
-		return coins+" coins"+ servants +" servants" + stone +" stone"+wood+ " wood";
+		return coins+" coins ,"+ servants +" servants ," + stone +" stone ,"+wood+ " wood ,";
 	}
 	public String toStringPoints() {
-		return victoryPoints+" victory points"+ militaryPoints +" military points" + faithPoints +" faith points"+ councilPrivileges + " council privileges";
+		return victoryPoints+" victory points ,"+ militaryPoints +" military points ," + faithPoints +" faith points ,"+ councilPrivileges + " council privileges ";
 	}
 	
 
 	@Override
 	public String toString() {
 		
-		return playerName+": " + toStringResources()+ " "+toStringPoints();
+		return toStringResources()+ " " +toStringPoints();
 		}
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 import junit.framework.Test;
 
@@ -44,7 +45,7 @@ public class OutputCLI implements Output{
 		System.out.println("VALUE:|-BONUS:-------------------------|");
 		printList(board.getCouncilPalace());
 		System.out.println("---------------------------------------|");
-		System.out.println("PRODUCTION");
+		System.out.println("PRODUCTION:");
 		System.out.println("VALUE:|");
 		printList(board.getProductionZone());
 		System.out.println("------|");
@@ -149,9 +150,16 @@ public class OutputCLI implements Output{
 	
 	@Override
 	public  void printExcommunicationTiles(BoardView board) {
-		for(CardDescriber card: board.getExcommunicationThisGame())
-			System.out.println(card.getPeriod() +" "+  card.getPermanentEffectDescriber());
-		
+		String repeated = new String();
+		System.out.println(" ");
+		System.out.println(" EXCOMMUNICATION TILES:");
+		System.out.println("|PERIOD:|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+		for(CardDescriber card: board.getExcommunicationThisGame()){
+			repeated = new String(new char[140-card.getPermanentEffectDescriber().length()]).replace("\0", " ");
+			System.out.println("|"+card.getPeriod() +"      |"+  card.getPermanentEffectDescriber()+repeated+"|");
+		}
+		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------|");
+		System.out.println(" ");
 	}
 	@Override
 	public  void printString(String string) {
@@ -165,12 +173,30 @@ public class OutputCLI implements Output{
 	}
 	@Override
 	public  void printCompleteStatus(PlayerView player) {
-		System.out.println(player.getName() +": recap");
-		System.out.println("Family members value: " + player.getFamilyMembers().getStatus());
-		System.out.println("Free family members: " + player.getFamilyMembers().whatIsFree());
+		System.out.println("");
+		System.out.println("RECAP OF PLAYER " + "'" + player.getName() + "' :");
+		System.out.println("");
+		System.out.println("Family members value: ");
+		System.out.println(player.getFamilyMembers().getStatus());
+		System.out.println("");
+		System.out.println("Free family members:  ");
+		System.out.println(player.getFamilyMembers().whatIsFree());
+		System.out.println("");
+		System.out.println("Resources and points:");
 		printResources(player);	
-		printCards(player);
+		System.out.println("");
+		System.out.println("Cards owned:");
+		if(player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD).isEmpty() && player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD).isEmpty()
+			&& player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD).isEmpty()	&& player.getCurrentCards(DevelopmentCardTypes.VENTURECARD).isEmpty()){
+			System.out.println("No cards owned yet");
+		}
+		else{
+			printCards(player);
+		}
+		System.out.println("");
+		System.out.println("Personal tile values: ");
 		System.out.println( player.getPersonalTileValues());
+		System.out.println("");
 	}
 	@Override
 	public  void printRankings(MainClientView view) {
@@ -191,20 +217,20 @@ public class OutputCLI implements Output{
 	@Override
 	public void printCards(PlayerView player) {  //stampare tutta la persona board
 		if(!player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD).isEmpty()){
-			System.out.println("territory Cards owned");
+			System.out.println(" Territory Cards owned:");
 			printCards(player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD));}
 		if(!player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD).isEmpty()){
-			System.out.println("character cards owned");
+			System.out.println(" Character cards owned:");
 			printCards(player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD));}
 		if(!player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD).isEmpty()){
-			System.out.println("building cards owned");
+			System.out.println(" Building cards owned:");
 			printCards(player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD));}
 		if(!player.getCurrentCards(DevelopmentCardTypes.VENTURECARD).isEmpty()){
-			System.out.println("venture cards owned");
+			System.out.println(" Venture cards owned:");
 			printCards(player.getCurrentCards(DevelopmentCardTypes.VENTURECARD));}
 		
 		if(!player.getPermamentsEffect().isEmpty()){
-		System.out.println("permanents effect owned");
+		System.out.println("Permanents effect owned");
 		for(String s: player.getPermamentsEffect())
 			System.out.println(s);
 	}
