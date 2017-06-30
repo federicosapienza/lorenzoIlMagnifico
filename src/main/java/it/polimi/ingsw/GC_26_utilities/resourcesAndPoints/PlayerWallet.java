@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @author David Yun (david.yun@mail.polimi.it)
  * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
  * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
  * This class represents the message sent to the players, containing the status of the resources and points of the current
  * player.
  * Then it updates the status of the player in the clients' view.  
