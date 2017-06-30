@@ -394,7 +394,7 @@ public class Game extends Observable<CardDescriber>{
 			 * If the game is ended, it has to be chosen a winner, else, the game will go on with next period.
 			 */	
 			if(period==numberOfPeriods){
-				gameElements.notifyPlayers(new Info(GameStatus.ENDING, null, "calculating results "+ period+ " round "+round ));;
+				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, "calculating results "+ period+ " round "+round ));;
 				chooseAWinner();  
 				return; 
 				
