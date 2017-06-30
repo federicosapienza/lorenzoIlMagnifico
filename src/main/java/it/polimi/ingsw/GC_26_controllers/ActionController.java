@@ -8,10 +8,24 @@ import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_server.Observer;
 import it.polimi.ingsw.GC_26_utilities.Request;
 
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the controller for every action
+ *
+ */
 public class ActionController implements Observer<Action>{  
 	Player player;
 	MainActionHandler handlers;
 	
+	/**
+	 * Constructor: it creates an ActionController for the player and the MainActionHandler contained in the parameters
+	 * @param player the player to control
+	 * @param handlers the handlers to control
+	 */
 	public ActionController(Player player, MainActionHandler handlers) {
 		if(player==null || handlers==null)
 			throw new NullPointerException("player or handlers are null"); 
@@ -19,6 +33,10 @@ public class ActionController implements Observer<Action>{
 		this.handlers= handlers;
 	}
 	
+	/**
+	 * Method that analyze the action contained in the parameter and checks if it is everything ok according with 
+	 * the characteristics of the player
+	 */
 	public void update(Action action){ 
 		if (action == null) {
 			throw new NullPointerException("action is null");
@@ -36,7 +54,10 @@ public class ActionController implements Observer<Action>{
 			secondActionController(action);
 	}
 	
-	
+	/**
+	 * Method that controls if the action contained in the parameter is ok as a first action
+	 * @param action It's the action that has to be checked as a first action
+	 */
 	private void firstActionController(Action action){
 		if(action==null)
 			throw new NullPointerException(); 
@@ -80,7 +101,10 @@ public class ActionController implements Observer<Action>{
 			}
 		}
 	}
-	
+	/**
+	 * Method that controls if the action contained in the parameter is ok as a secondary action
+	 * @param action It's the action that has to be checked as a secondary action
+	 */
 	private void secondActionController(Action action){
 		if (action == null) {
 			throw new NullPointerException("action is null");
