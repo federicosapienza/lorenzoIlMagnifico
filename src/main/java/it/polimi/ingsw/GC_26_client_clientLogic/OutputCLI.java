@@ -8,7 +8,6 @@ import java.util.Set;
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 
 
