@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @author David Yun (david.yun@mail.polimi.it)
  * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
  * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
  * This class represents the message sent to the players, containing the status of the resources and points of the current
  * player.
  * Then it updates the status of the player in the clients' view.  
@@ -149,16 +150,16 @@ public class PlayerWallet implements Serializable{
 	
 	
 	public String toStringResources() {
-		return coins+" coins"+ servants +" servants" + stone +" stone"+wood+ " wood";
+		return coins+" coins ,"+ servants +" servants ," + stone +" stone ,"+wood+ " wood ,";
 	}
 	public String toStringPoints() {
-		return victoryPoints+" victory points"+ militaryPoints +" military points" + faithPoints +" faith points"+ councilPrivileges + " council privileges";
+		return victoryPoints+" victory points ,"+ militaryPoints +" military points ," + faithPoints +" faith points ,"+ councilPrivileges + " council privileges ";
 	}
 	
 
 	@Override
 	public String toString() {
 		
-		return playerName+": " + toStringResources()+ " "+toStringPoints();
+		return toStringResources()+ " " +toStringPoints();
 		}
 }

@@ -4,6 +4,15 @@ import java.util.Set;
 
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This is the interface of the Output
+ *
+ */
 public interface Output {
 	void printBoard(BoardView board);
 	void printExcommunicationTiles(BoardView board);
@@ -14,4 +23,5 @@ public interface Output {
 	void printFamilyMembers(PlayerView player);
 	void printCards(PlayerView thisPlayer);
 	void printCards(Set<CardDescriber> cards);
+	void printLeaderCards(Set<CardDescriber> cards);
 }

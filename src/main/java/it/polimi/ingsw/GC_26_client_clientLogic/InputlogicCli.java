@@ -171,8 +171,8 @@ public class InputlogicCli implements Runnable{
 		
 		
 		public void setActionPerformed() {
-			output.printCards(view.getThisPlayer().getLeadersCardOwned());
-			printRequest("choose a value between 1 and 4 to try activating the correspondent Leader Card");
+			output.printLeaderCards(view.getThisPlayer().getLeadersCardOwned());
+			printRequest("Choose a value between 1 and 4 to try activating the correspondent Leader Card");
 			this.setWaitingResponse();
 		}
 		
