@@ -61,25 +61,37 @@ public class ClientMain {
 			LOG.log( Level.SEVERE, "error in socket connection ", e);	
 		}
 		
-		
+		boolean flag=true;;
+		/*
 		Scanner scanIN=new Scanner(System.in);
-
 		while(true){
-			System.out.println("Do you want to start a new game? Y/N");
+			System.out.println("Do you want to start a new game? 1 to continue , 0 to exit");
 		
-			while(!scanIN.hasNextLine()) { 
+		
+			while(!scanIN.hasNextInt()) { //used to be sure integer is an input
 			    scanIN.next();
 			    System.out.println("not valid input");
 			}
-			String value = scanIN.nextLine();
-			if(value.equals("Y")){
-				start();
+			int value = scanIN.nextInt();
+			System.out.println("here");
+			if(value==1){
+				flag=true;
 				break;
 			}
-			if(value.equals("N"))
-				break;			
+			if(value==0){
+				flag=false;
+				break;	
+			}
+			else System.out.println("not valid input");
+			
 	}
-		scanIN.close();
+	*/
+		System.out.println( "here2");
+	//	scanIN.close();
+		System.out.println("sto iniziando");
+		if(flag)
+			start();
+		return;
 	}
 	
 	

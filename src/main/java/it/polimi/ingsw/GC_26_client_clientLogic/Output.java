@@ -24,4 +24,5 @@ public interface Output {
 	void printCards(PlayerView thisPlayer);
 	void printCards(Set<CardDescriber> cards);
 	void printLeaderCards(Set<CardDescriber> cards);
+	void printFinalRankings(MainClientView view);
 }

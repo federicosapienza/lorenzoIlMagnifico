@@ -295,7 +295,7 @@ public class Game extends Observable<CardDescriber>{
 		 * If the player has been suspended, he'll miss his turn
 		 */
 		if(status == PlayerStatus.SUSPENDED){
-			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "misses his turn"));
+			gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ " misses his turn"));
 			nextStep();
 			return;
 		}
@@ -316,7 +316,7 @@ public class Game extends Observable<CardDescriber>{
 	 * Method called to send cards and set the family members
 	 */
 	private void startingRound() {
-		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGTURN, null, "Starting period "+ period+ " round "+round ));
+		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGROUND, null, "Starting period "+ period+ " round "+round ));
 		
 		gameElements.getBoard().endRound();
 		gameElements.getDices().rollDices();

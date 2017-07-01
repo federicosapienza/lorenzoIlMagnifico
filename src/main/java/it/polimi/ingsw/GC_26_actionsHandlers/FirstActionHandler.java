@@ -8,6 +8,7 @@ import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
 
 /**
  * 
@@ -43,7 +44,6 @@ public class FirstActionHandler extends ActionHandler{
 	 */
 	public boolean isPossible(Player player, Action action) throws IllegalArgumentException{
 		
-		//spiegare che programmazione molto difensiva
 		
 		player.setTemporaryWarehouse();  // prepares the action
 		
@@ -75,7 +75,7 @@ public class FirstActionHandler extends ActionHandler{
 				return super.productionIsPossible(player, familyMemberUsed, action);
 			}
 			else {
-				throw new IllegalArgumentException();
+				throw new IllegalActionException();
 			}
 			
 		}

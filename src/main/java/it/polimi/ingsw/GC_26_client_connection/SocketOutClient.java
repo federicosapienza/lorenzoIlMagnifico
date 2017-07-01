@@ -23,7 +23,6 @@ public class SocketOutClient implements ClientConnection{
 	@Override
 	public void login(String username) {
 		try {
-
 			objOut.writeUTF(username);
 			objOut.flush();
 			
@@ -65,6 +64,7 @@ public class SocketOutClient implements ClientConnection{
 	public void close() {
 		try { //socket is closed by input stream
 			objOut.close();
+			socket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

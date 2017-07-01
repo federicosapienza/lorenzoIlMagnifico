@@ -11,6 +11,7 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.Info;
 import it.polimi.ingsw.GC_26_utilities.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
 
 /*Handles only the cases in which the player can choose:
  *  choice values: 0 for excommunication , any other value for paying faith points
@@ -37,7 +38,7 @@ public class VaticanReportHandler extends Handler{
 			return;
 		}
 		 if(player.getWarehouse().getFaithPoints()< GameParameters.getFaithPointNeeded(gameElements.getGame().getPeriod())){
-		    	throw new IllegalStateException("player should not be asked for vatican report choice");
+		    	throw new IllegalActionException("player should not be asked for vatican report choice");
 		    	//the player should not be here  	
 		}
 		 

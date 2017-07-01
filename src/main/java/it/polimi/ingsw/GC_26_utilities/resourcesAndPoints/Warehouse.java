@@ -2,6 +2,7 @@ package it.polimi.ingsw.GC_26_utilities.resourcesAndPoints;
 
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_server.Observable;
+import it.polimi.ingsw.GC_26_utilities_exceptions.NotEnoughResourcesExceptions;
 
 /* It ' s the class that represent the status of the player in terms of resources and points owned.
  * It must not be mistaken with ResourcesOrPoints class , which instead represent the payments and effects that are called by cards, positions etc
@@ -121,8 +122,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 	
 	public boolean areResourcesEnough(ResourcesOrPoints resources){
 		/*as soon as one element (resources or scores) is not enough, returns false.
-		 *  In order to be more general , this method checks also if faith points or victoryPoint are enough,
-		 *   even if there is no payment with them. Instead , there is no need to check council privileges number 
+		 * Note that there is no need to check council privileges number 
 		 */
 		if(!greaterEqualThan(coins, resources.getResources().getCoins()))  
 			return false;
@@ -136,9 +136,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 			return false;
 		if(!greaterEqualThan(faithPoints, resources.getPoints().getFaithPoints()))  
 			return false;
-		if(!greaterEqualThan(militaryPoints, resources.getPoints().getMilitaryPoints()))  
-			return false;
-		return true;
+		return greaterEqualThan(militaryPoints, resources.getPoints().getMilitaryPoints())  ;
 	}
 	
 	private boolean greaterEqualThan(int WarehouseParameter, int test){
@@ -209,7 +207,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 	}
 	
 	
-	public void spendResources(ResourcesOrPoints resources) {//throws IllegalArgumentException
+	public void spendResources(ResourcesOrPoints resources) {
 		this.coins  -= resources.getResources().getCoins();
 		this.servants -= resources.getResources().getServants();
 		this.wood -= resources.getResources().getWood();
@@ -221,7 +219,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		
 		// To ensure nothing went wrong calls moreThanZero. 
 		if(!moreThanZero())  {
-			throw new IllegalArgumentException("Resources went below zero");
+			throw new NotEnoughResourcesExceptions("Resources went below zero");
 		}
 		//notify the clients
 			notifyObservers(new PlayerWallet(this));

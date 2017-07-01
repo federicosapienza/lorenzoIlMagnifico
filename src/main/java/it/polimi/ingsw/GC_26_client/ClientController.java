@@ -33,7 +33,7 @@ public class ClientController {
 	
 
 	public void receiveCard(CardDescriber card){
-		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME || view.getGameStatus()==GameStatus.INITIALIZINGTURN){
+		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME || view.getGameStatus()==GameStatus.INITIALIZINGROUND){
 			if(card.getTypeOfCard().equalsIgnoreCase("Development Card")){
 				view.getBoard().addCardWhereFree(card);
 				return;}
@@ -53,7 +53,7 @@ public class ClientController {
 	}
 	
 	public void receiveAction(ActionNotification action){
-		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME||view.getGameStatus()==GameStatus.INITIALIZINGTURN)
+		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME||view.getGameStatus()==GameStatus.INITIALIZINGROUND)
 			throw new IllegalStateException();  //TODO come gestirla
 		if(view.getGameStatus()==GameStatus.PLAYING){
 			view.getBoard().update(action);
@@ -67,7 +67,7 @@ public class ClientController {
 	public void receivePosition(PositionDescriber position){
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME)
 			view.getBoard().addPosition(new PositionView(position));
-		if(view.getGameStatus()==GameStatus.PLAYING || view.getGameStatus()==GameStatus.INITIALIZINGTURN){}
+		if(view.getGameStatus()==GameStatus.PLAYING || view.getGameStatus()==GameStatus.INITIALIZINGROUND){}
 			//TODO lancia eccezione;
 		
 	}
@@ -160,22 +160,28 @@ public class ClientController {
 		GameStatus old=view.getGameStatus();
 		view.setGameStatus(info.getGameStatus());
 
-		if(old== GameStatus.INITIALIZINGGAME && info.getGameStatus()==GameStatus.INITIALIZINGTURN) 
-			output.printBoard(view.getBoard());
-		
-		if(old== GameStatus.INITIALIZINGGAME && info.getGameStatus()==GameStatus.INITIALIZINGTURN)
+		if(old== GameStatus.INITIALIZINGGAME && info.getGameStatus()==GameStatus.INITIALIZINGROUND){
 			output.printExcommunicationTiles(view.getBoard());
+			output.printLeaderCards(view.getThisPlayer().getLeadersCardOwned());
+		}
 			
-		if(old== GameStatus.INITIALIZINGTURN && info.getGameStatus()==GameStatus.PLAYING)  
+		if(old== GameStatus.INITIALIZINGROUND && info.getGameStatus()==GameStatus.PLAYING)  {
 			output.printBoard(view.getBoard());
+			output.printRankings(view);
+		}
+
 		
-		if(info.getGameStatus()==GameStatus.INITIALIZINGTURN)
+		if(info.getGameStatus()==GameStatus.INITIALIZINGROUND){
 			view.getBoard().cleanBoard();
+		}
+		
 		if(info.getMessage().contains("ended the turn")) //TODO cambiare se cambia in EndTurnController
 				output.printCompleteStatus(view.getPlayer(info.getPlayerReferred()));
 		
-		if(info.getGameStatus()==GameStatus.ENDING)
+		if(info.getGameStatus()==GameStatus.ENDING){
+			output.printFinalRankings(view);
 			main.restart();
+		}
 			
 	}
 	

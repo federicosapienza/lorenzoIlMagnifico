@@ -87,11 +87,11 @@ public class HarvestAndProductionHandler {
 			card.runPermanentEffect(player);
 			//calling the card. Going back we must be sure turn is not finished or player has been asked for choice
 			
-			synchronized (player) {
-				if(player.getStatus()== PlayerStatus.TRADING){
-					actionValue=value;
-					flag =false;
-				}
+			
+		if(player.getStatus()== PlayerStatus.TRADING){
+			actionValue=value;
+			flag =false;
+				
 			}	
 		}
 		return flag;

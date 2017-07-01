@@ -25,6 +25,7 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 		private ObjectOutputStream objOut =  null;
 		private  ObjectInputStream objIn  = null;
 		private ClientMainServerView views= null;
+		private boolean closed=false;
 
 		public ServerSocketToClient(Socket socket, Server server) throws IOException {
 			this.socket=socket;
@@ -53,7 +54,7 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 				Boolean loginDone= false;
 				String username=null;
 				while(!loginDone){
-					objOut.writeUTF("Insert username and password");
+					objOut.writeUTF("Insert username");
 					objOut.flush();
 					username = objIn.readUTF();
 					if(username==null){
@@ -65,9 +66,8 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 						objOut.writeUTF("Entering in a game");
 					objOut.flush();}
 				}
-				if(username!=null)
-					server.addClient(this, username);
-				while(true){
+				server.addClient(this, username);
+				while(!closed){
 					
 					//reading objects
 					Object object = objIn.readObject();
@@ -82,29 +82,34 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 						Action action = (Action) object;
 						views.getActionInputView().notifyNewAction(action);
 				} 
-					
-						
-				}
-						// closes the scanner
-					//	socketIn.close();
-						// closes the printWriter
-				//		socketOut.close();
-				
-			
-			// closes the socket
-			//	socket.close();
+				}	
 			} 
 			catch (IOException e) {
-			System.err.println(e.getMessage());
-			//TODO fare
+				closed= true;
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			finally{
+				closeSocket();
 			}
-			
+			}
 		
 		
+		private void closeSocket(){
+			try {
+				socket.close();
+				objOut.close();
+				objIn.close();
+				System.out.println("exiting");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	
+
 		
 		private synchronized void sendMethod(Object object) {
 			try {

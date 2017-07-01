@@ -7,6 +7,8 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_server.Observer;
 import it.polimi.ingsw.GC_26_utilities.Request;
+import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
+import it.polimi.ingsw.GC_26_utilities_exceptions.NotEnoughResourcesExceptions;
 
 /**
  * 
@@ -88,19 +90,23 @@ public class ActionController implements Observer<Action>{
 				else 
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 			} 
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+		} catch (NotEnoughResourcesExceptions e) {
+			
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.PLAYING, "repeat your action" , null));
+				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "not valid action: resources ended under zero. ending turn" , null));
 			}
 		} catch (IllegalStateException e1 ) {
-			e1.printStackTrace();
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.PLAYING, "repeat your action" , null));
-
+				player.setStatus(new Request(PlayerStatus.PLAYING, "not valid action" , null));
 			}
 		}
+		catch (IllegalActionException e1 ) {
+			synchronized (player) {
+				player.setStatus(new Request(PlayerStatus.PLAYING, "not valid action" , null));
+		}
 	}
+	}
+	
 	/**
 	 * Method that controls if the action contained in the parameter is ok as a secondary action
 	 * @param action It's the action that has to be checked as a secondary action
@@ -129,18 +135,20 @@ public class ActionController implements Observer<Action>{
 				}
 				else{
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
-				}
-				
+				}	
 			}
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			} catch (NotEnoughResourcesExceptions e) {
+			
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.SECONDPLAY, "repeat your action" , null));
-
+				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "not valid action: resources ended under zero. ending turn" , null));
 			}
-			
-			
+		} 
+		catch (IllegalActionException e1 ) {
+			synchronized (player) {
+				player.setStatus(new Request(PlayerStatus.PLAYING, "not valid action" , null));
+			}
 		}
+				
 		catch (IllegalStateException e1 ) {
 			e1.printStackTrace();
 			synchronized (player) {

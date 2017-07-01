@@ -9,6 +9,7 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.Info;
 import it.polimi.ingsw.GC_26_utilities.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26_utilities.Request;
+import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
 
 
 //Handles the activation of leaderCards : he keeps memory of the cards used this turn to prevent the player from trying using the same card twice
@@ -51,10 +52,10 @@ public class LeaderCardHandler extends Handler{
 			card= list.get(choice);
 		} catch (IndexOutOfBoundsException e) {
 			player.notifyObservers(new Request(player.getStatus(),errorString, null));
-			throw new IllegalStateException();
+			throw new IllegalActionException();
 		}
 		if (player.getPersonalBoard().isLeaderCardUsedYet(card) || !card.checkRequirement(player))
-			throw new IllegalStateException();
+			throw new IllegalActionException();
 		
 		player.getPersonalBoard().setLeaderCardUsed(card);
 		card.runImmediateEffect(player);

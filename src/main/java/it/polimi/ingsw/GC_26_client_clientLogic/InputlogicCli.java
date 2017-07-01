@@ -43,14 +43,14 @@ public class InputlogicCli implements Runnable{
 		@Override
 		public void run() {
 			String username;
-				while(true){
-				username = scanIN.nextLine();
-				if(username!=null)
-					break;
-				}
-				connection.login(username);
-				view.setPlayerUsername(username);
-				
+			while(true){
+			username = scanIN.nextLine();
+			if(username!=null)
+				break;
+			}
+			connection.login(username);
+			view.setPlayerUsername(username);
+			scanIN.close();
 				
 			scanIN=new Scanner(System.in);
 
@@ -83,8 +83,9 @@ public class InputlogicCli implements Runnable{
 					waitingResponse=false;
 					continue;
 				}
-				if(close)
+				if(close){
 					break;
+				}
 			}	
 		}
 	
@@ -166,6 +167,7 @@ public class InputlogicCli implements Runnable{
 		
 		public synchronized void close(){
 			close=true;
+			scanIN.close();
 			connection.close();
 		}
 		

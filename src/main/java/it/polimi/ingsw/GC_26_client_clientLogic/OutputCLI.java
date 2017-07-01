@@ -234,6 +234,7 @@ public class OutputCLI implements Output{
 	@Override
 	public  void printRankings(MainClientView view) {
 		// TODO sarebbe bello stampare classifica a parte da punti
+		System.out.println("qui vengono stampati punti vittoria , fede e militari");
 		
 	}
 	
@@ -269,6 +270,14 @@ public class OutputCLI implements Output{
 	}
 	
 
+	}
+
+
+
+	@Override
+	public void printFinalRankings(MainClientView view) {
+		// TODO solo punti vittoria per tutti i player nel match
+		
 	}
 	
 

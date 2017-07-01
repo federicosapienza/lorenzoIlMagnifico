@@ -11,6 +11,8 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_player.PlayerStatus;
 import it.polimi.ingsw.GC_26_server.Observer;
 import it.polimi.ingsw.GC_26_utilities.Request;
+import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
+import it.polimi.ingsw.GC_26_utilities_exceptions.NotEnoughResourcesExceptions;
 
 //the controller called whenever the game asks the client to perform a specific choice
 public class ChoiceController implements Observer<Integer>{
@@ -82,12 +84,19 @@ public class ChoiceController implements Observer<Integer>{
 			
 			}
 			  }
-		catch(IllegalArgumentException e){
+		catch(IllegalActionException e){
 			e.printStackTrace();
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, null , null));
+				player.setStatus(new Request(PlayerStatus.TRADING, null , null));
 				//ends the turn
-			}	
+			}
+		}
+		catch(NotEnoughResourcesExceptions e){
+			e.printStackTrace();
+			synchronized (player) {
+				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "Not enough resources: ending the turn" , null));
+				//ends the turn
+			}		
 		}
 	}
 		
@@ -113,14 +122,23 @@ public class ChoiceController implements Observer<Integer>{
 							player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 					}	
 					}
-			} catch(IllegalArgumentException e){
+			} catch(IllegalActionException e){
 				e.printStackTrace();
 				synchronized (player) {
 					 player.backToPreviousStatusWithoutNotifying();
 					player.setStatus(new Request(player.getStatus(), "action not valid" , null));
 
 				}
-			}		
+			}
+			catch(NotEnoughResourcesExceptions e){
+				e.printStackTrace();
+				synchronized (player) {
+					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "Not enough resources: ending the turn" , null));
+					//ends the turn
+				}		
+			}
+			
+			
 		}
 		private void diplomaticPrivilegesController(int choice) {
 			try{
@@ -145,7 +163,7 @@ public class ChoiceController implements Observer<Integer>{
 					else player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));;
 				}
 				}
-			catch(IllegalArgumentException e){
+			catch(IllegalActionException e){
 				e.printStackTrace();
 				synchronized (player) {
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, "action not valid" , null));
@@ -153,16 +171,14 @@ public class ChoiceController implements Observer<Integer>{
 					
 				}
 			}
-			catch ( IllegalStateException e1 ) {
-				e1.printStackTrace();
+			catch(NotEnoughResourcesExceptions e){
+				e.printStackTrace();
 				synchronized (player) {
-					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, "action not valid" , null));
-					
-
-				}
-				}	
-				
-			}
+					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "Not enough resources: ending the turn" , null));
+					//ends the turn
+				}		
+			}		
+		}
 		private void vaticanReportController(int choice) {
 			try{
 				player.setPlayerActive();
@@ -172,7 +188,7 @@ public class ChoiceController implements Observer<Integer>{
 				handlers.getGameElements().getGame().vaticanReportNext(); // automatically ends the turn
 		}
 			
-			catch ( IllegalStateException e ) {
+			catch ( IllegalActionException e ) {
 				e.printStackTrace();
 				synchronized (player) {
 					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "action not valid" , null));
@@ -204,7 +220,7 @@ public class ChoiceController implements Observer<Integer>{
 				//otherwise the status does not change
 				}
 		}
-		catch( IllegalStateException e){
+		catch( IllegalActionException e){
 			player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED,null, null));
 		}
 		}

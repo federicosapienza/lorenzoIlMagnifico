@@ -23,6 +23,7 @@ import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMember;
+import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)
@@ -146,8 +147,7 @@ public abstract class ActionHandler extends Handler{
 		 */
 		if(!card.canPlayerGetThis(player)){
 			 player.notifyObservers(new Request(player.getStatus(),"not enough resources to get the card",new CardDescriber(card)));
-			return false;
-			
+			return false;	
 		}
 		return true;
 	 }
@@ -230,7 +230,7 @@ public abstract class ActionHandler extends Handler{
 		  if(action.getPosition()==2){ 
 			 MultipleHarvest position = gameElements.getBoard().getHarvestZone().getMultipleHarvest();
 			 return getCheckerHandler().canMemberGoToPosition(position, player, familyMember, action);}
-		  throw new IllegalArgumentException();
+		  throw new IllegalActionException();
 	 }
 	 
 	 protected boolean productionIsPossible(Player player, FamilyMember familyMember, Action action){
@@ -259,7 +259,7 @@ public abstract class ActionHandler extends Handler{
 			 MultipleProduction position = gameElements.getBoard().getProductionZone().getMultipleProduction();
 			 return checkerHandler.canMemberGoToPosition(position, player, familyMember, action);
 		 } 
-		 throw new IllegalArgumentException();
+		 throw new IllegalActionException();
 		}
 	 
 	 
@@ -394,7 +394,7 @@ public abstract class ActionHandler extends Handler{
 				return;
 		 }
 			  
-			 throw new IllegalArgumentException();
+			 throw new IllegalActionException();
 }
 	 /**
 	  * Method to use when performing an action in the harvest zone
@@ -432,6 +432,6 @@ public abstract class ActionHandler extends Handler{
 				 	}
 
 			 
-			 throw new IllegalArgumentException();
+			 throw new IllegalActionException();
 }
 }

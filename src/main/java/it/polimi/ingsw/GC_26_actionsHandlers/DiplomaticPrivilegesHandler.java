@@ -6,6 +6,7 @@ import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
 
 
 /**
@@ -18,7 +19,7 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
  */
 public class DiplomaticPrivilegesHandler{
 	private  ResourcesOrPoints[] diplomaticPrivilegesTrades= GameParameters.getDiplomaticPrivilegesTrades();
-	private boolean used[]= new boolean[GameParameters.getDiplomaticPrivilegesTrades().length];
+	private boolean[] used= new boolean[GameParameters.getDiplomaticPrivilegesTrades().length];
 
 	/**
 	 * Constructor: it creates an array of boolean initialized to false
@@ -40,7 +41,7 @@ public class DiplomaticPrivilegesHandler{
 	 */
 	public boolean isPossible(Player player, int choice){  
 		if(!player.getWarehouse().areResourcesEnough(ResourcesOrPoints.newPoints(0, 0, 0, 1))){
-			throw new IllegalStateException();
+			throw new IllegalActionException();
 		}
 		
 		if(choice >= diplomaticPrivilegesTrades.length){   
@@ -63,19 +64,23 @@ public class DiplomaticPrivilegesHandler{
 	public void perform(Player player, int choice){  
 		
 		if(!player.getWarehouse().areResourcesEnough(ResourcesOrPoints.newPoints(0, 0, 0, 1)))
-			throw new IllegalStateException();
+			throw new IllegalActionException();
 			
 		if(used[choice]){
-			throw new IllegalArgumentException();
+			throw new IllegalActionException();
 		}
 		
 		// If the integer is greater than the maximum number of possible choice, the first possible reward is automatically given.
 		if(choice >= diplomaticPrivilegesTrades.length){   
-			choice=findNotUsed();
+			int temp =findNotUsed();
+			player.getWarehouse().add(diplomaticPrivilegesTrades[temp]);
+
 		}
 		
+		else player.getWarehouse().add(diplomaticPrivilegesTrades[choice]);
+
+		
 		//the choice of the player is recorded 
-		player.getWarehouse().add(diplomaticPrivilegesTrades[choice]);
 		player.getWarehouse().spendResources(ResourcesOrPoints.newPoints(0, 0, 0, 1));
 		used[choice] = true;
 		
@@ -108,7 +113,7 @@ public class DiplomaticPrivilegesHandler{
 	 */
 	private int findNotUsed(){
 		for(int i=0; i< used.length; i++){
-			if(used[i]==false)
+			if(!used[i])
 				return i;
 		}
 		resetMemory();
@@ -122,7 +127,7 @@ public class DiplomaticPrivilegesHandler{
 	 */
 	private boolean isSomethingNotUsed(){
 		for(int i=0; i< used.length; i++){
-			if(used[i]==false)
+			if(!used[i])
 				return true;
 		}
 		return false;

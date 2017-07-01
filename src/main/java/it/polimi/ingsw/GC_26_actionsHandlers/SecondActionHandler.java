@@ -8,6 +8,7 @@ import it.polimi.ingsw.GC_26_gameLogic.GameElements;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
 
 public class SecondActionHandler extends ActionHandler{
 
@@ -54,7 +55,7 @@ public class SecondActionHandler extends ActionHandler{
 			return super.councilPalaceIsPossible(player, null, action);
 		if(action.getZone()==BoardZone.HARVEST ||action.getZone()==BoardZone.PRODUCTION)
 				return true;
-		else throw new IllegalArgumentException();
+		else throw new IllegalActionException();
 		
 	
 	}

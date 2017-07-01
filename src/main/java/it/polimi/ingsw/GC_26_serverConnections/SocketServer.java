@@ -11,6 +11,7 @@ import it.polimi.ingsw.GC_26_server.Server;
 public class SocketServer  {
 	private final Server server;
 	private final int port;
+	public boolean stopped=false;
     
 
     public SocketServer (Server server, int PORT) {
@@ -33,17 +34,14 @@ public class SocketServer  {
     				Socket socket = welcomeSocket.accept();
     				ServerConnectionToClient socketconnect =new ServerSocketToClient(socket, server); 
         			pool.submit(socketconnect);
-    	    	
-    	    	
-    			
-    			
-    			
-    			
     		}
     		
 			}catch (Exception e) {
 				e.printStackTrace();
     		}
+    		finally {
+				welcomeSocket.close();
+			}
     	
     	
 	}
