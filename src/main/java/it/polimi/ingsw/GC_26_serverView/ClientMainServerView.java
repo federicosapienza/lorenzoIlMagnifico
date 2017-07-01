@@ -4,7 +4,7 @@ import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
 import it.polimi.ingsw.GC_26_serverConnections.ServerConnectionToClient;
 
 public class ClientMainServerView {
-	private final String name;
+	private  String name;
 	private PlayerWalletView playerWalletView;
 	private CardDescriberView cardDescriberView;
 	private MessageView messageView;
@@ -123,5 +123,7 @@ public class ClientMainServerView {
 		return endTurnView;
 	}
 	
-	
+	public void setName(String name) {
+		this.name = name;
+	}
 }

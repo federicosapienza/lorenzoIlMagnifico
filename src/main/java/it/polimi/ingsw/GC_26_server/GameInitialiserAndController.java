@@ -20,6 +20,7 @@ public class GameInitialiserAndController{
 	private Game game;
 	private List<ClientMainServerView> clients= new ArrayList<>() ;
 	private int numOfPlayer=0 ; //new match are created when a player is in 
+	private int nameRepeated=1;
 	
 	public  GameInitialiserAndController(Cards cards, BonusInterface bonus, TimerValuesInterface times){
 		game = new Game( cards,  bonus,  times);
@@ -28,29 +29,27 @@ public class GameInitialiserAndController{
 	
 	public void addClient(ClientMainServerView client){
 		clients.add(client);
+		changeNameIfNameAlreadyExists(client);
 		game.addPlayer(client.getName());
 		numOfPlayer++;
 	}
-	public boolean isPlayerHere(String playerName){
-		for(Player p: game.getPlayers()){
-			if(playerName.equals(p.getName()))
-				return true;
-		}
-		 return false;
-	}
-	
 	
 	public int getNumOfPlayer() {
 		return numOfPlayer;
 	}
 	
+	private void changeNameIfNameAlreadyExists(ClientMainServerView view){
+		List<Player> players= game.getPlayers();
+		for(Player player: players)
+			if(player.getName().equals(view.getName())){
+				String temp= String.valueOf(nameRepeated);
+				view.setName(view.getName().concat(temp));
+				nameRepeated++;
+			}
+				
+	}
 	
-	public void removeClient(){
-		//TODO
-	}
-	public void addClientAgain(ClientMainServerView views){
-		//TODO
-	}
+	
 	public void initialiseGame(){
 		game.initialiseGame();
 		GameElements gameElements = game.getGameElements();

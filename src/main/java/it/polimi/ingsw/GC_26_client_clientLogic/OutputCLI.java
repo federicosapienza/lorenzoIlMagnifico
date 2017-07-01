@@ -89,7 +89,7 @@ public class OutputCLI implements Output{
 	
 	
 	private String printBonusPosition(PositionDescriber positionDescriber){
-		String repeated = new String();
+		String repeated ;
 		StringBuilder temp = new StringBuilder(" ");
 		if("null".equals(positionDescriber.getResourcesOrPointsOnPosition())){
 			return temp.toString();
@@ -236,10 +236,10 @@ public class OutputCLI implements Output{
 	}
 	@Override
 	public  void printRankings(MainClientView view) {
-		// TODO sarebbe bello stampare classifica a parte da punti
-		//Map<String, PlayerView> players=view.getPlayers();
-		//List<PlayerView> list = new ArrayList<>();
-		//list  = players.values();
+		Map<String, PlayerView> players=view.getPlayers();
+
+		List<PlayerView> playerViews  = new ArrayList<>(players.values());
+		
 	}
 	
 	public  void printCards(Set<CardDescriber> cards){
