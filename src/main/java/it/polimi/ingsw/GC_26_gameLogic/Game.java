@@ -153,10 +153,8 @@ public class Game extends Observable<CardDescriber>{
 		}
 		gameElements= new GameElements(this, players, numberOfPlayers, resourcesOrPointsBonus, bonusInterface.getFaithTrack());
 		
-		//TODO notificare i giocatori
 		
 		
-		//TODO prendere 4 carte leader per giocatore e notificarliele 
 	}
 	
 	/**
@@ -441,7 +439,7 @@ public class Game extends Observable<CardDescriber>{
 		 */
 		  if(player.getWarehouse().getFaithPoints() < GameParameters.getFaithPointNeeded(period)){
 		    	excommunicationTile.runEffect(player);
-		    	gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "is excommunicated"));
+		    	gameElements.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ " is excommunicated"));
 		    	gameElements.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(excommunicationTile), null));
 		    	vaticanReportNext();
 		    	return;
