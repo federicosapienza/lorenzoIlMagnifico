@@ -188,27 +188,27 @@ public class InputlogicCli implements Runnable{
 			this.setWaitingResponse();
 		}
 		public void setWaitingVaticanChoice(CardDescriber card) {
-			printRequest("enter 0 to be excommunicated or 1 for not; excommunication:" +card.getPermanentEffectDescriber());
+			printRequest("Enter 0 to be excommunicated or 1 for not; excommunication:" +card.getPermanentEffectDescriber());
 			this.setWaitingResponse();
 			
 		}
 
 
 		public void setWaitingPaymentChoice() {
-			printRequest("enter 1 for first payment, 2 per second");
+			printRequest("Enter 1 for first payment, 2 per second");
 			this.setWaitingResponse();
 		}
 
 
 		public void setWaitingTrading(CardDescriber card) {
-			printRequest("enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
+			printRequest("Enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
 					+ " and you choose that: "+card.getName()+" :"+ card.getPermanentEffectDescriber());	
 			this.setWaitingResponse();
 
 		}
 
 		public void setWaitingCouncilPriviledge() {
-			printRequest("insert the correspondent number");
+			printRequest("Insert the correspondent number");
 			this.setWaitingResponse();
 		}
 

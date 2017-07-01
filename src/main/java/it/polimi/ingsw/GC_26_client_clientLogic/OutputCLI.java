@@ -71,7 +71,7 @@ public class OutputCLI implements Output{
 			temp.append(test);
 		if(position.getCardHere()!=null){
 			//temp.append(position.getCardHere()+ " ");//before
-			test = printCardsFinal(position.getCardHere());//How should it be.
+			test = printDevelopmentCards(position.getCardHere());//How should it be.
 			temp.append(test);
 			}
 		if(!position.getPlayersHere().isEmpty()){
@@ -102,7 +102,7 @@ public class OutputCLI implements Output{
 		return temp.toString();
 	}
 	
-	private String printCardsFinal(CardDescriber card){
+	private String printDevelopmentCards(CardDescriber card){
 	String repeated = new String();
 	StringBuilder temp = new StringBuilder(" ");
 	if("Development Card".equals(card.getTypeOfCard())){//Dev cards finished
@@ -242,6 +242,13 @@ public class OutputCLI implements Output{
 		for(CardDescriber cardDescriber : cards)
 			System.out.println(cardDescriber);
 	}
+	//Specific method instead of printCards
+	public void printDevelopmentCardsSet(Set<CardDescriber> cards){
+		for(CardDescriber cardDescriber : cards){
+			String temp = printDevelopmentCards(cardDescriber);
+			System.out.println("|"+temp);
+		}
+	}
 	
 	public  void printFamilyMembers(PlayerView player){
 		System.out.println(player.getFamilyMembers().getStatus());
@@ -252,19 +259,24 @@ public class OutputCLI implements Output{
 	public void printCards(PlayerView player) {  //stampare tutta la persona board
 		if(!player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD).isEmpty()){
 			System.out.println(" Territory Cards owned:");
-			printCards(player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD));}
+			System.out.println("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+			printDevelopmentCardsSet(player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD));}
 		if(!player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD).isEmpty()){
 			System.out.println(" Character cards owned:");
-			printCards(player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD));}
+			System.out.println("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+			printDevelopmentCardsSet(player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD));}
 		if(!player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD).isEmpty()){
 			System.out.println(" Building cards owned:");
-			printCards(player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD));}
+			System.out.println("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+			printDevelopmentCardsSet(player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD));}
 		if(!player.getCurrentCards(DevelopmentCardTypes.VENTURECARD).isEmpty()){
 			System.out.println(" Venture cards owned:");
-			printCards(player.getCurrentCards(DevelopmentCardTypes.VENTURECARD));}
+			System.out.println("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+			printDevelopmentCardsSet(player.getCurrentCards(DevelopmentCardTypes.VENTURECARD));}
 		
 		if(!player.getPermamentsEffect().isEmpty()){
-		System.out.println("Permanents effect owned");
+		System.out.println("");
+		System.out.println("Permanents effect owned:");
 		for(String s: player.getPermamentsEffect())
 			System.out.println(s);
 	}
