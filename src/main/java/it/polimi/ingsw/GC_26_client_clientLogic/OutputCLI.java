@@ -1,5 +1,7 @@
 package it.polimi.ingsw.GC_26_client_clientLogic;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -8,6 +10,7 @@ import java.util.Set;
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 
 
@@ -234,8 +237,9 @@ public class OutputCLI implements Output{
 	@Override
 	public  void printRankings(MainClientView view) {
 		// TODO sarebbe bello stampare classifica a parte da punti
-		System.out.println("qui vengono stampati punti vittoria , fede e militari");
-		
+		//Map<String, PlayerView> players=view.getPlayers();
+		//List<PlayerView> list = new ArrayList<>();
+		//list  = players.values();
 	}
 	
 	public  void printCards(Set<CardDescriber> cards){

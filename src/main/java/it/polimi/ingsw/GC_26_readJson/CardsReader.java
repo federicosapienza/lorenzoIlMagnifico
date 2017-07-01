@@ -350,7 +350,7 @@ public class CardsReader {
 	public Requirement createRequirement(String requirementType){
 		if("pointsOrResources".equals(requirementType)){
 			intList = readIntList("pointsOrResourcesRequirement");
-			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResources(intList.get(0),intList.get(1),intList.get(2),intList.get(3));
+			ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(intList.get(0),intList.get(1),intList.get(2),intList.get(3),intList.get(4),intList.get(5),intList.get(6),intList.get(7));
 			return new PointsOrResourcesRequirement(resourcesOrPoints);
 		}
 		if("cardsNumber".equals(requirementType)){
@@ -359,7 +359,7 @@ public class CardsReader {
 		}
 		if("cardsNumberOR".equals(requirementType)){
 			intList = readIntList("cardNumberRequirementOR");
-			return new CardNumbersOrRequirement(intList.get(0),intList.get(0),intList.get(0),intList.get(0));
+			return new CardNumbersOrRequirement(intList.get(0),intList.get(1),intList.get(2),intList.get(3));
 		}
 		return null;
 	}

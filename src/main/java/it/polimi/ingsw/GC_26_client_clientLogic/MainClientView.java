@@ -158,6 +158,9 @@ public class MainClientView {
 		return thisPlayer;
 	}
 
-
-
+	//private final Map<String, PlayerView> players;
+	
+	public Map<String,PlayerView> getPlayers(){
+		return players;
+	}
 }
