@@ -159,10 +159,14 @@ public class ClientController {
 		}
 		GameStatus old=view.getGameStatus();
 		view.setGameStatus(info.getGameStatus());
+
+		if(old== GameStatus.INITIALIZINGGAME && info.getGameStatus()==GameStatus.INITIALIZINGTURN) 
+			output.printBoard(view.getBoard());
+		
 		if(old== GameStatus.INITIALIZINGGAME && info.getGameStatus()==GameStatus.INITIALIZINGTURN)
 			output.printExcommunicationTiles(view.getBoard());
 			
-		if(old== GameStatus.INITIALIZINGTURN && info.getGameStatus()==GameStatus.PLAYING)  //TODO
+		if(old== GameStatus.INITIALIZINGTURN && info.getGameStatus()==GameStatus.PLAYING)  
 			output.printBoard(view.getBoard());
 		
 		if(info.getGameStatus()==GameStatus.INITIALIZINGTURN)

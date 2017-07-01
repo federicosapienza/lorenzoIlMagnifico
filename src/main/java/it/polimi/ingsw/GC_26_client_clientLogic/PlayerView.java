@@ -11,7 +11,17 @@ import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
-//keeps status of players: points , resources, cards in personal board
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the Player View. It keeps the status of the players, in terms of points, resources and cards
+ * in their Personal Boards
+ *
+ */
+
 
 public class PlayerView {
 	private String name;
@@ -22,14 +32,19 @@ public class PlayerView {
 
 
 	private Set <CardDescriber> leadersCardUsed;  // the cards the player has shown
-	private Set <CardDescriber> leadersCardOwned;//not null only for the playerView representing the client.
+	private Set <CardDescriber> leadersCardOwned; //not null only for the playerView representing the client.
 	private PlayerWallet wallet;
 	private String personalTileValues;
 	private FamilyMembersDescriber familyMembers;
 	private List<String> permamentsEffect= new ArrayList<>();
 	
-	public PlayerView(PlayerWallet wallet){  //the first time the client receives a playerWallet of a player, it creates playerView
-		name= wallet.getPlayerName();
+	/**
+	 * Constructor: the first time the client receives a PlayerWallet of a player, a PlayerView with the characteristics of 
+	 * the PlayerWallet contained in the parameter is created
+	 * @param wallet It's the PlayerWallet which defines the characteristics of the PlayerView
+	 */
+	public PlayerView(PlayerWallet wallet){  
+		name = wallet.getPlayerName();
 		leadersCardOwned= new HashSet<>();
 		leadersCardUsed= new HashSet<>();
 		
@@ -37,22 +52,38 @@ public class PlayerView {
 		
 	}
 	
+	/**
+	 * Method that updates the values of the PlayerView with the ones of the PlayerWallet contained in the parameter,
+	 * if it isn't equal to the current PlayerWallet 
+	 * @param wallet It's PlayerWallet whose values will update the PlayerView
+	 */
 	public void updateValues(PlayerWallet wallet){
 		if(!this.wallet.equals(wallet))
 			this.wallet=wallet;
-		
 	}
 	
+	/**
+	 * Method that sets personalTileValues to the string contained in the parameter
+	 * @param string It's the string to assign to personalTileValues
+	 */
 	public void setPersonalTileValues(String string){
-		personalTileValues= string;
+		personalTileValues = string;
 	}
 
-	//called only at the beginning of the game
-	public void addLeaderCardOwned(CardDescriber card){//used to add LeaderCard at the beginning ogf the game for "this" player
+	/**
+	 * Method called exclusively at the beginning of the game to add LeaderCard to the player
+	 * @param card It's the CardDescriber to add to the Set of Leader Cards owned by the player
+	 */
+	public void addLeaderCardOwned(CardDescriber card){
 		leadersCardOwned.add(card);
 
 	}
 	
+	/**
+	 * Method that adds the card contained in the parameter to the Set of Cards owned (if the CardDescriber describes
+	 * a Development Card) or used (if the CardDescriber describes a Leader Card) by the player
+	 * @param card It's the CardDescriber to add
+	 */
 	public void addCard(CardDescriber card){
 		if(card.getTypeOfCard().contains("Development")){
 			Set<CardDescriber> temp= getCurrentCards(card.getType());
@@ -68,25 +99,51 @@ public class PlayerView {
 			
 	}
 	
+	/**
+	 * Method that sets the current FamilyMembersDescriber to the one contained in the parameter
+	 * @param familyMembers It's the FamilyMembersDescriber to assign to familyMembers 
+	 */
 	public void setFamilyMembers(FamilyMembersDescriber familyMembers) {
 		this.familyMembers = familyMembers;
 	}
 	
+	/**
+	 * Method that returns the current value of FamilyMembersDescriber, i.e. familyMembers
+	 * @return the current value of FamilyMembersDescriber, i.e. familyMembers
+	 */
 	public FamilyMembersDescriber getFamilyMembers() {
 		return familyMembers;
 	}
 
+	/**
+	 * Method that returns the current PlayerWallet
+	 * @return the current PlayerWallet
+	 */
 	public PlayerWallet getWallet() {
 		return wallet;
 	}
+	
+	/**
+	 * Method that returns the name of the player
+	 * @return the name of the player
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Method that returns the list of Permanent Effects applied on the player
+	 * @return the list of Permanent Effects applied on the player
+	 */
 	public List<String> getPermamentsEffect() {
 		return permamentsEffect;
 	}
 	
+	/**
+	 * Method that returns the current Set of cards that match correctly with the type of card contained in the parameter
+	 * @param type It's the type of Development Card to check to find the corresponding Set of cards
+	 * @return the current Set of cards that match correctly with the type of card contained in the parameter
+	 */
 	public Set<CardDescriber> getCurrentCards(DevelopmentCardTypes type){
 		switch(type){
 		case TERRITORYCARD:
@@ -102,10 +159,18 @@ public class PlayerView {
 		}
 	}
 	
+	/**
+	 * Method that returns the Set of CardDescriber of Leader Cards actually owned by the player
+	 * @return the Set of CardDescriber of Leader Cards actually owned by the player
+	 */
 	public Set<CardDescriber> getLeadersCardOwned() {
 		return leadersCardOwned;
 	}
 	
+	/**
+	 * Method that returns the Personal Tile Values as a string
+	 * @return the Personal Tile Values as a string
+	 */
 	public String getPersonalTileValues() {
 		return personalTileValues;
 	}

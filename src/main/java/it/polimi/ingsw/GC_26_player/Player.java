@@ -12,6 +12,15 @@ import it.polimi.ingsw.GC_26_utilities.Message;
 import it.polimi.ingsw.GC_26_utilities.Request;
 import it.polimi.ingsw.GC_26_utilities.familyMembers.FamilyMembers;
 
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the player
+ *
+ */
 public class Player extends Observable<Message> {
 	private final String name;
 	private final Warehouse warehouse;
@@ -42,7 +51,12 @@ public class Player extends Observable<Message> {
 	private Action typeOfSecondaryAction;
 	private int secondActionValue;
 	
-
+	/**
+	 * Constructor: it creates a player with the name and the correct starting resources, as expressed in the parameters
+	 * @param name It's the name of the player
+	 * @param startingResources the ResourcesOrPoints given to every player at the beginning of the game, according
+	 * to the Rulebook
+	 */
 	public Player(String name, ResourcesOrPoints startingResources) {
 		if(name==null || startingResources==null)
 			throw new NullPointerException(); 
@@ -58,45 +72,85 @@ public class Player extends Observable<Message> {
 
 	
 	
-	//getters methods
+	/**
+	 * Method that returns the name of the player
+	 * @return the name of the player
+	 */
 	public String getName() {
 		return this.name;
 	}
 	
+	/**
+	 * Method that returns the Family Members of the player
+	 * @return the Family Members of the player
+	 */
 	public FamilyMembers getFamilyMembers() {
 		return familyMembers;
 	}
 	
+	/**
+	 * Method that returns the Personal Board of the player
+	 * @return the Personal Board of the player
+	 */
 	public PersonalBoard getPersonalBoard() {
 		return personalBoard;
 	}
+	
+	/**
+	 * Method that returns the current Warehouse of the player 
+	 * @return the current Warehouse of the player 
+	 */
 	public Warehouse getWarehouse() {
 		return warehouse;
 	}
 	
+	/**
+	 * Method that returns the test Warehouse of the player 
+	 * @return the test Warehouse of the player 
+	 */
 	public Warehouse getTestWarehouse() {
 		return testWarehouse;
 	}
 	
+	/**
+	 * Method that returns the Permanent Effects applied on the player 
+	 * @return the Permanent Effects applied on the player 
+	 */
 	public PermanentModifiers getPermanentModifiers() {
 		return permanentModifiers;
 	}
 	
+	/**
+	 * Method that returns the status of the player
+	 * @return the status of the player
+	 */
 	public PlayerStatus getStatus(){
 		return status;
 	}
 	
+	/**
+	 * Method that returns the previous status of the player
+	 * @return the previous status of the player
+	 */
 	public PlayerStatus getPreviousStatus() {
 		return previousStatus;
 	}
+	
+	/**
+	 * Method that checks if the player is active or not
+	 * @return true if the player is active; false if he isn't active
+	 */
 	public boolean isPlayerActive() {
 		return playerActive;
 	}
 	
 	
 	
-	//setters methods
-	
+	/**
+	 * Method that sets the status of the player to the one contained in the request of the parameter and updates the 
+	 * previous status setting it to the old current status
+	 * @param request It's the request containing the new status of the player
+	 */
 	public void setStatus(Request request){
 		PlayerStatus temp = request.getStatus();
 		if(temp!= this.status)
@@ -106,49 +160,102 @@ public class Player extends Observable<Message> {
 		
 	}
 	
-	
+	/**
+	 * Method that resets the current status to the previous one
+	 */
 	public void backToPreviousStatusWithoutNotifying() {
 		status=previousStatus;
 	}
 	
+	/**
+	 * Method that sets the test Warehouse to a new Warehouse equal to the current one
+	 */
 	public void setTemporaryWarehouse(){
 		testWarehouse = new Warehouse(warehouse);
 		
 	}
 	
+	/**
+	 * Method used to make the player active
+	 */
 	public void setPlayerActive() {
 		this.playerActive = true;
 	}
 	
+	/**
+	 * Method used at the end of the turn of the player to make him inactive
+	 */
 	public void endTurn(){
 		playerActive=false;
 	}
 	
+	/**
+	 * Method that checks if there's a secondary action
+	 * @return true if there's a secondary action; false if there isn't
+	 */
 	public boolean isThereAsecondaryAction(){
 		return secondaryAction;
 	}
+	
+	/**
+	 * Method to call whenever a secondary action exists: it sets secondaryAction to true
+	 */
 	public void setSecondaryAction(){
 		secondaryAction = true;
 	}
+	
+	/**
+	 * Method that defines the discount of the secondary action
+	 * @param discountOnSecondAction It's the discount to apply on the secondary action
+	 */
 	public void setDiscountOnSecondAction(ResourcesOrPoints discountOnSecondAction) {
 		this.discountOnSecondAction = discountOnSecondAction;
 	}
+	
+	/**
+	 * Method that returns the discount applied on the secondary action
+	 * @return the discount applied on the secondary action
+	 */
 	public ResourcesOrPoints getDiscountOnSecondAction() {
 		return discountOnSecondAction;
 	}
+	
+	/**
+	 * Method that sets the action of the secondary action to the one contained in the parameter
+	 * @param typeOfSecondaryAction It's the action performed by the secondary action
+	 */
 	public void setTypeOfSecondaryAction(Action typeOfSecondaryAction) {
 		this.typeOfSecondaryAction = typeOfSecondaryAction;
 	}
+	
+	/**
+	 * Method that returns the action performed by the secondary action
+	 * @return the action performed by the secondary action
+	 */
 	public Action getTypeOfSecondaryAction() {
 		return typeOfSecondaryAction;
 	}
+	
+	/**
+	 * Method that returns the value of the secondary action
+	 * @return the value of the secondary action
+	 */
 	public int getSecondactionValue() {
 		return secondActionValue;
 	}
+	
+	/**
+	 * Method that sets the value of the secondary action to the one contained in the parameter
+	 * @param secondactionValue It's the value of the secondary action to assign to the current value of this player's 
+	 * secondary action 
+	 */
 	public void setSecondactionValue(int secondactionValue) {
 		this.secondActionValue = secondactionValue;
 	}
 	
+	/**
+	 * Method that resets the secondary action
+	 */
 	public void resetSecondAction(){
 		secondaryAction=false;
 		discountOnSecondAction=null;
@@ -156,10 +263,20 @@ public class Player extends Observable<Message> {
 		secondActionValue=0;
 	}
 	
+	/**
+	 * Method that returns the Development card that has been used by the player
+	 * @return the Development card that has been used by the player
+	 */
 	public DevelopmentCard getCardUsed() {
 		return cardUsed;
 	}
 	
+	/**
+	 * Method to call when the player uses the card contained in the parameter: it's assigned to the current value of
+	 * this player's cardUsed
+	 * @param cardUsed It's the Development card used by the player and that will be assigned to the current value of
+	 * this player's cardUsed
+	 */
 	public void setCardUsed(DevelopmentCard cardUsed) {
 		this.cardUsed = cardUsed;
 	}
