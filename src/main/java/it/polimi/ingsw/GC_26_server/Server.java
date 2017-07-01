@@ -83,11 +83,7 @@ public class Server {
 	}
 
 	
-	
-	public void endGame(GameInitialiserAndController game){
-		//TODO
-	}
-	
+
 	
 	public static void main(String args[]){
 		Server server =  new Server();
