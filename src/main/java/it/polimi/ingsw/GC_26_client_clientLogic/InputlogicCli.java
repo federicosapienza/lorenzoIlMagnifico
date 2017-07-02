@@ -68,21 +68,21 @@ public class InputlogicCli implements Runnable{
 					waitingAction=false;
 					continue;
 				}
-				if(value<0){  //the player asks to reset action , if he was performing an action. useless while waiting response.
+				else if(value<0){  //the player asks to reset action , if he was performing an action. useless while waiting response.
 					restartValues();
 					output.printString(lastString);
 					continue;
 				}	
-				if(this.getWaitingAction()){
+				else if(this.getWaitingAction()){
 					handleAction(value);
 				}
-				if(this.getWaitingResponce()){
+				else if(this.getWaitingResponce()){
 					String temp=String.valueOf(value);
 					connection.sendResponce(temp);
 					waitingResponse=false;
 					continue;
 				}
-				if(close){
+				else if(close){
 					
 					System.out.println("what happens");
 					break;

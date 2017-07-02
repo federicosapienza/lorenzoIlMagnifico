@@ -13,6 +13,7 @@ import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_readJson.ReadAll;
 import it.polimi.ingsw.GC_26_readJson.TimerValuesInterface;
+import it.polimi.ingsw.GC_26_utilities_exceptions.NotEnoughResourcesExceptions;
 
 public class WarehouseTest {
 	Cards cards;
@@ -79,7 +80,7 @@ public class WarehouseTest {
 		
 	}
 	
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = NotEnoughResourcesExceptions.class)
 	public void testIllegalSpendResources() {
 
 		ResourcesOrPoints resources = ResourcesOrPoints.newResourcesOrPoints(7, 1, 1, 1, 0, 0, 0, 0);

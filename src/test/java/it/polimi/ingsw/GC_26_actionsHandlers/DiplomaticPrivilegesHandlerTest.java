@@ -7,6 +7,7 @@ import org.junit.Test;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26_utilities_exceptions.NotEnoughResourcesExceptions;
 
 public class DiplomaticPrivilegesHandlerTest {
 
@@ -56,7 +57,7 @@ public class DiplomaticPrivilegesHandlerTest {
 	}
 	
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=NotEnoughResourcesExceptions.class)
 	public void performTestFalse(){
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(5, 5, 5, 1);
 		Player player = new Player("Leon", startingResources);

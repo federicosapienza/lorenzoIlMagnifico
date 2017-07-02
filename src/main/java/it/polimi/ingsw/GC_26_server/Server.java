@@ -12,12 +12,21 @@ import it.polimi.ingsw.GC_26_serverConnections.SocketServer;
 import it.polimi.ingsw.GC_26_serverView.ClientMainServerView;
 
 public class Server {
+	private static Server instance=null ; //singleton 
 	private GameInitialiserAndController game;
 	private Cards cards;
 	private BonusInterface bonus;
 	private TimerValuesInterface times;
 	private Timer startGameTimer;
 	private final static int PORT = 29997;
+	
+	
+	public static synchronized Server getServer(){ //singleton
+		if(instance==null){
+			instance=new Server();
+		}
+		return instance;
+	}
 	
 	public void start() {
 		ReadFromFile gamesSpecific= new ReadAll();
@@ -27,7 +36,7 @@ public class Server {
 		times= gamesSpecific.getTimes();
 		game= new GameInitialiserAndController(cards, bonus, times);
 		
-		SocketServer socketServer = new SocketServer(this, PORT);
+		SocketServer socketServer = SocketServer.getSocketServer(this, PORT);
 		try {
 			socketServer.run();
 		} catch (IOException e) {
@@ -85,9 +94,9 @@ public class Server {
 	
 
 	
-	public static void main(String args[]){
-		Server server =  new Server();
-			server.start();
+	public static void main(String[] args){
+		Server server =  Server.getServer();
+		server.start();
 	}
 	
 	

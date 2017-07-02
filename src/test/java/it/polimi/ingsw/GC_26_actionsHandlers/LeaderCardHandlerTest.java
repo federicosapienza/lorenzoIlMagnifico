@@ -15,6 +15,7 @@ import it.polimi.ingsw.GC_26_cards.leaderCard.PointsOrResourcesRequirement;
 import it.polimi.ingsw.GC_26_cards.leaderCard.Requirement;
 import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
 
 public class LeaderCardHandlerTest {
 	
@@ -102,7 +103,7 @@ public class LeaderCardHandlerTest {
 		assertEquals(5, player.getWarehouse().getCoins());
 	}
 	
-	@Test(expected= IllegalStateException.class)
+	@Test(expected= IllegalActionException.class)
 	public void performFalseTest(){
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(0, 0, 0, 0);
 		Player player = new Player("Leon", startingResources);
@@ -119,7 +120,7 @@ public class LeaderCardHandlerTest {
 		leaderCardHandler.perform(player, 1);
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalActionException.class)
 	public void performFalse1Test(){
 		ResourcesOrPoints startingResources = ResourcesOrPoints.newResources(0, 0, 0, 0);
 		Player player = new Player("Leon", startingResources);

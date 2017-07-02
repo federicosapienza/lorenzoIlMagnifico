@@ -142,7 +142,7 @@ public class OutputCLI implements Output{
 	}
 	
 	private String printDevelopmentCards(CardDescriber card){
-	String repeated = new String();
+	String repeated;
 	StringBuilder temp = new StringBuilder(" ");
 	if("Development Card".equals(card.getTypeOfCard())){//Dev cards finished
 		if(card.getName()!=null){
@@ -187,7 +187,7 @@ public class OutputCLI implements Output{
 	
 	@Override
 	public void printLeaderCards(Set<CardDescriber> cards){
-		String repeated = new String();
+		String repeated ;
 		StringBuilder temp = new StringBuilder(" ");
 		System.out.println("");
 		System.out.println(" LEADER CARDS:");
@@ -222,7 +222,7 @@ public class OutputCLI implements Output{
 	
 	@Override
 	public  void printExcommunicationTiles(BoardView board) {
-		String repeated = new String();
+		String repeated ;
 		System.out.println(" ");
 		System.out.println(" EXCOMMUNICATION TILES:");
 		System.out.println("|PERIOD:|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
