@@ -50,7 +50,7 @@ public class InputlogicCli implements Runnable{
 			}
 			connection.login(username);
 			view.setPlayerUsername(username);
-				
+
 			scanIN=new Scanner(System.in);
 
 			while(true){

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.GC_26_client_clientLogic;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,7 +9,6 @@ import java.util.Set;
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26_player.Player;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 
 
@@ -57,6 +55,44 @@ public class OutputCLI implements Output{
 		System.out.println("*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
 
 	}
+	@Override
+	public void printTitle(){
+		System.out.println("         |----|       |-----------|  |----------|  |----------|  |----  |---|  |-----------|  |-----------| \n"
+		          +"         |    |       |           |  | |-----|  |  |          |  |    \\ |   |  |           |  |           | \n"
+		          +"         |    |       |  |-----|  |  | |     |  |  |   |------|  |     \\|   |  |----       |  |  |-----|  | \n"
+		          +"         |    |       |  |     |  |  | |-----|  |  |   |         |          |      /       /  |  |     |  | \n"
+	 	          +"         |    |       |  |     |  |  |       ---|  |    ------|  |          |     /       /   |  |     |  | \n"
+		          +"         |    |       |  |     |  |  |  | \\  \\     |    ------|  |          |    /       /    |  |     |  | \n"
+		          +"         |    ------  |  |     |  |  |  |  \\  \\    |   |         |          |   /       /     |  |     |  | \n"
+		          +"         |         |  |  |-----|  |  |  |   \\  \\   |   |------|  |          |  |       ----|  |  |-----|  | \n"
+		          +"         |         |  |           |  |  |    \\  \\  |          |  |    |\\    |  |           |  |           | \n"
+		          +"         |---------|  |-----------|  |--|     \\--\\ |----------|  |----| \\---|  |-----------|  |-----------| \n"
+		          +"\n"
+		          +"\n"
+		          +"                                                |---|  |---| \n"
+		          +"                                                |   |  |   | \n"
+		          +"                                                |   |  |   | \n"
+		          +"                                                |   |  |   | \n"
+		          +"                                                |   |  |   ---- \n"
+		          +"                                                |   |  |      | \n"
+		          +"                                                |---|  |------| \n"
+		          +"\n"
+		          +"\n"
+		          + "   |---     ----|  |----------|  |----------|  |----  |---|  |---|  |--------|  |---|  |----------|  |-----------|\n"
+		          + "   |   \\   /    |  |   ----   |  |          |  |    \\ |   |  |   |  |        |  |   |  |          |  |           |\n"
+		          + "   |    \\-/     |  |  |    |  |  |   |------|  |     \\|   |  |   |  |   |----|  |   |  |   |------|  |  |-----|  |\n"
+		          + "   |            |  |  |    |  |  |   |         |          |  |   |  |   |       |   |  |   |         |  |     |  |\n"
+		          + "   |            |  |   ----   |  |   |         |          |  |   |  |   |----|  |   |  |   |         |  |     |  |\n"
+		          + "   |            |  |          |  |   | |----|  |          |  |   |  |        |  |   |  |   |         |  |     |  |\n"
+		          + "   |   |\\  /|   |  |   |--|   |  |   | |--| |  |          |  |   |  |   |----|  |   |  |   |         |  |     |  |\n"
+		          + "   |   | \\/ |   |  |   |  |   |  |   |----| |  |          |  |   |  |   |       |   |  |   |------|  |  |-----|  |\n"
+		          + "   |   |    |   |  |   |  |   |  |          |  |    |\\    |  |   |  |   |       |   |  |          |  |           |\n"
+		          + "   |---|    |---|  |---|  |---|  |----------|  |----| \\---|  |---|  |---|       |---|  |----------|  |-----------|\n"
+		          +"\n"
+		          +"\n"
+		          +"\n");
+	}
+	
 	
 	
 	
@@ -237,9 +273,14 @@ public class OutputCLI implements Output{
 	@Override
 	public  void printRankings(MainClientView view) {
 		Map<String, PlayerView> players=view.getPlayers();
-
 		List<PlayerView> playerViews  = new ArrayList<>(players.values());
-		
+		System.out.println("\n");
+		System.out.println("RANKINGS: ");
+		for(int i=0; i<playerViews.size();i++){
+			System.out.println("PLAYER " + "'"  + playerViews.get(i).getName()  + "'" + " : " +"|Victory Points :" + playerViews.get(i).getWallet().getVictoryPoints() +" |Military Points: " 
+					+ playerViews.get(i).getWallet().getMilitaryPoints() + " |Faith Points: " + playerViews.get(i).getWallet().getFaithPoints());
+		}
+		System.out.println("\n");
 	}
 	
 	public  void printCards(Set<CardDescriber> cards){
@@ -292,9 +333,16 @@ public class OutputCLI implements Output{
 
 	@Override
 	public void printFinalRankings(MainClientView view) {
-		// TODO solo punti vittoria per tutti i player nel match
-		
+		Map<String, PlayerView> players=view.getPlayers();
+		List<PlayerView> playerViews  = new ArrayList<>(players.values());
+		System.out.println("\n");
+		System.out.println("FINAL SCORE: ");
+		for(int i=0; i<playerViews.size();i++){
+			System.out.println("PLAYER " + "'"  + playerViews.get(i).getName()  + "'" + " : " +"|Victory Points :" + playerViews.get(i).getWallet().getVictoryPoints());
+		}
+		System.out.println("\n");
+	}
 	}
 	
 
-}
+
