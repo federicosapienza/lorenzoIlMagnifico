@@ -17,14 +17,12 @@ public class ClientMain {
 	private final static int PORT = 29997;
 	private final static String IP="127.0.0.1";
 	private static final Logger LOG = Logger.getLogger(ClientMain.class.getName());
-	
-	private ExecutorService pool;
 	private SocketINClient socketINClient;
 	private InputlogicCli inputlogicCli;
 	private Socket socket;
 	
 	
-	private synchronized void start(){
+	private synchronized void start( boolean firstMatch){
 		ClientConnection connection=null;
 		try {
 			 socket= new Socket(IP, PORT);
@@ -34,19 +32,25 @@ public class ClientMain {
 			LOG.log( Level.SEVERE, "error in socket connection ", e);		
 		}
 		MainClientView view = new MainClientView();
-		pool = Executors.newFixedThreadPool(2);
+		ExecutorService pool = Executors.newFixedThreadPool(2);
 		Output output= new OutputCLI();
-		inputlogicCli= new InputlogicCli(connection, view, output);
+		inputlogicCli= new InputlogicCli( connection, view, output);
 		socketINClient.setController( new ClientController(inputlogicCli,view, output,this));
+		
+		if(firstMatch){
+			
+			output.printTitle();
+		}
 		
 		pool.submit(inputlogicCli);
 		pool.submit(socketINClient);
 		
 		try {
-			wait();
+			synchronized (this) {
+				wait();
+			}	
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log( Level.SEVERE, "wait interruption ", e);		
 		}
 	}
 	
@@ -61,11 +65,12 @@ public class ClientMain {
 			LOG.log( Level.SEVERE, "error in socket connection ", e);	
 		}
 		
-		boolean flag=true;;
-		/*
+		boolean flag=true;
+		System.out.println("Do you want to start a new game? 1 to continue , 0 to exit");
+
+		
 		Scanner scanIN=new Scanner(System.in);
 		while(true){
-			System.out.println("Do you want to start a new game? 1 to continue , 0 to exit");
 		
 		
 			while(!scanIN.hasNextInt()) { //used to be sure integer is an input
@@ -85,18 +90,21 @@ public class ClientMain {
 			else System.out.println("not valid input");
 			
 	}
-	*/
+	
 		System.out.println( "here2");
-	//	scanIN.close();
 		System.out.println("sto iniziando");
 		if(flag)
-			start();
+			start( false);
+		else{
+			scanIN.close();
+			System.out.println("See you!");
+		}
 		return;
 	}
 	
 	
 	public static void main(String[] args){
 		ClientMain client = new ClientMain();
-		client.start();
+		client.start( true);
 	}
 }

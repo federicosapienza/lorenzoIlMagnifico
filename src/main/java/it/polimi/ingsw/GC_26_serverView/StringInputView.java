@@ -12,7 +12,7 @@ public class StringInputView extends Observable<Integer>{
 	public void notifyNewString(String string){
 		
 		String temp = "end turn";
-		if(string.equalsIgnoreCase(temp) || string.equals("999")){
+		if(string.equalsIgnoreCase(temp) || "999".equals(string)){
 				endTurnView.notifyEndTurn(false);
 				return;
 		}
@@ -22,9 +22,7 @@ public class StringInputView extends Observable<Integer>{
 		}
 		
 		
-		
-		//TODO endturn chiama chiusura connessione, il socket magari legge e chiude subito , poi notifichiamo da qui
-	}
+		}
 		
 		//https://stackoverflow.com/questions/5585779/how-to-convert-a-string-to-an-int-in-java
 		public static boolean isInteger(String str) {

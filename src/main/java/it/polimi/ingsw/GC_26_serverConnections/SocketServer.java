@@ -36,14 +36,13 @@ public class SocketServer  {
    
      	    	System.out.println("server ready at port "+port);
  
-    			while(true){
+    			while(!stopped){
     				Socket socket = welcomeSocket.accept();
     				ServerConnectionToClient socketconnect =new ServerSocketToClient(socket, server); 
         			pool.submit(socketconnect);
     		}
     		
-			}catch (Exception e) {
-				e.printStackTrace();
+			
     		}
     		finally {
 				welcomeSocket.close();

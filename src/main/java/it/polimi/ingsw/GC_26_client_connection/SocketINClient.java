@@ -20,7 +20,7 @@ public class SocketINClient implements Runnable{
 	private   ObjectInputStream objIn  = null;
 	private  ClientController controller=null;
 	private boolean running= true;
-	private final static Logger LOG = Logger.getLogger(ClientMain.class.getName());
+	private final static Logger LOG = Logger.getLogger(SocketINClient.class.getName());
 		
 		public SocketINClient(Socket socket) throws IOException {
 	        this.socket= socket;
@@ -37,8 +37,7 @@ public class SocketINClient implements Runnable{
 					try {
 						while (running){
 				        String string = objIn.readUTF();
-				        System.out.println(string);
-				        if(string.equals("Entering in a game")){//any change here must be changed also in server
+				        if("Entering in a game".equals(string)){//any change here must be changed also in server
 				        	controller.setLoginDone();
 				        	break;
 				        }
@@ -54,30 +53,30 @@ public class SocketINClient implements Runnable{
 						controller.receiveMessage(message);
 						continue;
 					}
-					if(object instanceof ActionNotification){
+					else if(object instanceof ActionNotification){
 						ActionNotification action = (ActionNotification) object;
 						controller.receiveAction(action);
 						continue;
 
 					}
-					if(object instanceof CardDescriber){
+					else if(object instanceof CardDescriber){
 						CardDescriber card = (CardDescriber) object;
 						controller.receiveCard(card);
 						continue;
 
 					}
-					if(object instanceof PlayerWallet){
+					else if(object instanceof PlayerWallet){
 						PlayerWallet wallet = (PlayerWallet) object;
 						controller.receivePlayerPocket(wallet);
 						continue;
 
  					}
-					if(object instanceof PositionDescriber){
+					else if(object instanceof PositionDescriber){
 						PositionDescriber positionDescriber = (PositionDescriber) object;
 						controller.receivePosition(positionDescriber);
 						continue;}
 					
-					if(object instanceof FamilyMembersDescriber){
+					else if(object instanceof FamilyMembersDescriber){
 						FamilyMembersDescriber familyMembersDescriber= (FamilyMembersDescriber) object;
 						controller.receiveFamilyMembers(familyMembersDescriber);
 						continue;
@@ -91,16 +90,18 @@ public class SocketINClient implements Runnable{
 					
 				
 				}catch (ClassNotFoundException e) {
-					e.printStackTrace();
+					LOG.log(Level.SEVERE, "class not found ", e);	
 ;
 				}
 				
 				catch(IOException e1){
-							//TODO
+					LOG.log(Level.SEVERE, "Socket interruption ", e1);	
+
 
 				}
 				catch(IllegalArgumentException e2){
-					//TODO
+					LOG.log(Level.SEVERE, "Object received not known ", e2);	
+
 				}
 			
 				finally {

@@ -76,7 +76,7 @@ public class GameInitialiserAndController{
 						Player player=null;
 						//finds correspondent name
 						for(Player p: players){
-							if(p.getName()==view.getName()){
+							if(p.getName().equals(view.getName())){
 								player=p;
 								break;}
 							}

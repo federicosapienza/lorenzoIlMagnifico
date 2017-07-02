@@ -16,7 +16,7 @@ public class InputlogicCli implements Runnable{
 		private boolean firstAction = true;  //if first action true , if second is false
 		private MainClientView view; 
 		private Output output;
-		private Scanner scanIN= new Scanner(System.in);
+		private  Scanner scanIN=new Scanner(System.in);
 	
 		
 		private int boardChoice=0; //senza lo zero la seconda volta va male
@@ -32,7 +32,8 @@ public class InputlogicCli implements Runnable{
 		private boolean close=false;
 		
 		
-		public InputlogicCli(ClientConnection connection, MainClientView view, Output output) {
+		public InputlogicCli( ClientConnection connection, MainClientView view, Output output) {
+			//this.scanIN=scanner;
 			this.connection=connection;
 			this.view=view;
 			this.output=output;
@@ -51,12 +52,10 @@ public class InputlogicCli implements Runnable{
 			connection.login(username);
 			view.setPlayerUsername(username);
 
-			scanIN=new Scanner(System.in);
-
 			while(true){
 				while(!scanIN.hasNextInt()) { //used to be sure integer is an input
 				    scanIN.next();
-				    System.out.println("not valid input");
+				    output.printString("not valid input");
 				}
 				int value = scanIN.nextInt();
 				/*if(scanIN==null)  // if user insert enter key twice 
@@ -66,12 +65,10 @@ public class InputlogicCli implements Runnable{
 					connection.sendResponce(temp);
 					waitingResponse=false;
 					waitingAction=false;
-					continue;
 				}
 				else if(value<0){  //the player asks to reset action , if he was performing an action. useless while waiting response.
 					restartValues();
 					output.printString(lastString);
-					continue;
 				}	
 				else if(this.getWaitingAction()){
 					handleAction(value);
@@ -80,11 +77,8 @@ public class InputlogicCli implements Runnable{
 					String temp=String.valueOf(value);
 					connection.sendResponce(temp);
 					waitingResponse=false;
-					continue;
 				}
 				else if(close){
-					
-					System.out.println("what happens");
 					break;
 				}
 			}	
@@ -97,22 +91,24 @@ public class InputlogicCli implements Runnable{
 		if(firstAction && !familyMemberChosen && (value<5 && value>0)){ // family member is not chosen in second action
 			familyMember=value;
 			familyMemberColour= chooseColour(familyMember);
-			output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
+			output.printString("What Action? 1-Territories Tower 2-Characters Tower 3-Buildings Tower 4-Ventures Tower" +System.lineSeparator()
+									+" 5-market  6-production zone -7 Harvest 8-CouncPalace ");
 			familyMemberChosen=true;
 			return;
 		}
 		if(familyMemberChosen && !zoneChosen && (value>0 && value<9)){
 			boardChoice=value;
 			zone=chooseBoardZone(boardChoice);
-			output.printString("what position? '-1'-togoBack");
 			zoneChosen=true;
+			//new request
+			askPosition(); //method created to reduce cognitive complexity
 			return;
 		}
-		if(zoneChosen && !positionChosen &&  (value>0 && value<5)){
-			position=value;
-			output.printString("How many servants? '-1'-togoBack");
-			positionChosen=true;
-			return;
+		if(zoneChosen && !positionChosen &&value>=1 ){
+			boolean temp= validatingPosition(value); //method created to reduce cognitive complexity
+			if(temp)
+				return;
+		
 		}
 		if(positionChosen && value>=0){
 			servants=value;
@@ -128,6 +124,45 @@ public class InputlogicCli implements Runnable{
 		}
 		
 		
+		private void askPosition(){
+			String stringRepeated= " ('-1'-togoBack)";
+			if(zone==BoardZone.TERRITORYTOWER|| zone==BoardZone.BUILDINGTOWER|| zone==BoardZone.CHARACTERTOWER || zone==BoardZone.VENTURETOWER)
+				output.printString("What floor? chose a value between 1 and "+ view.getBoard().getBuildingsTower().size() + stringRepeated);
+				//number of floors in building tower is the same of that in other towers
+			String request= "what Position? Choose a value between 1 and ";
+			if(zone==BoardZone.MARKET)
+				output.printString(request+view.getBoard().getMarketZone().size()+stringRepeated );
+			if(zone==BoardZone.PRODUCTION)
+				output.printString(request+view.getBoard().getProductionZone().size()+stringRepeated );
+			if(zone==BoardZone.HARVEST)
+				output.printString(request+view.getBoard().getHarvestZone().size()+stringRepeated );
+			if(zone== BoardZone.COUNCILPALACE){  //in the hypothesis council palace positions will always be 1
+				//no choice of position:
+				positionChosen=true;
+				output.printString("How many servants? ('-1'-to go Back)");				
+			}
+		}
+		
+		private boolean validatingPosition(int value ){
+			boolean temp=false;
+			if((zone==BoardZone.TERRITORYTOWER|| zone==BoardZone.BUILDINGTOWER)&& value >view.getBoard().getBuildingsTower().size())
+				temp=true; //number of floors in building tower is the same of that in other towers
+			if((zone==BoardZone.CHARACTERTOWER|| zone==BoardZone.VENTURETOWER)&& value >view.getBoard().getBuildingsTower().size())
+				temp=true;	
+			if(zone==BoardZone.MARKET&& value>view.getBoard().getMarketZone().size())
+				temp=true;
+			if( zone==BoardZone.PRODUCTION && value>view.getBoard().getProductionZone().size())
+				temp=true;
+			if( zone==BoardZone.HARVEST&& value>view.getBoard().getHarvestZone().size())
+				temp=true;
+			//no choice for council palace: 1 position only
+			if(temp){ //the action is valid
+				position=value;
+				output.printString("How many servants? ('-1'-to go Back)");
+				positionChosen=true;
+				}
+			return temp;
+		}
 		
 		
 		private synchronized boolean getWaitingAction(){
@@ -150,7 +185,8 @@ public class InputlogicCli implements Runnable{
 		}
 		public synchronized void setWaitingSecondAction(){
 			output.printResources(view.getThisPlayer());
-			output.printString("What Action? 1-terr 2-char 3-buil 4-ven 5-mark 6-prod -7 harv 8-councPalace ");
+			output.printString("What Action? 1-Territories Tower 2-Characters Tower 3-Buildings Tower 4-Ventures Tower" +System.lineSeparator()
+			+" 5-market  6-production zone -7 Harvest 8-CouncPalace ");
 			restartValues();
 			familyMemberChosen=true;
 			firstAction=false;
@@ -168,7 +204,6 @@ public class InputlogicCli implements Runnable{
 		
 		public synchronized void close(){
 			close=true;
-			scanIN.close();
 			connection.close();
 		}
 		

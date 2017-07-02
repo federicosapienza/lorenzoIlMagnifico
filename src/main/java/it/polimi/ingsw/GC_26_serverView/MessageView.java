@@ -35,9 +35,8 @@ public class MessageView extends OutputView implements Observer<Message>{
 				timer = new Timer(true);
 				timer.schedule(new EndTurnTask(endTurnView), (long) times.getVaticanReportTimer()*1000);
 			}
-			if(request.getStatus()==PlayerStatus.WAITINGHISTURN || request.getStatus()==PlayerStatus.SUSPENDED){
-				if(timer!=null)
-					timer.cancel();
+			if((request.getStatus()==PlayerStatus.WAITINGHISTURN || request.getStatus()==PlayerStatus.SUSPENDED) && timer!=null){
+				timer.cancel();
 			}
 		}
 

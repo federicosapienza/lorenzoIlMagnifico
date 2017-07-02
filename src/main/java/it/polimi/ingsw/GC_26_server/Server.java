@@ -2,6 +2,8 @@ package it.polimi.ingsw.GC_26_server;
 
 import java.io.IOException;
 import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;
@@ -19,7 +21,8 @@ public class Server {
 	private TimerValuesInterface times;
 	private Timer startGameTimer;
 	private final static int PORT = 29997;
-	
+	private static final Logger LOG = Logger.getLogger(Server.class.getName());
+
 	
 	public static synchronized Server getServer(){ //singleton
 		if(instance==null){
@@ -40,8 +43,8 @@ public class Server {
 		try {
 			socketServer.run();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, "Can't establish Socket connection. ", e);	
+
 		}
 		
 		
@@ -66,7 +69,6 @@ public class Server {
 		}
 		synchronized (this) {  //to avoid synchronization risks between new requests and timer
 
-		System.out.println("new Client");
 		game.addClient(clientView);
 		int num = game.getNumOfPlayer();
 		if(num==2){  

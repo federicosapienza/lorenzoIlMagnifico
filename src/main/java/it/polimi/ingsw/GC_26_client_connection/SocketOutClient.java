@@ -4,6 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 
@@ -11,6 +13,8 @@ public class SocketOutClient implements ClientConnection{
 	
 	 Socket socket= null;
 	 ObjectOutputStream objOut =  null;
+	private static final Logger LOG = Logger.getLogger(SocketOutClient.class.getName());
+
 		
 	public SocketOutClient(Socket socket) throws IOException {
         this.socket= socket;
@@ -29,8 +33,8 @@ public class SocketOutClient implements ClientConnection{
 
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, " Socket connection error ", e);	
+
 		}
 		
 	}
@@ -42,8 +46,7 @@ public class SocketOutClient implements ClientConnection{
 			objOut.flush();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, " Socket connection error ", e);		
 		}
 	}
 
@@ -54,8 +57,7 @@ public class SocketOutClient implements ClientConnection{
 			objOut.flush();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log( Level.SEVERE, "error in socket connection ", e);		
 		}
 		
 	}
@@ -66,8 +68,7 @@ public class SocketOutClient implements ClientConnection{
 			objOut.close();
 			socket.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log( Level.SEVERE, "error in socket connection ", e);		
 		}
 		
 	}

@@ -1,6 +1,9 @@
 package it.polimi.ingsw.GC_26_controllers;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.GC_26_actionsHandlers.DiplomaticPrivilegesHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.LeaderCardHandler;
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
@@ -16,8 +19,13 @@ import it.polimi.ingsw.GC_26_utilities_exceptions.NotEnoughResourcesExceptions;
 
 //the controller called whenever the game asks the client to perform a specific choice
 public class ChoiceController implements Observer<Integer>{
-	Player player;
-	MainActionHandler handlers;
+	private Player player;
+	private MainActionHandler handlers;
+	private static final Logger LOG = Logger.getLogger(ActionController.class.getName());
+	private static final String errorMessage= "Illegal action was going to be performed ";
+	private static final String errorResources =  "not enough resources ";
+	private static final String errorMessageResources= "Not enough resources: ending the turn";
+	private static final String actionNotValid=  "action not valid";
 	
 	public ChoiceController(Player player, MainActionHandler handlers) {
 		this.player=player;
@@ -85,16 +93,16 @@ public class ChoiceController implements Observer<Integer>{
 			}
 			  }
 		catch(IllegalActionException e){
-			e.printStackTrace();
+			LOG.log( Level.FINE, "Illegal action was going to be performed ", e);
 			synchronized (player) {
 				player.setStatus(new Request(PlayerStatus.TRADING, null , null));
 				//ends the turn
 			}
 		}
 		catch(NotEnoughResourcesExceptions e){
-			e.printStackTrace();
+			LOG.log( Level.FINE, errorResources, e);
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "Not enough resources: ending the turn" , null));
+				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, errorMessageResources , null));
 				//ends the turn
 			}		
 		}
@@ -123,15 +131,15 @@ public class ChoiceController implements Observer<Integer>{
 					}	
 					}
 			} catch(IllegalActionException e){
-				e.printStackTrace();
+				LOG.log( Level.FINE, errorMessage, e);
 				synchronized (player) {
 					 player.backToPreviousStatusWithoutNotifying();
-					player.setStatus(new Request(player.getStatus(), "action not valid" , null));
+					player.setStatus(new Request(player.getStatus(), actionNotValid , null));
 
 				}
 			}
 			catch(NotEnoughResourcesExceptions e){
-				e.printStackTrace();
+				LOG.log( Level.FINE, errorResources, e);
 				synchronized (player) {
 					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "Not enough resources: ending the turn" , null));
 					//ends the turn
@@ -164,17 +172,17 @@ public class ChoiceController implements Observer<Integer>{
 				}
 				}
 			catch(IllegalActionException e){
-				e.printStackTrace();
+				LOG.log( Level.FINE, errorMessage, e);
 				synchronized (player) {
-					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, "action not valid" , null));
+					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, actionNotValid , null));
 
 					
 				}
 			}
-			catch(NotEnoughResourcesExceptions e){
-				e.printStackTrace();
+			catch(NotEnoughResourcesExceptions e1){
+				LOG.log( Level.FINE, errorResources, e1);
 				synchronized (player) {
-					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "Not enough resources: ending the turn" , null));
+					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, errorMessageResources , null));
 					//ends the turn
 				}		
 			}		
@@ -189,9 +197,9 @@ public class ChoiceController implements Observer<Integer>{
 		}
 			
 			catch ( IllegalActionException e ) {
-				e.printStackTrace();
+				LOG.log( Level.FINE, errorMessage, e);
 				synchronized (player) {
-					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "action not valid" , null));
+					player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, actionNotValid , null));
 					handlers.getVaticanReportHandler().perform(player, 0); //not loop because if 0 status is not checked
 				}
 				handlers.getGameElements().getGame().vaticanReportNext(); // automatically ends the turn
@@ -221,7 +229,8 @@ public class ChoiceController implements Observer<Integer>{
 				}
 		}
 		catch( IllegalActionException e){
-			player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED,null, null));
+			LOG.log( Level.FINE, errorMessage, e);
+			player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED,actionNotValid, null));
 		}
 		}
 }

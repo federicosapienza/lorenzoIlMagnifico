@@ -1,5 +1,8 @@
 package it.polimi.ingsw.GC_26_controllers;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.GC_26_actionsHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_gameLogic.GameParameters;
@@ -20,9 +23,12 @@ import it.polimi.ingsw.GC_26_utilities_exceptions.NotEnoughResourcesExceptions;
  *
  */
 public class ActionController implements Observer<Action>{  
-	Player player;
-	MainActionHandler handlers;
-	
+	private Player player;
+	private MainActionHandler handlers;
+	private static final Logger LOG = Logger.getLogger(ActionController.class.getName());
+	private static final String errorMessage= "Illegal action was going to be performed ";
+	private static final String errorRequest = "not valid action";
+
 	/**
 	 * Constructor: it creates an ActionController for the player and the MainActionHandler contained in the parameters
 	 * @param player the player to control
@@ -91,18 +97,23 @@ public class ActionController implements Observer<Action>{
 					player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 			} 
 		} catch (NotEnoughResourcesExceptions e) {
-			
+			LOG.log( Level.FINE, "not enough resources ", e);	
+
 			synchronized (player) {
 				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "not valid action: resources ended under zero. ending turn" , null));
 			}
 		} catch (IllegalStateException e1 ) {
+			LOG.log( Level.FINE, "Illegal action was going to be performed ", e1);	
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.PLAYING, "not valid action" , null));
+				LOG.log( Level.FINE, errorMessage, e1);	
+				player.setStatus(new Request(PlayerStatus.PLAYING, errorRequest , null));
 			}
 		}
-		catch (IllegalActionException e1 ) {
+		catch (IllegalActionException e2 ) {
+			LOG.log( Level.FINE, errorMessage, e2);	
+
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.PLAYING, "not valid action" , null));
+				player.setStatus(new Request(PlayerStatus.PLAYING, errorRequest , null));
 		}
 	}
 	}
@@ -138,19 +149,20 @@ public class ActionController implements Observer<Action>{
 				}	
 			}
 			} catch (NotEnoughResourcesExceptions e) {
-			
+				LOG.log( Level.FINE, "not enough resources ", e);	
 			synchronized (player) {
 				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "not valid action: resources ended under zero. ending turn" , null));
 			}
 		} 
 		catch (IllegalActionException e1 ) {
+			LOG.log( Level.FINE, errorMessage, e1);	
 			synchronized (player) {
-				player.setStatus(new Request(PlayerStatus.PLAYING, "not valid action" , null));
+				player.setStatus(new Request(PlayerStatus.PLAYING, errorRequest , null));
 			}
 		}
 				
-		catch (IllegalStateException e1 ) {
-			e1.printStackTrace();
+		catch (IllegalStateException e2 ) {
+			LOG.log( Level.FINE, errorMessage, e2);	
 			synchronized (player) {
 				player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
 

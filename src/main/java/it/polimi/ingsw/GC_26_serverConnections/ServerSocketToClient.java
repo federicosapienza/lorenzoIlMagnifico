@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
@@ -26,6 +27,9 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 		private  ObjectInputStream objIn  = null;
 		private ClientMainServerView views= null;
 		private boolean closed=false;
+		private static final Logger LOG = Logger.getLogger(ServerSocketToClient.class.getName());
+		private static final String errorString = "error in socket connection ";
+
 
 		public ServerSocketToClient(Socket socket, Server server) throws IOException {
 			this.socket=socket;
@@ -86,9 +90,10 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 			} 
 			catch (IOException e) {
 				closed= true;
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.log( Level.SEVERE, errorString , e);
+			} catch (ClassNotFoundException e1) {
+				LOG.log( Level.SEVERE, "object not recognised ", e1);		
+
 			}
 			finally{
 				closeSocket();
@@ -101,10 +106,9 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 				socket.close();
 				objOut.close();
 				objIn.close();
-				System.out.println("exiting");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.log( Level.SEVERE, errorString, e);		
+
 			}
 		}
 
@@ -116,8 +120,7 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 				objOut.writeObject(object);
 				objOut.flush();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.log( Level.SEVERE, errorString, e);		
 			}
 			
 		}
