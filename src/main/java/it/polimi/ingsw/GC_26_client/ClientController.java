@@ -1,8 +1,9 @@
 package it.polimi.ingsw.GC_26_client;
 
+
 import it.polimi.ingsw.GC_26_board.PositionDescriber;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
-import it.polimi.ingsw.GC_26_client_clientLogic.InputlogicCli;
+import it.polimi.ingsw.GC_26_client_clientLogic.InputLogic;
 import it.polimi.ingsw.GC_26_client_clientLogic.MainClientView;
 import it.polimi.ingsw.GC_26_client_clientLogic.Output;
 import it.polimi.ingsw.GC_26_client_clientLogic.PositionView;
@@ -19,12 +20,12 @@ import it.polimi.ingsw.GC_26_utilities.resourcesAndPoints.PlayerWallet;
 
 public class ClientController {
 	private MainClientView view;
-	private InputlogicCli iOlogic;
+	private InputLogic iOlogic;
 	private Output output;
 	private ClientMain main;
-	
 
-	public ClientController(InputlogicCli iOlogic, MainClientView view, Output output, ClientMain main) {
+
+	public ClientController(InputLogic iOlogic, MainClientView view, Output output, ClientMain main) {
 		this.iOlogic= iOlogic;
 		this.view= view;
 		this.output=output;
@@ -34,16 +35,17 @@ public class ClientController {
 
 	public void receiveCard(CardDescriber card){
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME || view.getGameStatus()==GameStatus.INITIALIZINGROUND){
-			if(card.getTypeOfCard().equalsIgnoreCase("Development Card")){
+			if("Development Card".equalsIgnoreCase(card.getTypeOfCard())){
 				view.getBoard().addCardWhereFree(card);
+
 				return;}
-			if(card.getTypeOfCard().equalsIgnoreCase("Excommunication Tile")){
+			if(("Excommunication Tile").equalsIgnoreCase(card.getTypeOfCard())){
 				view.getBoard().addExcommunication(card);
 				return;
 			}
 			
 		
-			if(card.getTypeOfCard().equalsIgnoreCase("Leader Card")){
+			if(("Leader Card").equalsIgnoreCase(card.getTypeOfCard())){
 					view.getPlayer(view.getPlayerUsername()).addLeaderCardOwned(card); //the card is sent only to "this" client
 					return;
 					}
@@ -53,8 +55,6 @@ public class ClientController {
 	}
 	
 	public void receiveAction(ActionNotification action){
-		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME||view.getGameStatus()==GameStatus.INITIALIZINGROUND)
-			throw new IllegalStateException();  //TODO come gestirla
 		if(view.getGameStatus()==GameStatus.PLAYING){
 			view.getBoard().update(action);
 			if(action.getFamilyMemberColour()!=null) //means it is not second action
@@ -68,7 +68,6 @@ public class ClientController {
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME)
 			view.getBoard().addPosition(new PositionView(position));
 		if(view.getGameStatus()==GameStatus.PLAYING || view.getGameStatus()==GameStatus.INITIALIZINGROUND){}
-			//TODO lancia eccezione;
 		
 	}
 	
@@ -108,6 +107,16 @@ public class ClientController {
 	}
 	
 	private void handleRequests(Request request){
+		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME){
+			//in our protocol player is been informed about his real username: 
+			//can be different from the chosen one if two client in the same game have chosen the same username;
+			if(request.getMessage()!=null){
+				view.setPlayerUsername(request.getMessage());
+				output.printString(" Your username will be '" + request.getMessage()+"'");
+			}
+			return;
+		}
+		
 		view.setPlayerStatus(request.getStatus());
 		if(request.getMessage()!=null)
 			output.printString(request.getMessage());
@@ -155,7 +164,7 @@ public class ClientController {
 	
 	private void handleInfo(Info info) {
 		if(info.getMessage()!=null){
-			System.out.println(info.getMessage());
+			output.printString(info.getMessage());
 		}
 		GameStatus old=view.getGameStatus();
 		view.setGameStatus(info.getGameStatus());
@@ -175,7 +184,7 @@ public class ClientController {
 			view.getBoard().cleanBoard();
 		}
 		
-		if(info.getMessage().contains("ended the turn")) //TODO cambiare se cambia in EndTurnController
+		if("ended the turn".contains(info.getMessage())) 
 				output.printCompleteStatus(view.getPlayer(info.getPlayerReferred()));
 		
 		if(info.getGameStatus()==GameStatus.ENDING){
@@ -187,14 +196,12 @@ public class ClientController {
 	
 	
 	private void handlePersonalBoardChangeNotification(PersonalBoardChangeNotification change) {
-		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME){
-			if(change.getBoardTileValues()!=null)
+		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME && change.getBoardTileValues()!=null)
 				view.getPlayer(change.getPlayerName()).setPersonalTileValues(change.getBoardTileValues());
-		}
-		if(view.getGameStatus()==GameStatus.PLAYING){
-			if(change.getBoardTileValues()==null && change.getCard()!=null)
+		
+		if(view.getGameStatus()==GameStatus.PLAYING && change.getBoardTileValues()==null && change.getCard()!=null)
 				view.getPlayer(change.getPlayerName()).addCard(change.getCard());
-		}
+		
 				
 	}
 

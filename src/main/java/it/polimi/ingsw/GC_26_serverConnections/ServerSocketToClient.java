@@ -77,7 +77,7 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 					Object object = objIn.readObject();
 					if(object instanceof String){
 						String string = (String) object;
-						views.getStringInputView().notifyNewString(string);;
+						views.getStringInputView().notifyNewString(string);
 						
 					
 						

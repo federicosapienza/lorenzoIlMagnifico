@@ -40,10 +40,10 @@ public class MainClientView {
 	 * @param string It's the player's username
 	 */
 	public void setPlayerUsername(String string){
-		System.out.println(string);
 		playerUsername= string;
-		
-	}
+
+		}
+	
 	
 	/**
 	 * Method that returns the gameStatus
@@ -71,7 +71,6 @@ public class MainClientView {
 	 */
 	public void setGameStatus(GameStatus gameStatus) {
 		synchronized (this) {
-			System.out.println();
 			this.gameStatus = gameStatus;
 		}
 			
@@ -83,7 +82,7 @@ public class MainClientView {
 	 * @param playerStatus It's the status that has to be set as the current status of the player
 	 */
 	public synchronized void setPlayerStatus(PlayerStatus playerStatus) {
-		synchronized (this.playerStatus) {
+		synchronized (this) {
 			this.playerStatus = playerStatus;
 		}
 		this.playerStatus = playerStatus;
@@ -163,4 +162,6 @@ public class MainClientView {
 	public Map<String,PlayerView> getPlayers(){
 		return players;
 	}
+	
+	
 }

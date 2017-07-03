@@ -57,9 +57,7 @@ public class TwoOrPayments implements Payment{
 	@Override
 	public synchronized boolean canPlayerGetThis(Player player, DevelopmentCardTypes type) {
 		//returns true as long as one payment is ok!
-		if(mode1.canPlayerGetThis(player,type) || mode2.canPlayerGetThis(player, type))
-			return true;
-		else return false;
+		return mode1.canPlayerGetThis(player,type) || mode2.canPlayerGetThis(player, type);
 	}
 
 	/**
@@ -72,10 +70,9 @@ public class TwoOrPayments implements Payment{
 		boolean pay1 = mode1.canPlayerGetThis(player, type);
 		boolean pay2 = mode2.canPlayerGetThis(player,type);
 		
-		if(pay1&& pay2)
-		synchronized (player) {
-			player.setStatus(new Request(PlayerStatus.CHOOSINGPAYMENT, null, new CardDescriber(player.getCardUsed())));
-			return;
+		if(pay1&& pay2  && player.getStatus()!=PlayerStatus.WAITINGHISTURN &&  player.getStatus()!=PlayerStatus.SUSPENDED){
+		player.setStatus(new Request(PlayerStatus.CHOOSINGPAYMENT, null, new CardDescriber(player.getCardUsed())));
+		return;
 		}
 		if(pay1){
 				mode1.pay(player,type);

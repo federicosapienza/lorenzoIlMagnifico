@@ -13,7 +13,7 @@ public class SocketServer  {
 	private static SocketServer instance= null; //singleton
 	private final Server server;
 	private final int port;
-	public boolean stopped=false;
+	private boolean stopped=false;
     
 
     private SocketServer (Server server, int PORT) {
@@ -29,7 +29,7 @@ public class SocketServer  {
     
 	
 	public void run() throws IOException{
-		ServerSocket welcomeSocket  = new ServerSocket(port);;
+		ServerSocket welcomeSocket  = new ServerSocket(port);
 	    	ExecutorService pool=  Executors.newCachedThreadPool();
 
     		try {

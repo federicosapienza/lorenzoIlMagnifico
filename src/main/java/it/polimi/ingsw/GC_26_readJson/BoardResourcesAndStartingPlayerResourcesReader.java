@@ -41,7 +41,7 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 		listOfPaths = jsonPathData.getResources();
 		for(String s:listOfPaths){
 				try {
-					br = new BufferedReader(new FileReader(s));
+					br = new BufferedReader(new  FileReader(s));
 				    jsonObject= gson.fromJson(br, JsonObject.class);
 					}
 				catch (FileNotFoundException e) {

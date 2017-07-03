@@ -49,7 +49,7 @@ public class ReceiveResourcesOrPointsEffect implements Effect{
 			//Santa Rita's Effect: only resources (not points are given again)
 			ResourcesOrPoints temp = ResourcesOrPoints.newResources(resources.getResources().getCoins(), resources.getResources().getServants(),
 					resources.getResources().getWood(), resources.getResources().getStone());
-			player.getWarehouse().add(temp);;
+			player.getWarehouse().add(temp);
 			
 		}
 	}

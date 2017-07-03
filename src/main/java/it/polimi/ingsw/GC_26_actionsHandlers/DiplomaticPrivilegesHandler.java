@@ -14,8 +14,7 @@ import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
  * It records the type of privileges used to avoid the player to perform the same trade twice.
  * When the remained privileges are 0, it resets the memory (i.e. the player has ended the trades with council palace).
  * 
- * The player sends an int value that identifies the choice. If the Integer is greater than the number of choices,
- * 	the first reward possible is given. (The values for the choices are set between 1 and 5 in the standard game)
+ * The player sends an int value that identifies the choice. (The values for the choices are set between 1 and 5 in the standard game)
  */
 public class DiplomaticPrivilegesHandler{
 	private  ResourcesOrPoints[] diplomaticPrivilegesTrades= GameParameters.getDiplomaticPrivilegesTrades();
@@ -44,7 +43,7 @@ public class DiplomaticPrivilegesHandler{
 			throw new IllegalActionException();
 		}
 		
-		if(choice >= diplomaticPrivilegesTrades.length){   
+		if(choice >= diplomaticPrivilegesTrades.length || choice <0){   
 			player.notifyObservers(new Request(player.getStatus(),"Insert a valid choice", null));
 			return false;
 		}

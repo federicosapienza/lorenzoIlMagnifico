@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 import it.polimi.ingsw.GC_26_readJson.BonusInterface;
 import it.polimi.ingsw.GC_26_readJson.Cards;
 import it.polimi.ingsw.GC_26_readJson.ReadAll;
@@ -57,7 +58,7 @@ public class Server {
 		}
 		ClientMainServerView views= new ClientMainServerView(username, connection, times);
 		connection.addViews( views);
-		enterInANewGame(views);
+		enterInANewGame(views); 
 		
 	}
 
@@ -74,7 +75,7 @@ public class Server {
 		if(num==2){  
 			startGameTimer = new Timer(true);
 			startGameTimer.schedule(new StartGameTask(this),(long) times.getStartingTimer()*1000 );
-			return;
+			return ;
 		}
 		if(num==4){
 			startGameTimer.cancel();

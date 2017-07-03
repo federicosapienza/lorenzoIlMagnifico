@@ -78,9 +78,7 @@ public class BoardView {
 	 */
 	public void addCardWhereFree(CardDescriber card){
 		List<PositionView> list =findRightTowerFromCard(card);
-		boolean flag= findAndAddPositionWithoutCard(list, card);
-		if(flag==false);
-			//TODO lanciare exception;
+		findAndAddPositionWithoutCard(list, card);
 	}
 	
 	/**

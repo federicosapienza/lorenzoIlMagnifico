@@ -9,7 +9,7 @@ import it.polimi.ingsw.GC_26_client_connection.ClientConnection;
 import it.polimi.ingsw.GC_26_gameLogic.Action;
 import it.polimi.ingsw.GC_26_utilities.dices.Colour;
 
-public class InputlogicCli implements Runnable{
+public class InputlogicCli implements InputLogic{
 		private ClientConnection connection;
 		private boolean waitingAction=false;
 		private boolean waitingResponse = false;
@@ -26,7 +26,7 @@ public class InputlogicCli implements Runnable{
 		private int familyMember=0;
 		private BoardZone zone=null;
 		private boolean zoneChosen=false;
-		private boolean positionChosen=false;;
+		private boolean positionChosen=false;
 		private boolean familyMemberChosen=false;
 		private String lastString; //it s called any time we want to repeat the last request
 		private boolean close=false;
@@ -86,7 +86,7 @@ public class InputlogicCli implements Runnable{
 	
 		
 		
-		public void handleAction(int value){
+		private void handleAction(int value){
 		  //if waiting action
 		if(firstAction && !familyMemberChosen && (value<5 && value>0)){ // family member is not chosen in second action
 			familyMember=value;

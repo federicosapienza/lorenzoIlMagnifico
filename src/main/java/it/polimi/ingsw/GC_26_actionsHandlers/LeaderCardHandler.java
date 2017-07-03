@@ -1,6 +1,8 @@
 package it.polimi.ingsw.GC_26_actionsHandlers;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.leaderCard.LeaderCard;
@@ -15,6 +17,8 @@ import it.polimi.ingsw.GC_26_utilities_exceptions.IllegalActionException;
 //Handles the activation of leaderCards : he keeps memory of the cards used this turn to prevent the player from trying using the same card twice
 public class LeaderCardHandler extends Handler{
 	private String errorString = "Wrong value";
+	private static final Logger LOG = Logger.getLogger(LeaderCardHandler.class.getName());
+
 
 	public LeaderCardHandler(List<Player> players) {
 		super(players);
@@ -30,7 +34,8 @@ public class LeaderCardHandler extends Handler{
 		try {
 			card= list.get(choice);
 		} catch (IndexOutOfBoundsException e) {
-			player.notifyObservers(new Request(player.getStatus(),errorString, null));
+			LOG.log( Level.FINE, "index out of bound in vector  ", e);
+		player.notifyObservers(new Request(player.getStatus(),errorString, null));
 			return false;
 		}
 		if(player.getPersonalBoard().isLeaderCardUsedYet(card)){
@@ -51,6 +56,7 @@ public class LeaderCardHandler extends Handler{
 		try {
 			card= list.get(choice);
 		} catch (IndexOutOfBoundsException e) {
+			LOG.log( Level.FINE, "index out of bound in vector  ", e);
 			player.notifyObservers(new Request(player.getStatus(),errorString, null));
 			throw new IllegalActionException();
 		}

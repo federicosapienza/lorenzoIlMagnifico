@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.*;
 
 import it.polimi.ingsw.GC_26_client.ClientController;
+import it.polimi.ingsw.GC_26_client_clientLogic.InputLogic;
 import it.polimi.ingsw.GC_26_client_clientLogic.InputlogicCli;
 import it.polimi.ingsw.GC_26_client_clientLogic.MainClientView;
 import it.polimi.ingsw.GC_26_client_clientLogic.Output;
@@ -18,7 +19,7 @@ public class ClientMain {
 	private final static String IP="127.0.0.1";
 	private static final Logger LOG = Logger.getLogger(ClientMain.class.getName());
 	private SocketINClient socketINClient;
-	private InputlogicCli inputlogicCli;
+	private InputLogic inputLogic;
 	private Socket socket;
 	
 	
@@ -34,15 +35,15 @@ public class ClientMain {
 		MainClientView view = new MainClientView();
 		ExecutorService pool = Executors.newFixedThreadPool(2);
 		Output output= new OutputCLI();
-		inputlogicCli= new InputlogicCli( connection, view, output);
-		socketINClient.setController( new ClientController(inputlogicCli,view, output,this));
+		inputLogic= new InputlogicCli( connection, view, output);
+		socketINClient.setController( new ClientController(inputLogic,view, output,this));
 		
 		if(firstMatch){
 			
 			output.printTitle();
 		}
 		
-		pool.submit(inputlogicCli);
+		pool.submit(inputLogic);
 		pool.submit(socketINClient);
 		
 	}
@@ -50,7 +51,7 @@ public class ClientMain {
 
 	public synchronized void restart(){
 		this.notifyAll();
-		inputlogicCli.close();
+		inputLogic.close();
 		socketINClient.close();
 		try {
 			socket.close();
