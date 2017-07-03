@@ -105,9 +105,10 @@ public class OutputCLI implements Output{
 	private  void printTool(PositionView position){
 		StringBuilder temp= new StringBuilder(" ");
 		String test = new String();
-		if(position.getBonusPosition() !=null)
+		if(position.getBonusPosition() !=null){
 			test = printBonusPosition(position.getPositionDescriber());
 			temp.append(test);
+			}
 		if(position.getCardHere()!=null){
 			//temp.append(position.getCardHere()+ " ");//before
 			test = printDevelopmentCards(position.getCardHere());//How should it be.
