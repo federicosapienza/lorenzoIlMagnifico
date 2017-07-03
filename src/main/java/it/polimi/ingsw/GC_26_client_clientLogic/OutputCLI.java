@@ -104,7 +104,7 @@ public class OutputCLI implements Output{
 	
 	private  void printTool(PositionView position){
 		StringBuilder temp= new StringBuilder(" ");
-		String test = new String();
+		String test ;
 		if(position.getBonusPosition() !=null){
 			test = printBonusPosition(position.getPositionDescriber());
 			temp.append(test);
@@ -154,7 +154,7 @@ public class OutputCLI implements Output{
 			repeated = new String(new char[14]).replace("\0", " ");
 			temp.append (repeated + "|");
 		}
-		if(card.getActionValue()!=0){ //Valore di inizializzazione
+		else{ //Valore di inizializzazione
 			repeated = new String(new char[13]).replace("\0", " ");
 			temp.append (card.getActionValue() + repeated + "|");
 		}
@@ -162,7 +162,7 @@ public class OutputCLI implements Output{
 			repeated = new String(new char[80-card.getPaymentDescriber().length()]).replace("\0", " ");
 			temp.append(card.getPaymentDescriber() + repeated + "|");
 		}
-		if(card.getPaymentDescriber()==null){
+		else{
 			repeated = new String(new char[80]).replace("\0", " ");
 			temp.append(repeated + "|");
 		}
@@ -170,7 +170,7 @@ public class OutputCLI implements Output{
 			repeated = new String(new char[120-card.getImmediateEffectDescriber().length()]).replace("\0", " ");
 			temp.append(card.getImmediateEffectDescriber() + repeated + "|");
 		}
-		if(card.getImmediateEffectDescriber()==null){
+		else{
 			repeated = new String(new char[120]).replace("\0", " ");//120 should be enough
 			temp.append(repeated + "|");
 		}
@@ -178,7 +178,7 @@ public class OutputCLI implements Output{
 			repeated = new String(new char[140-card.getPermanentEffectDescriber().length()]).replace("\0", " ");
 			temp.append(card.getPermanentEffectDescriber() + repeated + "|");
 		}
-		if(card.getPermanentEffectDescriber()==null){
+		else{
 			repeated = new String(new char[140]).replace("\0", " ");//140 should be enough
 			temp.append(repeated + "|");
 		}

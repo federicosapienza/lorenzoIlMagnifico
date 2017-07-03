@@ -45,13 +45,6 @@ public class ClientMain {
 		pool.submit(inputlogicCli);
 		pool.submit(socketINClient);
 		
-		try {
-			synchronized (this) {
-				wait();
-			}	
-		} catch (InterruptedException e) {
-			LOG.log( Level.SEVERE, "wait interruption ", e);		
-		}
 	}
 	
 

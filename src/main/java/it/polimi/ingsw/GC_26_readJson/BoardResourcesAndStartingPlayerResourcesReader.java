@@ -27,10 +27,8 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 	private Logger logger;
 	private Type listTypeInt = new TypeToken<List<Integer>>() {}.getType();
 	private List<Integer> list =  new ArrayList<>();
-	private List<Integer> list2 =  new ArrayList<>();
 	int counter=0;
 	int timer;
-	private JsonElement jsonElement;
 	private ResourcesOrPoints[] territoryTowerResources = new ResourcesOrPoints[4];
 	private ResourcesOrPoints[] characterTowerResources = new ResourcesOrPoints[4];
 	private ResourcesOrPoints[] buildingTowerResources = new ResourcesOrPoints[4];
@@ -114,13 +112,14 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 					br.close();
 					}
 				catch (IOException e) {
-					logger.log(null, "Buffered reader not closed", e);;
+					logger.log(null, "Buffered reader not closed", e);
 				}
 			}		
 		}
 	
 	
 	public void readFaithTrack(BonusImplementation bonusImplementation){
+		List<Integer> list2;
 		try {
 			br = new BufferedReader(new FileReader("src/ResourcesForBoard/Faith_Point_Track/faith_point_track.json"));
 			jsonObject= gson.fromJson(br, JsonObject.class);
@@ -141,6 +140,7 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 	}
 	
 	public void readTimers(TimerValueImplementation timerValueImplementation){
+		JsonElement jsonElement;
 		try {
 			br = new BufferedReader(new FileReader("src/Timers/timer.json"));
 			jsonObject= gson.fromJson(br, JsonObject.class);
