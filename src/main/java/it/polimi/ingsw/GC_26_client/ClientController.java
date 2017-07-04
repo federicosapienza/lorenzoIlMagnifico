@@ -176,10 +176,11 @@ public class ClientController {
 			
 		if(old== GameStatus.INITIALIZINGROUND && info.getGameStatus()==GameStatus.PLAYING)  {
 			output.printBoard(view.getBoard());
+		}
+		if(old== GameStatus.PLAYING && info.getGameStatus()==GameStatus.INITIALIZINGROUND)  {
 			output.printRankings(view);
 		}
-
-		
+			
 		if(info.getGameStatus()==GameStatus.INITIALIZINGROUND){
 			view.getBoard().cleanBoard();
 		}

@@ -139,21 +139,22 @@ public class InputlogicCli implements InputLogic{
 			if(zone== BoardZone.COUNCILPALACE){  //in the hypothesis council palace positions will always be 1
 				//no choice of position:
 				positionChosen=true;
+				position=1;
 				output.printString("How many servants? ('-1'-to go Back)");				
 			}
 		}
 		
 		private boolean validatingPosition(int value ){
 			boolean temp=false;
-			if((zone==BoardZone.TERRITORYTOWER|| zone==BoardZone.BUILDINGTOWER)&& value >view.getBoard().getBuildingsTower().size())
+			if((zone==BoardZone.TERRITORYTOWER|| zone==BoardZone.BUILDINGTOWER)&& value <=view.getBoard().getBuildingsTower().size())
 				temp=true; //number of floors in building tower is the same of that in other towers
-			if((zone==BoardZone.CHARACTERTOWER|| zone==BoardZone.VENTURETOWER)&& value >view.getBoard().getBuildingsTower().size())
+			if((zone==BoardZone.CHARACTERTOWER|| zone==BoardZone.VENTURETOWER)&& value <=view.getBoard().getBuildingsTower().size())
 				temp=true;	
-			if(zone==BoardZone.MARKET&& value>view.getBoard().getMarketZone().size())
+			if(zone==BoardZone.MARKET&& value<=view.getBoard().getMarketZone().size())
 				temp=true;
-			if( zone==BoardZone.PRODUCTION && value>view.getBoard().getProductionZone().size())
+			if( zone==BoardZone.PRODUCTION && value<=view.getBoard().getProductionZone().size())
 				temp=true;
-			if( zone==BoardZone.HARVEST&& value>view.getBoard().getHarvestZone().size())
+			if( zone==BoardZone.HARVEST&& value<=view.getBoard().getHarvestZone().size())
 				temp=true;
 			//no choice for council palace: 1 position only
 			if(temp){ //the action is valid
@@ -195,23 +196,28 @@ public class InputlogicCli implements InputLogic{
 			
 		}
 	
-		public synchronized void setWaitingResponse(){
+		private synchronized void setWaitingResponse(boolean askToEndTurn){
 			output.printResources(view.getThisPlayer());
-			output.printString("waiting, 999 to close turn"); // do not use printRequest here (= this line would always be saved as last) 
+			if(askToEndTurn)
+				output.printString("waiting, 999 to close turn"); // do not use printRequest here (= this line would always be saved as last) 
 			restartValues();
 			waitingResponse=true;
+			firstAction=false;
+			waitingAction=false;
 		}
 		
 		public synchronized void close(){
+			setTurnEnded();
 			close=true;
 			connection.close();
+			
 		}
 		
 		
 		public void setActionPerformed() {
-			output.printLeaderCards(view.getThisPlayer().getLeadersCardOwned());
 			printRequest("Choose a value between 1 and 4 to try activating the correspondent Leader Card");
-			this.setWaitingResponse();
+			output.printLeaderCards(view.getThisPlayer().getLeadersCardOwned());
+			this.setWaitingResponse(true);
 		}
 		
 		public synchronized void setTurnEnded(){
@@ -221,31 +227,31 @@ public class InputlogicCli implements InputLogic{
 		
 		public void setPlayerSuspended(){
 			printRequest("You are now suspended : press any key to be able to play again");
-			this.setWaitingResponse();
+			this.setWaitingResponse(false);
 		}
 		public void setWaitingVaticanChoice(CardDescriber card) {
 			printRequest("Enter 0 to be excommunicated or 1 for not; excommunication:" +card.getPermanentEffectDescriber());
-			this.setWaitingResponse();
+			this.setWaitingResponse(false);
 			
 		}
 
 
 		public void setWaitingPaymentChoice() {
 			printRequest("Enter 1 for first payment, 2 per second");
-			this.setWaitingResponse();
+			this.setWaitingResponse(false);
 		}
 
 
 		public void setWaitingTrading(CardDescriber card) {
 			printRequest("Enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
 					+ " and you choose that: "+card.getName()+" :"+ card.getPermanentEffectDescriber());	
-			this.setWaitingResponse();
+			this.setWaitingResponse(false);
 
 		}
 
 		public void setWaitingCouncilPriviledge() {
 			printRequest("Insert the correspondent number");
-			this.setWaitingResponse();
+			this.setWaitingResponse(false);
 		}
 
 		private void restartValues() {

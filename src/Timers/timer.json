@@ -1,5 +1,5 @@
 	   {
-	  	"startingTimer":5, 
-	  	"turnTimer":4,
-	  	"vaticanreportTimer":600
+	  	"startingTimer":30, 
+	  	"turnTimer":120,
+	  	"vaticanreportTimer":60
 	  }

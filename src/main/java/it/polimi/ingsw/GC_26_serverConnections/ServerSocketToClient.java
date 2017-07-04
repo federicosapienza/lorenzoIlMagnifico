@@ -90,7 +90,7 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 			} 
 			catch (IOException e) {
 				closed= true;
-				LOG.log( Level.SEVERE, errorString , e);
+				LOG.log( Level.FINE, errorString , e);
 			} catch (ClassNotFoundException e1) {
 				LOG.log( Level.SEVERE, "object not recognised ", e1);		
 
@@ -116,11 +116,13 @@ public class ServerSocketToClient  implements ServerConnectionToClient{
 
 		
 		private synchronized void sendMethod(Object object) {
+			if(!closed){
 			try {
 				objOut.writeObject(object);
 				objOut.flush();
 			} catch (IOException e) {
 				LOG.log( Level.SEVERE, errorString, e);		
+			}
 			}
 			
 		}

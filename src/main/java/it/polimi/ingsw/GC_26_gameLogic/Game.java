@@ -281,7 +281,7 @@ public class Game extends Observable<CardDescriber>{
 		 */
 		if(!playersNoMoreSuspended.isEmpty()){
 			for(Player p: playersNoMoreSuspended){
-				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, p.getName(), p.getName()+ "is no more suspended")) ;
+				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, p.getName(), p.getName()+ " is no more suspended")) ;
 				playersNoMoreSuspended.remove(p);
 			}
 		}

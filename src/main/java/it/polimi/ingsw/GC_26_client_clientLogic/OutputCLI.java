@@ -270,6 +270,14 @@ public class OutputCLI implements Output{
 		System.out.println("Personal tile values: ");
 		System.out.println( player.getPersonalTileValues());
 		System.out.println("");
+		
+		if(!player.getPermamentsEffect().isEmpty()){
+		System.out.println("Permanents effect owned:");
+		for ( String string: player.getPermamentsEffect()){
+			System.out.println(string);
+			
+			}
+		}
 	}
 	@Override
 	public  void printRankings(MainClientView view) {

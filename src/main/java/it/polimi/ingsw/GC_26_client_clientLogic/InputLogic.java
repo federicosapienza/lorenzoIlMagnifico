@@ -5,7 +5,6 @@ import it.polimi.ingsw.GC_26_cards.CardDescriber;
 public interface InputLogic extends Runnable{
 	public void setWaitingFirstAction();
 	public void setWaitingSecondAction();
-	public void setWaitingResponse();
 	public void setActionPerformed();
 	public  void setTurnEnded();
 	public void setPlayerSuspended();
