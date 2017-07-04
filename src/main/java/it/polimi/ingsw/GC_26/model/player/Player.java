@@ -2,13 +2,13 @@ package it.polimi.ingsw.GC_26.model.player;
 
 import it.polimi.ingsw.GC_26.messages.Message;
 import it.polimi.ingsw.GC_26.messages.Request;
-import it.polimi.ingsw.GC_26.model.game.action.Action;
+import it.polimi.ingsw.GC_26.messages.action.Action;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMembers;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.personalBoard.PersonalBoard;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Warehouse;
-import it.polimi.ingsw.GC_26.server.Observable;
+import it.polimi.ingsw.GC_26.utilities.observer.Observable;
 
 /**
  * 

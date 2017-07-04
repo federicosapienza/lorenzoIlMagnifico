@@ -5,8 +5,8 @@ package it.polimi.ingsw.GC_26.model.actionHandlers;
 
 import it.polimi.ingsw.GC_26.messages.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26.messages.Request;
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
-import it.polimi.ingsw.GC_26.model.game.action.Action;
+import it.polimi.ingsw.GC_26.messages.action.Action;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.CouncilPalace;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MarketPosition;
@@ -23,7 +23,7 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMembe
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameElements;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26.model.player.Player;
-import it.polimi.ingsw.GC_26.utilities.IllegalActionException;
+import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)

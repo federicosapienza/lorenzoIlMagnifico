@@ -4,7 +4,7 @@ package it.polimi.ingsw.GC_26.model.actionHandlers;
 
 
 import it.polimi.ingsw.GC_26.messages.Request;
-import it.polimi.ingsw.GC_26.model.game.action.Action;
+import it.polimi.ingsw.GC_26.messages.action.Action;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.MultiplePosition;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.SinglePosition;

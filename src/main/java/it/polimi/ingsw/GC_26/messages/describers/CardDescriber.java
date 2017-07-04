@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.describers;
+package it.polimi.ingsw.GC_26.messages.describers;
 
 import java.io.Serializable;
 

@@ -2,13 +2,13 @@ package it.polimi.ingsw.GC_26.model.actionHandlers;
 
 
 import it.polimi.ingsw.GC_26.messages.Request;
-import it.polimi.ingsw.GC_26.model.game.action.Action;
-import it.polimi.ingsw.GC_26.model.game.action.ActionNotification;
+import it.polimi.ingsw.GC_26.messages.action.Action;
+import it.polimi.ingsw.GC_26.messages.action.ActionNotification;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameElements;
 import it.polimi.ingsw.GC_26.model.player.Player;
-import it.polimi.ingsw.GC_26.utilities.IllegalActionException;
+import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;
 
 public class SecondActionHandler extends ActionHandler{
 

@@ -9,8 +9,8 @@ import it.polimi.ingsw.GC_26.client.view.BoardView;
 import it.polimi.ingsw.GC_26.client.view.MainClientView;
 import it.polimi.ingsw.GC_26.client.view.PlayerView;
 import it.polimi.ingsw.GC_26.client.view.PositionView;
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
-import it.polimi.ingsw.GC_26.model.describers.PositionDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.PositionDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
 

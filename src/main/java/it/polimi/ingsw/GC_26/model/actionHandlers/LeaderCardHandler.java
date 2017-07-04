@@ -7,11 +7,11 @@ import java.util.logging.Logger;
 import it.polimi.ingsw.GC_26.messages.Info;
 import it.polimi.ingsw.GC_26.messages.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26.messages.Request;
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCard;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26.model.player.Player;
-import it.polimi.ingsw.GC_26.utilities.IllegalActionException;
+import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;
 
 
 //Handles the activation of leaderCards : he keeps memory of the cards used this turn to prevent the player from trying using the same card twice

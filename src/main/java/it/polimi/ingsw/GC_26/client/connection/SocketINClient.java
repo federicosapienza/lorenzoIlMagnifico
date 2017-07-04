@@ -9,10 +9,10 @@ import java.util.logging.Logger;
 
 import it.polimi.ingsw.GC_26.client.ClientController;
 import it.polimi.ingsw.GC_26.messages.Message;
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
-import it.polimi.ingsw.GC_26.model.describers.PositionDescriber;
-import it.polimi.ingsw.GC_26.model.game.action.ActionNotification;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMembersDescriber;
+import it.polimi.ingsw.GC_26.messages.action.ActionNotification;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.FamilyMembersDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.PositionDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet;
 
 public class SocketINClient implements Runnable{

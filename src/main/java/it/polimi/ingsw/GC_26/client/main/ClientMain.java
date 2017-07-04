@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.client;
+package it.polimi.ingsw.GC_26.client.main;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.*;
 
+import it.polimi.ingsw.GC_26.client.ClientController;
 import it.polimi.ingsw.GC_26.client.cli.InputLogic;
 import it.polimi.ingsw.GC_26.client.cli.InputlogicCli;
 import it.polimi.ingsw.GC_26.client.cli.Output;

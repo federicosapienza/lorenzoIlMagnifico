@@ -2,7 +2,7 @@ package it.polimi.ingsw.GC_26.model.game.gameComponents.board;
 
 import java.util.*;
 
-import it.polimi.ingsw.GC_26.model.describers.PositionDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.PositionDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.CouncilPalace;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MarketPosition;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.TowerPosition;
@@ -12,7 +12,7 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.board.zones.ProductionZon
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.zones.Tower;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameParameters;
-import it.polimi.ingsw.GC_26.server.Observable;
+import it.polimi.ingsw.GC_26.utilities.observer.Observable;
 
 /**
  * 

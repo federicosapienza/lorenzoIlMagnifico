@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import it.polimi.ingsw.GC_26.client.view.BoardView;
 import it.polimi.ingsw.GC_26.client.view.PositionView;
-import it.polimi.ingsw.GC_26.model.describers.PositionDescriber;
-import it.polimi.ingsw.GC_26.model.game.action.Action;
-import it.polimi.ingsw.GC_26.model.game.action.ActionNotification;
+import it.polimi.ingsw.GC_26.messages.action.Action;
+import it.polimi.ingsw.GC_26.messages.action.ActionNotification;
+import it.polimi.ingsw.GC_26.messages.describers.PositionDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;

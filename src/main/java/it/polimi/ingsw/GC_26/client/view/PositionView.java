@@ -3,8 +3,8 @@ package it.polimi.ingsw.GC_26.client.view;
 import java.util.HashMap;
 import java.util.Map;
 
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
-import it.polimi.ingsw.GC_26.model.describers.PositionDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.PositionDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
 

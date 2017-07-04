@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.utilities;
+package it.polimi.ingsw.GC_26.utilities.exceptions;
 
 public class NotEnoughResourcesExceptions extends RuntimeException{
 

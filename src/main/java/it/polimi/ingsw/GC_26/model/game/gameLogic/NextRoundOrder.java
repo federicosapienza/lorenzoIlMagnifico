@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.game.gameComponents.rankings;
+package it.polimi.ingsw.GC_26.model.game.gameLogic;
 
 import java.util.ArrayList;
 import java.util.List;

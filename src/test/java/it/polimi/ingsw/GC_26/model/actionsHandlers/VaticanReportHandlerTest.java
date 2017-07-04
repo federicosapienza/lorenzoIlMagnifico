@@ -15,7 +15,7 @@ import it.polimi.ingsw.GC_26.model.actionHandlers.VaticanReportHandler;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.Game;
 import it.polimi.ingsw.GC_26.model.player.Player;
-import it.polimi.ingsw.GC_26.utilities.IllegalActionException;
+import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;
 
 public class VaticanReportHandlerTest {
 

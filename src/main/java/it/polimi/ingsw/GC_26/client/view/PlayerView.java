@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet;
 
 /**

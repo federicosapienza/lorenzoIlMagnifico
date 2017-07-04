@@ -1,10 +1,11 @@
-package it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers;
+package it.polimi.ingsw.GC_26.messages.describers;
 
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
 import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
+import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMembers;
 
 public class FamilyMembersDescriber implements Serializable{
 	/**

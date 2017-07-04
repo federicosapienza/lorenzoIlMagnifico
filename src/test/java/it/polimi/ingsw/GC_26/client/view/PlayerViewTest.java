@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import it.polimi.ingsw.GC_26.client.view.PlayerView;
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect;

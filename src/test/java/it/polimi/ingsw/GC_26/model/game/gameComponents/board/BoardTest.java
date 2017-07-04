@@ -10,9 +10,9 @@ import java.util.List;
 import org.junit.Test;
 
 import it.polimi.ingsw.GC_26.jsonReader.ReadAll;
+import it.polimi.ingsw.GC_26.messages.action.Action;
 import it.polimi.ingsw.GC_26.model.actionHandlers.ActionCheckerHandler;
 import it.polimi.ingsw.GC_26.model.actionHandlers.ActionPerformerHandler;
-import it.polimi.ingsw.GC_26.model.game.action.Action;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.Board;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.TowerPosition;

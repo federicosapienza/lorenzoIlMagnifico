@@ -11,7 +11,7 @@ import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
 import it.polimi.ingsw.GC_26.messages.Info;
 import it.polimi.ingsw.GC_26.messages.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26.messages.Request;
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
@@ -22,7 +22,7 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Player
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
-import it.polimi.ingsw.GC_26.server.Observable;
+import it.polimi.ingsw.GC_26.utilities.observer.Observable;
 
 /**
  * 

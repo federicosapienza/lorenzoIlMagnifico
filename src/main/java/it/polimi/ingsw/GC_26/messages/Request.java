@@ -1,6 +1,6 @@
 package it.polimi.ingsw.GC_26.messages;
 
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
 
 public class Request extends Message{

@@ -5,7 +5,7 @@ import java.util.Set;
 import it.polimi.ingsw.GC_26.client.view.BoardView;
 import it.polimi.ingsw.GC_26.client.view.MainClientView;
 import it.polimi.ingsw.GC_26.client.view.PlayerView;
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 
 /**
  * 

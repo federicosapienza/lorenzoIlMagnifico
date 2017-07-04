@@ -13,9 +13,9 @@ import it.polimi.ingsw.GC_26.model.actionHandlers.VaticanReportHandler;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
-import it.polimi.ingsw.GC_26.server.Observer;
-import it.polimi.ingsw.GC_26.utilities.IllegalActionException;
-import it.polimi.ingsw.GC_26.utilities.NotEnoughResourcesExceptions;
+import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;
+import it.polimi.ingsw.GC_26.utilities.exceptions.NotEnoughResourcesExceptions;
+import it.polimi.ingsw.GC_26.utilities.observer.Observer;
 
 //the controller called whenever the game asks the client to perform a specific choice
 public class ChoiceController implements Observer<Integer>{

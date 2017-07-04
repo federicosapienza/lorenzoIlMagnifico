@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import it.polimi.ingsw.GC_26.model.game.action.Action;
+import it.polimi.ingsw.GC_26.messages.action.Action;
 
 public class SocketOutClient implements ClientConnection{
 	

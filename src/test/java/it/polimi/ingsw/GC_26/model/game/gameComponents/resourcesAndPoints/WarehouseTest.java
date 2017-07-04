@@ -15,7 +15,7 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Resour
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Warehouse;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.Game;
 import it.polimi.ingsw.GC_26.model.player.Player;
-import it.polimi.ingsw.GC_26.utilities.NotEnoughResourcesExceptions;
+import it.polimi.ingsw.GC_26.utilities.exceptions.NotEnoughResourcesExceptions;
 
 public class WarehouseTest {
 	Cards cards;

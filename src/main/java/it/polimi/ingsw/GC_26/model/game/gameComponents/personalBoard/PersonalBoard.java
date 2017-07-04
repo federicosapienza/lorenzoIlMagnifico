@@ -1,10 +1,10 @@
 package it.polimi.ingsw.GC_26.model.game.gameComponents.personalBoard;
 
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCard;
-import it.polimi.ingsw.GC_26.server.Observable;
+import it.polimi.ingsw.GC_26.utilities.observer.Observable;
 
 import java.util.Set;
 

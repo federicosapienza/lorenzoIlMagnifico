@@ -5,9 +5,9 @@ package it.polimi.ingsw.GC_26.client.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
-import it.polimi.ingsw.GC_26.model.game.action.Action;
-import it.polimi.ingsw.GC_26.model.game.action.ActionNotification;
+import it.polimi.ingsw.GC_26.messages.action.Action;
+import it.polimi.ingsw.GC_26.messages.action.ActionNotification;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
 
 /**

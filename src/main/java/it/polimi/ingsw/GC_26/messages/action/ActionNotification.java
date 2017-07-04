@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.game.action;
+package it.polimi.ingsw.GC_26.messages.action;
 
 /**
  * 

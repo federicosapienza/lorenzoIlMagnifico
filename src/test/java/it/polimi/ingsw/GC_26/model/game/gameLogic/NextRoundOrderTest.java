@@ -1,11 +1,11 @@
-package it.polimi.ingsw.GC_26.model.game.gameComponents.rankings;
+package it.polimi.ingsw.GC_26.model.game.gameLogic;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.rankings.NextRoundOrder;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.gameLogic.NextRoundOrder;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class NextRoundOrderTest {

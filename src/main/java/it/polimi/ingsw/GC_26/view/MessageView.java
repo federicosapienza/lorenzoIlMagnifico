@@ -6,8 +6,8 @@ import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
 import it.polimi.ingsw.GC_26.messages.Message;
 import it.polimi.ingsw.GC_26.messages.Request;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
-import it.polimi.ingsw.GC_26.server.Observer;
 import it.polimi.ingsw.GC_26.server.connections.ServerConnectionToClient;
+import it.polimi.ingsw.GC_26.utilities.observer.Observer;
 
 public class MessageView extends OutputView implements Observer<Message>{
 	private Timer timer;

@@ -6,7 +6,7 @@ import it.polimi.ingsw.GC_26.model.actionHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
-import it.polimi.ingsw.GC_26.server.Observer;
+import it.polimi.ingsw.GC_26.utilities.observer.Observer;
 
 public class EndTurnController implements Observer<Boolean>{
 	

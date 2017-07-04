@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.server;
+package it.polimi.ingsw.GC_26.utilities.observer;
 
 /**
  * 

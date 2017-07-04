@@ -1,12 +1,9 @@
-package it.polimi.ingsw.GC_26.server;
+package it.polimi.ingsw.GC_26.controller;
 
 import java.util.ArrayList;
 
 import java.util.List;
 
-import it.polimi.ingsw.GC_26.controller.ActionController;
-import it.polimi.ingsw.GC_26.controller.ChoiceController;
-import it.polimi.ingsw.GC_26.controller.EndTurnController;
 import it.polimi.ingsw.GC_26.jsonReader.BonusInterface;
 import it.polimi.ingsw.GC_26.jsonReader.Cards;
 import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;

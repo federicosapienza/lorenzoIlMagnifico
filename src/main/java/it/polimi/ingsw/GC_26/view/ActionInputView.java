@@ -1,7 +1,7 @@
 package it.polimi.ingsw.GC_26.view;
 
-import it.polimi.ingsw.GC_26.model.game.action.Action;
-import it.polimi.ingsw.GC_26.server.Observable;
+import it.polimi.ingsw.GC_26.messages.action.Action;
+import it.polimi.ingsw.GC_26.utilities.observer.Observable;
 
 public class ActionInputView extends Observable<Action>{
 	

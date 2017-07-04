@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import it.polimi.ingsw.GC_26.messages.Message;
+import it.polimi.ingsw.GC_26.messages.action.ActionNotification;
 import it.polimi.ingsw.GC_26.model.actionHandlers.MainActionHandler;
-import it.polimi.ingsw.GC_26.model.game.action.ActionNotification;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.Board;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Dices;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.rankings.NextRoundOrder;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.player.Player;
-import it.polimi.ingsw.GC_26.server.Observable;
+import it.polimi.ingsw.GC_26.utilities.observer.Observable;
 
 /**
  * 

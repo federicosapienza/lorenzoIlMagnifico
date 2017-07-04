@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import it.polimi.ingsw.GC_26.client.connection.ClientConnection;
 import it.polimi.ingsw.GC_26.client.view.MainClientView;
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
-import it.polimi.ingsw.GC_26.model.game.action.Action;
+import it.polimi.ingsw.GC_26.messages.action.Action;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
 

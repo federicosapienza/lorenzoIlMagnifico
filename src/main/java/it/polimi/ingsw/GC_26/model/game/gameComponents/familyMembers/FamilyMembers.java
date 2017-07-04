@@ -4,10 +4,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import it.polimi.ingsw.GC_26.messages.describers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.*;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26.model.player.Player;
-import it.polimi.ingsw.GC_26.server.Observable;
+import it.polimi.ingsw.GC_26.utilities.observer.Observable;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)

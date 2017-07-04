@@ -1,8 +1,8 @@
 package it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints;
 
 import it.polimi.ingsw.GC_26.model.player.Player;
-import it.polimi.ingsw.GC_26.server.Observable;
-import it.polimi.ingsw.GC_26.utilities.NotEnoughResourcesExceptions;
+import it.polimi.ingsw.GC_26.utilities.exceptions.NotEnoughResourcesExceptions;
+import it.polimi.ingsw.GC_26.utilities.observer.Observable;
 
 /* It ' s the class that represent the status of the player in terms of resources and points owned.
  * It must not be mistaken with ResourcesOrPoints class , which instead represent the payments and effects that are called by cards, positions etc

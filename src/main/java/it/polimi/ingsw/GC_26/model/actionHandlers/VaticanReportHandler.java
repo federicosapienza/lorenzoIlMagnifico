@@ -4,14 +4,14 @@ import java.util.Map;
 
 import it.polimi.ingsw.GC_26.messages.Info;
 import it.polimi.ingsw.GC_26.messages.PersonalBoardChangeNotification;
-import it.polimi.ingsw.GC_26.model.describers.CardDescriber;
+import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.excommunicationTile.ExcommunicationTile;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameElements;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
 import it.polimi.ingsw.GC_26.model.player.Player;
-import it.polimi.ingsw.GC_26.utilities.IllegalActionException;
+import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;
 
 /*Handles only the cases in which the player can choose:
  *  choice values: 0 for excommunication , any other value for paying faith points
