@@ -23,7 +23,8 @@ public class SecondActionHandler extends ActionHandler{
 		//enough servants?
 		if(!player.getTestWarehouse().areResourcesEnough(ResourcesOrPoints.newResources(0,action.getServantsUsed(),0,0))){
 			player.notifyObservers(new Request(player.getStatus(),"Not enough servants", null));
-			return false;}
+			return false;
+		}
 		player.getTestWarehouse().spendResources(ResourcesOrPoints.newResources(0,action.getServantsUsed(),0,0));
 		
 		//gets the info about second action from PlayerStatus and checks is valid

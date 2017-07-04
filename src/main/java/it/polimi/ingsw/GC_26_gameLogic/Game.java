@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
-
 import it.polimi.ingsw.GC_26_board.BoardZone;
 import it.polimi.ingsw.GC_26_cards.CardDescriber;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
@@ -167,6 +165,12 @@ public class Game extends Observable<CardDescriber>{
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Number of players: "+numberOfPlayers+". Time for round: "+times.getTurnTimer()+" s"));
 
+		/**
+		 * Every player is notified about his username: he has proposed one but id a username already exists it has been changed.
+		 */
+		for(Player p: players){ 
+			p.notifyObservers(new Request(PlayerStatus.WAITINGHISTURN, p.getName(), null));
+		}
 		
 		
 		/**
@@ -277,7 +281,7 @@ public class Game extends Observable<CardDescriber>{
 		 */
 		if(!playersNoMoreSuspended.isEmpty()){
 			for(Player p: playersNoMoreSuspended){
-				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, p.getName(), p.getName()+ "is no more suspended")) ;
+				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, p.getName(), p.getName()+ " is no more suspended")) ;
 				playersNoMoreSuspended.remove(p);
 			}
 		}
@@ -392,7 +396,7 @@ public class Game extends Observable<CardDescriber>{
 			 * If the game is ended, it has to be chosen a winner, else, the game will go on with next period.
 			 */	
 			if(period==numberOfPeriods){
-				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, "calculating results "+ period+ " round "+round ));;
+				gameElements.notifyPlayers(new Info(GameStatus.PLAYING, null, "calculating results "+ period+ " round "+round ));
 				chooseAWinner();  
 				return; 
 				

@@ -101,12 +101,12 @@ public class FamilyMember {
 		   if (this.getClass() != obj.getClass()) 
 			   return false;
 		   FamilyMember other = (FamilyMember) obj;
-		   if(player.equals(other.getPlayer()) && colour== other.getColour())
-			   return true;
-		   else 
-			   return false;   
+		   return (player.equals(other.getPlayer()) && colour== other.getColour()) ;
 	}
 	
-
+	 @Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 	
 }

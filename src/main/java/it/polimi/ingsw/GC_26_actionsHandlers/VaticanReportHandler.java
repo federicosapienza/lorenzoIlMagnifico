@@ -33,19 +33,19 @@ public class VaticanReportHandler extends Handler{
 			ExcommunicationTile tile = gameElements.getGame().getThisRoundExcommunicationTiles();
 			tile.runEffect(player);
 			super.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "is excommunicated"));
-	    	super.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), 
-	    			new CardDescriber(tile) ,null));
+			super.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(tile) ,null));
 			return;
 		}
-		 if(player.getWarehouse().getFaithPoints()< GameParameters.getFaithPointNeeded(gameElements.getGame().getPeriod())){
-		    	throw new IllegalActionException("player should not be asked for vatican report choice");
-		    	//the player should not be here  	
+		
+		if(player.getWarehouse().getFaithPoints()< GameParameters.getFaithPointNeeded(gameElements.getGame().getPeriod())){
+			throw new IllegalActionException("player should not be asked for vatican report choice");
+			//the player should not be here  	
 		}
 		 
 		 Map<Integer, Integer> faithPointsTrack=gameElements.getFaithPointsTrack();
 		 int temp= faithPointsTrack.get(player.getWarehouse().getFaithPoints());
 		 //giving the player more bonus points if associated permanent effects is on
-		temp += player.getPermanentModifiers().getAdditionalVP();
+		 temp += player.getPermanentModifiers().getAdditionalVP();
 		 
 		 super.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), 
 				 				player.getName()+" support the Church and gains "+ temp+" victory points" ));

@@ -37,6 +37,7 @@ public class SocketINClient implements Runnable{
 					try {
 						while (running){
 				        String string = objIn.readUTF();
+				        System.out.println(string);
 				        if("Entering in a game".equals(string)){//any change here must be changed also in server
 				        	controller.setLoginDone();
 				        	break;
@@ -51,39 +52,33 @@ public class SocketINClient implements Runnable{
 					if(object instanceof Message){
 						Message message = (Message) object;
 						controller.receiveMessage(message);
-						continue;
 					}
 					else if(object instanceof ActionNotification){
 						ActionNotification action = (ActionNotification) object;
 						controller.receiveAction(action);
-						continue;
 
 					}
 					else if(object instanceof CardDescriber){
 						CardDescriber card = (CardDescriber) object;
 						controller.receiveCard(card);
-						continue;
 
 					}
 					else if(object instanceof PlayerWallet){
 						PlayerWallet wallet = (PlayerWallet) object;
 						controller.receivePlayerPocket(wallet);
-						continue;
-
  					}
 					else if(object instanceof PositionDescriber){
 						PositionDescriber positionDescriber = (PositionDescriber) object;
 						controller.receivePosition(positionDescriber);
-						continue;}
+						}
 					
 					else if(object instanceof FamilyMembersDescriber){
 						FamilyMembersDescriber familyMembersDescriber= (FamilyMembersDescriber) object;
 						controller.receiveFamilyMembers(familyMembersDescriber);
-						continue;
 
 					}
 					
-					throw new IllegalArgumentException();
+					else throw new IllegalArgumentException();
 				
 					
 					}
@@ -91,7 +86,7 @@ public class SocketINClient implements Runnable{
 				
 				}catch (ClassNotFoundException e) {
 					LOG.log(Level.SEVERE, "class not found ", e);	
-;
+
 				}
 				
 				catch(IOException e1){

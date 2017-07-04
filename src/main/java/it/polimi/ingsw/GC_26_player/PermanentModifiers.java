@@ -1,6 +1,6 @@
 package it.polimi.ingsw.GC_26_player;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -107,7 +107,7 @@ public class PermanentModifiers {
     private boolean discountOnMarketResources=false;
     private boolean discountOnHarvestResources=false;
     private boolean discountOnProductionResources=false;
-    private Map<BoardZone, ResourcesOrPoints> discounts= new HashMap<>();
+    private Map<BoardZone, ResourcesOrPoints> discounts=  new EnumMap<>(BoardZone.class);
 
     /**
      * Method that checks the presence of a discount in the zone expressed in the parameter
@@ -184,7 +184,6 @@ public class PermanentModifiers {
      * @param res It's the discount on the resources or points that the player has to pay to get the card.
      */
     public void addDiscount(BoardZone zone, ResourcesOrPoints res){
-        ResourcesOrPoints temp = discounts.get(zone);
         if(discounts.isEmpty()){  // if there is no discount
             if(zone!=null) { //(i.e Dame effect)
                 discounts.put(zone, res);
@@ -205,7 +204,12 @@ public class PermanentModifiers {
                 return;
             }
         }
-        else if (!discounts.isEmpty()){ //there is a discount
+        else addDiscountToExistings(zone, res);
+    }
+        	
+       private void addDiscountToExistings(BoardZone zone, ResourcesOrPoints res){
+           ResourcesOrPoints temp = discounts.get(zone);
+
             if(zone!=null) { //(i.e. Dame effect)
                 discounts.put(zone, ResourcesOrPoints.sum(res, temp));
                 activateFlagDiscountOnResources(zone);
@@ -249,7 +253,7 @@ public class PermanentModifiers {
                 return;
             }
         }
-    }
+    
 
     /**
      * Getter method that returns the discount that is eventually applied on a particular zone of the board
@@ -321,7 +325,7 @@ public class PermanentModifiers {
      * They'll be checked and called in ActionCheckerHandler and SecondActionHandler
      */
 
-    private Map<BoardZone, Integer> actionModifiers= new HashMap<>();
+    private Map<BoardZone, Integer> actionModifiers= new EnumMap<>(BoardZone.class);
 
     /**
      * Method used to add an action modifier
@@ -661,7 +665,6 @@ public class PermanentModifiers {
      *
      */
 
-    //TODO per il momento non consideriamo il caso in effetti attivati durante un turno, ma solo all'inizio
 
     /**
      * Parameters and methods for "Ludovico il Moro".

@@ -272,7 +272,15 @@ public class OutputCLI implements Output{
 		xPrintSysOut("Personal tile values: ");
 		xPrintSysOut(player.getPersonalTileValues());
 		xPrintSysOut("\n");
+		if(!player.getPermamentsEffect().isEmpty()){
+		xPrintSysOut("Permanents effect owned:");
+		for ( String string: player.getPermamentsEffect()){
+			xPrintSysOut(string);
+			}
+		}
 	}
+	
+	
 	@Override
 	public  void printRankings(MainClientView view) {
 		Map<String, PlayerView> players=view.getPlayers();

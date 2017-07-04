@@ -168,7 +168,7 @@ public class ChoiceController implements Observer<Integer>{
 					if(player.isThereAsecondaryAction()){
 						player.setStatus(new Request(PlayerStatus.SECONDPLAY, null , null));
 						return;}
-					else player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));;
+					else player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 				}
 				}
 			catch(IllegalActionException e){

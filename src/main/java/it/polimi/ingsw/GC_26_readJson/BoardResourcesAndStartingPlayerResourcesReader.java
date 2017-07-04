@@ -41,20 +41,20 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 	public void readResources(BonusImplementation bonusImplementation){
 		listOfPaths = jsonPathData.getResources();
 		for(String s:listOfPaths){
+			try {
+				fileReader = new FileReader(s);
+				br = new BufferedReader(fileReader);
+				jsonObject= gson.fromJson(br, JsonObject.class);
+				} catch (FileNotFoundException e) {
+				logger.log(null, "File not Found!", e);
+			}
+			finally {
 				try {
-					fileReader = new FileReader(s);
-					br = new BufferedReader(fileReader);
-					jsonObject= gson.fromJson(br, JsonObject.class);
-					} catch (FileNotFoundException e) {
-					logger.log(null, "File not Found!", e);
-				}
-				finally {
-					try {
-						fileReader.close();
-					} catch (IOException e2) {
-					logger.log(null, "FileReader not closed!", e2);
-				}
-				}
+					fileReader.close();
+				} catch (IOException e2) {
+				logger.log(null, "FileReader not closed!", e2);
+			}
+			}
 		list = new Gson().fromJson(jsonObject.get("resources"), listTypeInt);
 		ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResourcesOrPoints(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5),list.get(6),list.get(7));
 		addResourcesInArray(resourcesOrPoints);
