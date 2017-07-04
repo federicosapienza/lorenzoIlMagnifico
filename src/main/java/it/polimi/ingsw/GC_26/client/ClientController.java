@@ -3,7 +3,6 @@ package it.polimi.ingsw.GC_26.client;
 
 import it.polimi.ingsw.GC_26.client.cli.InputLogic;
 import it.polimi.ingsw.GC_26.client.cli.Output;
-import it.polimi.ingsw.GC_26.client.connection.ClientMain;
 import it.polimi.ingsw.GC_26.client.view.MainClientView;
 import it.polimi.ingsw.GC_26.client.view.PositionView;
 import it.polimi.ingsw.GC_26.messages.Info;
