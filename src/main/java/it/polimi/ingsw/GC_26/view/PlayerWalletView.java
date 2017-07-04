@@ -11,7 +11,7 @@ public class PlayerWalletView extends OutputView implements Observer<PlayerWalle
 		super(connection);
 	}
 
-	
+	@Override
 	public void update(PlayerWallet wallet) {
 		super.getConnection().send(wallet);
 		

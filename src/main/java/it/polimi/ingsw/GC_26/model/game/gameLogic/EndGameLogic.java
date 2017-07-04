@@ -64,7 +64,8 @@ public class EndGameLogic {
 			Warehouse warehouse= player.getWarehouse();
 			int temp;
 			
-			temp= warehouse.getVictoryPoints()-warehouse.getVictoryPoints()/modifiers.getVictoryPointsReducer();
+			temp= warehouse.getVictoryPoints()/modifiers.getVictoryPointsReducer();  
+			//we obtain a value always smaller than player.getVictoryPoints(): no risk in spending
 			warehouse.spendResources(ResourcesOrPoints.newPoints(temp, 0, 0, 0)) ;
 			// player can lose victory points if permanent effect are activated : if his victory points go below zero they are set to zero.
 			temp = modifiers.howManyVictoryPointLess();
@@ -74,19 +75,17 @@ public class EndGameLogic {
 
 			
 			//conquered territories
-			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.TERRITORYCARD)){
+			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.TERRITORYCARD) && personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD)>0){
 				temp=personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD);
-				warehouse.add(ResourcesOrPoints.newPoints(territoryBonus[temp], 0, 0, 0));
+				warehouse.add(ResourcesOrPoints.newPoints(territoryBonus[temp-1], 0, 0, 0));
 			}
 			//character cards owned
-			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.CHARACTERCARD)){
+			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.CHARACTERCARD)&& personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.CHARACTERCARD)>0){
 				temp=personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.CHARACTERCARD);
-				warehouse.add(ResourcesOrPoints.newPoints(charactersBonus[temp], 0, 0, 0));
+				warehouse.add(ResourcesOrPoints.newPoints(charactersBonus[temp-1], 0, 0, 0));
 			}
 			//venture cards owned
-			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.VENTURECARD)){
-				temp=personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.VENTURECARD);
-				warehouse.add(ResourcesOrPoints.newPoints(charactersBonus[temp], 0, 0, 0));
+			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.VENTURECARD)&& personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.VENTURECARD)>0){
 				List<DevelopmentCard> list = personalBoard.getCurrentCards(DevelopmentCardTypes.VENTURECARD);
 				//activating permanent effect of character cards in order to give them victory points
 				for(DevelopmentCard card: list){ 

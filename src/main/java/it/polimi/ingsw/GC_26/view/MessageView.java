@@ -21,7 +21,7 @@ public class MessageView extends OutputView implements Observer<Message>{
 	}
 
 	
-	
+	@Override
 	public void update(Message message) {
 		super.getConnection().send(message);
 		

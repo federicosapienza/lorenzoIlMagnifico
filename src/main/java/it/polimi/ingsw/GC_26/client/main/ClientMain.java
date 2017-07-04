@@ -19,7 +19,7 @@ import it.polimi.ingsw.GC_26.client.view.MainClientView;
 
 public class ClientMain {
 	private final static int PORT = 29997;
-	private final static String IP="127.0.0.1";
+	private final static String IP="127.0.0.1";  //connect to local host
 	private static final Logger LOG = Logger.getLogger(ClientMain.class.getName());
 	private SocketINClient socketINClient;
 	private InputLogic inputLogic;

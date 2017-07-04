@@ -10,7 +10,7 @@ public class PositionView extends OutputView implements Observer<PositionDescrib
 		super(connection);
 	}
 	
-	
+	@Override
 	public void update(PositionDescriber position) {
 		super.getConnection().send(position);
 

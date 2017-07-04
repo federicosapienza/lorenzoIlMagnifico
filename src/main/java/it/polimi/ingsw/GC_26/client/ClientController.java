@@ -67,7 +67,6 @@ public class ClientController {
 	public void receivePosition(PositionDescriber position){
 		if(view.getGameStatus()==GameStatus.INITIALIZINGGAME)
 			view.getBoard().addPosition(new PositionView(position));
-		if(view.getGameStatus()==GameStatus.PLAYING || view.getGameStatus()==GameStatus.INITIALIZINGROUND){}
 		
 	}
 	

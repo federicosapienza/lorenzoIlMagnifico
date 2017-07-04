@@ -58,8 +58,7 @@ public class InputlogicCli implements InputLogic{
 				    output.printString("not valid input");
 				}
 				int value = scanIN.nextInt();
-				/*if(scanIN==null)  // if user insert enter key twice 
-					continue; */
+				
 				if(value==999){  //if player asks to end the turn
 					String	temp="end turn" ;
 					connection.sendResponce(temp);
@@ -175,6 +174,7 @@ public class InputlogicCli implements InputLogic{
 			return waitingResponse;
 		}
 		
+		@Override
 		public synchronized void setWaitingFirstAction(){
 			firstAction=true;
 			waitingAction=true;
@@ -184,6 +184,7 @@ public class InputlogicCli implements InputLogic{
 			
 
 		}
+		@Override
 		public synchronized void setWaitingSecondAction(){
 			output.printResources(view.getThisPlayer());
 			output.printString("What Action? 1-Territories Tower 2-Characters Tower 3-Buildings Tower 4-Ventures Tower" +System.lineSeparator()
@@ -195,7 +196,7 @@ public class InputlogicCli implements InputLogic{
 			waitingResponse=false;
 			
 		}
-	
+		
 		private synchronized void setWaitingResponse(boolean askToEndTurn){
 			output.printResources(view.getThisPlayer());
 			if(askToEndTurn)
@@ -205,7 +206,7 @@ public class InputlogicCli implements InputLogic{
 			firstAction=false;
 			waitingAction=false;
 		}
-		
+		@Override
 		public synchronized void close(){
 			setTurnEnded();
 			close=true;
@@ -213,42 +214,43 @@ public class InputlogicCli implements InputLogic{
 			
 		}
 		
-		
+		@Override
 		public void setActionPerformed() {
 			printRequest("Choose a value between 1 and 4 to try activating the correspondent Leader Card");
 			output.printLeaderCards(view.getThisPlayer().getLeadersCardOwned());
 			this.setWaitingResponse(true);
 		}
-		
+		@Override
 		public synchronized void setTurnEnded(){
 			waitingResponse=false;
 			waitingAction=false;
 		}
-		
+		@Override
 		public void setPlayerSuspended(){
 			printRequest("You are now suspended : press any key to be able to play again");
 			this.setWaitingResponse(false);
 		}
+		@Override
 		public void setWaitingVaticanChoice(CardDescriber card) {
 			printRequest("Enter 0 to be excommunicated or 1 for not; excommunication:" +card.getPermanentEffectDescriber());
 			this.setWaitingResponse(false);
 			
 		}
 
-
+		@Override
 		public void setWaitingPaymentChoice() {
 			printRequest("Enter 1 for first payment, 2 per second");
 			this.setWaitingResponse(false);
 		}
 
-
+		@Override
 		public void setWaitingTrading(CardDescriber card) {
 			printRequest("Enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
 					+ " and you choose that: "+card.getName()+" :"+ card.getPermanentEffectDescriber());	
 			this.setWaitingResponse(false);
 
 		}
-
+		@Override
 		public void setWaitingCouncilPriviledge() {
 			printRequest("Insert the correspondent number");
 			this.setWaitingResponse(false);

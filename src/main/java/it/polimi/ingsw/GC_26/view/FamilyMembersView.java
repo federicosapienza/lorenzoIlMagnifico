@@ -11,7 +11,7 @@ public class FamilyMembersView extends OutputView implements Observer<FamilyMemb
 	}
 
 	
-	
+	@Override
 	public void update(FamilyMembersDescriber familyMembersDescriber) {
 		super.getConnection().send(familyMembersDescriber);
 
