@@ -72,7 +72,7 @@ public class CardsReader {
 	private Type listTypeInt = new TypeToken<List<Integer>>() {}.getType();
 	private JsonPathData jsonPathData = new JsonPathData();
 	private Logger logger;
-	
+	private FileReader fileReader;
 	
 	
 	public JsonObject getJsonObject(){
@@ -83,12 +83,20 @@ public class CardsReader {
 		return br;
 	}
 	
-	public void createJsonObjectFromFile(String path){
+	public void createJsonObjectFromFile(String path) {
 		try {
-			br = new BufferedReader(new FileReader(path));
+			fileReader = new FileReader(path);
+			br = new BufferedReader(fileReader);
 			jsonObject= gson.fromJson(br, JsonObject.class);
-		} catch (FileNotFoundException e) {
+			} catch (FileNotFoundException e) {
 			logger.log(null, "File not Found!", e);
+		}
+		finally {
+			try {
+				fileReader.close();
+			} catch (IOException e2) {
+			logger.log(null, "FileReader not closed!", e2);
+		}
 		}
 	}
 	

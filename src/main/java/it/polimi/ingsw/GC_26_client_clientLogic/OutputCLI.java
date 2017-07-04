@@ -19,45 +19,45 @@ public class OutputCLI implements Output{
 	
 	@Override
 	public synchronized void printBoard(BoardView board) {
-		System.out.println("*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
-		System.out.println("TERRITORY TOWER:");
-		System.out.println("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+		xPrintSysOut("*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
+		xPrintSysOut("TERRITORY TOWER:");
+		xPrintSysOut("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 		printList(board.getTerritoriesTower());
-		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("CHARACTER TOWER:");
-		System.out.println("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+		xPrintSysOut("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		xPrintSysOut("CHARACTER TOWER:");
+		xPrintSysOut("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 		printList(board.getCharactersTower());
-		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("BUILDING TOWER:");
-		System.out.println("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+		xPrintSysOut("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		xPrintSysOut("BUILDING TOWER:");
+		xPrintSysOut("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 		printList(board.getBuildingsTower());
-		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("VENTURE TOWER:");
-		System.out.println("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+		xPrintSysOut("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		xPrintSysOut("VENTURE TOWER:");
+		xPrintSysOut("VALUE:|-BONUS:-------------------------|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 		printList(board.getVenturesTower());
-		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("MARKET:");
-		System.out.println("VALUE:|-BONUS:-------------------------|");
+		xPrintSysOut("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		xPrintSysOut("MARKET:");
+		xPrintSysOut("VALUE:|-BONUS:-------------------------|");
 		printList(board.getMarketZone());
-		System.out.println("---------------------------------------|");
-		System.out.println("COUNCIL PALACE:");
-		System.out.println("VALUE:|-BONUS:-------------------------|");
+		xPrintSysOut("---------------------------------------|");
+		xPrintSysOut("COUNCIL PALACE:");
+		xPrintSysOut("VALUE:|-BONUS:-------------------------|");
 		printList(board.getCouncilPalace());
-		System.out.println("---------------------------------------|");
-		System.out.println("PRODUCTION:");
-		System.out.println("VALUE:|");
+		xPrintSysOut("---------------------------------------|");
+		xPrintSysOut("PRODUCTION:");
+		xPrintSysOut("VALUE:|");
 		printList(board.getProductionZone());
-		System.out.println("------|");
-		System.out.println("HARVEST:");
-		System.out.println("VALUE:|");
+		xPrintSysOut("------|");
+		xPrintSysOut("HARVEST:");
+		xPrintSysOut("VALUE:|");
 		printList(board.getHarvestZone());
-		System.out.println("------|");
-		System.out.println("*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
+		xPrintSysOut("------|");
+		xPrintSysOut("*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
 
 	}
 	@Override
 	public void printTitle(){
-		System.out.println("         |----|       |-----------|  |----------|  |----------|  |----  |---|  |-----------|  |-----------| \n"
+		xPrintSysOut("         |----|       |-----------|  |----------|  |----------|  |----  |---|  |-----------|  |-----------| \n"
 		          +"         |    |       |           |  | |-----|  |  |          |  |    \\ |   |  |           |  |           | \n"
 		          +"         |    |       |  |-----|  |  | |     |  |  |   |------|  |     \\|   |  |----       |  |  |-----|  | \n"
 		          +"         |    |       |  |     |  |  | |-----|  |  |   |         |          |      /       /  |  |     |  | \n"
@@ -93,7 +93,9 @@ public class OutputCLI implements Output{
 		          +"\n");
 	}
 	
-	
+	private void xPrintSysOut(String string){ //x just to be quicker calling that method
+		System.out.println(string);
+	}
 	
 	
 	private void printList(List<PositionView> positions){
@@ -121,7 +123,7 @@ public class OutputCLI implements Output{
 			}
 
 		}
-		System.out.println(position.getPositionValue()+"     |"+temp);
+		xPrintSysOut(position.getPositionValue()+"     |"+temp);
 	}
 	
 	
@@ -190,9 +192,9 @@ public class OutputCLI implements Output{
 	public void printLeaderCards(Set<CardDescriber> cards){
 		String repeated ;
 		StringBuilder temp = new StringBuilder(" ");
-		System.out.println("");
-		System.out.println(" LEADER CARDS:");
-		System.out.println(" |NAME:-------------------------|-REQUIREMENTS------------------------------------------------------------------------------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:-------------------------------------------------------------------------------------------------------------------------------------");
+		xPrintSysOut("\n");
+		xPrintSysOut(" LEADER CARDS:");
+		xPrintSysOut(" |NAME:-------------------------|-REQUIREMENTS------------------------------------------------------------------------------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:-------------------------------------------------------------------------------------------------------------------------------------");
 		for(CardDescriber cardDescriber : cards){
 			repeated = new String(new char[30-cardDescriber.getName().length()]).replace("\0", " ");
 			temp.append("|" + cardDescriber.getName() + repeated +"|");
@@ -214,74 +216,74 @@ public class OutputCLI implements Output{
 				repeated = new String(new char[150]).replace("\0", " ");
 				temp.append(repeated +"|");
 			}
-			System.out.println(temp);
+			System.out.println(temp); //è uno stringBuilder,lo lascio con sysout
 			temp = new StringBuilder(" ");
 		}
-		System.out.println(" |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("");
+		xPrintSysOut(" |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		xPrintSysOut("\n");
 	}
 	
 	@Override
 	public  void printExcommunicationTiles(BoardView board) {
 		String repeated ;
-		System.out.println(" ");
-		System.out.println(" EXCOMMUNICATION TILES:");
-		System.out.println("|PERIOD:|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+		xPrintSysOut("\n");
+		xPrintSysOut(" EXCOMMUNICATION TILES:");
+		xPrintSysOut("|PERIOD:|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 		for(CardDescriber card: board.getExcommunicationThisGame()){
 			repeated = new String(new char[140-card.getPermanentEffectDescriber().length()]).replace("\0", " ");
-			System.out.println("|"+card.getPeriod() +"      |"+  card.getPermanentEffectDescriber()+repeated+"|");
+			xPrintSysOut("|"+card.getPeriod() +"      |"+  card.getPermanentEffectDescriber()+repeated+"|");
 		}
-		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------|");
-		System.out.println(" ");
+		xPrintSysOut("-----------------------------------------------------------------------------------------------------------------------------------------------------|");
+		xPrintSysOut("\n");
 	}
 	@Override
 	public  void printString(String string) {
-		System.out.println(string);
+		xPrintSysOut(string);
 		
 	}
 	@Override
 	public  void printResources(PlayerView player) {
-		System.out.println(player.getWallet().toString());
+		xPrintSysOut(player.getWallet().toString());
 		
 	}
 	@Override
 	public  void printCompleteStatus(PlayerView player) {
-		System.out.println("");
-		System.out.println("RECAP OF PLAYER " + "'" + player.getName() + "' :");
-		System.out.println("");
-		System.out.println("Family members value: ");
+		xPrintSysOut("\n");
+		xPrintSysOut("RECAP OF PLAYER " + "'" + player.getName() + "' :");
+		xPrintSysOut("\n");
+		xPrintSysOut("Family members value: ");
 		System.out.println(player.getFamilyMembers().getStatus());
-		System.out.println("");
-		System.out.println("Free family members:  ");
+		xPrintSysOut("\n");
+		xPrintSysOut("Free family members:  ");
 		System.out.println(player.getFamilyMembers().whatIsFree());
-		System.out.println("");
-		System.out.println("Resources and points:");
+		xPrintSysOut("\n");
+		xPrintSysOut("Resources and points:");
 		printResources(player);	
-		System.out.println("");
-		System.out.println("Cards owned:");
+		xPrintSysOut("\n");
+		xPrintSysOut("Cards owned:");
 		if(player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD).isEmpty() && player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD).isEmpty()
 			&& player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD).isEmpty()	&& player.getCurrentCards(DevelopmentCardTypes.VENTURECARD).isEmpty()){
-			System.out.println("No cards owned yet");
+			xPrintSysOut("No cards owned yet");
 		}
 		else{
 			printCards(player);
 		}
-		System.out.println("");
-		System.out.println("Personal tile values: ");
-		System.out.println( player.getPersonalTileValues());
-		System.out.println("");
+		xPrintSysOut("\n");
+		xPrintSysOut("Personal tile values: ");
+		xPrintSysOut(player.getPersonalTileValues());
+		xPrintSysOut("\n");
 	}
 	@Override
 	public  void printRankings(MainClientView view) {
 		Map<String, PlayerView> players=view.getPlayers();
 		List<PlayerView> playerViews  = new ArrayList<>(players.values());
-		System.out.println("\n");
-		System.out.println("RANKINGS: ");
+		xPrintSysOut("\n");
+		xPrintSysOut("RANKINGS: ");
 		for(int i=0; i<playerViews.size();i++){
-			System.out.println("PLAYER " + "'"  + playerViews.get(i).getName()  + "'" + " : " +"|Victory Points :" + playerViews.get(i).getWallet().getVictoryPoints() +" |Military Points: " 
+			xPrintSysOut("PLAYER " + "'"  + playerViews.get(i).getName()  + "'" + " : " +"|Victory Points :" + playerViews.get(i).getWallet().getVictoryPoints() +" |Military Points: " 
 					+ playerViews.get(i).getWallet().getMilitaryPoints() + " |Faith Points: " + playerViews.get(i).getWallet().getFaithPoints());
 		}
-		System.out.println("\n");
+		xPrintSysOut("\n");
 	}
 	
 	public  void printCards(Set<CardDescriber> cards){
@@ -292,39 +294,39 @@ public class OutputCLI implements Output{
 	public void printDevelopmentCardsSet(Set<CardDescriber> cards){
 		for(CardDescriber cardDescriber : cards){
 			String temp = printDevelopmentCards(cardDescriber);
-			System.out.println("|"+temp);
+			xPrintSysOut("|"+temp);
 		}
 	}
 	
 	public  void printFamilyMembers(PlayerView player){
 		System.out.println(player.getFamilyMembers().getStatus());
-		System.out.println(player.getFamilyMembers().whatIsFree().toString());
+		xPrintSysOut(player.getFamilyMembers().whatIsFree().toString());
 	}
 	
 	@Override
 	public void printCards(PlayerView player) {  //stampare tutta la persona board
 		if(!player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD).isEmpty()){
-			System.out.println(" Territory Cards owned:");
-			System.out.println("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+			xPrintSysOut(" Territory Cards owned:");
+			xPrintSysOut("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 			printDevelopmentCardsSet(player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD));}
 		if(!player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD).isEmpty()){
-			System.out.println(" Character cards owned:");
-			System.out.println("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+			xPrintSysOut(" Character cards owned:");
+			xPrintSysOut("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 			printDevelopmentCardsSet(player.getCurrentCards(DevelopmentCardTypes.CHARACTERCARD));}
 		if(!player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD).isEmpty()){
-			System.out.println(" Building cards owned:");
-			System.out.println("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+			xPrintSysOut(" Building cards owned:");
+			xPrintSysOut("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 			printDevelopmentCardsSet(player.getCurrentCards(DevelopmentCardTypes.BUILDINGCARD));}
 		if(!player.getCurrentCards(DevelopmentCardTypes.VENTURECARD).isEmpty()){
-			System.out.println(" Venture cards owned:");
-			System.out.println("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
+			xPrintSysOut(" Venture cards owned:");
+			xPrintSysOut("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
 			printDevelopmentCardsSet(player.getCurrentCards(DevelopmentCardTypes.VENTURECARD));}
 		
 		if(!player.getPermamentsEffect().isEmpty()){
-		System.out.println("");
-		System.out.println("Permanents effect owned:");
+		xPrintSysOut("\n");
+		xPrintSysOut("Permanents effect owned:");
 		for(String s: player.getPermamentsEffect())
-			System.out.println(s);
+			xPrintSysOut(s);
 	}
 	
 
@@ -336,12 +338,12 @@ public class OutputCLI implements Output{
 	public void printFinalRankings(MainClientView view) {
 		Map<String, PlayerView> players=view.getPlayers();
 		List<PlayerView> playerViews  = new ArrayList<>(players.values());
-		System.out.println("\n");
-		System.out.println("FINAL SCORE: ");
+		xPrintSysOut("\n");
+		xPrintSysOut("FINAL SCORE: ");
 		for(int i=0; i<playerViews.size();i++){
-			System.out.println("PLAYER " + "'"  + playerViews.get(i).getName()  + "'" + " : " +"|Victory Points :" + playerViews.get(i).getWallet().getVictoryPoints());
+			xPrintSysOut("PLAYER " + "'"  + playerViews.get(i).getName()  + "'" + " : " +"|Victory Points :" + playerViews.get(i).getWallet().getVictoryPoints());
 		}
-		System.out.println("\n");
+		xPrintSysOut("\n");
 	}
 	}
 	

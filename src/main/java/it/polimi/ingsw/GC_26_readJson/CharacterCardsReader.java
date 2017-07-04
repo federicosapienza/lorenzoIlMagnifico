@@ -26,7 +26,7 @@ public class CharacterCardsReader extends CardsReader {
 	private String doublePermanentEffect;
 	private String doublePayment;
 		
-		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
+		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation) {
 			String[] listOfPaths = super.chooseListOfCards(numberOfPeriod, DevelopmentCardTypes.CHARACTERCARD);
 			for(String s:listOfPaths){
 				super.createJsonObjectFromFile(s);
@@ -76,20 +76,7 @@ public class CharacterCardsReader extends CardsReader {
 		
 		private void createCharacterCard(CardsImplementation cardsImplementation,int numOfPeriod){
 			DevelopmentCard developmentCard= DevelopmentCardImplementation.characterCard(name, period, payment, immediateEffect,permanentEffect);
-			switch(numOfPeriod){
-			   case 1:
-				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
-				   break;
-			   case 2:
-				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
-				   break;
-			   case 3:
-				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
-				   break;
-			   default:
-				   throw new IllegalArgumentException();
-			   }
-		   
+			cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
 			}
 			
 }	

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26_readJson;
 
+
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26_cards.developmentCards.DevelopmentCardTypes;
@@ -27,7 +28,7 @@ public class BuildingCardsReader extends CardsReader {
 	private String doublePermanentEffect;
 	private String doublePayment;
 		
-		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation){
+		public void readCards(int numberOfPeriod,CardsImplementation cardsImplementation) {
 			String[] listOfPaths = super.chooseListOfCards(numberOfPeriod, DevelopmentCardTypes.BUILDINGCARD);
 			for(String s:listOfPaths){
 				super.createJsonObjectFromFile(s);
@@ -78,20 +79,7 @@ public class BuildingCardsReader extends CardsReader {
 		
 		private void createBuildingCard(CardsImplementation cardsImplementation,int numOfPeriod){
 			DevelopmentCard developmentCard= DevelopmentCardImplementation.buildingCard(name, period, payment, immediateEffect, permanentEffect, actionValue);
-			switch(numOfPeriod){
-			   case 1:
-				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.BUILDINGCARD).add(developmentCard);
-				   break;
-			   case 2:
-				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.BUILDINGCARD).add(developmentCard);
-				   break;
-			   case 3:
-				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.BUILDINGCARD).add(developmentCard);
-				   break;
-			   default:
-				   throw new IllegalArgumentException();
-			   }
-		   
+			cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.BUILDINGCARD).add(developmentCard);
 			}
 			
 }	

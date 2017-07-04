@@ -77,19 +77,7 @@ public class VentureCardsReader extends CardsReader {
 		
 		private void createVentureCard(CardsImplementation cardsImplementation,int numOfPeriod){
 			DevelopmentCard developmentCard= DevelopmentCardImplementation.ventureCard(name, period, payment, immediateEffect, permanentEffect);
-			switch(numOfPeriod){
-			   case 1:
-				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.VENTURECARD).add(developmentCard);
-				   break;
-			   case 2:
-				   cardsImplementation.getDevelopmentCards(numOfPeriod,DevelopmentCardTypes.VENTURECARD ).add(developmentCard);
-				   break;
-			   case 3:
-				   cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.VENTURECARD).add(developmentCard);
-				   break;
-			   default:
-				   throw new IllegalArgumentException();
-			   }
+			cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.VENTURECARD).add(developmentCard);
 			}
 			
 }
