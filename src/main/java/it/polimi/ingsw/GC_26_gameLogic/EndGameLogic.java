@@ -27,8 +27,8 @@ public class EndGameLogic {
 	private final static int[] territoryBonus = new  int[]{0,0,1,4,10,20};
 	private final static int[] charactersBonus = new  int[]{1,3,6,10,15,21};
 	private final static int resourcesBonus = 5;
-	private final ResourcesOrPoints militaryStrenghtFirstReward = ResourcesOrPoints.newPoints(5, 0, 0, 0);
-	private final ResourcesOrPoints militaryStrenghtSecondReward = ResourcesOrPoints.newPoints(2, 0, 0, 0);
+	private final ResourcesOrPoints militaryStrengthFirstReward = ResourcesOrPoints.newPoints(5, 0, 0, 0);
+	private final ResourcesOrPoints militaryStrengthSecondReward = ResourcesOrPoints.newPoints(2, 0, 0, 0);
 
 	/**
 	 * Constructor: it allows the game to analyze, based on the game elements, all the information about the game
@@ -44,7 +44,7 @@ public class EndGameLogic {
 	 */
 	public void start(){
 		
-		calcultatingPoints();
+		calculatingPoints();
 		
 		elaboratingMilitaryPointResult();
 		
@@ -57,7 +57,7 @@ public class EndGameLogic {
 		
 	
 
-	private void calcultatingPoints(){
+	private void calculatingPoints(){
 		for(Player player: gameElements.getPlayers()){
 			PermanentModifiers modifiers =player.getPermanentModifiers();
 			PersonalBoard personalBoard= player.getPersonalBoard();
@@ -102,7 +102,7 @@ public class EndGameLogic {
 	
 	private void elaboratingMilitaryPointResult(){
 // starting elaborating results
-		//military strenght:
+		//military strength:
 		int bestValue=0;
 		int secondValue=0;
 		//searching military strength best values
@@ -121,13 +121,13 @@ public class EndGameLogic {
 		
 		//rewarding the players with more military points
 		for(Player player: gameElements.getPlayers()){
-			int  temp= player.getWarehouse().getMilitaryPoints();
+			int temp= player.getWarehouse().getMilitaryPoints();
 			if(temp==bestValue){
-				player.getWarehouse().add(militaryStrenghtFirstReward);
+				player.getWarehouse().add(militaryStrengthFirstReward);
 				continue;
 			}
 			if(bestValue != secondValue &&temp==secondValue){
-				player.getWarehouse().add(militaryStrenghtSecondReward);
+				player.getWarehouse().add(militaryStrengthSecondReward);
 
 			}
 				

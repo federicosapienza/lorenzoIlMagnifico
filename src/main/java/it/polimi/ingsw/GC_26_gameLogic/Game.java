@@ -470,6 +470,10 @@ public class Game extends Observable<CardDescriber>{
 		playersNoMoreSuspended.add(player);
 		
 	}
+	
+	public List<Player> getPlayersNoMoreSuspended() {
+		return playersNoMoreSuspended;
+	}
 
 	
 	

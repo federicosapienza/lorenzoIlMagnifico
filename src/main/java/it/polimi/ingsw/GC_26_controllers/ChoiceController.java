@@ -39,7 +39,8 @@ public class ChoiceController implements Observer<Integer>{
 		}
 		if(status==PlayerStatus.SUSPENDED){
 			restartingPlayer();
-			return;}
+			return;
+			}
 		if(status == PlayerStatus.TRADING)
 			 tradeController(choice);
 		if(status == PlayerStatus.CHOOSINGPAYMENT)
@@ -47,9 +48,10 @@ public class ChoiceController implements Observer<Integer>{
 		
 		if(status == PlayerStatus.VATICANREPORTDECISION){
 			vaticanReportController(choice);
-			return;}
+			return;
+		}
 		
-		if(status==PlayerStatus.TRADINGCOUNCILPRIVILEDGES )
+		if(status==PlayerStatus.TRADINGCOUNCILPRIVILEGES )
 			//player is trading diplomatic privileges
 			diplomaticPrivilegesController( choice);
 		if(status==PlayerStatus.ACTIONPERFORMED)
@@ -83,10 +85,9 @@ public class ChoiceController implements Observer<Integer>{
 			
 			//going back from production: we must end his turn
 			synchronized (player) {
-				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
-					return;
-				 //going back to previous state of the game, if time not expired and restarting the action that was interrputed
-				if(player.getStatus()==PlayerStatus.TRADING)
+				//going back to previous state of the game, if time not expired and restarting the action that was interrputed
+				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED ||
+						player.getStatus()==PlayerStatus.TRADING)// time out reached
 					return;
 				else player.setStatus(new Request(PlayerStatus.ACTIONPERFORMED, null , null));
 			
@@ -119,7 +120,7 @@ public class ChoiceController implements Observer<Integer>{
 					PlayerStatus previousStatus =player.getPreviousStatus(); 
 					if(previousStatus ==PlayerStatus.PLAYING){
 						if(player.getWarehouse().getCouncilPrivileges()>0){
-							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+							player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
 									+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 							return;
 						}
@@ -161,7 +162,7 @@ public class ChoiceController implements Observer<Integer>{
 						return;
 					 //going back to previous state of the game, if time not expired and restarting the action that was interrputed
 					if(player.getWarehouse().getCouncilPrivileges()>0){
-						player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+						player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
 								+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 						return;
 					}
@@ -221,7 +222,7 @@ public class ChoiceController implements Observer<Integer>{
 					return;
 				 //going back to previous state of the game, if time not expired and restarting the action that was interrupted
 				if(player.getWarehouse().getCouncilPrivileges()>0){
-					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
 							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 					return;
 				}

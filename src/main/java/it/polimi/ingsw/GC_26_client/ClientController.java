@@ -156,7 +156,7 @@ public class ClientController {
 			iOlogic.setWaitingTrading(request.getCard());
 			return;
 			}
-		if(request.getStatus()==PlayerStatus.TRADINGCOUNCILPRIVILEDGES){
+		if(request.getStatus()==PlayerStatus.TRADINGCOUNCILPRIVILEGES){
 			iOlogic.setWaitingCouncilPriviledge();
 			return;
 		}

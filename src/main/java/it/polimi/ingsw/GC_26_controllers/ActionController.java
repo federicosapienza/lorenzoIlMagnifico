@@ -85,7 +85,7 @@ public class ActionController implements Observer<Action>{
 				if(player.getStatus()==PlayerStatus.CHOOSINGPAYMENT || player.getStatus()==PlayerStatus.TRADING)  //server waits for action
 					return;
 				if(player.getWarehouse().getCouncilPrivileges()>0){
-					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
 							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 					return;
 				}
@@ -140,7 +140,7 @@ public class ActionController implements Observer<Action>{
 				if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)// time out reached
 					return;
 				if(player.getWarehouse().getCouncilPrivileges()>0){
-					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEDGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
+					player.setStatus(new Request(PlayerStatus.TRADINGCOUNCILPRIVILEGES,GameParameters.getDiplomaticPrivilegesDescription()+ " ("
 							+player.getWarehouse().getCouncilPrivileges()+ " left)", null));
 					return;
 				}
