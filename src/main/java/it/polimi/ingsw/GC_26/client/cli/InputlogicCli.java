@@ -67,14 +67,14 @@ public class InputlogicCli implements InputLogic{
 		connection.login(username);
 		view.setPlayerUsername(username);
 
+
 		while(true){
 			while(!scanIN.hasNextInt()) { //used to be sure integer is an input
 			    scanIN.next();
 			    output.printString("not valid input");
 			}
 			int value = scanIN.nextInt();
-			/*if(scanIN==null)  // if user insert enter key twice 
-				continue; */
+			
 			if(value==999){  //if player asks to end the turn
 				String temp="end turn" ;
 				connection.sendResponce(temp);
@@ -84,7 +84,7 @@ public class InputlogicCli implements InputLogic{
 			else if(value<0){  //the player asks to reset action , if he was performing an action. useless while waiting response.
 				restartValues();
 				output.printString(lastString);
-			}	
+			}
 			else if(this.getWaitingAction()){
 				handleAction(value);
 			}
@@ -209,19 +209,20 @@ public class InputlogicCli implements InputLogic{
 	/**
 	 * Method called to specify that a first action has to be waited
 	 */
+	
+	@Override
 	public synchronized void setWaitingFirstAction(){
 		firstAction=true;
 		waitingAction=true;
 		restartValues();
 		//the print of board and complete status at the beginning of the turn are done by clientController()
 		printRequest("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
-		
-
 	}
 	
 	/**
 	 * Method called to specify that a second action has to be waited
 	 */
+	@Override
 	public synchronized void setWaitingSecondAction(){
 		output.printResources(view.getThisPlayer());
 		output.printString("What Action? 1-Territories Tower 2-Characters Tower 3-Buildings Tower 4-Ventures Tower" +System.lineSeparator()
@@ -248,9 +249,12 @@ public class InputlogicCli implements InputLogic{
 		waitingAction=false;
 	}
 	
+	
+	
 	/**
 	 * Method that closes the connection
 	 */
+	@Override
 	public synchronized void close(){
 		setTurnEnded();
 		close=true;
@@ -261,6 +265,7 @@ public class InputlogicCli implements InputLogic{
 	/**
 	 * Method called to specify that an action has been performed and a response has to be waited 
 	 */
+	@Override
 	public void setActionPerformed() {
 		printRequest("Choose a value between 1 and 4 to try activating the correspondent Leader Card");
 		output.printLeaderCards(view.getThisPlayer().getLeadersCardOwned());
@@ -270,6 +275,7 @@ public class InputlogicCli implements InputLogic{
 	/**
 	 * Method called to specify that the turn is ended and so it isn't necessary to wait for an action or a response
 	 */
+	@Override
 	public synchronized void setTurnEnded(){
 		waitingResponse=false;
 		waitingAction=false;
@@ -278,6 +284,7 @@ public class InputlogicCli implements InputLogic{
 	/**
 	 * Method that notifies that the player has been suspended 
 	 */
+	@Override
 	public void setPlayerSuspended(){
 		printRequest("You are now suspended : press any key to be able to play again");
 		this.setWaitingResponse(false);
@@ -286,6 +293,7 @@ public class InputlogicCli implements InputLogic{
 	/**
 	 * Method called to specify that the player has to choose if he wants to support the Church or not
 	 */
+	@Override
 	public void setWaitingVaticanChoice(CardDescriber card) {
 		printRequest("Enter 0 to be excommunicated or 1 for not; excommunication:" +card.getPermanentEffectDescriber());
 		this.setWaitingResponse(false);
@@ -295,6 +303,7 @@ public class InputlogicCli implements InputLogic{
 	/**
 	 * Method which notifies that the player has to choose the payment that he wants to pay, among the two possible payments
 	 */
+	@Override
 	public void setWaitingPaymentChoice() {
 		printRequest("Enter 1 for first payment, 2 per second");
 		this.setWaitingResponse(false);
@@ -303,6 +312,7 @@ public class InputlogicCli implements InputLogic{
 	/**
 	 * Method which notifies that the player has to choose if he wants to perform the trade or not
 	 */
+	@Override
 	public void setWaitingTrading(CardDescriber card) {
 		printRequest("Enter 0 not to perform any trade, 1 to perform the first trade and 2 if there is a second trade"
 				+ " and you choose that: "+card.getName()+" :"+ card.getPermanentEffectDescriber());	
@@ -313,7 +323,8 @@ public class InputlogicCli implements InputLogic{
 	/**
 	 * Method that asks the player which Council Privilege he wants to obtain
 	 */
-	public void setWaitingCouncilPriviledge() {
+	@Override
+	public void setWaitingCouncilPrivilege() {
 		printRequest("Insert the correspondent number");
 		this.setWaitingResponse(false);
 	}

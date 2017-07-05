@@ -19,7 +19,7 @@ public interface InputLogic extends Runnable{
 	public void setWaitingVaticanChoice(CardDescriber card);
 	public void setWaitingPaymentChoice();
 	public void setWaitingTrading(CardDescriber card);
-	public void setWaitingCouncilPriviledge();
+	public void setWaitingCouncilPrivilege();
 	
 	public void close();
 	

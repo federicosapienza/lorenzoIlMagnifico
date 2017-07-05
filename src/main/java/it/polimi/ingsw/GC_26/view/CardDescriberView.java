@@ -11,7 +11,7 @@ public class CardDescriberView extends OutputView implements Observer<CardDescri
 	}
 
 	
-	
+	@Override
 	public void update(CardDescriber cardDescriber) {
 		super.getConnection().send(cardDescriber);
 	}
