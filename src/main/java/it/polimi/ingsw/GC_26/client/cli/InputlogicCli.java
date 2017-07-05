@@ -3,6 +3,7 @@ package it.polimi.ingsw.GC_26.client.cli;
 import java.util.Scanner;
 
 import it.polimi.ingsw.GC_26.client.connection.ClientConnection;
+import it.polimi.ingsw.GC_26.client.main.ClientMain;
 import it.polimi.ingsw.GC_26.client.view.MainClientView;
 import it.polimi.ingsw.GC_26.messages.action.Action;
 import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
@@ -24,7 +25,7 @@ public class InputlogicCli implements InputLogic{
 	private boolean firstAction = true;  //if first action true , if second is false
 	private MainClientView view; 
 	private Output output;
-	private Scanner scanIN=new Scanner(System.in);
+	private Scanner scanIN; //new Scanner(System.in);
 
 	
 	private int boardChoice=0; //senza lo zero la seconda volta va male
@@ -38,6 +39,9 @@ public class InputlogicCli implements InputLogic{
 	private boolean familyMemberChosen=false;
 	private String lastString; //it s called any time we want to repeat the last request
 	private boolean close=false;
+	private ClientMain main;
+	private int exitingValue=0;
+	private String username;
 	
 	/**
 	 * Constructor: it creates the InputlogicCli with the attributes indicated in the parameters
@@ -45,11 +49,13 @@ public class InputlogicCli implements InputLogic{
 	 * @param view
 	 * @param output
 	 */
-	public InputlogicCli(ClientConnection connection, MainClientView view, Output output) {
-		//this.scanIN=scanner;
+	public InputlogicCli(String username, ClientMain main, Scanner scanner, ClientConnection connection, MainClientView view, Output output) {
+		this.username=username;
+		this.main= main;
 		this.connection=connection;
 		this.view=view;
 		this.output=output;
+		this.scanIN=scanner;
 
 	}
 	
@@ -58,15 +64,19 @@ public class InputlogicCli implements InputLogic{
 	 */
 	@Override
 	public void run() {
-		String username;
-		while(true){
-		username = scanIN.nextLine();
-		if(username!=null)
-			break;
+		while(username==null){
+			output.printString("Enter a username");
+			while(!scanIN.hasNextLine()) { //used to be sure integer is an input
+			    scanIN.next();
+			    output.printString("not valid input");
+				}
+		    username = scanIN.nextLine();
 		}
 		connection.login(username);
 		view.setPlayerUsername(username);
+		
 
+		output.printString("Entering in a game");
 
 		while(true){
 			while(!scanIN.hasNextInt()) { //used to be sure integer is an input
@@ -94,9 +104,21 @@ public class InputlogicCli implements InputLogic{
 				waitingResponse=false;
 			}
 			else if(close){
+				if(value==1 || value ==0)
+					exitingValue=value;
+				else output.printString("not valid ");
 				break;
-			}
-		}	
+			}		
+			
+		}
+		if(exitingValue==1)
+			main.start(false, username);
+			
+		if(exitingValue==0){
+			//ends the client
+			scanIN.close();
+			output.printString("See you!");
+		}
 	}
 	
 	/**
@@ -257,6 +279,8 @@ public class InputlogicCli implements InputLogic{
 	@Override
 	public synchronized void close(){
 		setTurnEnded();
+		output.printString("Do you want to start a new game? 1 to continue , 0 to exit");
+
 		close=true;
 		connection.close();
 		

@@ -189,7 +189,7 @@ public class ClientController {
 		
 		if(info.getGameStatus()==GameStatus.ENDING){
 			output.printFinalRankings(view);
-			main.restart();
+			main.closeGame();
 		}
 			
 	}

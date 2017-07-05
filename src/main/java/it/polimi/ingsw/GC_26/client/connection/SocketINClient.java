@@ -37,7 +37,6 @@ public class SocketINClient implements Runnable{
 					try {
 						while (running){
 				        String string = objIn.readUTF();
-				        System.out.println(string);
 				        if("Entering in a game".equals(string)){//any change here must be changed also in server
 				        	controller.setLoginDone();
 				        	break;
@@ -106,8 +105,10 @@ public class SocketINClient implements Runnable{
 		
 	public void close(){
 		try {
-			socket.close();
+			if(!socket.isClosed())
+				socket.close();
 			objIn.close();
+			running=false;
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, "Can't establish Socket connection. ", e);	
 		}
