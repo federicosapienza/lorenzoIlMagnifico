@@ -9,86 +9,104 @@ import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
 
+/**
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the logic that manages the input in the CLI
+ *
+ */
 public class InputlogicCli implements InputLogic{
-		private ClientConnection connection;
-		private boolean waitingAction=false;
-		private boolean waitingResponse = false;
-		private boolean firstAction = true;  //if first action true , if second is false
-		private MainClientView view; 
-		private Output output;
-		private  Scanner scanIN=new Scanner(System.in);
-	
-		
-		private int boardChoice=0; //senza lo zero la seconda volta va male
-		private int position=0;
-		private int servants=-2;
-		private Colour familyMemberColour =null;
-		private int familyMember=0;
-		private BoardZone zone=null;
-		private boolean zoneChosen=false;
-		private boolean positionChosen=false;
-		private boolean familyMemberChosen=false;
-		private String lastString; //it s called any time we want to repeat the last request
-		private boolean close=false;
-		
-		
-		public InputlogicCli( ClientConnection connection, MainClientView view, Output output) {
-			//this.scanIN=scanner;
-			this.connection=connection;
-			this.view=view;
-			this.output=output;
+	private ClientConnection connection;
+	private boolean waitingAction=false;
+	private boolean waitingResponse = false;
+	private boolean firstAction = true;  //if first action true , if second is false
+	private MainClientView view; 
+	private Output output;
+	private Scanner scanIN=new Scanner(System.in);
 
+	
+	private int boardChoice=0; //senza lo zero la seconda volta va male
+	private int position=0;
+	private int servants=-2;
+	private Colour familyMemberColour =null;
+	private int familyMember=0;
+	private BoardZone zone=null;
+	private boolean zoneChosen=false;
+	private boolean positionChosen=false;
+	private boolean familyMemberChosen=false;
+	private String lastString; //it s called any time we want to repeat the last request
+	private boolean close=false;
+	
+	/**
+	 * Constructor: it creates the InputlogicCli with the attributes indicated in the parameters
+	 * @param connection
+	 * @param view
+	 * @param output
+	 */
+	public InputlogicCli(ClientConnection connection, MainClientView view, Output output) {
+		//this.scanIN=scanner;
+		this.connection=connection;
+		this.view=view;
+		this.output=output;
+
+	}
+	
+	/**
+	 * Method that runs the CLI logic in input
+	 */
+	@Override
+	public void run() {
+		String username;
+		while(true){
+		username = scanIN.nextLine();
+		if(username!=null)
+			break;
 		}
-		
-		//main class
-		@Override
-		public void run() {
-			String username;
-			while(true){
-			username = scanIN.nextLine();
-			if(username!=null)
+		connection.login(username);
+		view.setPlayerUsername(username);
+
+		while(true){
+			while(!scanIN.hasNextInt()) { //used to be sure integer is an input
+			    scanIN.next();
+			    output.printString("not valid input");
+			}
+			int value = scanIN.nextInt();
+			/*if(scanIN==null)  // if user insert enter key twice 
+				continue; */
+			if(value==999){  //if player asks to end the turn
+				String temp="end turn" ;
+				connection.sendResponce(temp);
+				waitingResponse=false;
+				waitingAction=false;
+			}
+			else if(value<0){  //the player asks to reset action , if he was performing an action. useless while waiting response.
+				restartValues();
+				output.printString(lastString);
+			}	
+			else if(this.getWaitingAction()){
+				handleAction(value);
+			}
+			else if(this.getWaitingResponce()){
+				String temp=String.valueOf(value);
+				connection.sendResponce(temp);
+				waitingResponse=false;
+			}
+			else if(close){
 				break;
 			}
-			connection.login(username);
-			view.setPlayerUsername(username);
-
-			while(true){
-				while(!scanIN.hasNextInt()) { //used to be sure integer is an input
-				    scanIN.next();
-				    output.printString("not valid input");
-				}
-				int value = scanIN.nextInt();
-				/*if(scanIN==null)  // if user insert enter key twice 
-					continue; */
-				if(value==999){  //if player asks to end the turn
-					String	temp="end turn" ;
-					connection.sendResponce(temp);
-					waitingResponse=false;
-					waitingAction=false;
-				}
-				else if(value<0){  //the player asks to reset action , if he was performing an action. useless while waiting response.
-					restartValues();
-					output.printString(lastString);
-				}	
-				else if(this.getWaitingAction()){
-					handleAction(value);
-				}
-				else if(this.getWaitingResponce()){
-					String temp=String.valueOf(value);
-					connection.sendResponce(temp);
-					waitingResponse=false;
-				}
-				else if(close){
-					break;
-				}
-			}	
-		}
+		}	
+	}
 	
+	/**
+	 * Method that handles the selected action checking the value contained in the parameter
+	 * @param value It's the value of the action
+	 */
+	private void handleAction(int value){
 		
-		
-		private void handleAction(int value){
-		  //if waiting action
-		if(firstAction && !familyMemberChosen && (value<5 && value>0)){ // family member is not chosen in second action
+		//if waiting action
+		if(firstAction && !familyMemberChosen && (value>0 && value<5)){ // family member is not chosen in second action
 			familyMember=value;
 			familyMemberColour= chooseColour(familyMember);
 			output.printString("What Action? 1-Territories Tower 2-Characters Tower 3-Buildings Tower 4-Ventures Tower" +System.lineSeparator()
@@ -120,198 +138,259 @@ public class InputlogicCli implements InputLogic{
 			waitingAction=false;
 			return;	
 		}
-			output.printString("Not Valid! Repeat!");
-		}
-		
-		
-		private void askPosition(){
-			String stringRepeated= " ('-1'-togoBack)";
-			if(zone==BoardZone.TERRITORYTOWER|| zone==BoardZone.BUILDINGTOWER|| zone==BoardZone.CHARACTERTOWER || zone==BoardZone.VENTURETOWER)
-				output.printString("What floor? chose a value between 1 and "+ view.getBoard().getBuildingsTower().size() + stringRepeated);
-				//number of floors in building tower is the same of that in other towers
-			String request= "what Position? Choose a value between 1 and ";
-			if(zone==BoardZone.MARKET)
-				output.printString(request+view.getBoard().getMarketZone().size()+stringRepeated );
-			if(zone==BoardZone.PRODUCTION)
-				output.printString(request+view.getBoard().getProductionZone().size()+stringRepeated );
-			if(zone==BoardZone.HARVEST)
-				output.printString(request+view.getBoard().getHarvestZone().size()+stringRepeated );
-			if(zone== BoardZone.COUNCILPALACE){  //in the hypothesis council palace positions will always be 1
-				//no choice of position:
-				positionChosen=true;
-				position=1;
-				output.printString("How many servants? ('-1'-to go Back)");				
-			}
-		}
-		
-		private boolean validatingPosition(int value ){
-			boolean temp=false;
-			if((zone==BoardZone.TERRITORYTOWER|| zone==BoardZone.BUILDINGTOWER)&& value <=view.getBoard().getBuildingsTower().size())
-				temp=true; //number of floors in building tower is the same of that in other towers
-			if((zone==BoardZone.CHARACTERTOWER|| zone==BoardZone.VENTURETOWER)&& value <=view.getBoard().getBuildingsTower().size())
-				temp=true;	
-			if(zone==BoardZone.MARKET&& value<=view.getBoard().getMarketZone().size())
-				temp=true;
-			if( zone==BoardZone.PRODUCTION && value<=view.getBoard().getProductionZone().size())
-				temp=true;
-			if( zone==BoardZone.HARVEST&& value<=view.getBoard().getHarvestZone().size())
-				temp=true;
-			//no choice for council palace: 1 position only
-			if(temp){ //the action is valid
-				position=value;
-				output.printString("How many servants? ('-1'-to go Back)");
-				positionChosen=true;
-				}
-			return temp;
-		}
-		
-		
-		private synchronized boolean getWaitingAction(){
-			return waitingAction;
-		}
-		
-		
-		private synchronized boolean getWaitingResponce(){
-			return waitingResponse;
-		}
-		
-		public synchronized void setWaitingFirstAction(){
-			firstAction=true;
-			waitingAction=true;
-			restartValues();
-			//the print of board and complete status at the beginning of the turn are done by clientController()
-			printRequest("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
-			
-
-		}
-		public synchronized void setWaitingSecondAction(){
-			output.printResources(view.getThisPlayer());
-			output.printString("What Action? 1-Territories Tower 2-Characters Tower 3-Buildings Tower 4-Ventures Tower" +System.lineSeparator()
-			+" 5-market  6-production zone -7 Harvest 8-CouncPalace ");
-			restartValues();
-			familyMemberChosen=true;
-			firstAction=false;
-			waitingAction=true;
-			waitingResponse=false;
-			
-		}
+		output.printString("Not Valid! Repeat!");
+	}
 	
-		private synchronized void setWaitingResponse(boolean askToEndTurn){
-			output.printResources(view.getThisPlayer());
-			if(askToEndTurn)
-				output.printString("waiting, 999 to close turn"); // do not use printRequest here (= this line would always be saved as last) 
-			restartValues();
-			waitingResponse=true;
-			firstAction=false;
-			waitingAction=false;
+	/**
+	 * Method that asks the client to specify the position of the zone involved in his action
+	 */
+	private void askPosition(){
+		String stringRepeated= " ('-1'-togoBack)";
+		if(zone==BoardZone.TERRITORYTOWER|| zone==BoardZone.BUILDINGTOWER|| zone==BoardZone.CHARACTERTOWER || zone==BoardZone.VENTURETOWER)
+			output.printString("What floor? chose a value between 1 and "+ view.getBoard().getBuildingsTower().size() + stringRepeated);
+			//number of floors in building tower is the same of that in other towers
+		String request= "what Position? Choose a value between 1 and ";
+		if(zone==BoardZone.MARKET)
+			output.printString(request+view.getBoard().getMarketZone().size()+stringRepeated );
+		if(zone==BoardZone.PRODUCTION)
+			output.printString(request+view.getBoard().getProductionZone().size()+stringRepeated );
+		if(zone==BoardZone.HARVEST)
+			output.printString(request+view.getBoard().getHarvestZone().size()+stringRepeated );
+		if(zone== BoardZone.COUNCILPALACE){  //in the hypothesis council palace positions will always be 1
+			//no choice of position:
+			positionChosen=true;
+			position=1;
+			output.printString("How many servants? ('-1'-to go Back)");				
 		}
+	}
+	
+	/**
+	 * Method that checks if the specified position is valid
+	 * @param value It's the value that indicates the position
+	 * @return true if the specified position is valid; false if it isn't
+	 */
+	private boolean validatingPosition(int value ){
+		boolean temp=false;
+		if((zone==BoardZone.TERRITORYTOWER|| zone==BoardZone.BUILDINGTOWER)&& value <=view.getBoard().getBuildingsTower().size())
+			temp=true; //number of floors in building tower is the same of that in other towers
+		if((zone==BoardZone.CHARACTERTOWER|| zone==BoardZone.VENTURETOWER)&& value <=view.getBoard().getBuildingsTower().size())
+			temp=true;	
+		if(zone==BoardZone.MARKET&& value<=view.getBoard().getMarketZone().size())
+			temp=true;
+		if( zone==BoardZone.PRODUCTION && value<=view.getBoard().getProductionZone().size())
+			temp=true;
+		if( zone==BoardZone.HARVEST&& value<=view.getBoard().getHarvestZone().size())
+			temp=true;
+		//no choice for council palace: 1 position only
+		if(temp){ //the action is valid
+			position=value;
+			output.printString("How many servants? ('-1'-to go Back)");
+			positionChosen=true;
+			}
+		return temp;
+	}
+	
+	/**
+	 * Method that checks if the CLI is waiting for an action in input or not
+	 * @return true if the CLI is waiting for an action in input; false if it isn't
+	 */
+	private synchronized boolean getWaitingAction(){
+		return waitingAction;
+	}
+	
+	/**
+	 * Method that checks if the CLI is waiting for a response or not
+	 * @return true if the CLI is waiting for a response; false if it isn't
+	 */
+	private synchronized boolean getWaitingResponce(){
+		return waitingResponse;
+	}
+	
+	/**
+	 * Method called to specify that a first action has to be waited
+	 */
+	public synchronized void setWaitingFirstAction(){
+		firstAction=true;
+		waitingAction=true;
+		restartValues();
+		//the print of board and complete status at the beginning of the turn are done by clientController()
+		printRequest("What family member do you choose? 1-orange 2-black 3-white 4-neutral");
 		
-		public synchronized void close(){
-			setTurnEnded();
-			close=true;
-			connection.close();
+
+	}
+	
+	/**
+	 * Method called to specify that a second action has to be waited
+	 */
+	public synchronized void setWaitingSecondAction(){
+		output.printResources(view.getThisPlayer());
+		output.printString("What Action? 1-Territories Tower 2-Characters Tower 3-Buildings Tower 4-Ventures Tower" +System.lineSeparator()
+		+" 5-market  6-production zone -7 Harvest 8-CouncPalace ");
+		restartValues();
+		familyMemberChosen=true;
+		firstAction=false;
+		waitingAction=true;
+		waitingResponse=false;
+		
+	}
+
+	/**
+	 * Method called to specify that a response has to be waited
+	 * @param askToEndTurn It's a boolean that, if true, specifies that the turn can be ended with a specific command
+	 */
+	private synchronized void setWaitingResponse(boolean askToEndTurn){
+		output.printResources(view.getThisPlayer());
+		if(askToEndTurn)
+			output.printString("waiting, 999 to close turn"); // do not use printRequest here (= this line would always be saved as last) 
+		restartValues();
+		waitingResponse=true;
+		firstAction=false;
+		waitingAction=false;
+	}
+	
+	/**
+	 * Method that closes the connection
+	 */
+	public synchronized void close(){
+		setTurnEnded();
+		close=true;
+		connection.close();
+		
+	}
+	
+	/**
+	 * Method called to specify that an action has been performed and a response has to be waited 
+	 */
+	public void setActionPerformed() {
+		printRequest("Choose a value between 1 and 4 to try activating the correspondent Leader Card");
+		output.printLeaderCards(view.getThisPlayer().getLeadersCardOwned());
+		this.setWaitingResponse(true);
+	}
+	
+	/**
+	 * Method called to specify that the turn is ended and so it isn't necessary to wait for an action or a response
+	 */
+	public synchronized void setTurnEnded(){
+		waitingResponse=false;
+		waitingAction=false;
+	}
+	
+	/**
+	 * Method that notifies that the player has been suspended 
+	 */
+	public void setPlayerSuspended(){
+		printRequest("You are now suspended : press any key to be able to play again");
+		this.setWaitingResponse(false);
+	}
+	
+	/**
+	 * Method called to specify that the player has to choose if he wants to support the Church or not
+	 */
+	public void setWaitingVaticanChoice(CardDescriber card) {
+		printRequest("Enter 0 to be excommunicated or 1 for not; excommunication:" +card.getPermanentEffectDescriber());
+		this.setWaitingResponse(false);
+		
+	}
+
+	/**
+	 * Method which notifies that the player has to choose the payment that he wants to pay, among the two possible payments
+	 */
+	public void setWaitingPaymentChoice() {
+		printRequest("Enter 1 for first payment, 2 per second");
+		this.setWaitingResponse(false);
+	}
+
+	/**
+	 * Method which notifies that the player has to choose if he wants to perform the trade or not
+	 */
+	public void setWaitingTrading(CardDescriber card) {
+		printRequest("Enter 0 not to perform any trade, 1 to perform the first trade and 2 if there is a second trade"
+				+ " and you choose that: "+card.getName()+" :"+ card.getPermanentEffectDescriber());	
+		this.setWaitingResponse(false);
+
+	}
+
+	/**
+	 * Method that asks the player which Council Privilege he wants to obtain
+	 */
+	public void setWaitingCouncilPriviledge() {
+		printRequest("Insert the correspondent number");
+		this.setWaitingResponse(false);
+	}
+
+	/**
+	 * Method that resets the values to the default ones
+	 */
+	private void restartValues() {
+		boardChoice=0;
+		position=0;
+		servants=-2;
+		familyMemberColour =null;
+		familyMember=0;
+		zone=null;
+		zoneChosen=false;
+		positionChosen=false;
+		if(firstAction)
+			familyMemberChosen=false;
+		else familyMemberChosen=true;
+	}
+
+	/**
+	 * Method that returns the colour of the Family Member contained in the parameter
+	 * @param familyMember It's the Family Member whose colour has to be returned
+	 * @return the colour of the Family Member contained in the parameter
+	 */
+	private Colour chooseColour(int familyMember) {
+		switch (familyMember) {
+		case 1:
+			return Colour.ORANGE;
+		case 2:
+			return Colour.BLACK;
+		case 3:
+			return Colour.WHITE;
+		case 4:
+			return Colour.NEUTRAL;
+		default: throw new IllegalArgumentException();
+		}
+	}
+
+	/**
+	 * Method that returns the Board Zone that corresponds to the number contained in the parameter
+	 * @param boardChoice It's the number that specifies the Board Zone to get
+	 * @return the Board Zone that corresponds to the number contained in the parameter
+	 */
+	private BoardZone chooseBoardZone(int boardChoice) {
+		switch (boardChoice) {
+		case 1:
+			return BoardZone.TERRITORYTOWER;
+		case 2:
+			return BoardZone.CHARACTERTOWER;
+		case 3:
+			return BoardZone.BUILDINGTOWER;
+		case 4:
+			return BoardZone.VENTURETOWER;
+		case 5:
+			return BoardZone.MARKET;
+		case 6:
+			return BoardZone.PRODUCTION;
+		case 7:
+			return BoardZone.HARVEST;
+		case 8:
+			return BoardZone.COUNCILPALACE;
+
+		default: throw new IllegalArgumentException();
 			
 		}
-		
-		
-		public void setActionPerformed() {
-			printRequest("Choose a value between 1 and 4 to try activating the correspondent Leader Card");
-			output.printLeaderCards(view.getThisPlayer().getLeadersCardOwned());
-			this.setWaitingResponse(true);
-		}
-		
-		public synchronized void setTurnEnded(){
-			waitingResponse=false;
-			waitingAction=false;
-		}
-		
-		public void setPlayerSuspended(){
-			printRequest("You are now suspended : press any key to be able to play again");
-			this.setWaitingResponse(false);
-		}
-		public void setWaitingVaticanChoice(CardDescriber card) {
-			printRequest("Enter 0 to be excommunicated or 1 for not; excommunication:" +card.getPermanentEffectDescriber());
-			this.setWaitingResponse(false);
-			
-		}
-
-
-		public void setWaitingPaymentChoice() {
-			printRequest("Enter 1 for first payment, 2 per second");
-			this.setWaitingResponse(false);
-		}
-
-
-		public void setWaitingTrading(CardDescriber card) {
-			printRequest("Enter 0 for not performing trade, 1 for perform first trade and  2 if there is a second trade"
-					+ " and you choose that: "+card.getName()+" :"+ card.getPermanentEffectDescriber());	
-			this.setWaitingResponse(false);
-
-		}
-
-		public void setWaitingCouncilPriviledge() {
-			printRequest("Insert the correspondent number");
-			this.setWaitingResponse(false);
-		}
-
-		private void restartValues() {
-			boardChoice=0;
-			position=0;
-			servants=-2;
-			familyMemberColour =null;
-			familyMember=0;
-			zone=null;
-			zoneChosen=false;
-			positionChosen=false;
-			if(firstAction)
-				familyMemberChosen=false;
-			else familyMemberChosen=true;
-		}
-
-
-		private Colour chooseColour(int familyMember) {
-			switch (familyMember) {
-			case 1:
-				return Colour.ORANGE;
-			case 2:
-				return Colour.BLACK;
-			case 3:
-				return Colour.WHITE;
-			case 4:
-				return Colour.NEUTRAL;
-			default: throw new IllegalArgumentException();
-			}
-		}
-
-
-		private BoardZone chooseBoardZone(int boardChoice) {
-			switch (boardChoice) {
-			case 1:
-				return BoardZone.TERRITORYTOWER;
-			case 2:
-				return BoardZone.CHARACTERTOWER;
-			case 3:
-				return BoardZone.BUILDINGTOWER;
-			case 4:
-				return BoardZone.VENTURETOWER;
-			case 5:
-				return BoardZone.MARKET;
-			case 6:
-				return BoardZone.PRODUCTION;
-			case 7:
-				return BoardZone.HARVEST;
-			case 8:
-				return BoardZone.COUNCILPALACE;
-
-			default: throw new IllegalArgumentException();
-				
-			}
-		}
-		
-		private void printRequest(String string){  //so we keep track of last string sent
-			lastString=string;
-			output.printString(string);
-		}
+	}
+	
+	/**
+	 * Method that prints the string contained in the parameter
+	 * @param string
+	 */
+	private void printRequest(String string){  //so we keep track of last string sent
+		lastString=string;
+		output.printString(string);
+	}
 		
 
 

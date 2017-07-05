@@ -9,7 +9,7 @@ import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
  * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
  * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
  * 
- * Class that represents the notification message to create whenever a change on a personal board happens. 
+ * Class that represents the notification message to send and receive whenever a change on a personal board happens. 
  *
  */
 public class PersonalBoardChangeNotification extends Message{

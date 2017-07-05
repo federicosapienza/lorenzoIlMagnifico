@@ -119,7 +119,7 @@ public class ActionController implements Observer<Action>{
 	}
 	
 	/**
-	 * Method that controls if the action contained in the parameter is ok as a secondary action
+	 * Method that controls the correctness of the action contained in the parameter as a secondary action
 	 * @param action It's the action that has to be checked as a secondary action
 	 */
 	private void secondActionController(Action action){

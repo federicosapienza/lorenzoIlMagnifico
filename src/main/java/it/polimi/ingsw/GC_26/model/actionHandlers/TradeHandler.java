@@ -11,26 +11,33 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.TradeEffect
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
+/**
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the handler for the trades. Trades need dialogue with user: they're usually based on choices and player 
+ * can also decide not to trade!
+ * Creation rules: 
+ * If a resource to be given can be traded in two different ways, this resource is inserted both in give1 and give2
+ * If there is a choice in giving and only one possible outcome, the outcome is inserted both in receive1 and receive2. 
+ * If there is only one income and only one outcome give2 and receive2 are set as null; 
+ * So there's one between give2 and receive2 that is not null, the other one (receive2 or give2) is not null too.
+ * 
+ * Choice rules: 0 means refuse trade, 2 means second choice if present, any other value for first choice. 
+ * If second choice is not present 2 stands for accepting first choice
+ * When trade is done, if the action has not ended yet, production is restarted from where it was interrupted
+ */
 
-//Trade effect needs dialog with user: there is often choice and player can also decide not to trade!
-/*Creation rules: 
-* if a resource to be given can be traded in two different ways , this resource is inserted both in give1 and give2
-* if  there is a choice in giving and only one possible outcome, the outcome is inserted both in receive1 that receive2. 
-* If there is only one income and only one outcome  give2 and receive2 are left null; 
-* 
-* So if one of both give2 and receive2 is not null , the other one (receive2 or give2) is not null
-* 
-* 
-* Choice rules: 0 stands for refuse trade , 2 stands for second choice if present, any other value for first choice. 
-* If second choice is not present 2 stands for accepting first choice
-* 
-* 
-* When trade is done if action is not ended yet production is restarted from where it was interrupted
-* 
-*/
 public class TradeHandler {
 	
-	public boolean isPossible(Player player , int choice){  // could throw runtime exception: ClassCastException
+	/**
+	 * Method that checks if the trade chosen by the player is possible 
+	 * @param player It's the player who selects the trade
+	 * @param choice It's the choice selected by the player
+	 * @return true if the trade is possible; false if it isn't possible.
+	 */
+	public boolean isPossible(Player player, int choice){  // could throw runtime exception: ClassCastException
 		if(choice == 0){ //if player has refused the trade
 			return true;}
 
@@ -58,7 +65,12 @@ public class TradeHandler {
 		
 	}
 	
-	public void perform(Player player , int choice){  // could throw runtime exception: ClassCastException
+	/**
+	 * Method called to perform the trade that corresponds to the choice selected by the player
+	 * @param player It's the player who selects the trade
+	 * @param choice It's the choice selected by the player
+	 */
+	public void perform(Player player, int choice){  // could throw runtime exception: ClassCastException
 		if(choice == 0) //if player has refused the trade
 			return;
 		

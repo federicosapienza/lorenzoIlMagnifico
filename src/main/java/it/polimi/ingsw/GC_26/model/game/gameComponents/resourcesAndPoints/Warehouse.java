@@ -234,7 +234,7 @@ public class Warehouse  extends Observable<PlayerWallet> {
 		notifyObservers(new PlayerWallet(this));
 	}
 	
-	public void resetCouncilPriviledges(){  // used in Council privileges handling
+	public void resetCouncilPrivileges(){  // used in Council privileges handling
 		councilPrivileges = 0;
 		
 		//notify the clients

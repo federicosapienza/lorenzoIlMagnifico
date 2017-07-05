@@ -10,7 +10,7 @@ import it.polimi.ingsw.GC_26.utilities.observer.Observable;
  * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
  * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
  * 
- * Abstract class representing a message
+ * Abstract class that represents the messages to send and receive through the connection
  *
  */
 public abstract class Message extends Observable<Message> implements Serializable{
