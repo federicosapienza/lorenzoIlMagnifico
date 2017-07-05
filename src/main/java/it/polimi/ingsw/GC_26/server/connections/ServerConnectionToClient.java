@@ -8,6 +8,14 @@ import it.polimi.ingsw.GC_26.messages.describers.PositionDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet;
 import it.polimi.ingsw.GC_26.view.ClientMainServerView;
 
+/**
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This interface represents the server connection to the client
+ *
+ */
 public interface ServerConnectionToClient extends Runnable{
 
 	void addViews(ClientMainServerView views);

@@ -14,7 +14,6 @@ import it.polimi.ingsw.GC_26.model.player.Player;
  */
 public interface LeaderCard {
 	
-	//TODO descrizione formale
 
 	public abstract String getName();
 	public abstract boolean checkRequirement(Player player);

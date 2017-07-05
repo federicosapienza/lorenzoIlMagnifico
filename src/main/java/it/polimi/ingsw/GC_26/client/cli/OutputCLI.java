@@ -14,12 +14,22 @@ import it.polimi.ingsw.GC_26.messages.describers.PositionDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
 
+/**
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This is the class that represents the output displayed in the CLI.
+ * Methods are synchronized to avoid ugly mixtures of requests from InputLogic and infos from views.
+ *
+ */
 
-//methods are synchronized to avoid ugly mixtures of requests from InputLogic and infos from views.
 public class OutputCLI implements Output{
 
 	
-	
+	/**
+	 * Method that prints the board
+	 */
 	@Override
 	public synchronized void printBoard(BoardView board) {
 		xPrintSysOut("*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
@@ -58,6 +68,10 @@ public class OutputCLI implements Output{
 		xPrintSysOut("*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
 
 	}
+	
+	/**
+	 * Method that simply prints the title of the game 
+	 */
 	@Override
 	public void printTitle(){
 		xPrintSysOut("         |----|       |-----------|  |----------|  |----------|  |----  |---|  |-----------|  |-----------| \n"
@@ -96,29 +110,40 @@ public class OutputCLI implements Output{
 		          +"\n");
 	}
 	
-	private void xPrintSysOut(String string){ //x just to be quicker calling that method
+	/**
+	 * Method that prints the string contained in the parameter. It's used just to be quicker when calling the print method
+	 * @param string It's the string that has to be printed
+	 */
+	private void xPrintSysOut(String string){ 
 		System.out.println(string);
 	}
 	
-	
+	/**
+	 * Method that prints the list of position views
+	 * @param positions It's the list of position views
+	 */
 	private void printList(List<PositionView> positions){
 		for(PositionView p : positions){
 			printTool(p);
 		}
 	}
 	
-	private  void printTool(PositionView position){
+	/**
+	 * Method that prints the info about the PositionView contained in the parameter 
+	 * @param position It's the PositionView whose info have to be displayed
+	 */
+	private void printTool(PositionView position){
 		StringBuilder temp= new StringBuilder(" ");
-		String test ;
+		String test;
 		if(position.getBonusPosition() !=null){
 			test = printBonusPosition(position.getPositionDescriber());
 			temp.append(test);
-			}
+		}
 		if(position.getCardHere()!=null){
 			//temp.append(position.getCardHere()+ " ");//before
 			test = printDevelopmentCards(position.getCardHere());//How should it be.
 			temp.append(test);
-			}
+		}
 		if(!position.getPlayersHere().isEmpty()){
 			Map<String , Colour> here= position.getPlayersHere();
 			for (Map.Entry<String, Colour> entry : here.entrySet()){
@@ -129,7 +154,11 @@ public class OutputCLI implements Output{
 		xPrintSysOut(position.getPositionValue()+"     |"+temp);
 	}
 	
-	
+	/**
+	 * Method that prints the bonus of the position described by the PositionDescriber contained in the parameter
+	 * @param positionDescriber It's the describer of the position whose bonus has to be displayed
+	 * @return the description of the bonus of the position as a string
+	 */
 	private String printBonusPosition(PositionDescriber positionDescriber){
 		String repeated ;
 		StringBuilder temp = new StringBuilder(" ");
@@ -147,6 +176,11 @@ public class OutputCLI implements Output{
 		return temp.toString();
 	}
 	
+	/**
+	 * Method that prints the info about Development card described by the CardDescriber contained in the parameter
+	 * @param card It's the CardDescriber that describes the info of card to print
+	 * @return the info of the card as a string
+	 */
 	private String printDevelopmentCards(CardDescriber card){
 	String repeated;
 	StringBuilder temp = new StringBuilder(" ");
@@ -191,6 +225,9 @@ public class OutputCLI implements Output{
 	return temp.toString();
 	}
 	
+	/**
+	 * Method that prints the info about the Leader cards described by the Set of CardDescriber contained in the parameter
+	 */
 	@Override
 	public void printLeaderCards(Set<CardDescriber> cards){
 		String repeated ;
@@ -226,8 +263,11 @@ public class OutputCLI implements Output{
 		xPrintSysOut("\n");
 	}
 	
+	/**
+	 * Method that prints the Excommunication tiles for the BoardView contained in the parameter
+	 */
 	@Override
-	public  void printExcommunicationTiles(BoardView board) {
+	public void printExcommunicationTiles(BoardView board) {
 		String repeated ;
 		xPrintSysOut("\n");
 		xPrintSysOut(" EXCOMMUNICATION TILES:");
@@ -239,16 +279,27 @@ public class OutputCLI implements Output{
 		xPrintSysOut("-----------------------------------------------------------------------------------------------------------------------------------------------------|");
 		xPrintSysOut("\n");
 	}
+	
+	/**
+	 * Method that simply prints the string contained in the parameter
+	 */
 	@Override
-	public  void printString(String string) {
+	public void printString(String string) {
 		xPrintSysOut(string);
-		
 	}
+	
+	/**
+	 * Method that prints all the resources and points owned by the player that corresponds to the PlayerView contained in the parameter
+	 */
 	@Override
 	public  void printResources(PlayerView player) {
 		xPrintSysOut(player.getWallet().toString());
 		
 	}
+	
+	/**
+	 * Method that prints all the info about the player that corresponds to the PlayerView contained in the parameter
+	 */
 	@Override
 	public  void printCompleteStatus(PlayerView player) {
 		xPrintSysOut("\n");
@@ -283,7 +334,9 @@ public class OutputCLI implements Output{
 		}
 	}
 	
-	
+	/**
+	 * Method that prints the rankings of the game 
+	 */
 	@Override
 	public  void printRankings(MainClientView view) {
 		Map<String, PlayerView> players=view.getPlayers();
@@ -297,11 +350,18 @@ public class OutputCLI implements Output{
 		xPrintSysOut("\n");
 	}
 	
-	public  void printCards(Set<CardDescriber> cards){
+	/**
+	 * Method that prints the cards described in the Set of CardDescriber contained in the parameter
+	 */
+	public void printCards(Set<CardDescriber> cards){
 		for(CardDescriber cardDescriber : cards)
 			System.out.println(cardDescriber);
 	}
-	//Specific method instead of printCards
+	
+	/**
+	 * Method that prints the Development cards described in the Set of CardDescriber contained in the parameter
+	 * @param cards
+	 */
 	public void printDevelopmentCardsSet(Set<CardDescriber> cards){
 		for(CardDescriber cardDescriber : cards){
 			String temp = printDevelopmentCards(cardDescriber);
@@ -309,13 +369,20 @@ public class OutputCLI implements Output{
 		}
 	}
 	
-	public  void printFamilyMembers(PlayerView player){
+	/**
+	 * Method that prints the info about the Family Members of the player that corresponds to the PlayerView contained in the parameter
+	 */
+	public void printFamilyMembers(PlayerView player){
 		System.out.println(player.getFamilyMembers().getStatus());
 		xPrintSysOut(player.getFamilyMembers().whatIsFree().toString());
 	}
 	
+	/**
+	 * Method that prints all the cards which are contained in the Personal Board of the player that corresponds to the PlayerView 
+	 * contained in the parameter and the permanent effects that are affecting the player
+	 */
 	@Override
-	public void printCards(PlayerView player) {  //stampare tutta la persona board
+	public void printCards(PlayerView player) {  
 		if(!player.getCurrentCards(DevelopmentCardTypes.TERRITORYCARD).isEmpty()){
 			xPrintSysOut(" Territory Cards owned:");
 			xPrintSysOut("|-NAME:--------------------|-ACTION VALUE:|-PAYMENT:-----------------------------------------------------------------------|-IMMEDIATE EFFECT:------------------------------------------------------------------------------------------------------|-PERMANENT EFFECT:--------------------------------------------------------------------------------------------------------------------------|");
@@ -334,17 +401,18 @@ public class OutputCLI implements Output{
 			printDevelopmentCardsSet(player.getCurrentCards(DevelopmentCardTypes.VENTURECARD));}
 		
 		if(!player.getPermamentsEffect().isEmpty()){
-		xPrintSysOut("\n");
-		xPrintSysOut("Permanents effect owned:");
-		for(String s: player.getPermamentsEffect())
-			xPrintSysOut(s);
-	}
+			xPrintSysOut("\n");
+			xPrintSysOut("Permanents effect owned:");
+			for(String s: player.getPermamentsEffect())
+				xPrintSysOut(s);
+		}
 	
 
 	}
 
-
-
+	/**
+	 * Method that prints the final ranking with the final score
+	 */
 	@Override
 	public void printFinalRankings(MainClientView view) {
 		Map<String, PlayerView> players=view.getPlayers();

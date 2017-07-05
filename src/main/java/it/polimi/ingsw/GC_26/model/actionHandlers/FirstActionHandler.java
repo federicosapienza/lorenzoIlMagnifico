@@ -61,32 +61,30 @@ public class FirstActionHandler extends ActionHandler{
 		else if(action.getZone()==BoardZone.BUILDINGTOWER  || action.getZone() == BoardZone.CHARACTERTOWER || 
 					action.getZone()==BoardZone.TERRITORYTOWER || action.getZone()==BoardZone.VENTURETOWER){
 				return super.towerIsPossible(player, familyMemberUsed, action);
-			}
+		}
 		else if(action.getZone()==BoardZone.MARKET){
 				return super.marketIsPossible(player, familyMemberUsed, action);
-			}
+		}
 		else if(action.getZone()==BoardZone.COUNCILPALACE){
 				return super.councilPalaceIsPossible(player, familyMemberUsed, action);
-			}
+		}
 		else if(action.getZone()==BoardZone.HARVEST){
 				return super.harvestIsPossible(player, familyMemberUsed, action);
-			}
+		}
 		else if(action.getZone()==BoardZone.PRODUCTION){
 				return super.productionIsPossible(player, familyMemberUsed, action);
-			}
-			else {
-				throw new IllegalActionException();
-			}
 			
 		}
+		else {
+				throw new IllegalActionException();
+		}
+			
+	}
 				
- 
-		
-		
-	
-	 
-	 
-/////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Method called to perform the Action chosen by the player contained in the parameters
+	 */
 	@Override
 	 public void perform(Player player, Action action) {
 			//spends the servants

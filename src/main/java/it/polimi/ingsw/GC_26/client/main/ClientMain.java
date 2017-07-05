@@ -17,6 +17,14 @@ import it.polimi.ingsw.GC_26.client.connection.SocketINClient;
 import it.polimi.ingsw.GC_26.client.connection.SocketOutClient;
 import it.polimi.ingsw.GC_26.client.view.MainClientView;
 
+/**
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This is the class that contains the main method used to create a client and connect it to the Server
+ *
+ */
 public class ClientMain {
 	private final static int PORT = 29997;
 	private final static String IP="127.0.0.1";  //connect to local host
@@ -26,12 +34,16 @@ public class ClientMain {
 	private Socket socket;
 	private Scanner scanner= new Scanner(System.in);
 	
-	
-	public synchronized void start( boolean firstMatch, String username){ 
+	/**
+	 * Method that starts the creation of the client and connects it to the Server
+	 * @param firstMatch It's a flag that indicates if the client is playing his first match or not 
+	 * @param username It's the username of the client
+	 */
+	public synchronized void start(boolean firstMatch, String username){ 
 		//username is set to null if first match, saves the name chosen in first match otherwise
 		ClientConnection connection=null;
 		try {
-			 socket= new Socket(IP, PORT);
+			socket= new Socket(IP, PORT);
 			connection= new SocketOutClient(socket);
 			socketINClient = new SocketINClient(socket);
 		} catch (IOException e) {
@@ -44,7 +56,6 @@ public class ClientMain {
 		socketINClient.setController( new ClientController(inputLogic,view, output,this));
 		
 		if(firstMatch){
-			
 			output.printTitle();
 		}
 		
@@ -54,9 +65,9 @@ public class ClientMain {
 		
 	}
 	
-	
-	
-	
+	/**
+	 * Method called to close the current game
+	 */
 	public synchronized void closeGame(){
 		inputLogic.close();
 		socketINClient.close();
@@ -67,12 +78,19 @@ public class ClientMain {
 		}
 		
 	}
+	
+	/**
+	 * Method called to close completely the program
+	 */
 	public void closeProgram(){
 		scanner.close();
 		
 	}
 	
-	
+	/**
+	 * Main method called to create a new ClientMain and start its initialization
+	 * @param args
+	 */
 	public static void main(String[] args){
 		ClientMain client = new ClientMain();
 		client.start( true, null);

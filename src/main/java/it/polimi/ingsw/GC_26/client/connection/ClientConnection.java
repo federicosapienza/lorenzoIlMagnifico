@@ -17,7 +17,7 @@ public interface ClientConnection {
 
 	void login(String username);
 
-	void sendResponce(String temp);
+	void sendResponse(String temp);
 
 	void performAction(Action action);
 

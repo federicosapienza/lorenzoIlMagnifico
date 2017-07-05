@@ -87,7 +87,7 @@ public class InputlogicCli implements InputLogic{
 			
 			if(value==999){  //if player asks to end the turn
 				String temp="end turn" ;
-				connection.sendResponce(temp);
+				connection.sendResponse(temp);
 				waitingResponse=false;
 				waitingAction=false;
 			}
@@ -100,7 +100,7 @@ public class InputlogicCli implements InputLogic{
 			}
 			else if(this.getWaitingResponce()){
 				String temp=String.valueOf(value);
-				connection.sendResponce(temp);
+				connection.sendResponse(temp);
 				waitingResponse=false;
 			}
 			else if(close){
