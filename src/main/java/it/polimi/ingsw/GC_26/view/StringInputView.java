@@ -4,7 +4,7 @@ import it.polimi.ingsw.GC_26.utilities.observer.Observable;
 
 public class StringInputView extends Observable<Integer>{
 	
-	EndTurnView endTurnView ;
+	private EndTurnView endTurnView ;
 	
 	public StringInputView(EndTurnView endTurnView) {
 		this.endTurnView= endTurnView;}

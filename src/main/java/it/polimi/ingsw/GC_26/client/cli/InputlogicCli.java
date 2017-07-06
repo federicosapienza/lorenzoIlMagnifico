@@ -76,7 +76,7 @@ public class InputlogicCli implements InputLogic{
 		view.setPlayerUsername(username);
 		
 
-		output.printString("Entering in a game: please wait");
+		output.printString("Entering a game: please wait");
 
 		while(true){
 			while(!scanIN.hasNextInt()) { //used to be sure integer is an input
@@ -128,11 +128,11 @@ public class InputlogicCli implements InputLogic{
 	private void handleAction(int value){
 		
 		//if waiting action
-		if(firstAction && !familyMemberChosen && (value>0 && value<view.getThisPlayer().getFamilyMembers().size())){ // family member is not chosen in second action
+		if(firstAction && !familyMemberChosen && (value>0 && value<=view.getThisPlayer().getFamilyMembers().size())){ // family member is not chosen in second action
 			familyMember=value;
 			familyMemberColour= chooseColour(familyMember);
-			output.printString("What Action? 1-Territories Tower 2-Characters Tower 3-Buildings Tower 4-Ventures Tower" +System.lineSeparator()
-									+" 5-market  6-production zone -7 Harvest 8-CouncPalace ");
+			output.printString("What Action? Choose: 1-Territories Tower 2-Characters Tower 3-Buildings Tower 4-Ventures Tower" +System.lineSeparator()
+									+" 5-market  6-production zone -7 Harvest 8-Council Palace ");
 			familyMemberChosen=true;
 			return;
 		}
@@ -176,7 +176,7 @@ public class InputlogicCli implements InputLogic{
 		}
 		//case thee are more than one position in the zone "zone"
 		if(zone==BoardZone.TERRITORYTOWER|| zone==BoardZone.BUILDINGTOWER|| zone==BoardZone.CHARACTERTOWER || zone==BoardZone.VENTURETOWER)
-			output.printString("What floor? chose a value between 1 and "+ view.getBoard().getBuildingsTower().size() + stringRepeated);
+			output.printString("What floor? choose a value between 1 and "+ view.getBoard().getBuildingsTower().size() + stringRepeated);
 			//number of floors in building tower is the same of that in other towers
 		String request= "what Position? Choose a value between 1 and ";
 		if(zone==BoardZone.MARKET)

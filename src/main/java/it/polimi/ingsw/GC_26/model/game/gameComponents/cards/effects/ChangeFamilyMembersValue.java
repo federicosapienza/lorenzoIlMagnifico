@@ -35,7 +35,7 @@ public class ChangeFamilyMembersValue implements Effect{
 	@Override
 	public synchronized void doEffect(Player player, boolean immediate) {
 		player.getPermanentModifiers().setColouredMembersChange(colouredMemberChange);
-		player.getPermanentModifiers().setColouredMembersChange(neutralMemberChange);
+		player.getPermanentModifiers().setNeutralMembersChange(neutralMemberChange);
 		player.getFamilyMembers().changeValues();
 		
 	}
@@ -46,8 +46,8 @@ public class ChangeFamilyMembersValue implements Effect{
 	@Override
 	public String toString() {
 		if(neutralMemberChange==0)
-		return " All coloured Family Members of the player receive a" +colouredMemberChange+ "  increment/reduction of their value";
-		else return " Neutral Family Members of the player receive a" +neutralMemberChange+ "  increment/reduction of their value";
+		return " All coloured Family Members of the player receive a " +colouredMemberChange+ "  change of their value";
+		else return " Neutral Family Members of the player receive a " +neutralMemberChange+ "  change of their value";
 	}
 	
 	

@@ -241,7 +241,7 @@ public class ClientController {
 			main.closeGame();
 		}
 		// whenever something is printed , if the player is suspended we notify the player again
-		if(view.getPlayerStatus()==PlayerStatus.SUSPENDED) 
+		if(view.getPlayerStatus()==PlayerStatus.SUSPENDED  && info.getGameStatus()!=GameStatus.ENDING) 
 			iOlogic.setPlayerSuspended();
 	}
 	

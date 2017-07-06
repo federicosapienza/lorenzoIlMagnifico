@@ -28,15 +28,17 @@ public class ClientMainServerView {
 			throw new NullPointerException();
 		}
 		this.name = name;
-		playerWalletView =  new PlayerWalletView(connection);
-		cardDescriberView = new CardDescriberView(connection);
 		endTurnView= new EndTurnView();
-		messageView = new MessageView(connection, endTurnView , times);
-		actionView = new ActionView(connection);
 		stringInputView = new StringInputView(endTurnView);
 		actionInputView = new ActionInputView();
+		playerWalletView =  new PlayerWalletView(connection);
+		cardDescriberView = new CardDescriberView(connection);
+		
+		actionView = new ActionView(connection);
+		
 		positionView =new PositionView(connection);
 		familyMembersView = new FamilyMembersView(connection);
+		messageView = new MessageView( connection, endTurnView ,stringInputView,  times);
 	}
 	
 	

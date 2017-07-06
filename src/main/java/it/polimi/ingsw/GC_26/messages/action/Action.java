@@ -82,6 +82,6 @@ public class Action implements Serializable{
 		if(familyMemberColour!=null){
 		return familyMemberColour+ " in "+ zone.getStringDescriber()+", position "+ position;
 		}
-		else return "goes to " + zone.getStringDescriber()+", position "+ position + "with a second action";
+		else return "goes to " + zone.getStringDescriber()+", position "+ position + " with a second action";
 	}
 }

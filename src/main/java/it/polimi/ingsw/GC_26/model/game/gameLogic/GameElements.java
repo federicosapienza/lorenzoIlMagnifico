@@ -26,7 +26,6 @@ public class GameElements extends Observable<ActionNotification>{
 	private Dices dices;
 	private NextRoundOrder nextRoundOrder;
 	private List<Player> players;
-	private int numberOfPlayers;
 	private MainActionHandler handlers;
 	private Map<Integer, Integer> faithPointsTrack;
 	
@@ -104,7 +103,7 @@ public class GameElements extends Observable<ActionNotification>{
 	 * @return the number of players that are playing the game
 	 */
 	public  int getNumberOfPlayers() {
-		return numberOfPlayers;
+		return players.size();
 	}
 	
 	/**
