@@ -233,14 +233,16 @@ public class ClientController {
 			view.getBoard().cleanBoard();
 		}
 		
-		if("ended the turn".contains(info.getMessage())) 
-				output.printCompleteStatus(view.getPlayer(info.getPlayerReferred()));
+		if((info.getMessage().contains("ended the turn"))) 
+			output.printCompleteStatus(view.getPlayer(info.getPlayerReferred()));
 		
 		if(info.getGameStatus()==GameStatus.ENDING){
 			output.printFinalRankings(view);
 			main.closeGame();
 		}
-			
+		// whenever something is printed , if the player is suspended we notify the player again
+		if(view.getPlayerStatus()==PlayerStatus.SUSPENDED) 
+			iOlogic.setPlayerSuspended();
 	}
 	
 	/**

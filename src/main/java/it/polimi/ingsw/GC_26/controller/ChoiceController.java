@@ -81,7 +81,7 @@ public class ChoiceController implements Observer<Integer>{
 	 */
 
 	private void restartingPlayer() {
-		player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, null, null));
+		player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, "Entering in the game again ", null));
 		handlers.getGameElements().getGame().addPlayerNoMoreSuspended(player);
 	}
 

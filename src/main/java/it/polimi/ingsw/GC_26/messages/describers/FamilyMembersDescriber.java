@@ -55,4 +55,11 @@ public class FamilyMembersDescriber implements Serializable{
 	public Map<Colour, Integer> getStatus(){
 		return status;
 	}
+	
+	/**
+	 * Method that returns the number of family members used
+	 */
+	public int size(){
+		return status.size();
+	}
 }

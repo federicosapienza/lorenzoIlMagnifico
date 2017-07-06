@@ -76,7 +76,7 @@ public class InputlogicCli implements InputLogic{
 		view.setPlayerUsername(username);
 		
 
-		output.printString("Entering in a game");
+		output.printString("Entering in a game: please wait");
 
 		while(true){
 			while(!scanIN.hasNextInt()) { //used to be sure integer is an input
@@ -128,7 +128,7 @@ public class InputlogicCli implements InputLogic{
 	private void handleAction(int value){
 		
 		//if waiting action
-		if(firstAction && !familyMemberChosen && (value>0 && value<5)){ // family member is not chosen in second action
+		if(firstAction && !familyMemberChosen && (value>0 && value<view.getThisPlayer().getFamilyMembers().size())){ // family member is not chosen in second action
 			familyMember=value;
 			familyMemberColour= chooseColour(familyMember);
 			output.printString("What Action? 1-Territories Tower 2-Characters Tower 3-Buildings Tower 4-Ventures Tower" +System.lineSeparator()
@@ -168,6 +168,13 @@ public class InputlogicCli implements InputLogic{
 	 */
 	private void askPosition(){
 		String stringRepeated= " ('-1'-togoBack)";
+		if(view.getBoard().getZone(zone).size()==1){
+			positionChosen=true;
+			position=1;
+			output.printString("How many servants? ('-1'-to go Back)");	
+			return;
+		}
+		//case thee are more than one position in the zone "zone"
 		if(zone==BoardZone.TERRITORYTOWER|| zone==BoardZone.BUILDINGTOWER|| zone==BoardZone.CHARACTERTOWER || zone==BoardZone.VENTURETOWER)
 			output.printString("What floor? chose a value between 1 and "+ view.getBoard().getBuildingsTower().size() + stringRepeated);
 			//number of floors in building tower is the same of that in other towers
@@ -178,13 +185,12 @@ public class InputlogicCli implements InputLogic{
 			output.printString(request+view.getBoard().getProductionZone().size()+stringRepeated );
 		if(zone==BoardZone.HARVEST)
 			output.printString(request+view.getBoard().getHarvestZone().size()+stringRepeated );
-		if(zone== BoardZone.COUNCILPALACE){  //in the hypothesis council palace positions will always be 1
-			//no choice of position:
-			positionChosen=true;
-			position=1;
-			output.printString("How many servants? ('-1'-to go Back)");				
+		if(zone== BoardZone.COUNCILPALACE && view.getBoard().getProductionZone().size()>1){  //in the hypothesis council palace positions will always be 1
+			output.printString(request+view.getBoard().getHarvestZone().size()+stringRepeated );
+	
 		}
 	}
+	
 	
 	/**
 	 * Method that checks if the specified position is valid
@@ -279,7 +285,7 @@ public class InputlogicCli implements InputLogic{
 	@Override
 	public synchronized void close(){
 		setTurnEnded();
-		output.printString("Do you want to start a new game? 1 to continue , 0 to exit");
+		printRequest("Do you want to start a new game? 1 to continue , 0 to exit");
 
 		close=true;
 		connection.close();
@@ -310,7 +316,7 @@ public class InputlogicCli implements InputLogic{
 	 */
 	@Override
 	public void setPlayerSuspended(){
-		printRequest("You are now suspended : press any key to be able to play again");
+		printRequest("You are now suspended : insert any number to be able to play again");
 		this.setWaitingResponse(false);
 	}
 	

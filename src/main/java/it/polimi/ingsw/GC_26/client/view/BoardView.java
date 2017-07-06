@@ -171,6 +171,35 @@ public class BoardView {
 	}
 
 	/**
+	 * Method that returns the list of PositionView asked
+	 * @return the list of PositionView corresponding to the zone asked
+	 * @param zone It's the zone whose corresponding list will be returned
+	 */
+	
+	public List<PositionView> getZone(BoardZone zone) {
+		switch (zone) {
+		case BUILDINGTOWER:
+			return buildingsTower;
+		case TERRITORYTOWER:
+			return territoriesTower;	
+		case CHARACTERTOWER:
+			return charactersTower;
+		case VENTURETOWER:
+			return venturesTower;
+		case MARKET:
+			return marketZone;
+		case HARVEST:
+			return harvestZone;
+		case PRODUCTION:
+			return productionZone;
+		case COUNCILPALACE:
+			return councilPalace;
+		default: throw new IllegalArgumentException();
+		
+		}
+	
+	}
+	/**
 	 * Method that returns the list of PositionView for the Territory Tower
 	 * @return the list of PositionView for the Territory Tower
 	 */
