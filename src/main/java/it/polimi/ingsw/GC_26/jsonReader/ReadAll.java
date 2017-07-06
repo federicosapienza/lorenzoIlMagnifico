@@ -3,6 +3,15 @@ package it.polimi.ingsw.GC_26.jsonReader;
 
 import it.polimi.ingsw.GC_26.server.ReadFromFile;
 
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class is the one that reads all the elements contained in the file
+ *
+ */
 public class ReadAll implements ReadFromFile{
 	private TerritoryCardsReader territoryCardsReader = new TerritoryCardsReader();
 	private BuildingCardsReader buildingCardsReader = new BuildingCardsReader();
@@ -15,12 +24,18 @@ public class ReadAll implements ReadFromFile{
 	private BonusImplementation bonus = new BonusImplementation();
 	private TimerValueImplementation timer = new TimerValueImplementation();
 	
-	
+	/**
+	 * Main method to create a new ReadAll object and start the reading of all the elements
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		ReadAll readAll= new ReadAll();
 		readAll.start();
 	}
 	
+	/**
+	 * Method that starts the reading of all the elements contained in the Json file
+	 */
 	public void start(){
 		territoryCardsReader.readCards(1,cards);
 		territoryCardsReader.readCards(2,cards);
@@ -53,16 +68,25 @@ public class ReadAll implements ReadFromFile{
 		
 	}
 	
+	/**
+	 * Method that returns the cards
+	 */
 	@Override
 	public Cards getCards() {
 		return  cards;
 	}
 	
+	/**
+	 * Method that returns the bonus
+	 */
 	@Override
 	public BonusInterface getBonus() {
 		return bonus;
 	}
 	
+	/**
+	 * Method that returns the timers
+	 */
 	@Override
 	public TimerValuesInterface getTimes() {
 		return timer;

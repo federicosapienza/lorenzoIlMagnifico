@@ -11,9 +11,9 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.CardsNumber
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ReceiveResourcesOrPointsEffect;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.MilitaryPointPayment;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.Payment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.ResourcesPayment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.TwoOrPayments;
+import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.personalBoard.PersonalBoard;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.player.Player;

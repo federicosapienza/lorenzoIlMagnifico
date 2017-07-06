@@ -1,6 +1,7 @@
 package it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments;
 
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.player.Player;
 

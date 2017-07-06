@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.model.actionHandlers.LeaderCardHandler;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ReceiveResourcesOrPointsEffect;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCard;
@@ -15,6 +14,7 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCa
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.PointsOrResourcesRequirement;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.LeaderCardHandler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;
 

@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 
 import it.polimi.ingsw.GC_26.messages.Request;
 import it.polimi.ingsw.GC_26.messages.action.Action;
-import it.polimi.ingsw.GC_26.model.actionHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameParameters;
+import it.polimi.ingsw.GC_26.model.handlers.actionHandlers.MainActionHandler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
 import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;

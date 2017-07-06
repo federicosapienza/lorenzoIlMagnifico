@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments;
+package it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common;
 
 
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;

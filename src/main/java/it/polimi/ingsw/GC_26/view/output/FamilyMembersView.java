@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.view;
+package it.polimi.ingsw.GC_26.view.output;
 
 import it.polimi.ingsw.GC_26.messages.describers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26.server.connections.ServerConnectionToClient;

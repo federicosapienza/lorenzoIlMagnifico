@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.actionHandlers;
+package it.polimi.ingsw.GC_26.model.handlers.actionHandlers;
 
 
 
@@ -22,6 +22,7 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.De
 import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMember;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameElements;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
+import it.polimi.ingsw.GC_26.model.handlers.Handler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;
 

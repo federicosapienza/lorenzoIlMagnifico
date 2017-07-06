@@ -18,8 +18,8 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCa
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCardImplementation;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.PointsOrResourcesRequirement;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.Payment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.ResourcesPayment;
+import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Warehouse;

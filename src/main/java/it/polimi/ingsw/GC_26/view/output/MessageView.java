@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.view;
+package it.polimi.ingsw.GC_26.view.output;
 
 import java.util.Timer;
 
@@ -8,6 +8,8 @@ import it.polimi.ingsw.GC_26.messages.Request;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
 import it.polimi.ingsw.GC_26.server.connections.ServerConnectionToClient;
 import it.polimi.ingsw.GC_26.utilities.observer.Observer;
+import it.polimi.ingsw.GC_26.view.EndTurnTask;
+import it.polimi.ingsw.GC_26.view.EndTurnView;
 
 public class MessageView extends OutputView implements Observer<Message>{
 	private Timer timer;

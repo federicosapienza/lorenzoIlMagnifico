@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.model.actionHandlers.ActionPerformerHandler;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.CouncilPalace;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MarketPosition;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.TowerPosition;
@@ -12,6 +11,7 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.board.zones.Tower;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMember;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.handlers.actionHandlers.ActionPerformerHandler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class ActionPerformerHandlerTest {

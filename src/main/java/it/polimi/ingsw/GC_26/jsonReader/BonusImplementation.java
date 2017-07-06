@@ -81,7 +81,10 @@ public class BonusImplementation implements BonusInterface {
 		if("advanced".equals(normalOrAdvanced)){
 			return personalBoardTilesAdvanced;
 		}
-		return Collections.emptyList();
+		else {
+			return Collections.emptyList();
+		}
+		
 	}
 
 }

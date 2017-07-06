@@ -37,9 +37,9 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.PointsOr
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.TwoAndRequirements;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.MilitaryPointPayment;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.Payment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.ResourcesPayment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.TwoOrPayments;
+import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment;
 
 public class CardsReaderTest {
 
@@ -48,7 +48,7 @@ public class CardsReaderTest {
 	@Test
 	public void createJsonObjectFromFileBufferedReaderTest(){
 		cardsReader.createJsonObjectFromFile("src/Cards/Territory_cards/Period_1/City.json");
-		assertNotNull(cardsReader.getBuffedredReader());
+		assertNotNull(cardsReader.getBufferedReader());
 	}
 	
 	@Test

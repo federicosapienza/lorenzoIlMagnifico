@@ -38,9 +38,9 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.PointsOr
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.TwoAndRequirements;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.MilitaryPointPayment;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.Payment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.ResourcesPayment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.TwoOrPayments;
+import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.*;
 
 import java.lang.reflect.Type;
@@ -50,6 +50,15 @@ import java.util.logging.Logger;
 
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the reader of the cards contained in json
+ *
+ */
 public class CardsReader {
 	
 
@@ -71,15 +80,26 @@ public class CardsReader {
 	private Logger logger;
 	private FileReader fileReader;
 	
-	
+	/**
+	 * Method that returns the jsonObject
+	 * @return the jsonObject
+	 */
 	public JsonObject getJsonObject(){
 		return jsonObject;
 	}
 	
-	public BufferedReader getBuffedredReader(){
+	/**
+	 * Method that returns the buffered reader
+	 * @return the buffered reader
+	 */
+	public BufferedReader getBufferedReader(){
 		return br;
 	}
 	
+	/**
+	 * Method that creates the JsonObject from file
+	 * @param path indicates the name of the file to read from
+	 */
 	public void createJsonObjectFromFile(String path) {
 		try {
 			fileReader = new FileReader(path);
@@ -97,6 +117,9 @@ public class CardsReader {
 		}
 	}
 	
+	/**
+	 * Method called to close the buffered reader
+	 */
 	public void closeBufferedReader(){
 		try {
 			br.close();
@@ -106,6 +129,11 @@ public class CardsReader {
 		}
 	}
 	
+	/**
+	 * Method that returns the jsonObject whose name is equal to the string contained in the parameter, as a string value
+	 * @param stringToRead It's the name of the jsonObject to search and assign to jsonElement
+	 * @return the jsonObject whose name is equal to the string contained in the parameter, as a string value
+	 */
 	public String readString(String stringToRead){
 		String returnString;
 		jsonElement= jsonObject.get(stringToRead);
@@ -113,6 +141,11 @@ public class CardsReader {
 		return returnString;
 	}
 	
+	/**
+	 * Method that returns the jsonObject whose name is equal to the string contained in the parameter, as a primitive integer value.
+	 * @param stringToRead It's the name of the jsonObject to search and assign to jsonElement
+	 * @return the jsonObject whose name is equal to the string contained in the parameter, as a primitive integer value
+	 */
 	public int readInt(String stringToRead){
 		int returnInt;
 		jsonElement = jsonObject.get(stringToRead);
@@ -120,13 +153,23 @@ public class CardsReader {
 		return returnInt;
 	}
 	
+	/**
+	 * Method that returns the List of Integer associated to the jsonObject whose name is equal to the string contained in the 
+	 * parameter
+	 * @param stringToRead It's the name of the jsonObject to search 
+	 * @return the List of Integer associated to the jsonObject whose name is equal to the string contained in the parameter
+	 */
 	public List<Integer> readIntList(String stringToRead){
 		List<Integer> returnIntList;
 		returnIntList = new Gson().fromJson(jsonObject.get(stringToRead), listTypeInt);
 		return returnIntList;
 	}
 
-	
+	/**
+	 * Method that creates the permanent effects 
+	 * @param effectType It's the String that describes the type of effect
+	 * @return the effect that corresponds to the String contained in the parameter
+	 */
 	public Effect createPermanentEffect(String effectType){
 		
 			if("singleTrade".equals(effectType)){
@@ -246,7 +289,11 @@ public class CardsReader {
 		
 	}									
 	
-	
+	/**
+	 * Method that creates the immediate effect that corresponds to the String contained in the parameter
+	 * @param effectType It's the string that describes the type of the immediate effect to create
+	 * @return the immediate effect that corresponds to the String contained in the parameter
+	 */
 	public Effect createImmediateEffect(String effectType){
 		if("singleTrade".equals(effectType)){
 			intList=readIntList("immediateTradeEffectGive1");
@@ -337,7 +384,11 @@ public class CardsReader {
 		return null;
 	}
 	
-	
+	/**
+	 * Method that creates the payment that corresponds to the String contained in the parameter
+	 * @param paymentType It's the String which describes the type of the payment to create
+	 * @return the payment that corresponds to the String contained in the parameter
+	 */
 	public Payment createPayment(String paymentType){
 		if("resources".equals(paymentType)){
 			intList = readIntList("payment");
@@ -352,6 +403,11 @@ public class CardsReader {
 		return null;
 	}
 	
+	/**
+	 * Method that creates the requirement that corresponds to the String contained in the parameter
+	 * @param requirementType It's the String that describes the requirement which has to be created
+	 * @return the requirement that corresponds to the String contained in the parameter
+	 */
 	public Requirement createRequirement(String requirementType){
 		if("pointsOrResources".equals(requirementType)){
 			intList = readIntList("pointsOrResourcesRequirement");
@@ -369,19 +425,44 @@ public class CardsReader {
 		return null;
 	}
 	
+	/**
+	 * Method that creates a double effect with the two effects contained in the parameters: both effects are applied 
+	 * @param effect1 It's the first effect to apply
+	 * @param effect2 It's the second effect to apply
+	 * @return a new double effect with the two effects contained in the parameters
+	 */
 	public Effect createDoubleEffect(Effect effect1,Effect effect2){
 		 return new TwoAndEffect(effect1, effect2);
 	}
 	
+	/**
+	 * Method that creates a double payment with the two payments contained in the parameters: players can choose which payment
+	 * they want to pay
+	 * @param payment1 It's the first possible payment
+	 * @param payment2 It's the second possible payment
+	 * @return the double payment with the two payments contained in the parameters
+	 */
 	public Payment createDoublePayment(Payment payment1,Payment payment2){
 		return new TwoOrPayments(payment1, payment2);
 		
 	}
 	
+	/**
+	 * Method that creates a double requirement with the two requirements contained in the parameters: both requirements are
+	 * required
+	 * @param requirement It's the first requirement to have
+	 * @param requirement2 It's the second requirement to have
+	 * @return the double requirement with the two requirements contained in the parameters
+	 */
 	public Requirement createDoubleRequirement(Requirement requirement,Requirement requirement2){
 		return new TwoAndRequirements(requirement, requirement2);
 	}
 	
+	/**
+	 * Method that returns the type of Development cards that corresponds to the String contained in the parameter
+	 * @param type It's the String that describes the type of Development cards to return
+	 * @return the type of Development cards that corresponds to the String contained in the parameter
+	 */
 	public DevelopmentCardTypes getDevelopmentCardType(String type){
 			if("territory".equals(type)){ 
 				return DevelopmentCardTypes.TERRITORYCARD;}
@@ -392,7 +473,13 @@ public class CardsReader {
 			if("venture".equals(type)){ 
 				return DevelopmentCardTypes.VENTURECARD;}
 			return null;
-		}
+	}
+	
+	/**
+	 * Method that returns the Board Zone that corresponds to the String contained in the parameter
+	 * @param type It's the String that describes the Board Zone to get
+	 * @return the Board Zone that corresponds to the String contained in the parameter
+	 */
 	public BoardZone getBoardZoneType(String type){
 		if("territory".equals(type)){
 			return BoardZone.TERRITORYTOWER;}
@@ -413,6 +500,14 @@ public class CardsReader {
 		return null;
 	}
 	
+	/**
+	 * Method called to choose the list of cards which corresponds to the number of list and to the DevelopmentCardTypes contained
+	 * in the parameters, as an array of String
+	 * @param numOfList It's the number of period of the list of cards which have to be returned
+	 * @param developmentCardTypes It's the type of Development cards which have to be returned
+	 * @return the list of cards which corresponds to the number of list and to the DevelopmentCardTypes contained
+	 * in the parameters, as an array of String
+	 */
 	public String[] chooseListOfCards(int numOfList, DevelopmentCardTypes developmentCardTypes){
 		switch (numOfList) {
 		case 1:

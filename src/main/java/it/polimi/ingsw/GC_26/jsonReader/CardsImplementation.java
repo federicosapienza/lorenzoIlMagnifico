@@ -9,6 +9,15 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.De
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.excommunicationTile.ExcommunicationTile;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCard;
 
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ *
+ * This class implements the Cards interface; it contains all the implementation cards
+ *
+ */
 public class CardsImplementation implements Cards {
 	
 	private List<DevelopmentCard> territoryCardsPeriod1 = new ArrayList<>();
@@ -34,9 +43,11 @@ public class CardsImplementation implements Cards {
 	private List<ExcommunicationTile> excommunicationTilesPeriod2 = new ArrayList<>();
 	private List<ExcommunicationTile> excommunicationTilesPeriod3 = new ArrayList<>();
 
-	
-	
-
+	/**
+	 * Method that shuffles and returns the cards which belong to the period and to the type contained in the parameters
+	 * @param period It's the period of the cards that have to be shuffled and returned
+	 * @param type It's the type of the Development Cards that have to be shuffled and returned 
+	 */
 	@Override
 	public List<DevelopmentCard> getRandomDevelopmentCards(int period, DevelopmentCardTypes type) {
 		switch (period) {
@@ -100,8 +111,12 @@ public class CardsImplementation implements Cards {
 		return Collections.emptyList();
 	}
 	
-	
-	
+	/**
+	 * Method that returns the List of Development Cards expressed by the period and the type contained in the parameter
+	 * @param period It's the period of the cards that have to be returned
+	 * @param type It's the type of the Development Cards that have to be returned 
+	 * @return the Development Cards that correspond to the period and the type expressed in the parameter
+	 */
 	public List<DevelopmentCard> getDevelopmentCards(int period, DevelopmentCardTypes type) {
 		switch (period) {
 		case 1:
@@ -152,6 +167,10 @@ public class CardsImplementation implements Cards {
 		return Collections.emptyList();
 	}
 	
+	/**
+	 * Method that returns a random List of Leader Cards, whose size depends on the number of players expressed in the parameter
+	 * @param numOfPlayers It's the number of players who are playing the game
+	 */
 	@Override
 	public List<LeaderCard> getRandomLeaderCards(int numOfPlayers) {
 		Collections.shuffle(leaderCard);
@@ -181,6 +200,10 @@ public class CardsImplementation implements Cards {
 		return leaderCard;
 	}
 
+	/**
+	 * Method that returns a random List of Excommunication Tiles
+	 *
+	 */
 	@Override
 	public List<ExcommunicationTile> getRandomExcommunicationTiles() {
 		List<ExcommunicationTile> excommunicationTilesTemp = new ArrayList<ExcommunicationTile>();
@@ -191,8 +214,13 @@ public class CardsImplementation implements Cards {
 		Collections.shuffle(excommunicationTilesPeriod3);
 		excommunicationTilesTemp.add(excommunicationTilesPeriod3.get(0));
 		return excommunicationTilesTemp;
-		}
+	}
 	
+	/**
+	 * Method that returns the Excommunication Tile that corresponds to the period indicated in the parameter
+	 * @param period It's the number of period whose Excommunication Tile has to be returned
+	 * @return Excommunication Tile of the period indicated in the parameter
+	 */
 	public List<ExcommunicationTile> getExcommunicationTiles(int period){
 		switch (period) {
 		case 1:

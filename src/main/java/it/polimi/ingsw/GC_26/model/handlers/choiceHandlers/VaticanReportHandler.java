@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.actionHandlers;
+package it.polimi.ingsw.GC_26.model.handlers.choiceHandlers;
 
 import java.util.Map;
 
@@ -10,6 +10,7 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Resour
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameElements;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameParameters;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
+import it.polimi.ingsw.GC_26.model.handlers.Handler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;
 

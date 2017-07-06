@@ -33,68 +33,170 @@ public class JsonPathData {
 	
 	String[] timers = {"src/Timers/timer.json"};
 	
-
+	/**
+	 * Method that returns the Territory Cards of the first period, as an array of String values
+	 * @return the Territory Cards of the first period, as an array of String values
+	 */
 	public String[] getTerritoryCardsPeriod1PathArray() {
 		return territoryCardsPeriod1PathArray;
 	}
+	
+	/**
+	 * Method that returns the Territory Cards of the second period, as an array of String values
+	 * @return the Territory Cards of the second period, as an array of String values
+	 */
 	public String[] getTerritoryCardsPeriod2PathArray() {
 		return territoryCardsPeriod2PathArray;
 	}
+	
+	/**
+	 * Method that returns the Territory Cards of the third period, as an array of String values
+	 * @return the Territory Cards of the third period, as an array of String values
+	 */
 	public String[] getTerritoryCardsPeriod3PathArray() {
 		return territoryCardsPeriod3PathArray;
 	}
+	
+	/**
+	 * Method that returns the Building Cards of the first period, as an array of String values
+	 * @return the Building Cards of the second period, as an array of String values
+	 */
 	public String[] getBuildingCardsPeriod1PathArray() {
 		return buildingCardsPeriod1PathArray;
 	}
+	
+	/**
+	 * Method that returns the Building Cards of the second period, as an array of String values
+	 * @return the Building Cards of the second period, as an array of String values
+	 */
 	public String[] getBuildingCardsPeriod2PathArray() {
 		return buildingCardsPeriod2PathArray;
 	}
+	
+	/**
+	 * Method that returns the Building Cards of the third period, as an array of String values
+	 * @return the Building Cards of the third period, as an array of String values
+	 */
 	public String[] getBuildingCardsPeriod3PathArray() {
 		return buildingCardsPeriod3PathArray;
 	}
 	
+	/**
+	 * Method that returns the Character Cards of the first period, as an array of String values
+	 * @return the Character Cards of the first period, as an array of String values
+	 */
 	public String[] getCharacterCardsPeriod1PathArray() {
 		return characterCardsPeriod1PathArray;
 	}
+	
+	/**
+	 * Method that returns the Character Cards of the second period, as an array of String values
+	 * @return the Character Cards of the second period, as an array of String values
+	 */
 	public String[] getCharacterCardsPeriod2PathArray() {
 		return characterCardsPeriod2PathArray;
 	}
+	
+	/**
+	 * Method that returns the Character Cards of the third period, as an array of String values
+	 * @return the Character Cards of the third period, as an array of String values
+	 */
 	public String[] getCharacterCardsPeriod3PathArray() {
 		return characterCardsPeriod3PathArray;
 	}
+	
+	/**
+	 * Method that returns the Venture Cards of the first period, as an array of String values
+	 * @return the Venture Cards of the first period, as an array of String values
+	 */
 	public String[] getVentureCardsPeriod1PathArray() {
 		return ventureCardsPeriod1PathArray;
 	}
+	
+	/**
+	 * Method that returns the Venture Cards of the second period, as an array of String values
+	 * @return the Venture Cards of the second period, as an array of String values
+	 */
 	public String[] getVentureCardsPeriod2PathArray() {
 		return ventureCardsPeriod2PathArray;
 	}
+	
+	/**
+	 * Method that returns the Venture Cards of the third period, as an array of String values
+	 * @return the Venture Cards of the third period, as an array of String values
+	 */
 	public String[] getVentureCardsPeriod3PathArray() {
 		return ventureCardsPeriod3PathArray;
 	}
+	
+	/**
+	 * Method that returns the resources contained in all the zones of the Board, as an array of String values
+	 * @return the resources contained in all the zones of the Board, as an array of String values
+	 */
 	public String[] getResources() {
 		return resources;
 	}
+	
+	/**
+	 * Method that returns the starting resources for each player, as an array of String values
+	 * @return the starting resources for each player, as an array of String values
+	 */
 	public String[] getStartingResources() {
 		return startingResources;
 	}
+	
+	/**
+	 * Method that returns the list of Leader Cards, as an array of String values
+	 * @return the list of Leader Cards, as an array of String values
+	 */
 	public String[] getLeaderCards() {
 		return leaderCards;
 	}
+	
+	/**
+	 * Method that returns the Excommunication Tiles of the first period, as an array of String values
+	 * @return the Excommunication Tiles of the first period, as an array of String values
+	 */
 	public String[] getExcommunicationTilesPeriod1() {
 		return excommunicationTilesPeriod1;
 	}
+	
+	/**
+	 * Method that returns the Excommunication Tiles of the second period, as an array of String values
+	 * @return the Excommunication Tiles of the second period, as an array of String values
+	 */
 	public String[] getExcommunicationTilesPeriod2() {
 		return excommunicationTilesPeriod2;
 	}
+	
+	/**
+	 * Method that returns the Excommunication Tiles of the third period, as an array of String values
+	 * @return the Excommunication Tiles of the third period, as an array of String values
+	 */
 	public String[] getExcommunicationTilesPeriod3() {
 		return excommunicationTilesPeriod3;
 	}
+	
+	/**
+	 * Method that returns the normal Personal Board Tiles, as an array of String values
+	 * @return the normal Personal Board Tiles, as an array of String values
+	 */
 	public String[] getPersonalBoardTilesNormal() {
 		return personalBoardTilesNormal;
 	}
+	
+	/**
+	 * Method that returns the advanced Personal Board Tiles, as an array of String values
+	 * @return the advanced Personal Board Tiles, as an array of String values
+	 */
 	public String[] getPersonalBoardTilesAdvanced() {
 		return personalBoardTilesAdvanced;
 	}
+	
+	/**
+	 * Method that returns the timers, as an array of String values
+	 * @return the timers, as an array of String values
+	 */
 	public String[] getTimers() {
 		return timers;
 	}

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.actionHandlers;
+package it.polimi.ingsw.GC_26.model.handlers.choiceHandlers;
 
 
 
@@ -132,11 +132,19 @@ public class DiplomaticPrivilegesHandler{
 		return false;
 		
 	}
-	//Need these for testing
+	
+	/**
+	 * Method that returns the Council Privileges which have been used, as an array of boolean values 
+	 * @return the Council Privileges which have been used, as an array of boolean values
+	 */
 	public boolean[] getUsedArray(){
 		return used;
 	}
 	
+	/**
+	 * Method that updates which Council Privilege has been used
+	 * @param position indicates which Council Privilege has been used
+	 */
 	public void setUsedToTrue(int position){
 		used[position] = true;
 	}

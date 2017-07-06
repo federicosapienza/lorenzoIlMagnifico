@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.actionHandlers;
+package it.polimi.ingsw.GC_26.model.handlers.actionHandlers;
 
 
 import it.polimi.ingsw.GC_26.messages.Request;
@@ -10,12 +10,31 @@ import it.polimi.ingsw.GC_26.model.game.gameLogic.GameElements;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;
 
+/**
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the handler for second actions
+ *
+ */
 public class SecondActionHandler extends ActionHandler{
 
-	public SecondActionHandler(GameElements gameElements , HarvestAndProductionHandler handler) {
+	/**
+	 * Constructor: it creates a SecondActionHandler based on the game elements and on the HarvestAndProductionHandler
+	 * contained in the parameters
+	 * @param gameElements the game elements of the game which this SecondActionHandler is based on
+	 * @param handler the HarvestAndProductionHandler of the game which this SecondActionHandler is based on
+	 */
+	public SecondActionHandler(GameElements gameElements, HarvestAndProductionHandler handler) {
 		super(gameElements,handler);
 	}
 
+	/**
+	 * Method that checks if the action contained in the parameter is possible if performed by the player contained in the parameter
+	 * @param player It's the player who is performing the action
+	 * @param action It's the action performed by the player
+	 */
 	@Override
 	public boolean isPossible(Player player, Action action) {
 		//BoardZone correspondence is checked here, position correspondence in ActionCheckerHandler 
@@ -60,6 +79,12 @@ public class SecondActionHandler extends ActionHandler{
 		
 	
 	}
+	
+	/**
+	 * Method that performs the action selected by the player contained in the parameters
+	 * @param player It's the player who is performing the action
+	 * @param action It's the action performed by the player
+	 */
 	@Override
 	public void perform(Player player, Action action) {
 		//spends the servants

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.actionHandlers;
+package it.polimi.ingsw.GC_26.model.handlers.actionHandlers;
 
 import java.util.List;
 
@@ -8,11 +8,23 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.personalBoard.PersonalBoa
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
 
+/**
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the handler for Harvest and Production actions. 
+ */
 public class HarvestAndProductionHandler {
-	private int actionValue; //updated when player is interrupted due to trading , no need to reset at the end of the turn
+	//updated when player is interrupted due to trading, no need to reset at the end of the turn
+	private int actionValue; 
 	
 	
-	
+	/**
+	 * Method called to start the Harvest action
+	 * @param player It's the player who is performing the Harvest action
+	 * @param value It's the value of the Family Member which the player is using for the Harvest action
+	 */
 	public void startHarvest(Player player, int value){
 		if(value<1){
 			return;
@@ -30,6 +42,11 @@ public class HarvestAndProductionHandler {
 		perform(player, list, value);
 	}
 	
+	/**
+	 * Method called to start the Production action
+	 * @param player It's the player who is performing the Production action
+	 * @param value It's the value of the Family Member which the player is using for the Production action
+	 */
 	public void startProduction(Player player, int value){
 		if(value<1)
 			return;
@@ -46,6 +63,12 @@ public class HarvestAndProductionHandler {
 		perform(player, list, value);
 	}
 
+	/**
+	 * Method called to perform the Harvest or Production action
+	 * @param player It's the player who is performing the action
+	 * @param set It's the list of Development Cards present on the player's Personal Board
+	 * @param value It's the value of the Family Member which the player is using for the Harvest action
+	 */
 	private void perform(Player player, List<DevelopmentCard> set, int value) {
 		//setting TestWarehouse: it is used in trades: we must ensure the player is not using resources just earned in trading.
 		player.setTemporaryWarehouse();
@@ -59,7 +82,10 @@ public class HarvestAndProductionHandler {
 		}
 	}
 	
-	//called after trades
+	/**
+	 * Method called after trades, if they occurred: it continues to perform the Harvest or Production action
+	 * @param player It's the player who is performing the action
+	 */
 	public void continuePerforming(Player player){
 		//taking again the right set of card at the right position
 		 List<DevelopmentCard> set =player.getPersonalBoard().getCurrentCards(player.getCardUsed().getType()) ;
@@ -79,7 +105,17 @@ public class HarvestAndProductionHandler {
 		 }
 	}
 	
-	//if false action is been suspended
+	/**
+	 * Method that checks if the value of the Family Member used by the player if enough to run the permanent effects of the cards
+	 * present in the Harvest or Production zone and if the check is positive, runs the permanent effect and if the player is trading, 
+	 * interrupts the performance of the action, sets the actionValue to the value of the Family Member used by the player and 
+	 * sets the flag to false
+	 * @param card It's the Development Card which could affect the player with its permanent effect
+	 * @param value It's the value of the Family Member used by the player contained in the parameter
+	 * @param player It's the player who is performing the action
+	 * @return false if the player is trading; else true.
+	 */
+	//if false action is suspended
 	private boolean performTool(DevelopmentCard card, int value, Player player){
 		boolean flag=true;
 		if(value>=card.getActionValue()){

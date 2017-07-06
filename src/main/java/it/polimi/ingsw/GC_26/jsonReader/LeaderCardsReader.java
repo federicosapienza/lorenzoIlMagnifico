@@ -5,7 +5,14 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCa
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCardImplementation;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement;
 
-
+/**
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the reader of the Leader Cards
+ *
+ */
 public class LeaderCardsReader extends CardsReader {
 		
 	private JsonPathData pathData = new JsonPathData();
@@ -26,6 +33,10 @@ public class LeaderCardsReader extends CardsReader {
 	private String doublePermanentEffect;
 	private String doubleRequirements;
 	
+	/**
+	 * Method that updates the CardsImplementation with the Leader Cards read from the file
+	 * @param cardsImplementation It's the object to update with the Character cards read from the file
+	 */
 	public void readCards(CardsImplementation cardsImplementation){
 		String [] listOfPaths = pathData.getLeaderCards();
 		for(String s:listOfPaths){
@@ -72,6 +83,10 @@ public class LeaderCardsReader extends CardsReader {
 		}
 	}
 	
+	/**
+	 * Method that creates a Leader Card 
+	 * @param cardsImplementation It's the object to update with the card that has been created
+	 */
 	private void createLeaderCard(CardsImplementation cardsImplementation){
 		LeaderCard leaderCard = new LeaderCardImplementation(name, requirement, immediateEffect, permanentEffect);
 		cardsImplementation.getLeaderCards().add(leaderCard);

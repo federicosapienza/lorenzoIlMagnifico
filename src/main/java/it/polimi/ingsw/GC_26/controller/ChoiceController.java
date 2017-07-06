@@ -5,12 +5,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.polimi.ingsw.GC_26.messages.Request;
-import it.polimi.ingsw.GC_26.model.actionHandlers.DiplomaticPrivilegesHandler;
-import it.polimi.ingsw.GC_26.model.actionHandlers.LeaderCardHandler;
-import it.polimi.ingsw.GC_26.model.actionHandlers.MainActionHandler;
-import it.polimi.ingsw.GC_26.model.actionHandlers.TradeHandler;
-import it.polimi.ingsw.GC_26.model.actionHandlers.VaticanReportHandler;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameParameters;
+import it.polimi.ingsw.GC_26.model.handlers.actionHandlers.MainActionHandler;
+import it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.DiplomaticPrivilegesHandler;
+import it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.LeaderCardHandler;
+import it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.TradeHandler;
+import it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.VaticanReportHandler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
 import it.polimi.ingsw.GC_26.utilities.exceptions.IllegalActionException;

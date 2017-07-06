@@ -2,6 +2,12 @@ package it.polimi.ingsw.GC_26.view;
 
 import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
 import it.polimi.ingsw.GC_26.server.connections.ServerConnectionToClient;
+import it.polimi.ingsw.GC_26.view.output.ActionView;
+import it.polimi.ingsw.GC_26.view.output.CardDescriberView;
+import it.polimi.ingsw.GC_26.view.output.FamilyMembersView;
+import it.polimi.ingsw.GC_26.view.output.MessageView;
+import it.polimi.ingsw.GC_26.view.output.PlayerWalletView;
+import it.polimi.ingsw.GC_26.view.output.PositionView;
 
 public class ClientMainServerView {
 	private  String name;

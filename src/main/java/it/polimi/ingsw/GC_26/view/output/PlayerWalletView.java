@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.view;
+package it.polimi.ingsw.GC_26.view.output;
 
 
 import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet;

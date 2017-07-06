@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.actionHandlers;
+package it.polimi.ingsw.GC_26.model.handlers.actionHandlers;
 
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.CouncilPalace;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MarketPosition;

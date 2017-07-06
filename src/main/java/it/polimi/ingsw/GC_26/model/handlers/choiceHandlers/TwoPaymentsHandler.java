@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.model.actionHandlers;
+package it.polimi.ingsw.GC_26.model.handlers.choiceHandlers;
 
 
 import java.util.List;
@@ -8,9 +8,10 @@ import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.Payment;
 import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.TwoOrPayments;
+import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment;
 import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
+import it.polimi.ingsw.GC_26.model.handlers.Handler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 /**
