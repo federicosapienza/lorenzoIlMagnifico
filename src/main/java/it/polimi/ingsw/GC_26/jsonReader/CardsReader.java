@@ -244,7 +244,7 @@ public class CardsReader {
 			if("ChangeFamilyMembersValue".equals(effectType)){
 				intInt = readInt("permanentColouredMemberChange");
 				intInt2 = readInt("permanentNeutralMemberChange");
-				return new ChangeFamilyMembersValue(intInt, intInt);
+				return new ChangeFamilyMembersValue(intInt, intInt2);
 			}
 			if("DisableMilitaryPointsRequirement".equals(effectType)){
 				return new DisableMilitaryPointsRequirement();

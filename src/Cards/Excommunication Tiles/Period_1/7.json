@@ -2,7 +2,7 @@
 	  	"name": "1.7",
 	  	"period": 1,
 	  	"typeOfPermanentEffect" : "ChangeFamilyMembersValue",
-	  		"permanentColouredMemberChange" : 1,
+	  		"permanentColouredMemberChange" : -1,
 	  		"permanentNeutralMemberChange" : 0
 	  	}
 	  
