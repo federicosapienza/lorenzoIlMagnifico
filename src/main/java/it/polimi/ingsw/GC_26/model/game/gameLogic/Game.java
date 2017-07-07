@@ -246,12 +246,12 @@ public class Game extends Observable<CardDescriber>{
 	private List<DevelopmentCard> buildingTowerCards;
 	private List<DevelopmentCard> characterTowerCards;
 	private List<DevelopmentCard> ventureTowerCards;
-	private final static int turnsNumber=4;  //TODO rimettere 4
+	private final static int turnsNumber=4; 
 	
 	/**
 	 * Method that describes what to do next
 	 */
-	public void nextStep() {  //TODO RImettere i tempo giust
+	public void nextStep() { 
 		
 		playersPerformedActions++;
 		

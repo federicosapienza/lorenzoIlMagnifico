@@ -51,7 +51,8 @@ public class LeaderCardHandler extends Handler{
 			return false;
 		}	
 		try {
-			card= list.get(choice);
+			int temp= choice -1;
+			card= list.get(temp);
 		} catch (IndexOutOfBoundsException e) {
 			LOG.log( Level.FINE, "index out of bound in vector  ", e);
 		player.notifyObservers(new Request(player.getStatus(),errorString, null));
@@ -78,7 +79,8 @@ public class LeaderCardHandler extends Handler{
 		List<LeaderCard> list = player.getPersonalBoard().getLeadersCard();
 		LeaderCard card=null;
 		try {
-			card= list.get(choice);
+			int temp=choice -1;
+			card= list.get(temp);
 		} catch (IndexOutOfBoundsException e) {
 			LOG.log( Level.FINE, "index out of bound in vector  ", e);
 			player.notifyObservers(new Request(player.getStatus(),errorString, null));

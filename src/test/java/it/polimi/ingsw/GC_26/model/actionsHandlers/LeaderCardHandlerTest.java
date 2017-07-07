@@ -34,7 +34,7 @@ public class LeaderCardHandlerTest {
 		LeaderCard leaderCard = new LeaderCardImplementation("Giovanni dalle Bande Nere", requirement, immediateEffect, permanentEffect);
 		player.getWarehouse().add(ResourcesOrPoints.newPoints(0, 12, 0, 0));
 		player.getPersonalBoard().addLeaderCard(leaderCard);
-		assertTrue(leaderCardHandler.isPossible(player, 0));
+		assertTrue(leaderCardHandler.isPossible(player, 1));
 	}
 
 	
@@ -51,7 +51,7 @@ public class LeaderCardHandlerTest {
 		LeaderCard leaderCard = new LeaderCardImplementation("Giovanni dalle Bande Nere", requirement, immediateEffect, permanentEffect);
 		player.getWarehouse().add(ResourcesOrPoints.newPoints(0, 12, 0, 0));
 		player.getPersonalBoard().addLeaderCard(leaderCard);
-		assertFalse(leaderCardHandler.isPossible(player, 1));
+		assertFalse(leaderCardHandler.isPossible(player, 2));
 	}
 	
 	@Test
@@ -67,7 +67,7 @@ public class LeaderCardHandlerTest {
 		LeaderCard leaderCard = new LeaderCardImplementation("Giovanni dalle Bande Nere", requirement, immediateEffect, permanentEffect);
 		player.getWarehouse().add(ResourcesOrPoints.newPoints(0, 10, 0, 0));
 		player.getPersonalBoard().addLeaderCard(leaderCard);
-		assertFalse(leaderCardHandler.isPossible(player, 0));
+		assertFalse(leaderCardHandler.isPossible(player, 1));
 	}
 	
 	@Test
@@ -83,7 +83,7 @@ public class LeaderCardHandlerTest {
 		LeaderCard leaderCard = new LeaderCardImplementation("Giovanni dalle Bande Nere", requirement, immediateEffect, permanentEffect);
 		player.getWarehouse().add(ResourcesOrPoints.newPoints(0, 12, 0, 0));
 		player.getPersonalBoard().addLeaderCard(leaderCard);
-		assertTrue(leaderCardHandler.isPossible(player, 0));
+		assertTrue(leaderCardHandler.isPossible(player, 1));
 	}
 	
 	@Test
@@ -100,7 +100,7 @@ public class LeaderCardHandlerTest {
 		player.setTemporaryWarehouse();
 		player.getPersonalBoard().addLeaderCard(leaderCard);
 		player.getWarehouse().add(ResourcesOrPoints.newPoints(0, 12, 0, 0));
-		leaderCardHandler.perform(player, 0);
+		leaderCardHandler.perform(player, 1);
 		assertEquals(5, player.getWarehouse().getCoins());
 	}
 	
@@ -118,7 +118,7 @@ public class LeaderCardHandlerTest {
 		player.setTemporaryWarehouse();
 		player.getPersonalBoard().addLeaderCard(leaderCard);
 		player.getWarehouse().add(ResourcesOrPoints.newPoints(0, 12, 0, 0));
-		leaderCardHandler.perform(player, 1);
+		leaderCardHandler.perform(player, 2);
 	}
 	
 	@Test(expected = IllegalActionException.class)
@@ -135,7 +135,7 @@ public class LeaderCardHandlerTest {
 		player.setTemporaryWarehouse();
 		player.getPersonalBoard().addLeaderCard(leaderCard);
 		player.getWarehouse().add(ResourcesOrPoints.newPoints(0, 10, 0, 0));
-		leaderCardHandler.perform(player, 0);
+		leaderCardHandler.perform(player, 1);
 	}
 	
 }
