@@ -471,12 +471,20 @@ public class Game extends Observable<CardDescriber>{
 		  
 	}
 	
-	
+	/**
+	 * Method called when a player is not suspended anymore: it adds the player to the list of players who were suspended at before 
+	 * and now are not suspended anymore
+	 * @param player It's the player who was suspended and now isn't suspended
+	 */
 	public void addPlayerNoMoreSuspended(Player player) {
 		playersNoMoreSuspended.add(player);
 		
 	}
 	
+	/**
+	 * Method that returns the list of players who were suspended before and now are not suspended
+	 * @return the list of players who were suspended before and now are not suspended
+	 */
 	public List<Player> getPlayersNoMoreSuspended() {
 		return playersNoMoreSuspended;
 	}

@@ -253,8 +253,6 @@ public class GameParameters {
 	 * Method that returns the string describing the possibles diplomatic trades.
 	 * @return diplomaticPrivilegesDescription It's the the string describing the possibles diplomatic trades
 	 */
-	
-	
 	public static String getDiplomaticPrivilegesDescription() {
 		return diplomaticPrivilegesDescription;
 	}

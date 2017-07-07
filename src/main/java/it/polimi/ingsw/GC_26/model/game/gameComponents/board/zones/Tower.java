@@ -115,7 +115,7 @@ public class Tower {
 	/**
 	 * Method that checks if the family member can be put in the tower
 	 * @param familyMember It's the family member that the player wants to put in the tower
-	 * @return true if it is possible; there are three possibilties 
+	 * @return true if it is possible; there are three possibilities 
 	 * 1)the tower doesn't contain other coloured family members that belong to the player who wants to put another 
 	 * coloured family member 
 	 * 2) the player wants to put a neutral family member

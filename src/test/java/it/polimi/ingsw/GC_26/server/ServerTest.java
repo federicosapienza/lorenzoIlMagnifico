@@ -2,7 +2,7 @@ package it.polimi.ingsw.GC_26.server;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.server.Server;
+import it.polimi.ingsw.GC_26.server.main.Server;
 
 public class ServerTest {
 	

@@ -96,6 +96,6 @@ public class CharacterCardsReader extends CardsReader {
 	private void createCharacterCard(CardsImplementation cardsImplementation, int numOfPeriod){
 		DevelopmentCard developmentCard= DevelopmentCardImplementation.characterCard(name, period, payment, immediateEffect,permanentEffect);
 		cardsImplementation.getDevelopmentCards(numOfPeriod, DevelopmentCardTypes.CHARACTERCARD).add(developmentCard);
-		}
+	}
 			
 }	

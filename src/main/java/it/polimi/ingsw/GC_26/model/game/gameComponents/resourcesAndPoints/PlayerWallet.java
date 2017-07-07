@@ -119,8 +119,11 @@ public class PlayerWallet implements Serializable{
 		return victoryPoints;
 	}
 	
+	/**
+	 * Method that returns true if the Object contained in the parameter is equal to this one or if the PlayerWallet of the Object is 
+	 * equal to this one
+	 */
 	@Override
-	
 	public boolean equals(Object obj) {
 	    if (this == obj)               
 	        return true;
@@ -143,23 +146,34 @@ public class PlayerWallet implements Serializable{
 
 	}
 	
+	/**
+	 * Method that returns a hash code value for the object
+	 */
 	@Override
 	public int hashCode() {
 		return super.hashCode();
 	}
 	
-	
+	/**
+	 * Method that returns the description of the resources as a string value
+	 */
 	public String toStringResources() {
 		return coins+" coins ,"+ servants +" servants ," + stone +" stone ,"+wood+ " wood ,";
 	}
+	
+	/**
+	 * Method that returns the description of the points as a string value
+	 * @return
+	 */
 	public String toStringPoints() {
 		return victoryPoints+" victory points ,"+ militaryPoints +" military points ," + faithPoints +" faith points ,"+ councilPrivileges + " council privileges ";
 	}
 	
-
+	/**
+	 * Method that returns the description of the resources and points as a string value
+	 */
 	@Override
 	public String toString() {
-		
 		return toStringResources()+ " " +toStringPoints();
-		}
+	}
 }
