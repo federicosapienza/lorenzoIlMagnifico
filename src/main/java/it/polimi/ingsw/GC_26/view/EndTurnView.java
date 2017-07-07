@@ -14,9 +14,9 @@ import it.polimi.ingsw.GC_26.utilities.observer.Observable;
 public class EndTurnView extends Observable<Boolean>{
 	
 	/**
-	 * Method that notifies the observers about the end of the turn: if the boolean timeout is true, it means that the turn is ended,
-	 * if it's false, it means that the turn isn't ended
-	 * @param timeout It's the boolean which indicates if the turn is ended or not
+	 * Method that notifies the observers about the end of the turn: if the timeout for the turn has occurred, the corresponding boolean
+	 * contained in the parameter is true, else it's false
+	 * @param timeout It's the boolean which indicates if the timeout for the turn has occurred or not
 	 */
 	public void notifyEndTurn(boolean timeout){
 		notifyObservers(timeout);

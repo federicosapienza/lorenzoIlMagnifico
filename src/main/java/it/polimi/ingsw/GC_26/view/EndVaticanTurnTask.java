@@ -23,6 +23,7 @@ public class EndVaticanTurnTask extends TimerTask{
 	
 	/**
 	 * Method called to run the EndVaticanTurnTask: the stringInputView will automatically respond to controllers with default action
+	 * (which means excommunication)
 	 */
 	@Override
 	public void run() { 
