@@ -170,8 +170,8 @@ public class Game extends Observable<CardDescriber>{
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Number of players: "+numberOfPlayers+". Time for round: "+times.getTurnTimer()+" s"));
 		
-		if(numberOfPlayers>=GameParameters.getNumPlayersForMultipleZones());
-		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Multiple position malus: "+GameParameters.getMultiplePositionMalus()));
+		if(numberOfPlayers>=GameParameters.getNumPlayersForMultipleZones())
+			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Multiple position malus: "+GameParameters.getMultiplePositionMalus()));
 
 
 		/**
