@@ -250,7 +250,7 @@ public class Game extends Observable<CardDescriber>{
 	private List<DevelopmentCard> buildingTowerCards;
 	private List<DevelopmentCard> characterTowerCards;
 	private List<DevelopmentCard> ventureTowerCards;
-	private final static int turnsNumber=4; 
+	private final static int TURNNUMBER=4; 
 
 	
 	/**
@@ -260,14 +260,14 @@ public class Game extends Observable<CardDescriber>{
 		
 		playersPerformedActions++;
 		
-		if(playersPerformedActions== numberOfPlayers && turn!=turnsNumber){
+		if(playersPerformedActions== numberOfPlayers && turn!=TURNNUMBER){
 			playersPerformedActions=0; 
 			turn++; 
 		}
 		/**
 		 * starting Vatican Turn
 		 */
-		if(turn == turnsNumber && playersPerformedActions==numberOfPlayers){
+		if(turn == TURNNUMBER && playersPerformedActions==numberOfPlayers){
 			if(round==1){
 				/**
 				 * If the first round of the current period has come to the end, the game will go on with the next round,

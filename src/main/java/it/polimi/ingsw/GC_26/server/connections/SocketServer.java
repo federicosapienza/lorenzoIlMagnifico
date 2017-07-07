@@ -26,11 +26,11 @@ public class SocketServer  {
 	/**
 	 * Constructor: it creates a SocketServer based on the server and the port indicated in the parameters
 	 * @param server It's the server of this SocketServer
-	 * @param PORT It's the port of the SocketServer
+	 * @param port It's the port of the SocketServer
 	 */
-	private SocketServer (Server server, int PORT) {
+	private SocketServer (Server server, int port) {
 		this.server= server;
-		port=PORT;
+		this.port=port;
 	}
 	
 	/**

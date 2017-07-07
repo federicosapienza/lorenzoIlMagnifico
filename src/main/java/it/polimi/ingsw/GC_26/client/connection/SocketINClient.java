@@ -28,7 +28,7 @@ public class SocketINClient implements Runnable{
 	private ObjectInputStream objIn  = null;
 	private ClientController controller=null;
 	private boolean running= true;
-	private final static Logger LOG = Logger.getLogger(SocketINClient.class.getName());
+	private static final  Logger LOG = Logger.getLogger(SocketINClient.class.getName());
 	
 	/**
 	 * Constructor: it creates the SocketINClient based on the Socket contained in the parameter

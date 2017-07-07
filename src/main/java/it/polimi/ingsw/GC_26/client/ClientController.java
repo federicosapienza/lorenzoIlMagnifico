@@ -234,7 +234,7 @@ public class ClientController {
 			view.getBoard().cleanBoard();
 		}
 		
-		if((info.getMessage().contains("ended the turn"))) 
+		if(info.getMessage().contains("ended the turn")) 
 			output.printCompleteStatus(view.getPlayer(info.getPlayerReferred()));
 		
 		if(info.getGameStatus()==GameStatus.ENDING){

@@ -24,9 +24,10 @@ import it.polimi.ingsw.GC_26.model.player.Player;
  */
 public class EndGameLogic {
 	private final GameElements gameElements;
-	private final static int[] territoryBonus = new  int[]{0,0,1,4,10,20};
-	private final static int[] charactersBonus = new  int[]{1,3,6,10,15,21};
-	private final static int resourcesBonus = 5;
+	private final static int[] TERRITORYBONUS = new  int[]{0,0,1,4,10,20};
+	private final static int[] CHARACTERBONUS = new  int[]{1,3,6,10,15,21};
+	private final static int RESOURCESBONUS = 5;
+	
 	private final ResourcesOrPoints militaryStrengthFirstReward = ResourcesOrPoints.newPoints(5, 0, 0, 0);
 	private final ResourcesOrPoints militaryStrengthSecondReward = ResourcesOrPoints.newPoints(2, 0, 0, 0);
 
@@ -75,12 +76,12 @@ public class EndGameLogic {
 			//conquered territories
 			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.TERRITORYCARD) && personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD)>0){
 				temp=personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD);
-				warehouse.add(ResourcesOrPoints.newPoints(territoryBonus[temp-1], 0, 0, 0));
+				warehouse.add(ResourcesOrPoints.newPoints(TERRITORYBONUS[temp-1], 0, 0, 0));
 			}
 			//character cards owned
 			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.CHARACTERCARD)&& personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.CHARACTERCARD)>0){
 				temp=personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.CHARACTERCARD);
-				warehouse.add(ResourcesOrPoints.newPoints(charactersBonus[temp-1], 0, 0, 0));
+				warehouse.add(ResourcesOrPoints.newPoints(CHARACTERBONUS[temp-1], 0, 0, 0));
 			}
 			//venture cards owned
 			if(!modifiers.pointsForThisCardType(DevelopmentCardTypes.VENTURECARD)&& personalBoard.getNumberOfCardPerType(DevelopmentCardTypes.VENTURECARD)>0){
@@ -91,7 +92,7 @@ public class EndGameLogic {
 				}
 			}
 			temp= warehouse.getCoins()+warehouse.getServants()+warehouse.getStone()+warehouse.getWood();
-			warehouse.add(ResourcesOrPoints.newPoints(temp/resourcesBonus, 0, 0, 0));
+			warehouse.add(ResourcesOrPoints.newPoints(temp/RESOURCESBONUS, 0, 0, 0));
 		}
 
 	}

@@ -25,7 +25,7 @@ public class InputlogicCli implements InputLogic{
 	private boolean firstAction = true;  //if first action true , if second is false
 	private MainClientView view; 
 	private Output output;
-	private Scanner scanIN; //new Scanner(System.in);
+	private Scanner scanIN; 
 
 	
 	private int boardChoice=0; //senza lo zero la seconda volta va male

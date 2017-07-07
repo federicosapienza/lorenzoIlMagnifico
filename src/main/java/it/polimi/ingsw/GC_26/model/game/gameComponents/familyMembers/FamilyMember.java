@@ -101,7 +101,7 @@ public class FamilyMember {
 		   if (this.getClass() != obj.getClass()) 
 			   return false;
 		   FamilyMember other = (FamilyMember) obj;
-		   return (player.equals(other.getPlayer()) && colour== other.getColour()) ;
+		   return player.equals(other.getPlayer()) && colour== other.getColour() ;
 	}
 	
 	 @Override

@@ -324,7 +324,7 @@ public class OutputCLI implements Output{
 		}
 		xPrintSysOut("\n");
 		
-		if(player.getLeaderCardUsed().size()!=0)
+		if(player.getLeaderCardUsed().isEmpty())
 			printLeaderCards(player.getLeaderCardUsed());
 			
 		xPrintSysOut("\n");
