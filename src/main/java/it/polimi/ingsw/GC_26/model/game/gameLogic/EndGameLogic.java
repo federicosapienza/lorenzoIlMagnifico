@@ -52,11 +52,9 @@ public class EndGameLogic {
 		
 	}
 		
-		
-		
-		
-	
-
+	/**
+	 * Method that calculates the Victory Points of each player
+	 */
 	private void calculatingPoints(){
 		for(Player player: gameElements.getPlayers()){
 			PermanentModifiers modifiers =player.getPermanentModifiers();
@@ -98,9 +96,12 @@ public class EndGameLogic {
 
 	}
 	
-	
+	/**
+	 * Method that calculates the Military Points of each player and rewards the first two players with the greatest amount of Military 
+	 * Points
+	 */
 	private void elaboratingMilitaryPointResult(){
-// starting elaborating results
+		// starting elaborating results
 		//military strength:
 		int bestValue=0;
 		int secondValue=0;
@@ -134,6 +135,10 @@ public class EndGameLogic {
 		
 	}
 	
+	/**
+	 * Method that elaborates the results obtained through the methods which calculate the Victory and Military points in order to
+	 * determine the winner and notify the players who the winner is
+	 */
 	private void elaboratingResult(){
 		//finding the winner
 			int bestValue=0;

@@ -20,7 +20,7 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Player
  * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
  * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
  * 
- * This class represents the part of Socket that manages all the input that the Server receives from the client 
+ * This class represents the part of Socket that manages all the input that the client receives from the server 
  *
  */
 public class SocketINClient implements Runnable{

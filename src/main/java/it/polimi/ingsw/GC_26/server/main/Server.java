@@ -1,4 +1,4 @@
-package it.polimi.ingsw.GC_26.server;
+package it.polimi.ingsw.GC_26.server.main;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -10,10 +10,21 @@ import it.polimi.ingsw.GC_26.jsonReader.BonusInterface;
 import it.polimi.ingsw.GC_26.jsonReader.Cards;
 import it.polimi.ingsw.GC_26.jsonReader.ReadAll;
 import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
+import it.polimi.ingsw.GC_26.server.ReadFromFile;
+import it.polimi.ingsw.GC_26.server.StartGameTask;
 import it.polimi.ingsw.GC_26.server.connections.ServerConnectionToClient;
 import it.polimi.ingsw.GC_26.server.connections.SocketServer;
 import it.polimi.ingsw.GC_26.view.ClientMainServerView;
 
+/**
+ * 
+ * @author David Yun (david.yun@mail.polimi.it)
+ * @author Federico Sapienza (federico.sapienza@mail.polimi.it)
+ * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
+ * 
+ * This class represents the Server
+ *
+ */
 public class Server {
 	private static Server instance=null ; //singleton 
 	private GameInitialiserAndController game;
@@ -24,7 +35,11 @@ public class Server {
 	private final static int PORT = 29997;
 	private static final Logger LOG = Logger.getLogger(Server.class.getName());
 
-	
+	/**
+	 * Method that returns the instance of this class. If the instance is null, a new Server is created and the instance is set to this 
+	 * new Server 
+	 * @return the instance of this class
+	 */
 	public static synchronized Server getServer(){ //singleton
 		if(instance==null){
 			instance=new Server();
@@ -32,8 +47,11 @@ public class Server {
 		return instance;
 	}
 	
+	/**
+	 * Method called to start the Server, reading all the elements from the Json file and getting the corresponding SocketServer 
+	 */
 	public void start() {
-		ReadFromFile gamesSpecific= new ReadAll();
+		ReadFromFile gamesSpecific = new ReadAll();
 		gamesSpecific.start();
 		cards= gamesSpecific.getCards();
 		bonus = gamesSpecific.getBonus();
@@ -51,20 +69,28 @@ public class Server {
 		
 	}
 
-	
+	/**
+	 * Method called to add a new client to the Server.
+	 * @param connection It's the ServerConnectionToClient that connects the Server with the client
+	 * @param username It's the username of the new client that has to be added
+	 */
 	public synchronized void addClient(ServerConnectionToClient connection, String username){
 		if (connection == null || username == null) {
 			throw new NullPointerException();
 		}
 		ClientMainServerView views= new ClientMainServerView(username, connection, times);
-		connection.addViews( views);
+		connection.addViews(views);
 		enterInANewGame(views); 
 		
 	}
 
-	
-	
-	private  void enterInANewGame(ClientMainServerView clientView){
+	/**
+	 * Method called to add the ClientMainServerView contained in the parameter to the GameInitialiserAndController of this Server:
+	 * this means that the client associated with the ClientMainServerView contained in the parameter is added to a new game managed
+	 * by this Server
+	 * @param clientView
+	 */
+	private void enterInANewGame(ClientMainServerView clientView){
 		if (clientView == null) {
 			throw new NullPointerException();
 		}
@@ -85,20 +111,22 @@ public class Server {
 		}	
 	}
 
-	
-	
+	/**
+	 * Method called to create a new game managed by this Server
+	 */
 	public void newGame() {
 		synchronized (this) {//to avoid synchronization risks between new requests and timer
 		game.initialiseGame();
 		this.game= new GameInitialiserAndController(cards, bonus, times);
-	}
+		}
 	}
 
-	
-
-	
+	/**
+	 * Main method to call to start the Server 
+	 * @param args
+	 */
 	public static void main(String[] args){
-		Server server =  Server.getServer();
+		Server server = Server.getServer();
 		server.start();
 	}
 	

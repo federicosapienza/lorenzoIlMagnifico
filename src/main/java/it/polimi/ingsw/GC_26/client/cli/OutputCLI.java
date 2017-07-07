@@ -20,7 +20,7 @@ import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
  * @author Leonardo Varè (leonardo.vare@mail.polimi.it)
  * 
  * This is the class that represents the output displayed in the CLI.
- * Methods are synchronized to avoid ugly mixtures of requests from InputLogic and infos from views.
+ * Methods are synchronized to avoid ugly mixtures of requests from InputLogic and info from views.
  *
  */
 
@@ -226,7 +226,7 @@ public class OutputCLI implements Output{
 	}
 	
 	/**
-	 * Method that prints the info about the Leader cards described by the Set of CardDescriber contained in the parameter
+	 * Method that prints the info about the Leader cards described by the list of CardDescriber contained in the parameter
 	 */
 	@Override
 	public void printLeaderCards(List<CardDescriber> cards){

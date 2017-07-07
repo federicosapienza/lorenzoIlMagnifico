@@ -98,6 +98,9 @@ public class Game extends Observable<CardDescriber>{
 	 */
 	public Player addPlayer(String name){
 		numberOfPlayers++;
+		if (numberOfPlayers > 4) {
+			throw new IllegalArgumentException();
+		}
 		Player player = new Player(name, startingResources.get(numberOfPlayers-1));
 		players.add(player);
 		return player;
@@ -167,8 +170,8 @@ public class Game extends Observable<CardDescriber>{
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Number of players: "+numberOfPlayers+". Time for round: "+times.getTurnTimer()+" s"));
 		
-		if(numberOfPlayers>=GameParameters.getNumPlayersForMultipleZones());
-		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Multiple position malus: "+GameParameters.getMultiplePositionMalus()));
+		if(numberOfPlayers>=GameParameters.getNumPlayersForMultipleZones())
+			gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Multiple position malus: "+GameParameters.getMultiplePositionMalus()));
 
 
 		/**
@@ -247,6 +250,7 @@ public class Game extends Observable<CardDescriber>{
 	private List<DevelopmentCard> characterTowerCards;
 	private List<DevelopmentCard> ventureTowerCards;
 	private final static int turnsNumber=4; 
+
 	
 	/**
 	 * Method that describes what to do next
@@ -257,7 +261,7 @@ public class Game extends Observable<CardDescriber>{
 		
 		if(playersPerformedActions== numberOfPlayers && turn!=turnsNumber){
 			playersPerformedActions=0; 
-			turn++; //then read 303
+			turn++; 
 		}
 		/**
 		 * starting Vatican Turn
@@ -471,12 +475,20 @@ public class Game extends Observable<CardDescriber>{
 		  
 	}
 	
-	
+	/**
+	 * Method called when a player is not suspended anymore: it adds the player to the list of players who were suspended at before 
+	 * and now are not suspended anymore
+	 * @param player It's the player who was suspended and now isn't suspended
+	 */
 	public void addPlayerNoMoreSuspended(Player player) {
 		playersNoMoreSuspended.add(player);
 		
 	}
 	
+	/**
+	 * Method that returns the list of players who were suspended before and now are not suspended
+	 * @return the list of players who were suspended before and now are not suspended
+	 */
 	public List<Player> getPlayersNoMoreSuspended() {
 		return playersNoMoreSuspended;
 	}

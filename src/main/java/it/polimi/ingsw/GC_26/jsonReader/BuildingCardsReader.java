@@ -101,19 +101,3 @@ public class BuildingCardsReader extends CardsReader {
 	}
 			
 }	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
