@@ -98,6 +98,9 @@ public class Game extends Observable<CardDescriber>{
 	 */
 	public Player addPlayer(String name){
 		numberOfPlayers++;
+		if (numberOfPlayers > 4) {
+			throw new IllegalArgumentException();
+		}
 		Player player = new Player(name, startingResources.get(numberOfPlayers-1));
 		players.add(player);
 		return player;
@@ -246,7 +249,7 @@ public class Game extends Observable<CardDescriber>{
 	private List<DevelopmentCard> buildingTowerCards;
 	private List<DevelopmentCard> characterTowerCards;
 	private List<DevelopmentCard> ventureTowerCards;
-	private final static int turnsNumber=4;  //TODO rimettere 4
+	private final static int turnsNumber=4;
 	
 	/**
 	 * Method that describes what to do next
@@ -257,7 +260,7 @@ public class Game extends Observable<CardDescriber>{
 		
 		if(playersPerformedActions== numberOfPlayers && turn!=turnsNumber){
 			playersPerformedActions=0; 
-			turn++; //then read 303
+			turn++; 
 		}
 		/**
 		 * starting Vatican Turn

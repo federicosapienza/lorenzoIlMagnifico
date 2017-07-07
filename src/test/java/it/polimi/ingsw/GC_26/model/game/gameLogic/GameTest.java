@@ -130,6 +130,17 @@ public class GameTest {
 		game.nextStep();
 		game.nextStep();
 		game.nextStep();
+		
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+
 		game.nextStep();
 		game.nextStep();
 		game.nextStep();
@@ -177,8 +188,8 @@ public class GameTest {
 		game.addPlayer("Steph");
 		game.initialiseGame();
 		game.startGame();
-		game.nextStep(); //playersPerformedActions = 1
-		game.nextStep(); //playersPerformedActions = 2 --> round = 2, turn =1, playerPerformedActions = 0
+		game.nextStep(); 
+		game.nextStep(); 
 		game.nextStep();
 		game.nextStep();
 		
@@ -197,11 +208,33 @@ public class GameTest {
 		game.nextStep();
 		game.nextStep();
 		
+		game.nextStep(); 
+		game.nextStep(); 
+		game.nextStep();
+		game.nextStep();
+		
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		game.nextStep();
 		game.getPlayers().get(0).setStatus(new Request(PlayerStatus.SUSPENDED, "David suspended", null));
 		game.nextStep();
 		game.nextStep();
 		game.addPlayerNoMoreSuspended(game.getPlayers().get(0));
 		game.nextStep();
+		game.nextStep();
+		game.nextStep();
+		
 		assertTrue(game.getPlayers().get(0).getStatus() == PlayerStatus.SUSPENDED && game.getPeriod() == 3 && game.getRound() == 2);
 		
 	}
@@ -254,7 +287,7 @@ public class GameTest {
 	}
 	
 	
-	/*
+	
 	@Test (expected = IllegalArgumentException.class)
 	public void testCannotCreateA5PlayersGame() {
 		readAll.start();
@@ -269,9 +302,9 @@ public class GameTest {
 		game.addPlayer("Hulk");
 		game.addPlayer("Tony");
 	
-		game.initialiseGame();
+		
 	}
-	*/
+	
 
 }
 
