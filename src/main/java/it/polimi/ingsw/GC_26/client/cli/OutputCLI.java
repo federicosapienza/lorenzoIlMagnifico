@@ -229,7 +229,7 @@ public class OutputCLI implements Output{
 	 * Method that prints the info about the Leader cards described by the Set of CardDescriber contained in the parameter
 	 */
 	@Override
-	public void printLeaderCards(Set<CardDescriber> cards){
+	public void printLeaderCards(List<CardDescriber> cards){
 		String repeated ;
 		StringBuilder temp = new StringBuilder(" ");
 		xPrintSysOut("\n");
@@ -306,10 +306,10 @@ public class OutputCLI implements Output{
 		xPrintSysOut("RECAP OF PLAYER " + "'" + player.getName() + "' :");
 		xPrintSysOut("\n");
 		xPrintSysOut("Family members value: ");
-		System.out.println(player.getFamilyMembers().getStatus());
+		xPrintSysOut(player.getFamilyMembers().getStatus().toString());
 		xPrintSysOut("\n");
 		xPrintSysOut("Free family members:  ");
-		System.out.println(player.getFamilyMembers().whatIsFree());
+		xPrintSysOut(player.getFamilyMembers().whatIsFree().toString());
 		xPrintSysOut("\n");
 		xPrintSysOut("Resources and points:");
 		printResources(player);	
@@ -326,12 +326,7 @@ public class OutputCLI implements Output{
 		xPrintSysOut("Personal tile values: ");
 		xPrintSysOut(player.getPersonalTileValues());
 		xPrintSysOut("\n");
-		if(!player.getPermamentsEffect().isEmpty()){
-		xPrintSysOut("Permanents effect owned:");
-		for ( String string: player.getPermamentsEffect()){
-			xPrintSysOut(string);
-			}
-		}
+		
 	}
 	
 	/**

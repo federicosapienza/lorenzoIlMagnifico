@@ -31,7 +31,7 @@ public class PlayerView {
 
 
 	private Set <CardDescriber> leadersCardUsed;  // the cards the player has shown
-	private Set <CardDescriber> leadersCardOwned; //not null only for the playerView representing the client.
+	private List <CardDescriber> leadersCardOwned; //not null only for the playerView representing the client.
 	private PlayerWallet wallet;
 	private String personalTileValues;
 	private FamilyMembersDescriber familyMembers;
@@ -44,7 +44,7 @@ public class PlayerView {
 	 */
 	public PlayerView(PlayerWallet wallet){  
 		name = wallet.getPlayerName();
-		leadersCardOwned= new HashSet<>();
+		leadersCardOwned= new ArrayList<>();
 		leadersCardUsed= new HashSet<>();
 		
 		this.wallet=wallet;
@@ -162,7 +162,7 @@ public class PlayerView {
 	 * Method that returns the Set of CardDescriber of Leader Cards actually owned by the player
 	 * @return the Set of CardDescriber of Leader Cards actually owned by the player
 	 */
-	public Set<CardDescriber> getLeadersCardOwned() {
+	public List<CardDescriber> getLeadersCardOwned() {
 		return leadersCardOwned;
 	}
 	

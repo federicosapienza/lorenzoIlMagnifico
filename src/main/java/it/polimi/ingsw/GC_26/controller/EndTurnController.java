@@ -39,6 +39,9 @@ public class EndTurnController implements Observer<Boolean>{
 		PlayerStatus previousStatus;
 		synchronized (player) {
 			previousStatus= player.getStatus();
+			if(player.getStatus()==PlayerStatus.WAITINGHISTURN || player.getStatus()==PlayerStatus.SUSPENDED)
+				return;  //not allowed to perform action
+			
 			if(timeOutOccured && !player.isPlayerActive() ){
 				player.setStatus(new Request(PlayerStatus.SUSPENDED, "end turn", null));
 				handlers.getGameElements().notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+" is suspended"));

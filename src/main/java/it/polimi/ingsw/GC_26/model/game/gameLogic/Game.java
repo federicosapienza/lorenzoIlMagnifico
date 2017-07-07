@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+
+
 import it.polimi.ingsw.GC_26.jsonReader.BonusInterface;
 import it.polimi.ingsw.GC_26.jsonReader.Cards;
 import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
@@ -164,7 +166,9 @@ public class Game extends Observable<CardDescriber>{
 		 */
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Welcome to a new game!"));
 		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Number of players: "+numberOfPlayers+". Time for round: "+times.getTurnTimer()+" s"));
-		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Number of players: "+numberOfPlayers+". Time for round: "+times.getTurnTimer()+" s"));
+		
+		if(numberOfPlayers>=GameParameters.getNumPlayersForMultipleZones());
+		gameElements.notifyPlayers(new Info(GameStatus.INITIALIZINGGAME, null, "Multiple position malus: "+GameParameters.getMultiplePositionMalus()));
 
 
 		/**
@@ -242,7 +246,7 @@ public class Game extends Observable<CardDescriber>{
 	private List<DevelopmentCard> buildingTowerCards;
 	private List<DevelopmentCard> characterTowerCards;
 	private List<DevelopmentCard> ventureTowerCards;
-	private final static int turnsNumber=2;  //TODO rimettere 4
+	private final static int turnsNumber=4;  //TODO rimettere 4
 	
 	/**
 	 * Method that describes what to do next

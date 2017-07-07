@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GC_26.client.cli;
 
+import java.util.List;
 import java.util.Set;
 
 import it.polimi.ingsw.GC_26.client.view.BoardView;
@@ -26,7 +27,7 @@ public interface Output {
 	void printFamilyMembers(PlayerView player);
 	void printCards(PlayerView thisPlayer);
 	void printCards(Set<CardDescriber> cards);
-	void printLeaderCards(Set<CardDescriber> cards);
+	void printLeaderCards(List<CardDescriber> cards);
 	void printFinalRankings(MainClientView view);
 	void printTitle();
 }

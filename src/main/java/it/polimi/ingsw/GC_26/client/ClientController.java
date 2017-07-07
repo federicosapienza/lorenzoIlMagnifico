@@ -227,6 +227,7 @@ public class ClientController {
 		}
 		if(old== GameStatus.PLAYING && info.getGameStatus()==GameStatus.INITIALIZINGROUND)  {
 			output.printRankings(view);
+			output.printExcommunicationTiles(view.getBoard());
 		}
 			
 		if(info.getGameStatus()==GameStatus.INITIALIZINGROUND){

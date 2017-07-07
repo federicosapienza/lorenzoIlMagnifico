@@ -268,7 +268,6 @@ public class InputlogicCli implements InputLogic{
 	 * @param askToEndTurn It's a boolean that, if true, specifies that the turn can be ended with a specific command
 	 */
 	private synchronized void setWaitingResponse(boolean askToEndTurn){
-		output.printResources(view.getThisPlayer());
 		if(askToEndTurn)
 			output.printString("waiting, 999 to close turn"); // do not use printRequest here (= this line would always be saved as last) 
 		restartValues();
@@ -297,6 +296,7 @@ public class InputlogicCli implements InputLogic{
 	 */
 	@Override
 	public void setActionPerformed() {
+		output.printResources(view.getThisPlayer());
 		printRequest("Choose a value between 1 and 4 to try activating the correspondent Leader Card");
 		output.printLeaderCards(view.getThisPlayer().getLeadersCardOwned());
 		this.setWaitingResponse(true);
@@ -325,6 +325,8 @@ public class InputlogicCli implements InputLogic{
 	 */
 	@Override
 	public void setWaitingVaticanChoice(CardDescriber card) {
+		output.printExcommunicationTiles(view.getBoard());
+		output.printResources(view.getThisPlayer());
 		printRequest("Enter 0 to be excommunicated or 1 for not; excommunication:" +card.getPermanentEffectDescriber());
 		this.setWaitingResponse(false);
 		
@@ -335,6 +337,7 @@ public class InputlogicCli implements InputLogic{
 	 */
 	@Override
 	public void setWaitingPaymentChoice() {
+		output.printResources(view.getThisPlayer());
 		printRequest("Enter 1 for first payment, 2 per second");
 		this.setWaitingResponse(false);
 	}
@@ -344,6 +347,7 @@ public class InputlogicCli implements InputLogic{
 	 */
 	@Override
 	public void setWaitingTrading(CardDescriber card) {
+		output.printResources(view.getThisPlayer());
 		printRequest("Enter 0 not to perform any trade, 1 to perform the first trade and 2 if there is a second trade"
 				+ " and you choose that: "+card.getName()+" :"+ card.getPermanentEffectDescriber());	
 		this.setWaitingResponse(false);
@@ -355,6 +359,7 @@ public class InputlogicCli implements InputLogic{
 	 */
 	@Override
 	public void setWaitingCouncilPrivilege() {
+		output.printResources(view.getThisPlayer());
 		printRequest("Insert the correspondent number");
 		this.setWaitingResponse(false);
 	}

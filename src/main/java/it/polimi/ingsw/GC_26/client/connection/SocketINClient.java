@@ -102,17 +102,18 @@ public class SocketINClient implements Runnable{
 		
 	} catch (ClassNotFoundException e) {
 		LOG.log(Level.SEVERE, "class not found ", e);	
-
+		close();
 	}
 	
 	catch(IOException e1){
-		LOG.log(Level.SEVERE, "Socket interruption ", e1);	
+		LOG.log(Level.SEVERE, "Socket interruption ", e1);
+		close();
 
 
 	}
 	catch(IllegalArgumentException e2){
 		LOG.log(Level.SEVERE, "Object received not known ", e2);	
-
+		close();
 	}
 
 	finally {
@@ -130,7 +131,7 @@ public class SocketINClient implements Runnable{
 			objIn.close();
 			running=false;
 		} catch (IOException e) {
-			LOG.log(Level.SEVERE, "Can't establish Socket connection. ", e);	
+			LOG.log(Level.SEVERE, "Can't close Socket connection. ", e);	
 		}
 	}
 
