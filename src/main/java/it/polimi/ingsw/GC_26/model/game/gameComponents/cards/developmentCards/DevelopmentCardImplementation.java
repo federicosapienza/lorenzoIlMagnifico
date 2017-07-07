@@ -178,8 +178,8 @@ public class DevelopmentCardImplementation implements DevelopmentCard{
         if(type== DevelopmentCardTypes.TERRITORYCARD && !player.getPermanentModifiers().isMilitaryPointRequirementNotNeeded()){
             int territoryCardsOwned = player.getPersonalBoard().getNumberOfCardPerType(DevelopmentCardTypes.TERRITORYCARD);
             if(player.getWarehouse().getMilitaryPoints() < GameParameters.getTerritoryCardRequirements(territoryCardsOwned+1)){//+1 because I want to increase my number of cards
-                player.notifyObservers(new Request(player.getStatus(),"not enough resources military "
-                        + "Points for getting another military card",new CardDescriber(player.getCardUsed())))	;
+                player.notifyObservers(new Request(player.getStatus(),"not enough  military "
+                        + "Points for getting another military card. You need "+GameParameters.getTerritoryCardRequirements(territoryCardsOwned),new CardDescriber(player.getCardUsed())))	;
                 return false;
             }
         }

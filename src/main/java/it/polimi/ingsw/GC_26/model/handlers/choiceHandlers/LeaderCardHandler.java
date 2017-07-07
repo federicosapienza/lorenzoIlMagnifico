@@ -95,7 +95,7 @@ public class LeaderCardHandler extends Handler{
 		super.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(card), null));			
 
 		//notifies the players
-		super.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName() + " uses Leader Card "+ card));
+		super.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName() + " uses Leader Card "+ card.getName()));
 		}
 	
 	

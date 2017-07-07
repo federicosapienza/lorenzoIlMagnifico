@@ -245,6 +245,7 @@ public class ChoiceController implements Observer<Integer>{
 				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, actionNotValid , null));
 				handlers.getVaticanReportHandler().perform(player, 0); //not loop because if 0 status is not checked
 			}
+			player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, null, null));
 			handlers.getGameElements().getGame().vaticanReportNext(); // automatically ends the turn
 			}	
 		
@@ -274,6 +275,8 @@ public class ChoiceController implements Observer<Integer>{
 				return;
 			}
 			//otherwise the status does not change
+			player.notifyObservers(new Request(player.getStatus(),null  , null));
+
 			}
 	}
 	catch( IllegalActionException e){

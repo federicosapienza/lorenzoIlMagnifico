@@ -30,7 +30,7 @@ public class PlayerView {
 	private Set<CardDescriber> ventureCardSet=new HashSet<>();
 
 
-	private Set <CardDescriber> leadersCardUsed;  // the cards the player has shown
+	private List <CardDescriber> leadersCardUsed;  // the cards the player has shown
 	private List <CardDescriber> leadersCardOwned; //not null only for the playerView representing the client.
 	private PlayerWallet wallet;
 	private String personalTileValues;
@@ -45,7 +45,7 @@ public class PlayerView {
 	public PlayerView(PlayerWallet wallet){  
 		name = wallet.getPlayerName();
 		leadersCardOwned= new ArrayList<>();
-		leadersCardUsed= new HashSet<>();
+		leadersCardUsed= new ArrayList<>();
 		
 		this.wallet=wallet;
 		
@@ -173,4 +173,13 @@ public class PlayerView {
 	public String getPersonalTileValues() {
 		return personalTileValues;
 	}
+	
+	/**
+	 * Method that returns the Set of CardDescriber of Leader Cards used at least once by the player
+	 * @return the Set of CardDescriber of Leader Cards used by the player
+	 */
+	public List<CardDescriber> getLeaderCardUsed() {
+		return leadersCardUsed;
+	}
+	
 }

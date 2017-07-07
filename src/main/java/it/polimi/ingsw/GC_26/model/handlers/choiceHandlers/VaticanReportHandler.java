@@ -50,7 +50,7 @@ public class VaticanReportHandler extends Handler{
 		if(choice == 0) {// player has decided to be excommunicated.
 			ExcommunicationTile tile = gameElements.getGame().getThisRoundExcommunicationTiles();
 			tile.runEffect(player);
-			super.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ "is excommunicated"));
+			super.notifyPlayers(new Info(GameStatus.PLAYING, player.getName(), player.getName()+ " is excommunicated"));
 			super.notifyPlayers(new PersonalBoardChangeNotification(GameStatus.PLAYING, player.getName(), new CardDescriber(tile) ,null));
 			return;
 		}

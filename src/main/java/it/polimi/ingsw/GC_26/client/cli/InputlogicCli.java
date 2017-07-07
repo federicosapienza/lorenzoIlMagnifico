@@ -316,7 +316,7 @@ public class InputlogicCli implements InputLogic{
 	 */
 	@Override
 	public void setPlayerSuspended(){
-		printRequest("You are now suspended : insert any number to be able to play again");
+		printRequest("You are suspended : insert any number to be able to play again");
 		this.setWaitingResponse(false);
 	}
 	
@@ -359,8 +359,8 @@ public class InputlogicCli implements InputLogic{
 	 */
 	@Override
 	public void setWaitingCouncilPrivilege() {
-		output.printResources(view.getThisPlayer());
 		printRequest("Insert the correspondent number");
+		output.printResources(view.getThisPlayer());
 		this.setWaitingResponse(false);
 	}
 
