@@ -324,10 +324,10 @@ public class OutputCLI implements Output{
 		}
 		xPrintSysOut("\n");
 		
-		if(player.getLeaderCardUsed().isEmpty())
+		if(!player.getLeaderCardUsed().isEmpty()){
 			printLeaderCards(player.getLeaderCardUsed());
-			
-		xPrintSysOut("\n");
+			xPrintSysOut("\n");
+		}
 		
 		xPrintSysOut("Personal tile values: ");
 		xPrintSysOut(player.getPersonalTileValues());

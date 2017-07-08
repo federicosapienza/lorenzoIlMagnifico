@@ -47,7 +47,8 @@ public class ClientMain {
 			connection= new SocketOutClient(socket);
 			socketINClient = new SocketINClient(socket);
 		} catch (IOException e) {
-			LOG.log( Level.SEVERE, "error in socket connection ", e);		
+			LOG.log( Level.SEVERE, "error in socket connection ", e);
+			
 		}
 		MainClientView view = new MainClientView();
 		ExecutorService pool = Executors.newFixedThreadPool(2);

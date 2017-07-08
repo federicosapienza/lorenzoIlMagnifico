@@ -235,7 +235,10 @@ public class ChoiceController implements Observer<Integer>{
 			player.setPlayerActive();
 			VaticanReportHandler handler= handlers.getVaticanReportHandler();
 			handler.perform(player, choice);
-			
+			synchronized (player) {
+				player.setStatus(new Request(PlayerStatus.WAITINGHISTURN, null , null));
+			}
+
 			handlers.getGameElements().getGame().vaticanReportNext(); // automatically ends the turn
 	}
 		
