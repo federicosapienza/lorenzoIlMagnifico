@@ -39,17 +39,21 @@ public class ClientMain {
 	 * @param firstMatch It's a flag that indicates if the client is playing his first match or not 
 	 * @param username It's the username of the client
 	 */
-	public synchronized void start(boolean firstMatch, String username){ 
+	public synchronized void start(boolean firstMatch, String username) { 
 		//username is set to null if first match, saves the name chosen in first match otherwise
 		ClientConnection connection=null;
+		
 		try {
 			socket= new Socket(IP, PORT);
 			connection= new SocketOutClient(socket);
 			socketINClient = new SocketINClient(socket);
-		} catch (IOException e) {
+		 }catch (IOException e) {
 			LOG.log( Level.SEVERE, "error in socket connection ", e);
-			
+			return;
 		}
+
+		
+	
 		MainClientView view = new MainClientView();
 		ExecutorService pool = Executors.newFixedThreadPool(2);
 		Output output= new OutputCLI();
