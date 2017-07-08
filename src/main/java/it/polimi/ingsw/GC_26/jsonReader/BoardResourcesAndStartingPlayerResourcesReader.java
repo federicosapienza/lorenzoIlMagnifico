@@ -186,7 +186,7 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 	public void readFaithTrack(BonusImplementation bonusImplementation){
 		List<Integer> list2;
 		try {
-			fileReader = new FileReader("src/ResourcesForBoard/Faith_Point_Track/faith_point_track.json");
+			fileReader = new FileReader("doc/ResourcesForBoard/Faith_Point_Track/faith_point_track.json");
 			br = new BufferedReader(fileReader);
 			jsonObject= gson.fromJson(br, JsonObject.class);
 			} catch (FileNotFoundException e) {
@@ -219,7 +219,7 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 	public void readTimers(TimerValueImplementation timerValueImplementation){
 		JsonElement jsonElement = null;
 		try {
-			fileReader = new FileReader("src/Timers/timer.json");
+			fileReader = new FileReader("doc/Timers/timer.json");
 			br = new BufferedReader(fileReader);
 			jsonObject= gson.fromJson(br, JsonObject.class);
 			} catch (FileNotFoundException e) {
