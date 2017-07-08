@@ -10,6 +10,7 @@ Server:
      Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/server/main/Server.java
 
 Client:
+
      Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/client/main/ClientMain.java
 
 
@@ -22,7 +23,6 @@ Server and Clients communicates via socket communication.
 When Server is first started, it automatically reads any file from:
       Magnifico-Yun-Sapienza-Vare/src/Cards/
       etc...
-      
       Then it automatically waits for client connection
 
 # Game 
