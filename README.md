@@ -6,10 +6,11 @@ This is the repository for the java implementation of Lorenzo il Magnifico.
 In order to start game,  you first need to start Server. Then you can start an unlimited number of clients.
 
 Server: 
-Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/server/main/Server.java
+     
+     Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/server/main/Server.java
 
 Client:
-Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/client/main/ClientMain.java
+     Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/client/main/ClientMain.java
 
 
 You can interact with client via a cli interface.
