@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.GC_26.model</OriginalElement>
+  <nodes>
+    <node x="2456.7968411805214" y="414.70912300213377">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCardImplementation</node>
+    <node x="1328.287441261155" y="467.175415966773">it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints</node>
+    <node x="568.0143739477599" y="974.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.zones.Market</node>
+    <node x="1773.68367965758" y="588.8654257795022">it.polimi.ingsw.GC_26.model.player.PermanentModifiers</node>
+    <node x="2116.657900213585" y="1180.386277034272">it.polimi.ingsw.GC_26.model.handlers.actionHandlers.SecondActionHandler</node>
+    <node x="-65.4231260522406" y="974.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.zones.HarvestZone</node>
+    <node x="1232.984498765236" y="-128.66353544051043">it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour</node>
+    <node x="3374.8657556337334" y="1353.2435928485313">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.CardNumbersRequirement</node>
+    <node x="543.0143739477599" y="844.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MarketPosition</node>
+    <node x="1655.2895798084992" y="1180.386277034272">it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.TwoPaymentsHandler</node>
+    <node x="2448.997913141832" y="1180.386277034272">it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.DiplomaticPrivilegesHandler</node>
+    <node x="1633.6281140683527" y="950.3862770342722">it.polimi.ingsw.GC_26.model.handlers.Handler</node>
+    <node x="3156.565063146586" y="835.3235117949816">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.TwoOrPayments</node>
+    <node x="-293.1106260522406" y="974.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.zones.Tower</node>
+    <node x="1502.2895798084992" y="1180.386277034272">it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.TradeHandler</node>
+    <node x="3423.782349291818" y="735.3235117949816">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment</node>
+    <node x="-142.9856260522406" y="744.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.SinglePosition</node>
+    <node x="1791.9465335146251" y="487.1766266665893">it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet</node>
+    <node x="705.0143739477599" y="844.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.CouncilPalace</node>
+    <node x="2492.3218302800724" y="222.32428958082187">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCard</node>
+    <node x="1314.2895798084992" y="1180.386277034272">it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.LeaderCardHandler</node>
+    <node x="1507.7724053796808" y="-259.05102317459887">it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Dice</node>
+    <node x="582.0985075053101" y="1571.8069110098368">it.polimi.ingsw.GC_26.model.game.gameLogic.GameElements</node>
+    <node x="3853.8657556337325" y="1353.2435928485313">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.PointsOrResourcesRequirement</node>
+    <node x="356.01437394775985" y="844.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MultipleProduction</node>
+    <node x="-318.1106260522406" y="844.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.TowerPosition</node>
+    <node x="1945.157900213585" y="1050.386277034272">it.polimi.ingsw.GC_26.model.handlers.actionHandlers.ActionHandler</node>
+    <node x="1504.2724053796808" y="-119.05102317459887">it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Dices</node>
+    <node x="2774.7211940213174" y="511.7804954876781">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes</node>
+    <node x="3149.122362220066" y="965.3235117949816">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects</node>
+    <node x="3606.8657556337325" y="1353.2435928485313">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.CardNumbersOrRequirement</node>
+    <node x="181.01437394775985" y="844.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.SingleProduction</node>
+    <node x="1303.912441261155" y="387.175415966773">it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Points</node>
+    <node x="3076.1793393503417" y="409.2009307921762">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.excommunicationTile.ExcommunicationTileImplementation</node>
+    <node x="15.014373947759395" y="844.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MultipleHarvest</node>
+    <node x="466.2679010141794" y="-36.498891155633316">it.polimi.ingsw.GC_26.model.game.gameComponents.personalBoard.PersonalBoard</node>
+    <node x="2747.3236174251415" y="409.07229715289236">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardImplementation</node>
+    <node x="-31.051414312887175" y="1574.8700216813388">it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus</node>
+    <node x="1412.912441261155" y="387.175415966773">it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Resources</node>
+    <node x="3327.565063146586" y="835.3235117949816">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.MilitaryPointPayment</node>
+    <node x="1974.2531140683527" y="950.3862770342722">it.polimi.ingsw.GC_26.model.handlers.actionHandlers.ActionCheckerHandler</node>
+    <node x="1352.6247112826777" y="615.3586649756468">it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Warehouse</node>
+    <node x="464.2659697705586" y="118.95257251756175">it.polimi.ingsw.GC_26.model.game.gameComponents.personalBoard.PersonalBoardTile</node>
+    <node x="1790.6493330984679" y="381.5947897155485">it.polimi.ingsw.GC_26.model.player.PlayerStatus</node>
+    <node x="1931.657900213585" y="1180.386277034272">it.polimi.ingsw.GC_26.model.handlers.actionHandlers.FirstActionHandler</node>
+    <node x="376.1272179081376" y="1573.5463562014293">it.polimi.ingsw.GC_26.model.game.gameLogic.EndGameLogic</node>
+    <node x="499.8096632980988" y="281.02885936456323">it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone</node>
+    <node x="301.13937394775985" y="974.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.zones.ProductionZone</node>
+    <node x="1817.7777959621096" y="294.7140627853156">it.polimi.ingsw.GC_26.model.player.Player</node>
+    <node x="1474.6962544580686" y="44.5836895074699">it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMember</node>
+    <node x="1957.5449356046602" y="1370.386277034272">it.polimi.ingsw.GC_26.model.handlers.actionHandlers.MainActionHandler</node>
+    <node x="1998.64493560466" y="1590.386277034272">it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.VaticanReportHandler</node>
+    <node x="165.9861881512128" y="1575.498780559226">it.polimi.ingsw.GC_26.model.game.gameLogic.GameParameters</node>
+    <node x="1472.365175426803" y="163.41517280612345">it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMembers</node>
+    <node x="-159.1106260522406" y="844.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.SingleHarvest</node>
+    <node x="519.9908454101493" y="407.87374024592475">it.polimi.ingsw.GC_26.model.game.gameComponents.board.Board</node>
+    <node x="2795.593564158521" y="211.3079051609061">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard</node>
+    <node x="195.20687199352562" y="1369.2801547071258">it.polimi.ingsw.GC_26.model.game.gameLogic.Game</node>
+    <node x="3169.8657556337334" y="1353.2435928485313">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.TwoAndRequirements</node>
+    <node x="293.82208780252745" y="744.4527016610583">it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.MultiplePosition</node>
+    <node x="1755.2531140683527" y="950.3862770342722">it.polimi.ingsw.GC_26.model.handlers.actionHandlers.ActionPerformerHandler</node>
+    <node x="3080.709234419259" y="205.40985863172762">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.excommunicationTile.ExcommunicationTile</node>
+    <node x="-257.2614168640099" y="1574.630621453376">it.polimi.ingsw.GC_26.model.game.gameLogic.NextRoundOrder</node>
+    <node x="3369.208041778966" y="1163.2435928485313">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement</node>
+    <node x="2274.282900213585" y="950.3862770342722">it.polimi.ingsw.GC_26.model.handlers.actionHandlers.HarvestAndProductionHandler</node>
+    <node x="3527.565063146586" y="835.3235117949816">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.ResourcesPayment</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.CardNumbersRequirement" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement">
+      <point x="0.0" y="-15.0" />
+      <point x="3480.8657556337325" y="1333.2435928485313" />
+      <point x="3443.2913751122974" y="1333.2435928485313" />
+      <point x="10.58333333333303" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.LeaderCardHandler" target="it.polimi.ingsw.GC_26.model.handlers.Handler">
+      <point x="0.0" y="-15.0" />
+      <point x="1398.2895798084992" y="1150.386277034272" />
+      <point x="1321.3781140683527" y="1150.386277034272" />
+      <point x="1321.3781140683527" y="1030.386277034272" />
+      <point x="1645.8781140683527" y="1030.386277034272" />
+      <point x="-36.75" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.VaticanReportHandler" target="it.polimi.ingsw.GC_26.model.handlers.Handler">
+      <point x="69.375" y="-15.0" />
+      <point x="2160.51993560466" y="1565.386277034272" />
+      <point x="2715.824721749892" y="1565.386277034272" />
+      <point x="2715.824721749892" y="1000.3862770342722" />
+      <point x="1719.3781140683527" y="1000.3862770342722" />
+      <point x="36.75" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.CouncilPalace" target="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.MultiplePosition">
+      <point x="-33.75" y="-15.0" />
+      <point x="738.7643739477599" y="794.4527016610583" />
+      <point x="417.1554211358607" y="794.4527016610583" />
+      <point x="49.33333333333337" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.handlers.actionHandlers.FirstActionHandler" target="it.polimi.ingsw.GC_26.model.handlers.actionHandlers.ActionHandler">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.handlers.choiceHandlers.TwoPaymentsHandler" target="it.polimi.ingsw.GC_26.model.handlers.Handler">
+      <point x="0.0" y="-15.0" />
+      <point x="1747.2895798084992" y="1150.386277034272" />
+      <point x="1670.3781140683527" y="1150.386277034272" />
+      <point x="-12.25" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.CardNumbersOrRequirement" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement">
+      <point x="0.0" y="-15.0" />
+      <point x="3720.3657556337325" y="1323.2435928485313" />
+      <point x="3464.4580417789653" y="1323.2435928485313" />
+      <point x="31.75" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MarketPosition" target="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.SinglePosition">
+      <point x="-35.5" y="-15.0" />
+      <point x="578.5143739477599" y="804.4527016610583" />
+      <point x="-23.110626052240605" y="804.4527016610583" />
+      <point x="51.375" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MultipleProduction" target="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.MultiplePosition">
+      <point x="0.0" y="-15.0" />
+      <point x="439.01437394775985" y="824.4527016610583" />
+      <point x="367.82208780252745" y="824.4527016610583" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardImplementation" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard">
+      <point x="-94.87500000000045" y="-15.0" />
+      <point x="2780.741803615365" y="348.5223933378386" />
+      <point x="2847.2381415748982" y="348.5223933378385" />
+      <point x="2897.4473549011927" y="346.89667705787554" />
+      <point x="2896.014663682582" y="334.3443737263019" />
+      <point x="22.71428571428578" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.handlers.actionHandlers.SecondActionHandler" target="it.polimi.ingsw.GC_26.model.handlers.actionHandlers.ActionHandler">
+      <point x="0.0" y="-15.0" />
+      <point x="2208.657900213585" y="1160.386277034272" />
+      <point x="2060.157900213585" y="1160.386277034272" />
+      <point x="46.0" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.SingleHarvest" target="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.SinglePosition">
+      <point x="0.0" y="-15.0" />
+      <point x="-17.125" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.SingleProduction" target="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.SinglePosition">
+      <point x="0.0" y="-15.0" />
+      <point x="258.51437394775985" y="814.4527016610583" />
+      <point x="-57.360626052240605" y="814.4527016610583" />
+      <point x="17.125" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.TwoOrPayments" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment">
+      <point x="-37.75" y="-15.0" />
+      <point x="3194.315063146586" y="795.3235117949816" />
+      <point x="3432.365682625151" y="795.3235117949816" />
+      <point x="-42.91666666666697" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.TwoAndRequirements" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement">
+      <point x="-46.25" y="-15.0" />
+      <point x="3216.1157556337334" y="1323.2435928485313" />
+      <point x="3400.958041778966" y="1323.2435928485313" />
+      <point x="-31.75" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MultipleHarvest" target="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.MultiplePosition">
+      <point x="0.0" y="-15.0" />
+      <point x="88.0143739477594" y="824.4527016610583" />
+      <point x="318.4887544691942" y="824.4527016610583" />
+      <point x="-49.333333333333314" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.MilitaryPointPayment" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment">
+      <point x="0.0" y="-15.0" />
+      <point x="3417.065063146586" y="815.3235117949816" />
+      <point x="3466.699015958485" y="815.3235117949816" />
+      <point x="-8.58333333333303" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.PointsOrResourcesRequirement" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement">
+      <point x="-61.25" y="-15.0" />
+      <point x="3915.1157556337325" y="1313.2435928485313" />
+      <point x="3485.6247084456313" y="1313.2435928485313" />
+      <point x="52.91666666666697" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.excommunicationTile.ExcommunicationTileImplementation" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.excommunicationTile.ExcommunicationTile">
+      <point x="-68.5" y="-15.0" />
+      <point x="3146.472525540567" y="326.37367555307515" />
+      <point x="3214.1508085841915" y="329.25576686805243" />
+      <point x="45.0" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.ResourcesPayment" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment">
+      <point x="-41.75" y="-15.0" />
+      <point x="3569.315063146586" y="805.3235117949816" />
+      <point x="3501.032349291818" y="805.3235117949816" />
+      <point x="25.75" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.handlers.actionHandlers.ActionHandler" target="it.polimi.ingsw.GC_26.model.handlers.Handler">
+      <point x="-57.5" y="-15.0" />
+      <point x="1956.657900213585" y="1030.386277034272" />
+      <point x="1694.8781140683527" y="1030.386277034272" />
+      <point x="12.25" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCardImplementation" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCard">
+      <point x="0.0" y="-15.0" />
+      <point x="2562.003654990297" y="330.80605529812397" />
+      <point x="2582.6468436946043" y="330.1587291777764" />
+      <point x="30.0" y="15.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.TowerPosition" target="it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.common.SinglePosition">
+      <point x="46.0" y="-15.0" />
+      <point x="-203.1106260522406" y="824.4527016610583" />
+      <point x="-125.8606260522406" y="824.4527016610583" />
+      <point x="-51.375" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.35055852382636216" x="2062.865335069213" y="775.1837065175223" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
