@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects</OriginalElement>
+  <nodes>
+    <node x="1796.8352165676063" y="-1048.4589796231248">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.LoseVictoryPointsforEachNVictoryPointsEffect</node>
+    <node x="4832.3322418795315" y="-855.8063498888588">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.GoingToOccupiedActionSpacesAllowedEffect</node>
+    <node x="1730.9949003608338" y="-28.73997855503103">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ChangeFamilyMembersValue</node>
+    <node x="2335.4554370109277" y="763.7694341667157">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.DoubleServantsNeededEffect</node>
+    <node x="1702.0142704991886" y="750.3633621247045">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.GainVictoryPointsPerAnyMilitaryPointEffect</node>
+    <node x="1807.081663625379" y="-234.3010608442449">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.SetSecondAction</node>
+    <node x="3339.5" y="0.0">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect</node>
+    <node x="4795.346278529078" y="-46.67098211486757">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.CardsNumberToResourcesEffect</node>
+    <node x="2796.377632623893" y="760.3301545868279">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ReceiveDiscountOnActionsEffect</node>
+    <node x="1739.179457988154" y="-887.7273404631933">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.TradeEffect</node>
+    <node x="4849.513198618369" y="-1049.061354473479">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ReceiveResourcesOrPointsEffect</node>
+    <node x="4805.878102949057" y="757.995685700658">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.NoVictoryPointForCardTypeEffect</node>
+    <node x="4835.803666637455" y="-560.5803680423759">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.VaticanSupportBonus</node>
+    <node x="4837.696871357497" y="-231.9471420782612">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.FamilyMembersValueSetterEffect</node>
+    <node x="1756.6520963944301" y="-406.6010777069513">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.LoseVictoryPointForResourcesOrPointsEffect</node>
+    <node x="4821.4875950969235" y="182.6294496597243">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.DoubleImmediateResourcesFromCards</node>
+    <node x="4810.0204955068075" y="-395.7583613244967">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.PermanentResourcesMalusEffect</node>
+    <node x="1748.0227786225632" y="144.29602051306858">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.DeletingBonusFloorsEffect</node>
+    <node x="1743.8633959847907" y="302.5">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.MarketBanEffect</node>
+    <node x="1805.3102880510278" y="-541.7439468945987">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.DisableMilitaryPointsRequirement</node>
+    <node x="4860.65048660806" y="410.3354910574337">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.TwoAndEffect</node>
+    <node x="1751.140445599085" y="471.0436364531895">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ActionValueModifierEffect</node>
+    <node x="4829.624593918854" y="-716.3996778923442">it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.DisableTowerOccupiedMalus</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.VaticanSupportBonus" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-48.5" />
+      <point x="4386.93473372861" y="-407.9255671349738" />
+      <point x="3763.977842844328" y="-64.52955183317886" />
+      <point x="94.43181818181802" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.DoubleImmediateResourcesFromCards" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-37.0" />
+      <point x="4490.0" y="164.0" />
+      <point x="3674.40005969939" y="136.85174453602224" />
+      <point x="44.06818181818198" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.LoseVictoryPointForResourcesOrPointsEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-48.5" />
+      <point x="2548.02663763881" y="-320.1184038254464" />
+      <point x="3239.020210761787" y="-5.883684137630553" />
+      <point x="-94.43181818181802" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.GainVictoryPointsPerAnyMilitaryPointEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-48.5" />
+      <point x="2631.067375471722" y="323.14325906681927" />
+      <point x="3325.6885934228508" y="142.06641507575313" />
+      <point x="-18.886363636363512" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.LoseVictoryPointsforEachNVictoryPointsEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-48.5" />
+      <point x="2796.6463893097375" y="-931.8295600040517" />
+      <point x="3374.6478149850973" y="-205.34323956129697" />
+      <point x="-132.2045454545455" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.MarketBanEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-37.0" />
+      <point x="2427.5" y="164.0" />
+      <point x="3174.7060204682916" y="116.34819894971946" />
+      <point x="-44.06818181818198" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.TwoAndEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-81.5" />
+      <point x="4350.338187925345" y="321.34088479325555" />
+      <point x="3641.8343387279942" y="174.0" />
+      <point x="31.477272727272975" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.CardsNumberToResourcesEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-81.5" />
+      <point x="4559.288564866469" y="-0.8327941895229287" />
+      <point x="3753.353371035578" y="95.17877982804816" />
+      <point x="56.65909090909099" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.FamilyMembersValueSetterEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-59.5" />
+      <point x="4609.079826600848" y="-188.14131656784753" />
+      <point x="3793.092535590465" y="56.52228794940504" />
+      <point x="69.25" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.GoingToOccupiedActionSpacesAllowedEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-37.0" />
+      <point x="4552.422866820486" y="-822.4994620050484" />
+      <point x="3727.321968024863" y="-250.43555744637627" />
+      <point x="119.61363636363649" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.DisableMilitaryPointsRequirement" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-37.0" />
+      <point x="2641.4113657579787" y="-562.6520963944301" />
+      <point x="3266.232366164667" y="-61.97144302517688" />
+      <point x="-107.02272727272748" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ChangeFamilyMembersValue" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-59.5" />
+      <point x="2333.289136460561" y="-15.286230974251794" />
+      <point x="3067.9570447121623" y="58.48737653294114" />
+      <point x="-69.25" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.DeletingBonusFloorsEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-37.0" />
+      <point x="2134.3121440840223" y="125.40891936983172" />
+      <point x="3116.3693823691137" y="91.09962261362972" />
+      <point x="-56.65909090909099" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.SetSecondAction" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-81.5" />
+      <point x="2504.653140375968" y="-148.8112477190342" />
+      <point x="3175.3731994187165" y="32.21926988032385" />
+      <point x="-81.84090909090901" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.PermanentResourcesMalusEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-48.5" />
+      <point x="4571.922328825535" y="-313.01726064394506" />
+      <point x="3805.683444681374" y="-6.265986563885008" />
+      <point x="81.84090909090901" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.DoubleServantsNeededEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-37.0" />
+      <point x="3335.5" y="194.0" />
+      <point x="3361.152367017894" y="163.50284732782046" />
+      <point x="-6.295454545454504" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ActionValueModifierEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-70.5" />
+      <point x="2455.180274328485" y="229.27608921832552" />
+      <point x="3274.9762434917166" y="128.25427099173066" />
+      <point x="-31.47727272727252" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ReceiveResourcesOrPointsEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-59.5" />
+      <point x="4267.469427973621" y="-901.6953956921121" />
+      <point x="3605.6798362105487" y="-177.4825546397775" />
+      <point x="132.2045454545455" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.DisableTowerOccupiedMalus" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-37.0" />
+      <point x="4516.112727010731" y="-617.7098177021003" />
+      <point x="3756.961678544586" y="-145.4166633224541" />
+      <point x="107.02272727272748" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.TradeEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-125.5" />
+      <point x="2518.910947602905" y="-803.4704504697727" />
+      <point x="3272.4955402550268" y="-220.7092103440765" />
+      <point x="-119.61363636363649" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ReceiveDiscountOnActionsEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-59.5" />
+      <point x="3319.3406173622266" y="350.29790744492016" />
+      <point x="3429.019365327129" y="197.81214408402246" />
+      <point x="6.295454545454504" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.NoVictoryPointForCardTypeEffect" target="it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect">
+      <point x="0.0" y="-48.5" />
+      <point x="3960.4460626417817" y="493.66558837904586" />
+      <point x="3496.886363636363" y="184.0" />
+      <point x="18.886363636363512" y="37.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4004319648466007" x="4448.668286970245" y="118.42394970354258" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
