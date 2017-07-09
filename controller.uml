@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.GC_26.controller</OriginalElement>
+  <nodes>
+    <node x="0.0" y="66.0">it.polimi.ingsw.GC_26.controller.ActionController</node>
+    <node x="328.0" y="0.0">it.polimi.ingsw.GC_26.controller.ChoiceController</node>
+    <node x="776.0" y="121.0">it.polimi.ingsw.GC_26.controller.EndTurnController</node>
+    <node x="391.0" y="412.0">it.polimi.ingsw.GC_26.controller.GameInitialiserAndController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.GC_26.controller.GameInitialiserAndController" target="it.polimi.ingsw.GC_26.controller.ChoiceController">
+      <point x="0.0" y="-115.0" />
+      <point x="0.0" y="181.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.controller.GameInitialiserAndController" target="it.polimi.ingsw.GC_26.controller.ActionController">
+      <point x="-100.66666666666669" y="-115.0" />
+      <point x="441.3333333333333" y="387.0" />
+      <point x="154.0" y="387.0" />
+      <point x="0.0" y="115.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.GC_26.controller.GameInitialiserAndController" target="it.polimi.ingsw.GC_26.controller.EndTurnController">
+      <point x="100.66666666666663" y="-115.0" />
+      <point x="642.6666666666666" y="387.0" />
+      <point x="880.0" y="387.0" />
+      <point x="0.0" y="60.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6579589378043271" x="515.7199096679688" y="255.49868774414062" />
+  <SelectedNodes>
+    <node>it.polimi.ingsw.GC_26.controller.GameInitialiserAndController</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
