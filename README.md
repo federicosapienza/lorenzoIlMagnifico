@@ -42,7 +42,7 @@ In order to change any timer value , go to:
 
 # Cli
 
-To interact with the game, you only has to follow the istructions the interface will send.
+To interact with the game, just follow the istructions the interface will send.
 
 # Docs
 
