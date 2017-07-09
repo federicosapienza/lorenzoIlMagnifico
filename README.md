@@ -48,7 +48,7 @@ To interact with the game, just follow the instructions sent by the interface.
 
 # Docs
 
-In the doc folder there are some UML diagrams. 2 are dedicated to the Model: the file “orderedModelUML.png” (if you prefer, you can see also the equivalent file, which is “modelUML.png”, that has a nicer management of the links between classes, but similar classes have very long links and are very outdistanced from each other) contains a reordered UML diagram for the Model, with the Effects displayed as a package, because it contains too many classes, and representing them with the other classes in an only UML diagram would have compromised its readability and clarity. So we have decided to represent with an expanded view the Effects package with another dedicated UML diagram, which is contained in the “effectsUML.png” file.
+Inside the “diagrams” folder there are some UML diagrams. 2 are dedicated to the Model: the file “orderedModelUML.png” (if you prefer, you can see also the equivalent file, which is “modelUML.png”, that has a nicer management of the links between classes, but similar classes have very long links and are very outdistanced from each other) contains a reordered UML diagram for the Model, with the Effects displayed as a package, because it contains too many classes, and representing them with the other classes in an only UML diagram would have compromised its readability and clarity. So we have decided to represent with an expanded view the Effects package with another dedicated UML diagram, which is contained in the “effectsUML.png” file.
 
 Then there’s a UML diagram dedicated to the View, which is contained in the “viewUML.png”, and a UML diagram dedicated to the Controllers, which is contained in the ”controllerUML.png” file. 
 
