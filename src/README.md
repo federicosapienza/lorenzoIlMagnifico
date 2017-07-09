@@ -16,7 +16,7 @@ The server-side view is pretty simple:
 -receives objects(an "Action" object or a string) from the connection and sends the info to the right controller
 -starts and ends timers.
 
-#Controller
+# Controller
 Controller ' s objects are notified by the view . Controllers check if player is allowed to perform the action that was received
 and call the part of the model that was designed to perform that action. 
 Specifically, the controller calls one of the objects of "Handlers" package,  instantiated at the beginning of the game and always usable by controllers 
