@@ -52,7 +52,7 @@ Inside the “diagrams” folder there are some UML diagrams. 2 are dedicated to
 
 Then there’s a UML diagram dedicated to the View, which is contained in the “viewUML.png”, and a UML diagram dedicated to the Controllers, which is contained in the ”controllerUML.png” file. 
 
-There is also an initial UML diagram, named “UML 20_5_17.mdj”, which contains the initial planning around the model in the very first moments of development. 
+There is also an initial UML diagram, named "InitialUMLDraft.png" which contains the initial planning around the model in the very first moments of development. 
 
 Finally, please take a look to the “README.md” file contained in the "src” folder, that briefly describes the MVC pattern that we’ve followed.
 
