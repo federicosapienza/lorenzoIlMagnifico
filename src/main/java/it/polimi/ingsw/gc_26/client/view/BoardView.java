@@ -194,7 +194,8 @@ public class BoardView {
 			return productionZone;
 		case COUNCILPALACE:
 			return councilPalace;
-		default: throw new IllegalArgumentException();
+		default: 
+			throw new IllegalArgumentException();
 		
 		}
 	

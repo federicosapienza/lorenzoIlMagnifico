@@ -55,4 +55,13 @@ public class BoardViewTest {
 		boardView.cleanBoard();
 		assertTrue(boardView.getBuildingsTower().size() == 0 && boardView.getCharactersTower().size() == 0);
 	}
+	
+	@Test
+	public void testCardHereNullAfterNotification() {
+		boardView.addPosition(posView);
+		boardView.addPosition(posView2);
+		boardView.update(actionNotification);
+		assertNull(boardView.getVenturesTower().get(0).getCardHere());
+	}
+	
 }
