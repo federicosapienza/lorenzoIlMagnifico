@@ -56,6 +56,3 @@ There is also an initial UML diagram, named “UML 20_5_17.mdj”, which contain
 
 Finally, please take a look to the “README.md” file contained in the "src” folder, that briefly describes the MVC pattern that we’ve followed.
 
-
-#Authors
-Federico Sapienza, Leonardo Varè, David Yun.
