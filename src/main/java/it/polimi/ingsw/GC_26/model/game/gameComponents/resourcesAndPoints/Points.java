@@ -78,5 +78,28 @@ public class Points {
 		return temp.toString(); 
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		    if (this == obj)                
+		        return true;
+		    if (obj == null)               
+		        return false;
+		    if (getClass() != obj.getClass())   
+		        return false;
+		    Points other = (Points) obj;               
+		    if (militaryPoints != other.getMilitaryPoints())        
+		        return false;                
+		    if(victoryPoints!=other.getVictoryPoints())
+		    	return false;
+		    if (faithPoints != other.getFaithPoints())        
+		        return false;                
+		    if(councilPrivileges!=other.getCouncilPrivileges())
+		    	return false;
+		    return true; 
+	}
 	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }

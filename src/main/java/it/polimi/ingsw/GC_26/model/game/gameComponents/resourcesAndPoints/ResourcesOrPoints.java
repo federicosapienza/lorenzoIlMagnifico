@@ -49,7 +49,7 @@ public class ResourcesOrPoints{
 	
 	/**
 	 * Method called to create a new ResourcesOrPoints object, only with the resources contained in the parameters (every type of 
-	 * Points are set to 0)
+	 * Points is set to 0)
 	 * @param coins the coins of the new ResourcesOrPoints object
 	 * @param servants the servants of the new ResourcesOrPoints object
 	 * @param wood the wood of the new ResourcesOrPoints object
@@ -62,7 +62,7 @@ public class ResourcesOrPoints{
 	
 	/**
 	 * Method called to create a new ResourcesOrPoints object, only with the Points contained in the parameters (every type of 
-	 * Resources are set to 0)
+	 * Resources is set to 0)
 	 * @param victoryP the Victory Points of the new ResourcesOrPoints object
 	 * @param militaryP the Military Points of the new ResourcesOrPoints object
 	 * @param faithP the Faith Points of the new ResourcesOrPoints object
@@ -242,5 +242,22 @@ public class ResourcesOrPoints{
 	public int getVictoryPoints() {
 		return points.getVictoryPoints();
 
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		    if (this == obj)                
+		        return true;
+		    if (obj == null)               
+		        return false;
+		    if (getClass() != obj.getClass())   
+		        return false;
+		    ResourcesOrPoints other = (ResourcesOrPoints) obj;               
+		    return resources.equals(other.getResources()) && points.equals(other.getPoints());
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 }

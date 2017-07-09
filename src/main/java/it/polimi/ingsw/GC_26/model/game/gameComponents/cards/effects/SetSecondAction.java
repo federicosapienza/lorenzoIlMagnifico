@@ -26,7 +26,7 @@ public class SetSecondAction implements Effect{
 	 */
 	//
 	private final Action action; 
-	private final ResourcesOrPoints secondActionDiscount;  //leave null if does not exists
+	private final ResourcesOrPoints secondActionDiscount;  //leave all zero if does not exists
 	
 	/**
 	 * Constructor: it creates the effect of the second action, with the value and the discount expressed in the parameters
@@ -68,7 +68,7 @@ public class SetSecondAction implements Effect{
 	@Override
 	public String toString() {
 		if(action.getZone()!=null){
-		if(secondActionDiscount==null)
+		if(secondActionDiscount.equals(ResourcesOrPoints.newResources(0, 0, 0, 0)))
 			return " Second action of type " +action.getZone() +" of value " +value;
 		else{
 			return " Second action of type " +action.getZone() +" of value " +value+ " with discount "+ secondActionDiscount;
