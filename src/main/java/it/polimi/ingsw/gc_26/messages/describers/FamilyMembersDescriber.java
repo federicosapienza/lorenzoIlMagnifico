@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import it.polimi.ingsw.gc_26.model.game.game_components.dices.Colour;
-import it.polimi.ingsw.gc_26.model.game.game_components.familyMembers.FamilyMembers;
+import it.polimi.ingsw.gc_26.model.game.game_components.family_members.FamilyMembers;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)

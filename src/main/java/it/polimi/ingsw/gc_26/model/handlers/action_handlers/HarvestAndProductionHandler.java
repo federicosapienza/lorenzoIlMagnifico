@@ -4,7 +4,7 @@ import java.util.List;
 
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.gc_26.model.game.game_components.personalBoard.PersonalBoardTile;
+import it.polimi.ingsw.gc_26.model.game.game_components.personal_board.PersonalBoardTile;
 import it.polimi.ingsw.gc_26.model.player.Player;
 import it.polimi.ingsw.gc_26.model.player.PlayerStatus;
 

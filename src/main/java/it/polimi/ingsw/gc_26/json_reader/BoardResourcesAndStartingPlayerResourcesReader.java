@@ -14,8 +14,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
-import it.polimi.ingsw.gc_26.model.game.game_components.personalBoard.PersonalBoardTile;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.personal_board.PersonalBoardTile;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 
 /**
  * 
@@ -46,7 +46,9 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 	private ResourcesOrPoints[] ventureTowerResources = new ResourcesOrPoints[4];
 	private ResourcesOrPoints[] marketResources = new ResourcesOrPoints[4];
 	private ResourcesOrPoints[] councilResources = new ResourcesOrPoints[1];
-	
+	private static final String FILE_NOT_FOUND = "File not found!";
+	private static final String FILEREADER_NOT_CLOSED = "File reader not closed!";
+	private static final String BUFFERED_READER_NOT_CLOSED = "Buffered Reader not closed";
 	/**
 	 * Method that reads the resources and points of the Board from the file 
 	 * @param bonusImplementation It's the object that contains all the resources and points that must be placed in the Board
@@ -59,13 +61,13 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 				br = new BufferedReader(fileReader);
 				jsonObject= gson.fromJson(br, JsonObject.class);
 				} catch (FileNotFoundException e) {
-				logger.log(null, "File not Found!", e);
+				logger.log(null, FILE_NOT_FOUND, e);
 			}
 			finally {
 				try {
 					fileReader.close();
 				} catch (IOException e2) {
-				logger.log(null, "FileReader not closed!", e2);
+				logger.log(null, FILEREADER_NOT_CLOSED, e2);
 			}
 		}
 		list = new Gson().fromJson(jsonObject.get("resources"), listTypeInt);
@@ -75,7 +77,7 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 				br.close();
 			}
 			catch (IOException e) {
-				logger.log(null, "Buffered Reader not closed", e);
+				logger.log(null, BUFFERED_READER_NOT_CLOSED, e);
 			}
 		}
 		bonusImplementation.getListOfResourcesOfPointsArray().add(territoryTowerResources);
@@ -99,13 +101,13 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 				br = new BufferedReader(fileReader);
 				jsonObject= gson.fromJson(br, JsonObject.class);
 				} catch (FileNotFoundException e) {
-				logger.log(null, "File not Found!", e);
+				logger.log(null, FILE_NOT_FOUND, e);
 			}
 			finally {
 				try {
 					fileReader.close();
 				} catch (IOException e2) {
-				logger.log(null, "FileReader not closed!", e2);
+				logger.log(null, FILEREADER_NOT_CLOSED, e2);
 			}
 			}
 			list = new Gson().fromJson(jsonObject.get("resources"), listTypeInt);
@@ -115,7 +117,7 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 				br.close();
 				}
 			catch (IOException e) {
-				logger.log(null, "Buffered Reader not closed", e);
+				logger.log(null, BUFFERED_READER_NOT_CLOSED, e);
 			}
 		}
 	}
@@ -156,13 +158,13 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 				br = new BufferedReader(fileReader);
 				jsonObject= gson.fromJson(br, JsonObject.class);
 				} catch (FileNotFoundException e) {
-				logger.log(null, "File not Found!", e);
+				logger.log(null, FILE_NOT_FOUND, e);
 			}
 			finally {
 				try {
 					fileReader.close();
 				} catch (IOException e2) {
-				logger.log(null, "FileReader not closed!", e2);
+				logger.log(null, FILEREADER_NOT_CLOSED, e2);
 				}
 			}
 			list = new Gson().fromJson(jsonObject.get("resourcesOrPointsProduction"), listTypeInt);
@@ -174,7 +176,7 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 				br.close();
 				}
 			catch (IOException e) {
-				logger.log(null, "Buffered reader not closed", e);
+				logger.log(null, BUFFERED_READER_NOT_CLOSED, e);
 			}
 		}		
 	}
@@ -190,13 +192,13 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 			br = new BufferedReader(fileReader);
 			jsonObject= gson.fromJson(br, JsonObject.class);
 			} catch (FileNotFoundException e) {
-			logger.log(null, "File not Found!", e);
+			logger.log(null, FILE_NOT_FOUND, e);
 		}
 		finally {
 			try {
 				fileReader.close();
 			} catch (IOException e2) {
-			logger.log(null, "FileReader not closed!", e2);
+			logger.log(null, FILEREADER_NOT_CLOSED, e2);
 		}
 		}
 	list = new Gson().fromJson(jsonObject.get("position"), listTypeInt);
@@ -208,7 +210,7 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 			br.close();
 			}
 		catch (IOException e) {
-			logger.log(null, "Buffered reader not closed!", e);
+			logger.log(null, BUFFERED_READER_NOT_CLOSED, e);
 		}
 	}
 	
@@ -223,13 +225,13 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 			br = new BufferedReader(fileReader);
 			jsonObject= gson.fromJson(br, JsonObject.class);
 			} catch (FileNotFoundException e) {
-			logger.log(null, "File not Found!", e);
+			logger.log(null, FILE_NOT_FOUND, e);
 		}
 		finally {
 			try {
 				fileReader.close();
 			} catch (IOException e2) {
-			logger.log(null, "FileReader not closed!", e2);
+			logger.log(null, FILEREADER_NOT_CLOSED, e2);
 		}
 		}
 		jsonElement = jsonObject.get("startingTimer");
@@ -245,7 +247,7 @@ public class BoardResourcesAndStartingPlayerResourcesReader extends CardsReader 
 			br.close();
 			}
 		catch (IOException e) {
-			logger.log(null, "Buffered reader not closed!", e);
+			logger.log(null, BUFFERED_READER_NOT_CLOSED, e);
 		}
 	}
 	

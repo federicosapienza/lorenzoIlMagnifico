@@ -1,7 +1,7 @@
 package it.polimi.ingsw.gc_26.model.game.game_components.cards.leaderCard;
 
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.gc_26.model.game.game_components.personalBoard.PersonalBoard;
+import it.polimi.ingsw.gc_26.model.game.game_components.personal_board.PersonalBoard;
 import it.polimi.ingsw.gc_26.model.player.Player;
 
 /**

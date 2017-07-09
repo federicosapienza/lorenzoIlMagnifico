@@ -5,7 +5,7 @@ import it.polimi.ingsw.gc_26.messages.Request;
 import it.polimi.ingsw.gc_26.messages.action.Action;
 import it.polimi.ingsw.gc_26.messages.action.ActionNotification;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.BoardZone;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameElements;
 import it.polimi.ingsw.gc_26.model.player.Player;
 import it.polimi.ingsw.gc_26.utilities.exceptions.IllegalActionException;

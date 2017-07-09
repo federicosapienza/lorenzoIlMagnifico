@@ -98,6 +98,6 @@ public class ClientMain {
 	 */
 	public static void main(String[] args){
 		ClientMain client = new ClientMain();
-		client.start( true, null);
+		client.start(true, null);
 	}
 }

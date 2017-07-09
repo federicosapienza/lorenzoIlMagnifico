@@ -6,7 +6,7 @@ import it.polimi.ingsw.gc_26.model.game.game_components.board.positions.TowerPos
 import it.polimi.ingsw.gc_26.model.game.game_components.board.zones.Tower;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.gc_26.model.game.game_components.familyMembers.FamilyMember;
+import it.polimi.ingsw.gc_26.model.game.game_components.family_members.FamilyMember;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameParameters;
 import it.polimi.ingsw.gc_26.model.player.Player;
 import it.polimi.ingsw.gc_26.model.player.PlayerStatus;

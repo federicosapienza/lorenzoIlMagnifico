@@ -48,7 +48,7 @@ import it.polimi.ingsw.gc_26.model.game.game_components.cards.payments.MilitaryP
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.payments.ResourcesPayment;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.payments.TwoOrPayments;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.payments.common.Payment;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.*;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.*;
 
 /**
  * 

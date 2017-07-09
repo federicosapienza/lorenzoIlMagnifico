@@ -14,7 +14,7 @@ import it.polimi.ingsw.gc_26.json_reader.Cards;
 import it.polimi.ingsw.gc_26.json_reader.ReadAll;
 import it.polimi.ingsw.gc_26.json_reader.TimerValuesInterface;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.BoardZone;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.game.game_logic.Game;
 import it.polimi.ingsw.gc_26.model.player.PermanentModifiers;
 import it.polimi.ingsw.gc_26.model.player.Player;

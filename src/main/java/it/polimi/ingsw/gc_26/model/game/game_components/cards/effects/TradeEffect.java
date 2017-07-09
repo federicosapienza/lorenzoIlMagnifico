@@ -3,7 +3,7 @@ package it.polimi.ingsw.gc_26.model.game.game_components.cards.effects;
 
 import it.polimi.ingsw.gc_26.messages.Request;
 import it.polimi.ingsw.gc_26.messages.describers.CardDescriber;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.player.Player;
 import it.polimi.ingsw.gc_26.model.player.PlayerStatus;
 

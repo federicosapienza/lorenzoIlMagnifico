@@ -17,9 +17,9 @@ import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.D
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.excommunicationTile.ExcommunicationTile;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.leaderCard.LeaderCard;
-import it.polimi.ingsw.gc_26.model.game.game_components.personalBoard.PersonalBoardTile;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.PlayerWallet;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.personal_board.PersonalBoardTile;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.PlayerWallet;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.player.Player;
 import it.polimi.ingsw.gc_26.model.player.PlayerStatus;
 import it.polimi.ingsw.gc_26.utilities.observer.Observable;
@@ -43,18 +43,26 @@ public class Game extends Observable<CardDescriber>{
 	private List<ResourcesOrPoints[]> resourcesOrPointsBonus;
 	private final int numberOfPeriods = GameParameters.getNumberOfPeriods(); 
 	private GameStatus gameStatus=GameStatus.INITIALIZINGGAME;
-	
 	private List<ResourcesOrPoints> startingResources;
 	private TimerValuesInterface times;
 	private BonusInterface bonusInterface;
 	private List<Player> playersNoMoreSuspended= new CopyOnWriteArrayList<>();
-	
-	
 	private List<ExcommunicationTile> excommunicationTiles;
-	
 	private int period=1;
 	private int round=1;
+	private int playersDoneVatican=-1;
 
+	/**
+	 * This indicates how many players performed an action. -1 is the value that indicates the a new round is starting
+	 */
+	private int playersPerformedActions = -1; 
+	private int turn=1;
+	private List<DevelopmentCard> territoryTowerCards;
+	private List<DevelopmentCard> buildingTowerCards;
+	private List<DevelopmentCard> characterTowerCards;
+	private List<DevelopmentCard> ventureTowerCards;
+	private final static int TURNNUMBER=4; 
+	
 	/**
 	 * Constructor: it creates a game with the characteristics expressed in the parameters
 	 * @param cards are the cards of the game
@@ -239,16 +247,6 @@ public class Game extends Observable<CardDescriber>{
 		nextStep();
 	}
 	
-	/**
-	 * This indicates how many players performed an action. -1 is the value that indicates the a new round is starting
-	 */
-	private int playersPerformedActions = -1; 
-	private int turn=1;
-	private List<DevelopmentCard> territoryTowerCards;
-	private List<DevelopmentCard> buildingTowerCards;
-	private List<DevelopmentCard> characterTowerCards;
-	private List<DevelopmentCard> ventureTowerCards;
-	private final static int TURNNUMBER=4; 
 
 	
 	/**
@@ -395,12 +393,13 @@ public class Game extends Observable<CardDescriber>{
 		endGame.start();
 	}
 	
-	private int playersDoneVatican=-1;
-	
+	/**
+	 * Method called to start the Vatican Report phase
+	 */
 	public void vaticanReportNext(){
 		playersDoneVatican++;
 
-		if(playersDoneVatican==numberOfPlayers){ //else read 401
+		if(playersDoneVatican==numberOfPlayers){
 			/**
 			 * If the game is ended, it has to be chosen a winner, else, the game will go on with next period.
 			 */	

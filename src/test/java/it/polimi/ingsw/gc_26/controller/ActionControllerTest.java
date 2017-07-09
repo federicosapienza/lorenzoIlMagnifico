@@ -16,7 +16,7 @@ import it.polimi.ingsw.gc_26.json_reader.TimerValuesInterface;
 import it.polimi.ingsw.gc_26.messages.action.Action;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.BoardZone;
 import it.polimi.ingsw.gc_26.model.game.game_components.dices.Colour;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.game.game_logic.Game;
 import it.polimi.ingsw.gc_26.model.handlers.action_handlers.MainActionHandler;
 import it.polimi.ingsw.gc_26.model.player.Player;
@@ -47,5 +47,41 @@ public class ActionControllerTest {
 		assertTrue(player1.isPlayerActive());
 	}
 	
+	@Test (expected = NullPointerException.class)
+	public void testNotNullAction() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		cards = readAll.getCards();
+		bonus = readAll.getBonus();
+		times = readAll.getTimes();
+		Game game = new Game(cards, bonus, times);
+		game.addPlayer("David");
+		game.addPlayer("Steph");
+		game.initialiseGame();
+		game.startGame();
+		Action action = null;
+		MainActionHandler mainActionHandler = new MainActionHandler(game.getGameElements());
+		ActionController actionController = new ActionController(game.getPlayers().get(0), mainActionHandler);
+		actionController.update(action);
+	}
+	
+	@Test (expected = NullPointerException.class)
+	public void testNotNullPlayer() {
+		readAll.start();
+		resourcesOrPointsList = readAll.getBonus().getListOfResourcesOfPointsArray();
+		cards = readAll.getCards();
+		bonus = readAll.getBonus();
+		times = readAll.getTimes();
+		Game game = new Game(cards, bonus, times);
+		game.addPlayer("David");
+		game.addPlayer("Steph");
+		game.initialiseGame();
+		game.startGame();
+		Player player = null;
+		MainActionHandler mainActionHandler = new MainActionHandler(game.getGameElements());
+		ActionController actionController = new ActionController(player, mainActionHandler);
+		Action action = new Action(BoardZone.COUNCILPALACE, 1, Colour.BLACK, 0);
+		actionController.update(action);
+	}
 	
 }

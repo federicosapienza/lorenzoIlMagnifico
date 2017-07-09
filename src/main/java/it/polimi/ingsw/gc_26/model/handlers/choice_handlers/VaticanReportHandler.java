@@ -6,7 +6,7 @@ import it.polimi.ingsw.gc_26.messages.Info;
 import it.polimi.ingsw.gc_26.messages.PersonalBoardChangeNotification;
 import it.polimi.ingsw.gc_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.excommunicationTile.ExcommunicationTile;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameElements;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameParameters;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameStatus;

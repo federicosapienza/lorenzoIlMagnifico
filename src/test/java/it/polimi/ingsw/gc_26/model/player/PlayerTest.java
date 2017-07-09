@@ -13,7 +13,7 @@ import it.polimi.ingsw.gc_26.json_reader.ReadAll;
 import it.polimi.ingsw.gc_26.json_reader.TimerValuesInterface;
 import it.polimi.ingsw.gc_26.messages.Request;
 import it.polimi.ingsw.gc_26.model.game.game_components.dices.Colour;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.game.game_logic.Game;
 import it.polimi.ingsw.gc_26.model.player.Player;
 import it.polimi.ingsw.gc_26.model.player.PlayerStatus;

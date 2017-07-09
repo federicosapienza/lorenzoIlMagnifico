@@ -10,7 +10,7 @@ import it.polimi.ingsw.gc_26.model.game.game_components.board.zones.HarvestZone;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.zones.Market;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.zones.ProductionZone;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.zones.Tower;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameParameters;
 import it.polimi.ingsw.gc_26.utilities.observer.Observable;
 

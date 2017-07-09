@@ -8,7 +8,7 @@ import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.D
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCardImplementation;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.effects.Effect;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.effects.TradeEffect;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.player.Player;
 
 /**

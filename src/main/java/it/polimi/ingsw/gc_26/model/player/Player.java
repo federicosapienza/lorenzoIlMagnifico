@@ -4,10 +4,10 @@ import it.polimi.ingsw.gc_26.messages.Message;
 import it.polimi.ingsw.gc_26.messages.Request;
 import it.polimi.ingsw.gc_26.messages.action.Action;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.gc_26.model.game.game_components.familyMembers.FamilyMembers;
-import it.polimi.ingsw.gc_26.model.game.game_components.personalBoard.PersonalBoard;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.Warehouse;
+import it.polimi.ingsw.gc_26.model.game.game_components.family_members.FamilyMembers;
+import it.polimi.ingsw.gc_26.model.game.game_components.personal_board.PersonalBoard;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.Warehouse;
 import it.polimi.ingsw.gc_26.utilities.observer.Observable;
 
 /**

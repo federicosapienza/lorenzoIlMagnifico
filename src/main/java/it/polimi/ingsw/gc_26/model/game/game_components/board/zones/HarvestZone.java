@@ -6,7 +6,7 @@ import java.util.List;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.positions.MultipleHarvest;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.positions.SingleHarvest;
 import it.polimi.ingsw.gc_26.model.game.game_components.dices.Colour;
-import it.polimi.ingsw.gc_26.model.game.game_components.familyMembers.FamilyMember;
+import it.polimi.ingsw.gc_26.model.game.game_components.family_members.FamilyMember;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameParameters;
 import it.polimi.ingsw.gc_26.model.player.Player;
 

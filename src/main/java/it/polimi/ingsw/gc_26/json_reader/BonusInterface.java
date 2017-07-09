@@ -3,8 +3,8 @@ package it.polimi.ingsw.gc_26.json_reader;
 import java.util.List;
 import java.util.Map;
 
-import it.polimi.ingsw.gc_26.model.game.game_components.personalBoard.PersonalBoardTile;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.personal_board.PersonalBoardTile;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 
 /**
  * 

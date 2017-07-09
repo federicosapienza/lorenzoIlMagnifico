@@ -3,7 +3,7 @@ package it.polimi.ingsw.gc_26.client.view;
 import java.util.HashMap;
 import java.util.Map;
 
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.PlayerWallet;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.PlayerWallet;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameStatus;
 import it.polimi.ingsw.gc_26.model.player.PlayerStatus;
 

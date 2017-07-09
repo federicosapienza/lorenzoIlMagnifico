@@ -1,7 +1,7 @@
 package it.polimi.ingsw.gc_26.model.game.game_components.board.positions;
 
 import it.polimi.ingsw.gc_26.model.game.game_components.board.positions.common.MultiplePosition;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 
 /**
  * 

@@ -7,9 +7,9 @@ import java.util.List;
 import it.polimi.ingsw.gc_26.messages.Info;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.gc_26.model.game.game_components.personalBoard.PersonalBoard;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.Warehouse;
+import it.polimi.ingsw.gc_26.model.game.game_components.personal_board.PersonalBoard;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.Warehouse;
 import it.polimi.ingsw.gc_26.model.player.PermanentModifiers;
 import it.polimi.ingsw.gc_26.model.player.Player;
 
@@ -24,9 +24,9 @@ import it.polimi.ingsw.gc_26.model.player.Player;
  */
 public class EndGameLogic {
 	private final GameElements gameElements;
-	private final static int[] TERRITORYBONUS = new  int[]{0,0,1,4,10,20};
-	private final static int[] CHARACTERBONUS = new  int[]{1,3,6,10,15,21};
-	private final static int RESOURCESBONUS = 5;
+	private static final int[] TERRITORYBONUS = new  int[]{0,0,1,4,10,20};
+	private static final int[] CHARACTERBONUS = new  int[]{1,3,6,10,15,21};
+	private static final int RESOURCESBONUS = 5;
 	
 	private final ResourcesOrPoints militaryStrengthFirstReward = ResourcesOrPoints.newPoints(5, 0, 0, 0);
 	private final ResourcesOrPoints militaryStrengthSecondReward = ResourcesOrPoints.newPoints(2, 0, 0, 0);

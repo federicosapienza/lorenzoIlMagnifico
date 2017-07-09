@@ -3,7 +3,7 @@ package it.polimi.ingsw.gc_26.model.game.game_components.board.positions.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.ingsw.gc_26.model.game.game_components.familyMembers.FamilyMember;
+import it.polimi.ingsw.gc_26.model.game.game_components.family_members.FamilyMember;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameParameters;
 
 /**

@@ -7,7 +7,7 @@ import it.polimi.ingsw.gc_26.messages.Message;
 import it.polimi.ingsw.gc_26.messages.action.ActionNotification;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.Board;
 import it.polimi.ingsw.gc_26.model.game.game_components.dices.Dices;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.handlers.action_handlers.MainActionHandler;
 import it.polimi.ingsw.gc_26.model.player.Player;
 import it.polimi.ingsw.gc_26.utilities.observer.Observable;

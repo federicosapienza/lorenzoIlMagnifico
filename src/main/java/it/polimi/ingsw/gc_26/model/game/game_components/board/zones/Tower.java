@@ -5,8 +5,8 @@ import java.util.*;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.positions.TowerPosition;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCard;
 import it.polimi.ingsw.gc_26.model.game.game_components.dices.Colour;
-import it.polimi.ingsw.gc_26.model.game.game_components.familyMembers.*;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.family_members.*;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameParameters;
 import it.polimi.ingsw.gc_26.model.player.Player;
 

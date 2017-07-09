@@ -10,8 +10,8 @@ import it.polimi.ingsw.gc_26.model.game.game_components.board.positions.common.M
 import it.polimi.ingsw.gc_26.model.game.game_components.board.positions.common.SinglePosition;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.zones.Tower;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.gc_26.model.game.game_components.familyMembers.FamilyMember;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.family_members.FamilyMember;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameParameters;
 import it.polimi.ingsw.gc_26.model.player.Player;
 
@@ -50,40 +50,40 @@ public class ActionCheckerHandler {
 	  * if (numPlayers<4 && position>2)||(numPlayers=4 && position>4) an exception has to be thrown.
 	  */
 	public boolean marketActionValidation(Player player, Action action, int  numOfPlayers){
-	 if(action.getPosition()<=0 ){
+		if(action.getPosition()<=0 ){
 			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
 	 		return false;
-	 }
-	if((numOfPlayers<GameParameters.getNumPlayerforCompleteMarketActivation() 
-			&& action.getPosition()>GameParameters.getMinMarketZones())||
-			(numOfPlayers>=GameParameters.getNumPlayerforCompleteMarketActivation() 
-			&& action.getPosition()>GameParameters.getMaxMarketZones())){
+	 	}
+		if((numOfPlayers<GameParameters.getNumPlayerforCompleteMarketActivation() && 
+				action.getPosition()>GameParameters.getMinMarketZones())|| 
+				(numOfPlayers>=GameParameters.getNumPlayerforCompleteMarketActivation() && 
+				action.getPosition()>GameParameters.getMaxMarketZones())){
 			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
 			return false;
-	 }
-	 else return true;
+		}
+		else 
+			return true;
 	}
-
-	 
-	 /**
+	
+	/**
 	  * Validating the action.
 	  * The number of positions in the Harvest and Production zone depends on the number of players 
 	  * with standard rules: if (numPlayers<3 && position>1)||(numPlayers>=3 && position>2) throws exception.
 	  */
-	
 	public boolean productionAndHarvestValidation(Player player, Action action, int  numOfPlayers){
 		if(action.getPosition()<=0 ){
 			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
 	 		return false;
 		}
-	 if ( (numOfPlayers<GameParameters.getNumPlayersForMultipleZones() 
-						&& action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())||
-				( numOfPlayers>=GameParameters.getNumPlayersForMultipleZones() 
-						&& action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()+GameParameters.getSingleHarvestOrProductionZones())){
+		if ((numOfPlayers<GameParameters.getNumPlayersForMultipleZones() && 
+				action.getPosition()>GameParameters.getSingleHarvestOrProductionZones())|| 
+				(numOfPlayers>=GameParameters.getNumPlayersForMultipleZones() && 
+				action.getPosition()>GameParameters.getMultipleHarvestOrProductionZones()+GameParameters.getSingleHarvestOrProductionZones())){
 			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
 			return false;
-	 }
-	 else return true;
+		}
+		else 
+			return true;
 	}
 	
 	public boolean councilPalaceValidation(Player player, Action action){
@@ -91,7 +91,8 @@ public class ActionCheckerHandler {
 			player.notifyObservers(new Request(player.getStatus(),positionNotValid, null));
 			return false;
 		}
-		else return true;
+		else 
+			return true;
 	}
 	
 	
@@ -101,8 +102,10 @@ public class ActionCheckerHandler {
 	//enough servants?
 			if(!player.getTestWarehouse().areResourcesEnough(ResourcesOrPoints.newResources(0,action.getServantsUsed(),0,0))){
 				player.notifyObservers(new Request(player.getStatus(),"Not enough servants", null));
-				return false;}
-			else return true;
+				return false;
+			}
+			else 
+				return true;
 	}
 	
 	public boolean isFamilyMemberFree(FamilyMember familyMember, Player player){
@@ -119,43 +122,37 @@ public class ActionCheckerHandler {
 	 * Checks if the player is not already owning the maximum number of cards allowed
 	 */
 	public boolean checkMaximumNumberOfCardsNotReached(Player player, Action action){
-	if(player.getPersonalBoard().getNumberOfCardPerType(convertZoneInCard(action.getZone()))
-								>= GameParameters.getMaxNumOfCards()){
-				player.notifyObservers(new Request(player.getStatus(),"maximum number of card already reached", null));
-				return false;
-								}
-	else return true;
+	if(player.getPersonalBoard().getNumberOfCardPerType(convertZoneInCard(action.getZone())) >= GameParameters.getMaxNumOfCards()){
+		player.notifyObservers(new Request(player.getStatus(),"maximum number of card already reached", null));
+		return false;
+	}
+	else 
+		return true;
 	}
 	
 	
 	public boolean towerActionCheck(Tower tower , FamilyMember familyMember, Player player){
-	if(!tower.canFamilyMemberGoToTheTower(familyMember)){ //familyMember== null ->second Action: (considered by canPlayerGoToTheTower=
-		player.notifyObservers(new Request(player.getStatus(),"Your coloured members are already in the tower", null));
-		return false;
+		if(!tower.canFamilyMemberGoToTheTower(familyMember)){ //familyMember== null ->second Action: (considered by canPlayerGoToTheTower=
+			player.notifyObservers(new Request(player.getStatus(),"Your coloured members are already in the tower", null));
+			return false;
 		}
 	
-	/**
-	 * If the tower is occupied, the player has to pay coins(or whatever payment, if rules are changed)if he owns them; 
-	 * it also checks that Brunelleschi effect is not activated
-	 */
-	if(!tower.isTheTowerFree()&& !player.getPermanentModifiers().isTowerBonusRevokedOn()){
+		/**
+		 * If the tower is occupied, the player has to pay coins(or whatever payment, if rules are changed)if he owns them; 
+		 * it also checks that Brunelleschi effect is not activated
+		 */
+		if(!tower.isTheTowerFree()&& !player.getPermanentModifiers().isTowerBonusRevokedOn()){
 			if (!player.getTestWarehouse().areResourcesEnough(GameParameters.getTowerOccupiedMalus())){
 				player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
 				player.notifyObservers(new Request(player.getStatus(),"Not enough resources for going in a occupied tower", null));
 				return false;
 			}
 			player.getTestWarehouse().spendResources(GameParameters.getTowerOccupiedMalus());
+		}
+		return true;
 	}
-	return true;
 	
-	}
-	
-	
-	 
-
-	 
-	 
-	 /**
+	/**
 	  * 
 	  * 
 	  * This method checks if the position if free and if the family member's value is enough to perform the action
@@ -183,21 +180,21 @@ public class ActionCheckerHandler {
 		  * handling permanent effect that doubles the servants needed:
 		  */
 		 if(servants!=0 && player.getPermanentModifiers().isDoubleServantsOn())
-			 servants = servants/2;
-			 
-		 if(  (familyMember != null && familyMember.getValue() + servants+ 
-				 	player.getPermanentModifiers().getActionModifier(action.getZone()) < position.getValueOfPosition())){  //first action
-					player.notifyObservers(new Request(player.getStatus(),"Family member's value and servants used not enough", null));
-
-				return false; }
+			 servants = servants/2; 
+		 if(familyMember != null && familyMember.getValue() + servants+ 
+				 	player.getPermanentModifiers().getActionModifier(action.getZone()) < position.getValueOfPosition()){  //first action
+			 player.notifyObservers(new Request(player.getStatus(),"Family member's value and servants used not enough", null));
+			 return false;
+		 }
 		 else if (familyMember==null && player.getSecondactionValue()+action.getServantsUsed()+ 
-				 player.getPermanentModifiers().getActionModifier(action.getZone())
-				 								<position.getValueOfPosition()){  // second action: those determined by cards
-				player.notifyObservers(new Request(player.getStatus()," servants used not enough", null));
-				return false;
-				}
-		 else return true;
-	}
+				 player.getPermanentModifiers().getActionModifier(action.getZone()) < position.getValueOfPosition()){  // second action: those determined by cards
+			 player.notifyObservers(new Request(player.getStatus()," servants used not enough", null));
+			 return false;
+		}
+		 else 
+			 return true;
+	 }
+	 
 	 /**
 	  * Method that checks the possibility of an action that involves multiple positions
 	  * @param position It's the multiple position involved in the action
@@ -206,9 +203,7 @@ public class ActionCheckerHandler {
 	  * @param action It's the action that the player wants to perform
 	  * @return true if the action can be performed according to the rules; false if it can't be performed
 	  */
-
 	 public boolean canMemberGoToPosition(MultiplePosition position, Player player, FamilyMember familyMember, Action action){
-		 
 		 int servants =action.getServantsUsed();
 		 /**
 		  * Handling the permanent effect that doubles the servants needed:
@@ -219,28 +214,27 @@ public class ActionCheckerHandler {
 		 /**
 		  * Checking if the value of the family member is enough to perform the action or not
 		  */
-		 if((familyMember != null && familyMember.getValue() + servants+ 
-				 	player.getPermanentModifiers().getActionModifier(action.getZone()) < position.getValueOfPosition())){  //first action
-					player.notifyObservers(new Request(player.getStatus(),"Family member's value and servants used not enough", null));
-					return false; 
-					}
+		 if(familyMember != null && familyMember.getValue() + servants+ 
+				 	player.getPermanentModifiers().getActionModifier(action.getZone()) < position.getValueOfPosition()){  //first action
+			 player.notifyObservers(new Request(player.getStatus(),"Family member's value and servants used not enough", null));
+			 return false;
+		}
 		 else if (familyMember==null && player.getSecondactionValue()+action.getServantsUsed()+  // second action: those determined by cards
-				 player.getPermanentModifiers().getActionModifier(action.getZone())
-				 								<position.getValueOfPosition()){  
-			 
-				player.notifyObservers(new Request(player.getStatus()," servants used not enough", null));
-				return false;
-				}
-		 else return true;
-	 }
+				 player.getPermanentModifiers().getActionModifier(action.getZone()) < position.getValueOfPosition()){
+			 player.notifyObservers(new Request(player.getStatus()," servants used not enough", null));
+			 return false;
+		}
+		 else 
+			 return true;
+	}
 	
 	 /**
 	  * Method that converts the board zone expressed in the parameter to the corresponding type of development card
 	  * @param zone It's the board zone that has to be converted to a development card
 	  * @return the type of development card that matches with the board zone expressed in the parameter
 	  */
-		protected DevelopmentCardTypes convertZoneInCard(BoardZone zone){
-			switch (zone) {
+	 protected DevelopmentCardTypes convertZoneInCard(BoardZone zone){
+		 switch (zone) {
 			case TERRITORYTOWER: 
 				return DevelopmentCardTypes.TERRITORYCARD;
 			case BUILDINGTOWER: 
@@ -252,7 +246,6 @@ public class ActionCheckerHandler {
 			default:
 				throw new IllegalArgumentException();
 			}
-	 
-		}
+	 }
 	
 }

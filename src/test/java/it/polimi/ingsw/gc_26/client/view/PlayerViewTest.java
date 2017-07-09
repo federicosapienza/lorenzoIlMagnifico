@@ -20,9 +20,9 @@ import it.polimi.ingsw.gc_26.model.game.game_components.cards.leaderCard.PointsO
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.leaderCard.Requirement;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.payments.ResourcesPayment;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.payments.common.Payment;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.PlayerWallet;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.gc_26.model.game.game_components.resourcesAndPoints.Warehouse;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.PlayerWallet;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.ResourcesOrPoints;
+import it.polimi.ingsw.gc_26.model.game.game_components.resources_and_points.Warehouse;
 import it.polimi.ingsw.gc_26.model.player.Player;
 
 public class PlayerViewTest {
@@ -99,31 +99,7 @@ public class PlayerViewTest {
 		assertTrue(playerView.getPermamentsEffect().isEmpty());
 	}
 	
-	//The following test for illegal argument exception doesn't work, but I don't understand why!
-	/*
-	@Test
-	public void testIllegalGetCurrentCards() {
-		boolean thrownIllegalCurrentCardsExcep = false;
-		
-		ResourcesOrPoints resourcesOrPoints = ResourcesOrPoints.newResources(6, 3, 2, 2);
-		Player player = new Player("George", resourcesOrPoints);
-		ResourcesOrPoints resourcesOrPoints2 = ResourcesOrPoints.newResources(0, 0, 2, 0);
-		Payment payment = new ResourcesPayment(resourcesOrPoints2);
-		ResourcesOrPoints resourcesOrPoints3 = ResourcesOrPoints.newResourcesOrPoints(0, 0, 0, 0, 0, 0, 1, 0);
-		Effect immediate = new ReceiveResourcesOrPointsEffect(resourcesOrPoints3);
-		ResourcesOrPoints resourcesOrPoints4 = ResourcesOrPoints.newResources(1, 0,0,0);
-		Effect permanent = new TradeEffect(resourcesOrPoints4, resourcesOrPoints3, null, null);
-		DevelopmentCard developmentCard = DevelopmentCardImplementation.buildingCard("Chapel", 1, payment, immediate, permanent, 2);
-		PlayerWallet wallet = new PlayerWallet(player.getWarehouse());
-		CardDescriber cardDescriber = new CardDescriber(developmentCard);
-		PlayerView playerView = new PlayerView(wallet);
-		DevelopmentCardTypes nullType = null;
-		try {
-			playerView.getCurrentCards(nullType);
-		} catch (IllegalArgumentException e) {
-			thrownIllegalCurrentCardsExcep = true;
-		}
-		assertTrue(thrownIllegalCurrentCardsExcep);
-	}
-	*/
+	
+	
+	
 }

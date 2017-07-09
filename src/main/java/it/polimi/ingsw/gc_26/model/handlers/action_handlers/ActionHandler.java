@@ -19,7 +19,7 @@ import it.polimi.ingsw.gc_26.model.game.game_components.board.zones.HarvestZone;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.zones.ProductionZone;
 import it.polimi.ingsw.gc_26.model.game.game_components.board.zones.Tower;
 import it.polimi.ingsw.gc_26.model.game.game_components.cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.gc_26.model.game.game_components.familyMembers.FamilyMember;
+import it.polimi.ingsw.gc_26.model.game.game_components.family_members.FamilyMember;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameElements;
 import it.polimi.ingsw.gc_26.model.game.game_logic.GameStatus;
 import it.polimi.ingsw.gc_26.model.handlers.Handler;
