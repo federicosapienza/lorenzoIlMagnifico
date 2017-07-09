@@ -230,7 +230,11 @@ public class ChoiceController implements Observer<Integer>{
 	 * @param choice It's the choice of the player that indicates if he wants to support the Church or not: 0 if he doesn't want to
 	 * support it, any other value to support it 
 	 */
-	private void vaticanReportController(int choice) {
+	//it ' synchronized because client and timertask may try to perform this action at the same time
+	private synchronized void vaticanReportController(int choice) {
+		//ensuring timer and client do no not both perform this action 
+		if(player.getStatus()==PlayerStatus.WAITINGHISTURN)
+			return;
 		try{
 			player.setPlayerActive();
 			VaticanReportHandler handler= handlers.getVaticanReportHandler();
