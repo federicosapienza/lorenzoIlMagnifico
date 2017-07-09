@@ -36,6 +36,9 @@ is reached (4),  the game starts.
 The game follows the advanced rules of Lorenzo il Magnifico.
 Any player has a limited time to complete his turn. After that, the turn is automatically ended, and if the player has not perfrmed any action, he is suspended. Anyway he can be reconnected to the game any time , following the istructions given by client interface.
 When the game ends, winner is chosen, and then clients can choose whether to close the program or start a new game.
+In order to change any timer value , go to:
+
+     Magnifico-Yun-Sapienza-Vare/doc/Timers/timer.json
 
 # Cli
 
