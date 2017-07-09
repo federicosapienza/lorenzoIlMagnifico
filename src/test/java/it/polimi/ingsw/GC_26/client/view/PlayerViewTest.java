@@ -9,20 +9,20 @@ import org.junit.Test;
 
 import it.polimi.ingsw.GC_26.client.view.PlayerView;
 import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardImplementation;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ReceiveResourcesOrPointsEffect;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.TradeEffect;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCard;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCardImplementation;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.PointsOrResourcesRequirement;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.Requirement;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.ResourcesPayment;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Warehouse;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCardImplementation;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.effects.Effect;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.effects.ReceiveResourcesOrPointsEffect;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.effects.TradeEffect;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.leaderCard.LeaderCard;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.leaderCard.LeaderCardImplementation;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.leaderCard.PointsOrResourcesRequirement;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.leaderCard.Requirement;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.payments.ResourcesPayment;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.payments.common.Payment;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.PlayerWallet;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.Warehouse;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class PlayerViewTest {

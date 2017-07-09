@@ -5,8 +5,8 @@ import java.util.Map;
 
 import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.messages.describers.PositionDescriber;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
+import it.polimi.ingsw.GC_26.model.game.game_components.board.BoardZone;
+import it.polimi.ingsw.GC_26.model.game.game_components.dices.Colour;
 
 /**
  * 

@@ -2,7 +2,7 @@ package it.polimi.ingsw.GC_26.view.output;
 
 import java.util.Timer;
 
-import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
+import it.polimi.ingsw.GC_26.json_reader.TimerValuesInterface;
 import it.polimi.ingsw.GC_26.messages.Message;
 import it.polimi.ingsw.GC_26.messages.Request;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;

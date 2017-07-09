@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import it.polimi.ingsw.GC_26.messages.PersonalBoardChangeNotification;
 import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
-import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
+import it.polimi.ingsw.GC_26.model.game.game_logic.GameStatus;
 
 public class PersonalBoardChangeNotificationTest {
 

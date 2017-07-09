@@ -11,8 +11,8 @@ import it.polimi.ingsw.GC_26.client.view.PlayerView;
 import it.polimi.ingsw.GC_26.client.view.PositionView;
 import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.messages.describers.PositionDescriber;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26.model.game.game_components.dices.Colour;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)

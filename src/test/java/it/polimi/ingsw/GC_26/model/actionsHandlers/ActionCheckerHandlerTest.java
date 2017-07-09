@@ -5,20 +5,20 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import it.polimi.ingsw.GC_26.messages.action.Action;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.CouncilPalace;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MarketPosition;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardImplementation;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ReceiveResourcesOrPointsEffect;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.ResourcesPayment;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMember;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.GC_26.model.game.gameLogic.GameParameters;
-import it.polimi.ingsw.GC_26.model.handlers.actionHandlers.ActionCheckerHandler;
+import it.polimi.ingsw.GC_26.model.game.game_components.board.BoardZone;
+import it.polimi.ingsw.GC_26.model.game.game_components.board.positions.CouncilPalace;
+import it.polimi.ingsw.GC_26.model.game.game_components.board.positions.MarketPosition;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCardImplementation;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.effects.Effect;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.effects.ReceiveResourcesOrPointsEffect;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.payments.ResourcesPayment;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.payments.common.Payment;
+import it.polimi.ingsw.GC_26.model.game.game_components.dices.Colour;
+import it.polimi.ingsw.GC_26.model.game.game_components.familyMembers.FamilyMember;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_logic.GameParameters;
+import it.polimi.ingsw.GC_26.model.handlers.action_handlers.ActionCheckerHandler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class ActionCheckerHandlerTest {

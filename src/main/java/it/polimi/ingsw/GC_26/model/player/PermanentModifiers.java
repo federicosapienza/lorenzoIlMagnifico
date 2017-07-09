@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Warehouse;
+import it.polimi.ingsw.GC_26.model.game.game_components.board.BoardZone;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.Warehouse;
 
 
 /**

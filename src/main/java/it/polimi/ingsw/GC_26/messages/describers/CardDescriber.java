@@ -2,13 +2,13 @@ package it.polimi.ingsw.GC_26.messages.describers;
 
 import java.io.Serializable;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardImplementation;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.excommunicationTile.ExcommunicationTile;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.excommunicationTile.ExcommunicationTileImplementation;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCard;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCardImplementation;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCardImplementation;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.excommunicationTile.ExcommunicationTile;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.excommunicationTile.ExcommunicationTileImplementation;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.leaderCard.LeaderCard;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.leaderCard.LeaderCardImplementation;
 
 
 /**

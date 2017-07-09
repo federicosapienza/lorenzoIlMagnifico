@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.GC_26.model.game.gameLogic.NextRoundOrder;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_logic.NextRoundOrder;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class NextRoundOrderTest {

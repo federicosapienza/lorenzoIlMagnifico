@@ -8,14 +8,14 @@ import java.util.List;
 import org.junit.Test;
 
 import it.polimi.ingsw.GC_26.controller.ChoiceController;
-import it.polimi.ingsw.GC_26.jsonReader.BonusInterface;
-import it.polimi.ingsw.GC_26.jsonReader.Cards;
-import it.polimi.ingsw.GC_26.jsonReader.ReadAll;
-import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
+import it.polimi.ingsw.GC_26.json_reader.BonusInterface;
+import it.polimi.ingsw.GC_26.json_reader.Cards;
+import it.polimi.ingsw.GC_26.json_reader.ReadAll;
+import it.polimi.ingsw.GC_26.json_reader.TimerValuesInterface;
 import it.polimi.ingsw.GC_26.messages.Request;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.GC_26.model.game.gameLogic.Game;
-import it.polimi.ingsw.GC_26.model.handlers.actionHandlers.MainActionHandler;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_logic.Game;
+import it.polimi.ingsw.GC_26.model.handlers.action_handlers.MainActionHandler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
 

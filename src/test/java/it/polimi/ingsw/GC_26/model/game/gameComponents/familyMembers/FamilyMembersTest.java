@@ -3,9 +3,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.*;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMembers;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.*;
+import it.polimi.ingsw.GC_26.model.game.game_components.dices.*;
+import it.polimi.ingsw.GC_26.model.game.game_components.familyMembers.FamilyMembers;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.*;
 import it.polimi.ingsw.GC_26.model.player.*;
 public class FamilyMembersTest {
 	

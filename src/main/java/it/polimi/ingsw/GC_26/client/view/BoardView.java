@@ -8,7 +8,7 @@ import java.util.List;
 import it.polimi.ingsw.GC_26.messages.action.Action;
 import it.polimi.ingsw.GC_26.messages.action.ActionNotification;
 import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
+import it.polimi.ingsw.GC_26.model.game.game_components.board.BoardZone;
 
 /**
  * 

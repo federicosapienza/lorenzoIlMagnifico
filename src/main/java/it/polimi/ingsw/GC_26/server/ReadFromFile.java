@@ -1,8 +1,8 @@
 package it.polimi.ingsw.GC_26.server;
 
-import it.polimi.ingsw.GC_26.jsonReader.BonusInterface;
-import it.polimi.ingsw.GC_26.jsonReader.Cards;
-import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
+import it.polimi.ingsw.GC_26.json_reader.BonusInterface;
+import it.polimi.ingsw.GC_26.json_reader.Cards;
+import it.polimi.ingsw.GC_26.json_reader.TimerValuesInterface;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.GC_26.view.output;
 
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.PlayerWallet;
 import it.polimi.ingsw.GC_26.server.connections.ServerConnectionToClient;
 import it.polimi.ingsw.GC_26.utilities.observer.Observer;
 

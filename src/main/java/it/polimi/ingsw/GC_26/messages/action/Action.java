@@ -4,8 +4,8 @@ package it.polimi.ingsw.GC_26.messages.action;
 
 import java.io.Serializable;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
+import it.polimi.ingsw.GC_26.model.game.game_components.board.BoardZone;
+import it.polimi.ingsw.GC_26.model.game.game_components.dices.Colour;
 
 
 /**

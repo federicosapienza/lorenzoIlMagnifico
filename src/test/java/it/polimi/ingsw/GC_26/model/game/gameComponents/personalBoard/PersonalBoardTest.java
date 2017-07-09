@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardImplementation;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.leaderCard.LeaderCardImplementation;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.personalBoard.PersonalBoard;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.personalBoard.PersonalBoardTile;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCardImplementation;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.leaderCard.LeaderCardImplementation;
+import it.polimi.ingsw.GC_26.model.game.game_components.personalBoard.PersonalBoard;
+import it.polimi.ingsw.GC_26.model.game.game_components.personalBoard.PersonalBoardTile;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class PersonalBoardTest {

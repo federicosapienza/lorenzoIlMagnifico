@@ -9,20 +9,20 @@ import java.util.List;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.jsonReader.BonusInterface;
-import it.polimi.ingsw.GC_26.jsonReader.Cards;
-import it.polimi.ingsw.GC_26.jsonReader.ReadAll;
-import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
+import it.polimi.ingsw.GC_26.json_reader.BonusInterface;
+import it.polimi.ingsw.GC_26.json_reader.Cards;
+import it.polimi.ingsw.GC_26.json_reader.ReadAll;
+import it.polimi.ingsw.GC_26.json_reader.TimerValuesInterface;
 import it.polimi.ingsw.GC_26.messages.Request;
 import it.polimi.ingsw.GC_26.messages.action.Action;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.board.BoardZone;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMember;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.Warehouse;
-import it.polimi.ingsw.GC_26.model.game.gameLogic.Game;
-import it.polimi.ingsw.GC_26.model.handlers.actionHandlers.FirstActionHandler;
-import it.polimi.ingsw.GC_26.model.handlers.actionHandlers.HarvestAndProductionHandler;
+import it.polimi.ingsw.GC_26.model.game.game_components.board.BoardZone;
+import it.polimi.ingsw.GC_26.model.game.game_components.dices.Colour;
+import it.polimi.ingsw.GC_26.model.game.game_components.familyMembers.FamilyMember;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.Warehouse;
+import it.polimi.ingsw.GC_26.model.game.game_logic.Game;
+import it.polimi.ingsw.GC_26.model.handlers.action_handlers.FirstActionHandler;
+import it.polimi.ingsw.GC_26.model.handlers.action_handlers.HarvestAndProductionHandler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
 

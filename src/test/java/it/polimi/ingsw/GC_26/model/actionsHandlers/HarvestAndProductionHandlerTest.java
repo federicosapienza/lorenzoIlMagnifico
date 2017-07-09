@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.GC_26.model.handlers.actionHandlers.HarvestAndProductionHandler;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.handlers.action_handlers.HarvestAndProductionHandler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class HarvestAndProductionHandlerTest {

@@ -6,10 +6,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.polimi.ingsw.GC_26.controller.GameInitialiserAndController;
-import it.polimi.ingsw.GC_26.jsonReader.BonusInterface;
-import it.polimi.ingsw.GC_26.jsonReader.Cards;
-import it.polimi.ingsw.GC_26.jsonReader.ReadAll;
-import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
+import it.polimi.ingsw.GC_26.json_reader.BonusInterface;
+import it.polimi.ingsw.GC_26.json_reader.Cards;
+import it.polimi.ingsw.GC_26.json_reader.ReadAll;
+import it.polimi.ingsw.GC_26.json_reader.TimerValuesInterface;
 import it.polimi.ingsw.GC_26.server.ReadFromFile;
 import it.polimi.ingsw.GC_26.server.StartGameTask;
 import it.polimi.ingsw.GC_26.server.connections.ServerConnectionToClient;

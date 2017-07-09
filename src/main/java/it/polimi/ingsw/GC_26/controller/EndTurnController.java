@@ -2,8 +2,8 @@ package it.polimi.ingsw.GC_26.controller;
 
 import it.polimi.ingsw.GC_26.messages.Info;
 import it.polimi.ingsw.GC_26.messages.Request;
-import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
-import it.polimi.ingsw.GC_26.model.handlers.actionHandlers.MainActionHandler;
+import it.polimi.ingsw.GC_26.model.game.game_logic.GameStatus;
+import it.polimi.ingsw.GC_26.model.handlers.action_handlers.MainActionHandler;
 import it.polimi.ingsw.GC_26.model.player.Player;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
 import it.polimi.ingsw.GC_26.utilities.observer.Observer;

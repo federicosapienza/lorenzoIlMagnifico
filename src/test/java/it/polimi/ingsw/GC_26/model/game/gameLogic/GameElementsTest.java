@@ -8,16 +8,16 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.jsonReader.BonusImplementation;
-import it.polimi.ingsw.GC_26.jsonReader.BonusInterface;
-import it.polimi.ingsw.GC_26.jsonReader.Cards;
-import it.polimi.ingsw.GC_26.jsonReader.CardsImplementation;
-import it.polimi.ingsw.GC_26.jsonReader.ReadAll;
-import it.polimi.ingsw.GC_26.jsonReader.TimerValueImplementation;
-import it.polimi.ingsw.GC_26.jsonReader.TimerValuesInterface;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
-import it.polimi.ingsw.GC_26.model.game.gameLogic.Game;
-import it.polimi.ingsw.GC_26.model.game.gameLogic.GameElements;
+import it.polimi.ingsw.GC_26.json_reader.BonusImplementation;
+import it.polimi.ingsw.GC_26.json_reader.BonusInterface;
+import it.polimi.ingsw.GC_26.json_reader.Cards;
+import it.polimi.ingsw.GC_26.json_reader.CardsImplementation;
+import it.polimi.ingsw.GC_26.json_reader.ReadAll;
+import it.polimi.ingsw.GC_26.json_reader.TimerValueImplementation;
+import it.polimi.ingsw.GC_26.json_reader.TimerValuesInterface;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_logic.Game;
+import it.polimi.ingsw.GC_26.model.game.game_logic.GameElements;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class GameElementsTest {

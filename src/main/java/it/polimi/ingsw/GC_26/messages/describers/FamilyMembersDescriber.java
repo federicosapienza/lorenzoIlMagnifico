@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.dices.Colour;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.familyMembers.FamilyMembers;
+import it.polimi.ingsw.GC_26.model.game.game_components.dices.Colour;
+import it.polimi.ingsw.GC_26.model.game.game_components.familyMembers.FamilyMembers;
 
 /**
  * @author David Yun (david.yun@mail.polimi.it)

@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.board.positions.MarketPosition;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.board.zones.Market;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_components.board.positions.MarketPosition;
+import it.polimi.ingsw.GC_26.model.game.game_components.board.zones.Market;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class MarketTest {

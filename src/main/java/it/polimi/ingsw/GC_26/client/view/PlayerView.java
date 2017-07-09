@@ -7,8 +7,8 @@ import java.util.Set;
 
 import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.messages.describers.FamilyMembersDescriber;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.PlayerWallet;
 
 /**
  * 

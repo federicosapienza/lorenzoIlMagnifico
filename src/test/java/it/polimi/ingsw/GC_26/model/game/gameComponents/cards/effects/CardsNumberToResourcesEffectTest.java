@@ -4,18 +4,18 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCard;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardImplementation;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.developmentCards.DevelopmentCardTypes;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.CardsNumberToResourcesEffect;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.Effect;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.effects.ReceiveResourcesOrPointsEffect;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.MilitaryPointPayment;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.ResourcesPayment;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.TwoOrPayments;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.cards.payments.common.Payment;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.personalBoard.PersonalBoard;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCard;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCardImplementation;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.developmentCards.DevelopmentCardTypes;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.effects.CardsNumberToResourcesEffect;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.effects.Effect;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.effects.ReceiveResourcesOrPointsEffect;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.payments.MilitaryPointPayment;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.payments.ResourcesPayment;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.payments.TwoOrPayments;
+import it.polimi.ingsw.GC_26.model.game.game_components.cards.payments.common.Payment;
+import it.polimi.ingsw.GC_26.model.game.game_components.personalBoard.PersonalBoard;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class CardsNumberToResourcesEffectTest {

@@ -14,8 +14,8 @@ import it.polimi.ingsw.GC_26.messages.action.ActionNotification;
 import it.polimi.ingsw.GC_26.messages.describers.CardDescriber;
 import it.polimi.ingsw.GC_26.messages.describers.FamilyMembersDescriber;
 import it.polimi.ingsw.GC_26.messages.describers.PositionDescriber;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet;
-import it.polimi.ingsw.GC_26.model.game.gameLogic.GameStatus;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.PlayerWallet;
+import it.polimi.ingsw.GC_26.model.game.game_logic.GameStatus;
 import it.polimi.ingsw.GC_26.model.player.PlayerStatus;
 
 /**

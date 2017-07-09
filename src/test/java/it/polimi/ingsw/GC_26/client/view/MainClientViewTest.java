@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import it.polimi.ingsw.GC_26.client.view.MainClientView;
 import it.polimi.ingsw.GC_26.client.view.PlayerView;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.PlayerWallet;
-import it.polimi.ingsw.GC_26.model.game.gameComponents.resourcesAndPoints.ResourcesOrPoints;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.PlayerWallet;
+import it.polimi.ingsw.GC_26.model.game.game_components.resourcesAndPoints.ResourcesOrPoints;
 import it.polimi.ingsw.GC_26.model.player.Player;
 
 public class MainClientViewTest {
