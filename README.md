@@ -1,54 +1,61 @@
 #  Ingegneria del Software project: Lorenzo il Magnifico
 
-This is the repository for the java implementation of Lorenzo il Magnifico.
+This is the repository which contains a Java-based online multiplayer game of the board game “Lorenzo il Magnifico”, made by Cranio Creations.
+The game has been created following the MVC pattern.
 
 # How to run:
-In order to start game,  you first need to start Server. Then you can start an unlimited number of clients.
+In order to start the game, the first thing to do is running the Server class, contained in the following path:
 
-Server: 
-     
-     Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/server/main/Server.java
+	Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/server/main/Server.java
 
-Client:
+Once the Server is started, you can run the amount of clients you want, from running the ClientMain class contained in the following path:
 
-     Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/client/main/ClientMain.java
+	Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/client/main/ClientMain.java
 
 
-You can interact with client via a cli interface.
-Server and Clients communicates via socket communication.
-
+You can interact with client via CLI (Command Line Interface).
+Server and Clients communicate via Socket communication.
 
 
 # Server initialisation:
-When Server is first started, it automatically reads any file from:
+When Server is started, it automatically reads any file from:
 
      Magnifico-Yun-Sapienza-Vare/doc/Cards/      
      Magnifico-Yun-Sapienza-Vare/doc/ResourcesForBoard/
      Magnifico-Yun-Sapienza-Vare/doc/StartingResources/
      Magnifico-Yun-Sapienza-Vare/doc/Timers/
 
-Then,it starts waiting for clients.
-
+Then, it starts to wait for clients who want to connect with the Server.
 
 # Game 
-When two clients are connected, a countdown starts: after the time determined by a timer or when the maximum number of clients 
-is reached (4),  the game starts.
+When two clients are connected, a countdown is started. The game starts if one of the two following events occur:
+1) the countdown ends and so the game starts with the current connected clients;
+2) the maximum number of clients (4) connected to the current game is reached and so the countdown is interrupted and ignored and the game starts automatically with 4 players.
+
 The game follows the advanced rules of Lorenzo il Magnifico.
-Any player has a limited time to complete his turn. After that, the turn is automatically ended, and if the player has not perfrmed any action, he is suspended. Anyway he can be reconnected to the game any time , following the istructions given by client interface.
-When the game ends, winner is chosen, and then clients can choose whether to close the program or start a new game.
-In order to change any timer value , go to:
+
+Every player has a limited time to perform an action in his turn. If the player doesn’t perform any action within this limited time, he is suspended. He can ask to be reconnected to the game at any time, following the instructions given by the client’s interface.
+
+When the game ends, it establishes who the winner is, and then clients can choose whether to close the program or start a new game.
+
+In order to change any timer value, go to:
 
      Magnifico-Yun-Sapienza-Vare/doc/Timers/timer.json
 
 # Cli
 
-To interact with the game, just follow the istructions the interface will send.
+To interact with the game, just follow the instructions sent by the interface.
 
 # Docs
 
-In folder doc you can find some UML's maps.  We have done two high levels UMl's maps , one for model , one for model-view-controller pattern. We have also added a Uml focused about the package of cards effect, because of the fact there were about 20 classes,and showing all of them in model's Uml would have compromised readability.
-There is also a Uml 's map , showing the model as we thought it in the firsts moments of development. 
+In the doc folder there are some UML diagrams. 2 are dedicated to the Model: the file “orderedModelUML.png” (if you prefer, you can see also the equivalent file, which is “modelUML.png”, that has a nicer management of the links between classes, but similar classes have very long links and are very outdistanced from each other) contains a reordered UML diagram for the Model, with the Effects displayed as a package, because it contains too many classes, and representing them with the other classes in an only UML diagram would have compromised its readability and clarity. So we have decided to represent with an expanded view the Effects package with another dedicated UML diagram, which is contained in the “effectsUML.png” file.
 
-Finally, please take a look to the README.md in folder "src" , that briefly describes the mvc pattern.
+Then there’s a UML diagram dedicated to the View, which is contained in the “viewUML.png”, and a UML diagram dedicated to the Controllers, which is contained in the ”controllerUML.png” file. 
+
+There is also an initial UML diagram, named “UML 20_5_17.mdj”, which contains the initial planning around the model in the very first moments of development. 
+
+Finally, please take a look to the “README.md” file contained in the "src” folder, that briefly describes the MVC pattern that we’ve followed.
 
 
+#Authors
+Federico Sapienza, Leonardo Varè, David Yun.

@@ -1,22 +1,21 @@
 # MVC brief description 
 
-Here is briefly described our implementation of Mvc pattern , to help you navigate through the classes of our project.  
+In the following lines there is a short description of our implementation of the MVC pattern, to help you navigate through the classes of our project.  
 
 
 # Model
-Any time there is a change in the model, the model sends to the view a specific object to the view: 
-this object belongs to one of the classes of "Message" folder. 
+Using the Observer pattern, we have decided to implement the game with the following logic:
+whenever a change occurs in the model, the model sends a specific object to the view; 
+this object belongs to one of the classes contained in the “messages” package. 
 The objects of these classes can be real messages or immutable simple describers of the underlying structure of the model.
-Observer pattern is used
-
 
 # View:
 The server-side view is pretty simple:
--receives objects from the model and sends them to the connection (and then to the client). (Observer pattern is used)
--receives objects(an "Action" object or a string) from the connection and sends the info to the right controller
--starts and ends timers.
+- it receives objects from the model and sends them to the connection (and then to the client) (Observer pattern is used);
+- it receives objects(an "Action" object or a string) from the connection and sends the info to the right controller;
+- it starts and ends timers.
 
 # Controller
-Controller ' s objects are notified by the view . Controllers check if player is allowed to perform the action that was received
-and call the part of the model that was designed to perform that action. 
-Specifically, the controller calls one of the objects of "Handlers" package,  instantiated at the beginning of the game and always usable by controllers 
+The objects of the controllers are notified by the view . Controllers check if the player is allowed to perform the action which has been received
+and call the part of the model that has been designed to perform that specific action. 
+Particularly, the controller calls one of the objects of the “handlers" package, instantiated at the beginning of the game and always usable by controllers.
