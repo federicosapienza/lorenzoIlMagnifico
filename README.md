@@ -1,7 +1,7 @@
 #  Ingegneria del Software project: Lorenzo il Magnifico
 
 This is the repository which contains a Java-based online multiplayer game of the board game “Lorenzo il Magnifico”, made by Cranio Creations.
-As a team of three people, we implmenented this game in 2017.
+As a team of three people, we implemented this game in 2017.
 
 # How to run:
 In order to start the game, the first thing to do is running the Server class, contained in the following path:
