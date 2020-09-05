@@ -6,24 +6,24 @@ The game has been created following the MVC pattern.
 # How to run:
 In order to start the game, the first thing to do is running the Server class, contained in the following path:
 
-	Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/server/main/Server.java
+	lorenzoIlMagnifico/src/main/java/it/polimi/ingsw/GC_26/server/main/Server.java
 
 Once the Server is started, you can run the amount of clients you want, from running the ClientMain class contained in the following path:
 
-	Magnifico-Yun-Sapienza-Vare/src/main/java/it/polimi/ingsw/GC_26/client/main/ClientMain.java
+	lorenzoIlMagnifico/src/main/java/it/polimi/ingsw/GC_26/client/main/ClientMain.java
 
 
 You can interact with client via CLI (Command Line Interface).
 Server and Clients communicate via Socket communication.
 
 
-# Server initialisation:
+# Server initialization:
 When Server is started, it automatically reads any file from:
 
-     Magnifico-Yun-Sapienza-Vare/doc/Cards/      
-     Magnifico-Yun-Sapienza-Vare/doc/ResourcesForBoard/
-     Magnifico-Yun-Sapienza-Vare/doc/StartingResources/
-     Magnifico-Yun-Sapienza-Vare/doc/Timers/
+     lorenzoIlMagnifico/doc/Cards/      
+     lorenzoIlMagnifico/doc/ResourcesForBoard/
+     lorenzoIlMagnifico/doc/StartingResources/
+     lorenzoIlMagnifico/doc/Timers/
 
 Then, it starts to wait for clients who want to connect with the Server.
 
@@ -40,7 +40,7 @@ When the game ends, it establishes who the winner is, and then clients can choos
 
 In order to change any timer value, go to:
 
-     Magnifico-Yun-Sapienza-Vare/doc/Timers/timer.json
+     lorenzoIlMagnifico/doc/Timers/timer.json
 
 # Cli
 
